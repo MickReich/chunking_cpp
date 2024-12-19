@@ -75,13 +75,37 @@ $(BUILD_DIR)/$(TEST_DIR)/%.o: $(TEST_DIR)/%.cpp $(HEADERS) | $(BUILD_DIR)/$(TEST
 $(BUILD_DIR)/$(TEST_DIR):
 	mkdir -p $(BUILD_DIR)/$(TEST_DIR)
 
+# Format settings
+CLANG_FORMAT ?= clang-format
+CLANG_FORMAT_STYLE = file  # Uses .clang-format if present, otherwise LLVM style
+
 # Format source files
 format:
-	clang-format -i *.cpp *.hpp
+	@which $(CLANG_FORMAT) > /dev/null || (echo "$(CLANG_FORMAT) not found. Please install it."; exit 1)
+	$(CLANG_FORMAT) -i -style=$(CLANG_FORMAT_STYLE) *.cpp *.hpp $(TEST_DIR)/*.cpp
+
+# Check format (useful for CI)
+format-check:
+	@which $(CLANG_FORMAT) > /dev/null || (echo "$(CLANG_FORMAT) not found. Please install it."; exit 1)
+	$(CLANG_FORMAT) -style=$(CLANG_FORMAT_STYLE) -n -Werror *.cpp *.hpp $(TEST_DIR)/*.cpp
+
+# Documentation settings
+DOXYGEN = doxygen
+DOXYFILE = Doxyfile
+PYTHON ?= python3
+DOC_PORT ?= 8080
 
 # Generate documentation
 docs:
-	doxygen Doxyfile
+	@which $(DOXYGEN) > /dev/null || (echo "$(DOXYGEN) not found. Please install it."; exit 1)
+	mkdir -p build/docs
+	$(DOXYGEN) $(DOXYFILE)
+
+# Serve documentation locally
+serve-docs: docs
+	@which $(PYTHON) > /dev/null || (echo "$(PYTHON) not found. Please install it."; exit 1)
+	@echo "Serving documentation at http://localhost:$(DOC_PORT)"
+	@cd build/docs/html && $(PYTHON) -m http.server $(DOC_PORT)
 
 # Phony targets
-.PHONY: all clean run test format docs
+.PHONY: all clean run test format format-check docs serve-docs
