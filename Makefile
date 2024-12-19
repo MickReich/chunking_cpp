@@ -1,6 +1,6 @@
 # Compiler settings
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -Wextra -pedantic -I.
+CXXFLAGS = -std=c++17 -Wall -Wextra -pedantic -I./include
 
 # Detect OS for GTest configuration
 ifeq ($(OS),Windows_NT)
@@ -22,90 +22,101 @@ endif
 # Add GTest include to CXXFLAGS
 CXXFLAGS += $(GTEST_INCLUDE)
 
-# Build settings
+# Directory settings
+SRC_DIR = src
+INC_DIR = include
 BUILD_DIR = build
-TARGET = chunker
+BIN_DIR = $(BUILD_DIR)/bin
 
-# Source files
-SRCS = main.cpp
-HEADERS = chunk.hpp data_structures.hpp utils.hpp config.hpp
+# Target executable
+TARGET = $(BIN_DIR)/chunker
 
-# Object files
-OBJS = $(SRCS:%.cpp=$(BUILD_DIR)/%.o)
+# Source and object files
+SRCS = $(wildcard $(SRC_DIR)/*.cpp)
+OBJS = $(SRCS:$(SRC_DIR)/%.cpp=$(BUILD_DIR)/%.o)
+
+# Header files
+HEADERS = $(wildcard $(INC_DIR)/*.hpp)
 
 # Test settings
 TEST_DIR = tests
+TEST_BIN_DIR = $(BUILD_DIR)/tests
 TEST_SRCS = $(wildcard $(TEST_DIR)/*.cpp)
-TEST_OBJS = $(TEST_SRCS:%.cpp=$(BUILD_DIR)/%.o)
-TEST_TARGET = $(BUILD_DIR)/run_tests
+TEST_OBJS = $(TEST_SRCS:$(TEST_DIR)/%.cpp=$(TEST_BIN_DIR)/%.o)
+TEST_BINS = $(TEST_BIN_DIR)/test_runner
+
+# GTest settings
+GTEST_LIBS = -lgtest -lgtest_main -pthread
+TEST_CXXFLAGS = $(CXXFLAGS)
 
 # Default target
-all: $(BUILD_DIR)/$(TARGET)
+all: $(TARGET)
 
-# Create build directory
+# Create build directories
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
 
+$(BIN_DIR):
+	mkdir -p $(BIN_DIR)
+
 # Compile the executable
-$(BUILD_DIR)/$(TARGET): $(OBJS)
+$(TARGET): $(OBJS) | $(BIN_DIR)
 	$(CXX) $(OBJS) -o $@
 
 # Compile object files
-$(BUILD_DIR)/%.o: %.cpp $(HEADERS) | $(BUILD_DIR)
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp $(HEADERS) | $(BUILD_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# Test targets
+$(TEST_BIN_DIR):
+	mkdir -p $(TEST_BIN_DIR)
+
+$(TEST_BIN_DIR)/%.o: $(TEST_DIR)/%.cpp $(HEADERS) | $(TEST_BIN_DIR)
+	$(CXX) $(TEST_CXXFLAGS) -c $< -o $@
+
+$(TEST_BIN_DIR)/test_runner: $(TEST_OBJS)
+	$(CXX) $(TEST_OBJS) $(GTEST_LIBS) -o $@
+
+.PRECIOUS: $(TEST_BIN_DIR)/%.o
+
+test: $(TEST_BINS)
+	@echo "Running all tests..."
+	./$(TEST_BINS)
+
+# Run specific test suite (e.g., make test-chunk)
+test-%: $(TEST_BINS)
+	./$(TEST_BINS) --gtest_filter=$**
 
 # Clean build files
 clean:
 	rm -rf $(BUILD_DIR)
+	rm -f $(PACKAGE)-$(VERSION).tar.gz
 
 # Run the program
-run: $(BUILD_DIR)/$(TARGET)
-	./$(BUILD_DIR)/$(TARGET)
+run: $(TARGET)
+	$(TARGET)
 
-# Test target
-test: $(TEST_TARGET)
-	./$(TEST_TARGET)
+# Distribution package
+VERSION = 1.0
+PACKAGE = vector-chunker
 
-$(TEST_TARGET): $(TEST_OBJS) | $(BUILD_DIR)/$(TEST_DIR)
-	$(CXX) $(TEST_OBJS) $(GTEST_LIBS) -o $@
+dist:
+	mkdir -p $(PACKAGE)-$(VERSION)
+	cp -r $(SRC_DIR) $(INC_DIR) Makefile BUILDING.md LICENSE README.md $(PACKAGE)-$(VERSION)/
+	tar -czf $(PACKAGE)-$(VERSION).tar.gz $(PACKAGE)-$(VERSION)
+	rm -rf $(PACKAGE)-$(VERSION)
 
-$(BUILD_DIR)/$(TEST_DIR)/%.o: $(TEST_DIR)/%.cpp $(HEADERS) | $(BUILD_DIR)/$(TEST_DIR)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
-
-$(BUILD_DIR)/$(TEST_DIR):
-	mkdir -p $(BUILD_DIR)/$(TEST_DIR)
-
-# Format settings
-CLANG_FORMAT ?= clang-format
-CLANG_FORMAT_STYLE = file  # Uses .clang-format if present, otherwise LLVM style
-
-# Format source files
-format:
-	@which $(CLANG_FORMAT) > /dev/null || (echo "$(CLANG_FORMAT) not found. Please install it."; exit 1)
-	$(CLANG_FORMAT) -i -style=$(CLANG_FORMAT_STYLE) *.cpp *.hpp $(TEST_DIR)/*.cpp
-
-# Check format (useful for CI)
-format-check:
-	@which $(CLANG_FORMAT) > /dev/null || (echo "$(CLANG_FORMAT) not found. Please install it."; exit 1)
-	$(CLANG_FORMAT) -style=$(CLANG_FORMAT_STYLE) -n -Werror *.cpp *.hpp $(TEST_DIR)/*.cpp
-
-# Documentation settings
-DOXYGEN = doxygen
-DOXYFILE = Doxyfile
-PYTHON ?= python3
-DOC_PORT ?= 8080
-
-# Generate documentation
-docs:
-	@which $(DOXYGEN) > /dev/null || (echo "$(DOXYGEN) not found. Please install it."; exit 1)
-	mkdir -p build/docs
-	$(DOXYGEN) $(DOXYFILE)
-
-# Serve documentation locally
-serve-docs: docs
-	@which $(PYTHON) > /dev/null || (echo "$(PYTHON) not found. Please install it."; exit 1)
-	@echo "Serving documentation at http://localhost:$(DOC_PORT)"
-	@cd build/docs/html && $(PYTHON) -m http.server $(DOC_PORT)
+# Distribution check
+distcheck: dist
+	@echo "Testing distribution package..."
+	@tmp_dir=`mktemp -d` && \
+	tar -C $$tmp_dir -xzf $(PACKAGE)-$(VERSION).tar.gz && \
+	cd $$tmp_dir/$(PACKAGE)-$(VERSION) && \
+	$(MAKE) && \
+	$(MAKE) run && \
+	cd - > /dev/null && \
+	rm -rf $$tmp_dir && \
+	echo "Distribution package test passed!"
 
 # Phony targets
-.PHONY: all clean run test format format-check docs serve-docs
+.PHONY: all clean run dist distcheck test test-%
