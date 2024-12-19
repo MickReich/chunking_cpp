@@ -1,6 +1,6 @@
 # Compiler settings
 CXX = g++
-CXXFLAGS = -std=c++11 -Wall -Wextra -pedantic -I.
+CXXFLAGS = -std=c++17 -Wall -Wextra -pedantic -I.
 
 # Build settings
 BUILD_DIR = build
@@ -8,7 +8,7 @@ TARGET = chunker
 
 # Source files
 SRCS = main.cpp
-HEADERS = chunk.hpp
+HEADERS = chunk.hpp data_structures.hpp utils.hpp config.hpp
 
 # Object files
 OBJS = $(SRCS:%.cpp=$(BUILD_DIR)/%.o)
@@ -36,5 +36,13 @@ clean:
 run: $(BUILD_DIR)/$(TARGET)
 	./$(BUILD_DIR)/$(TARGET)
 
+# Format source files
+format:
+	clang-format -i *.cpp *.hpp
+
+# Generate documentation
+docs:
+	doxygen Doxyfile
+
 # Phony targets
-.PHONY: all clean run
+.PHONY: all clean run format docs

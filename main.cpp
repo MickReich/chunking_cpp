@@ -3,6 +3,8 @@
 #include <vector>
 #include "chunk.hpp"
 #include "data_structures.hpp"
+#include "utils.hpp"
+#include "config.hpp"
 
 // Helper function to print chunks
 template<typename T>
@@ -130,6 +132,35 @@ int main() {
         std::cout << val << " ";
     }
     std::cout << std::endl;
+
+    // Example 10: Using Statistics
+    std::cout << "\n=== Statistics Example ===" << std::endl;
+    std::vector<double> stats_data = {1.0, 2.0, 2.0, 3.0, 4.0, 5.0};
+    std::cout << "Mean: " << chunk_utils::Statistics<double>::mean(stats_data) << std::endl;
+    std::cout << "Median: " << chunk_utils::Statistics<double>::median(stats_data) << std::endl;
+    auto [mode_val, mode_freq] = chunk_utils::Statistics<double>::mode(stats_data);
+    std::cout << "Mode: " << mode_val << " (frequency: " << mode_freq << ")" << std::endl;
+
+    // Example 11: Chunk Manipulation
+    std::cout << "\n=== Chunk Manipulation Example ===" << std::endl;
+    auto chunks1 = std::vector<std::vector<int>>{{1, 2}, {3, 4}};
+    auto chunks2 = std::vector<std::vector<int>>{{5, 6}, {7, 8}};
+    
+    auto merged = chunk_utils::ChunkManipulator<int>::merge_chunks(chunks1, chunks2);
+    std::cout << "Merged chunks:" << std::endl;
+    print_chunks(merged);
+
+    auto filtered = chunk_utils::ChunkManipulator<int>::filter_chunks(
+        merged, [](const auto& chunk) { return chunk[0] > 3; });
+    std::cout << "Filtered chunks (first element > 3):" << std::endl;
+    print_chunks(filtered);
+
+    // Example 12: Random Chunk Generation
+    std::cout << "\n=== Random Chunk Generation Example ===" << std::endl;
+    auto random_chunks = chunk_utils::ChunkGenerator<double>::generate_random_chunks(
+        3, 4, 0.0, 10.0);
+    std::cout << "Randomly generated chunks:" << std::endl;
+    print_chunks(random_chunks);
 
     return 0;
 } 
