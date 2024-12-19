@@ -24,7 +24,14 @@ public:
     static T median(std::vector<T> data) {
         if (data.empty()) return T();
         std::sort(data.begin(), data.end());
-        return data[data.size() / 2];
+        if (data.size() % 2 == 0) {
+            // For even number of elements, return average of two middle values
+            size_t mid = data.size() / 2;
+            return (data[mid - 1] + data[mid]) / static_cast<T>(2);
+        } else {
+            // For odd number of elements, return middle value
+            return data[data.size() / 2];
+        }
     }
 
     static std::pair<T, size_t> mode(const std::vector<T>& data) {
