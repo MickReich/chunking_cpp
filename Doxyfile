@@ -48,6 +48,7 @@ EXCLUDE              = build \
                       tests
 EXCLUDE_PATTERNS     = */build/* \
                       */tests/*
+INCLUDE_PATH         = include
 
 # Output formats
 GENERATE_HTML        = YES

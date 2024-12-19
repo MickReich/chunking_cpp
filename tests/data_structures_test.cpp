@@ -1,4 +1,4 @@
-#include "../data_structures.hpp"
+#include "data_structures.hpp"
 #include <gtest/gtest.h>
 
 TEST(CircularBufferTest, BasicOperations) {

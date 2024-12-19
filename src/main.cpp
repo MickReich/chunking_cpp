@@ -1,7 +1,7 @@
-#include "../config.hpp"
-#include "../data_structures.hpp"
-#include "../include/chunk.hpp"
-#include "../utils.hpp"
+#include "chunk.hpp"
+#include "config.hpp"
+#include "data_structures.hpp"
+#include "utils.hpp"
 #include <iomanip>
 #include <iostream>
 #include <vector>

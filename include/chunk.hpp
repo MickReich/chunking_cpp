@@ -4,7 +4,7 @@
 #include <stdexcept>
 #include <vector>
 
-#include "../config.hpp"
+#include "config.hpp"
 
 /**
  * @file chunk.hpp

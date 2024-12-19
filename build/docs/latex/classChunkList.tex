@@ -1,0 +1,206 @@
+\doxysection{Chunk\+List\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classChunkList}{}\label{classChunkList}\index{ChunkList$<$ T $>$@{ChunkList$<$ T $>$}}
+
+
+{\ttfamily \#include $<$data\+\_\+structures.\+hpp$>$}
+
+
+
+Collaboration diagram for Chunk\+List\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{classChunkList__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classChunkList_a9ff55cbfadab6fb66d139ad75d74f95c}{append\+\_\+chunk}} (const std\+::vector$<$ T $>$ \&chunk\+\_\+data)
+\item 
+void \mbox{\hyperlink{classChunkList_a81d821906a5ec8c79f1a9ed27cf1480a}{clear}} ()
+\item 
+bool \mbox{\hyperlink{classChunkList_abb8a93c3a579f974f65aadac03c07b52}{empty}} () const
+\item 
+std\+::vector$<$ T $>$ \mbox{\hyperlink{classChunkList_a310a9fc14313410eb215edee02dda399}{flatten}} () const
+\item 
+void \mbox{\hyperlink{classChunkList_a60e42a7bdfc7edb8207b9485ebd9b42d}{prepend\+\_\+chunk}} (const std\+::vector$<$ T $>$ \&chunk\+\_\+data)
+\item 
+size\+\_\+t \mbox{\hyperlink{classChunkList_a5e024a47318415463cc12ac53366413e}{size}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structChunkNode}{Chunk\+Node}}$<$ T $>$ $>$ \mbox{\hyperlink{classChunkList_a49bc83f07b0d5997269e5a775a8e8540}{head\+\_\+}}
+\item 
+size\+\_\+t \mbox{\hyperlink{classChunkList_aedfd23ee7e0970d662c94db875c854df}{size\+\_\+}} = 0
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structChunkNode}{Chunk\+Node}}$<$ T $>$ $>$ \mbox{\hyperlink{classChunkList_a05973e00a2e94eb41d9c496413f350aa}{tail\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class Chunk\+List$<$ T $>$}
+
+
+Definition at line \mbox{\hyperlink{data__structures_8hpp_source_l00193}{193}} of file \mbox{\hyperlink{data__structures_8hpp_source}{data\+\_\+structures.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classChunkList_a9ff55cbfadab6fb66d139ad75d74f95c}\label{classChunkList_a9ff55cbfadab6fb66d139ad75d74f95c} 
+\index{ChunkList$<$ T $>$@{ChunkList$<$ T $>$}!append\_chunk@{append\_chunk}}
+\index{append\_chunk@{append\_chunk}!ChunkList$<$ T $>$@{ChunkList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{append\_chunk()}{append\_chunk()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classChunkList}{Chunk\+List}}$<$ T $>$\+::append\+\_\+chunk (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ T $>$ \&}]{chunk\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{data__structures_8hpp_source_l00200}{200}} of file \mbox{\hyperlink{data__structures_8hpp_source}{data\+\_\+structures.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{data__structures_8hpp_source_l00195}{Chunk\+List$<$ T $>$\+::head\+\_\+}}, \mbox{\hyperlink{data__structures_8hpp_source_l00197}{Chunk\+List$<$ T $>$\+::size\+\_\+}}, and \mbox{\hyperlink{data__structures_8hpp_source_l00196}{Chunk\+List$<$ T $>$\+::tail\+\_\+}}.
+
+
+
+Referenced by \mbox{\hyperlink{main_8cpp_source_l00023}{main()}}.
+
+\Hypertarget{classChunkList_a81d821906a5ec8c79f1a9ed27cf1480a}\label{classChunkList_a81d821906a5ec8c79f1a9ed27cf1480a} 
+\index{ChunkList$<$ T $>$@{ChunkList$<$ T $>$}!clear@{clear}}
+\index{clear@{clear}!ChunkList$<$ T $>$@{ChunkList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classChunkList}{Chunk\+List}}$<$ T $>$\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{data__structures_8hpp_source_l00241}{241}} of file \mbox{\hyperlink{data__structures_8hpp_source}{data\+\_\+structures.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{data__structures_8hpp_source_l00195}{Chunk\+List$<$ T $>$\+::head\+\_\+}}, \mbox{\hyperlink{data__structures_8hpp_source_l00197}{Chunk\+List$<$ T $>$\+::size\+\_\+}}, and \mbox{\hyperlink{data__structures_8hpp_source_l00196}{Chunk\+List$<$ T $>$\+::tail\+\_\+}}.
+
+\Hypertarget{classChunkList_abb8a93c3a579f974f65aadac03c07b52}\label{classChunkList_abb8a93c3a579f974f65aadac03c07b52} 
+\index{ChunkList$<$ T $>$@{ChunkList$<$ T $>$}!empty@{empty}}
+\index{empty@{empty}!ChunkList$<$ T $>$@{ChunkList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool \mbox{\hyperlink{classChunkList}{Chunk\+List}}$<$ T $>$\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{data__structures_8hpp_source_l00237}{237}} of file \mbox{\hyperlink{data__structures_8hpp_source}{data\+\_\+structures.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{data__structures_8hpp_source_l00197}{Chunk\+List$<$ T $>$\+::size\+\_\+}}.
+
+\Hypertarget{classChunkList_a310a9fc14313410eb215edee02dda399}\label{classChunkList_a310a9fc14313410eb215edee02dda399} 
+\index{ChunkList$<$ T $>$@{ChunkList$<$ T $>$}!flatten@{flatten}}
+\index{flatten@{flatten}!ChunkList$<$ T $>$@{ChunkList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{flatten()}{flatten()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$ T $>$ \mbox{\hyperlink{classChunkList}{Chunk\+List}}$<$ T $>$\+::flatten (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{data__structures_8hpp_source_l00224}{224}} of file \mbox{\hyperlink{data__structures_8hpp_source}{data\+\_\+structures.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{data__structures_8hpp_source_l00195}{Chunk\+List$<$ T $>$\+::head\+\_\+}}.
+
+
+
+Referenced by \mbox{\hyperlink{main_8cpp_source_l00023}{main()}}.
+
+\Hypertarget{classChunkList_a60e42a7bdfc7edb8207b9485ebd9b42d}\label{classChunkList_a60e42a7bdfc7edb8207b9485ebd9b42d} 
+\index{ChunkList$<$ T $>$@{ChunkList$<$ T $>$}!prepend\_chunk@{prepend\_chunk}}
+\index{prepend\_chunk@{prepend\_chunk}!ChunkList$<$ T $>$@{ChunkList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{prepend\_chunk()}{prepend\_chunk()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classChunkList}{Chunk\+List}}$<$ T $>$\+::prepend\+\_\+chunk (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ T $>$ \&}]{chunk\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{data__structures_8hpp_source_l00212}{212}} of file \mbox{\hyperlink{data__structures_8hpp_source}{data\+\_\+structures.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{data__structures_8hpp_source_l00195}{Chunk\+List$<$ T $>$\+::head\+\_\+}}, \mbox{\hyperlink{data__structures_8hpp_source_l00197}{Chunk\+List$<$ T $>$\+::size\+\_\+}}, and \mbox{\hyperlink{data__structures_8hpp_source_l00196}{Chunk\+List$<$ T $>$\+::tail\+\_\+}}.
+
+
+
+Referenced by \mbox{\hyperlink{main_8cpp_source_l00023}{main()}}.
+
+\Hypertarget{classChunkList_a5e024a47318415463cc12ac53366413e}\label{classChunkList_a5e024a47318415463cc12ac53366413e} 
+\index{ChunkList$<$ T $>$@{ChunkList$<$ T $>$}!size@{size}}
+\index{size@{size}!ChunkList$<$ T $>$@{ChunkList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+size\+\_\+t \mbox{\hyperlink{classChunkList}{Chunk\+List}}$<$ T $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{data__structures_8hpp_source_l00234}{234}} of file \mbox{\hyperlink{data__structures_8hpp_source}{data\+\_\+structures.\+hpp}}.
+
+
+
+References \mbox{\hyperlink{data__structures_8hpp_source_l00197}{Chunk\+List$<$ T $>$\+::size\+\_\+}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classChunkList_a49bc83f07b0d5997269e5a775a8e8540}\label{classChunkList_a49bc83f07b0d5997269e5a775a8e8540} 
+\index{ChunkList$<$ T $>$@{ChunkList$<$ T $>$}!head\_@{head\_}}
+\index{head\_@{head\_}!ChunkList$<$ T $>$@{ChunkList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{head\_}{head\_}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{structChunkNode}{Chunk\+Node}}$<$T$>$ $>$ \mbox{\hyperlink{classChunkList}{Chunk\+List}}$<$ T $>$\+::head\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{data__structures_8hpp_source_l00195}{195}} of file \mbox{\hyperlink{data__structures_8hpp_source}{data\+\_\+structures.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{data__structures_8hpp_source_l00200}{Chunk\+List$<$ T $>$\+::append\+\_\+chunk()}}, \mbox{\hyperlink{data__structures_8hpp_source_l00241}{Chunk\+List$<$ T $>$\+::clear()}}, \mbox{\hyperlink{data__structures_8hpp_source_l00224}{Chunk\+List$<$ T $>$\+::flatten()}}, and \mbox{\hyperlink{data__structures_8hpp_source_l00212}{Chunk\+List$<$ T $>$\+::prepend\+\_\+chunk()}}.
+
+\Hypertarget{classChunkList_aedfd23ee7e0970d662c94db875c854df}\label{classChunkList_aedfd23ee7e0970d662c94db875c854df} 
+\index{ChunkList$<$ T $>$@{ChunkList$<$ T $>$}!size\_@{size\_}}
+\index{size\_@{size\_}!ChunkList$<$ T $>$@{ChunkList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{size\_}{size\_}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+size\+\_\+t \mbox{\hyperlink{classChunkList}{Chunk\+List}}$<$ T $>$\+::size\+\_\+ = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{data__structures_8hpp_source_l00197}{197}} of file \mbox{\hyperlink{data__structures_8hpp_source}{data\+\_\+structures.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{data__structures_8hpp_source_l00200}{Chunk\+List$<$ T $>$\+::append\+\_\+chunk()}}, \mbox{\hyperlink{data__structures_8hpp_source_l00241}{Chunk\+List$<$ T $>$\+::clear()}}, \mbox{\hyperlink{data__structures_8hpp_source_l00237}{Chunk\+List$<$ T $>$\+::empty()}}, \mbox{\hyperlink{data__structures_8hpp_source_l00212}{Chunk\+List$<$ T $>$\+::prepend\+\_\+chunk()}}, and \mbox{\hyperlink{data__structures_8hpp_source_l00234}{Chunk\+List$<$ T $>$\+::size()}}.
+
+\Hypertarget{classChunkList_a05973e00a2e94eb41d9c496413f350aa}\label{classChunkList_a05973e00a2e94eb41d9c496413f350aa} 
+\index{ChunkList$<$ T $>$@{ChunkList$<$ T $>$}!tail\_@{tail\_}}
+\index{tail\_@{tail\_}!ChunkList$<$ T $>$@{ChunkList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{tail\_}{tail\_}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{structChunkNode}{Chunk\+Node}}$<$T$>$ $>$ \mbox{\hyperlink{classChunkList}{Chunk\+List}}$<$ T $>$\+::tail\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{data__structures_8hpp_source_l00196}{196}} of file \mbox{\hyperlink{data__structures_8hpp_source}{data\+\_\+structures.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{data__structures_8hpp_source_l00200}{Chunk\+List$<$ T $>$\+::append\+\_\+chunk()}}, \mbox{\hyperlink{data__structures_8hpp_source_l00241}{Chunk\+List$<$ T $>$\+::clear()}}, and \mbox{\hyperlink{data__structures_8hpp_source_l00212}{Chunk\+List$<$ T $>$\+::prepend\+\_\+chunk()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{data__structures_8hpp}{data\+\_\+structures.\+hpp}}\end{DoxyCompactItemize}

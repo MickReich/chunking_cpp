@@ -1,4 +1,4 @@
-#include "../include/chunk.hpp"
+#include "chunk.hpp"
 #include <gtest/gtest.h>
 
 class ChunkTest : public ::testing::Test {

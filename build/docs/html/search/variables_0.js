@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['chunk_5fsize_5f_0',['chunk_size_',['../classChunk.html#a1944aeea42f9a2f974b6cfe50c1c6658',1,'Chunk']]]
+  ['buffer_5f_0',['buffer_',['../classCircularBuffer.html#a8dec6941db72a0d1111de5d261878c51',1,'CircularBuffer']]]
 ];

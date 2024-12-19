@@ -1,0 +1,73 @@
+\doxysection{chunk\+\_\+utils\+::Chunk\+Manipulator\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classchunk__utils_1_1ChunkManipulator}{}\label{classchunk__utils_1_1ChunkManipulator}\index{chunk\_utils::ChunkManipulator$<$ T $>$@{chunk\_utils::ChunkManipulator$<$ T $>$}}
+
+
+{\ttfamily \#include $<$utils.\+hpp$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__utils_1_1ChunkManipulator_ac5cc27e53560990ba7154bf82632e4d4}{filter\+\_\+chunks}} (const std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \&chunks, std\+::function$<$ bool(const std\+::vector$<$ T $>$ \&)$>$ predicate)
+\item 
+static std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__utils_1_1ChunkManipulator_aad43e878aa138c2a57312f13e56cacc8}{merge\+\_\+chunks}} (const std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \&chunks1, const std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \&chunks2)
+\item 
+static std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__utils_1_1ChunkManipulator_a673159f2b0528f27d649bc1b20ef4aad}{transform\+\_\+chunks}} (const std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \&chunks, std\+::function$<$ std\+::vector$<$ T $>$(const std\+::vector$<$ T $>$ \&)$>$ transformer)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class chunk\+\_\+utils\+::\+Chunk\+Manipulator$<$ T $>$}
+
+
+Definition at line \mbox{\hyperlink{utils_8hpp_source_l00053}{53}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classchunk__utils_1_1ChunkManipulator_ac5cc27e53560990ba7154bf82632e4d4}\label{classchunk__utils_1_1ChunkManipulator_ac5cc27e53560990ba7154bf82632e4d4} 
+\index{chunk\_utils::ChunkManipulator$<$ T $>$@{chunk\_utils::ChunkManipulator$<$ T $>$}!filter\_chunks@{filter\_chunks}}
+\index{filter\_chunks@{filter\_chunks}!chunk\_utils::ChunkManipulator$<$ T $>$@{chunk\_utils::ChunkManipulator$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{filter\_chunks()}{filter\_chunks()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+static std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__utils_1_1ChunkManipulator}{chunk\+\_\+utils\+::\+Chunk\+Manipulator}}$<$ T $>$\+::filter\+\_\+chunks (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \&}]{chunks,  }\item[{std\+::function$<$ bool(const std\+::vector$<$ T $>$ \&)$>$}]{predicate }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{utils_8hpp_source_l00063}{63}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{main_8cpp_source_l00023}{main()}}.
+
+\Hypertarget{classchunk__utils_1_1ChunkManipulator_aad43e878aa138c2a57312f13e56cacc8}\label{classchunk__utils_1_1ChunkManipulator_aad43e878aa138c2a57312f13e56cacc8} 
+\index{chunk\_utils::ChunkManipulator$<$ T $>$@{chunk\_utils::ChunkManipulator$<$ T $>$}!merge\_chunks@{merge\_chunks}}
+\index{merge\_chunks@{merge\_chunks}!chunk\_utils::ChunkManipulator$<$ T $>$@{chunk\_utils::ChunkManipulator$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{merge\_chunks()}{merge\_chunks()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+static std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__utils_1_1ChunkManipulator}{chunk\+\_\+utils\+::\+Chunk\+Manipulator}}$<$ T $>$\+::merge\+\_\+chunks (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \&}]{chunks1,  }\item[{const std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \&}]{chunks2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{utils_8hpp_source_l00055}{55}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{main_8cpp_source_l00023}{main()}}.
+
+\Hypertarget{classchunk__utils_1_1ChunkManipulator_a673159f2b0528f27d649bc1b20ef4aad}\label{classchunk__utils_1_1ChunkManipulator_a673159f2b0528f27d649bc1b20ef4aad} 
+\index{chunk\_utils::ChunkManipulator$<$ T $>$@{chunk\_utils::ChunkManipulator$<$ T $>$}!transform\_chunks@{transform\_chunks}}
+\index{transform\_chunks@{transform\_chunks}!chunk\_utils::ChunkManipulator$<$ T $>$@{chunk\_utils::ChunkManipulator$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{transform\_chunks()}{transform\_chunks()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+static std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__utils_1_1ChunkManipulator}{chunk\+\_\+utils\+::\+Chunk\+Manipulator}}$<$ T $>$\+::transform\+\_\+chunks (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \&}]{chunks,  }\item[{std\+::function$<$ std\+::vector$<$ T $>$(const std\+::vector$<$ T $>$ \&)$>$}]{transformer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{utils_8hpp_source_l00071}{71}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{utils_8hpp}{utils.\+hpp}}\end{DoxyCompactItemize}

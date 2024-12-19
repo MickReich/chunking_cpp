@@ -109,3 +109,23 @@ Serve documentation locally:
 ```bash
 make docs-serve
 ```
+
+## Project Structure
+```
+.
+├── include/
+│   ├── chunk.hpp
+│   ├── config.hpp
+│   ├── data_structures.hpp
+│   └── utils.hpp
+├── src/
+│   └── main.cpp
+├── tests/
+│   ├── test_main.cpp
+│   ├── chunk_test.cpp
+│   ├── data_structures_test.cpp
+│   └── utils_test.cpp
+├── Makefile
+├── Doxyfile
+└── README.md
+```

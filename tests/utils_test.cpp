@@ -1,4 +1,4 @@
-#include "../utils.hpp"
+#include "utils.hpp"
 #include <gtest/gtest.h>
 
 using namespace chunk_utils;
