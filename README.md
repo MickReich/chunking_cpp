@@ -46,6 +46,8 @@ make docs
 - C++11 or later
 - Make
 - CMake (optional)
+- Doxygen (optional)
+- Graphviz (optional)
 
 ## Testing
 
@@ -93,4 +95,37 @@ After installing Google Test:
 
 ```bash
 make test
+```
+
+## Documentation
+
+
+```bash
+make docs
+```
+
+Serve documentation locally:
+
+```bash
+make docs-serve
+```
+
+## Project Structure
+```
+.
+├── include/
+│   ├── chunk.hpp
+│   ├── config.hpp
+│   ├── data_structures.hpp
+│   └── utils.hpp
+├── src/
+│   └── main.cpp
+├── tests/
+│   ├── test_main.cpp
+│   ├── chunk_test.cpp
+│   ├── data_structures_test.cpp
+│   └── utils_test.cpp
+├── Makefile
+├── Doxyfile
+└── README.md
 ```

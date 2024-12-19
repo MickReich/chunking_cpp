@@ -8,5 +8,6 @@ var searchData=
   ['print_5fchunks_5',['print_chunks',['../main_8cpp.html#af4761dcd0fd187c30346163870ed9a3b',1,'main.cpp']]],
   ['priorityqueue_6',['PriorityQueue',['../classPriorityQueue.html',1,'']]],
   ['processing_20library_7',['Advanced Chunk Processing Library',['../index.html',1,'']]],
-  ['push_8',['push',['../classCircularBuffer.html#a54c7a5a2596ab2e24661115758ba665c',1,'CircularBuffer::push()'],['../classPriorityQueue.html#a0b71ca9bf78de4cf33517c67c987f2b2',1,'PriorityQueue::push()'],['../classSlidingWindow.html#a57d04cd6d016fe2c45ed2895003c1f71',1,'SlidingWindow::push()']]]
+  ['project_20structure_8',['Project Structure',['../index.html#autotoc_md13',1,'']]],
+  ['push_9',['push',['../classCircularBuffer.html#a54c7a5a2596ab2e24661115758ba665c',1,'CircularBuffer::push()'],['../classPriorityQueue.html#a0b71ca9bf78de4cf33517c67c987f2b2',1,'PriorityQueue::push()'],['../classSlidingWindow.html#a57d04cd6d016fe2c45ed2895003c1f71',1,'SlidingWindow::push()']]]
 ];
