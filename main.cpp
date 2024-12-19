@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <vector>
 #include "chunk.hpp"
+#include "data_structures.hpp"
 
 // Helper function to print chunks
 template<typename T>
@@ -68,7 +69,7 @@ int main() {
 
     // Example 6: Chunking by predicate (start new chunk on even numbers)
     std::cout << "\n=== Predicate-based Chunking Example ===" << std::endl;
-    Chunk<int> pred_chunker(0);  // chunk_size doesn't matter for predicate-based chunking
+    Chunk<int> pred_chunker(1);  // Use minimum chunk size of 1 for predicate-based chunking
     std::vector<int> pred_data = {1, 2, 3, 4, 5, 6, 7, 8};
     pred_chunker.add(pred_data);
     
@@ -78,7 +79,7 @@ int main() {
 
     // Example 7: Chunking by sum
     std::cout << "\n=== Sum-based Chunking Example ===" << std::endl;
-    Chunk<int> sum_chunker(0);  // chunk_size doesn't matter for sum-based chunking
+    Chunk<int> sum_chunker(1);  // Use minimum chunk size of 1 for sum-based chunking
     std::vector<int> sum_data = {1, 2, 3, 4, 5, 6, 7, 8, 9};
     sum_chunker.add(sum_data);
     
@@ -88,13 +89,47 @@ int main() {
 
     // Example 8: Equal division chunking
     std::cout << "\n=== Equal Division Chunking Example ===" << std::endl;
-    Chunk<int> equal_chunker(0);  // chunk_size doesn't matter for n-division chunking
+    Chunk<int> equal_chunker(1);  // Use minimum chunk size of 1 for n-division chunking
     std::vector<int> equal_data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     equal_chunker.add(equal_data);
     
     auto equal_chunks = equal_chunker.chunk_into_n(3);
     std::cout << "Data divided into 3 chunks:" << std::endl;
     print_chunks(equal_chunks);
+
+    // Example 9: Using data structures
+    std::cout << "\n=== Data Structures Example ===" << std::endl;
+    
+    // Circular Buffer example
+    CircularBuffer<int> buffer(3);
+    buffer.push(1);
+    buffer.push(2);
+    buffer.push(3);
+    buffer.push(4);  // This will overwrite 1
+    std::cout << "Circular Buffer: ";
+    for (const auto& val : buffer.to_vector()) {
+        std::cout << val << " ";
+    }
+    std::cout << std::endl;
+
+    // Sliding Window example
+    SlidingWindow<double> window(3);
+    window.push(1.0);
+    window.push(2.0);
+    window.push(3.0);
+    window.push(4.0);  // This will remove 1.0
+    std::cout << "Sliding Window Average: " << window.average() << std::endl;
+
+    // ChunkList example
+    ChunkList<int> chunk_list;
+    chunk_list.append_chunk({1, 2, 3});
+    chunk_list.append_chunk({4, 5, 6});
+    chunk_list.prepend_chunk({-1, 0});
+    std::cout << "ChunkList flattened: ";
+    for (const auto& val : chunk_list.flatten()) {
+        std::cout << val << " ";
+    }
+    std::cout << std::endl;
 
     return 0;
 } 

@@ -105,17 +105,21 @@ public:
     }
 
     // Chunk by predicate - start new chunk when predicate returns true
+    // Note: This method ignores the original chunk_size_
     template<typename Pred>
     std::vector<std::vector<T>> chunk_by_predicate(Pred predicate) const {
         std::vector<std::vector<T>> chunks;
+        if (data_.empty()) return chunks;
+
         std::vector<T> current_chunk;
+        current_chunk.push_back(data_[0]);  // Add first element
         
-        for (const T& item : data_) {
-            if (predicate(item) && !current_chunk.empty()) {
+        for (size_t i = 1; i < data_.size(); ++i) {
+            if (predicate(data_[i])) {
                 chunks.push_back(current_chunk);
                 current_chunk.clear();
             }
-            current_chunk.push_back(item);
+            current_chunk.push_back(data_[i]);
         }
         
         if (!current_chunk.empty()) {
@@ -126,8 +130,11 @@ public:
     }
 
     // Chunk by sum - create chunks that sum up to a target value
+    // Note: This method ignores the original chunk_size_
     std::vector<std::vector<T>> chunk_by_sum(T target_sum) const {
         std::vector<std::vector<T>> chunks;
+        if (data_.empty()) return chunks;
+
         std::vector<T> current_chunk;
         T current_sum = T();
         
@@ -149,14 +156,14 @@ public:
     }
 
     // Chunk into n equal(ish) parts
+    // Note: This method ignores the original chunk_size_
     std::vector<std::vector<T>> chunk_into_n(size_t n) const {
         if (n == 0) {
             throw std::invalid_argument("Number of chunks must be greater than 0");
         }
-        if (n > data_.size()) {
-            n = data_.size();
-        }
+        if (data_.empty()) return std::vector<std::vector<T>>();
         
+        n = std::min(n, data_.size());
         std::vector<std::vector<T>> chunks(n);
         size_t base_size = data_.size() / n;
         size_t remainder = data_.size() % n;
