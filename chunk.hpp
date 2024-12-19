@@ -71,4 +71,106 @@ public:
     bool empty() const {
         return data_.empty();
     }
+
+    // New chunking strategies
+    
+    // Chunk with overlap - each chunk shares n elements with the next chunk
+    std::vector<std::vector<T>> get_overlapping_chunks(size_t overlap) const {
+        if (overlap >= chunk_size_) {
+            throw std::invalid_argument("Overlap must be less than chunk size");
+        }
+        
+        std::vector<std::vector<T>> chunks;
+        size_t step = chunk_size_ - overlap;
+        
+        for (size_t i = 0; i + chunk_size_ <= data_.size(); i += step) {
+            chunks.push_back(std::vector<T>(
+                data_.begin() + i,
+                data_.begin() + i + chunk_size_
+            ));
+        }
+        
+        // Handle remaining elements if any
+        if (data_.size() % step != 0) {
+            size_t remaining = data_.size() % step;
+            if (remaining > overlap) {
+                chunks.push_back(std::vector<T>(
+                    data_.end() - chunk_size_,
+                    data_.end()
+                ));
+            }
+        }
+        
+        return chunks;
+    }
+
+    // Chunk by predicate - start new chunk when predicate returns true
+    template<typename Pred>
+    std::vector<std::vector<T>> chunk_by_predicate(Pred predicate) const {
+        std::vector<std::vector<T>> chunks;
+        std::vector<T> current_chunk;
+        
+        for (const T& item : data_) {
+            if (predicate(item) && !current_chunk.empty()) {
+                chunks.push_back(current_chunk);
+                current_chunk.clear();
+            }
+            current_chunk.push_back(item);
+        }
+        
+        if (!current_chunk.empty()) {
+            chunks.push_back(current_chunk);
+        }
+        
+        return chunks;
+    }
+
+    // Chunk by sum - create chunks that sum up to a target value
+    std::vector<std::vector<T>> chunk_by_sum(T target_sum) const {
+        std::vector<std::vector<T>> chunks;
+        std::vector<T> current_chunk;
+        T current_sum = T();
+        
+        for (const T& item : data_) {
+            if (current_sum + item > target_sum && !current_chunk.empty()) {
+                chunks.push_back(current_chunk);
+                current_chunk.clear();
+                current_sum = T();
+            }
+            current_chunk.push_back(item);
+            current_sum += item;
+        }
+        
+        if (!current_chunk.empty()) {
+            chunks.push_back(current_chunk);
+        }
+        
+        return chunks;
+    }
+
+    // Chunk into n equal(ish) parts
+    std::vector<std::vector<T>> chunk_into_n(size_t n) const {
+        if (n == 0) {
+            throw std::invalid_argument("Number of chunks must be greater than 0");
+        }
+        if (n > data_.size()) {
+            n = data_.size();
+        }
+        
+        std::vector<std::vector<T>> chunks(n);
+        size_t base_size = data_.size() / n;
+        size_t remainder = data_.size() % n;
+        
+        size_t current_pos = 0;
+        for (size_t i = 0; i < n; ++i) {
+            size_t current_chunk_size = base_size + (i < remainder ? 1 : 0);
+            chunks[i] = std::vector<T>(
+                data_.begin() + current_pos,
+                data_.begin() + current_pos + current_chunk_size
+            );
+            current_pos += current_chunk_size;
+        }
+        
+        return chunks;
+    }
 };

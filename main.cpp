@@ -56,5 +56,45 @@ int main() {
         std::cout << "Expected error: " << e.what() << std::endl;
     }
 
+    // Example 5: Overlapping chunks
+    std::cout << "\n=== Overlapping Chunks Example ===" << std::endl;
+    Chunk<int> overlap_chunker(4);
+    std::vector<int> overlap_data = {1, 2, 3, 4, 5, 6, 7, 8};
+    overlap_chunker.add(overlap_data);
+    
+    std::cout << "Chunks with 2-element overlap:" << std::endl;
+    auto overlapping_chunks = overlap_chunker.get_overlapping_chunks(2);
+    print_chunks(overlapping_chunks);
+
+    // Example 6: Chunking by predicate (start new chunk on even numbers)
+    std::cout << "\n=== Predicate-based Chunking Example ===" << std::endl;
+    Chunk<int> pred_chunker(0);  // chunk_size doesn't matter for predicate-based chunking
+    std::vector<int> pred_data = {1, 2, 3, 4, 5, 6, 7, 8};
+    pred_chunker.add(pred_data);
+    
+    auto predicate_chunks = pred_chunker.chunk_by_predicate([](int x) { return x % 2 == 0; });
+    std::cout << "Chunks starting with even numbers:" << std::endl;
+    print_chunks(predicate_chunks);
+
+    // Example 7: Chunking by sum
+    std::cout << "\n=== Sum-based Chunking Example ===" << std::endl;
+    Chunk<int> sum_chunker(0);  // chunk_size doesn't matter for sum-based chunking
+    std::vector<int> sum_data = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    sum_chunker.add(sum_data);
+    
+    auto sum_chunks = sum_chunker.chunk_by_sum(10);
+    std::cout << "Chunks with sum <= 10:" << std::endl;
+    print_chunks(sum_chunks);
+
+    // Example 8: Equal division chunking
+    std::cout << "\n=== Equal Division Chunking Example ===" << std::endl;
+    Chunk<int> equal_chunker(0);  // chunk_size doesn't matter for n-division chunking
+    std::vector<int> equal_data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    equal_chunker.add(equal_data);
+    
+    auto equal_chunks = equal_chunker.chunk_into_n(3);
+    std::cout << "Data divided into 3 chunks:" << std::endl;
+    print_chunks(equal_chunks);
+
     return 0;
 } 
