@@ -4,11 +4,13 @@
 #include <stdexcept>
 #include <vector>
 
+#include "../config.hpp"
+
 /**
  * @file chunk.hpp
  * @brief Template class for chunk-based data processing
- * @author Your Name
- * @date YYYY-MM-DD
+ * @author Jonathan Reich
+ * @date 2024-12-19
  */
 
 /**

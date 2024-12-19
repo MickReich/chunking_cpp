@@ -49,6 +49,14 @@ TEST_BINS = $(TEST_BIN_DIR)/test_runner
 GTEST_LIBS = -lgtest -lgtest_main -pthread
 TEST_CXXFLAGS = $(CXXFLAGS)
 
+# Documentation settings
+DOCS_DIR = $(BUILD_DIR)/docs
+HTML_DIR = $(DOCS_DIR)/html
+DOXYGEN = doxygen
+DOXYFILE = Doxyfile
+PYTHON ?= python3
+DOC_PORT ?= 8080
+
 # Default target
 all: $(TARGET)
 
@@ -132,7 +140,24 @@ format-check:
 	@which $(CLANG_FORMAT) > /dev/null || (echo "$(CLANG_FORMAT) not found. Please install it."; exit 1)
 	$(CLANG_FORMAT) -style=$(CLANG_FORMAT_STYLE) -n -Werror $(SRC_DIR)/*.cpp $(INC_DIR)/*.hpp $(TEST_DIR)/*.cpp
 
+# Documentation targets
+docs: | $(DOCS_DIR)
+	@which $(DOXYGEN) > /dev/null || (echo "$(DOXYGEN) not found. Please install it."; exit 1)
+	mkdir -p build/docs
+	$(DOXYGEN) $(DOXYFILE)
 
+# Clean documentation
+docs-clean:
+	rm -rf $(DOCS_DIR)
+
+# Serve documentation locally
+docs-serve: docs
+	@which $(PYTHON) > /dev/null || (echo "$(PYTHON) not found. Please install it."; exit 1)
+	@echo "Serving documentation at http://localhost:$(DOC_PORT)"
+	@cd $(DOCS_DIR)/html && $(PYTHON) -m http.server $(DOC_PORT)
+
+$(DOCS_DIR):
+	mkdir -p $(DOCS_DIR)
 
 # Phony targets
-.PHONY: all clean run dist distcheck test test-% format format-check
+.PHONY: all clean run dist distcheck test test-% format format-check docs docs-clean docs-serve
