@@ -105,7 +105,7 @@ run: $(TARGET)
 	$(TARGET)
 
 # Distribution package
-VERSION = 1.0
+VERSION = 0.1
 PACKAGE = vector-chunker
 
 dist:

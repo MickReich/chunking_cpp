@@ -33,14 +33,6 @@ make run
 
 See `main.cpp` for comprehensive examples of all features.
 
-## Documentation
-
-Generate documentation:
-
-```bash
-make docs
-```
-
 ## Requirements
 
 - C++11 or later
@@ -99,7 +91,6 @@ make test
 
 ## Documentation
 
-
 ```bash
 make docs
 ```
@@ -111,7 +102,8 @@ make docs-serve
 ```
 
 ## Project Structure
-```
+
+```markdown
 .
 ├── include/
 │   ├── chunk.hpp
