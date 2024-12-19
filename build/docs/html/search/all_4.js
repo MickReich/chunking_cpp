@@ -22,5 +22,5 @@ var searchData=
   ['clear_19',['clear',['../classChunk.html#a96a31d4bd95a2117af0430d799159b91',1,'Chunk::clear()'],['../classChunkList.html#a81d821906a5ec8c79f1a9ed27cf1480a',1,'ChunkList::clear()']]],
   ['comp_5f_20',['comp_',['../classPriorityQueue.html#a4fa43ad50be95b27d62d62d73a83f19c',1,'PriorityQueue']]],
   ['config_2ehpp_21',['config.hpp',['../config_8hpp.html',1,'']]],
-  ['cross_20platform_22',['Method 2: Using vcpkg (Cross-platform)',['../index.html#autotoc_md10',1,'']]]
+  ['cross_20platform_22',['Method 2: Using vcpkg (Cross-platform)',['../index.html#autotoc_md9',1,'']]]
 ];
