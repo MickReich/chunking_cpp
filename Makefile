@@ -118,5 +118,21 @@ distcheck: dist
 	rm -rf $$tmp_dir && \
 	echo "Distribution package test passed!"
 
+
+CLANG_FORMAT ?= clang-format
+CLANG_FORMAT_STYLE = file  # Uses .clang-format if present, otherwise LLVM style
+
+# Format source files
+format:
+	@which $(CLANG_FORMAT) > /dev/null || (echo "$(CLANG_FORMAT) not found. Please install it."; exit 1)
+	$(CLANG_FORMAT) -i -style=$(CLANG_FORMAT_STYLE) $(SRC_DIR)/*.cpp $(INC_DIR)/*.hpp $(TEST_DIR)/*.cpp
+
+# Check format (useful for CI)
+format-check:
+	@which $(CLANG_FORMAT) > /dev/null || (echo "$(CLANG_FORMAT) not found. Please install it."; exit 1)
+	$(CLANG_FORMAT) -style=$(CLANG_FORMAT_STYLE) -n -Werror $(SRC_DIR)/*.cpp $(INC_DIR)/*.hpp $(TEST_DIR)/*.cpp
+
+
+
 # Phony targets
-.PHONY: all clean run dist distcheck test test-%
+.PHONY: all clean run dist distcheck test test-% format format-check
