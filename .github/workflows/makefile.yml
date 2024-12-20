@@ -26,8 +26,5 @@ jobs:
     - name: Install project
       run: make
 
-    - name: Run check
-      run: make check
-
     - name: Run distcheck
       run: make distcheck
