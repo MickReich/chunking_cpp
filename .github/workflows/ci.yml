@@ -27,9 +27,7 @@ jobs:
       run: make
 
     - name: Run tests
-      run: |
-        cd build/tests
-        ./run_tests
+      run: make test
 
     - name: Generate documentation
       run: |
