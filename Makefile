@@ -13,16 +13,16 @@ CXXFLAGS += -std=c++17 -Wall -Wextra -pedantic -I./include
 # Detect OS for GTest configuration
 ifeq ($(OS),Windows_NT)
     GTEST_DIR = $(VCPKG_ROOT)/installed/x64-windows
-    GTEST_INCLUDE = -I$(GTEST_DIR)/include
+    GTEST_INCLUDE = -I$(GTEST_DIR)/include -I/usr/include/gtest
     GTEST_LIBS = -L$(GTEST_DIR)/lib -lgtest -lgtest_main
 else
     UNAME_S := $(shell uname -s)
     ifeq ($(UNAME_S),Linux)
-        GTEST_INCLUDE = -I/usr/include
+        GTEST_INCLUDE = -I/usr/include/gtest -I/usr/include
         GTEST_LIBS = -lgtest -lgtest_main -pthread
     endif
     ifeq ($(UNAME_S),Darwin)
-        GTEST_INCLUDE = -I/usr/local/include
+        GTEST_INCLUDE = -I/usr/local/include/gtest -I/usr/local/include
         GTEST_LIBS = -L/usr/local/lib -lgtest -lgtest_main -pthread
     endif
 endif
@@ -123,7 +123,9 @@ PACKAGE = vector-chunker
 
 dist:
 	mkdir -p $(PACKAGE)-$(VERSION)
-	cp -r $(SRC_DIR) $(INC_DIR) Makefile BUILDING.md LICENSE README.md $(PACKAGE)-$(VERSION)/
+	chmod +x configure
+	cp -r $(SRC_DIR) $(INC_DIR) Makefile BUILDING.md LICENSE README.md configure Doxyfile $(PACKAGE)-$(VERSION)/
+	chmod +x $(PACKAGE)-$(VERSION)/configure
 	tar -czf $(PACKAGE)-$(VERSION).tar.gz $(PACKAGE)-$(VERSION)
 	rm -rf $(PACKAGE)-$(VERSION)
 
@@ -133,6 +135,9 @@ distcheck: dist
 	@tmp_dir=`mktemp -d` && \
 	tar -C $$tmp_dir -xzf $(PACKAGE)-$(VERSION).tar.gz && \
 	cd $$tmp_dir/$(PACKAGE)-$(VERSION) && \
+	if [ ! -f configure ]; then echo "configure script missing from package"; exit 1; fi && \
+	chmod +x configure && \
+	./configure && \
 	$(MAKE) install && \
 	cd - > /dev/null && \
 	rm -rf $$tmp_dir && \

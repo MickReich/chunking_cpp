@@ -1,5 +1,5 @@
 #include "chunk.hpp"
-#include <gtest/gtest.h>
+#include "gtest/gtest.h"
 
 class ChunkTest : public ::testing::Test {
 protected:

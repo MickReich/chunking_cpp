@@ -115,6 +115,15 @@ docdir = \$(PREFIX)/share/doc/chunker
 # Dependencies
 HAVE_GTEST = $ENABLE_TESTS
 HAVE_DOXYGEN = $ENABLE_DOCS
+
+# Additional include paths
+ifeq ($(OS),Windows_NT)
+    EXTRA_INCLUDES = -I$(VCPKG_ROOT)/installed/x64-windows/include
+else
+    EXTRA_INCLUDES = -I/usr/include/gtest -I/usr/local/include/gtest
+endif
+
+CXXFLAGS += $(EXTRA_INCLUDES)
 EOF
 
 # Create build directory

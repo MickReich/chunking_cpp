@@ -1,5 +1,5 @@
 #include "data_structures.hpp"
-#include <gtest/gtest.h>
+#include "gtest/gtest.h"
 
 TEST(CircularBufferTest, BasicOperations) {
     CircularBuffer<int> buffer(3);

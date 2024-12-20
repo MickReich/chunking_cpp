@@ -23,6 +23,7 @@ cd /usr/src/gtest
 sudo cmake CMakeLists.txt
 sudo make
 sudo cp lib/*.a /usr/lib
+sudo ln -s /usr/src/gtest/include/gtest /usr/include/gtest
 
 # Install documentation tools
 sudo apt-get install doxygen graphviz
