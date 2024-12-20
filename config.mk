@@ -21,3 +21,12 @@ docdir = $(PREFIX)/share/doc/chunker
 # Dependencies
 HAVE_GTEST = 1
 HAVE_DOXYGEN = 1
+
+# Additional include paths
+ifeq (,Windows_NT)
+    EXTRA_INCLUDES = -I/installed/x64-windows/include
+else
+    EXTRA_INCLUDES = -I/usr/include/gtest -I/usr/local/include/gtest
+endif
+
+CXXFLAGS += 

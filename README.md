@@ -9,6 +9,11 @@ A C++ library for flexible data chunking and processing operations.
 - Predicate-based chunking
 - Sum-based chunking
 - Equal division chunking
+- Sliding window chunking
+- Statistical threshold-based chunking
+- Similarity-based chunking
+- Monotonicity-based chunking
+- Padded fixed-size chunking
 - Circular buffer
 - Sliding window
 - Priority queue
