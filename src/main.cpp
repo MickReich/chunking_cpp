@@ -115,68 +115,70 @@ int main() {
     std::cout << "Data divided into 3 chunks:" << std::endl;
     print_chunks(equal_chunks);
 
-    // Example 9: Using data structures
-    std::cout << "\n=== Data Structures Example ===" << std::endl;
+    // Example 13: Monotonicity-based chunking
+    std::cout << "\n=== Monotonicity-based Chunking Example ===" << std::endl;
+    Chunk<int> mono_chunker(1);
+    std::vector<int> mono_data = {1, 3, 5, 4, 2, 1, 7, 9, 8, 6};
+    mono_chunker.add(mono_data);
 
-    // Circular Buffer example
-    CircularBuffer<int> buffer(3);
-    buffer.push(1);
-    buffer.push(2);
-    buffer.push(3);
-    buffer.push(4); // This will overwrite 1
-    std::cout << "Circular Buffer: ";
-    for (const auto& val : buffer.to_vector()) {
-        std::cout << val << " ";
+    auto mono_chunks = mono_chunker.chunk_by_monotonicity();
+    std::cout << "Chunks based on monotonicity changes:" << std::endl;
+    print_chunks(mono_chunks);
+
+    // Example 14: Statistical threshold chunking
+    std::cout << "\n=== Statistical Threshold Chunking Example ===" << std::endl;
+    Chunk<double> stat_chunker(1);
+    std::vector<double> stat_data = {1.0, 1.5, 5.0, 5.5, 2.0, 2.5, 7.0, 7.5};
+    stat_chunker.add(stat_data);
+
+    auto mean = [](const std::vector<double>& v) {
+        return std::accumulate(v.begin(), v.end(), 0.0) / v.size();
+    };
+
+    auto stat_chunks = stat_chunker.chunk_by_statistic(3.0, mean);
+    std::cout << "Chunks based on mean threshold (3.0):" << std::endl;
+    print_chunks(stat_chunks);
+
+    // Example 15: Similarity-based chunking
+    std::cout << "\n=== Similarity-based Chunking Example ===" << std::endl;
+    Chunk<int> sim_chunker(1);
+    std::vector<int> sim_data = {1, 2, 10, 11, 2, 3, 20, 21};
+    sim_chunker.add(sim_data);
+
+    auto sim_chunks = sim_chunker.chunk_by_similarity(3);
+    std::cout << "Chunks based on similarity (max diff = 3):" << std::endl;
+    print_chunks(sim_chunks);
+
+    // Example 16: Padded fixed-size chunking
+    std::cout << "\n=== Padded Fixed-size Chunking Example ===" << std::endl;
+    Chunk<int> pad_chunker(3);  // Chunks of size 3
+    std::vector<int> pad_data = {1, 2, 3, 4, 5, 6, 7, 8};
+    pad_chunker.add(pad_data);
+
+    auto padded_chunks = pad_chunker.get_padded_chunks(0);  // Pad with zeros
+    std::cout << "Fixed-size chunks with padding:" << std::endl;
+    print_chunks(padded_chunks);
+
+    // Example 17: Combined strategies
+    std::cout << "\n=== Combined Chunking Strategies Example ===" << std::endl;
+    Chunk<double> combined_chunker(4);
+    std::vector<double> combined_data = {1.1, 1.2, 1.3, 5.1, 5.2, 5.3, 2.1, 2.2, 2.3};
+    combined_chunker.add(combined_data);
+
+    // First chunk by similarity
+    auto step1_chunks = combined_chunker.chunk_by_similarity(1.0);
+    std::cout << "Step 1 - Similarity-based chunks:" << std::endl;
+    print_chunks(step1_chunks);
+
+    // Then apply sliding window to each chunk
+    std::cout << "Step 2 - Sliding windows within each chunk:" << std::endl;
+    for (size_t i = 0; i < step1_chunks.size(); ++i) {
+        Chunk<double> window_chunker(2);
+        window_chunker.add(step1_chunks[i]);
+        auto windows = window_chunker.sliding_window(2, 1);
+        std::cout << "Windows for chunk " << i << ":" << std::endl;
+        print_chunks(windows);
     }
-    std::cout << std::endl;
-
-    // Sliding Window example
-    SlidingWindow<double> window(3);
-    window.push(1.0);
-    window.push(2.0);
-    window.push(3.0);
-    window.push(4.0); // This will remove 1.0
-    std::cout << "Sliding Window Average: " << window.average() << std::endl;
-
-    // ChunkList example
-    ChunkList<int> chunk_list;
-    chunk_list.append_chunk({1, 2, 3});
-    chunk_list.append_chunk({4, 5, 6});
-    chunk_list.prepend_chunk({-1, 0});
-    std::cout << "ChunkList flattened: ";
-    for (const auto& val : chunk_list.flatten()) {
-        std::cout << val << " ";
-    }
-    std::cout << std::endl;
-
-    // Example 10: Using Statistics
-    std::cout << "\n=== Statistics Example ===" << std::endl;
-    std::vector<double> stats_data = {1.0, 2.0, 2.0, 3.0, 4.0, 5.0};
-    std::cout << "Mean: " << chunk_utils::Statistics<double>::mean(stats_data) << std::endl;
-    std::cout << "Median: " << chunk_utils::Statistics<double>::median(stats_data) << std::endl;
-    auto [mode_val, mode_freq] = chunk_utils::Statistics<double>::mode(stats_data);
-    std::cout << "Mode: " << mode_val << " (frequency: " << mode_freq << ")" << std::endl;
-
-    // Example 11: Chunk Manipulation
-    std::cout << "\n=== Chunk Manipulation Example ===" << std::endl;
-    auto chunks1 = std::vector<std::vector<int>>{{1, 2}, {3, 4}};
-    auto chunks2 = std::vector<std::vector<int>>{{5, 6}, {7, 8}};
-
-    auto merged = chunk_utils::ChunkManipulator<int>::merge_chunks(chunks1, chunks2);
-    std::cout << "Merged chunks:" << std::endl;
-    print_chunks(merged);
-
-    auto filtered = chunk_utils::ChunkManipulator<int>::filter_chunks(
-        merged, [](const auto& chunk) { return chunk[0] > 3; });
-    std::cout << "Filtered chunks (first element > 3):" << std::endl;
-    print_chunks(filtered);
-
-    // Example 12: Random Chunk Generation
-    std::cout << "\n=== Random Chunk Generation Example ===" << std::endl;
-    auto random_chunks =
-        chunk_utils::ChunkGenerator<double>::generate_random_chunks(3, 4, 0.0, 10.0);
-    std::cout << "Randomly generated chunks:" << std::endl;
-    print_chunks(random_chunks);
 
     return 0;
 }
