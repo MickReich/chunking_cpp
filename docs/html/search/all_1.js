@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['2_3a_20using_20vcpkg_20cross_20platform_0',['Method 2: Using vcpkg (Cross-platform)',['../index.html#autotoc_md10',1,'']]]
+  ['buffer_5f_0',['buffer_',['../classCircularBuffer.html#a8dec6941db72a0d1111de5d261878c51',1,'CircularBuffer']]],
+  ['buffersettings_1',['BufferSettings',['../structchunk__config_1_1BufferSettings.html',1,'chunk_config']]]
 ];

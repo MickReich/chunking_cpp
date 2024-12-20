@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['to_5fvector_0',['to_vector',['../classCircularBuffer.html#a094a1fe8196a5da1ad5ac43d04512dad',1,'CircularBuffer']]],
-  ['transform_5fchunks_1',['transform_chunks',['../classchunk__utils_1_1ChunkManipulator.html#a673159f2b0528f27d649bc1b20ef4aad',1,'chunk_utils::ChunkManipulator']]]
+  ['node_0',['node',['../structadvanced__structures_1_1ChunkSkipList_1_1Node.html#ade4a2d21749cd0266341a52e1cdd2b2d',1,'advanced_structures::ChunkSkipList::Node::Node()'],['../structadvanced__structures_1_1ChunkBPlusTree_1_1Node.html#ad82822bde19c4a8fde799e108255df52',1,'advanced_structures::ChunkBPlusTree::Node::Node()']]]
 ];

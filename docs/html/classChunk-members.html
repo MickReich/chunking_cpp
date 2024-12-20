@@ -21,9 +21,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Advanced Chunk Processing Library<span id="projectnumber">&#160;1.0</span>
+   <div id="projectname">Advanced Chunk Processing Library<span id="projectnumber">&#160;0.2.0</span>
    </div>
-   <div id="projectbrief">A C++ library for flexible data chunking and processing operations</div>
+   <div id="projectbrief">A comprehensive C++ library for advanced data chunking strategies and processing operations</div>
   </td>
  </tr>
  </tbody>
@@ -76,26 +76,31 @@ $(function() {
 
 <p>This is the complete list of members for <a class="el" href="classChunk.html">Chunk&lt; T &gt;</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="classChunk.html#ae60a0d3a0c2aadaa2de71dacdea51113">add</a>(const T &amp;value)</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classChunk.html#ae24f6cc95a794bc5b3c0da675326e42c">add</a>(const std::vector&lt; T &gt; &amp;values)</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classChunk.html#ab3dbe715d38a706d02f9b840829576da">Chunk</a>(size_t chunk_size)</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">explicit</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classChunk.html#a69630b9586ba94c1df6a8c29df2aab40">chunk_by_predicate</a>(Pred predicate) const</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classChunk.html#a3533c581decb67f8f9511dc6b7c264c7">chunk_by_sum</a>(T target_sum) const</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classChunk.html#addc46ee1885118a00bed3b5df55a96c5">chunk_count</a>() const</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classChunk.html#a8399db98c455ce9b00b45aace5919a05">chunk_into_n</a>(size_t n) const</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classChunk.html#a68e0b1fdf9f01abb4cda166ef2b6ca49">chunk_size</a>() const</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classChunk.html#a1944aeea42f9a2f974b6cfe50c1c6658">chunk_size_</a></td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classChunk.html#a96a31d4bd95a2117af0430d799159b91">clear</a>()</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classChunk.html#a61bf5cedb1bf93acd2e563e12e6e6a82">data_</a></td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classChunk.html#abc37efc665bf3468c08ae54c2020f088">empty</a>() const</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classChunk.html#a2c1f2fb7b5a0d3eb875311362cb27580">get_chunk</a>(size_t index) const</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classChunk.html#adbff639ac17c8d894373b0f67fa08658">get_chunks</a>() const</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classChunk.html#ab833db41bbf73b77ce520712ed7c7239">get_overlapping_chunks</a>(size_t overlap) const</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classChunk.html#aaa08401de48a718d93d3c25f4a9155cf">add</a>(const T &amp;element)</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classChunk.html#acfcab88bdc71650a777dc96572a3dd20">add</a>(const std::vector&lt; T &gt; &amp;elements)</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classChunk.html#ae7a6f9e3ad1cd778aa340bb71ab923c4">Chunk</a>(size_t size)</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">explicit</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classChunk.html#a3dc937cbb4ca8da19ad8dfe6bde7807f">chunk_by_monotonicity</a>() const</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classChunk.html#a69630b9586ba94c1df6a8c29df2aab40">chunk_by_predicate</a>(Pred predicate) const</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classChunk.html#a6eb63fcaea91518ff55759a7de548b2b">chunk_by_similarity</a>(T threshold) const</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classChunk.html#abe62a4d4d72e24468d53ec0f58f5a43f">chunk_by_statistic</a>(T threshold, StatFunc stat_func) const</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classChunk.html#a3533c581decb67f8f9511dc6b7c264c7">chunk_by_sum</a>(T target_sum) const</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classChunk.html#addc46ee1885118a00bed3b5df55a96c5">chunk_count</a>() const</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classChunk.html#a8399db98c455ce9b00b45aace5919a05">chunk_into_n</a>(size_t n) const</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a></td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classChunk.html#a1574993946fe5b28c6d89ce4bf77857b">chunks</a></td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a></td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classChunk.html#a2c1f2fb7b5a0d3eb875311362cb27580">get_chunk</a>(size_t index) const</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classChunk.html#adbff639ac17c8d894373b0f67fa08658">get_chunks</a>() const</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classChunk.html#ab833db41bbf73b77ce520712ed7c7239">get_overlapping_chunks</a>(size_t overlap) const</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classChunk.html#a016606afd5f7ea84a27020ddb02e5624">get_padded_chunks</a>(const T &amp;pad_value) const</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classChunk.html#a160459077243c9e5ff642f478277e161">size</a>() const</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classChunk.html#aadb0e77dfcd8b7ab108b1556fdae21b2">sliding_window</a>(size_t window_size, size_t step=1) const</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classChunk.html#a82af79dbdc92786a8073a50389d75738">update_chunks</a>()</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classChunk.html#af09c384809b7238eb999b1d4d8fcfdd3">validate_size</a>(size_t size, const std::string &amp;param) const</td><td class="entry"><a class="el" href="classChunk.html">Chunk&lt; T &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">private</span></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 20 2024 08:21:59 for Advanced Chunk Processing Library by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+Generated on Sat Dec 21 2024 07:56:55 for Advanced Chunk Processing Library by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
 </small></address>
 </body>
 </html>

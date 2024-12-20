@@ -21,9 +21,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Advanced Chunk Processing Library<span id="projectnumber">&#160;1.0</span>
+   <div id="projectname">Advanced Chunk Processing Library<span id="projectnumber">&#160;0.2.0</span>
    </div>
-   <div id="projectbrief">A C++ library for flexible data chunking and processing operations</div>
+   <div id="projectbrief">A comprehensive C++ library for advanced data chunking strategies and processing operations</div>
   </td>
  </tr>
  </tbody>
@@ -70,83 +70,103 @@ $(function() {
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Advanced <a class="el" href="classChunk.html">Chunk</a> Processing Library </div></div>
+  <div class="headertitle"><div class="title">Advanced <a class="el" href="classChunk.html" title="A template class for managing and processing data in chunks.">Chunk</a> Processing Library </div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md_README"></a> A C++ library for flexible data chunking and processing operations.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Features</h1>
 <ul>
+<li>Parallel chunk processing</li>
+<li><a class="el" href="classChunk.html" title="A template class for managing and processing data in chunks.">Chunk</a> compression (RLE, Delta)</li>
 <li>Basic chunking operations</li>
 <li>Overlapping chunks</li>
 <li>Predicate-based chunking</li>
 <li>Sum-based chunking</li>
 <li>Equal division chunking</li>
+<li>Sliding window chunking</li>
+<li>Statistical threshold-based chunking</li>
+<li>Similarity-based chunking</li>
+<li>Monotonicity-based chunking</li>
+<li>Padded fixed-size chunking</li>
 <li>Circular buffer</li>
 <li>Sliding window</li>
 <li>Priority queue</li>
-<li><a class="el" href="classChunk.html">Chunk</a> list</li>
+<li><a class="el" href="classChunk.html" title="A template class for managing and processing data in chunks.">Chunk</a> list</li>
 <li>Statistical operations</li>
 <li>Random chunk generation</li>
-<li><a class="el" href="classChunk.html">Chunk</a> manipulation utilities</li>
+<li><a class="el" href="classChunk.html" title="A template class for managing and processing data in chunks.">Chunk</a> manipulation utilities</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md2"></a>
-Building</h1>
-<div class="fragment"><div class="line">make</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md3"></a>
-Running</h1>
-<div class="fragment"><div class="line">make run</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md4"></a>
-Examples</h1>
+Quick Start</h1>
+<div class="fragment"><div class="line"># Clone the repository</div>
+<div class="line">git clone git@github.com:JohnnyTeutonic/chunking_cpp.git</div>
+<div class="line">cd chunking_cpp</div>
+<div class="line"> </div>
+<div class="line"># Configure the project (optionally with tests, documentation, sanitizers, and coverage enabled)</div>
+<div class="line">chmod +x configure</div>
+<div class="line">./configure  --enable-tests --enable-docs --enable-sanitizers --enable-coverage</div>
+<div class="line"> </div>
+<div class="line"># Build the project</div>
+<div class="line">make</div>
+<div class="line"> </div>
+<div class="line"># To execute the example program</div>
+<div class="line">make run</div>
+<div class="line"># Run tests</div>
+<div class="line">make test</div>
+<div class="line"># Uninstall if needed</div>
+<div class="line">make uninstall</div>
+</div><!-- fragment --><p>For detailed build instructions, dependencies, and configuration options, see BUILDING.md.</p>
+<h1><a class="anchor" id="autotoc_md3"></a>
+Usage Examples</h1>
 <p>See <code><a class="el" href="main_8cpp.html">main.cpp</a></code> for comprehensive examples of all features.</p>
-<h1><a class="anchor" id="autotoc_md5"></a>
+<h1><a class="anchor" id="autotoc_md4"></a>
 Documentation</h1>
-<p>Generate documentation:</p>
+<p>Generate and view the documentation locally:</p>
 <div class="fragment"><div class="line">make docs</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md6"></a>
-Requirements</h1>
-<ul>
-<li>C++11 or later</li>
-<li>Make</li>
-<li>CMake (optional)</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md7"></a>
-Testing</h1>
-<h2><a class="anchor" id="autotoc_md8"></a>
-Installing Google Test</h2>
-<p>Choose one of the following methods:</p>
-<h3><a class="anchor" id="autotoc_md9"></a>
-Method 1: System Package Manager (Linux/macOS)</h3>
-<p>On Ubuntu/Debian:</p>
-<div class="fragment"><div class="line">sudo apt-get update</div>
-<div class="line">sudo apt-get install cmake g++ libgtest-dev</div>
-<div class="line">cd /usr/src/gtest</div>
-<div class="line">sudo cmake CMakeLists.txt</div>
-<div class="line">sudo make</div>
-<div class="line">sudo cp lib/*.a /usr/lib</div>
-</div><!-- fragment --><p>On macOS:</p>
-<div class="fragment"><div class="line">brew install googletest</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md10"></a>
-Method 2: Using vcpkg (Cross-platform)</h3>
-<div class="fragment"><div class="line"># Clone and bootstrap vcpkg</div>
-<div class="line">git clone https://github.com/Microsoft/vcpkg.git</div>
-<div class="line">cd vcpkg</div>
-<div class="line">./bootstrap-vcpkg.sh  # or bootstrap-vcpkg.bat on Windows</div>
-<div class="line"> </div>
-<div class="line"># Install GTest</div>
-<div class="line">./vcpkg install gtest</div>
-<div class="line"> </div>
-<div class="line"># Set environment variable</div>
-<div class="line">export VCPKG_ROOT=/path/to/vcpkg  # Add to your .bashrc or .zshrc</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md11"></a>
-Running Tests</h2>
-<p>After installing Google Test:</p>
-<div class="fragment"><div class="line">make test</div>
+<div class="line">make docs-serve</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md5"></a>
+License</h1>
+<p>This project is licensed under the GNU General Public License v2.0 - see the [LICENSE](LICENSE) file for details.</p>
+<h1><a class="anchor" id="autotoc_md6"></a>
+Project Structure</h1>
+<div class="fragment"><div class="line">.</div>
+<div class="line">├── include/</div>
+<div class="line">│   ├── chunk.hpp</div>
+<div class="line">│   ├── config.hpp</div>
+<div class="line">│   ├── advanced_structures.hpp</div>
+<div class="line">│   ├── chunk_compression.hpp</div>
+<div class="line">│   ├── chunk_strategies.hpp</div>
+<div class="line">│   ├── data_structures.hpp</div>
+<div class="line">│   ├── parallel_chunk.hpp</div>
+<div class="line">│   └── utils.hpp</div>
+<div class="line">├── src/</div>
+<div class="line">│   └── main.cpp</div>
+<div class="line">├── tests/</div>
+<div class="line">│   ├── test_main.cpp</div>
+<div class="line">│   ├── chunk_test.cpp</div>
+<div class="line">│   ├── chunk_strategies_test.cpp</div>
+<div class="line">│   ├── chunk_compression_test.cpp</div>
+<div class="line">│   ├── parallel_chunk_test.cpp</div>
+<div class="line">│   ├── advanced_structures_test.cpp</div>
+<div class="line">│   ├── data_structures_test.cpp</div>
+<div class="line">│   └── utils_test.cpp</div>
+<div class="line">├── scripts/</div>
+<div class="line">│   └── run_tests.sh</div>
+<div class="line">├── .github/</div>
+<div class="line">│   └── workflows/</div>
+<div class="line">│       └── ci.yml</div>
+<div class="line">├── Makefile</div>
+<div class="line">├── CMakeLists.txt</div>
+<div class="line">├── Doxyfile</div>
+<div class="line">├── README.md</div>
+<div class="line">├── BUILDING.md</div>
+<div class="line">└── LICENSE</div>
 </div><!-- fragment --> </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 20 2024 08:21:59 for Advanced Chunk Processing Library by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+Generated on Sat Dec 21 2024 07:56:55 for Advanced Chunk Processing Library by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
 </small></address>
 </body>
 </html>

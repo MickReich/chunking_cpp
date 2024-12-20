@@ -1,10 +1,7 @@
 var searchData=
 [
-  ['gen_0',['gen',['../classchunk__utils_1_1ChunkGenerator.html#aa12692893370479eb6e99dc3a9c10661',1,'chunk_utils::ChunkGenerator']]],
-  ['generate_5frandom_5fchunks_1',['generate_random_chunks',['../classchunk__utils_1_1ChunkGenerator.html#ae6136fb99fc953bbdf9f22314d61cae4',1,'chunk_utils::ChunkGenerator']]],
-  ['generate_5frandom_5fdata_2',['generate_random_data',['../classchunk__utils_1_1ChunkGenerator.html#a8de1ac93ada6f7969952af28ca6cf832',1,'chunk_utils::ChunkGenerator']]],
-  ['get_5fchunk_3',['get_chunk',['../classChunk.html#a2c1f2fb7b5a0d3eb875311362cb27580',1,'Chunk']]],
-  ['get_5fchunks_4',['get_chunks',['../classChunk.html#adbff639ac17c8d894373b0f67fa08658',1,'Chunk']]],
-  ['get_5foverlapping_5fchunks_5',['get_overlapping_chunks',['../classChunk.html#ab833db41bbf73b77ce520712ed7c7239',1,'Chunk']]],
-  ['google_20test_6',['Installing Google Test',['../index.html#autotoc_md8',1,'']]]
+  ['insert_0',['insert',['../classadvanced__structures_1_1ChunkSkipList.html#a5bb5a4e03c0a22adebf77793aa87d2d1',1,'advanced_structures::ChunkSkipList::insert()'],['../classadvanced__structures_1_1ChunkBPlusTree.html#a24a557be77c94069b36695bd35b0ce80',1,'advanced_structures::ChunkBPlusTree::insert(const T &amp;key)']]],
+  ['insert_5fnon_5ffull_1',['insert_non_full',['../classadvanced__structures_1_1ChunkBPlusTree.html#a895a38fcff176405e85aae33a68ecdab',1,'advanced_structures::ChunkBPlusTree']]],
+  ['is_5fleaf_2',['is_leaf',['../structadvanced__structures_1_1ChunkBPlusTree_1_1Node.html#af95539116997aaf592a2d938ad1b16a3',1,'advanced_structures::ChunkBPlusTree::Node']]],
+  ['is_5fvalid_5fchunk_5fsize_3',['is_valid_chunk_size',['../namespacechunk__config.html#a435df67dbf6dedd195628597c8d53237',1,'chunk_config']]]
 ];

@@ -2,7 +2,7 @@
 PROJECT_NAME           = "Advanced Chunk Processing Library"
 PROJECT_NUMBER        = "0.2.0"
 PROJECT_BRIEF         = "A comprehensive C++ library for advanced data chunking strategies and processing operations"
-OUTPUT_DIRECTORY      = build/docs
+OUTPUT_DIRECTORY      = docs
 CREATE_SUBDIRS        = NO
 ALLOW_UNICODE_NAMES   = NO
 OUTPUT_LANGUAGE       = English

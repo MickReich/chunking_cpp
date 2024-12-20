@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['max_5fbuffer_5fsize_0',['MAX_BUFFER_SIZE',['../structchunk__config_1_1BufferSettings.html#a00b865d9e7adf992e68624735d7309c9',1,'chunk_config::BufferSettings']]],
-  ['max_5fchunk_5fsize_1',['MAX_CHUNK_SIZE',['../structchunk__config_1_1ChunkSettings.html#a8d2c2866636771b0dcf898d96dc90fcd',1,'chunk_config::ChunkSettings']]],
-  ['max_5fsize_5f_2',['max_size_',['../classSlidingWindow.html#af8bfa3d5d676ccee741121fa51a27370',1,'SlidingWindow']]],
-  ['min_5fbuffer_5fsize_3',['MIN_BUFFER_SIZE',['../structchunk__config_1_1BufferSettings.html#adeab997492c063602e4b801c132f8c41',1,'chunk_config::BufferSettings']]],
-  ['min_5fchunk_5fsize_4',['MIN_CHUNK_SIZE',['../structchunk__config_1_1ChunkSettings.html#a4ddea507f6a80871bdb753ea7bf6790c',1,'chunk_config::ChunkSettings']]]
+  ['head_0',['head',['../classadvanced__structures_1_1ChunkSkipList.html#ab57eee3b6e3a4baf840c7a474e9d6808',1,'advanced_structures::ChunkSkipList']]],
+  ['head_5f_1',['head_',['../classCircularBuffer.html#abd7fa51c466136b2ed4a3ed40dc72201',1,'CircularBuffer::head_'],['../classChunkList.html#a49bc83f07b0d5997269e5a775a8e8540',1,'ChunkList::head_']]],
+  ['heap_5f_2',['heap_',['../classPriorityQueue.html#a2dc28580b01197178f598f15b3182370',1,'PriorityQueue']]]
 ];

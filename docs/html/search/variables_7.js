@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['prev_0',['prev',['../structChunkNode.html#ad74c57e4ad48c23f8148e481e59d85f1',1,'ChunkNode']]]
+  ['keys_0',['keys',['../structadvanced__structures_1_1ChunkBPlusTree_1_1Node.html#abfcb85beab82189e87b5eb417d6fc3e5',1,'advanced_structures::ChunkBPlusTree::Node']]]
 ];

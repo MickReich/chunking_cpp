@@ -1,7 +1,7 @@
 # Project configuration
 PROJECT_NAME := ChunkProcessor
 BUILD_DIR := build
-DOC_DIR := $(BUILD_DIR)/docs
+DOC_DIR := docs
 TEST_DIR := $(BUILD_DIR)/tests
 
 # Compiler settings

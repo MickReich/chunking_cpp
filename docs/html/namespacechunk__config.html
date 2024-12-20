@@ -21,9 +21,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Advanced Chunk Processing Library<span id="projectnumber">&#160;1.0</span>
+   <div id="projectname">Advanced Chunk Processing Library<span id="projectnumber">&#160;0.2.0</span>
    </div>
-   <div id="projectbrief">A C++ library for flexible data chunking and processing operations</div>
+   <div id="projectbrief">A comprehensive C++ library for advanced data chunking strategies and processing operations</div>
   </td>
  </tr>
  </tbody>
@@ -71,7 +71,8 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">chunk_config Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -82,11 +83,50 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structchunk__config_1_1ChunkSettings.html">ChunkSettings</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a435df67dbf6dedd195628597c8d53237" id="r_a435df67dbf6dedd195628597c8d53237"><td class="memItemLeft" align="right" valign="top">static constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacechunk__config.html#a435df67dbf6dedd195628597c8d53237">is_valid_chunk_size</a> (size_t size)</td></tr>
+<tr class="separator:a435df67dbf6dedd195628597c8d53237"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a435df67dbf6dedd195628597c8d53237" name="a435df67dbf6dedd195628597c8d53237"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a435df67dbf6dedd195628597c8d53237">&#9670;&#160;</a></span>is_valid_chunk_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static constexpr bool chunk_config::is_valid_chunk_size </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="config_8hpp_source.html#l00014">14</a> of file <a class="el" href="config_8hpp_source.html">config.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   14</span>                                                       {</div>
+<div class="line"><span class="lineno">   15</span>    <span class="keywordflow">return</span> size &gt;= ChunkSettings::MIN_CHUNK_SIZE &amp;&amp; size &lt;= ChunkSettings::MAX_CHUNK_SIZE;</div>
+<div class="line"><span class="lineno">   16</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="config_8hpp_source.html#l00010">chunk_config::ChunkSettings::MAX_CHUNK_SIZE</a>, and <a class="el" href="config_8hpp_source.html#l00011">chunk_config::ChunkSettings::MIN_CHUNK_SIZE</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 20 2024 08:21:59 for Advanced Chunk Processing Library by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+Generated on Sat Dec 21 2024 07:56:55 for Advanced Chunk Processing Library by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
 </small></address>
 </body>
 </html>

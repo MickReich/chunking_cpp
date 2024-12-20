@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['rd_0',['rd',['../classchunk__utils_1_1ChunkGenerator.html#a76e8487f13a2c6ea1a6a9d4f132251f0',1,'chunk_utils::ChunkGenerator']]],
-  ['readme_2emd_1',['README.md',['../README_8md.html',1,'']]],
-  ['requirements_2',['Requirements',['../index.html#autotoc_md6',1,'']]],
-  ['running_3',['Running',['../index.html#autotoc_md3',1,'']]],
-  ['running_20tests_4',['Running Tests',['../index.html#autotoc_md11',1,'']]]
+  ['quantile_5f_0',['quantile_',['../classchunk__strategies_1_1QuantileStrategy.html#ace6f35eded09dd3a9d1ba78723a09644',1,'chunk_strategies::QuantileStrategy']]],
+  ['quantilestrategy_1',['quantilestrategy',['../classchunk__strategies_1_1QuantileStrategy.html',1,'chunk_strategies::QuantileStrategy&lt; T &gt;'],['../classchunk__strategies_1_1QuantileStrategy.html#a72c01766253b2849a819517e129c4aaf',1,'chunk_strategies::QuantileStrategy::QuantileStrategy()']]],
+  ['quick_20start_2',['Quick Start',['../index.html#autotoc_md2',1,'']]]
 ];

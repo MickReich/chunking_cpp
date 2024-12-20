@@ -21,9 +21,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Advanced Chunk Processing Library<span id="projectnumber">&#160;1.0</span>
+   <div id="projectname">Advanced Chunk Processing Library<span id="projectnumber">&#160;0.2.0</span>
    </div>
-   <div id="projectbrief">A C++ library for flexible data chunking and processing operations</div>
+   <div id="projectbrief">A comprehensive C++ library for advanced data chunking strategies and processing operations</div>
   </td>
  </tr>
  </tbody>
@@ -109,7 +109,7 @@ Private Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
 class SlidingWindow&lt; T &gt;</div>
-<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00125">125</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00139">139</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af3b1e96063c5054d12493cb2e710037e" name="af3b1e96063c5054d12493cb2e710037e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af3b1e96063c5054d12493cb2e710037e">&#9670;&#160;</a></span>SlidingWindow()</h2>
@@ -137,9 +137,15 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00132">132</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
-
-<p class="reference">References <a class="el" href="data__structures_8hpp_source.html#l00154">SlidingWindow&lt; T &gt;::size()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00146">146</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  146</span>                                        : <a class="code hl_variable" href="classSlidingWindow.html#af8bfa3d5d676ccee741121fa51a27370">max_size_</a>(<a class="code hl_function" href="classSlidingWindow.html#a42887fa629607e1a838f8f859054692f">size</a>) {</div>
+<div class="line"><span class="lineno">  147</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="classSlidingWindow.html#a42887fa629607e1a838f8f859054692f">size</a> == 0)</div>
+<div class="line"><span class="lineno">  148</span>            <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Window size must be positive&quot;</span>);</div>
+<div class="line"><span class="lineno">  149</span>    }</div>
+<div class="ttc" id="aclassSlidingWindow_html_a42887fa629607e1a838f8f859054692f"><div class="ttname"><a href="classSlidingWindow.html#a42887fa629607e1a838f8f859054692f">SlidingWindow::size</a></div><div class="ttdeci">size_t size() const</div><div class="ttdef"><b>Definition</b> <a href="data__structures_8hpp_source.html#l00170">data_structures.hpp:170</a></div></div>
+<div class="ttc" id="aclassSlidingWindow_html_af8bfa3d5d676ccee741121fa51a27370"><div class="ttname"><a href="classSlidingWindow.html#af8bfa3d5d676ccee741121fa51a27370">SlidingWindow::max_size_</a></div><div class="ttdeci">size_t max_size_</div><div class="ttdef"><b>Definition</b> <a href="data__structures_8hpp_source.html#l00142">data_structures.hpp:142</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="data__structures_8hpp_source.html#l00170">SlidingWindow&lt; T &gt;::size()</a>.</p>
 
 </div>
 </div>
@@ -169,11 +175,16 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00147">147</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
-
-<p class="reference">References <a class="el" href="data__structures_8hpp_source.html#l00129">SlidingWindow&lt; T &gt;::sum_</a>, and <a class="el" href="data__structures_8hpp_source.html#l00127">SlidingWindow&lt; T &gt;::window_</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="main_8cpp_source.html#l00023">main()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00161">161</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  161</span>                      {</div>
+<div class="line"><span class="lineno">  162</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classSlidingWindow.html#ad0b73b799043286e9835b91063686564">window_</a>.empty())</div>
+<div class="line"><span class="lineno">  163</span>            <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Window is empty&quot;</span>);</div>
+<div class="line"><span class="lineno">  164</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classSlidingWindow.html#a43f3679d56f6697a37b998262536c6a3">sum_</a> / <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(<a class="code hl_variable" href="classSlidingWindow.html#ad0b73b799043286e9835b91063686564">window_</a>.size());</div>
+<div class="line"><span class="lineno">  165</span>    }</div>
+<div class="ttc" id="aclassSlidingWindow_html_a43f3679d56f6697a37b998262536c6a3"><div class="ttname"><a href="classSlidingWindow.html#a43f3679d56f6697a37b998262536c6a3">SlidingWindow::sum_</a></div><div class="ttdeci">T sum_</div><div class="ttdef"><b>Definition</b> <a href="data__structures_8hpp_source.html#l00143">data_structures.hpp:143</a></div></div>
+<div class="ttc" id="aclassSlidingWindow_html_ad0b73b799043286e9835b91063686564"><div class="ttname"><a href="classSlidingWindow.html#ad0b73b799043286e9835b91063686564">SlidingWindow::window_</a></div><div class="ttdeci">std::deque&lt; T &gt; window_</div><div class="ttdef"><b>Definition</b> <a href="data__structures_8hpp_source.html#l00141">data_structures.hpp:141</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="data__structures_8hpp_source.html#l00143">SlidingWindow&lt; T &gt;::sum_</a>, and <a class="el" href="data__structures_8hpp_source.html#l00141">SlidingWindow&lt; T &gt;::window_</a>.</p>
 
 </div>
 </div>
@@ -202,9 +213,12 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00155">155</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
-
-<p class="reference">References <a class="el" href="data__structures_8hpp_source.html#l00127">SlidingWindow&lt; T &gt;::window_</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00173">173</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  173</span>                       {</div>
+<div class="line"><span class="lineno">  174</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classSlidingWindow.html#ad0b73b799043286e9835b91063686564">window_</a>.empty();</div>
+<div class="line"><span class="lineno">  175</span>    }</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="data__structures_8hpp_source.html#l00141">SlidingWindow&lt; T &gt;::window_</a>.</p>
 
 </div>
 </div>
@@ -234,11 +248,18 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00137">137</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
-
-<p class="reference">References <a class="el" href="data__structures_8hpp_source.html#l00128">SlidingWindow&lt; T &gt;::max_size_</a>, <a class="el" href="data__structures_8hpp_source.html#l00129">SlidingWindow&lt; T &gt;::sum_</a>, and <a class="el" href="data__structures_8hpp_source.html#l00127">SlidingWindow&lt; T &gt;::window_</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="main_8cpp_source.html#l00023">main()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00151">151</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  151</span>                              {</div>
+<div class="line"><span class="lineno">  152</span>        <a class="code hl_variable" href="classSlidingWindow.html#ad0b73b799043286e9835b91063686564">window_</a>.push_back(value);</div>
+<div class="line"><span class="lineno">  153</span>        <a class="code hl_variable" href="classSlidingWindow.html#a43f3679d56f6697a37b998262536c6a3">sum_</a> += value;</div>
+<div class="line"><span class="lineno">  154</span> </div>
+<div class="line"><span class="lineno">  155</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classSlidingWindow.html#ad0b73b799043286e9835b91063686564">window_</a>.size() &gt; <a class="code hl_variable" href="classSlidingWindow.html#af8bfa3d5d676ccee741121fa51a27370">max_size_</a>) {</div>
+<div class="line"><span class="lineno">  156</span>            <a class="code hl_variable" href="classSlidingWindow.html#a43f3679d56f6697a37b998262536c6a3">sum_</a> -= <a class="code hl_variable" href="classSlidingWindow.html#ad0b73b799043286e9835b91063686564">window_</a>.front();</div>
+<div class="line"><span class="lineno">  157</span>            <a class="code hl_variable" href="classSlidingWindow.html#ad0b73b799043286e9835b91063686564">window_</a>.pop_front();</div>
+<div class="line"><span class="lineno">  158</span>        }</div>
+<div class="line"><span class="lineno">  159</span>    }</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="data__structures_8hpp_source.html#l00142">SlidingWindow&lt; T &gt;::max_size_</a>, <a class="el" href="data__structures_8hpp_source.html#l00143">SlidingWindow&lt; T &gt;::sum_</a>, and <a class="el" href="data__structures_8hpp_source.html#l00141">SlidingWindow&lt; T &gt;::window_</a>.</p>
 
 </div>
 </div>
@@ -267,11 +288,14 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00154">154</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00170">170</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  170</span>                        {</div>
+<div class="line"><span class="lineno">  171</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classSlidingWindow.html#ad0b73b799043286e9835b91063686564">window_</a>.size();</div>
+<div class="line"><span class="lineno">  172</span>    }</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="data__structures_8hpp_source.html#l00141">SlidingWindow&lt; T &gt;::window_</a>.</p>
 
-<p class="reference">References <a class="el" href="data__structures_8hpp_source.html#l00127">SlidingWindow&lt; T &gt;::window_</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="data__structures_8hpp_source.html#l00132">SlidingWindow&lt; T &gt;::SlidingWindow()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="data__structures_8hpp_source.html#l00146">SlidingWindow&lt; T &gt;::SlidingWindow()</a>.</p>
 
 </div>
 </div>
@@ -300,9 +324,12 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00156">156</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
-
-<p class="reference">References <a class="el" href="data__structures_8hpp_source.html#l00129">SlidingWindow&lt; T &gt;::sum_</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00176">176</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  176</span>                  {</div>
+<div class="line"><span class="lineno">  177</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classSlidingWindow.html#a43f3679d56f6697a37b998262536c6a3">sum_</a>;</div>
+<div class="line"><span class="lineno">  178</span>    }</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="data__structures_8hpp_source.html#l00143">SlidingWindow&lt; T &gt;::sum_</a>.</p>
 
 </div>
 </div>
@@ -331,9 +358,12 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00153">153</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
-
-<p class="reference">References <a class="el" href="data__structures_8hpp_source.html#l00127">SlidingWindow&lt; T &gt;::window_</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00167">167</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  167</span>                                      {</div>
+<div class="line"><span class="lineno">  168</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classSlidingWindow.html#ad0b73b799043286e9835b91063686564">window_</a>;</div>
+<div class="line"><span class="lineno">  169</span>    }</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="data__structures_8hpp_source.html#l00141">SlidingWindow&lt; T &gt;::window_</a>.</p>
 
 </div>
 </div>
@@ -360,9 +390,9 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00128">128</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00142">142</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="data__structures_8hpp_source.html#l00137">SlidingWindow&lt; T &gt;::push()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="data__structures_8hpp_source.html#l00151">SlidingWindow&lt; T &gt;::push()</a>.</p>
 
 </div>
 </div>
@@ -388,9 +418,9 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00129">129</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00143">143</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="data__structures_8hpp_source.html#l00147">SlidingWindow&lt; T &gt;::average()</a>, <a class="el" href="data__structures_8hpp_source.html#l00137">SlidingWindow&lt; T &gt;::push()</a>, and <a class="el" href="data__structures_8hpp_source.html#l00156">SlidingWindow&lt; T &gt;::sum()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="data__structures_8hpp_source.html#l00161">SlidingWindow&lt; T &gt;::average()</a>, <a class="el" href="data__structures_8hpp_source.html#l00151">SlidingWindow&lt; T &gt;::push()</a>, and <a class="el" href="data__structures_8hpp_source.html#l00176">SlidingWindow&lt; T &gt;::sum()</a>.</p>
 
 </div>
 </div>
@@ -416,19 +446,19 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00127">127</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00141">141</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="data__structures_8hpp_source.html#l00147">SlidingWindow&lt; T &gt;::average()</a>, <a class="el" href="data__structures_8hpp_source.html#l00155">SlidingWindow&lt; T &gt;::empty()</a>, <a class="el" href="data__structures_8hpp_source.html#l00137">SlidingWindow&lt; T &gt;::push()</a>, <a class="el" href="data__structures_8hpp_source.html#l00154">SlidingWindow&lt; T &gt;::size()</a>, and <a class="el" href="data__structures_8hpp_source.html#l00153">SlidingWindow&lt; T &gt;::window()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="data__structures_8hpp_source.html#l00161">SlidingWindow&lt; T &gt;::average()</a>, <a class="el" href="data__structures_8hpp_source.html#l00173">SlidingWindow&lt; T &gt;::empty()</a>, <a class="el" href="data__structures_8hpp_source.html#l00151">SlidingWindow&lt; T &gt;::push()</a>, <a class="el" href="data__structures_8hpp_source.html#l00170">SlidingWindow&lt; T &gt;::size()</a>, and <a class="el" href="data__structures_8hpp_source.html#l00167">SlidingWindow&lt; T &gt;::window()</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li><a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a></li>
+<li>include/<a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 20 2024 08:21:59 for Advanced Chunk Processing Library by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+Generated on Sat Dec 21 2024 07:56:55 for Advanced Chunk Processing Library by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
 </small></address>
 </body>
 </html>

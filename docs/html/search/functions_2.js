@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['empty_0',['empty',['../classChunk.html#abc37efc665bf3468c08ae54c2020f088',1,'Chunk::empty()'],['../classCircularBuffer.html#a7509cc5ef0dd0a9f731c47b05929580c',1,'CircularBuffer::empty()'],['../classPriorityQueue.html#a808431d87d33867fff1c5ec66244ad9a',1,'PriorityQueue::empty()'],['../classSlidingWindow.html#a905eecdbbdd5a066a17469e1f9dec824',1,'SlidingWindow::empty()'],['../classChunkList.html#abb8a93c3a579f974f65aadac03c07b52',1,'ChunkList::empty()']]]
+  ['delta_5fdecode_0',['delta_decode',['../classchunk__compression_1_1ChunkCompressor.html#a946476140a49ecac06f68251762a6942',1,'chunk_compression::ChunkCompressor']]],
+  ['delta_5fencode_1',['delta_encode',['../classchunk__compression_1_1ChunkCompressor.html#a438ecfa6dc958ae561a6645861f6ef9a',1,'chunk_compression::ChunkCompressor']]]
 ];

@@ -1,10 +1,9 @@
 var searchData=
 [
-  ['size_0',['size',['../classChunk.html#a160459077243c9e5ff642f478277e161',1,'Chunk::size()'],['../classCircularBuffer.html#a73d5df7a33d545554fffeaaf843f36d9',1,'CircularBuffer::size()'],['../classPriorityQueue.html#ad2f921bbd345c3b6b7f038ab37bf33f1',1,'PriorityQueue::size()'],['../classSlidingWindow.html#a42887fa629607e1a838f8f859054692f',1,'SlidingWindow::size()'],['../classChunkList.html#a5e024a47318415463cc12ac53366413e',1,'ChunkList::size()']]],
-  ['size_5f_1',['size_',['../classCircularBuffer.html#ac13fa06e211a72fe58cfe761c228445d',1,'CircularBuffer::size_'],['../classChunkList.html#aedfd23ee7e0970d662c94db875c854df',1,'ChunkList::size_']]],
-  ['slidingwindow_2',['slidingwindow',['../classSlidingWindow.html',1,'SlidingWindow&lt; T &gt;'],['../classSlidingWindow.html#af3b1e96063c5054d12493cb2e710037e',1,'SlidingWindow::SlidingWindow()']]],
-  ['statistics_3',['Statistics',['../classchunk__utils_1_1Statistics.html',1,'chunk_utils']]],
-  ['sum_4',['sum',['../classSlidingWindow.html#abdf7e4faea00031d1d98b0d986516a87',1,'SlidingWindow']]],
-  ['sum_5f_5',['sum_',['../classSlidingWindow.html#a43f3679d56f6697a37b998262536c6a3',1,'SlidingWindow']]],
-  ['system_20package_20manager_20linux_20macos_6',['Method 1: System Package Manager (Linux/macOS)',['../index.html#autotoc_md9',1,'']]]
+  ['random_5flevel_0',['random_level',['../classadvanced__structures_1_1ChunkSkipList.html#a375b2d50bc56e6cdb067f64729b20aae',1,'advanced_structures::ChunkSkipList']]],
+  ['rd_1',['rd',['../classchunk__utils_1_1ChunkGenerator.html#a76e8487f13a2c6ea1a6a9d4f132251f0',1,'chunk_utils::ChunkGenerator']]],
+  ['readme_2emd_2',['README.md',['../README_8md.html',1,'']]],
+  ['reduce_3',['reduce',['../classparallel__chunk_1_1ParallelChunkProcessor.html#a25c4f81d28c25048dd9845178284a76a',1,'parallel_chunk::ParallelChunkProcessor']]],
+  ['root_4',['root',['../classadvanced__structures_1_1ChunkBPlusTree.html#a461b6e266ecdc394626e9307c8134f92',1,'advanced_structures::ChunkBPlusTree']]],
+  ['run_5flength_5fencode_5',['run_length_encode',['../classchunk__compression_1_1ChunkCompressor.html#a6d988809687b8a7ddb5706df444c5f2e',1,'chunk_compression::ChunkCompressor']]]
 ];

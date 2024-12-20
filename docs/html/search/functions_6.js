@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['main_0',['main',['../main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main.cpp']]],
-  ['mean_1',['mean',['../classchunk__utils_1_1Statistics.html#ab1c472157d5bacc357dcebe0fc19cf5d',1,'chunk_utils::Statistics']]],
-  ['median_2',['median',['../classchunk__utils_1_1Statistics.html#a2de339505cc415f0a10975bdf388ad7d',1,'chunk_utils::Statistics']]],
-  ['merge_5fchunks_3',['merge_chunks',['../classchunk__utils_1_1ChunkManipulator.html#aad43e878aa138c2a57312f13e56cacc8',1,'chunk_utils::ChunkManipulator']]],
-  ['mode_4',['mode',['../classchunk__utils_1_1Statistics.html#aaaf244247e7f592fcd650f9e514b7a6d',1,'chunk_utils::Statistics']]]
+  ['heapify_5fdown_0',['heapify_down',['../classPriorityQueue.html#a56e5f9d2fb1e1d5db7c04f00ff32d0c8',1,'PriorityQueue']]],
+  ['heapify_5fup_1',['heapify_up',['../classPriorityQueue.html#ac221c7a12a2f93f4bad4bc43f070ac02',1,'PriorityQueue']]]
 ];

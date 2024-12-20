@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['size_5f_0',['size_',['../classCircularBuffer.html#ac13fa06e211a72fe58cfe761c228445d',1,'CircularBuffer::size_'],['../classChunkList.html#aedfd23ee7e0970d662c94db875c854df',1,'ChunkList::size_']]],
-  ['sum_5f_1',['sum_',['../classSlidingWindow.html#a43f3679d56f6697a37b998262536c6a3',1,'SlidingWindow']]]
+  ['next_0',['next',['../structadvanced__structures_1_1ChunkBPlusTree_1_1Node.html#a01d6e9020063c3c5f311c09ed82dda5a',1,'advanced_structures::ChunkBPlusTree::Node::next'],['../structChunkNode.html#a9ed2c0bfaa2987be7534020dd1aab66a',1,'ChunkNode::next']]]
 ];

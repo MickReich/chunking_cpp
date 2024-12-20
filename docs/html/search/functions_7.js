@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['pop_0',['pop',['../classCircularBuffer.html#a3033e4e62f336be929c776e912f3b549',1,'CircularBuffer::pop()'],['../classPriorityQueue.html#adc6b1a207f02f2bfd5fdf758a7746b0c',1,'PriorityQueue::pop()']]],
-  ['prepend_5fchunk_1',['prepend_chunk',['../classChunkList.html#a60e42a7bdfc7edb8207b9485ebd9b42d',1,'ChunkList']]],
-  ['print_5fchunks_2',['print_chunks',['../main_8cpp.html#af4761dcd0fd187c30346163870ed9a3b',1,'main.cpp']]],
-  ['push_3',['push',['../classCircularBuffer.html#a54c7a5a2596ab2e24661115758ba665c',1,'CircularBuffer::push()'],['../classPriorityQueue.html#a0b71ca9bf78de4cf33517c67c987f2b2',1,'PriorityQueue::push()'],['../classSlidingWindow.html#a57d04cd6d016fe2c45ed2895003c1f71',1,'SlidingWindow::push()']]]
+  ['insert_0',['insert',['../classadvanced__structures_1_1ChunkSkipList.html#a5bb5a4e03c0a22adebf77793aa87d2d1',1,'advanced_structures::ChunkSkipList::insert()'],['../classadvanced__structures_1_1ChunkBPlusTree.html#a24a557be77c94069b36695bd35b0ce80',1,'advanced_structures::ChunkBPlusTree::insert(const T &amp;key)']]],
+  ['insert_5fnon_5ffull_1',['insert_non_full',['../classadvanced__structures_1_1ChunkBPlusTree.html#a895a38fcff176405e85aae33a68ecdab',1,'advanced_structures::ChunkBPlusTree']]],
+  ['is_5fvalid_5fchunk_5fsize_2',['is_valid_chunk_size',['../namespacechunk__config.html#a435df67dbf6dedd195628597c8d53237',1,'chunk_config']]]
 ];

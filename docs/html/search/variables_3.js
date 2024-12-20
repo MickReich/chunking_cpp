@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['gen_0',['gen',['../classchunk__utils_1_1ChunkGenerator.html#aa12692893370479eb6e99dc3a9c10661',1,'chunk_utils::ChunkGenerator']]]
+  ['forward_0',['forward',['../structadvanced__structures_1_1ChunkSkipList_1_1Node.html#aec5507e413075c1d8390cbe5aaed06f1',1,'advanced_structures::ChunkSkipList::Node']]]
 ];

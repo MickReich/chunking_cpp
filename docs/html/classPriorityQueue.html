@@ -21,9 +21,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Advanced Chunk Processing Library<span id="projectnumber">&#160;1.0</span>
+   <div id="projectname">Advanced Chunk Processing Library<span id="projectnumber">&#160;0.2.0</span>
    </div>
-   <div id="projectbrief">A C++ library for flexible data chunking and processing operations</div>
+   <div id="projectbrief">A comprehensive C++ library for advanced data chunking strategies and processing operations</div>
   </td>
  </tr>
  </tbody>
@@ -109,7 +109,7 @@ Private Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T, typename Compare = std::less&lt;T&gt;&gt;<br />
 class PriorityQueue&lt; T, Compare &gt;</div>
-<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00063">63</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00072">72</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a808431d87d33867fff1c5ec66244ad9a" name="a808431d87d33867fff1c5ec66244ad9a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a808431d87d33867fff1c5ec66244ad9a">&#9670;&#160;</a></span>empty()</h2>
@@ -136,11 +136,15 @@ template&lt;typename T , typename Compare  = std::less&lt;T&gt;&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00120">120</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00129">129</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  129</span>                       {</div>
+<div class="line"><span class="lineno">  130</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classPriorityQueue.html#a2dc28580b01197178f598f15b3182370">heap_</a>.empty();</div>
+<div class="line"><span class="lineno">  131</span>    }</div>
+<div class="ttc" id="aclassPriorityQueue_html_a2dc28580b01197178f598f15b3182370"><div class="ttname"><a href="classPriorityQueue.html#a2dc28580b01197178f598f15b3182370">PriorityQueue::heap_</a></div><div class="ttdeci">std::vector&lt; T &gt; heap_</div><div class="ttdef"><b>Definition</b> <a href="data__structures_8hpp_source.html#l00074">data_structures.hpp:74</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="data__structures_8hpp_source.html#l00074">PriorityQueue&lt; T, Compare &gt;::heap_</a>.</p>
 
-<p class="reference">References <a class="el" href="data__structures_8hpp_source.html#l00065">PriorityQueue&lt; T, Compare &gt;::heap_</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="data__structures_8hpp_source.html#l00108">PriorityQueue&lt; T, Compare &gt;::pop()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="data__structures_8hpp_source.html#l00117">PriorityQueue&lt; T, Compare &gt;::pop()</a>.</p>
 
 </div>
 </div>
@@ -170,11 +174,33 @@ template&lt;typename T , typename Compare  = std::less&lt;T&gt;&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00080">80</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00089">89</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   89</span>                                    {</div>
+<div class="line"><span class="lineno">   90</span>        <span class="keywordflow">while</span> (<span class="keyword">true</span>) {</div>
+<div class="line"><span class="lineno">   91</span>            <span class="keywordtype">size_t</span> largest = index;</div>
+<div class="line"><span class="lineno">   92</span>            <span class="keywordtype">size_t</span> left = 2 * index + 1;</div>
+<div class="line"><span class="lineno">   93</span>            <span class="keywordtype">size_t</span> right = 2 * index + 2;</div>
+<div class="line"><span class="lineno">   94</span> </div>
+<div class="line"><span class="lineno">   95</span>            <span class="keywordflow">if</span> (left &lt; <a class="code hl_variable" href="classPriorityQueue.html#a2dc28580b01197178f598f15b3182370">heap_</a>.size() &amp;&amp; <a class="code hl_variable" href="classPriorityQueue.html#a4fa43ad50be95b27d62d62d73a83f19c">comp_</a>(<a class="code hl_variable" href="classPriorityQueue.html#a2dc28580b01197178f598f15b3182370">heap_</a>[largest], <a class="code hl_variable" href="classPriorityQueue.html#a2dc28580b01197178f598f15b3182370">heap_</a>[left])) {</div>
+<div class="line"><span class="lineno">   96</span>                largest = left;</div>
+<div class="line"><span class="lineno">   97</span>            }</div>
+<div class="line"><span class="lineno">   98</span>            <span class="keywordflow">if</span> (right &lt; <a class="code hl_variable" href="classPriorityQueue.html#a2dc28580b01197178f598f15b3182370">heap_</a>.size() &amp;&amp; <a class="code hl_variable" href="classPriorityQueue.html#a4fa43ad50be95b27d62d62d73a83f19c">comp_</a>(<a class="code hl_variable" href="classPriorityQueue.html#a2dc28580b01197178f598f15b3182370">heap_</a>[largest], <a class="code hl_variable" href="classPriorityQueue.html#a2dc28580b01197178f598f15b3182370">heap_</a>[right])) {</div>
+<div class="line"><span class="lineno">   99</span>                largest = right;</div>
+<div class="line"><span class="lineno">  100</span>            }</div>
+<div class="line"><span class="lineno">  101</span> </div>
+<div class="line"><span class="lineno">  102</span>            <span class="keywordflow">if</span> (largest == index) {</div>
+<div class="line"><span class="lineno">  103</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  104</span>            }</div>
+<div class="line"><span class="lineno">  105</span> </div>
+<div class="line"><span class="lineno">  106</span>            std::swap(<a class="code hl_variable" href="classPriorityQueue.html#a2dc28580b01197178f598f15b3182370">heap_</a>[index], <a class="code hl_variable" href="classPriorityQueue.html#a2dc28580b01197178f598f15b3182370">heap_</a>[largest]);</div>
+<div class="line"><span class="lineno">  107</span>            index = largest;</div>
+<div class="line"><span class="lineno">  108</span>        }</div>
+<div class="line"><span class="lineno">  109</span>    }</div>
+<div class="ttc" id="aclassPriorityQueue_html_a4fa43ad50be95b27d62d62d73a83f19c"><div class="ttname"><a href="classPriorityQueue.html#a4fa43ad50be95b27d62d62d73a83f19c">PriorityQueue::comp_</a></div><div class="ttdeci">Compare comp_</div><div class="ttdef"><b>Definition</b> <a href="data__structures_8hpp_source.html#l00075">data_structures.hpp:75</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="data__structures_8hpp_source.html#l00075">PriorityQueue&lt; T, Compare &gt;::comp_</a>, and <a class="el" href="data__structures_8hpp_source.html#l00074">PriorityQueue&lt; T, Compare &gt;::heap_</a>.</p>
 
-<p class="reference">References <a class="el" href="data__structures_8hpp_source.html#l00066">PriorityQueue&lt; T, Compare &gt;::comp_</a>, and <a class="el" href="data__structures_8hpp_source.html#l00065">PriorityQueue&lt; T, Compare &gt;::heap_</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="data__structures_8hpp_source.html#l00108">PriorityQueue&lt; T, Compare &gt;::pop()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="data__structures_8hpp_source.html#l00117">PriorityQueue&lt; T, Compare &gt;::pop()</a>.</p>
 
 </div>
 </div>
@@ -204,11 +230,22 @@ template&lt;typename T , typename Compare  = std::less&lt;T&gt;&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00068">68</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00077">77</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   77</span>                                  {</div>
+<div class="line"><span class="lineno">   78</span>        <span class="keywordflow">while</span> (index &gt; 0) {</div>
+<div class="line"><span class="lineno">   79</span>            <span class="keywordtype">size_t</span> parent = (index - 1) / 2;</div>
+<div class="line"><span class="lineno">   80</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="classPriorityQueue.html#a4fa43ad50be95b27d62d62d73a83f19c">comp_</a>(<a class="code hl_variable" href="classPriorityQueue.html#a2dc28580b01197178f598f15b3182370">heap_</a>[parent], <a class="code hl_variable" href="classPriorityQueue.html#a2dc28580b01197178f598f15b3182370">heap_</a>[index])) {</div>
+<div class="line"><span class="lineno">   81</span>                std::swap(<a class="code hl_variable" href="classPriorityQueue.html#a2dc28580b01197178f598f15b3182370">heap_</a>[parent], <a class="code hl_variable" href="classPriorityQueue.html#a2dc28580b01197178f598f15b3182370">heap_</a>[index]);</div>
+<div class="line"><span class="lineno">   82</span>                index = parent;</div>
+<div class="line"><span class="lineno">   83</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">   84</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   85</span>            }</div>
+<div class="line"><span class="lineno">   86</span>        }</div>
+<div class="line"><span class="lineno">   87</span>    }</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="data__structures_8hpp_source.html#l00075">PriorityQueue&lt; T, Compare &gt;::comp_</a>, and <a class="el" href="data__structures_8hpp_source.html#l00074">PriorityQueue&lt; T, Compare &gt;::heap_</a>.</p>
 
-<p class="reference">References <a class="el" href="data__structures_8hpp_source.html#l00066">PriorityQueue&lt; T, Compare &gt;::comp_</a>, and <a class="el" href="data__structures_8hpp_source.html#l00065">PriorityQueue&lt; T, Compare &gt;::heap_</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="data__structures_8hpp_source.html#l00103">PriorityQueue&lt; T, Compare &gt;::push()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="data__structures_8hpp_source.html#l00112">PriorityQueue&lt; T, Compare &gt;::push()</a>.</p>
 
 </div>
 </div>
@@ -237,9 +274,22 @@ template&lt;typename T , typename Compare  = std::less&lt;T&gt;&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00108">108</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
-
-<p class="reference">References <a class="el" href="data__structures_8hpp_source.html#l00120">PriorityQueue&lt; T, Compare &gt;::empty()</a>, <a class="el" href="data__structures_8hpp_source.html#l00065">PriorityQueue&lt; T, Compare &gt;::heap_</a>, and <a class="el" href="data__structures_8hpp_source.html#l00080">PriorityQueue&lt; T, Compare &gt;::heapify_down()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00117">117</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  117</span>            {</div>
+<div class="line"><span class="lineno">  118</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="classPriorityQueue.html#a808431d87d33867fff1c5ec66244ad9a">empty</a>())</div>
+<div class="line"><span class="lineno">  119</span>            <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Queue is empty&quot;</span>);</div>
+<div class="line"><span class="lineno">  120</span>        T result = <a class="code hl_variable" href="classPriorityQueue.html#a2dc28580b01197178f598f15b3182370">heap_</a>[0];</div>
+<div class="line"><span class="lineno">  121</span>        <a class="code hl_variable" href="classPriorityQueue.html#a2dc28580b01197178f598f15b3182370">heap_</a>[0] = <a class="code hl_variable" href="classPriorityQueue.html#a2dc28580b01197178f598f15b3182370">heap_</a>.back();</div>
+<div class="line"><span class="lineno">  122</span>        <a class="code hl_variable" href="classPriorityQueue.html#a2dc28580b01197178f598f15b3182370">heap_</a>.pop_back();</div>
+<div class="line"><span class="lineno">  123</span>        <span class="keywordflow">if</span> (!<a class="code hl_function" href="classPriorityQueue.html#a808431d87d33867fff1c5ec66244ad9a">empty</a>()) {</div>
+<div class="line"><span class="lineno">  124</span>            <a class="code hl_function" href="classPriorityQueue.html#a56e5f9d2fb1e1d5db7c04f00ff32d0c8">heapify_down</a>(0);</div>
+<div class="line"><span class="lineno">  125</span>        }</div>
+<div class="line"><span class="lineno">  126</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">  127</span>    }</div>
+<div class="ttc" id="aclassPriorityQueue_html_a56e5f9d2fb1e1d5db7c04f00ff32d0c8"><div class="ttname"><a href="classPriorityQueue.html#a56e5f9d2fb1e1d5db7c04f00ff32d0c8">PriorityQueue::heapify_down</a></div><div class="ttdeci">void heapify_down(size_t index)</div><div class="ttdef"><b>Definition</b> <a href="data__structures_8hpp_source.html#l00089">data_structures.hpp:89</a></div></div>
+<div class="ttc" id="aclassPriorityQueue_html_a808431d87d33867fff1c5ec66244ad9a"><div class="ttname"><a href="classPriorityQueue.html#a808431d87d33867fff1c5ec66244ad9a">PriorityQueue::empty</a></div><div class="ttdeci">bool empty() const</div><div class="ttdef"><b>Definition</b> <a href="data__structures_8hpp_source.html#l00129">data_structures.hpp:129</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="data__structures_8hpp_source.html#l00129">PriorityQueue&lt; T, Compare &gt;::empty()</a>, <a class="el" href="data__structures_8hpp_source.html#l00074">PriorityQueue&lt; T, Compare &gt;::heap_</a>, and <a class="el" href="data__structures_8hpp_source.html#l00089">PriorityQueue&lt; T, Compare &gt;::heapify_down()</a>.</p>
 
 </div>
 </div>
@@ -269,9 +319,14 @@ template&lt;typename T , typename Compare  = std::less&lt;T&gt;&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00103">103</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
-
-<p class="reference">References <a class="el" href="data__structures_8hpp_source.html#l00065">PriorityQueue&lt; T, Compare &gt;::heap_</a>, and <a class="el" href="data__structures_8hpp_source.html#l00068">PriorityQueue&lt; T, Compare &gt;::heapify_up()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00112">112</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  112</span>                             {</div>
+<div class="line"><span class="lineno">  113</span>        <a class="code hl_variable" href="classPriorityQueue.html#a2dc28580b01197178f598f15b3182370">heap_</a>.push_back(item);</div>
+<div class="line"><span class="lineno">  114</span>        <a class="code hl_function" href="classPriorityQueue.html#ac221c7a12a2f93f4bad4bc43f070ac02">heapify_up</a>(<a class="code hl_variable" href="classPriorityQueue.html#a2dc28580b01197178f598f15b3182370">heap_</a>.size() - 1);</div>
+<div class="line"><span class="lineno">  115</span>    }</div>
+<div class="ttc" id="aclassPriorityQueue_html_ac221c7a12a2f93f4bad4bc43f070ac02"><div class="ttname"><a href="classPriorityQueue.html#ac221c7a12a2f93f4bad4bc43f070ac02">PriorityQueue::heapify_up</a></div><div class="ttdeci">void heapify_up(size_t index)</div><div class="ttdef"><b>Definition</b> <a href="data__structures_8hpp_source.html#l00077">data_structures.hpp:77</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="data__structures_8hpp_source.html#l00074">PriorityQueue&lt; T, Compare &gt;::heap_</a>, and <a class="el" href="data__structures_8hpp_source.html#l00077">PriorityQueue&lt; T, Compare &gt;::heapify_up()</a>.</p>
 
 </div>
 </div>
@@ -300,9 +355,12 @@ template&lt;typename T , typename Compare  = std::less&lt;T&gt;&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00121">121</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
-
-<p class="reference">References <a class="el" href="data__structures_8hpp_source.html#l00065">PriorityQueue&lt; T, Compare &gt;::heap_</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00132">132</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  132</span>                        {</div>
+<div class="line"><span class="lineno">  133</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classPriorityQueue.html#a2dc28580b01197178f598f15b3182370">heap_</a>.size();</div>
+<div class="line"><span class="lineno">  134</span>    }</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="data__structures_8hpp_source.html#l00074">PriorityQueue&lt; T, Compare &gt;::heap_</a>.</p>
 
 </div>
 </div>
@@ -329,9 +387,9 @@ template&lt;typename T , typename Compare  = std::less&lt;T&gt;&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00066">66</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00075">75</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="data__structures_8hpp_source.html#l00080">PriorityQueue&lt; T, Compare &gt;::heapify_down()</a>, and <a class="el" href="data__structures_8hpp_source.html#l00068">PriorityQueue&lt; T, Compare &gt;::heapify_up()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="data__structures_8hpp_source.html#l00089">PriorityQueue&lt; T, Compare &gt;::heapify_down()</a>, and <a class="el" href="data__structures_8hpp_source.html#l00077">PriorityQueue&lt; T, Compare &gt;::heapify_up()</a>.</p>
 
 </div>
 </div>
@@ -357,19 +415,19 @@ template&lt;typename T , typename Compare  = std::less&lt;T&gt;&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00065">65</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="data__structures_8hpp_source.html#l00074">74</a> of file <a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="data__structures_8hpp_source.html#l00120">PriorityQueue&lt; T, Compare &gt;::empty()</a>, <a class="el" href="data__structures_8hpp_source.html#l00080">PriorityQueue&lt; T, Compare &gt;::heapify_down()</a>, <a class="el" href="data__structures_8hpp_source.html#l00068">PriorityQueue&lt; T, Compare &gt;::heapify_up()</a>, <a class="el" href="data__structures_8hpp_source.html#l00108">PriorityQueue&lt; T, Compare &gt;::pop()</a>, <a class="el" href="data__structures_8hpp_source.html#l00103">PriorityQueue&lt; T, Compare &gt;::push()</a>, and <a class="el" href="data__structures_8hpp_source.html#l00121">PriorityQueue&lt; T, Compare &gt;::size()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="data__structures_8hpp_source.html#l00129">PriorityQueue&lt; T, Compare &gt;::empty()</a>, <a class="el" href="data__structures_8hpp_source.html#l00089">PriorityQueue&lt; T, Compare &gt;::heapify_down()</a>, <a class="el" href="data__structures_8hpp_source.html#l00077">PriorityQueue&lt; T, Compare &gt;::heapify_up()</a>, <a class="el" href="data__structures_8hpp_source.html#l00117">PriorityQueue&lt; T, Compare &gt;::pop()</a>, <a class="el" href="data__structures_8hpp_source.html#l00112">PriorityQueue&lt; T, Compare &gt;::push()</a>, and <a class="el" href="data__structures_8hpp_source.html#l00132">PriorityQueue&lt; T, Compare &gt;::size()</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li><a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a></li>
+<li>include/<a class="el" href="data__structures_8hpp_source.html">data_structures.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 20 2024 08:21:59 for Advanced Chunk Processing Library by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+Generated on Sat Dec 21 2024 07:56:55 for Advanced Chunk Processing Library by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
 </small></address>
 </body>
 </html>
