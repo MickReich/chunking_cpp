@@ -5,6 +5,7 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -13,9 +14,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-
+    
     - name: configure
-      run: ./configure
+      run: | 
+            chmod +x configure 
+            ./configure
 
     - name: Install dependencies
       run: make
