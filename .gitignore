@@ -12,13 +12,15 @@ build/
 *.exe
 *.out
 *.elf
+# CMake files
+CMakeCache.txt
+CMakeFiles/
+*/CMakeFiles/
 *.cmake
-*.bin
-*.make
-*.local
-*.vscode/
-.idea/
-cmake-build-*/
+cmake_install.cmake
+CTestTestfile.cmake
+_deps/
+.cmake/
 Testing/
 docs/
 *.user
@@ -26,7 +28,5 @@ compile_commands.json
 .cache/
 *.make
 *.local
-CMakeFiles/
-*/CMakeFiles/
 chunk_processor_exe
 run_tests
