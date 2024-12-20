@@ -1,6 +1,6 @@
 # Project settings
 PROJECT_NAME           = "Advanced Chunk Processing Library"
-PROJECT_NUMBER        = "0.1.0"
+PROJECT_NUMBER        = "0.2.0"
 PROJECT_BRIEF         = "A comprehensive C++ library for advanced data chunking strategies and processing operations"
 OUTPUT_DIRECTORY      = build/docs
 CREATE_SUBDIRS        = NO
@@ -13,6 +13,7 @@ EXTRACT_PRIVATE       = YES
 EXTRACT_STATIC        = YES
 EXTRACT_LOCAL_CLASSES = YES
 EXTRACT_LOCAL_METHODS = YES
+EXTRACT_ANON_NSPACES = YES
 HIDE_SCOPE_NAMES      = NO
 SHOW_INCLUDE_FILES    = YES
 SHOW_GROUPED_MEMB_INC = YES
@@ -25,8 +26,8 @@ BUILTIN_STL_SUPPORT   = YES
 CPP_CLI_SUPPORT       = NO
 DISTRIBUTE_GROUP_DOC  = NO
 SUBGROUPING          = YES
-INLINE_GROUPED_CLASSES = NO
-INLINE_SIMPLE_STRUCTS = NO
+INLINE_GROUPED_CLASSES = YES
+INLINE_SIMPLE_STRUCTS = YES
 
 # Warning and progress messages
 QUIET                = NO
@@ -38,7 +39,11 @@ WARN_NO_PARAMDOC     = YES
 # Input files
 INPUT                = README.md \
                       src \
-                      include
+                      include \
+                      include/advanced_structures.hpp \
+                      include/chunk_strategies.hpp \
+                      include/parallel_chunk.hpp \
+                      include/chunk_compression.hpp
 USE_MDFILE_AS_MAINPAGE = README.md
 FILE_PATTERNS        = *.cpp \
                       *.hpp \
@@ -56,11 +61,11 @@ HTML_OUTPUT          = html
 HTML_FILE_EXTENSION  = .html
 HTML_TIMESTAMP       = YES
 HTML_DYNAMIC_MENUS   = YES
-HTML_DYNAMIC_SECTIONS= NO
+HTML_DYNAMIC_SECTIONS= YES
 
 # Source browsing
 SOURCE_BROWSER       = YES
-INLINE_SOURCES       = NO
+INLINE_SOURCES       = YES
 STRIP_CODE_COMMENTS  = NO
 REFERENCED_BY_RELATION = YES
 REFERENCES_RELATION  = YES
@@ -81,8 +86,8 @@ CALL_GRAPH         = NO
 CALLER_GRAPH       = NO
 GRAPHICAL_HIERARCHY = YES
 DIRECTORY_GRAPH    = YES
-DOT_IMAGE_FORMAT   = png
-INTERACTIVE_SVG    = NO
+DOT_IMAGE_FORMAT   = svg
+INTERACTIVE_SVG    = YES
 
 # Search engine
 SEARCHENGINE        = YES
@@ -113,7 +118,7 @@ IDL_PROPERTY_SUPPORT = YES
 DISTRIBUTE_GROUP_DOC = NO
 GROUP_NESTED_COMPOUNDS = NO
 SUBGROUPING         = YES
-INLINE_GROUPED_CLASSES = NO
-INLINE_SIMPLE_STRUCTS = NO
+INLINE_GROUPED_CLASSES = YES
+INLINE_SIMPLE_STRUCTS = YES
 TYPEDEF_HIDES_STRUCT = NO
 LOOKUP_CACHE_SIZE   = 0

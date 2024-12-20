@@ -1,0 +1,80 @@
+\chapter{Advanced Chunk Processing Library}
+\hypertarget{index}{}\label{index}\index{Advanced Chunk Processing Library@{Advanced Chunk Processing Library}}
+\label{index_md_README}%
+\Hypertarget{index_md_README}%
+ A C++ library for flexible data chunking and processing operations.\hypertarget{index_autotoc_md1}{}\doxysection{\texorpdfstring{Features}{Features}}\label{index_autotoc_md1}
+
+\begin{DoxyItemize}
+\item Parallel chunk processing
+\item \doxylink{classChunk}{Chunk} compression (RLE, Delta)
+\item Basic chunking operations
+\item Overlapping chunks
+\item Predicate-\/based chunking
+\item Sum-\/based chunking
+\item Equal division chunking
+\item Sliding window chunking
+\item Statistical threshold-\/based chunking
+\item Similarity-\/based chunking
+\item Monotonicity-\/based chunking
+\item Padded fixed-\/size chunking
+\item Circular buffer
+\item Sliding window
+\item Priority queue
+\item \doxylink{classChunk}{Chunk} list
+\item Statistical operations
+\item Random chunk generation
+\item \doxylink{classChunk}{Chunk} manipulation utilities
+\end{DoxyItemize}\hypertarget{index_autotoc_md2}{}\doxysection{\texorpdfstring{Quick Start}{Quick Start}}\label{index_autotoc_md2}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Clone\ the\ repository}
+\DoxyCodeLine{git\ clone\ git@github.com:JohnnyTeutonic/chunking\_cpp.git}
+\DoxyCodeLine{cd\ chunking\_cpp}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Configure\ and\ build}
+\DoxyCodeLine{chmod\ +x\ configure}
+\DoxyCodeLine{./configure}
+\DoxyCodeLine{make\ install}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Uninstall\ if\ needed}
+\DoxyCodeLine{make\ uninstall}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Run\ tests}
+\DoxyCodeLine{make\ test}
+
+\end{DoxyCode}
+
+
+For detailed build instructions, dependencies, and configuration options, see BUILDING.md.\hypertarget{index_autotoc_md3}{}\doxysection{\texorpdfstring{Usage Examples}{Usage Examples}}\label{index_autotoc_md3}
+See {\ttfamily \doxylink{main_8cpp}{main.\+cpp}} for comprehensive examples of all features.\hypertarget{index_autotoc_md4}{}\doxysection{\texorpdfstring{Documentation}{Documentation}}\label{index_autotoc_md4}
+Generate and view the documentation\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make\ docs}
+\DoxyCodeLine{make\ docs-\/serve}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md5}{}\doxysection{\texorpdfstring{License}{License}}\label{index_autotoc_md5}
+This project is licensed under the GNU General Public License v2.\+0 -\/ see the \mbox{[}LICENSE\mbox{]}(LICENSE) file for details.\hypertarget{index_autotoc_md6}{}\doxysection{\texorpdfstring{Project Structure}{Project Structure}}\label{index_autotoc_md6}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{.}
+\DoxyCodeLine{├──\ include/}
+\DoxyCodeLine{│\ \ \ ├──\ chunk.hpp}
+\DoxyCodeLine{│\ \ \ ├──\ config.hpp}
+\DoxyCodeLine{│\ \ \ ├──\ data\_structures.hpp}
+\DoxyCodeLine{│\ \ \ └──\ utils.hpp}
+\DoxyCodeLine{├──\ src/}
+\DoxyCodeLine{│\ \ \ └──\ main.cpp}
+\DoxyCodeLine{├──\ tests/}
+\DoxyCodeLine{│\ \ \ ├──\ test\_main.cpp}
+\DoxyCodeLine{│\ \ \ ├──\ chunk\_test.cpp}
+\DoxyCodeLine{│\ \ \ ├──\ data\_structures\_test.cpp}
+\DoxyCodeLine{│\ \ \ └──\ utils\_test.cpp}
+\DoxyCodeLine{├──\ Makefile}
+\DoxyCodeLine{├──\ Doxyfile}
+\DoxyCodeLine{└──\ README.md}
+
+\end{DoxyCode}
+ 

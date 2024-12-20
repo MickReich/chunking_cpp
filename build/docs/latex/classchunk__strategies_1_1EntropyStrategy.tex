@@ -1,0 +1,184 @@
+\doxysection{chunk\+\_\+strategies\+::Entropy\+Strategy\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classchunk__strategies_1_1EntropyStrategy}{}\label{classchunk__strategies_1_1EntropyStrategy}\index{chunk\_strategies::EntropyStrategy$<$ T $>$@{chunk\_strategies::EntropyStrategy$<$ T $>$}}
+
+
+Strategy for chunking based on entropy thresholds.  
+
+
+
+
+{\ttfamily \#include $<$chunk\+\_\+strategies.\+hpp$>$}
+
+
+
+Inheritance diagram for chunk\+\_\+strategies\+::Entropy\+Strategy\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{classchunk__strategies_1_1EntropyStrategy__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for chunk\+\_\+strategies\+::Entropy\+Strategy\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{classchunk__strategies_1_1EntropyStrategy__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_a1f667ff61e3ddaf1db623c584998a173}{Entropy\+Strategy}} (double threshold)
+\item 
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_a808855cba029b6e37f5312596bcd8d71}{apply}} (const std\+::vector$<$ T $>$ \&data) override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_a317d481326287f6833aa9f21f6a0d596}{calculate\+\_\+entropy}} (const std\+::vector$<$ T $>$ \&values)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_a527a489dc2c4929e198ba83b32fb4390}{threshold\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class chunk\+\_\+strategies\+::\+Entropy\+Strategy$<$ T $>$}
+Strategy for chunking based on entropy thresholds. 
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00114}{114}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classchunk__strategies_1_1EntropyStrategy_a1f667ff61e3ddaf1db623c584998a173}\label{classchunk__strategies_1_1EntropyStrategy_a1f667ff61e3ddaf1db623c584998a173} 
+\index{chunk\_strategies::EntropyStrategy$<$ T $>$@{chunk\_strategies::EntropyStrategy$<$ T $>$}!EntropyStrategy@{EntropyStrategy}}
+\index{EntropyStrategy@{EntropyStrategy}!chunk\_strategies::EntropyStrategy$<$ T $>$@{chunk\_strategies::EntropyStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{EntropyStrategy()}{EntropyStrategy()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy}{chunk\+\_\+strategies\+::\+Entropy\+Strategy}}$<$ T $>$\+::\+Entropy\+Strategy (\begin{DoxyParamCaption}\item[{double}]{threshold }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00136}{136}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00136\ :\ \mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_a527a489dc2c4929e198ba83b32fb4390}{threshold\_}}(threshold)\ \{\}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classchunk__strategies_1_1EntropyStrategy_a808855cba029b6e37f5312596bcd8d71}\label{classchunk__strategies_1_1EntropyStrategy_a808855cba029b6e37f5312596bcd8d71} 
+\index{chunk\_strategies::EntropyStrategy$<$ T $>$@{chunk\_strategies::EntropyStrategy$<$ T $>$}!apply@{apply}}
+\index{apply@{apply}!chunk\_strategies::EntropyStrategy$<$ T $>$@{chunk\_strategies::EntropyStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{apply()}{apply()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy}{chunk\+\_\+strategies\+::\+Entropy\+Strategy}}$<$ T $>$\+::apply (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ T $>$ \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classchunk__strategies_1_1ChunkStrategy_a9982c118657fa88286e0337c6cd2ce9a}{chunk\+\_\+strategies\+::\+Chunk\+Strategy$<$ T $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00138}{138}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ chunks;}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ std::vector<T>\ current\_chunk;}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ T\&\ value\ :\ data)\ \{}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.push\_back(value);}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_a317d481326287f6833aa9f21f6a0d596}{calculate\_entropy}}(current\_chunk)\ >\ \mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_a527a489dc2c4929e198ba83b32fb4390}{threshold\_}})\ \{}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_chunk.size()\ >\ 1)\ \{}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.pop\_back();}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ chunks.push\_back(current\_chunk);}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk\ =\ \{value\};}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!current\_chunk.empty())\ \{}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ chunks.push\_back(current\_chunk);}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ chunks;}
+\DoxyCodeLine{00158\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk__strategies_8hpp_source_l00117}{chunk\+\_\+strategies\+::\+Entropy\+Strategy$<$ T $>$\+::calculate\+\_\+entropy()}}, and \mbox{\hyperlink{chunk__strategies_8hpp_source_l00115}{chunk\+\_\+strategies\+::\+Entropy\+Strategy$<$ T $>$\+::threshold\+\_\+}}.
+
+
+
+Referenced by \mbox{\hyperlink{main_8cpp_source_l00048}{main()}}.
+
+\Hypertarget{classchunk__strategies_1_1EntropyStrategy_a317d481326287f6833aa9f21f6a0d596}\label{classchunk__strategies_1_1EntropyStrategy_a317d481326287f6833aa9f21f6a0d596} 
+\index{chunk\_strategies::EntropyStrategy$<$ T $>$@{chunk\_strategies::EntropyStrategy$<$ T $>$}!calculate\_entropy@{calculate\_entropy}}
+\index{calculate\_entropy@{calculate\_entropy}!chunk\_strategies::EntropyStrategy$<$ T $>$@{chunk\_strategies::EntropyStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{calculate\_entropy()}{calculate\_entropy()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+double \mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy}{chunk\+\_\+strategies\+::\+Entropy\+Strategy}}$<$ T $>$\+::calculate\+\_\+entropy (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ T $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00117}{117}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (values.empty())}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0.0;}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ std::map<T,\ int>\ freq;}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ T\&\ val\ :\ values)\ \{}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ freq[val]++;}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ entropy\ =\ 0.0;}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ [\_,\ count]\ :\ freq)\ \{}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ p\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(count)\ /\ values.size();}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ entropy\ -\/=\ p\ *\ std::log2(p);}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ entropy;}
+\DoxyCodeLine{00133\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+Referenced by \mbox{\hyperlink{chunk__strategies_8hpp_source_l00138}{chunk\+\_\+strategies\+::\+Entropy\+Strategy$<$ T $>$\+::apply()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classchunk__strategies_1_1EntropyStrategy_a527a489dc2c4929e198ba83b32fb4390}\label{classchunk__strategies_1_1EntropyStrategy_a527a489dc2c4929e198ba83b32fb4390} 
+\index{chunk\_strategies::EntropyStrategy$<$ T $>$@{chunk\_strategies::EntropyStrategy$<$ T $>$}!threshold\_@{threshold\_}}
+\index{threshold\_@{threshold\_}!chunk\_strategies::EntropyStrategy$<$ T $>$@{chunk\_strategies::EntropyStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{threshold\_}{threshold\_}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+double \mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy}{chunk\+\_\+strategies\+::\+Entropy\+Strategy}}$<$ T $>$\+::threshold\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00115}{115}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{chunk__strategies_8hpp_source_l00138}{chunk\+\_\+strategies\+::\+Entropy\+Strategy$<$ T $>$\+::apply()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{chunk__strategies_8hpp}{chunk\+\_\+strategies.\+hpp}}\end{DoxyCompactItemize}

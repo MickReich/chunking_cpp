@@ -14,13 +14,22 @@ You should have received a copy of the GNU General Public License along
 with this program; if not, see <https://www.gnu.org/licenses/>.
 */
 
+#include "advanced_structures.hpp"
 #include "chunk.hpp"
+#include "chunk_compression.hpp"
+#include "chunk_strategies.hpp"
 #include "config.hpp"
 #include "data_structures.hpp"
+#include "parallel_chunk.hpp"
 #include "utils.hpp"
 #include <iomanip>
 #include <iostream>
 #include <vector>
+
+using namespace advanced_structures; // For ChunkSkipList and ChunkBPlusTree
+using namespace parallel_chunk;      // For ParallelChunkProcessor
+using namespace chunk_compression;   // For ChunkCompressor
+using namespace chunk_strategies;    // For QuantileStrategy, VarianceStrategy, etc.
 
 // Helper function to print chunks
 template <typename T>
@@ -151,11 +160,11 @@ int main() {
 
     // Example 16: Padded fixed-size chunking
     std::cout << "\n=== Padded Fixed-size Chunking Example ===" << std::endl;
-    Chunk<int> pad_chunker(3);  // Chunks of size 3
+    Chunk<int> pad_chunker(3); // Chunks of size 3
     std::vector<int> pad_data = {1, 2, 3, 4, 5, 6, 7, 8};
     pad_chunker.add(pad_data);
 
-    auto padded_chunks = pad_chunker.get_padded_chunks(0);  // Pad with zeros
+    auto padded_chunks = pad_chunker.get_padded_chunks(0); // Pad with zeros
     std::cout << "Fixed-size chunks with padding:" << std::endl;
     print_chunks(padded_chunks);
 
@@ -179,6 +188,89 @@ int main() {
         std::cout << "Windows for chunk " << i << ":" << std::endl;
         print_chunks(windows);
     }
+
+    // Example 18: Advanced chunking strategies
+    std::cout << "\n=== Advanced Chunking Strategies Example ===" << std::endl;
+
+    // Quantile-based chunking
+    std::vector<double> advanced_data = {1.0, 2.0, 5.0, 6.0, 3.0, 4.0, 8.0, 7.0};
+    QuantileStrategy<double> quantile_strategy(0.5);
+    auto quantile_chunks = quantile_strategy.apply(advanced_data);
+    std::cout << "Quantile-based chunks (median):" << std::endl;
+    print_chunks(quantile_chunks);
+
+    // Variance-based chunking
+    VarianceStrategy<double> variance_strategy(1.0);
+    auto variance_chunks = variance_strategy.apply(advanced_data);
+    std::cout << "Variance-based chunks (threshold = 1.0):" << std::endl;
+    print_chunks(variance_chunks);
+
+    // Entropy-based chunking
+    std::vector<int> entropy_data = {1, 1, 1, 2, 2, 3, 4, 4, 4, 4};
+    EntropyStrategy<int> entropy_strategy(1.5);
+    auto entropy_chunks = entropy_strategy.apply(entropy_data);
+    std::cout << "Entropy-based chunks (threshold = 1.5):" << std::endl;
+    print_chunks(entropy_chunks);
+
+    // Example 19: Advanced Data Structures
+    std::cout << "\n=== Advanced Data Structures Example ===" << std::endl;
+
+    // Skip List example
+    std::cout << "Skip List Operations:" << std::endl;
+    ChunkSkipList<int> skip_list;
+    std::vector<int> skip_data = {3, 6, 9, 2, 5, 8};
+    for (int val : skip_data) {
+        skip_list.insert(val);
+    }
+
+    std::cout << "Searching for values..." << std::endl;
+    std::cout << "Value 6: " << (skip_list.search(6) ? "Found" : "Not found") << std::endl;
+    std::cout << "Value 7: " << (skip_list.search(7) ? "Found" : "Not found") << std::endl;
+
+    // B+ Tree example
+    std::cout << "\nB+ Tree Operations:" << std::endl;
+    ChunkBPlusTree<int> bplus_tree;
+    for (int val : {1, 4, 7, 10, 13, 16}) {
+        bplus_tree.insert(val);
+    }
+
+    // Example 20: Parallel Processing
+    std::cout << "\n=== Parallel Processing Example ===" << std::endl;
+    std::vector<std::vector<int>> parallel_data = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+
+    // Double all numbers in parallel
+    auto double_op = [](std::vector<int>& chunk) {
+        for (int& val : chunk) {
+            val *= 2;
+        }
+    };
+
+    ParallelChunkProcessor<int>::process_chunks(parallel_data, double_op);
+    std::cout << "After parallel doubling:" << std::endl;
+    print_chunks(parallel_data);
+
+    // Example 21: Chunk Compression
+    std::cout << "\n=== Chunk Compression Example ===" << std::endl;
+    std::vector<int> compress_data = {1, 1, 1, 2, 2, 3, 4, 4, 4, 4};
+
+    // Run-length encoding
+    auto rle = ChunkCompressor<int>::run_length_encode(compress_data);
+    std::cout << "Run-length encoding:" << std::endl;
+    for (const auto& [value, count] : rle) {
+        std::cout << value << " appears " << count << " times" << std::endl;
+    }
+
+    // Delta encoding
+    std::vector<int> sequence = {10, 12, 15, 19, 24};
+    auto delta_encoded = ChunkCompressor<int>::delta_encode(sequence);
+    std::cout << "\nDelta encoding:" << std::endl;
+    std::cout << "Original: ";
+    for (int val : sequence)
+        std::cout << val << " ";
+    std::cout << "\nEncoded:  ";
+    for (int val : delta_encoded)
+        std::cout << val << " ";
+    std::cout << std::endl;
 
     return 0;
 }

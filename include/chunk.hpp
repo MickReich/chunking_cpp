@@ -1,10 +1,10 @@
 #ifndef CHUNK_HPP
 #define CHUNK_HPP
 
-#include <stdexcept>
-#include <vector>
-#include <string>
 #include <numeric>
+#include <stdexcept>
+#include <string>
+#include <vector>
 
 #include "config.hpp"
 
@@ -222,10 +222,7 @@ public:
 
         std::vector<std::vector<T>> chunks;
         for (size_t i = 0; i + window_size <= data_.size(); i += step) {
-            chunks.push_back(std::vector<T>(
-                data_.begin() + i,
-                data_.begin() + i + window_size
-            ));
+            chunks.push_back(std::vector<T>(data_.begin() + i, data_.begin() + i + window_size));
         }
         return chunks;
     }
@@ -236,13 +233,11 @@ public:
      * @param stat_func Function to compute the statistic (e.g., mean, median)
      * @return Vector of chunks divided by statistical threshold
      */
-    template<typename StatFunc>
-    std::vector<std::vector<T>> chunk_by_statistic(
-        T threshold,
-        StatFunc stat_func
-    ) const {
+    template <typename StatFunc>
+    std::vector<std::vector<T>> chunk_by_statistic(T threshold, StatFunc stat_func) const {
         std::vector<std::vector<T>> chunks;
-        if (data_.empty()) return chunks;
+        if (data_.empty())
+            return chunks;
 
         std::vector<T> current_chunk;
         current_chunk.push_back(data_[0]);
@@ -269,7 +264,8 @@ public:
      */
     std::vector<std::vector<T>> chunk_by_similarity(T similarity_threshold) const {
         std::vector<std::vector<T>> chunks;
-        if (data_.empty()) return chunks;
+        if (data_.empty())
+            return chunks;
 
         std::vector<T> current_chunk{data_[0]};
         T chunk_mean = data_[0];
@@ -282,7 +278,7 @@ public:
             }
             current_chunk.push_back(data_[i]);
             chunk_mean = std::accumulate(current_chunk.begin(), current_chunk.end(), T(0)) /
-                        static_cast<T>(current_chunk.size());
+                         static_cast<T>(current_chunk.size());
         }
 
         if (!current_chunk.empty()) {
@@ -298,17 +294,18 @@ public:
      */
     std::vector<std::vector<T>> chunk_by_monotonicity() const {
         std::vector<std::vector<T>> chunks;
-        if (data_.size() < 2) return {data_};
+        if (data_.size() < 2)
+            return {data_};
 
         std::vector<T> current_chunk{data_[0]};
         bool increasing = data_[1] > data_[0];
 
         for (size_t i = 1; i < data_.size(); ++i) {
-            if ((data_[i] > data_[i-1]) != increasing) {
+            if ((data_[i] > data_[i - 1]) != increasing) {
                 chunks.push_back(current_chunk);
                 current_chunk.clear();
                 if (i < data_.size() - 1) {
-                    increasing = data_[i+1] > data_[i];
+                    increasing = data_[i + 1] > data_[i];
                 }
             }
             current_chunk.push_back(data_[i]);
@@ -328,20 +325,20 @@ public:
      */
     std::vector<std::vector<T>> get_padded_chunks(const T& pad_value) const {
         std::vector<std::vector<T>> chunks;
-        
+
         for (size_t i = 0; i < data_.size(); i += chunk_size_) {
             std::vector<T> chunk;
             size_t remaining = std::min(chunk_size_, data_.size() - i);
             chunk.insert(chunk.end(), data_.begin() + i, data_.begin() + i + remaining);
-            
+
             // Pad if necessary
             if (remaining < chunk_size_) {
                 chunk.insert(chunk.end(), chunk_size_ - remaining, pad_value);
             }
-            
+
             chunks.push_back(chunk);
         }
-        
+
         return chunks;
     }
 };

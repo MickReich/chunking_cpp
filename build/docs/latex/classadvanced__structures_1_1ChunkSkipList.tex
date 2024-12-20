@@ -1,0 +1,273 @@
+\doxysection{advanced\+\_\+structures\+::Chunk\+Skip\+List\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classadvanced__structures_1_1ChunkSkipList}{}\label{classadvanced__structures_1_1ChunkSkipList}\index{advanced\_structures::ChunkSkipList$<$ T $>$@{advanced\_structures::ChunkSkipList$<$ T $>$}}
+
+
+A skip list implementation for efficient chunk searching.  
+
+
+
+
+{\ttfamily \#include $<$advanced\+\_\+structures.\+hpp$>$}
+
+
+
+Collaboration diagram for advanced\+\_\+structures\+::Chunk\+Skip\+List\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classadvanced__structures_1_1ChunkSkipList__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structadvanced__structures_1_1ChunkSkipList_1_1Node}{Node}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a358f6d1eb351d99cf1fd6b74b48d3181}{Chunk\+Skip\+List}} (int max\+\_\+lvl=16, float prob=0.\+5)
+\item 
+void \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a5bb5a4e03c0a22adebf77793aa87d2d1}{insert}} (const T \&value)
+\item 
+bool \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_ad0f1935e9193d98c9fa6213b1e5d9968}{search}} (const T \&value) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a375b2d50bc56e6cdb067f64729b20aae}{random\+\_\+level}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a642cbae0a13509a0616bcdb6112610f9}{current\+\_\+level}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structadvanced__structures_1_1ChunkSkipList_1_1Node}{Node}} $>$ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_ab57eee3b6e3a4baf840c7a474e9d6808}{head}}
+\item 
+int \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a4513a91224338557279cc6e03fa5abb4}{max\+\_\+level}}
+\item 
+float \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a55850229a7163c185f510621cdbd360b}{p}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class advanced\+\_\+structures\+::\+Chunk\+Skip\+List$<$ T $>$}
+A skip list implementation for efficient chunk searching. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of elements stored in the skip list \\
+\hline
+\end{DoxyTemplParams}
+
+
+Definition at line \mbox{\hyperlink{advanced__structures_8hpp_source_l00016}{16}} of file \mbox{\hyperlink{advanced__structures_8hpp_source}{advanced\+\_\+structures.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classadvanced__structures_1_1ChunkSkipList_a358f6d1eb351d99cf1fd6b74b48d3181}\label{classadvanced__structures_1_1ChunkSkipList_a358f6d1eb351d99cf1fd6b74b48d3181} 
+\index{advanced\_structures::ChunkSkipList$<$ T $>$@{advanced\_structures::ChunkSkipList$<$ T $>$}!ChunkSkipList@{ChunkSkipList}}
+\index{ChunkSkipList@{ChunkSkipList}!advanced\_structures::ChunkSkipList$<$ T $>$@{advanced\_structures::ChunkSkipList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{ChunkSkipList()}{ChunkSkipList()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList}{advanced\+\_\+structures\+::\+Chunk\+Skip\+List}}$<$ T $>$\+::\+Chunk\+Skip\+List (\begin{DoxyParamCaption}\item[{int}]{max\+\_\+lvl = {\ttfamily 16},  }\item[{float}]{prob = {\ttfamily 0.5} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{advanced__structures_8hpp_source_l00038}{38}} of file \mbox{\hyperlink{advanced__structures_8hpp_source}{advanced\+\_\+structures.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a4513a91224338557279cc6e03fa5abb4}{max\_level}}(max\_lvl),\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a55850229a7163c185f510621cdbd360b}{p}}(prob),\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a642cbae0a13509a0616bcdb6112610f9}{current\_level}}(1)\ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_ab57eee3b6e3a4baf840c7a474e9d6808}{head}}\ =\ std::make\_shared<Node>(T(),\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a4513a91224338557279cc6e03fa5abb4}{max\_level}});}
+\DoxyCodeLine{00041\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{advanced__structures_8hpp_source_l00024}{advanced\+\_\+structures\+::\+Chunk\+Skip\+List$<$ T $>$\+::head}}, and \mbox{\hyperlink{advanced__structures_8hpp_source_l00025}{advanced\+\_\+structures\+::\+Chunk\+Skip\+List$<$ T $>$\+::max\+\_\+level}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classadvanced__structures_1_1ChunkSkipList_a5bb5a4e03c0a22adebf77793aa87d2d1}\label{classadvanced__structures_1_1ChunkSkipList_a5bb5a4e03c0a22adebf77793aa87d2d1} 
+\index{advanced\_structures::ChunkSkipList$<$ T $>$@{advanced\_structures::ChunkSkipList$<$ T $>$}!insert@{insert}}
+\index{insert@{insert}!advanced\_structures::ChunkSkipList$<$ T $>$@{advanced\_structures::ChunkSkipList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList}{advanced\+\_\+structures\+::\+Chunk\+Skip\+List}}$<$ T $>$\+::insert (\begin{DoxyParamCaption}\item[{const T \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{advanced__structures_8hpp_source_l00043}{43}} of file \mbox{\hyperlink{advanced__structures_8hpp_source}{advanced\+\_\+structures.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ std::vector<std::shared\_ptr<Node>>\ update(\mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a4513a91224338557279cc6e03fa5abb4}{max\_level}});}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ current\ =\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_ab57eee3b6e3a4baf840c7a474e9d6808}{head}};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a642cbae0a13509a0616bcdb6112610f9}{current\_level}}\ -\/\ 1;\ i\ >=\ 0;\ i-\/-\/)\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (current-\/>forward[i]\ \&\&\ current-\/>forward[i]-\/>value\ <\ value)\ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\ =\ current-\/>forward[i];}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ update[i]\ =\ current;}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ new\_level\ =\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a375b2d50bc56e6cdb067f64729b20aae}{random\_level}}();}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (new\_level\ >\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a642cbae0a13509a0616bcdb6112610f9}{current\_level}})\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a642cbae0a13509a0616bcdb6112610f9}{current\_level}};\ i\ <\ new\_level;\ i++)\ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ update[i]\ =\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_ab57eee3b6e3a4baf840c7a474e9d6808}{head}};}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a642cbae0a13509a0616bcdb6112610f9}{current\_level}}\ =\ new\_level;}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ new\_node\ =\ std::make\_shared<Node>(value,\ new\_level);}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ new\_level;\ i++)\ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ new\_node-\/>forward[i]\ =\ update[i]-\/>forward[i];}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ update[i]-\/>forward[i]\ =\ new\_node;}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00067\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{advanced__structures_8hpp_source_l00027}{advanced\+\_\+structures\+::\+Chunk\+Skip\+List$<$ T $>$\+::current\+\_\+level}}, \mbox{\hyperlink{advanced__structures_8hpp_source_l00024}{advanced\+\_\+structures\+::\+Chunk\+Skip\+List$<$ T $>$\+::head}}, \mbox{\hyperlink{advanced__structures_8hpp_source_l00025}{advanced\+\_\+structures\+::\+Chunk\+Skip\+List$<$ T $>$\+::max\+\_\+level}}, and \mbox{\hyperlink{advanced__structures_8hpp_source_l00029}{advanced\+\_\+structures\+::\+Chunk\+Skip\+List$<$ T $>$\+::random\+\_\+level()}}.
+
+
+
+Referenced by \mbox{\hyperlink{main_8cpp_source_l00048}{main()}}.
+
+\Hypertarget{classadvanced__structures_1_1ChunkSkipList_a375b2d50bc56e6cdb067f64729b20aae}\label{classadvanced__structures_1_1ChunkSkipList_a375b2d50bc56e6cdb067f64729b20aae} 
+\index{advanced\_structures::ChunkSkipList$<$ T $>$@{advanced\_structures::ChunkSkipList$<$ T $>$}!random\_level@{random\_level}}
+\index{random\_level@{random\_level}!advanced\_structures::ChunkSkipList$<$ T $>$@{advanced\_structures::ChunkSkipList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{random\_level()}{random\_level()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+int \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList}{advanced\+\_\+structures\+::\+Chunk\+Skip\+List}}$<$ T $>$\+::random\+\_\+level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{advanced__structures_8hpp_source_l00029}{29}} of file \mbox{\hyperlink{advanced__structures_8hpp_source}{advanced\+\_\+structures.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ lvl\ =\ 1;}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ ((\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(rand())\ /\ RAND\_MAX)\ <\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a55850229a7163c185f510621cdbd360b}{p}}\ \&\&\ lvl\ <\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a4513a91224338557279cc6e03fa5abb4}{max\_level}})\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ lvl++;}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ lvl;}
+\DoxyCodeLine{00035\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{advanced__structures_8hpp_source_l00025}{advanced\+\_\+structures\+::\+Chunk\+Skip\+List$<$ T $>$\+::max\+\_\+level}}, and \mbox{\hyperlink{advanced__structures_8hpp_source_l00026}{advanced\+\_\+structures\+::\+Chunk\+Skip\+List$<$ T $>$\+::p}}.
+
+
+
+Referenced by \mbox{\hyperlink{advanced__structures_8hpp_source_l00043}{advanced\+\_\+structures\+::\+Chunk\+Skip\+List$<$ T $>$\+::insert()}}.
+
+\Hypertarget{classadvanced__structures_1_1ChunkSkipList_ad0f1935e9193d98c9fa6213b1e5d9968}\label{classadvanced__structures_1_1ChunkSkipList_ad0f1935e9193d98c9fa6213b1e5d9968} 
+\index{advanced\_structures::ChunkSkipList$<$ T $>$@{advanced\_structures::ChunkSkipList$<$ T $>$}!search@{search}}
+\index{search@{search}!advanced\_structures::ChunkSkipList$<$ T $>$@{advanced\_structures::ChunkSkipList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{search()}{search()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList}{advanced\+\_\+structures\+::\+Chunk\+Skip\+List}}$<$ T $>$\+::search (\begin{DoxyParamCaption}\item[{const T \&}]{value }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{advanced__structures_8hpp_source_l00069}{69}} of file \mbox{\hyperlink{advanced__structures_8hpp_source}{advanced\+\_\+structures.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ current\ =\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_ab57eee3b6e3a4baf840c7a474e9d6808}{head}};}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a642cbae0a13509a0616bcdb6112610f9}{current\_level}}\ -\/\ 1;\ i\ >=\ 0;\ i-\/-\/)\ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (current-\/>forward[i]\ \&\&\ current-\/>forward[i]-\/>value\ <\ value)\ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\ =\ current-\/>forward[i];}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ current\ =\ current-\/>forward[0];}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ current\ \&\&\ current-\/>value\ ==\ value;}
+\DoxyCodeLine{00078\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{advanced__structures_8hpp_source_l00027}{advanced\+\_\+structures\+::\+Chunk\+Skip\+List$<$ T $>$\+::current\+\_\+level}}, and \mbox{\hyperlink{advanced__structures_8hpp_source_l00024}{advanced\+\_\+structures\+::\+Chunk\+Skip\+List$<$ T $>$\+::head}}.
+
+
+
+Referenced by \mbox{\hyperlink{main_8cpp_source_l00048}{main()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classadvanced__structures_1_1ChunkSkipList_a642cbae0a13509a0616bcdb6112610f9}\label{classadvanced__structures_1_1ChunkSkipList_a642cbae0a13509a0616bcdb6112610f9} 
+\index{advanced\_structures::ChunkSkipList$<$ T $>$@{advanced\_structures::ChunkSkipList$<$ T $>$}!current\_level@{current\_level}}
+\index{current\_level@{current\_level}!advanced\_structures::ChunkSkipList$<$ T $>$@{advanced\_structures::ChunkSkipList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{current\_level}{current\_level}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+int \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList}{advanced\+\_\+structures\+::\+Chunk\+Skip\+List}}$<$ T $>$\+::current\+\_\+level\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{advanced__structures_8hpp_source_l00027}{27}} of file \mbox{\hyperlink{advanced__structures_8hpp_source}{advanced\+\_\+structures.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{advanced__structures_8hpp_source_l00043}{advanced\+\_\+structures\+::\+Chunk\+Skip\+List$<$ T $>$\+::insert()}}, and \mbox{\hyperlink{advanced__structures_8hpp_source_l00069}{advanced\+\_\+structures\+::\+Chunk\+Skip\+List$<$ T $>$\+::search()}}.
+
+\Hypertarget{classadvanced__structures_1_1ChunkSkipList_ab57eee3b6e3a4baf840c7a474e9d6808}\label{classadvanced__structures_1_1ChunkSkipList_ab57eee3b6e3a4baf840c7a474e9d6808} 
+\index{advanced\_structures::ChunkSkipList$<$ T $>$@{advanced\_structures::ChunkSkipList$<$ T $>$}!head@{head}}
+\index{head@{head}!advanced\_structures::ChunkSkipList$<$ T $>$@{advanced\_structures::ChunkSkipList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{head}{head}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{structadvanced__structures_1_1ChunkSkipList_1_1Node}{Node}}$>$ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList}{advanced\+\_\+structures\+::\+Chunk\+Skip\+List}}$<$ T $>$\+::head\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{advanced__structures_8hpp_source_l00024}{24}} of file \mbox{\hyperlink{advanced__structures_8hpp_source}{advanced\+\_\+structures.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{advanced__structures_8hpp_source_l00038}{advanced\+\_\+structures\+::\+Chunk\+Skip\+List$<$ T $>$\+::\+Chunk\+Skip\+List()}}, \mbox{\hyperlink{advanced__structures_8hpp_source_l00043}{advanced\+\_\+structures\+::\+Chunk\+Skip\+List$<$ T $>$\+::insert()}}, and \mbox{\hyperlink{advanced__structures_8hpp_source_l00069}{advanced\+\_\+structures\+::\+Chunk\+Skip\+List$<$ T $>$\+::search()}}.
+
+\Hypertarget{classadvanced__structures_1_1ChunkSkipList_a4513a91224338557279cc6e03fa5abb4}\label{classadvanced__structures_1_1ChunkSkipList_a4513a91224338557279cc6e03fa5abb4} 
+\index{advanced\_structures::ChunkSkipList$<$ T $>$@{advanced\_structures::ChunkSkipList$<$ T $>$}!max\_level@{max\_level}}
+\index{max\_level@{max\_level}!advanced\_structures::ChunkSkipList$<$ T $>$@{advanced\_structures::ChunkSkipList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{max\_level}{max\_level}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+int \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList}{advanced\+\_\+structures\+::\+Chunk\+Skip\+List}}$<$ T $>$\+::max\+\_\+level\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{advanced__structures_8hpp_source_l00025}{25}} of file \mbox{\hyperlink{advanced__structures_8hpp_source}{advanced\+\_\+structures.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{advanced__structures_8hpp_source_l00038}{advanced\+\_\+structures\+::\+Chunk\+Skip\+List$<$ T $>$\+::\+Chunk\+Skip\+List()}}, \mbox{\hyperlink{advanced__structures_8hpp_source_l00043}{advanced\+\_\+structures\+::\+Chunk\+Skip\+List$<$ T $>$\+::insert()}}, and \mbox{\hyperlink{advanced__structures_8hpp_source_l00029}{advanced\+\_\+structures\+::\+Chunk\+Skip\+List$<$ T $>$\+::random\+\_\+level()}}.
+
+\Hypertarget{classadvanced__structures_1_1ChunkSkipList_a55850229a7163c185f510621cdbd360b}\label{classadvanced__structures_1_1ChunkSkipList_a55850229a7163c185f510621cdbd360b} 
+\index{advanced\_structures::ChunkSkipList$<$ T $>$@{advanced\_structures::ChunkSkipList$<$ T $>$}!p@{p}}
+\index{p@{p}!advanced\_structures::ChunkSkipList$<$ T $>$@{advanced\_structures::ChunkSkipList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{p}{p}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+float \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList}{advanced\+\_\+structures\+::\+Chunk\+Skip\+List}}$<$ T $>$\+::p\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{advanced__structures_8hpp_source_l00026}{26}} of file \mbox{\hyperlink{advanced__structures_8hpp_source}{advanced\+\_\+structures.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{advanced__structures_8hpp_source_l00029}{advanced\+\_\+structures\+::\+Chunk\+Skip\+List$<$ T $>$\+::random\+\_\+level()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{advanced__structures_8hpp}{advanced\+\_\+structures.\+hpp}}\end{DoxyCompactItemize}

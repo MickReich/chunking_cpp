@@ -1,0 +1,177 @@
+\doxysection{chunk\+\_\+strategies\+::Variance\+Strategy\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classchunk__strategies_1_1VarianceStrategy}{}\label{classchunk__strategies_1_1VarianceStrategy}\index{chunk\_strategies::VarianceStrategy$<$ T $>$@{chunk\_strategies::VarianceStrategy$<$ T $>$}}
+
+
+Strategy for chunking based on variance thresholds.  
+
+
+
+
+{\ttfamily \#include $<$chunk\+\_\+strategies.\+hpp$>$}
+
+
+
+Inheritance diagram for chunk\+\_\+strategies\+::Variance\+Strategy\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{classchunk__strategies_1_1VarianceStrategy__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for chunk\+\_\+strategies\+::Variance\+Strategy\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{classchunk__strategies_1_1VarianceStrategy__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy_a87c90894b351203403bd32aa4ecd07a3}{Variance\+Strategy}} (double threshold)
+\item 
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy_a6266a9832c5f264bfe79efb4d4dc099d}{apply}} (const std\+::vector$<$ T $>$ \&data) override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy_a105f2d476af517d0f1e2d9cf58fb08c0}{calculate\+\_\+variance}} (const std\+::vector$<$ T $>$ \&values)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy_a57923fa38b90022ba7786ef882b137f1}{threshold\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class chunk\+\_\+strategies\+::\+Variance\+Strategy$<$ T $>$}
+Strategy for chunking based on variance thresholds. 
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00070}{70}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classchunk__strategies_1_1VarianceStrategy_a87c90894b351203403bd32aa4ecd07a3}\label{classchunk__strategies_1_1VarianceStrategy_a87c90894b351203403bd32aa4ecd07a3} 
+\index{chunk\_strategies::VarianceStrategy$<$ T $>$@{chunk\_strategies::VarianceStrategy$<$ T $>$}!VarianceStrategy@{VarianceStrategy}}
+\index{VarianceStrategy@{VarianceStrategy}!chunk\_strategies::VarianceStrategy$<$ T $>$@{chunk\_strategies::VarianceStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{VarianceStrategy()}{VarianceStrategy()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy}{chunk\+\_\+strategies\+::\+Variance\+Strategy}}$<$ T $>$\+::\+Variance\+Strategy (\begin{DoxyParamCaption}\item[{double}]{threshold }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00085}{85}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00085\ :\ \mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy_a57923fa38b90022ba7786ef882b137f1}{threshold\_}}(threshold)\ \{\}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classchunk__strategies_1_1VarianceStrategy_a6266a9832c5f264bfe79efb4d4dc099d}\label{classchunk__strategies_1_1VarianceStrategy_a6266a9832c5f264bfe79efb4d4dc099d} 
+\index{chunk\_strategies::VarianceStrategy$<$ T $>$@{chunk\_strategies::VarianceStrategy$<$ T $>$}!apply@{apply}}
+\index{apply@{apply}!chunk\_strategies::VarianceStrategy$<$ T $>$@{chunk\_strategies::VarianceStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{apply()}{apply()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy}{chunk\+\_\+strategies\+::\+Variance\+Strategy}}$<$ T $>$\+::apply (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ T $>$ \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classchunk__strategies_1_1ChunkStrategy_a9982c118657fa88286e0337c6cd2ce9a}{chunk\+\_\+strategies\+::\+Chunk\+Strategy$<$ T $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00087}{87}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ chunks;}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ std::vector<T>\ current\_chunk;}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ T\&\ value\ :\ data)\ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.push\_back(value);}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy_a105f2d476af517d0f1e2d9cf58fb08c0}{calculate\_variance}}(current\_chunk)\ >\ \mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy_a57923fa38b90022ba7786ef882b137f1}{threshold\_}})\ \{}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_chunk.size()\ >\ 1)\ \{}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.pop\_back();}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ chunks.push\_back(current\_chunk);}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk\ =\ \{value\};}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!current\_chunk.empty())\ \{}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ chunks.push\_back(current\_chunk);}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ chunks;}
+\DoxyCodeLine{00107\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk__strategies_8hpp_source_l00073}{chunk\+\_\+strategies\+::\+Variance\+Strategy$<$ T $>$\+::calculate\+\_\+variance()}}, and \mbox{\hyperlink{chunk__strategies_8hpp_source_l00071}{chunk\+\_\+strategies\+::\+Variance\+Strategy$<$ T $>$\+::threshold\+\_\+}}.
+
+
+
+Referenced by \mbox{\hyperlink{main_8cpp_source_l00048}{main()}}.
+
+\Hypertarget{classchunk__strategies_1_1VarianceStrategy_a105f2d476af517d0f1e2d9cf58fb08c0}\label{classchunk__strategies_1_1VarianceStrategy_a105f2d476af517d0f1e2d9cf58fb08c0} 
+\index{chunk\_strategies::VarianceStrategy$<$ T $>$@{chunk\_strategies::VarianceStrategy$<$ T $>$}!calculate\_variance@{calculate\_variance}}
+\index{calculate\_variance@{calculate\_variance}!chunk\_strategies::VarianceStrategy$<$ T $>$@{chunk\_strategies::VarianceStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{calculate\_variance()}{calculate\_variance()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+double \mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy}{chunk\+\_\+strategies\+::\+Variance\+Strategy}}$<$ T $>$\+::calculate\+\_\+variance (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ T $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00073}{73}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (values.size()\ <\ 2)}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0.0;}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ mean\ =\ std::accumulate(values.begin(),\ values.end(),\ 0.0)\ /\ values.size();}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ sq\_sum\ =\ 0.0;}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ T\&\ val\ :\ values)\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ sq\_sum\ +=\ (val\ -\/\ mean)\ *\ (val\ -\/\ mean);}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ sq\_sum\ /\ values.size();}
+\DoxyCodeLine{00082\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+Referenced by \mbox{\hyperlink{chunk__strategies_8hpp_source_l00087}{chunk\+\_\+strategies\+::\+Variance\+Strategy$<$ T $>$\+::apply()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classchunk__strategies_1_1VarianceStrategy_a57923fa38b90022ba7786ef882b137f1}\label{classchunk__strategies_1_1VarianceStrategy_a57923fa38b90022ba7786ef882b137f1} 
+\index{chunk\_strategies::VarianceStrategy$<$ T $>$@{chunk\_strategies::VarianceStrategy$<$ T $>$}!threshold\_@{threshold\_}}
+\index{threshold\_@{threshold\_}!chunk\_strategies::VarianceStrategy$<$ T $>$@{chunk\_strategies::VarianceStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{threshold\_}{threshold\_}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+double \mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy}{chunk\+\_\+strategies\+::\+Variance\+Strategy}}$<$ T $>$\+::threshold\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00071}{71}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{chunk__strategies_8hpp_source_l00087}{chunk\+\_\+strategies\+::\+Variance\+Strategy$<$ T $>$\+::apply()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{chunk__strategies_8hpp}{chunk\+\_\+strategies.\+hpp}}\end{DoxyCompactItemize}

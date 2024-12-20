@@ -1,11 +1,11 @@
 #include "chunk.hpp"
 #include "gtest/gtest.h"
-#include <cstdlib>  // for std::abs
-#include <numeric>  // for std::accumulate
+#include <cstdlib> // for std::abs
+#include <numeric> // for std::accumulate
 
 class ChunkTest : public ::testing::Test {
 protected:
-    using value_type = int;  // Define the type we're testing with
+    using value_type = int; // Define the type we're testing with
 
     void SetUp() override {
         test_data = std::vector<value_type>{1, 2, 3, 4, 5};
@@ -104,7 +104,7 @@ TEST_F(ChunkTest, ChunkBySimilarity) {
     for (const auto& chunk : chunks) {
         int max_diff = 0;
         for (size_t i = 1; i < chunk.size(); ++i) {
-            max_diff = std::max(max_diff, std::abs(chunk[i] - chunk[i-1]));
+            max_diff = std::max(max_diff, std::abs(chunk[i] - chunk[i - 1]));
         }
         EXPECT_LE(max_diff, 3);
     }
@@ -118,7 +118,7 @@ TEST_F(ChunkTest, ChunkByMonotonicity) {
         bool is_monotonic = true;
         bool increasing = chunk[1] > chunk[0];
         for (size_t i = 1; i < chunk.size(); ++i) {
-            if ((chunk[i] > chunk[i-1]) != increasing) {
+            if ((chunk[i] > chunk[i - 1]) != increasing) {
                 is_monotonic = false;
                 break;
             }

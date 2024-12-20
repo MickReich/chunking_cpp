@@ -12,8 +12,7 @@ struct ChunkSettings {
 };
 
 static constexpr bool is_valid_chunk_size(size_t size) {
-    return size >= ChunkSettings::MIN_CHUNK_SIZE && 
-           size <= ChunkSettings::MAX_CHUNK_SIZE;
+    return size >= ChunkSettings::MIN_CHUNK_SIZE && size <= ChunkSettings::MAX_CHUNK_SIZE;
 }
 
 struct BufferSettings {

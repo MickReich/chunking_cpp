@@ -4,6 +4,8 @@ A C++ library for flexible data chunking and processing operations.
 
 ## Features
 
+- Parallel chunk processing
+- Chunk compression (RLE, Delta)
 - Basic chunking operations
 - Overlapping chunks
 - Predicate-based chunking
