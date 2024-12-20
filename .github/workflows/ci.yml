@@ -56,8 +56,8 @@ jobs:
     - name: Run tests with coverage
       run: |
         # Initialize coverage
-        lcov --zerocounters --directory . --quiet
-        lcov --capture --initial --directory . --output-file base.info --ignore-errors empty,mismatch,range --quiet
+        lcov --rc lcov_branch_coverage=1 --zerocounters --directory . --quiet
+        lcov --rc lcov_branch_coverage=1 --capture --initial --directory . --output-file base.info --ignore-errors empty,mismatch,range --quiet
         
         # Run tests
         export LLVM_PROFILE_FILE="coverage-%p.profraw"
@@ -66,10 +66,10 @@ jobs:
         cd ../..
         
         # Collect coverage
-        lcov --directory . --capture --output-file test.info --ignore-errors empty,mismatch,range --quiet
-        lcov --add-tracefile base.info --add-tracefile test.info --output-file coverage.info
-        lcov --remove coverage.info '/usr/*' '*/tests/*' '*/build/*' --output-file filtered.info
-        lcov --list filtered.info
+        lcov --rc lcov_branch_coverage=1 --directory . --capture --output-file test.info --ignore-errors empty,mismatch,range --quiet
+        lcov --rc lcov_branch_coverage=1 --add-tracefile base.info --add-tracefile test.info --output-file coverage.info
+        lcov --rc lcov_branch_coverage=1 --remove coverage.info '/usr/*' '*/tests/*' '*/build/*' --output-file filtered.info
+        lcov --rc lcov_branch_coverage=1 --list filtered.info --ignore-errors empty,mismatch,range
 
     - name: Upload coverage report
       uses: actions/upload-artifact@v3
