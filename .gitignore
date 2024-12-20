@@ -35,3 +35,5 @@ CMakeCache.txt
 config.mk
 *.config
 *.conf
+run_tests[1]_*.cmake
+*_tests.cmake
