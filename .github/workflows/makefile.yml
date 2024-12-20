@@ -16,7 +16,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: install dependencies
-      run: sudo apt-get install doxygen googletest graphviz
+      run: sudo apt-get install cmake doxygen googletest graphviz
     
     - name: configure
       run: | 
