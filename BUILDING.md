@@ -124,14 +124,20 @@ make docs-serve
 ├── include/          # Header files
 │   ├── chunk.hpp
 │   ├── config.hpp
-│   ├── data_structures.hpp
+│   ├── advanced_structures.hpp
+│   ├── chunk_compression.hpp
+│   ├── chunk_strategies.hpp
+│   ├── parallel_chunk.hpp
 │   └── utils.hpp
 ├── src/             # Source files
 │   └── main.cpp
 ├── tests/           # Test files
 │   ├── test_main.cpp
 │   ├── chunk_test.cpp
-│   ├── data_structures_test.cpp
+│   ├── chunk_strategies_test.cpp
+│   ├── chunk_compression_test.cpp
+│   ├── parallel_chunk_test.cpp
+│   ├── advanced_structures_test.cpp
 │   └── utils_test.cpp
 ├── build/           # Build artifacts
 ├── docs/           # Generated documentation

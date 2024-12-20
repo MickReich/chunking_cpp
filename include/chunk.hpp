@@ -26,8 +26,9 @@
 template <typename T>
 class Chunk {
 private:
-    std::vector<T> data_;
-    size_t chunk_size_;
+    size_t chunk_size;
+    std::vector<T> data;
+    std::vector<std::vector<T>> chunks;
 
     // Helper function for validation
     void validate_size(size_t size, const std::string& param) const {
@@ -37,309 +38,194 @@ private:
     }
 
 public:
-    // Constructor with chunk size
-    explicit Chunk(size_t chunk_size) : chunk_size_(chunk_size) {
-        if (chunk_size == 0) {
+    explicit Chunk(size_t size) : chunk_size(size) {
+        if (size == 0) {
             throw std::invalid_argument("Chunk size must be greater than 0");
         }
     }
 
-    // Add data to the chunk
-    void add(const T& value) {
-        data_.push_back(value);
+    size_t size() const {
+        return data.size();
     }
 
-    // Add a vector of data
-    void add(const std::vector<T>& values) {
-        data_.insert(data_.end(), values.begin(), values.end());
+    size_t chunk_count() const {
+        return (data.size() + chunk_size - 1) / chunk_size;
     }
 
-    // Get chunks as vector of vectors
+    void add(const T& element) {
+        data.push_back(element);
+        update_chunks();
+    }
+
+    void add(const std::vector<T>& elements) {
+        data.insert(data.end(), elements.begin(), elements.end());
+        update_chunks();
+    }
+
     std::vector<std::vector<T>> get_chunks() const {
-        std::vector<std::vector<T>> chunks;
-
-        for (size_t i = 0; i < data_.size(); i += chunk_size_) {
-            std::vector<T> chunk;
-            size_t end = std::min(i + chunk_size_, data_.size());
-            chunk.insert(chunk.end(), data_.begin() + i, data_.begin() + end);
-            chunks.push_back(chunk);
-        }
-
         return chunks;
     }
 
-    // Get a specific chunk by index
     std::vector<T> get_chunk(size_t index) const {
-        size_t start = index * chunk_size_;
-        if (start >= data_.size()) {
+        size_t start = index * chunk_size;
+        if (start >= data.size()) {
             throw std::out_of_range("Chunk index out of range");
         }
-
-        size_t end = std::min(start + chunk_size_, data_.size());
-        return std::vector<T>(data_.begin() + start, data_.begin() + end);
+        size_t end = std::min(start + chunk_size, data.size());
+        return std::vector<T>(data.begin() + start, data.begin() + end);
     }
 
-    // Get the number of chunks
-    size_t chunk_count() const {
-        return (data_.size() + chunk_size_ - 1) / chunk_size_;
-    }
-
-    // Get the chunk size
-    size_t chunk_size() const {
-        return chunk_size_;
-    }
-
-    // Get total size of data
-    size_t size() const {
-        return data_.size();
-    }
-
-    // Clear all data
-    void clear() {
-        data_.clear();
-    }
-
-    // Check if empty
-    bool empty() const {
-        return data_.empty();
-    }
-
-    // New chunking strategies
-
-    // Chunk with overlap - each chunk shares n elements with the next chunk
     std::vector<std::vector<T>> get_overlapping_chunks(size_t overlap) const {
-        if (overlap >= chunk_size_) {
+        if (overlap >= chunk_size) {
             throw std::invalid_argument("Overlap must be less than chunk size");
         }
-
-        std::vector<std::vector<T>> chunks;
-        size_t step = chunk_size_ - overlap;
-
-        for (size_t i = 0; i + chunk_size_ <= data_.size(); i += step) {
-            chunks.push_back(std::vector<T>(data_.begin() + i, data_.begin() + i + chunk_size_));
+        std::vector<std::vector<T>> result;
+        size_t step = chunk_size - overlap;
+        for (size_t i = 0; i + chunk_size <= data.size(); i += step) {
+            result.push_back(std::vector<T>(data.begin() + i, data.begin() + i + chunk_size));
         }
-
-        // Handle remaining elements if any
-        if (data_.size() % step != 0) {
-            size_t remaining = data_.size() % step;
-            if (remaining > overlap) {
-                chunks.push_back(std::vector<T>(data_.end() - chunk_size_, data_.end()));
-            }
-        }
-
-        return chunks;
+        return result;
     }
 
-    // Chunk by predicate - start new chunk when predicate returns true
-    // Note: This method ignores the original chunk_size_
     template <typename Pred>
     std::vector<std::vector<T>> chunk_by_predicate(Pred predicate) const {
-        std::vector<std::vector<T>> chunks;
-        if (data_.empty())
-            return chunks;
-
+        std::vector<std::vector<T>> result;
+        if (data.empty()) return result;
         std::vector<T> current_chunk;
-        current_chunk.push_back(data_[0]); // Add first element
-
-        for (size_t i = 1; i < data_.size(); ++i) {
-            if (predicate(data_[i])) {
-                chunks.push_back(current_chunk);
+        for (const T& item : data) {
+            if (predicate(item) && !current_chunk.empty()) {
+                result.push_back(current_chunk);
                 current_chunk.clear();
             }
-            current_chunk.push_back(data_[i]);
+            current_chunk.push_back(item);
         }
-
         if (!current_chunk.empty()) {
-            chunks.push_back(current_chunk);
+            result.push_back(current_chunk);
         }
-
-        return chunks;
+        return result;
     }
 
-    // Chunk by sum - create chunks that sum up to a target value
-    // Note: This method ignores the original chunk_size_
     std::vector<std::vector<T>> chunk_by_sum(T target_sum) const {
-        std::vector<std::vector<T>> chunks;
-        if (data_.empty())
-            return chunks;
-
+        std::vector<std::vector<T>> result;
         std::vector<T> current_chunk;
         T current_sum = T();
-
-        for (const T& item : data_) {
+        for (const T& item : data) {
             if (current_sum + item > target_sum && !current_chunk.empty()) {
-                chunks.push_back(current_chunk);
+                result.push_back(current_chunk);
                 current_chunk.clear();
                 current_sum = T();
             }
             current_chunk.push_back(item);
             current_sum += item;
         }
-
         if (!current_chunk.empty()) {
-            chunks.push_back(current_chunk);
+            result.push_back(current_chunk);
         }
-
-        return chunks;
+        return result;
     }
 
-    // Chunk into n equal(ish) parts
-    // Note: This method ignores the original chunk_size_
     std::vector<std::vector<T>> chunk_into_n(size_t n) const {
-        if (n == 0) {
-            throw std::invalid_argument("Number of chunks must be greater than 0");
-        }
-        if (data_.empty())
-            return std::vector<std::vector<T>>();
-
-        n = std::min(n, data_.size());
-        std::vector<std::vector<T>> chunks(n);
-        size_t base_size = data_.size() / n;
-        size_t remainder = data_.size() % n;
-
-        size_t current_pos = 0;
+        if (n == 0) throw std::invalid_argument("Number of chunks must be greater than 0");
+        if (data.empty()) return std::vector<std::vector<T>>();
+        n = std::min(n, data.size());
+        std::vector<std::vector<T>> result(n);
+        size_t base_size = data.size() / n;
+        size_t remainder = data.size() % n;
+        size_t pos = 0;
         for (size_t i = 0; i < n; ++i) {
-            size_t current_chunk_size = base_size + (i < remainder ? 1 : 0);
-            chunks[i] = std::vector<T>(data_.begin() + current_pos,
-                                       data_.begin() + current_pos + current_chunk_size);
-            current_pos += current_chunk_size;
+            size_t chunk_size = base_size + (i < remainder ? 1 : 0);
+            result[i] = std::vector<T>(data.begin() + pos, data.begin() + pos + chunk_size);
+            pos += chunk_size;
         }
-
-        return chunks;
+        return result;
     }
 
-    // Additional chunking strategies
+    std::vector<std::vector<T>> chunk_by_monotonicity() const {
+        std::vector<std::vector<T>> result;
+        if (data.size() < 2) return {data};
+        std::vector<T> current_chunk{data[0]};
+        bool increasing = data[1] > data[0];
+        for (size_t i = 1; i < data.size(); ++i) {
+            if ((data[i] > data[i-1]) != increasing && !current_chunk.empty()) {
+                result.push_back(current_chunk);
+                current_chunk.clear();
+                if (i < data.size() - 1) increasing = data[i+1] > data[i];
+            }
+            current_chunk.push_back(data[i]);
+        }
+        if (!current_chunk.empty()) result.push_back(current_chunk);
+        return result;
+    }
 
-    /**
-     * @brief Chunk data based on a moving window
-     * @param window_size Size of the sliding window
-     * @param step Size of step between windows
-     * @return Vector of chunks representing sliding windows
-     */
+    template <typename StatFunc>
+    std::vector<std::vector<T>> chunk_by_statistic(T threshold, StatFunc stat_func) const {
+        std::vector<std::vector<T>> result;
+        if (data.empty()) return result;
+        std::vector<T> current_chunk{data[0]};
+        for (size_t i = 1; i < data.size(); ++i) {
+            if (stat_func(current_chunk) > threshold) {
+                result.push_back(current_chunk);
+                current_chunk.clear();
+            }
+            current_chunk.push_back(data[i]);
+        }
+        if (!current_chunk.empty()) result.push_back(current_chunk);
+        return result;
+    }
+
+    std::vector<std::vector<T>> chunk_by_similarity(T threshold) const {
+        std::vector<std::vector<T>> result;
+        if (data.empty()) return result;
+        std::vector<T> current_chunk{data[0]};
+        T chunk_mean = data[0];
+        for (size_t i = 1; i < data.size(); ++i) {
+            if (std::abs(data[i] - chunk_mean) > threshold) {
+                result.push_back(current_chunk);
+                current_chunk.clear();
+                chunk_mean = data[i];
+            }
+            current_chunk.push_back(data[i]);
+            chunk_mean = std::accumulate(current_chunk.begin(), current_chunk.end(), T(0)) / 
+                        static_cast<T>(current_chunk.size());
+        }
+        if (!current_chunk.empty()) result.push_back(current_chunk);
+        return result;
+    }
+
+    std::vector<std::vector<T>> get_padded_chunks(const T& pad_value) const {
+        std::vector<std::vector<T>> result;
+        for (size_t i = 0; i < data.size(); i += chunk_size) {
+            std::vector<T> chunk;
+            size_t remaining = std::min(chunk_size, data.size() - i);
+            chunk.insert(chunk.end(), data.begin() + i, data.begin() + i + remaining);
+            if (remaining < chunk_size) {
+                chunk.insert(chunk.end(), chunk_size - remaining, pad_value);
+            }
+            result.push_back(chunk);
+        }
+        return result;
+    }
+
     std::vector<std::vector<T>> sliding_window(size_t window_size, size_t step = 1) const {
         validate_size(window_size, "Window size");
         validate_size(step, "Step size");
-
-        std::vector<std::vector<T>> chunks;
-        for (size_t i = 0; i + window_size <= data_.size(); i += step) {
-            chunks.push_back(std::vector<T>(data_.begin() + i, data_.begin() + i + window_size));
+        std::vector<std::vector<T>> result;
+        for (size_t i = 0; i + window_size <= data.size(); i += step) {
+            result.push_back(std::vector<T>(data.begin() + i, data.begin() + i + window_size));
         }
-        return chunks;
+        return result;
     }
 
-    /**
-     * @brief Chunk data based on a statistical threshold
-     * @param threshold The statistical threshold for creating new chunks
-     * @param stat_func Function to compute the statistic (e.g., mean, median)
-     * @return Vector of chunks divided by statistical threshold
-     */
-    template <typename StatFunc>
-    std::vector<std::vector<T>> chunk_by_statistic(T threshold, StatFunc stat_func) const {
-        std::vector<std::vector<T>> chunks;
-        if (data_.empty())
-            return chunks;
-
-        std::vector<T> current_chunk;
-        current_chunk.push_back(data_[0]);
-
-        for (size_t i = 1; i < data_.size(); ++i) {
-            if (stat_func(current_chunk) > threshold) {
-                chunks.push_back(current_chunk);
-                current_chunk.clear();
-            }
-            current_chunk.push_back(data_[i]);
-        }
-
-        if (!current_chunk.empty()) {
-            chunks.push_back(current_chunk);
-        }
-
-        return chunks;
-    }
-
-    /**
-     * @brief Chunk data into groups with similar values
-     * @param similarity_threshold Maximum difference between values in a chunk
-     * @return Vector of chunks with similar values
-     */
-    std::vector<std::vector<T>> chunk_by_similarity(T similarity_threshold) const {
-        std::vector<std::vector<T>> chunks;
-        if (data_.empty())
-            return chunks;
-
-        std::vector<T> current_chunk{data_[0]};
-        T chunk_mean = data_[0];
-
-        for (size_t i = 1; i < data_.size(); ++i) {
-            if (std::abs(data_[i] - chunk_mean) > similarity_threshold) {
-                chunks.push_back(current_chunk);
-                current_chunk.clear();
-                chunk_mean = data_[i];
-            }
-            current_chunk.push_back(data_[i]);
-            chunk_mean = std::accumulate(current_chunk.begin(), current_chunk.end(), T(0)) /
-                         static_cast<T>(current_chunk.size());
-        }
-
-        if (!current_chunk.empty()) {
-            chunks.push_back(current_chunk);
-        }
-
-        return chunks;
-    }
-
-    /**
-     * @brief Chunk data based on monotonicity changes
-     * @return Vector of chunks where each chunk is monotonic
-     */
-    std::vector<std::vector<T>> chunk_by_monotonicity() const {
-        std::vector<std::vector<T>> chunks;
-        if (data_.size() < 2)
-            return {data_};
-
-        std::vector<T> current_chunk{data_[0]};
-        bool increasing = data_[1] > data_[0];
-
-        for (size_t i = 1; i < data_.size(); ++i) {
-            if ((data_[i] > data_[i - 1]) != increasing) {
-                chunks.push_back(current_chunk);
-                current_chunk.clear();
-                if (i < data_.size() - 1) {
-                    increasing = data_[i + 1] > data_[i];
-                }
-            }
-            current_chunk.push_back(data_[i]);
-        }
-
-        if (!current_chunk.empty()) {
-            chunks.push_back(current_chunk);
-        }
-
-        return chunks;
-    }
-
-    /**
-     * @brief Chunk data into fixed-size chunks with padding
-     * @param pad_value Value to use for padding incomplete chunks
-     * @return Vector of equal-sized chunks with padding
-     */
-    std::vector<std::vector<T>> get_padded_chunks(const T& pad_value) const {
-        std::vector<std::vector<T>> chunks;
-
-        for (size_t i = 0; i < data_.size(); i += chunk_size_) {
+private:
+    void update_chunks() {
+        chunks.clear();
+        for (size_t i = 0; i < data.size(); i += chunk_size) {
             std::vector<T> chunk;
-            size_t remaining = std::min(chunk_size_, data_.size() - i);
-            chunk.insert(chunk.end(), data_.begin() + i, data_.begin() + i + remaining);
-
-            // Pad if necessary
-            if (remaining < chunk_size_) {
-                chunk.insert(chunk.end(), chunk_size_ - remaining, pad_value);
+            for (size_t j = 0; j < chunk_size && i + j < data.size(); ++j) {
+                chunk.push_back(data[i + j]);
             }
-
             chunks.push_back(chunk);
         }
-
-        return chunks;
     }
 };
 

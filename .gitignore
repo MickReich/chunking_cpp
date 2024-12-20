@@ -27,6 +27,13 @@ docs/
 compile_commands.json
 .cache/
 *.make
-*.local
+Makefile.local
 chunk_processor_exe
 run_tests
+CMakeCache.txt
+# Build configuration
+config.mk
+*.config
+*.conf
+run_tests[1]_*.cmake
+*_tests.cmake

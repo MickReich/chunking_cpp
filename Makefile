@@ -69,7 +69,6 @@ CMAKE_BINARY_DIR = "/mnt/c/Users/jonat/OneDrive/Documents/Python Scripts/chunkin
 test:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running tests..."
 	/usr/bin/ctest --force-new-ctest-process $(ARGS)
-	./tests/run_tests.sh
 .PHONY : test
 
 # Special rule for the target test
@@ -152,6 +151,19 @@ chunk_processor_exe: cmake_check_build_system
 chunk_processor_exe/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chunk_processor_exe.dir/build.make CMakeFiles/chunk_processor_exe.dir/build
 .PHONY : chunk_processor_exe/fast
+
+#=============================================================================
+# Target rules for targets named coverage
+
+# Build rule for target.
+coverage: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 coverage
+.PHONY : coverage
+
+# fast build rule for target.
+coverage/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/coverage.dir/build.make CMakeFiles/coverage.dir/build
+.PHONY : coverage/fast
 
 #=============================================================================
 # Target rules for targets named run_tests
@@ -337,6 +349,30 @@ tests/test_main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/test_main.cpp.s
 .PHONY : tests/test_main.cpp.s
 
+tests/utils_test.o: tests/utils_test.cpp.o
+.PHONY : tests/utils_test.o
+
+# target to build an object file
+tests/utils_test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/utils_test.cpp.o
+.PHONY : tests/utils_test.cpp.o
+
+tests/utils_test.i: tests/utils_test.cpp.i
+.PHONY : tests/utils_test.i
+
+# target to preprocess a source file
+tests/utils_test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/utils_test.cpp.i
+.PHONY : tests/utils_test.cpp.i
+
+tests/utils_test.s: tests/utils_test.cpp.s
+.PHONY : tests/utils_test.s
+
+# target to generate assembly for a file
+tests/utils_test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/utils_test.cpp.s
+.PHONY : tests/utils_test.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -346,6 +382,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... test"
+	@echo "... coverage"
 	@echo "... chunk_processor"
 	@echo "... chunk_processor_exe"
 	@echo "... run_tests"
@@ -370,6 +407,9 @@ help:
 	@echo "... tests/test_main.o"
 	@echo "... tests/test_main.i"
 	@echo "... tests/test_main.s"
+	@echo "... tests/utils_test.o"
+	@echo "... tests/utils_test.i"
+	@echo "... tests/utils_test.s"
 .PHONY : help
 
 
