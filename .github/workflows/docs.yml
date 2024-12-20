@@ -38,7 +38,7 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./docs/html
         enable_jekyll: false
-        allow_empty_commit: false
+        allow_empty_commit: true
         force_orphan: true
         commit_message: 'docs: update documentation'
         user_name: 'github-actions[bot]'
