@@ -2,7 +2,7 @@
 
 PREFIX = /mnt/c/Users/jonat/OneDrive/Documents/Python Scripts/chunking_cpp
 BUILD_TYPE = Release
-ENABLE_TESTS = 1
+ENABLE_TESTS = 0
 ENABLE_DOCS = 1
 
 # Compiler flags
@@ -19,7 +19,7 @@ includedir = $(PREFIX)/include
 docdir = $(PREFIX)/share/doc/chunker
 
 # Dependencies
-HAVE_GTEST = 1
+HAVE_GTEST = 0
 HAVE_DOXYGEN = 1
 
 # Additional include paths

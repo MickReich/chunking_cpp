@@ -31,10 +31,13 @@
 \DoxyCodeLine{git\ clone\ git@github.com:JohnnyTeutonic/chunking\_cpp.git}
 \DoxyCodeLine{cd\ chunking\_cpp}
 \DoxyCodeLine{}
-\DoxyCodeLine{\#\ Configure\ and\ build}
+\DoxyCodeLine{\#\ Configure\ and\ build\ (with\ tests\ and\ documentation)}
 \DoxyCodeLine{chmod\ +x\ configure}
-\DoxyCodeLine{./configure}
-\DoxyCodeLine{make\ install}
+\DoxyCodeLine{./configure\ \ -\/-\/enable-\/tests\ -\/-\/enable-\/docs}
+\DoxyCodeLine{make}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ To\ execute\ the\ main\ program}
+\DoxyCodeLine{./chunk\_processor\_exe}
 \DoxyCodeLine{}
 \DoxyCodeLine{\#\ Uninstall\ if\ needed}
 \DoxyCodeLine{make\ uninstall}
@@ -63,18 +66,32 @@ This project is licensed under the GNU General Public License v2.\+0 -\/ see the
 \DoxyCodeLine{├──\ include/}
 \DoxyCodeLine{│\ \ \ ├──\ chunk.hpp}
 \DoxyCodeLine{│\ \ \ ├──\ config.hpp}
-\DoxyCodeLine{│\ \ \ ├──\ data\_structures.hpp}
+\DoxyCodeLine{│\ \ \ ├──\ advanced\_structures.hpp}
+\DoxyCodeLine{│\ \ \ ├──\ chunk\_compression.hpp}
+\DoxyCodeLine{│\ \ \ ├──\ chunk\_strategies.hpp}
+\DoxyCodeLine{│\ \ \ ├──\ parallel\_chunk.hpp}
 \DoxyCodeLine{│\ \ \ └──\ utils.hpp}
 \DoxyCodeLine{├──\ src/}
 \DoxyCodeLine{│\ \ \ └──\ main.cpp}
 \DoxyCodeLine{├──\ tests/}
 \DoxyCodeLine{│\ \ \ ├──\ test\_main.cpp}
 \DoxyCodeLine{│\ \ \ ├──\ chunk\_test.cpp}
-\DoxyCodeLine{│\ \ \ ├──\ data\_structures\_test.cpp}
+\DoxyCodeLine{│\ \ \ ├──\ chunk\_strategies\_test.cpp}
+\DoxyCodeLine{│\ \ \ ├──\ chunk\_compression\_test.cpp}
+\DoxyCodeLine{│\ \ \ ├──\ parallel\_chunk\_test.cpp}
+\DoxyCodeLine{│\ \ \ ├──\ advanced\_structures\_test.cpp}
 \DoxyCodeLine{│\ \ \ └──\ utils\_test.cpp}
+\DoxyCodeLine{├──\ scripts/}
+\DoxyCodeLine{│\ \ \ └──\ run\_tests.sh}
+\DoxyCodeLine{├──\ .github/}
+\DoxyCodeLine{│\ \ \ └──\ workflows/}
+\DoxyCodeLine{│\ \ \ \ \ \ \ └──\ ci.yml}
 \DoxyCodeLine{├──\ Makefile}
+\DoxyCodeLine{├──\ CMakeLists.txt}
 \DoxyCodeLine{├──\ Doxyfile}
-\DoxyCodeLine{└──\ README.md}
+\DoxyCodeLine{├──\ README.md}
+\DoxyCodeLine{├──\ BUILDING.md}
+\DoxyCodeLine{└──\ LICENSE}
 
 \end{DoxyCode}
  

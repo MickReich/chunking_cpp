@@ -74,10 +74,15 @@ echo -e "${GREEN}C++ compiler version:${NC} $CXX_VERSION"
 # Check for optional dependencies
 if [ $ENABLE_TESTS -eq 1 ]; then
     echo "Checking for testing dependencies..."
-    if g++ -lgtest -lgtest_main 2>/dev/null; then
+    if ! dpkg -l | grep -q libgtest-dev; then
         echo -e "${YELLOW}Warning: Google Test not found${NC}"
-        echo "Tests will not be built"
-        ENABLE_TESTS=1
+        echo "Installing Google Test..."
+        sudo apt-get install -y libgtest-dev
+        cd /usr/src/gtest
+        sudo cmake CMakeLists.txt
+        sudo make
+        sudo cp lib/*.a /usr/lib
+        cd -
     else
         echo -e "${GREEN}Found Google Test${NC}"
     fi
@@ -143,3 +148,38 @@ echo "  make"
 echo
 echo "To execute the project, run:"
 echo "  make run"
+
+# Parse arguments
+COVERAGE=0
+SANITIZERS=0
+
+for arg in "$@"; do
+    case $arg in
+        --enable-coverage)
+            COVERAGE=1
+            shift
+            ;;
+        --enable-sanitizers)
+            SANITIZERS=1
+            shift
+            ;;
+    esac
+done
+
+# Base CMake command
+CMAKE_ARGS="-DCMAKE_BUILD_TYPE=Debug"
+
+# Add coverage if enabled
+if [ $COVERAGE -eq 1 ]; then
+    CMAKE_ARGS="$CMAKE_ARGS -DENABLE_COVERAGE=ON"
+fi
+
+# Add sanitizers if enabled
+if [ $SANITIZERS -eq 1 ]; then
+    CMAKE_ARGS="$CMAKE_ARGS -DENABLE_SANITIZERS=ON"
+fi
+
+# Run CMake
+cmake $CMAKE_ARGS .
+
+cd ..

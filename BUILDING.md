@@ -149,4 +149,6 @@ make docs-serve
 - `make docs-serve`: Serve documentation locally
 - `make clean`: Clean build artifacts
 - `make format`: Format source code
-- `make format-check`: Check source code formatting 
+- `make format-check`: Check source code formatting
+- `make install`: Install the project
+- `make uninstall`: Uninstall the project

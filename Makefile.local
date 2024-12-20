@@ -1,0 +1,79 @@
+# Project configuration
+PROJECT_NAME := ChunkProcessor
+BUILD_DIR := build
+DOC_DIR := $(BUILD_DIR)/docs
+TEST_DIR := $(BUILD_DIR)/tests
+
+# Compiler settings
+CXX := g++
+CXXFLAGS := -std=c++17 -Wall -Wextra
+
+.PHONY: all clean test docs docs-clean docs-serve help
+
+# Default target
+all: $(BUILD_DIR)
+	@cd $(BUILD_DIR) && $(MAKE)
+
+# Create build directory and run CMake
+$(BUILD_DIR):
+	@mkdir -p $(BUILD_DIR)
+	@cd $(BUILD_DIR) && cmake ..
+
+# Clean build artifacts
+clean:
+	@rm -rf $(BUILD_DIR)
+	@echo "Cleaned build directory"
+
+# Run tests
+test: all
+	@cd $(TEST_DIR) && ./run_tests
+
+# Documentation targets
+docs: all
+	@if ! command -v doxygen > /dev/null; then \
+		echo "Error: doxygen not found. Please install doxygen first."; \
+		exit 1; \
+	fi
+	@echo "Creating documentation directories..."
+	@mkdir -p $(BUILD_DIR)
+	@mkdir -p $(DOC_DIR)
+	@chmod 755 $(BUILD_DIR) $(DOC_DIR)
+
+	@if [ ! -f Doxyfile ]; then \
+		echo "Generating default Doxyfile..."; \
+		doxygen -g; \
+		echo "Customizing Doxyfile..."; \
+			sed -i 's/PROJECT_NAME.*=.*/PROJECT_NAME           = "Advanced Chunk Processing Library"/' Doxyfile; \
+			sed -i 's/OUTPUT_DIRECTORY.*=.*/OUTPUT_DIRECTORY       = build\/docs/' Doxyfile; \
+			sed -i 's/EXTRACT_ALL.*=.*/EXTRACT_ALL            = YES/' Doxyfile; \
+			sed -i 's/RECURSIVE.*=.*/RECURSIVE              = YES/' Doxyfile; \
+			sed -i 's/GENERATE_LATEX.*=.*/GENERATE_LATEX         = NO/' Doxyfile; \
+	fi
+	@echo "Generating documentation..."
+	@doxygen Doxyfile
+	@echo "Documentation generated in $(DOC_DIR)/html"
+
+# Clean documentation
+docs-clean:
+	@rm -rf $(DOC_DIR)
+	@echo "Cleaned documentation directory"
+
+# Serve documentation locally
+docs-serve: docs
+	@if ! command -v python3 > /dev/null; then \
+		echo "Error: python3 not found. Please install python3 first."; \
+		exit 1; \
+	fi
+	@echo "Serving documentation at http://localhost:8000"
+	@cd $(DOC_DIR)/html && python3 -m http.server 8000
+
+# Help target
+help:
+	@echo "Available targets:"
+	@echo "  all          - Build the project (default)"
+	@echo "  clean        - Remove build artifacts"
+	@echo "  test         - Run tests"
+	@echo "  docs         - Generate documentation"
+	@echo "  docs-clean   - Remove generated documentation"
+	@echo "  docs-serve   - Serve documentation locally at http://localhost:8000"
+	@echo "  help         - Show this help message" 

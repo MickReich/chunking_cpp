@@ -31,10 +31,15 @@ A C++ library for flexible data chunking and processing operations.
 git clone git@github.com:JohnnyTeutonic/chunking_cpp.git
 cd chunking_cpp
 
-# Configure and build
+# Configure the project (with tests and documentation enabled)
 chmod +x configure
-./configure
-make install
+./configure  --enable-tests --enable-docs
+
+# Build the project
+make
+
+# To execute the main program
+./chunk_processor_exe
 
 # Uninstall if needed
 make uninstall
@@ -51,7 +56,7 @@ See `main.cpp` for comprehensive examples of all features.
 
 ## Documentation
 
-Generate and view the documentation:
+Generate and view the documentation locally:
 
 ```bash
 make docs
@@ -69,16 +74,30 @@ This project is licensed under the GNU General Public License v2.0 - see the [LI
 ├── include/
 │   ├── chunk.hpp
 │   ├── config.hpp
-│   ├── data_structures.hpp
+│   ├── advanced_structures.hpp
+│   ├── chunk_compression.hpp
+│   ├── chunk_strategies.hpp
+│   ├── parallel_chunk.hpp
 │   └── utils.hpp
 ├── src/
 │   └── main.cpp
 ├── tests/
 │   ├── test_main.cpp
 │   ├── chunk_test.cpp
-│   ├── data_structures_test.cpp
+│   ├── chunk_strategies_test.cpp
+│   ├── chunk_compression_test.cpp
+│   ├── parallel_chunk_test.cpp
+│   ├── advanced_structures_test.cpp
 │   └── utils_test.cpp
+├── scripts/
+│   └── run_tests.sh
+├── .github/
+│   └── workflows/
+│       └── ci.yml
 ├── Makefile
+├── CMakeLists.txt
 ├── Doxyfile
-└── README.md
+├── README.md
+├── BUILDING.md
+└── LICENSE
 ```
