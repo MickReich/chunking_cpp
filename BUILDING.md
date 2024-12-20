@@ -60,7 +60,7 @@ git clone git@github.com:JohnnyTeutonic/chunking_cpp.git
 cd chunking_cpp
 ```
 
-2. Conversion of the configure script to unix line endings:
+2.Conversion of the configure script to unix line endings:
 
 If you are on windows, run the following command before running the configure script:
 
