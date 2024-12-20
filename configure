@@ -6,6 +6,8 @@ echo "PREFIX: $PREFIX"
 BUILD_TYPE=Release
 ENABLE_TESTS=0
 ENABLE_DOCS=0
+ENABLE_COVERAGE=0
+ENABLE_SANITIZERS=0
 # Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -22,6 +24,8 @@ print_help() {
     echo "  --build-type=TYPE    Build type (Debug|Release) [$BUILD_TYPE]"
     echo "  --enable-tests      Enable building tests"
     echo "  --enable-docs       Enable building documentation"
+    echo "  --enable-coverage   Enable code coverage reporting"
+    echo "  --enable-sanitizers Enable address and undefined behavior sanitizers"
     echo "  --help              Display this help message"
     echo
 }
@@ -40,6 +44,12 @@ for arg in "$@"; do
             ;;
         --enable-docs)
             ENABLE_DOCS=1
+            ;;
+        --enable-coverage)
+            ENABLE_COVERAGE=1
+            ;;
+        --enable-sanitizers)
+            ENABLE_SANITIZERS=1
             ;;
         --help)
             print_help
@@ -103,12 +113,26 @@ PREFIX = $PREFIX
 BUILD_TYPE = $BUILD_TYPE
 ENABLE_TESTS = $ENABLE_TESTS
 ENABLE_DOCS = $ENABLE_DOCS
+ENABLE_COVERAGE = $ENABLE_COVERAGE
+ENABLE_SANITIZERS = $ENABLE_SANITIZERS
 
 # Compiler flags
 ifeq (\$(BUILD_TYPE),Debug)
     CXXFLAGS += -g -O0 -DDEBUG
 else
     CXXFLAGS += -O2 -DNDEBUG
+endif
+
+# Coverage flags
+ifeq (\$(ENABLE_COVERAGE),1)
+    CXXFLAGS += --coverage -fprofile-arcs -ftest-coverage
+    LDFLAGS += --coverage
+endif
+
+# Sanitizer flags
+ifeq (\$(ENABLE_SANITIZERS),1)
+    CXXFLAGS += -fsanitize=address,undefined -fno-omit-frame-pointer
+    LDFLAGS += -fsanitize=address,undefined
 endif
 
 # Installation paths
@@ -142,6 +166,8 @@ echo "  Prefix:      $PREFIX"
 echo "  Build type:  $BUILD_TYPE"
 echo "  Tests:       $([ $ENABLE_TESTS -eq 1 ] && echo "enabled" || echo "disabled")"
 echo "  Docs:        $([ $ENABLE_DOCS -eq 1 ] && echo "enabled" || echo "disabled")"
+echo "  Coverage:    $([ $ENABLE_COVERAGE -eq 1 ] && echo "enabled" || echo "disabled")"
+echo "  Sanitizers:  $([ $ENABLE_SANITIZERS -eq 1 ] && echo "enabled" || echo "disabled")"
 echo
 echo "To build the project, run:"
 echo "  make"
@@ -167,7 +193,7 @@ for arg in "$@"; do
 done
 
 # Base CMake command
-CMAKE_ARGS="-DCMAKE_BUILD_TYPE=Debug"
+CMAKE_ARGS="-DCMAKE_BUILD_TYPE=$BUILD_TYPE"
 
 # Add coverage if enabled
 if [ $COVERAGE -eq 1 ]; then
