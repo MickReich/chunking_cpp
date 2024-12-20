@@ -17,89 +17,39 @@ A C++ library for flexible data chunking and processing operations.
 - Random chunk generation
 - Chunk manipulation utilities
 
-## Building
+## Quick Start
 
 ```bash
+# Clone the repository
+git clone git@github.com:JohnnyTeutonic/chunking_cpp.git
+cd chunking_cpp
+
+# Configure and build
+chmod +x configure
+./configure
 make
-```
 
-## Running
-
-```bash
-make run
-```
-
-## Examples
-
-See `main.cpp` for comprehensive examples of all features.
-
-## Requirements
-
-- C++11 or later
-- Make
-- CMake (optional)
-- Doxygen (optional)
-- Graphviz (optional)
-
-## Testing
-
-### Installing Google Test
-
-Choose one of the following methods:
-
-#### Method 1: System Package Manager (Linux/macOS)
-
-On Ubuntu/Debian:
-
-```bash
-sudo apt-get update
-sudo apt-get install cmake g++ libgtest-dev
-cd /usr/src/gtest
-sudo cmake CMakeLists.txt
-sudo make
-sudo cp lib/*.a /usr/lib
-```
-
-On macOS:
-
-```bash
-brew install googletest
-```
-
-#### Method 2: Using vcpkg (Cross-platform)
-
-```bash
-# Clone and bootstrap vcpkg
-git clone https://github.com/Microsoft/vcpkg.git
-cd vcpkg
-./bootstrap-vcpkg.sh  # or bootstrap-vcpkg.bat on Windows
-
-# Install GTest
-./vcpkg install gtest
-
-# Set environment variable
-export VCPKG_ROOT=/path/to/vcpkg  # Add to your .bashrc or .zshrc
-```
-
-### Running Tests
-
-After installing Google Test:
-
-```bash
+# Run tests
 make test
 ```
 
+For detailed build instructions, dependencies, and configuration options, see [BUILDING.md](BUILDING.md).
+
+## Usage Examples
+
+See `main.cpp` for comprehensive examples of all features.
+
 ## Documentation
 
+Generate and view the documentation:
 ```bash
 make docs
-```
-
-Serve documentation locally:
-
-```bash
 make docs-serve
 ```
+
+## License
+
+This project is licensed under the GNU General Public License v2.0 - see the [LICENSE](LICENSE) file for details.
 
 ## Project Structure
 
