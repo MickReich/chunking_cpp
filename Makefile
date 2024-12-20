@@ -1,6 +1,14 @@
+# Include generated configuration
+-include config.mk
+
+# Check if configuration exists
+ifeq ($(wildcard config.mk),)
+$(error Please run ./configure first)
+endif
+
 # Compiler settings
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -Wextra -pedantic -I./include
+CXXFLAGS += -std=c++17 -Wall -Wextra -pedantic -I./include
 
 # Detect OS for GTest configuration
 ifeq ($(OS),Windows_NT)
@@ -87,9 +95,14 @@ $(TEST_BIN_DIR)/test_runner: $(TEST_OBJS)
 
 .PRECIOUS: $(TEST_BIN_DIR)/%.o
 
+ifeq ($(HAVE_GTEST),1)
 test: $(TEST_BINS)
 	@echo "Running all tests..."
 	./$(TEST_BINS)
+else
+test:
+	@echo "Tests are disabled. Reconfigure with --enable-tests to enable."
+endif
 
 # Run specific test suite (e.g., make test-chunk)
 test-%: $(TEST_BINS)
@@ -141,10 +154,15 @@ format-check:
 	$(CLANG_FORMAT) -style=$(CLANG_FORMAT_STYLE) -n -Werror $(SRC_DIR)/*.cpp $(INC_DIR)/*.hpp $(TEST_DIR)/*.cpp
 
 # Documentation targets
+ifeq ($(HAVE_DOXYGEN),1)
 docs: | $(DOCS_DIR)
 	@which $(DOXYGEN) > /dev/null || (echo "$(DOXYGEN) not found. Please install it."; exit 1)
 	mkdir -p build/docs
 	$(DOXYGEN) $(DOXYFILE)
+else
+docs:
+	@echo "Documentation is disabled. Reconfigure with --enable-docs to enable."
+endif
 
 # Clean documentation
 docs-clean:

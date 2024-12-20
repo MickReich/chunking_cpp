@@ -56,29 +56,63 @@ vcpkg install gtest:x64-windows
 1.Clone the repository:
 
 ```bash
-git clone <repository-url>
-cd <repository-name>
+git clone git@github.com:JohnnyTeutonic/chunking_cpp.git
+cd chunking_cpp
 ```
 
-2.Build the project:
+2. Conversion of the configure script to unix line endings:
+
+If you are on windows, run the following command before running the configure script:
+
+```bash
+
+unix2dos configure
+```
+
+Make configure script executable
+
+```bash
+chmod +x configure
+```
+
+3.Configure the build:
+
+```bash
+./configure
+```
+
+Configuration options:
+
+- `--prefix=PATH`: Set installation prefix (default: /usr/local)
+- `--build-type=TYPE`: Set build type (Debug|Release)
+- `--disable-tests`: Disable building tests
+- `--disable-docs`: Disable building documentation
+
+example:
+
+```bash
+./configure --prefix=/usr/local --build-type=Debug --disable-tests --disable-docs
+```
+
+3.Build the project:
 
 ```bash
 make
 ```
 
-3.Run the tests:
+4.Run the tests:
 
 ```bash
 make test
 ```
 
-4.Generate documentation:
+5.Generate documentation:
 
 ```bash
 make docs
 ```
 
-5.Serve documentation locally:
+6.Serve documentation locally:
 
 ```bash
 make docs-serve
