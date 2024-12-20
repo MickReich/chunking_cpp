@@ -1,5 +1,9 @@
 var searchData=
 [
-  ['empty_0',['empty',['../classChunk.html#abc37efc665bf3468c08ae54c2020f088',1,'Chunk::empty()'],['../classCircularBuffer.html#a7509cc5ef0dd0a9f731c47b05929580c',1,'CircularBuffer::empty()'],['../classPriorityQueue.html#a808431d87d33867fff1c5ec66244ad9a',1,'PriorityQueue::empty()'],['../classSlidingWindow.html#a905eecdbbdd5a066a17469e1f9dec824',1,'SlidingWindow::empty()'],['../classChunkList.html#abb8a93c3a579f974f65aadac03c07b52',1,'ChunkList::empty()']]],
-  ['examples_1',['Examples',['../index.html#autotoc_md4',1,'']]]
+  ['gen_0',['gen',['../classchunk__utils_1_1ChunkGenerator.html#aa12692893370479eb6e99dc3a9c10661',1,'chunk_utils::ChunkGenerator']]],
+  ['generate_5frandom_5fchunks_1',['generate_random_chunks',['../classchunk__utils_1_1ChunkGenerator.html#ae6136fb99fc953bbdf9f22314d61cae4',1,'chunk_utils::ChunkGenerator']]],
+  ['generate_5frandom_5fdata_2',['generate_random_data',['../classchunk__utils_1_1ChunkGenerator.html#a8de1ac93ada6f7969952af28ca6cf832',1,'chunk_utils::ChunkGenerator']]],
+  ['get_5fchunk_3',['get_chunk',['../classChunk.html#a2c1f2fb7b5a0d3eb875311362cb27580',1,'Chunk']]],
+  ['get_5fchunks_4',['get_chunks',['../classChunk.html#adbff639ac17c8d894373b0f67fa08658',1,'Chunk']]],
+  ['get_5foverlapping_5fchunks_5',['get_overlapping_chunks',['../classChunk.html#ab833db41bbf73b77ce520712ed7c7239',1,'Chunk']]]
 ];

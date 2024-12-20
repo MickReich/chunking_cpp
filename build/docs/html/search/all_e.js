@@ -1,13 +1,11 @@
 var searchData=
 [
-  ['package_20manager_20linux_20macos_0',['Method 1: System Package Manager (Linux/macOS)',['../index.html#autotoc_md8',1,'']]],
-  ['platform_1',['Method 2: Using vcpkg (Cross-platform)',['../index.html#autotoc_md9',1,'']]],
-  ['pop_2',['pop',['../classCircularBuffer.html#a3033e4e62f336be929c776e912f3b549',1,'CircularBuffer::pop()'],['../classPriorityQueue.html#adc6b1a207f02f2bfd5fdf758a7746b0c',1,'PriorityQueue::pop()']]],
-  ['prepend_5fchunk_3',['prepend_chunk',['../classChunkList.html#a60e42a7bdfc7edb8207b9485ebd9b42d',1,'ChunkList']]],
-  ['prev_4',['prev',['../structChunkNode.html#ad74c57e4ad48c23f8148e481e59d85f1',1,'ChunkNode']]],
-  ['print_5fchunks_5',['print_chunks',['../main_8cpp.html#af4761dcd0fd187c30346163870ed9a3b',1,'main.cpp']]],
-  ['priorityqueue_6',['PriorityQueue',['../classPriorityQueue.html',1,'']]],
-  ['processing_20library_7',['Advanced Chunk Processing Library',['../index.html',1,'']]],
-  ['project_20structure_8',['Project Structure',['../index.html#autotoc_md12',1,'']]],
-  ['push_9',['push',['../classCircularBuffer.html#a54c7a5a2596ab2e24661115758ba665c',1,'CircularBuffer::push()'],['../classPriorityQueue.html#a0b71ca9bf78de4cf33517c67c987f2b2',1,'PriorityQueue::push()'],['../classSlidingWindow.html#a57d04cd6d016fe2c45ed2895003c1f71',1,'SlidingWindow::push()']]]
+  ['size_0',['size',['../classChunk.html#a160459077243c9e5ff642f478277e161',1,'Chunk::size()'],['../classCircularBuffer.html#a73d5df7a33d545554fffeaaf843f36d9',1,'CircularBuffer::size()'],['../classPriorityQueue.html#ad2f921bbd345c3b6b7f038ab37bf33f1',1,'PriorityQueue::size()'],['../classSlidingWindow.html#a42887fa629607e1a838f8f859054692f',1,'SlidingWindow::size()'],['../classChunkList.html#a5e024a47318415463cc12ac53366413e',1,'ChunkList::size()']]],
+  ['size_5f_1',['size_',['../classCircularBuffer.html#ac13fa06e211a72fe58cfe761c228445d',1,'CircularBuffer::size_'],['../classChunkList.html#aedfd23ee7e0970d662c94db875c854df',1,'ChunkList::size_']]],
+  ['slidingwindow_2',['slidingwindow',['../classSlidingWindow.html',1,'SlidingWindow&lt; T &gt;'],['../classSlidingWindow.html#af3b1e96063c5054d12493cb2e710037e',1,'SlidingWindow::SlidingWindow()']]],
+  ['start_3',['Quick Start',['../index.html#autotoc_md2',1,'']]],
+  ['statistics_4',['Statistics',['../classchunk__utils_1_1Statistics.html',1,'chunk_utils']]],
+  ['structure_5',['Project Structure',['../index.html#autotoc_md6',1,'']]],
+  ['sum_6',['sum',['../classSlidingWindow.html#abdf7e4faea00031d1d98b0d986516a87',1,'SlidingWindow']]],
+  ['sum_5f_7',['sum_',['../classSlidingWindow.html#a43f3679d56f6697a37b998262536c6a3',1,'SlidingWindow']]]
 ];

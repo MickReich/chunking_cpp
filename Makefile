@@ -66,7 +66,7 @@ PYTHON ?= python3
 DOC_PORT ?= 8080
 
 # Default target
-all: $(TARGET)
+install: $(TARGET)
 
 # Create build directories
 $(BUILD_DIR):
@@ -133,8 +133,7 @@ distcheck: dist
 	@tmp_dir=`mktemp -d` && \
 	tar -C $$tmp_dir -xzf $(PACKAGE)-$(VERSION).tar.gz && \
 	cd $$tmp_dir/$(PACKAGE)-$(VERSION) && \
-	$(MAKE) && \
-	$(MAKE) run && \
+	$(MAKE) install && \
 	cd - > /dev/null && \
 	rm -rf $$tmp_dir && \
 	echo "Distribution package test passed!"
@@ -178,4 +177,11 @@ $(DOCS_DIR):
 	mkdir -p $(DOCS_DIR)
 
 # Phony targets
-.PHONY: all clean run dist distcheck test test-% format format-check docs docs-clean docs-serve
+.PHONY: install install-headers install-docs uninstall clean run dist distcheck test test-% format format-check docs docs-clean docs-serve
+
+# Uninstall target
+uninstall:
+	rm -rf $(BUILD_DIR)
+	rm -f $(DESTDIR)$(bindir)/$(notdir $(TARGET))
+	rm -rf $(DESTDIR)$(includedir)/chunker
+	rm -rf $(DESTDIR)$(docdir)

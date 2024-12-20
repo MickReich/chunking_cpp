@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['rd_0',['rd',['../classchunk__utils_1_1ChunkGenerator.html#a76e8487f13a2c6ea1a6a9d4f132251f0',1,'chunk_utils::ChunkGenerator']]],
-  ['readme_2emd_1',['README.md',['../README_8md.html',1,'']]],
-  ['requirements_2',['Requirements',['../index.html#autotoc_md5',1,'']]],
-  ['running_3',['Running',['../index.html#autotoc_md3',1,'']]],
-  ['running_20tests_4',['Running Tests',['../index.html#autotoc_md10',1,'']]]
+  ['tail_5f_0',['tail_',['../classCircularBuffer.html#ad6b796b58f9b528479e5caf45713027b',1,'CircularBuffer::tail_'],['../classChunkList.html#a05973e00a2e94eb41d9c496413f350aa',1,'ChunkList::tail_']]],
+  ['to_5fvector_1',['to_vector',['../classCircularBuffer.html#a094a1fe8196a5da1ad5ac43d04512dad',1,'CircularBuffer']]],
+  ['transform_5fchunks_2',['transform_chunks',['../classchunk__utils_1_1ChunkManipulator.html#a673159f2b0528f27d649bc1b20ef4aad',1,'chunk_utils::ChunkManipulator']]]
 ];

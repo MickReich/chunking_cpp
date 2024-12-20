@@ -60,9 +60,7 @@ git clone git@github.com:JohnnyTeutonic/chunking_cpp.git
 cd chunking_cpp
 ```
 
-2.Conversion of the configure script to unix line endings:
-
-If you are on windows, run the following command before running the configure script:
+2.Conversion of the configure script to unix line endings (Windows only):
 
 ```bash
 
@@ -94,10 +92,10 @@ example:
 ./configure --prefix=/usr/local --build-type=Debug --disable-tests --disable-docs
 ```
 
-3.Build the project:
+3.Build and install the project:
 
 ```bash
-make
+make install
 ```
 
 4.Run the tests:

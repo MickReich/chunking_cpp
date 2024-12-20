@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['features_0',['Features',['../index.html#autotoc_md1',1,'']]],
-  ['filter_5fchunks_1',['filter_chunks',['../classchunk__utils_1_1ChunkManipulator.html#ac5cc27e53560990ba7154bf82632e4d4',1,'chunk_utils::ChunkManipulator']]],
-  ['flatten_2',['flatten',['../classChunkList.html#a310a9fc14313410eb215edee02dda399',1,'ChunkList']]],
-  ['full_3',['full',['../classCircularBuffer.html#a2a2f13f00dca028142c250b5f2183097',1,'CircularBuffer']]]
+  ['head_5f_0',['head_',['../classCircularBuffer.html#abd7fa51c466136b2ed4a3ed40dc72201',1,'CircularBuffer::head_'],['../classChunkList.html#a49bc83f07b0d5997269e5a775a8e8540',1,'ChunkList::head_']]],
+  ['heap_5f_1',['heap_',['../classPriorityQueue.html#a2dc28580b01197178f598f15b3182370',1,'PriorityQueue']]],
+  ['heapify_5fdown_2',['heapify_down',['../classPriorityQueue.html#a56e5f9d2fb1e1d5db7c04f00ff32d0c8',1,'PriorityQueue']]],
+  ['heapify_5fup_3',['heapify_up',['../classPriorityQueue.html#ac221c7a12a2f93f4bad4bc43f070ac02',1,'PriorityQueue']]]
 ];

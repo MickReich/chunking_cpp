@@ -27,7 +27,10 @@ cd chunking_cpp
 # Configure and build
 chmod +x configure
 ./configure
-make
+make install
+
+# Uninstall if needed
+make uninstall
 
 # Run tests
 make test
@@ -42,6 +45,7 @@ See `main.cpp` for comprehensive examples of all features.
 ## Documentation
 
 Generate and view the documentation:
+
 ```bash
 make docs
 make docs-serve

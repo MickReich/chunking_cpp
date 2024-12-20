@@ -1,9 +1,11 @@
 #!/bin/bash
 # Default settings
-PREFIX=/usr/local
+#PREFIX=/usr/local
+PREFIX=$(pwd)
+echo "PREFIX: $PREFIX"
 BUILD_TYPE=Release
-ENABLE_TESTS=1
-ENABLE_DOCS=1
+ENABLE_TESTS=0
+ENABLE_DOCS=0
 # Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -18,8 +20,8 @@ print_help() {
     echo "Options:"
     echo "  --prefix=PATH        Installation prefix [$PREFIX]"
     echo "  --build-type=TYPE    Build type (Debug|Release) [$BUILD_TYPE]"
-    echo "  --disable-tests      Disable building tests"
-    echo "  --disable-docs       Disable building documentation"
+    echo "  --enable-tests      Enable building tests"
+    echo "  --enable-docs       Enable building documentation"
     echo "  --help              Display this help message"
     echo
 }
@@ -33,11 +35,11 @@ for arg in "$@"; do
         --build-type=*)
             BUILD_TYPE="${arg#*=}"
             ;;
-        --disable-tests)
-            ENABLE_TESTS=0
+        --enable-tests)
+            ENABLE_TESTS=1
             ;;
-        --disable-docs)
-            ENABLE_DOCS=0
+        --enable-docs)
+            ENABLE_DOCS=1
             ;;
         --help)
             print_help
@@ -72,10 +74,10 @@ echo -e "${GREEN}C++ compiler version:${NC} $CXX_VERSION"
 # Check for optional dependencies
 if [ $ENABLE_TESTS -eq 1 ]; then
     echo "Checking for testing dependencies..."
-    if ! g++ -lgtest -lgtest_main 2>/dev/null; then
+    if g++ -lgtest -lgtest_main 2>/dev/null; then
         echo -e "${YELLOW}Warning: Google Test not found${NC}"
         echo "Tests will not be built"
-        ENABLE_TESTS=0
+        ENABLE_TESTS=1
     else
         echo -e "${GREEN}Found Google Test${NC}"
     fi
@@ -130,5 +132,5 @@ echo
 echo "To build the project, run:"
 echo "  make"
 echo
-echo "To install, run:"
-echo "  make install"
+echo "To execute the project, run:"
+echo "  make run"
