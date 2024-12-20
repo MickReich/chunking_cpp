@@ -27,7 +27,9 @@ jobs:
       run: make
 
     - name: Run tests
-      run: make test
+      run: |
+        make test
+        cat build/tests/test_results.xml
 
     - name: Generate documentation
       run: |
@@ -50,7 +52,7 @@ jobs:
       run: |
         cd build/tests
         ./run_tests
-        lcov --capture --directory . --output-file coverage.info
+        lcov --capture --directory .. --output-file coverage.info --no-external
         lcov --remove coverage.info '/usr/*' --output-file coverage.info
 
     - name: Upload coverage report
@@ -64,3 +66,7 @@ jobs:
       with:
         files: build/tests/coverage.info
         fail_ci_if_error: true
+
+    - name: Fix coverage paths
+      run: |
+        sed -i 's|/mnt/c/Users/jonat/OneDrive/Documents/Python Scripts/chunking_cpp/|/github/workspace/|g' build/tests/coverage.info

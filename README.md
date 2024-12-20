@@ -31,21 +31,19 @@ A C++ library for flexible data chunking and processing operations.
 git clone git@github.com:JohnnyTeutonic/chunking_cpp.git
 cd chunking_cpp
 
-# Configure the project (with tests and documentation enabled)
+# Configure the project (with tests, documentation, sanitizers, and coverage enabled)
 chmod +x configure
-./configure  --enable-tests --enable-docs
+./configure  --enable-tests --enable-docs --enable-sanitizers --enable-coverage
 
 # Build the project
 make
 
 # To execute the example program
 make run
-
-# Uninstall if needed
-make uninstall
-
 # Run tests
 make test
+# Uninstall if needed
+make uninstall
 ```
 
 For detailed build instructions, dependencies, and configuration options, see [BUILDING.md](BUILDING.md).
@@ -77,6 +75,7 @@ This project is licensed under the GNU General Public License v2.0 - see the [LI
 │   ├── advanced_structures.hpp
 │   ├── chunk_compression.hpp
 │   ├── chunk_strategies.hpp
+│   ├── data_structures.hpp
 │   ├── parallel_chunk.hpp
 │   └── utils.hpp
 ├── src/
@@ -88,6 +87,7 @@ This project is licensed under the GNU General Public License v2.0 - see the [LI
 │   ├── chunk_compression_test.cpp
 │   ├── parallel_chunk_test.cpp
 │   ├── advanced_structures_test.cpp
+│   ├── data_structures_test.cpp
 │   └── utils_test.cpp
 ├── scripts/
 │   └── run_tests.sh

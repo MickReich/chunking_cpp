@@ -31,6 +31,9 @@ enable_testing()
 set(GTEST_OUTPUT_DIR ${CMAKE_BINARY_DIR}/tests)
 file(MAKE_DIRECTORY ${GTEST_OUTPUT_DIR})
 
+# Ensure test results directory exists
+file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/tests/results)
+
 # Configure GTest
 include(GoogleTest)
 enable_testing()
@@ -40,7 +43,8 @@ option(ENABLE_COVERAGE "Enable coverage reporting" OFF)
 option(ENABLE_SANITIZERS "Enable sanitizers" OFF)
 
 if(ENABLE_COVERAGE)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage -fprofile-arcs -ftest-coverage -fno-inline")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
 endif()
 
 if(ENABLE_SANITIZERS)
@@ -61,6 +65,11 @@ add_executable(run_tests
     tests/chunk_compression_test.cpp
     tests/parallel_chunk_test.cpp
     tests/advanced_structures_test.cpp
+)
+
+# Set the output directory for run_tests executable
+set_target_properties(run_tests PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/tests
 )
 
 # Link test executable with GTest
@@ -87,9 +96,10 @@ file(WRITE ${CMAKE_BINARY_DIR}/tests/run_tests.sh
 
 # Create directory for test results if it doesn't exist
 mkdir -p \"\${0%/*}\"
+mkdir -p \"\${0%/*}/results\"
 
 # Run the tests and generate XML report
-./run_tests --gtest_output=xml:${GTEST_OUTPUT_DIR}/test_results.xml --gtest_break_on_failure
+cd \"\${0%/*}\" && ./run_tests --gtest_output=xml:test_results.xml --gtest_break_on_failure
 
 # Check if tests passed
 if [ $? -eq 0 ]; then
@@ -97,7 +107,11 @@ if [ $? -eq 0 ]; then
     exit 0
 else
     echo 'Some tests failed!'
-    cat ${GTEST_OUTPUT_DIR}/test_results.xml
+    if [ -f test_results.xml ]; then
+        cat test_results.xml
+    else
+        echo "Error: test_results.xml not found"
+    fi
     exit 1
 fi
 ")
@@ -108,10 +122,13 @@ file(COPY ${CMAKE_BINARY_DIR}/tests/run_tests.sh
     FILE_PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
 )
 
+# Ensure test output directory exists
+file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/tests)
+
 # Add test to CTest
 add_test(
     NAME AllTests
-    COMMAND ${CMAKE_BINARY_DIR}/tests/run_tests
+    COMMAND ${CMAKE_BINARY_DIR}/tests/run_tests --gtest_output=xml:${CMAKE_BINARY_DIR}/tests/test_results.xml
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/tests
 )
 
@@ -119,4 +136,13 @@ add_test(
 set_tests_properties(AllTests PROPERTIES
     ENVIRONMENT "GTEST_COLOR=1"
     FAIL_REGULAR_EXPRESSION ".*[Ff]ail.*"
+    FIXTURES_REQUIRED test_output
+)
+
+# Add fixture to ensure test output directory exists
+add_test(NAME create_test_output
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/tests
+)
+set_tests_properties(create_test_output PROPERTIES
+    FIXTURES_SETUP test_output
 ) 
