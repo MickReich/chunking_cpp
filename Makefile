@@ -69,7 +69,6 @@ CMAKE_BINARY_DIR = "/mnt/c/Users/jonat/OneDrive/Documents/Python Scripts/chunkin
 test:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running tests..."
 	/usr/bin/ctest --force-new-ctest-process $(ARGS)
-	./tests/run_tests.sh
 .PHONY : test
 
 # Special rule for the target test

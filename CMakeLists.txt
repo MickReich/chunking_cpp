@@ -25,6 +25,14 @@ target_link_libraries(chunk_processor_exe chunk_processor)
 # Enable testing
 enable_testing()
 
+# Configure test output
+set(GTEST_OUTPUT_DIR ${CMAKE_BINARY_DIR}/tests)
+file(MAKE_DIRECTORY ${GTEST_OUTPUT_DIR})
+
+# Configure GTest
+include(GoogleTest)
+enable_testing()
+
 # Add options for coverage and sanitizers
 option(ENABLE_COVERAGE "Enable coverage reporting" OFF)
 option(ENABLE_SANITIZERS "Enable sanitizers" OFF)
@@ -59,6 +67,14 @@ target_link_libraries(run_tests
     pthread
 )
 
+# Discover tests automatically
+gtest_discover_tests(run_tests
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/tests
+    PROPERTIES
+        ENVIRONMENT "GTEST_COLOR=1"
+        FAIL_REGULAR_EXPRESSION ".*[Ff]ail.*"
+)
+
 # Create tests directory
 file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/tests)
 
@@ -70,7 +86,7 @@ file(WRITE ${CMAKE_BINARY_DIR}/tests/run_tests.sh
 mkdir -p \"\${0%/*}\"
 
 # Run the tests and generate XML report
-./run_tests --gtest_output=xml:test_results.xml
+./run_tests --gtest_output=xml:${GTEST_OUTPUT_DIR}/test_results.xml --gtest_break_on_failure
 
 # Check if tests passed
 if [ $? -eq 0 ]; then
@@ -78,6 +94,7 @@ if [ $? -eq 0 ]; then
     exit 0
 else
     echo 'Some tests failed!'
+    cat ${GTEST_OUTPUT_DIR}/test_results.xml
     exit 1
 fi
 ")
@@ -88,17 +105,15 @@ file(COPY ${CMAKE_BINARY_DIR}/tests/run_tests.sh
     FILE_PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
 )
 
-# Ensure test binary is copied to tests directory
-add_custom_command(TARGET run_tests POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:run_tests> ${CMAKE_BINARY_DIR}/tests/
-)
-
-# Create symbolic link for convenience
-execute_process(
-    COMMAND ${CMAKE_COMMAND} -E create_symlink
-    ${CMAKE_BINARY_DIR}/tests/run_tests.sh
-    ${CMAKE_BINARY_DIR}/tests/run_tests
-)
-
 # Add test to CTest
-add_test(NAME AllTests COMMAND ${CMAKE_BINARY_DIR}/tests/run_tests) 
+add_test(
+    NAME AllTests
+    COMMAND ${CMAKE_BINARY_DIR}/tests/run_tests
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/tests
+)
+
+# Set test properties
+set_tests_properties(AllTests PROPERTIES
+    ENVIRONMENT "GTEST_COLOR=1"
+    FAIL_REGULAR_EXPRESSION ".*[Ff]ail.*"
+) 

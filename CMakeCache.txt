@@ -225,10 +225,10 @@ ChunkProcessor_IS_TOP_LEVEL:STATIC=ON
 ChunkProcessor_SOURCE_DIR:STATIC=/mnt/c/Users/jonat/OneDrive/Documents/Python Scripts/chunking_cpp
 
 //Enable coverage reporting
-ENABLE_COVERAGE:BOOL=OFF
+ENABLE_COVERAGE:BOOL=ON
 
 //Enable sanitizers
-ENABLE_SANITIZERS:BOOL=OFF
+ENABLE_SANITIZERS:BOOL=ON
 
 //The directory containing a CMake configuration file for GTest.
 GTest_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/GTest

@@ -134,3 +134,16 @@ TEST_F(ChunkTest, PaddedChunks) {
     EXPECT_EQ(chunks[0], (std::vector<value_type>{1, 2}));
     EXPECT_EQ(chunks[1], (std::vector<value_type>{3, 0}));
 }
+
+TEST(ChunkTest, BasicTest) {
+    // Basic test to verify test setup
+    ASSERT_TRUE(true);
+}
+
+TEST(ChunkTest, InitializationTest) {
+    // Test chunk initialization
+    std::vector<int> data = {1, 2, 3, 4, 5};
+    Chunk<int> chunk(2);  // Create chunk with size 2
+    chunk.add(data);      // Add data to chunk
+    ASSERT_EQ(chunk.size(), 5);
+}

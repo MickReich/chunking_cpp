@@ -30,3 +30,8 @@ compile_commands.json
 *.local
 chunk_processor_exe
 run_tests
+CMakeCache.txt
+# Build configuration
+config.mk
+*.config
+*.conf
