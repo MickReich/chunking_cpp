@@ -1,46 +1,21 @@
-name: Documentation
+name: Doxygen GitHub Pages Deploy Action
 
 on:
   push:
-    branches: [ main, cleanup ]
-  pull_request:
-    branches: [ main, cleanup ]
-
-permissions:
-  contents: write
-  pages: write
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
-  build-docs:
+  deploy:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: write
     steps:
-    - uses: actions/checkout@v3
-
-    - name: Install dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y doxygen graphviz lcov libgtest-dev
-
-    - name: Generate documentation
-      run: |
-        make docs
-
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      if: github.ref == 'refs/heads/main'
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./build/docs/html
-        enable_jekyll: false
-        allow_empty_commit: false
-        force_orphan: true
-        publish_branch: gh-pages
-        commit_message: 'docs: update documentation'
-
-    - name: Upload documentation artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: documentation
-        path: build/docs/html
-        if-no-files-found: error 
+      - uses: DenverCoder1/doxygen-github-pages-action@v2.0.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+          folder: docs/html
+          config_file: Doxyfile
+          doxygen_version: 1.9.6
