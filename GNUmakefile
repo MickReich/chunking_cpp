@@ -14,7 +14,7 @@ CXXFLAGS := -std=c++17 -Wall -Wextra
 setup-build:
 	@mkdir -p $(BUILD_DIR)
 	@echo "Configuring CMake..."
-	@cmake -B $(BUILD_DIR) -S . -DCMAKE_BUILD_TYPE=Debug
+	@cmake -B $(BUILD_DIR) -S . -DCMAKE_BUILD_TYPE=Debug -DENABLE_COVERAGE=ON
 	@echo "Building project..."
 	@cmake --build $(BUILD_DIR) --config Debug
 

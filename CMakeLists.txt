@@ -43,8 +43,32 @@ option(ENABLE_COVERAGE "Enable coverage reporting" OFF)
 option(ENABLE_SANITIZERS "Enable sanitizers" OFF)
 
 if(ENABLE_COVERAGE)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage -fprofile-arcs -ftest-coverage -fno-inline")
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -g -fprofile-arcs -ftest-coverage")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0 -g -fprofile-arcs -ftest-coverage")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fprofile-arcs -ftest-coverage")
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -fprofile-arcs -ftest-coverage")
+    
+    find_program(LCOV lcov REQUIRED)
+    find_program(GENHTML genhtml REQUIRED)
+    
+    set(COVERAGE_EXCLUDES
+        '/usr/*'
+        '${PROJECT_SOURCE_DIR}/tests/*'
+        '${PROJECT_SOURCE_DIR}/build/*'
+    )
+    
+    add_custom_target(coverage
+        DEPENDS run_tests
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/coverage
+        COMMAND ${LCOV} --directory . --zerocounters
+        COMMAND ${CMAKE_COMMAND} -E env LLVM_PROFILE_FILE=${CMAKE_BINARY_DIR}/coverage/coverage-%p.profraw
+        COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target run_tests
+        COMMAND ${LCOV} --directory . --capture --output-file coverage.info --ignore-errors empty,mismatch,range
+        COMMAND ${LCOV} --remove coverage.info ${COVERAGE_EXCLUDES} --output-file filtered.info
+        COMMAND ${GENHTML} filtered.info --output-directory ${CMAKE_BINARY_DIR}/coverage
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+        COMMENT "Generating coverage report"
+    )
 endif()
 
 if(ENABLE_SANITIZERS)

@@ -29,6 +29,7 @@ jobs:
     - name: Run tests
       run: |
         make test
+        ./build/tests/run_tests.sh
         cat build/tests/test_results.xml
 
     - name: Generate documentation
@@ -50,23 +51,37 @@ jobs:
 
     - name: Run tests with coverage
       run: |
-        cd build/tests
-        ./run_tests
-        lcov --capture --directory .. --output-file coverage.info --no-external
-        lcov --remove coverage.info '/usr/*' --output-file coverage.info
+        # Initialize coverage
+        lcov --zerocounters --directory . --quiet
+        lcov --capture --initial --directory . --output-file base.info --ignore-errors empty,mismatch,range --quiet
+        
+        # Run tests
+        export LLVM_PROFILE_FILE="coverage-%p.profraw"
+        cd build/tests && ./run_tests.sh
+        cd ../..
+        
+        # Collect coverage
+        lcov --directory . --capture --output-file test.info --ignore-errors empty,mismatch,range --quiet
+        lcov --add-tracefile base.info --add-tracefile test.info --output-file coverage.info
+        lcov --remove coverage.info '/usr/*' '*/tests/*' '*/build/*' --output-file filtered.info
+        lcov --list filtered.info
 
     - name: Upload coverage report
       uses: actions/upload-artifact@v3
       with:
         name: coverage-report
-        path: build/tests/coverage.info
+        path: filtered.info
 
     - name: Upload to Codecov
       uses: codecov/codecov-action@v3
       with:
-        files: build/tests/coverage.info
+        files: filtered.info
         fail_ci_if_error: true
 
     - name: Fix coverage paths
       run: |
         sed -i 's|/mnt/c/Users/jonat/OneDrive/Documents/Python Scripts/chunking_cpp/|/github/workspace/|g' build/tests/coverage.info
+
+    - name: Debug coverage files
+      run: |
+        find build -name "*.gcda" -o -name "*.gcno"

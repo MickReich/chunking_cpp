@@ -31,7 +31,7 @@ A C++ library for flexible data chunking and processing operations.
 git clone git@github.com:JohnnyTeutonic/chunking_cpp.git
 cd chunking_cpp
 
-# Configure the project (with tests, documentation, sanitizers, and coverage enabled)
+# Configure the project (optionally with tests, documentation, sanitizers, and coverage enabled)
 chmod +x configure
 ./configure  --enable-tests --enable-docs --enable-sanitizers --enable-coverage
 
