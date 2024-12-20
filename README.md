@@ -38,8 +38,8 @@ chmod +x configure
 # Build the project
 make
 
-# To execute the main program
-./chunk_processor_exe
+# To execute the example program
+make run
 
 # Uninstall if needed
 make uninstall

@@ -9,7 +9,7 @@ CXX := g++
 CXXFLAGS := -std=c++17 -Wall -Wextra
 
 # Ensure build directory exists and is configured
-.PHONY: setup-build test docs docs-clean docs-serve local-help
+.PHONY: setup-build test docs docs-clean docs-serve local-help run uninstall
 
 setup-build:
 	@mkdir -p $(BUILD_DIR)
@@ -17,6 +17,11 @@ setup-build:
 	@cmake -B $(BUILD_DIR) -S . -DCMAKE_BUILD_TYPE=Debug
 	@echo "Building project..."
 	@cmake --build $(BUILD_DIR) --config Debug
+
+# Run the executable
+run: setup-build
+	@echo "Running program..."
+	@$(BUILD_DIR)/chunk_processor_exe
 
 # Override CMake's test target
 test: setup-build
@@ -38,6 +43,9 @@ test: setup-build
 clean:
 	@rm -rf $(BUILD_DIR)
 	@echo "Cleaned build directory"
+
+# Alias for clean
+uninstall: clean
 
 # Documentation targets
 docs: setup-build
@@ -73,6 +81,7 @@ local-help:
 	@echo "  docs         - Generate documentation"
 	@echo "  docs-clean   - Remove generated documentation"
 	@echo "  docs-serve   - Serve documentation locally at http://localhost:8000"
+	@echo "  uninstall    - Remove all build artifacts (alias for clean)"
 	@echo "  local-help   - Show this help message"
 	@echo
 	@echo "For CMake targets, run 'make help'"
