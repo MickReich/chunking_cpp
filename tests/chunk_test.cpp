@@ -135,15 +135,21 @@ TEST_F(ChunkTest, PaddedChunks) {
     EXPECT_EQ(chunks[1], (std::vector<value_type>{3, 0}));
 }
 
-TEST(ChunkTest, BasicTest) {
+TEST_F(ChunkTest, BasicTest) {
     // Basic test to verify test setup
-    ASSERT_TRUE(true);
+    Chunk<int> chunk(2);
+    ASSERT_EQ(chunk.size(), 0);  // Initially empty
+    ASSERT_EQ(chunk.get_chunks().size(), 0);  // No chunks yet
 }
 
-TEST(ChunkTest, InitializationTest) {
+TEST_F(ChunkTest, InitializationTest) {
     // Test chunk initialization
-    std::vector<int> data = {1, 2, 3, 4, 5};
     Chunk<int> chunk(2);  // Create chunk with size 2
-    chunk.add(data);      // Add data to chunk
+    chunk.add(test_data);      // Add data from fixture
     ASSERT_EQ(chunk.size(), 5);
+    auto chunks = chunk.get_chunks();
+    ASSERT_EQ(chunks.size(), 3);  // Should have 3 chunks: [1,2], [3,4], [5]
+    ASSERT_EQ(chunks[0], (std::vector<int>{1, 2}));
+    ASSERT_EQ(chunks[1], (std::vector<int>{3, 4}));
+    ASSERT_EQ(chunks[2], (std::vector<int>{5}));
 }
