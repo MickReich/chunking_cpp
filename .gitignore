@@ -27,7 +27,7 @@ docs/
 compile_commands.json
 .cache/
 *.make
-*.local
+Makefile.local
 chunk_processor_exe
 run_tests
 CMakeCache.txt
