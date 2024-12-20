@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ main, cleanup ]
 
+permissions:
+  contents: write
+  pages: write
+
 jobs:
   build-docs:
     runs-on: ubuntu-latest
