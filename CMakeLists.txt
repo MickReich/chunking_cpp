@@ -6,6 +6,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Include directories
 include_directories(${PROJECT_SOURCE_DIR}/include)
+include_directories(${PROJECT_SOURCE_DIR}/src)
+include_directories(${GTEST_INCLUDE_DIRS})
 
 # Add library target
 add_library(chunk_processor
@@ -54,6 +56,7 @@ include_directories(${GTEST_INCLUDE_DIRS})
 add_executable(run_tests
     tests/test_main.cpp
     tests/chunk_test.cpp
+    tests/utils_test.cpp
     tests/chunk_strategies_test.cpp
     tests/chunk_compression_test.cpp
     tests/parallel_chunk_test.cpp
