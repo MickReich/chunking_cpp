@@ -31,6 +31,7 @@ jobs:
 
     - name: Run tests
       run: |
+        chmod +x build/tests/run_tests.sh
         make test
         ./build/tests/run_tests.sh
         cat build/tests/test_results.xml
@@ -60,6 +61,7 @@ jobs:
         
         # Run tests
         export LLVM_PROFILE_FILE="coverage-%p.profraw"
+        chmod +x build/tests/run_tests.sh
         cd build/tests && ./run_tests.sh
         cd ../..
         
