@@ -23,7 +23,7 @@ jobs:
             chmod +x configure 
             ./configure
 
-    - name: Install dependencies
+    - name: Install project
       run: make
 
     - name: Run check
