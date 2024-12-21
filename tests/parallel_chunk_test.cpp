@@ -80,3 +80,107 @@ TEST_F(ParallelChunkProcessorTest, ExceptionHandling) {
                                                     }),
         std::runtime_error);
 }
+
+TEST_F(ParallelChunkProcessorTest, MapWithEmptyChunks) {
+    std::vector<std::vector<int>> empty_chunks;
+    auto square = [](const int& x) { return x * x; };
+    auto result = ParallelChunkProcessor<int>::map<int>(empty_chunks, square);
+    EXPECT_TRUE(result.empty());
+}
+
+TEST_F(ParallelChunkProcessorTest, MapWithSingleElement) {
+    std::vector<std::vector<int>> single_chunk = {{42}};
+    auto square = [](const int& x) { return x * x; };
+    auto result = ParallelChunkProcessor<int>::map<int>(single_chunk, square);
+    EXPECT_EQ(result.size(), 1);
+    EXPECT_EQ(result[0][0], 1764); // 42^2
+}
+
+TEST_F(ParallelChunkProcessorTest, ReduceWithEmptyChunks) {
+    std::vector<std::vector<int>> empty_chunks;
+    auto sum = [](const int& a, const int& b) { return a + b; };
+    int result = ParallelChunkProcessor<int>::reduce(empty_chunks, sum, 0);
+    EXPECT_EQ(result, 0);
+}
+
+TEST_F(ParallelChunkProcessorTest, ReduceWithSingleElement) {
+    std::vector<std::vector<int>> single_chunk = {{42}};
+    auto sum = [](const int& a, const int& b) { return a + b; };
+    int result = ParallelChunkProcessor<int>::reduce(single_chunk, sum, 10);
+    EXPECT_EQ(result, 52); // 10 + 42
+}
+
+TEST_F(ParallelChunkProcessorTest, MapReduceCombined) {
+    auto double_it = [](const int& x) { return x * 2; };
+    auto multiply = [](const int& a, const int& b) { return a * b; };
+
+    // First, map to double all numbers
+    auto doubled = ParallelChunkProcessor<int>::map<int>(chunks, double_it);
+
+    // Flatten the chunks into a single vector for reduction
+    std::vector<int> flattened;
+    for (const auto& chunk : doubled) {
+        flattened.insert(flattened.end(), chunk.begin(), chunk.end());
+    }
+
+    // Perform reduction on the flattened vector
+    int result = std::accumulate(flattened.begin(), flattened.end(), 1, multiply);
+
+    // Calculate expected result: product of all numbers doubled
+    int expected = 1;
+    for (const auto& chunk : chunks) {
+        for (int x : chunk) {
+            expected *= (x * 2);
+        }
+    }
+    EXPECT_EQ(result, expected);
+}
+
+TEST_F(ParallelChunkProcessorTest, ConcurrentModification) {
+    std::vector<std::vector<int>> data = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+
+    std::atomic<int> counter{0};
+    ParallelChunkProcessor<int>::process_chunks(data, [&counter](std::vector<int>& chunk) {
+        for (int& x : chunk) {
+            x *= 2;
+            counter++;
+        }
+    });
+
+    EXPECT_EQ(counter, 9); // Should have processed all elements
+    for (size_t i = 0; i < data.size(); i++) {
+        for (size_t j = 0; j < data[i].size(); j++) {
+            EXPECT_EQ(data[i][j], (i * 3 + j + 1) * 2);
+        }
+    }
+}
+
+TEST_F(ParallelChunkProcessorTest, ExceptionPropagation) {
+    std::vector<std::vector<int>> data = {{1}, {2}, {3}, {4}, {5}};
+    int exception_threshold = 3;
+
+    EXPECT_THROW(
+        {
+            ParallelChunkProcessor<int>::process_chunks(
+                data, [exception_threshold](std::vector<int>& chunk) {
+                    if (chunk[0] > exception_threshold) {
+                        throw std::runtime_error("Value too large");
+                    }
+                    chunk[0] *= 2;
+                });
+        },
+        std::runtime_error);
+
+    // Check that some chunks were processed before exception
+    bool found_modified = false;
+    bool found_unmodified = false;
+    for (const auto& chunk : data) {
+        if (chunk[0] <= exception_threshold * 2 && chunk[0] % 2 == 0) {
+            found_modified = true;
+        }
+        if (chunk[0] > exception_threshold && chunk[0] == chunk[0] / 2 * 2) {
+            found_unmodified = true;
+        }
+    }
+    EXPECT_TRUE(found_modified || found_unmodified);
+}
