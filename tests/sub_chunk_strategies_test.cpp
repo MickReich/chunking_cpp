@@ -1,7 +1,7 @@
 /**
  * @file sub_chunk_strategies_test.cpp
  * @brief Test suite for sub-chunking strategies
- * 
+ *
  * This file contains comprehensive tests for:
  * - Recursive sub-chunking
  * - Hierarchical sub-chunking
@@ -16,17 +16,15 @@ using namespace chunk_strategies;
 
 /**
  * @brief Test fixture for sub-chunking strategy tests
- * 
+ *
  * Provides common test data and setup for all sub-chunking tests
  */
 class SubChunkStrategiesTest : public ::testing::Test {
 protected:
     void SetUp() override {
-        test_data = {
-            {1.0, 1.1, 1.2, 5.0, 5.1, 5.2},
-            {2.0, 2.1, 2.2, 10.0, 10.1, 10.2},
-            {3.0, 3.1, 3.2, 15.0, 15.1, 15.2}
-        };
+        test_data = {{1.0, 1.1, 1.2, 5.0, 5.1, 5.2},
+                     {2.0, 2.1, 2.2, 10.0, 10.1, 10.2},
+                     {3.0, 3.1, 3.2, 15.0, 15.1, 15.2}};
     }
 
     std::vector<std::vector<double>> test_data;
@@ -43,8 +41,7 @@ TEST_F(SubChunkStrategiesTest, RecursiveSubChunking) {
 TEST_F(SubChunkStrategiesTest, HierarchicalSubChunking) {
     std::vector<std::shared_ptr<ChunkStrategy<double>>> strategies = {
         std::make_shared<VarianceStrategy<double>>(5.0),
-        std::make_shared<EntropyStrategy<double>>(1.0)
-    };
+        std::make_shared<EntropyStrategy<double>>(1.0)};
 
     HierarchicalSubChunkStrategy<double> hierarchical_strategy(strategies, 2);
     auto result = hierarchical_strategy.apply(test_data);
@@ -67,4 +64,4 @@ TEST_F(SubChunkStrategiesTest, ConditionalSubChunking) {
 
     auto result = conditional_strategy.apply(test_data);
     EXPECT_GT(result.size(), 0);
-} 
+}

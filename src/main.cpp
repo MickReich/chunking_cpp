@@ -56,9 +56,8 @@ void print_chunks(const std::vector<std::vector<T>>& chunks) {
  * @param precision The number of decimal places to show for floating-point numbers
  */
 template <typename T>
-void print_sub_chunks(const std::vector<std::vector<std::vector<T>>>& sub_chunks, 
-                     const std::string& label,
-                     int precision = 2) {
+void print_sub_chunks(const std::vector<std::vector<std::vector<T>>>& sub_chunks,
+                      const std::string& label, int precision = 2) {
     std::cout << "\n" << label << ":\n";
     for (size_t i = 0; i < sub_chunks.size(); ++i) {
         std::cout << "Level " << i + 1 << ":\n";
@@ -74,7 +73,7 @@ void print_sub_chunks(const std::vector<std::vector<std::vector<T>>>& sub_chunks
 
 /**
  * @brief Demonstrates complex recursive sub-chunking with multiple levels
- * 
+ *
  * This function shows how to apply recursive sub-chunking strategies
  * to data with clear patterns, using variance-based chunking at multiple levels.
  */
@@ -84,7 +83,7 @@ void demonstrate_complex_recursive_subchunking() {
 
 /**
  * @brief Demonstrates hierarchical sub-chunking using multiple strategies
- * 
+ *
  * This function shows how to apply different chunking strategies
  * in a hierarchical manner, combining variance, similarity, and entropy-based approaches.
  */
@@ -94,7 +93,7 @@ void demonstrate_multi_strategy_subchunking() {
 
 /**
  * @brief Demonstrates adaptive conditional sub-chunking
- * 
+ *
  * This function shows how to use conditional sub-chunking with
  * adaptive thresholds based on chunk properties.
  */
@@ -430,10 +429,10 @@ int main() {
 
     // Initial data with clear hierarchical structure
     std::vector<std::vector<double>> hierarchical_data = {
-        {1.0, 1.1, 1.2, 1.3},           // Low variance
-        {1.0, 5.0, 10.0, 15.0},         // High variance
-        {2.0, 2.1, 2.2},                // Low variance
-        {0.0, 10.0, 20.0, 30.0, 40.0}   // High variance
+        {1.0, 1.1, 1.2, 1.3},         // Low variance
+        {1.0, 5.0, 10.0, 15.0},       // High variance
+        {2.0, 2.1, 2.2},              // Low variance
+        {0.0, 10.0, 20.0, 30.0, 40.0} // High variance
     };
     std::cout << "Initial hierarchical data:" << std::endl;
     print_chunks(hierarchical_data);
@@ -452,8 +451,7 @@ int main() {
     std::cout << "\n--- Hierarchical Sub-chunking ---" << std::endl;
     std::vector<std::shared_ptr<ChunkStrategy<double>>> strategies = {
         std::make_shared<VarianceStrategy<double>>(10.0),
-        std::make_shared<EntropyStrategy<double>>(1.0)
-    };
+        std::make_shared<EntropyStrategy<double>>(1.0)};
 
     HierarchicalSubChunkStrategy<double> hierarchical_strategy(strategies, 2);
     auto hierarchical_result = hierarchical_strategy.apply(hierarchical_data);
@@ -462,15 +460,16 @@ int main() {
     // Conditional sub-chunking example
     std::cout << "\n--- Conditional Sub-chunking ---" << std::endl;
     auto condition = [](const std::vector<double>& chunk) {
-        if (chunk.size() <= 3) return false;
-        
+        if (chunk.size() <= 3)
+            return false;
+
         double mean = std::accumulate(chunk.begin(), chunk.end(), 0.0) / chunk.size();
         double variance = 0.0;
         for (const auto& val : chunk) {
             variance += (val - mean) * (val - mean);
         }
         variance /= chunk.size();
-        
+
         return variance > 50.0;
     };
 
