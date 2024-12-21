@@ -64,21 +64,45 @@ jobs:
 
     - name: Run tests with coverage
       run: |
-        # Initialize coverage
-        lcov --rc lcov_branch_coverage=1 --zerocounters --directory . --quiet
-        lcov --rc lcov_branch_coverage=1 --capture --initial --directory . --output-file base.info --ignore-errors empty,mismatch,range --quiet
+        # Initialize coverage with more detailed settings
+        lcov --rc lcov_branch_coverage=1 --rc lcov_function_coverage=1 --zerocounters --directory . --quiet
+        lcov --rc lcov_branch_coverage=1 --rc lcov_function_coverage=1 --capture --initial --directory . --output-file base.info --ignore-errors empty,mismatch,range --quiet
         
-        # Run tests
+        # Run tests with environment variables to capture more data
+        export GCOV_PREFIX_STRIP=0
+        export GCOV_PREFIX=$PWD
         export LLVM_PROFILE_FILE="coverage-%p.profraw"
         chmod +x build/tests/run_tests.sh
         cd build/tests && ./run_tests.sh
         cd ../..
         
-        # Collect coverage
-        lcov --rc lcov_branch_coverage=1 --directory . --capture --output-file test.info --ignore-errors empty,mismatch,range,unused --quiet
-        lcov --rc lcov_branch_coverage=1 --add-tracefile base.info --add-tracefile test.info --output-file coverage.info
-        lcov --rc lcov_branch_coverage=1 --remove coverage.info '/usr/*' '*/tests/*' --output-file filtered.info
-        lcov --rc lcov_branch_coverage=1 --list filtered.info --ignore-errors empty,mismatch,unused
+        # Collect coverage with more detailed settings
+        lcov --rc lcov_branch_coverage=1 --rc lcov_function_coverage=1 --directory . --capture --output-file test.info --ignore-errors empty,mismatch,range,unused --quiet
+        lcov --rc lcov_branch_coverage=1 --rc lcov_function_coverage=1 --add-tracefile base.info --add-tracefile test.info --output-file coverage.info
+        
+        # More granular filtering of coverage data
+        lcov --rc lcov_branch_coverage=1 --rc lcov_function_coverage=1 --remove coverage.info \
+          '/usr/*' \
+          '*/tests/*' \
+          '*/build/*' \
+          '*/third_party/*' \
+          --output-file filtered.info
+        
+        # Generate detailed report
+        lcov --rc lcov_branch_coverage=1 --rc lcov_function_coverage=1 --list filtered.info --ignore-errors empty,mismatch,unused
+
+    - name: Generate coverage HTML report
+      run: |
+        genhtml --rc lcov_branch_coverage=1 --rc lcov_function_coverage=1 \
+          --output-directory coverage-html \
+          --legend --title "Test Coverage" \
+          --ignore-errors source filtered.info
+
+    - name: Upload HTML coverage report
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-html-report
+        path: coverage-html
 
     - name: Upload coverage report
       uses: actions/upload-artifact@v3
