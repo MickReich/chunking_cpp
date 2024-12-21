@@ -146,14 +146,19 @@ If you use this library in your research, please cite:
 ```markdown
 .
 ├── include/
-│   ├── chunk.hpp
-│   ├── config.hpp
-│   ├── advanced_structures.hpp
-│   ├── chunk_compression.hpp
-│   ├── chunk_strategies.hpp
-│   ├── data_structures.hpp
-│   ├── parallel_chunk.hpp
-│   └── utils.hpp
+│   ├── core/
+│   │   ├── chunk.hpp
+│   │   └── config.hpp
+│   ├── strategies/
+│   │   ├── chunk_strategies.hpp
+│   │   └── chunk_compression.hpp
+│   ├── parallel/
+│   │   └── parallel_chunk.hpp
+│   ├── structures/
+│   │   ├── advanced_structures.hpp
+│   │   └── data_structures.hpp
+│   └── utils/
+│       └── utils.hpp
 ├── src/
 │   └── main.cpp
 ├── tests/
