@@ -41,11 +41,10 @@ jobs:
       uses: actions/upload-pages-artifact@v2
       with:
         path: docs/html/
-        if-no-files-found: error
     
     - name: Deploy to GitHub Pages
       id: deployment
-      uses: actions/deploy-pages@v2
+      uses: actions/deploy-pages@v4
 
     - name: Check deployment
       run: |
