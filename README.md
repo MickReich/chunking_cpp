@@ -1,7 +1,7 @@
 # Advanced Chunk Processing Library
 
 [![codecov](https://codecov.io/gh/JohnnyTeutonic/chunking_cpp/branch/main/graph/badge.svg)](https://codecov.io/gh/JohnnyTeutonic/chunking_cpp/)
-[![Tests](https://github.com/JohnnyTeutonic/chunking_cpp/actions/workflows/test.yml/badge.svg)](https://github.com/JohnnyTeutonic/chunking_cpp/actions/workflows/test.yml)
+[![Tests](https://github.com/JohnnyTeutonic/chunking_cpp/actions/workflows/ci.yml/badge.svg)](https://github.com/JohnnyTeutonic/chunking_cpp/actions/workflows/ci.yml)
 
 A C++ library for flexible data chunking and processing operations.
 
