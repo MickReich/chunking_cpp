@@ -6,18 +6,18 @@
 
 namespace chunk_windows {
 
-template<typename T>
+template <typename T>
 class SlidingWindowProcessor {
 public:
     SlidingWindowProcessor(size_t window_size, size_t step_size)
         : window_size_(window_size), step_size_(step_size) {}
 
-    std::vector<T> process(const std::vector<T>& data, 
-                          std::function<T(const std::vector<T>&)> aggregator) {
+    std::vector<T> process(const std::vector<T>& data,
+                           std::function<T(const std::vector<T>&)> aggregator) {
         Chunk<T> chunker(window_size_);
         chunker.add(data);
         auto windows = chunker.sliding_window(window_size_, step_size_);
-        
+
         std::vector<T> results;
         for (const auto& window : windows) {
             results.push_back(aggregator(window));
@@ -31,12 +31,11 @@ private:
 };
 
 // Common window operations
-template<typename T>
+template <typename T>
 class WindowOperations {
 public:
     static T moving_average(const std::vector<T>& window) {
-        return std::accumulate(window.begin(), window.end(), T{}) / 
-               static_cast<T>(window.size());
+        return std::accumulate(window.begin(), window.end(), T{}) / static_cast<T>(window.size());
     }
 
     static T moving_median(std::vector<T> window) {
@@ -53,4 +52,4 @@ public:
     }
 };
 
-} // namespace chunk_windows 
+} // namespace chunk_windows

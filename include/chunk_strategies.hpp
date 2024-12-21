@@ -3,11 +3,11 @@
 #include "chunk.hpp"
 #include <algorithm>
 #include <cmath>
+#include <functional>
 #include <map>
 #include <numeric>
 #include <stdexcept>
 #include <vector>
-#include <functional>
 
 namespace chunk_strategies {
 
@@ -159,7 +159,7 @@ public:
     }
 };
 
-template<typename T>
+template <typename T>
 class PatternBasedStrategy {
 public:
     explicit PatternBasedStrategy(std::function<bool(T)> pattern_detector)
@@ -175,11 +175,11 @@ private:
     std::function<bool(T)> pattern_detector_;
 };
 
-template<typename T>
+template <typename T>
 class AdaptiveStrategy {
 public:
-    explicit AdaptiveStrategy(T initial_threshold, 
-                            std::function<T(const std::vector<T>&)> metric_calculator)
+    explicit AdaptiveStrategy(T initial_threshold,
+                              std::function<T(const std::vector<T>&)> metric_calculator)
         : threshold_(initial_threshold), metric_calculator_(metric_calculator) {}
 
     std::vector<std::vector<T>> apply(const std::vector<T>& data) {
@@ -193,7 +193,7 @@ private:
     std::function<T(const std::vector<T>&)> metric_calculator_;
 };
 
-template<typename T>
+template <typename T>
 class MultiCriteriaStrategy {
 public:
     MultiCriteriaStrategy(T similarity_threshold, size_t size_threshold)
@@ -221,24 +221,23 @@ private:
     size_t size_threshold_;
 };
 
-template<typename T>
+template <typename T>
 class DynamicThresholdStrategy {
 public:
     DynamicThresholdStrategy(T initial_threshold, T min_threshold, double decay_rate)
-        : initial_threshold_(initial_threshold), 
-          min_threshold_(min_threshold),
+        : initial_threshold_(initial_threshold), min_threshold_(min_threshold),
           decay_rate_(decay_rate) {}
 
     std::vector<std::vector<T>> apply(const std::vector<T>& data) {
         Chunk<T> chunker(1);
         chunker.add(data);
-        
+
         T current_threshold = initial_threshold_;
         return chunker.chunk_by_predicate([this, &current_threshold](T x) {
             static T last = x;
             bool start_new = std::abs(x - last) > current_threshold;
-            current_threshold = std::max(min_threshold_, 
-                                       static_cast<T>(current_threshold * decay_rate_));
+            current_threshold =
+                std::max(min_threshold_, static_cast<T>(current_threshold * decay_rate_));
             last = x;
             return start_new;
         });

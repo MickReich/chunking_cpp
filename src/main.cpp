@@ -18,11 +18,11 @@ with this program; if not, see <https://www.gnu.org/licenses/>.
 #include "chunk.hpp"
 #include "chunk_compression.hpp"
 #include "chunk_strategies.hpp"
+#include "chunk_windows.hpp"
 #include "config.hpp"
 #include "data_structures.hpp"
 #include "parallel_chunk.hpp"
 #include "utils.hpp"
-#include "chunk_windows.hpp"
 #include <iomanip>
 #include <iostream>
 #include <vector>
@@ -276,7 +276,7 @@ int main() {
 
     // Example 22: Advanced Chunking Strategy Combinations
     std::cout << "\n=== Advanced Chunking Strategy Combinations ===" << std::endl;
-    
+
     // Pattern-based chunking
     std::vector<int> pattern_data = {1, 2, 1, 2, 3, 4, 3, 4, 5, 6, 5, 6};
     Chunk<int> pattern_chunker(2);
@@ -294,15 +294,17 @@ int main() {
     std::vector<double> adaptive_data = {1.0, 1.1, 5.0, 5.1, 5.2, 2.0, 2.1, 7.0, 7.1, 7.2};
     Chunk<double> adaptive_chunker(1);
     adaptive_chunker.add(adaptive_data);
-    
-    auto adaptive_chunks = adaptive_chunker.chunk_by_statistic(1.0, [](const std::vector<double>& chunk) {
-        if (chunk.empty()) return 0.0;
-        double sum = 0.0;
-        for (size_t i = 1; i < chunk.size(); ++i) {
-            sum += std::abs(chunk[i] - chunk[i-1]);
-        }
-        return sum / (chunk.size() - 1);
-    });
+
+    auto adaptive_chunks =
+        adaptive_chunker.chunk_by_statistic(1.0, [](const std::vector<double>& chunk) {
+            if (chunk.empty())
+                return 0.0;
+            double sum = 0.0;
+            for (size_t i = 1; i < chunk.size(); ++i) {
+                sum += std::abs(chunk[i] - chunk[i - 1]);
+            }
+            return sum / (chunk.size() - 1);
+        });
     std::cout << "\nAdaptive size chunks (based on average difference):" << std::endl;
     print_chunks(adaptive_chunks);
 
@@ -310,12 +312,12 @@ int main() {
     std::vector<double> multi_data = {1.1, 1.2, 5.5, 5.6, 5.7, 2.1, 2.2, 7.5, 7.6, 7.7};
     Chunk<double> multi_chunker(1);
     multi_chunker.add(multi_data);
-    
+
     // First by similarity
     auto multi_step1 = multi_chunker.chunk_by_similarity(0.5);
     std::cout << "\nMulti-criteria chunking - Step 1 (similarity):" << std::endl;
     print_chunks(multi_step1);
-    
+
     // Then by size
     std::vector<std::vector<double>> multi_step2;
     for (const auto& chunk : multi_step1) {
@@ -331,11 +333,11 @@ int main() {
     std::vector<double> sliding_data = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0};
     Chunk<double> sliding_chunker(3);
     sliding_chunker.add(sliding_data);
-    
+
     auto sliding_chunks = sliding_chunker.sliding_window(3, 2);
     std::cout << "\nSliding window chunks with aggregation:" << std::endl;
     print_chunks(sliding_chunks);
-    
+
     // Calculate moving averages
     std::vector<double> moving_averages;
     for (const auto& window : sliding_chunks) {
@@ -352,7 +354,7 @@ int main() {
     std::vector<double> dynamic_data = {1.0, 1.1, 1.2, 5.0, 5.1, 5.2, 2.0, 2.1, 2.2};
     Chunk<double> dynamic_chunker(1);
     dynamic_chunker.add(dynamic_data);
-    
+
     double threshold = 0.5;
     auto dynamic_chunks = dynamic_chunker.chunk_by_predicate([&threshold](double x) {
         static double last = x;
