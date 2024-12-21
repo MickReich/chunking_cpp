@@ -9,8 +9,8 @@ var searchData=
   ['prev_6',['prev',['../structChunkNode.html#ad74c57e4ad48c23f8148e481e59d85f1',1,'ChunkNode']]],
   ['print_5fchunks_7',['print_chunks',['../main_8cpp.html#af4761dcd0fd187c30346163870ed9a3b',1,'main.cpp']]],
   ['priorityqueue_8',['PriorityQueue',['../classPriorityQueue.html',1,'']]],
-  ['process_5fchunks_9',['process_chunks',['../classparallel__chunk_1_1ParallelChunkProcessor.html#aceed1c1ad3d73895b53c501195b64adb',1,'parallel_chunk::ParallelChunkProcessor']]],
+  ['process_5fchunks_9',['process_chunks',['../classparallel__chunk_1_1ParallelChunkProcessor.html#a92eeb252a9c4d67a911d3c764802d260',1,'parallel_chunk::ParallelChunkProcessor']]],
   ['processing_20library_10',['Advanced Chunk Processing Library',['../index.html',1,'']]],
-  ['project_20structure_11',['Project Structure',['../index.html#autotoc_md6',1,'']]],
+  ['project_20structure_11',['Project Structure',['../index.html#autotoc_md16',1,'']]],
   ['push_12',['push',['../classCircularBuffer.html#a54c7a5a2596ab2e24661115758ba665c',1,'CircularBuffer::push()'],['../classPriorityQueue.html#a0b71ca9bf78de4cf33517c67c987f2b2',1,'PriorityQueue::push()'],['../classSlidingWindow.html#a57d04cd6d016fe2c45ed2895003c1f71',1,'SlidingWindow::push()']]]
 ];
