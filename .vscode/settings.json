@@ -70,8 +70,13 @@
         "mutex": "cpp",
         "ratio": "cpp",
         "stop_token": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "*.hpp": "cpp",
+        "*.cpp": "cpp"
     },
-    "cmake.configureSettings": { "gtest_build_samples": "ON" }
-
+    "cmake.configureSettings": { "gtest_build_samples": "ON" },
+    "C_Cpp.default.includePath": [
+        "${workspaceFolder}/include",
+        "${workspaceFolder}/src"
+    ]
 }
