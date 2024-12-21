@@ -66,10 +66,10 @@ jobs:
         cd ../..
         
         # Collect coverage
-        lcov --rc lcov_branch_coverage=1 --directory . --capture --output-file test.info --ignore-errors empty,mismatch,range --quiet
+        lcov --rc lcov_branch_coverage=1 --directory . --capture --output-file test.info --ignore-errors empty,mismatch,range,unused --quiet
         lcov --rc lcov_branch_coverage=1 --add-tracefile base.info --add-tracefile test.info --output-file coverage.info
-        lcov --rc lcov_branch_coverage=1 --remove coverage.info '/usr/*' '*/tests/*' '*/build/*' --output-file filtered.info
-        lcov --rc lcov_branch_coverage=1 --list filtered.info --ignore-errors empty,mismatch,range
+        lcov --rc lcov_branch_coverage=1 --remove coverage.info '/usr/*' '*/tests/*' --output-file filtered.info
+        lcov --rc lcov_branch_coverage=1 --list filtered.info --ignore-errors empty,mismatch,range,unused
 
     - name: Upload coverage report
       uses: actions/upload-artifact@v3
