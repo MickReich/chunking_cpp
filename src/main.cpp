@@ -48,6 +48,23 @@ void print_chunks(const std::vector<std::vector<T>>& chunks) {
     std::cout << "]" << std::endl;
 }
 
+// Helper function to print sub-chunks
+template <typename T>
+void print_sub_chunks(const std::vector<std::vector<std::vector<T>>>& sub_chunks, 
+                     const std::string& label) {
+    std::cout << "\n" << label << ":\n";
+    for (size_t i = 0; i < sub_chunks.size(); ++i) {
+        std::cout << "Level " << i + 1 << ":\n";
+        for (size_t j = 0; j < sub_chunks[i].size(); ++j) {
+            std::cout << "  Sub-chunk " << j + 1 << ": ";
+            for (const auto& val : sub_chunks[i][j]) {
+                std::cout << val << " ";
+            }
+            std::cout << "\n";
+        }
+    }
+}
+
 int main() {
     // Example 1: Integer chunking
     std::cout << "\n=== Integer Chunking Example ===" << std::endl;
@@ -388,7 +405,7 @@ int main() {
     std::cout << "\n--- Recursive Sub-chunking ---" << std::endl;
     RecursiveSubChunkStrategy<double> recursive_strategy(variance_strategy_ptr, 2, 2);
     auto recursive_result = recursive_strategy.apply(hierarchical_data);
-    print_chunks(recursive_result);
+    print_sub_chunks(recursive_result, "Recursive Sub-chunking");
 
     // Hierarchical sub-chunking example
     std::cout << "\n--- Hierarchical Sub-chunking ---" << std::endl;
@@ -399,7 +416,7 @@ int main() {
 
     HierarchicalSubChunkStrategy<double> hierarchical_strategy(strategies, 2);
     auto hierarchical_result = hierarchical_strategy.apply(hierarchical_data);
-    print_chunks(hierarchical_result);
+    print_sub_chunks(hierarchical_result, "Hierarchical Sub-chunking");
 
     // Conditional sub-chunking example
     std::cout << "\n--- Conditional Sub-chunking ---" << std::endl;
@@ -418,7 +435,7 @@ int main() {
 
     ConditionalSubChunkStrategy<double> conditional_strategy(variance_strategy_ptr, condition, 2);
     auto conditional_result = conditional_strategy.apply(hierarchical_data);
-    print_chunks(conditional_result);
+    print_sub_chunks(conditional_result, "Conditional Sub-chunking");
 
     return 0;
 }
