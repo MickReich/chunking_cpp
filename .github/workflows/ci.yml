@@ -69,7 +69,7 @@ jobs:
         lcov --rc lcov_branch_coverage=1 --directory . --capture --output-file test.info --ignore-errors empty,mismatch,range,unused --quiet
         lcov --rc lcov_branch_coverage=1 --add-tracefile base.info --add-tracefile test.info --output-file coverage.info
         lcov --rc lcov_branch_coverage=1 --remove coverage.info '/usr/*' '*/tests/*' --output-file filtered.info
-        lcov --rc lcov_branch_coverage=1 --list filtered.info --ignore-errors empty,mismatch,range,unused
+        lcov --rc lcov_branch_coverage=1 --list filtered.info --ignore-errors empty,mismatch,unused
 
     - name: Upload coverage report
       uses: actions/upload-artifact@v3
@@ -85,7 +85,12 @@ jobs:
 
     - name: Fix coverage paths
       run: |
-        sed -i 's|/mnt/c/Users/jonat/OneDrive/Documents/Python Scripts/chunking_cpp/|/github/workspace/|g' build/tests/coverage.info
+        # Get the absolute path to the project root
+        PROJECT_ROOT=$(pwd)
+        # Escape special characters in the path for sed
+        ESCAPED_PATH=$(echo "$PROJECT_ROOT" | sed 's/[\/&]/\\&/g')
+        # Replace the absolute path with /github/workspace/
+        sed -i "s|$ESCAPED_PATH/|/github/workspace/|g" filtered.info
 
     - name: Debug coverage files
       run: |
