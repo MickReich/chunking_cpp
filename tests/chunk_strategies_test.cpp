@@ -15,16 +15,16 @@ protected:
 class VarianceStrategyTest : public ::testing::Test {
 protected:
     void SetUp() override {
-        low_variance_data = {1.0, 1.1, 0.9, 1.05, 0.95};  // Low variance group
+        low_variance_data = {1.0, 1.1, 0.9, 1.05, 0.95};   // Low variance group
         high_variance_data = {1.0, 5.0, 10.0, 15.0, 20.0}; // High variance group
         mixed_variance_data = {
-            1.0, 1.1, 0.9,    // Group 1 (low variance)
-            5.0, 5.1, 4.9,    // Group 2 (low variance)
-            10.0, 15.0, 20.0  // Group 3 (high variance)
+            1.0,  1.1,  0.9, // Group 1 (low variance)
+            5.0,  5.1,  4.9, // Group 2 (low variance)
+            10.0, 15.0, 20.0 // Group 3 (high variance)
         };
         test_data = {1.0, 1.1, 1.2, 5.0, 5.1, 5.2, 2.0, 2.1, 2.2};
     }
-    
+
     const double variance_tolerance = 1e-10;
     std::vector<double> test_data;
     std::vector<double> low_variance_data;
@@ -38,13 +38,13 @@ protected:
         low_entropy_data = {1, 1, 1, 1, 1};  // Zero entropy
         high_entropy_data = {1, 2, 3, 4, 5}; // High entropy (all different)
         mixed_entropy_data = {
-            1, 1, 1,          // Group 1 (low entropy)
-            2, 2, 2,          // Group 2 (low entropy)
-            1, 2, 3, 4        // Group 3 (high entropy)
+            1, 1, 1,   // Group 1 (low entropy)
+            2, 2, 2,   // Group 2 (low entropy)
+            1, 2, 3, 4 // Group 3 (high entropy)
         };
         test_data = {1, 1, 1, 2, 2, 3, 4, 4, 4, 4};
     }
-    
+
     const double entropy_tolerance = 1e-10;
     std::vector<double> test_data;
     std::vector<double> low_entropy_data;
@@ -182,9 +182,9 @@ TEST_F(VarianceStrategyTest, HighVarianceData) {
 TEST_F(VarianceStrategyTest, MixedVarianceData) {
     VarianceStrategy<double> strategy(1.0);
     auto chunks = strategy.apply(mixed_variance_data);
-    
+
     EXPECT_GT(chunks.size(), 1) << "Mixed variance data should be split";
-    
+
     // Check each chunk's variance
     for (const auto& chunk : chunks) {
         double mean = std::accumulate(chunk.begin(), chunk.end(), 0.0) / chunk.size();
@@ -193,9 +193,8 @@ TEST_F(VarianceStrategyTest, MixedVarianceData) {
             variance += (val - mean) * (val - mean);
         }
         variance /= chunk.size();
-        
-        EXPECT_LE(variance, 1.0 + variance_tolerance) 
-            << "Chunk variance exceeds threshold";
+
+        EXPECT_LE(variance, 1.0 + variance_tolerance) << "Chunk variance exceeds threshold";
     }
 }
 
@@ -214,37 +213,34 @@ TEST_F(EntropyStrategyTest, HighEntropyData) {
 TEST_F(EntropyStrategyTest, MixedEntropyData) {
     EntropyStrategy<double> strategy(1.0);
     auto chunks = strategy.apply(mixed_entropy_data);
-    
+
     EXPECT_GT(chunks.size(), 1) << "Mixed entropy data should be split";
-    
+
     // Check each chunk's entropy
     for (const auto& chunk : chunks) {
         std::map<double, int> freq;
         for (const auto& val : chunk) {
             freq[val]++;
         }
-        
+
         double entropy = 0.0;
         for (const auto& [_, count] : freq) {
             double p = static_cast<double>(count) / chunk.size();
             entropy -= p * std::log2(p);
         }
-        
-        EXPECT_LE(entropy, 1.0 + entropy_tolerance) 
-            << "Chunk entropy exceeds threshold";
+
+        EXPECT_LE(entropy, 1.0 + entropy_tolerance) << "Chunk entropy exceeds threshold";
     }
 }
 
 TEST_F(VarianceStrategyTest, ZeroThreshold) {
     VarianceStrategy<double> strategy(0.0);
     auto chunks = strategy.apply(test_data);
-    EXPECT_GT(chunks.size(), 1) 
-        << "Zero variance threshold should split most non-constant data";
+    EXPECT_GT(chunks.size(), 1) << "Zero variance threshold should split most non-constant data";
 }
 
 TEST_F(EntropyStrategyTest, ZeroThreshold) {
     EntropyStrategy<double> strategy(0.0);
     auto chunks = strategy.apply(test_data);
-    EXPECT_GT(chunks.size(), 1) 
-        << "Zero entropy threshold should split most non-constant data";
+    EXPECT_GT(chunks.size(), 1) << "Zero entropy threshold should split most non-constant data";
 }
