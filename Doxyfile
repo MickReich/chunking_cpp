@@ -43,7 +43,12 @@ INPUT                = README.md \
                       include/advanced_structures.hpp \
                       include/chunk_strategies.hpp \
                       include/parallel_chunk.hpp \
-                      include/chunk_compression.hpp
+                      include/chunk_compression.hpp \
+                      include/sub_chunk_strategies.hpp \
+                      include/chunk_windows.hpp \
+                      include/data_structures.hpp \
+                      include/utils.hpp \
+                      include/config.hpp
 USE_MDFILE_AS_MAINPAGE = README.md
 FILE_PATTERNS        = *.cpp \
                       *.hpp \
@@ -55,6 +60,12 @@ EXCLUDE_PATTERNS     = */build/* \
                       */tests/*
 INCLUDE_PATH         = include
 
+# Additional paths
+STRIP_FROM_PATH      = include
+STRIP_FROM_INC_PATH  = include
+FULL_PATH_NAMES      = YES
+SHORT_NAMES          = NO
+
 # Output formats
 GENERATE_HTML        = YES
 HTML_OUTPUT          = html
@@ -62,6 +73,12 @@ HTML_FILE_EXTENSION  = .html
 HTML_TIMESTAMP       = YES
 HTML_DYNAMIC_MENUS   = YES
 HTML_DYNAMIC_SECTIONS= YES
+GENERATE_TREEVIEW    = YES
+DISABLE_INDEX        = NO
+FULL_SIDEBAR         = NO
+HTML_COLORSTYLE_HUE  = 220
+HTML_COLORSTYLE_SAT  = 100
+HTML_COLORSTYLE_GAMMA = 80
 
 # Source browsing
 SOURCE_BROWSER       = YES

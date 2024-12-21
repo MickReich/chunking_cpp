@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -48,6 +52,22 @@ $(function() {
 </script>
 <div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('index.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -73,7 +93,7 @@ $(function() {
   <div class="headertitle"><div class="title">Advanced <a class="el" href="classChunk.html" title="A template class for managing and processing data in chunks.">Chunk</a> Processing Library </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md_README"></a> <a href="https://codecov.io/gh/JohnnyTeutonic/chunking_cpp/"><img src="https://codecov.io/gh/JohnnyTeutonic/chunking_cpp/branch/main/graph/badge.svg" alt="codecov" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/JohnnyTeutonic/chunking_cpp/actions/workflows/ci.yml"><img src="https://github.com/JohnnyTeutonic/chunking_cpp/actions/workflows/ci.yml/badge.svg" alt="Tests" style="pointer-events: none;" class="inline"/></a></p>
+<div class="textblock"><p><a class="anchor" id="md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README"></a> <a href="https://codecov.io/gh/JohnnyTeutonic/chunking_cpp/"><img src="https://codecov.io/gh/JohnnyTeutonic/chunking_cpp/branch/main/graph/badge.svg" alt="codecov" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/JohnnyTeutonic/chunking_cpp/actions/workflows/ci.yml"><img src="https://github.com/JohnnyTeutonic/chunking_cpp/actions/workflows/ci.yml/badge.svg" alt="Tests" style="pointer-events: none;" class="inline"/></a></p>
 <p>A modern C++17 library providing advanced data chunking and processing capabilities with a focus on performance and flexibility.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Overview</h1>
@@ -86,6 +106,7 @@ Core Functionality</h2>
 <li>Parallel chunk processing</li>
 <li><a class="el" href="classChunk.html" title="A template class for managing and processing data in chunks.">Chunk</a> compression (RLE, Delta)</li>
 <li>Basic chunking operations</li>
+<li>Sub-chunking strategies</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md4"></a>
 Advanced Chunking Strategies</h2>
@@ -101,6 +122,13 @@ Advanced Chunking Strategies</h2>
 <li>Padded fixed-size chunking</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md5"></a>
+Sub-Chunking Strategies</h2>
+<ul>
+<li>Recursive sub-chunking</li>
+<li>Hierarchical sub-chunking</li>
+<li>Conditional sub-chunking</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md6"></a>
 Data Structures</h2>
 <ul>
 <li>Circular buffer</li>
@@ -108,14 +136,14 @@ Data Structures</h2>
 <li>Priority queue</li>
 <li><a class="el" href="classChunk.html" title="A template class for managing and processing data in chunks.">Chunk</a> list</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md6"></a>
+<h2><a class="anchor" id="autotoc_md7"></a>
 Analysis &amp; Utilities</h2>
 <ul>
 <li>Statistical operations</li>
 <li>Random chunk generation</li>
 <li><a class="el" href="classChunk.html" title="A template class for managing and processing data in chunks.">Chunk</a> manipulation utilities</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md7"></a>
+<h1><a class="anchor" id="autotoc_md8"></a>
 Requirements</h1>
 <ul>
 <li>C++17 compatible compiler (GCC 7+, Clang 5+, MSVC 2017+)</li>
@@ -124,7 +152,7 @@ Requirements</h1>
 <li>Doxygen (for documentation)</li>
 <li>Graphviz (for documentation graphs)</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md8"></a>
+<h1><a class="anchor" id="autotoc_md9"></a>
 Quick Start</h1>
 <div class="fragment"><div class="line"># Clone the repository</div>
 <div class="line">git clone git@github.com:JohnnyTeutonic/chunking_cpp.git</div>
@@ -144,9 +172,9 @@ Quick Start</h1>
 <div class="line"># Uninstall if needed</div>
 <div class="line">make uninstall</div>
 </div><!-- fragment --><p>For detailed build instructions, dependencies, and configuration options, see BUILDING.md.</p>
-<h1><a class="anchor" id="autotoc_md9"></a>
+<h1><a class="anchor" id="autotoc_md10"></a>
 Usage Examples</h1>
-<h2><a class="anchor" id="autotoc_md10"></a>
+<h2><a class="anchor" id="autotoc_md11"></a>
 Basic Usage</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="chunk_8hpp.html">chunk.hpp</a>&quot;</span></div>
 <div class="line"> </div>
@@ -161,9 +189,14 @@ Basic Usage</h2>
 <div class="line"><span class="keyword">auto</span> chunks = chunker.get_chunks(); <span class="comment">// Returns: {{1,2}, {3,4}, {5}}</span></div>
 <div class="ttc" id="achunk_8hpp_html"><div class="ttname"><a href="chunk_8hpp.html">chunk.hpp</a></div><div class="ttdoc">Template class for chunk-based data processing.</div></div>
 <div class="ttc" id="aclassChunk_html"><div class="ttname"><a href="classChunk.html">Chunk</a></div><div class="ttdoc">A template class for managing and processing data in chunks.</div><div class="ttdef"><b>Definition</b> <a href="chunk_8hpp_source.html#l00027">chunk.hpp:27</a></div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md11"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md12"></a>
 Advanced Features</h2>
-<div class="fragment"><div class="line"><span class="comment">// Predicate-based chunking</span></div>
+<div class="fragment"><div class="line"><span class="comment">// Sub-chunking example</span></div>
+<div class="line"><span class="keyword">auto</span> variance_strategy = std::make_shared&lt;VarianceStrategy&lt;double&gt;&gt;(5.0);</div>
+<div class="line">RecursiveSubChunkStrategy&lt;double&gt; recursive_strategy(variance_strategy, 2, 2);</div>
+<div class="line"><span class="keyword">auto</span> sub_chunks = recursive_strategy.apply(data);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Predicate-based chunking</span></div>
 <div class="line"><span class="keyword">auto</span> even_chunks = chunker.chunk_by_predicate([](<span class="keywordtype">int</span> x) { <span class="keywordflow">return</span> x % 2 == 0; });</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Similarity-based chunking</span></div>
@@ -173,7 +206,7 @@ Advanced Features</h2>
 <div class="line">ParallelChunkProcessor&lt;int&gt; parallel_chunker(4); <span class="comment">// 4 threads</span></div>
 <div class="line">parallel_chunker.process_chunks(chunks, [](<span class="keywordtype">int</span> x) { <span class="keywordflow">return</span> x * 2; });</div>
 </div><!-- fragment --><p>See <code><a class="el" href="main_8cpp.html">src/main.cpp</a></code> for more comprehensive examples.</p>
-<h1><a class="anchor" id="autotoc_md12"></a>
+<h1><a class="anchor" id="autotoc_md13"></a>
 Documentation</h1>
 <p>The library is extensively documented using Doxygen. You can:</p>
 <ol type="1">
@@ -182,7 +215,7 @@ Documentation</h1>
 </ol>
 <div class="fragment"><div class="line">make docs</div>
 <div class="line">make docs-serve</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md13"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md14"></a>
 Contributing</h1>
 <p>Contributions are welcome! Please:</p>
 <ol type="1">
@@ -192,10 +225,10 @@ Contributing</h1>
 <li>Ensure all tests pass</li>
 <li>Submit a pull request</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md14"></a>
+<h1><a class="anchor" id="autotoc_md15"></a>
 License</h1>
 <p>This project is licensed under the GNU General Public License v2.0 - see the [LICENSE](LICENSE) file for details.</p>
-<h1><a class="anchor" id="autotoc_md15"></a>
+<h1><a class="anchor" id="autotoc_md16"></a>
 Citation</h1>
 <p>If you use this library in your research, please cite:</p>
 <div class="fragment"><div class="line">@software{chunking_cpp,</div>
@@ -204,7 +237,7 @@ Citation</h1>
 <div class="line">  year = {2024},</div>
 <div class="line">  url = {https://github.com/JohnnyTeutonic/chunking_cpp}</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md16"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md17"></a>
 Project Structure</h1>
 <div class="fragment"><div class="line">.</div>
 <div class="line">├── include/</div>
@@ -213,7 +246,8 @@ Project Structure</h1>
 <div class="line">│   │   └── config.hpp</div>
 <div class="line">│   ├── strategies/</div>
 <div class="line">│   │   ├── chunk_strategies.hpp</div>
-<div class="line">│   │   └── chunk_compression.hpp</div>
+<div class="line">│   │   ├── chunk_compression.hpp</div>
+<div class="line">│   │   └── sub_chunk_strategies.hpp</div>
 <div class="line">│   ├── parallel/</div>
 <div class="line">│   │   └── parallel_chunk.hpp</div>
 <div class="line">│   ├── structures/</div>
@@ -245,9 +279,12 @@ Project Structure</h1>
 <div class="line">└── LICENSE</div>
 </div><!-- fragment --> </div></div><!-- PageDoc -->
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Sat Dec 21 2024 22:44:46 for Advanced Chunk Processing Library by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on Sun Dec 22 2024 05:04:06 for Advanced Chunk Processing Library by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
 </body>
 </html>

@@ -127,6 +127,7 @@ make docs-serve
 │   ├── advanced_structures.hpp
 │   ├── chunk_compression.hpp
 │   ├── chunk_strategies.hpp
+│   ├── sub_chunk_strategies.hpp
 │   ├── parallel_chunk.hpp
 │   └── utils.hpp
 ├── src/             # Source files
@@ -138,6 +139,7 @@ make docs-serve
 │   ├── chunk_compression_test.cpp
 │   ├── parallel_chunk_test.cpp
 │   ├── advanced_structures_test.cpp
+│   ├── sub_chunk_strategies_test.cpp
 │   └── utils_test.cpp
 ├── build/           # Build artifacts
 ├── docs/           # Generated documentation
@@ -158,3 +160,21 @@ make docs-serve
 - `make format-check`: Check source code formatting
 - `make install`: Install the project
 - `make uninstall`: Uninstall the project
+
+## Advanced Features
+
+### Sub-Chunking Strategies
+
+The library provides several sub-chunking strategies:
+
+- **Recursive Sub-chunking**: Apply a strategy recursively to create hierarchical chunks
+- **Hierarchical Sub-chunking**: Apply different strategies at each level
+- **Conditional Sub-chunking**: Apply sub-chunking based on chunk properties
+
+Example:
+
+```cpp
+auto strategy = std::make_shared<VarianceStrategy<double>>(5.0);
+RecursiveSubChunkStrategy<double> recursive(strategy, 2, 2);
+auto sub_chunks = recursive.apply(data);
+```

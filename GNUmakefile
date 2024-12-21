@@ -1,7 +1,7 @@
 # Project configuration
 PROJECT_NAME := ChunkProcessor
 BUILD_DIR := build
-DOC_DIR := $(BUILD_DIR)/docs
+DOC_DIR := docs
 TEST_DIR := $(BUILD_DIR)/tests
 SRC_FILES := $(shell find . -name "*.cpp" -o -name "*.hpp")
 
@@ -56,8 +56,14 @@ docs: setup-build
 	fi
 	@echo "Creating documentation directories..."
 	@mkdir -p $(DOC_DIR)
+	@mkdir -p $(DOC_DIR)/html
 	@chmod 755 $(DOC_DIR)
+	@echo "Generating documentation..."
 	@doxygen Doxyfile
+	@if [ ! -f "$(DOC_DIR)/html/index.html" ]; then \
+		echo "Error: Documentation generation failed!"; \
+		exit 1; \
+	fi
 	@echo "Documentation generated in $(DOC_DIR)/html"
 
 # Clean documentation
@@ -67,12 +73,19 @@ docs-clean:
 
 # Serve documentation locally
 docs-serve: docs
-	@if ! command -v python3 > /dev/null; then \
-		echo "Error: python3 not found. Please install python3 first."; \
-		exit 1; \
+	@if [ ! -f "$(DOC_DIR)/html/index.html" ]; then \
+		echo "Error: Documentation not found. Running 'make docs' first..."; \
+		$(MAKE) docs; \
 	fi
-	@echo "Serving documentation at http://localhost:8000"
-	@cd $(DOC_DIR)/html && python3 -m http.server 8000
+	@mkdir -p $(BUILD_DIR)
+	@echo "Starting documentation server on port 8000..."
+	@if lsof -Pi :8000 -sTCP:LISTEN -t >/dev/null ; then \
+		echo "Port 8000 is already in use. Killing existing process..." ; \
+		lsof -ti :8000 | xargs kill -9 ; \
+	fi
+	@cd $(DOC_DIR)/html && \
+	(python3 -m http.server --bind 127.0.0.1 8000 2>/dev/null & echo $$! > $(BUILD_DIR)/.docs-server.pid) && \
+	echo "Documentation server started. Visit http://localhost:8000"
 
 # Help target
 local-help:
@@ -111,3 +124,12 @@ format-check:
 	@echo "Checking source file formatting..."
 	@clang-format --dry-run -Werror $(SRC_FILES)
 	@echo "All files are properly formatted"
+
+.PHONY: docs-stop
+docs-stop:
+	@mkdir -p $(BUILD_DIR)
+	@if [ -f $(BUILD_DIR)/.docs-server.pid ]; then \
+		echo "Stopping documentation server..." ; \
+		kill -9 `cat $(BUILD_DIR)/.docs-server.pid` 2>/dev/null || true ; \
+		rm $(BUILD_DIR)/.docs-server.pid ; \
+	fi
