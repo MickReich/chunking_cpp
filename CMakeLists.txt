@@ -93,6 +93,7 @@ add_executable(run_tests
     tests/parallel_chunk_test.cpp
     tests/advanced_structures_test.cpp
     tests/advanced_chunk_strategies_test.cpp
+    tests/sub_chunk_strategies_test.cpp
 )
 
 # Set the output directory for run_tests executable
