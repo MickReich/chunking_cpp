@@ -6,6 +6,8 @@
 #include <future>
 #include <thread>
 #include <vector>
+#include <mutex>
+#include <exception>
 
 namespace parallel_chunk {
 
@@ -24,22 +26,31 @@ public:
      * @param operation Operation to apply to each chunk
      * @param num_threads Number of threads to use (default: hardware concurrency)
      */
-    static void process_chunks(std::vector<std::vector<T>>& chunks, ChunkOperation operation,
-                               size_t num_threads = std::thread::hardware_concurrency()) {
-        std::vector<std::future<void>> futures;
-        size_t chunks_per_thread = (chunks.size() + num_threads - 1) / num_threads;
+    static void process_chunks(std::vector<std::vector<T>>& chunks,
+                               const std::function<void(std::vector<T>&)>& operation) {
+        std::mutex exception_mutex;
+        std::exception_ptr exception_ptr = nullptr;
+        std::vector<std::thread> threads;
 
-        for (size_t i = 0; i < chunks.size(); i += chunks_per_thread) {
-            size_t end = std::min(i + chunks_per_thread, chunks.size());
-            futures.push_back(std::async(std::launch::async, [&, i, end]() {
-                for (size_t j = i; j < end; ++j) {
-                    operation(chunks[j]);
+        for (auto& chunk : chunks) {
+            threads.emplace_back([&chunk, &operation, &exception_mutex, &exception_ptr]() {
+                try {
+                    operation(chunk);
+                } catch (...) {
+                    std::lock_guard<std::mutex> lock(exception_mutex);
+                    if (!exception_ptr) {
+                        exception_ptr = std::current_exception();
+                    }
                 }
-            }));
+            });
         }
 
-        for (auto& future : futures) {
-            future.wait();
+        for (auto& thread : threads) {
+            thread.join();
+        }
+
+        if (exception_ptr) {
+            std::rethrow_exception(exception_ptr);
         }
     }
 

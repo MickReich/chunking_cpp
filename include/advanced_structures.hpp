@@ -115,6 +115,12 @@ public:
         insert_non_full(root, key);
     }
 
+    bool search(const T& key) const {
+        if (root == nullptr) return false;
+        
+        return search_node(root, key);
+    }
+
 private:
     void split_child(std::shared_ptr<Node> parent, int index) {
         auto child = parent->children[index];
@@ -158,6 +164,23 @@ private:
             }
             insert_non_full(node->children[i], key);
         }
+    }
+
+    bool search_node(const std::shared_ptr<Node>& node, const T& key) const {
+        int i = 0;
+        while (i < node->keys.size() && key > node->keys[i]) {
+            i++;
+        }
+        
+        if (i < node->keys.size() && key == node->keys[i]) {
+            return true;
+        }
+        
+        if (node->is_leaf) {
+            return false;
+        }
+        
+        return search_node(node->children[i], key);
     }
 };
 

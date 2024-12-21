@@ -153,3 +153,40 @@ TEST_F(ChunkTest, InitializationTest) {
     ASSERT_EQ(chunks[1], (std::vector<int>{3, 4}));
     ASSERT_EQ(chunks[2], (std::vector<int>{5}));
 }
+
+TEST_F(ChunkTest, EmptyChunkOperations) {
+    EXPECT_EQ(basic_chunker.size(), 0);
+    EXPECT_TRUE(basic_chunker.get_chunks().empty());
+    EXPECT_THROW(basic_chunker.get_chunk(0), std::out_of_range);
+}
+
+TEST_F(ChunkTest, EdgeCases) {
+    // Test with empty vector
+    std::vector<value_type> empty_data;
+    basic_chunker.add(empty_data);
+    EXPECT_EQ(basic_chunker.size(), 0);
+    
+    // Test with single element
+    basic_chunker.add(1);
+    EXPECT_EQ(basic_chunker.size(), 1);
+    
+    // Test chunk size equal to data size
+    Chunk<value_type> exact_chunker(5);
+    exact_chunker.add(test_data);
+    EXPECT_EQ(exact_chunker.get_chunks().size(), 1);
+}
+
+TEST_F(ChunkTest, ChunkBoundaries) {
+    // Test chunk size larger than data
+    Chunk<value_type> large_chunker(10);
+    large_chunker.add(test_data);
+    auto chunks = large_chunker.get_chunks();
+    EXPECT_EQ(chunks.size(), 1);
+    EXPECT_EQ(chunks[0], test_data);
+}
+
+TEST_F(ChunkTest, InvalidOperations) {
+    EXPECT_THROW(basic_chunker.get_overlapping_chunks(3), std::invalid_argument);
+    EXPECT_THROW(basic_chunker.chunk_into_n(0), std::invalid_argument);
+    EXPECT_THROW(basic_chunker.sliding_window(0), std::invalid_argument);
+}

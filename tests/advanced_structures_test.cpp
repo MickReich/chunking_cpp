@@ -5,7 +5,23 @@
 
 using namespace advanced_structures;
 
-TEST(ChunkSkipListTest, BasicOperations) {
+class ChunkSkipListTest : public ::testing::Test {
+protected:
+    void SetUp() override {
+        test_data = {1, 2, 3, 4, 5};
+    }
+    std::vector<int> test_data;
+};
+
+class ChunkBPlusTreeTest : public ::testing::Test {
+protected:
+    void SetUp() override {
+        test_data = {1, 2, 3, 4, 5};
+    }
+    std::vector<int> test_data;
+};
+
+TEST_F(ChunkSkipListTest, BasicOperations) {
     ChunkSkipList<int> skip_list;
 
     // Test insertion
@@ -37,7 +53,7 @@ TEST(ChunkSkipListTest, BasicOperations) {
     }
 }
 
-TEST(ChunkBPlusTreeTest, BasicOperations) {
+TEST_F(ChunkBPlusTreeTest, BasicOperations) {
     ChunkBPlusTree<int> tree;
 
     // Test insertion
@@ -46,15 +62,17 @@ TEST(ChunkBPlusTreeTest, BasicOperations) {
         tree.insert(val);
     }
 
-    // Sort values for comparison
-    std::sort(values.begin(), values.end());
+    // Test if values exist in tree
+    for (int val : values) {
+        EXPECT_TRUE(tree.search(val));
+    }
 
-    // Test traversal (implement if needed)
-    // auto result = tree.traverse();
-    // EXPECT_EQ(result, values);
+    // Test non-existent values
+    EXPECT_FALSE(tree.search(0));
+    EXPECT_FALSE(tree.search(10));
 }
 
-TEST(ChunkSkipListTest, StressTest) {
+TEST_F(ChunkSkipListTest, StressTest) {
     ChunkSkipList<int> skip_list;
     const int NUM_ELEMENTS = 10000;
 
@@ -72,4 +90,21 @@ TEST(ChunkSkipListTest, StressTest) {
     for (int i = NUM_ELEMENTS; i < NUM_ELEMENTS + 100; i++) {
         EXPECT_FALSE(skip_list.search(i));
     }
+}
+
+TEST_F(ChunkSkipListTest, EmptyOperations) {
+    ChunkSkipList<int> list;
+    EXPECT_TRUE(list.search(1) == false);
+    EXPECT_TRUE(list.search(0) == false);
+}
+
+TEST_F(ChunkBPlusTreeTest, EdgeCases) {
+    ChunkBPlusTree<int> tree;
+    tree.insert(1);
+    tree.insert(2);
+
+    // Verify insertions using find
+    EXPECT_TRUE(tree.search(1));
+    EXPECT_TRUE(tree.search(2));
+    EXPECT_FALSE(tree.search(3));
 }

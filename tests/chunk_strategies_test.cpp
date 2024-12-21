@@ -4,15 +4,38 @@
 
 using namespace chunk_strategies;
 
-TEST(QuantileStrategyTest, BasicOperation) {
-    std::vector<double> data = {1.0, 2.0, 5.0, 6.0, 3.0, 4.0, 8.0, 7.0};
+class QuantileStrategyTest : public ::testing::Test {
+protected:
+    void SetUp() override {
+        test_data = {1.0, 2.0, 5.0, 6.0, 3.0, 4.0, 8.0, 7.0};
+    }
+    std::vector<double> test_data;
+};
+
+class VarianceStrategyTest : public ::testing::Test {
+protected:
+    void SetUp() override {
+        test_data = {1.0, 1.1, 1.2, 5.0, 5.1, 5.2, 2.0, 2.1, 2.2};
+    }
+    std::vector<double> test_data;
+};
+
+class EntropyStrategyTest : public ::testing::Test {
+protected:
+    void SetUp() override {
+        test_data = {1, 1, 1, 2, 2, 3, 4, 4, 4, 4};
+    }
+    std::vector<double> test_data;
+};
+
+TEST_F(QuantileStrategyTest, BasicOperation) {
     QuantileStrategy<double> strategy(0.5); // median
 
-    auto chunks = strategy.apply(data);
+    auto chunks = strategy.apply(test_data);
     EXPECT_EQ(chunks.size(), 2); // Should split into two chunks at median
 
     // Get the median value
-    std::vector<double> sorted_data = data;
+    std::vector<double> sorted_data = test_data;
     std::sort(sorted_data.begin(), sorted_data.end());
     double median = sorted_data[sorted_data.size() / 2];
 
@@ -33,7 +56,7 @@ TEST(QuantileStrategyTest, BasicOperation) {
 }
 
 // Add more specific test cases
-TEST(QuantileStrategyTest, EdgeCases) {
+TEST_F(QuantileStrategyTest, EdgeCases) {
     // Empty input
     std::vector<double> empty_data;
     QuantileStrategy<double> strategy(0.5);
@@ -52,7 +75,7 @@ TEST(QuantileStrategyTest, EdgeCases) {
     EXPECT_GT(same_chunks.size(), 0);
 }
 
-TEST(QuantileStrategyTest, InvalidQuantile) {
+TEST_F(QuantileStrategyTest, InvalidQuantile) {
     EXPECT_THROW(QuantileStrategy<double>(-0.1), std::invalid_argument);
     EXPECT_THROW(QuantileStrategy<double>(1.1), std::invalid_argument);
     EXPECT_NO_THROW(QuantileStrategy<double>(0.0));
@@ -60,11 +83,10 @@ TEST(QuantileStrategyTest, InvalidQuantile) {
     EXPECT_NO_THROW(QuantileStrategy<double>(0.5));
 }
 
-TEST(VarianceStrategyTest, BasicOperation) {
-    std::vector<double> data = {1.0, 1.1, 1.2, 5.0, 5.1, 5.2, 2.0, 2.1, 2.2};
+TEST_F(VarianceStrategyTest, BasicOperation) {
     VarianceStrategy<double> strategy(1.0);
 
-    auto chunks = strategy.apply(data);
+    auto chunks = strategy.apply(test_data);
     EXPECT_GT(chunks.size(), 1);
 
     // Verify each chunk has low variance
@@ -78,11 +100,10 @@ TEST(VarianceStrategyTest, BasicOperation) {
     }
 }
 
-TEST(EntropyStrategyTest, BasicOperation) {
-    std::vector<int> data = {1, 1, 1, 2, 2, 3, 4, 4, 4, 4};
-    EntropyStrategy<int> strategy(1.5);
+TEST_F(EntropyStrategyTest, BasicOperation) {
+    EntropyStrategy<double> strategy(1.5);
 
-    auto chunks = strategy.apply(data);
+    auto chunks = strategy.apply(test_data);
     EXPECT_GT(chunks.size(), 1);
 
     // Verify chunks with repeated values have low entropy
@@ -100,4 +121,24 @@ TEST(EntropyStrategyTest, BasicOperation) {
 
         EXPECT_LE(entropy, 1.5);
     }
+}
+
+TEST_F(QuantileStrategyTest, EmptyData) {
+    std::vector<double> empty_data;
+    auto strategy = QuantileStrategy<double>(0.5);
+    EXPECT_TRUE(strategy.apply(empty_data).empty());
+}
+
+TEST_F(VarianceStrategyTest, SingleElement) {
+    std::vector<double> single_data{1.0};
+    auto strategy = VarianceStrategy<double>(1.0);
+    auto chunks = strategy.apply(single_data);
+    EXPECT_EQ(chunks.size(), 1);
+}
+
+TEST_F(EntropyStrategyTest, ConstantData) {
+    std::vector<double> constant_data(10, 1.0);
+    auto strategy = EntropyStrategy<double>(0.5);
+    auto chunks = strategy.apply(constant_data);
+    EXPECT_EQ(chunks.size(), 1);
 }
