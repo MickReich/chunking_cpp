@@ -78,11 +78,12 @@ jobs:
         path: filtered.info
 
     - name: Upload to Codecov
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v5
       with:
         files: filtered.info
         fail_ci_if_error: true
         token: ${{ secrets.CODECOV_TOKEN }}
+        slug: JohnnyTeutonic/chunking_cpp
         verbose: true
 
     - name: Fix coverage paths
