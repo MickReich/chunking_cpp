@@ -6,12 +6,21 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+# Allow only one concurrent deployment
+concurrency:
+    group: "pages"
+    cancel-in-progress: true
+  
 jobs:
   build-docs:
+    environment:
+        name: github-pages
+        url: ${{ steps.deployment.outputs.page_url }}  
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-
     steps:
     - uses: actions/checkout@v3
 
@@ -22,29 +31,22 @@ jobs:
 
     - name: Generate documentation
       run: |
+        make docs-clean
         make docs
 
+    - name: Setup Pages
+      uses: actions/configure-pages@v3
+          
     - name: Upload documentation artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-pages-artifact@v2
       with:
-        name: doxygen-docs
-        path: docs/html/
+        path: ".docs/html/"
         if-no-files-found: error
-
+    
     - name: Deploy to GitHub Pages
-      if: github.ref == 'refs/heads/main'
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs/html
-        enable_jekyll: false
-        allow_empty_commit: true
-        force_orphan: true
-        commit_message: 'docs: update documentation'
-        user_name: 'github-actions[bot]'
-        user_email: 'github-actions[bot]@users.noreply.github.com'
+        id: deployment
+        uses: actions/deploy-pages@v2
 
     - name: Check deployment
-      if: github.ref == 'refs/heads/main'
       run: |
         echo "Documentation should be available at https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
