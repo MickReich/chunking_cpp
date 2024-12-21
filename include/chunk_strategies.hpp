@@ -238,7 +238,7 @@ public:
             static T last = x;
             bool start_new = std::abs(x - last) > current_threshold;
             current_threshold = std::max(min_threshold_, 
-                                       current_threshold * decay_rate_);
+                                       static_cast<T>(current_threshold * decay_rate_));
             last = x;
             return start_new;
         });
