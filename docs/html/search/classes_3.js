@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['node_0',['node',['../structadvanced__structures_1_1ChunkBPlusTree_1_1Node.html',1,'advanced_structures::ChunkBPlusTree&lt; T &gt;::Node'],['../structadvanced__structures_1_1ChunkSkipList_1_1Node.html',1,'advanced_structures::ChunkSkipList&lt; T &gt;::Node']]]
+  ['dynamicthresholdstrategy_0',['DynamicThresholdStrategy',['../classchunk__strategies_1_1DynamicThresholdStrategy.html',1,'chunk_strategies']]]
 ];

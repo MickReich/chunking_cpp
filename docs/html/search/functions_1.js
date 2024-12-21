@@ -15,5 +15,6 @@ var searchData=
   ['chunknode_12',['ChunkNode',['../structChunkNode.html#a472aeaaf329410bb178ebd27bddee936',1,'ChunkNode']]],
   ['chunkskiplist_13',['ChunkSkipList',['../classadvanced__structures_1_1ChunkSkipList.html#a358f6d1eb351d99cf1fd6b74b48d3181',1,'advanced_structures::ChunkSkipList']]],
   ['circularbuffer_14',['CircularBuffer',['../classCircularBuffer.html#af34ba5fadb7bea7372c892acde3baf7a',1,'CircularBuffer']]],
-  ['clear_15',['clear',['../classChunkList.html#a81d821906a5ec8c79f1a9ed27cf1480a',1,'ChunkList']]]
+  ['clear_15',['clear',['../classChunkList.html#a81d821906a5ec8c79f1a9ed27cf1480a',1,'ChunkList']]],
+  ['conditionalsubchunkstrategy_16',['ConditionalSubChunkStrategy',['../classchunk__strategies_1_1ConditionalSubChunkStrategy.html#af71c64ffe37dea9bc55cb3633228a4f4',1,'chunk_strategies::ConditionalSubChunkStrategy']]]
 ];

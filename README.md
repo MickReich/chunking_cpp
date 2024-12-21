@@ -16,6 +16,7 @@ This library offers a comprehensive suite of tools for handling data in chunks, 
 - Parallel chunk processing
 - Chunk compression (RLE, Delta)
 - Basic chunking operations
+- Sub-chunking strategies
 
 ### Advanced Chunking Strategies
 
@@ -28,6 +29,12 @@ This library offers a comprehensive suite of tools for handling data in chunks, 
 - Similarity-based chunking
 - Monotonicity-based chunking
 - Padded fixed-size chunking
+
+### Sub-Chunking Strategies
+
+- Recursive sub-chunking
+- Hierarchical sub-chunking
+- Conditional sub-chunking
 
 ### Data Structures
 
@@ -95,6 +102,11 @@ auto chunks = chunker.get_chunks(); // Returns: {{1,2}, {3,4}, {5}}
 ### Advanced Features
 
 ```cpp
+// Sub-chunking example
+auto variance_strategy = std::make_shared<VarianceStrategy<double>>(5.0);
+RecursiveSubChunkStrategy<double> recursive_strategy(variance_strategy, 2, 2);
+auto sub_chunks = recursive_strategy.apply(data);
+
 // Predicate-based chunking
 auto even_chunks = chunker.chunk_by_predicate([](int x) { return x % 2 == 0; });
 
@@ -157,7 +169,8 @@ If you use this library in your research, please cite:
 │   │   └── config.hpp
 │   ├── strategies/
 │   │   ├── chunk_strategies.hpp
-│   │   └── chunk_compression.hpp
+│   │   ├── chunk_compression.hpp
+│   │   └── sub_chunk_strategies.hpp
 │   ├── parallel/
 │   │   └── parallel_chunk.hpp
 │   ├── structures/

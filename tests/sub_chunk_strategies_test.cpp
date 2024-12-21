@@ -1,9 +1,24 @@
+/**
+ * @file sub_chunk_strategies_test.cpp
+ * @brief Test suite for sub-chunking strategies
+ * 
+ * This file contains comprehensive tests for:
+ * - Recursive sub-chunking
+ * - Hierarchical sub-chunking
+ * - Conditional sub-chunking
+ * - Edge cases and error conditions
+ */
 #include "sub_chunk_strategies.hpp"
 #include "gtest/gtest.h"
 #include <vector>
 
 using namespace chunk_strategies;
 
+/**
+ * @brief Test fixture for sub-chunking strategy tests
+ * 
+ * Provides common test data and setup for all sub-chunking tests
+ */
 class SubChunkStrategiesTest : public ::testing::Test {
 protected:
     void SetUp() override {
