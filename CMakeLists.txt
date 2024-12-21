@@ -58,7 +58,6 @@ if(ENABLE_COVERAGE)
     set(COVERAGE_EXCLUDES
         '/usr/*'
         '${PROJECT_SOURCE_DIR}/tests/*'
-        '${PROJECT_SOURCE_DIR}/build/*'
     )
     
     add_custom_target(coverage
@@ -67,8 +66,8 @@ if(ENABLE_COVERAGE)
         COMMAND ${LCOV} --directory . --zerocounters
         COMMAND ${CMAKE_COMMAND} -E env LLVM_PROFILE_FILE=${CMAKE_BINARY_DIR}/coverage/coverage-%p.profraw
         COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target run_tests
-        COMMAND ${LCOV} --directory . --capture --output-file coverage.info --ignore-errors empty,mismatch,range
-        COMMAND ${LCOV} --remove coverage.info ${COVERAGE_EXCLUDES} --output-file filtered.info
+        COMMAND ${LCOV} --directory . --capture --output-file coverage.info --ignore-errors empty,mismatch,range,unused
+        COMMAND ${LCOV} --remove coverage.info ${COVERAGE_EXCLUDES} --output-file filtered.info --ignore-errors unused
         COMMAND ${GENHTML} filtered.info --output-directory ${CMAKE_BINARY_DIR}/coverage
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
         COMMENT "Generating coverage report"
