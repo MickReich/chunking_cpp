@@ -12,11 +12,13 @@ This library offers a comprehensive suite of tools for handling data in chunks, 
 ## Features
 
 ### Core Functionality
+
 - Parallel chunk processing
 - Chunk compression (RLE, Delta)
 - Basic chunking operations
 
 ### Advanced Chunking Strategies
+
 - Overlapping chunks
 - Predicate-based chunking
 - Sum-based chunking
@@ -28,12 +30,14 @@ This library offers a comprehensive suite of tools for handling data in chunks, 
 - Padded fixed-size chunking
 
 ### Data Structures
+
 - Circular buffer
 - Sliding window
 - Priority queue
 - Chunk list
 
 ### Analysis & Utilities
+
 - Statistical operations
 - Random chunk generation
 - Chunk manipulation utilities
@@ -73,6 +77,7 @@ For detailed build instructions, dependencies, and configuration options, see [B
 ## Usage Examples
 
 ### Basic Usage
+
 ```cpp
 #include "chunk.hpp"
 
@@ -88,6 +93,7 @@ auto chunks = chunker.get_chunks(); // Returns: {{1,2}, {3,4}, {5}}
 ```
 
 ### Advanced Features
+
 ```cpp
 // Predicate-based chunking
 auto even_chunks = chunker.chunk_by_predicate([](int x) { return x % 2 == 0; });
