@@ -71,5 +71,7 @@
         "ratio": "cpp",
         "stop_token": "cpp",
         "thread": "cpp"
-    }
+    },
+    "cmake.configureSettings": { "gtest_build_samples": "ON" }
+
 }
