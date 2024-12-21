@@ -22,6 +22,7 @@ with this program; if not, see <https://www.gnu.org/licenses/>.
 #include "config.hpp"
 #include "data_structures.hpp"
 #include "parallel_chunk.hpp"
+#include "sub_chunk_strategies.hpp"
 #include "utils.hpp"
 #include <iomanip>
 #include <iostream>
@@ -365,6 +366,59 @@ int main() {
     });
     std::cout << "\nDynamic threshold chunks:" << std::endl;
     print_chunks(dynamic_chunks);
+
+    // Example 23: Sub-chunking Strategies Examples
+    std::cout << "\n=== Sub-chunking Strategies Examples ===" << std::endl;
+
+    // Initial data with clear hierarchical structure
+    std::vector<std::vector<double>> hierarchical_data = {
+        {1.0, 1.1, 1.2, 1.3},           // Low variance
+        {1.0, 5.0, 10.0, 15.0},         // High variance
+        {2.0, 2.1, 2.2},                // Low variance
+        {0.0, 10.0, 20.0, 30.0, 40.0}   // High variance
+    };
+    std::cout << "Initial hierarchical data:" << std::endl;
+    print_chunks(hierarchical_data);
+
+    // Create shared_ptr for strategies
+    auto variance_strategy_ptr = std::make_shared<VarianceStrategy<double>>(5.0);
+    auto entropy_strategy_ptr = std::make_shared<EntropyStrategy<double>>(1.0);
+
+    // Recursive sub-chunking example
+    std::cout << "\n--- Recursive Sub-chunking ---" << std::endl;
+    RecursiveSubChunkStrategy<double> recursive_strategy(variance_strategy_ptr, 2, 2);
+    auto recursive_result = recursive_strategy.apply(hierarchical_data);
+    print_chunks(recursive_result);
+
+    // Hierarchical sub-chunking example
+    std::cout << "\n--- Hierarchical Sub-chunking ---" << std::endl;
+    std::vector<std::shared_ptr<ChunkStrategy<double>>> strategies = {
+        std::make_shared<VarianceStrategy<double>>(10.0),
+        std::make_shared<EntropyStrategy<double>>(1.0)
+    };
+
+    HierarchicalSubChunkStrategy<double> hierarchical_strategy(strategies, 2);
+    auto hierarchical_result = hierarchical_strategy.apply(hierarchical_data);
+    print_chunks(hierarchical_result);
+
+    // Conditional sub-chunking example
+    std::cout << "\n--- Conditional Sub-chunking ---" << std::endl;
+    auto condition = [](const std::vector<double>& chunk) {
+        if (chunk.size() <= 3) return false;
+        
+        double mean = std::accumulate(chunk.begin(), chunk.end(), 0.0) / chunk.size();
+        double variance = 0.0;
+        for (const auto& val : chunk) {
+            variance += (val - mean) * (val - mean);
+        }
+        variance /= chunk.size();
+        
+        return variance > 50.0;
+    };
+
+    ConditionalSubChunkStrategy<double> conditional_strategy(variance_strategy_ptr, condition, 2);
+    auto conditional_result = conditional_strategy.apply(hierarchical_data);
+    print_chunks(conditional_result);
 
     return 0;
 }
