@@ -22,6 +22,7 @@ with this program; if not, see <https://www.gnu.org/licenses/>.
 #include "data_structures.hpp"
 #include "parallel_chunk.hpp"
 #include "utils.hpp"
+#include "chunk_windows.hpp"
 #include <iomanip>
 #include <iostream>
 #include <vector>
@@ -30,6 +31,7 @@ using namespace advanced_structures; // For ChunkSkipList and ChunkBPlusTree
 using namespace parallel_chunk;      // For ParallelChunkProcessor
 using namespace chunk_compression;   // For ChunkCompressor
 using namespace chunk_strategies;    // For QuantileStrategy, VarianceStrategy, etc.
+using namespace chunk_windows;
 
 // Helper function to print chunks
 template <typename T>
@@ -271,6 +273,96 @@ int main() {
     for (int val : delta_encoded)
         std::cout << val << " ";
     std::cout << std::endl;
+
+    // Example 22: Advanced Chunking Strategy Combinations
+    std::cout << "\n=== Advanced Chunking Strategy Combinations ===" << std::endl;
+    
+    // Pattern-based chunking
+    std::vector<int> pattern_data = {1, 2, 1, 2, 3, 4, 3, 4, 5, 6, 5, 6};
+    Chunk<int> pattern_chunker(2);
+    pattern_chunker.add(pattern_data);
+    auto pattern_chunks = pattern_chunker.chunk_by_predicate([](int x) {
+        static int last = x;
+        bool start_new = (x <= last);
+        last = x;
+        return start_new;
+    });
+    std::cout << "Pattern-based chunks (new chunk when sequence decreases):" << std::endl;
+    print_chunks(pattern_chunks);
+
+    // Adaptive size chunking
+    std::vector<double> adaptive_data = {1.0, 1.1, 5.0, 5.1, 5.2, 2.0, 2.1, 7.0, 7.1, 7.2};
+    Chunk<double> adaptive_chunker(1);
+    adaptive_chunker.add(adaptive_data);
+    
+    auto adaptive_chunks = adaptive_chunker.chunk_by_statistic(1.0, [](const std::vector<double>& chunk) {
+        if (chunk.empty()) return 0.0;
+        double sum = 0.0;
+        for (size_t i = 1; i < chunk.size(); ++i) {
+            sum += std::abs(chunk[i] - chunk[i-1]);
+        }
+        return sum / (chunk.size() - 1);
+    });
+    std::cout << "\nAdaptive size chunks (based on average difference):" << std::endl;
+    print_chunks(adaptive_chunks);
+
+    // Multi-criteria chunking
+    std::vector<double> multi_data = {1.1, 1.2, 5.5, 5.6, 5.7, 2.1, 2.2, 7.5, 7.6, 7.7};
+    Chunk<double> multi_chunker(1);
+    multi_chunker.add(multi_data);
+    
+    // First by similarity
+    auto multi_step1 = multi_chunker.chunk_by_similarity(0.5);
+    std::cout << "\nMulti-criteria chunking - Step 1 (similarity):" << std::endl;
+    print_chunks(multi_step1);
+    
+    // Then by size
+    std::vector<std::vector<double>> multi_step2;
+    for (const auto& chunk : multi_step1) {
+        Chunk<double> size_chunker(2);
+        size_chunker.add(chunk);
+        auto sized_chunks = size_chunker.get_chunks();
+        multi_step2.insert(multi_step2.end(), sized_chunks.begin(), sized_chunks.end());
+    }
+    std::cout << "Multi-criteria chunking - Step 2 (size):" << std::endl;
+    print_chunks(multi_step2);
+
+    // Sliding window with custom aggregation
+    std::vector<double> sliding_data = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0};
+    Chunk<double> sliding_chunker(3);
+    sliding_chunker.add(sliding_data);
+    
+    auto sliding_chunks = sliding_chunker.sliding_window(3, 2);
+    std::cout << "\nSliding window chunks with aggregation:" << std::endl;
+    print_chunks(sliding_chunks);
+    
+    // Calculate moving averages
+    std::vector<double> moving_averages;
+    for (const auto& window : sliding_chunks) {
+        double avg = std::accumulate(window.begin(), window.end(), 0.0) / window.size();
+        moving_averages.push_back(avg);
+    }
+    std::cout << "Moving averages: ";
+    for (double avg : moving_averages) {
+        std::cout << std::fixed << std::setprecision(2) << avg << " ";
+    }
+    std::cout << std::endl;
+
+    // Dynamic threshold chunking
+    std::vector<double> dynamic_data = {1.0, 1.1, 1.2, 5.0, 5.1, 5.2, 2.0, 2.1, 2.2};
+    Chunk<double> dynamic_chunker(1);
+    dynamic_chunker.add(dynamic_data);
+    
+    double threshold = 0.5;
+    auto dynamic_chunks = dynamic_chunker.chunk_by_predicate([&threshold](double x) {
+        static double last = x;
+        bool start_new = std::abs(x - last) > threshold;
+        threshold = std::max(0.2, threshold * 0.95); // Gradually decrease threshold
+        last = x;
+        return start_new;
+    });
+    std::cout << "\nDynamic threshold chunks:" << std::endl;
+    print_chunks(dynamic_chunks);
 
     return 0;
 }
