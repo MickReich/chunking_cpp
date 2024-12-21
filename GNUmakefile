@@ -1,15 +1,16 @@
 # Project configuration
 PROJECT_NAME := ChunkProcessor
 BUILD_DIR := build
-DOC_DIR := docs
+DOC_DIR := $(BUILD_DIR)/docs
 TEST_DIR := $(BUILD_DIR)/tests
+SRC_FILES := $(shell find . -name "*.cpp" -o -name "*.hpp")
 
 # Compiler settings
 CXX := g++
 CXXFLAGS := -std=c++17 -Wall -Wextra
 
 # Ensure build directory exists and is configured
-.PHONY: setup-build test docs docs-clean docs-serve local-help run uninstall
+.PHONY: setup-build test docs docs-clean docs-serve local-help run uninstall format format-check
 
 setup-build:
 	@mkdir -p $(BUILD_DIR)
@@ -82,9 +83,31 @@ local-help:
 	@echo "  docs-clean   - Remove generated documentation"
 	@echo "  docs-serve   - Serve documentation locally at http://localhost:8000"
 	@echo "  uninstall    - Remove all build artifacts (alias for clean)"
+	@echo "  format       - Format source files using clang-format"
+	@echo "  format-check - Check if source files are properly formatted"
 	@echo "  local-help   - Show this help message"
 	@echo
 	@echo "For CMake targets, run 'make help'"
 
 # Default target
 .DEFAULT_GOAL := setup-build
+
+# Format source files
+format:
+	@if ! command -v clang-format > /dev/null; then \
+		echo "Error: clang-format not found. Please install clang-format first."; \
+		exit 1; \
+	fi
+	@echo "Formatting source files..."
+	@clang-format -i $(SRC_FILES)
+	@echo "Formatting complete"
+
+# Check if files are properly formatted
+format-check:
+	@if ! command -v clang-format > /dev/null; then \
+		echo "Error: clang-format not found. Please install clang-format first."; \
+		exit 1; \
+	fi
+	@echo "Checking source file formatting..."
+	@clang-format --dry-run -Werror $(SRC_FILES)
+	@echo "All files are properly formatted"

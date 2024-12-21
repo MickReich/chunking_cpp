@@ -69,13 +69,14 @@ TEST_F(ParallelChunkProcessorTest, SingleThreadProcessing) {
 TEST_F(ParallelChunkProcessorTest, ExceptionHandling) {
     std::vector<std::vector<int>> chunked_data = {test_data};
     EXPECT_THROW(
-        ParallelChunkProcessor<int>::process_chunks(chunked_data, [](std::vector<int>& chunk) {
-            for (size_t i = 0; i < chunk.size(); ++i) {
-                int x = chunk[i];
-                if (x > 3) throw std::runtime_error("test");
-                chunk[i] = x * 2;
-            }
-        }),
-        std::runtime_error
-    );
+        ParallelChunkProcessor<int>::process_chunks(chunked_data,
+                                                    [](std::vector<int>& chunk) {
+                                                        for (size_t i = 0; i < chunk.size(); ++i) {
+                                                            int x = chunk[i];
+                                                            if (x > 3)
+                                                                throw std::runtime_error("test");
+                                                            chunk[i] = x * 2;
+                                                        }
+                                                    }),
+        std::runtime_error);
 }

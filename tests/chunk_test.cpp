@@ -138,17 +138,17 @@ TEST_F(ChunkTest, PaddedChunks) {
 TEST_F(ChunkTest, BasicTest) {
     // Basic test to verify test setup
     Chunk<int> chunk(2);
-    ASSERT_EQ(chunk.size(), 0);  // Initially empty
-    ASSERT_EQ(chunk.get_chunks().size(), 0);  // No chunks yet
+    ASSERT_EQ(chunk.size(), 0);              // Initially empty
+    ASSERT_EQ(chunk.get_chunks().size(), 0); // No chunks yet
 }
 
 TEST_F(ChunkTest, InitializationTest) {
     // Test chunk initialization
     Chunk<int> chunk(2);  // Create chunk with size 2
-    chunk.add(test_data);      // Add data from fixture
+    chunk.add(test_data); // Add data from fixture
     ASSERT_EQ(chunk.size(), 5);
     auto chunks = chunk.get_chunks();
-    ASSERT_EQ(chunks.size(), 3);  // Should have 3 chunks: [1,2], [3,4], [5]
+    ASSERT_EQ(chunks.size(), 3); // Should have 3 chunks: [1,2], [3,4], [5]
     ASSERT_EQ(chunks[0], (std::vector<int>{1, 2}));
     ASSERT_EQ(chunks[1], (std::vector<int>{3, 4}));
     ASSERT_EQ(chunks[2], (std::vector<int>{5}));
@@ -165,11 +165,11 @@ TEST_F(ChunkTest, EdgeCases) {
     std::vector<value_type> empty_data;
     basic_chunker.add(empty_data);
     EXPECT_EQ(basic_chunker.size(), 0);
-    
+
     // Test with single element
     basic_chunker.add(1);
     EXPECT_EQ(basic_chunker.size(), 1);
-    
+
     // Test chunk size equal to data size
     Chunk<value_type> exact_chunker(5);
     exact_chunker.add(test_data);

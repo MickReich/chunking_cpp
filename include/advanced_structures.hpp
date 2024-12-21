@@ -116,8 +116,9 @@ public:
     }
 
     bool search(const T& key) const {
-        if (root == nullptr) return false;
-        
+        if (root == nullptr)
+            return false;
+
         return search_node(root, key);
     }
 
@@ -171,15 +172,15 @@ private:
         while (i < node->keys.size() && key > node->keys[i]) {
             i++;
         }
-        
+
         if (i < node->keys.size() && key == node->keys[i]) {
             return true;
         }
-        
+
         if (node->is_leaf) {
             return false;
         }
-        
+
         return search_node(node->children[i], key);
     }
 };

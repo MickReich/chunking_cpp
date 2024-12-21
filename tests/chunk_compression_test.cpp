@@ -45,7 +45,7 @@ TEST_F(ChunkCompressorTest, EmptyCompression) {
 TEST_F(ChunkCompressorTest, SingleElementCompression) {
     auto rle = ChunkCompressor<int>::run_length_encode(single_data);
     EXPECT_EQ(rle.size(), 1);
-    
+
     auto delta = ChunkCompressor<int>::delta_encode(single_data);
     EXPECT_EQ(delta.size(), 1);
 }

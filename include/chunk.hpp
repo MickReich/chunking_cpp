@@ -90,7 +90,8 @@ public:
     template <typename Pred>
     std::vector<std::vector<T>> chunk_by_predicate(Pred predicate) const {
         std::vector<std::vector<T>> result;
-        if (data.empty()) return result;
+        if (data.empty())
+            return result;
         std::vector<T> current_chunk;
         for (const T& item : data) {
             if (predicate(item) && !current_chunk.empty()) {
@@ -125,8 +126,10 @@ public:
     }
 
     std::vector<std::vector<T>> chunk_into_n(size_t n) const {
-        if (n == 0) throw std::invalid_argument("Number of chunks must be greater than 0");
-        if (data.empty()) return std::vector<std::vector<T>>();
+        if (n == 0)
+            throw std::invalid_argument("Number of chunks must be greater than 0");
+        if (data.empty())
+            return std::vector<std::vector<T>>();
         n = std::min(n, data.size());
         std::vector<std::vector<T>> result(n);
         size_t base_size = data.size() / n;
@@ -142,25 +145,29 @@ public:
 
     std::vector<std::vector<T>> chunk_by_monotonicity() const {
         std::vector<std::vector<T>> result;
-        if (data.size() < 2) return {data};
+        if (data.size() < 2)
+            return {data};
         std::vector<T> current_chunk{data[0]};
         bool increasing = data[1] > data[0];
         for (size_t i = 1; i < data.size(); ++i) {
-            if ((data[i] > data[i-1]) != increasing && !current_chunk.empty()) {
+            if ((data[i] > data[i - 1]) != increasing && !current_chunk.empty()) {
                 result.push_back(current_chunk);
                 current_chunk.clear();
-                if (i < data.size() - 1) increasing = data[i+1] > data[i];
+                if (i < data.size() - 1)
+                    increasing = data[i + 1] > data[i];
             }
             current_chunk.push_back(data[i]);
         }
-        if (!current_chunk.empty()) result.push_back(current_chunk);
+        if (!current_chunk.empty())
+            result.push_back(current_chunk);
         return result;
     }
 
     template <typename StatFunc>
     std::vector<std::vector<T>> chunk_by_statistic(T threshold, StatFunc stat_func) const {
         std::vector<std::vector<T>> result;
-        if (data.empty()) return result;
+        if (data.empty())
+            return result;
         std::vector<T> current_chunk{data[0]};
         for (size_t i = 1; i < data.size(); ++i) {
             if (stat_func(current_chunk) > threshold) {
@@ -169,13 +176,15 @@ public:
             }
             current_chunk.push_back(data[i]);
         }
-        if (!current_chunk.empty()) result.push_back(current_chunk);
+        if (!current_chunk.empty())
+            result.push_back(current_chunk);
         return result;
     }
 
     std::vector<std::vector<T>> chunk_by_similarity(T threshold) const {
         std::vector<std::vector<T>> result;
-        if (data.empty()) return result;
+        if (data.empty())
+            return result;
         std::vector<T> current_chunk{data[0]};
         T chunk_mean = data[0];
         for (size_t i = 1; i < data.size(); ++i) {
@@ -185,10 +194,11 @@ public:
                 chunk_mean = data[i];
             }
             current_chunk.push_back(data[i]);
-            chunk_mean = std::accumulate(current_chunk.begin(), current_chunk.end(), T(0)) / 
-                        static_cast<T>(current_chunk.size());
+            chunk_mean = std::accumulate(current_chunk.begin(), current_chunk.end(), T(0)) /
+                         static_cast<T>(current_chunk.size());
         }
-        if (!current_chunk.empty()) result.push_back(current_chunk);
+        if (!current_chunk.empty())
+            result.push_back(current_chunk);
         return result;
     }
 

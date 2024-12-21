@@ -2,12 +2,12 @@
 #define PARALLEL_CHUNK_HPP
 
 #include "chunk.hpp"
+#include <exception>
 #include <functional>
 #include <future>
+#include <mutex>
 #include <thread>
 #include <vector>
-#include <mutex>
-#include <exception>
 
 namespace parallel_chunk {
 
