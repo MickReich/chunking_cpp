@@ -1,3 +1,8 @@
+/**
+ * @file chunk_strategies.hpp
+ * @brief Defines various strategies for chunking data based on different criteria.
+ */
+
 #pragma once
 
 #include "chunk.hpp"
@@ -12,13 +17,22 @@
 namespace chunk_strategies {
 
 /**
- * @brief Base class for chunk strategies
- * @tparam T The type of elements to process
+ * @brief Base class for chunk strategies.
+ * @tparam T The type of elements to process.
  */
 template <typename T>
 class ChunkStrategy {
 public:
+    /**
+     * @brief Apply the chunking strategy to a dataset.
+     * @param data The input data to process.
+     * @return A vector of chunks.
+     */
     virtual std::vector<std::vector<T>> apply(const std::vector<T>& data) = 0;
+
+    /**
+     * @brief Virtual destructor for proper cleanup.
+     */
     virtual ~ChunkStrategy() = default;
 };
 

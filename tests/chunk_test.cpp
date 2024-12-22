@@ -1,3 +1,11 @@
+/**
+ * @file chunk_test.cpp
+ * @brief Unit tests for the Chunk class.
+ *
+ * This file contains tests for various operations on the Chunk class,
+ * including adding elements, retrieving chunks, and handling edge cases.
+ */
+
 #include "chunk.hpp"
 #include "gtest/gtest.h"
 #include <cstdlib> // for std::abs

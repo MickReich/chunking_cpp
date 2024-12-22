@@ -10,18 +10,14 @@
 
 /**
  * @file chunk.hpp
- * @brief Template class for chunk-based data processing
- * @author Jonathan Reich
- * @date 2024-12-19
+ * @brief Defines the Chunk class for managing data in fixed-size chunks.
  */
 
+#pragma once
+
 /**
- * @brief A template class for managing and processing data in chunks
- *
- * This class provides various methods for splitting data into chunks,
- * including fixed-size chunks, overlapping chunks, and predicate-based chunking.
- *
- * @tparam T The type of elements to be chunked
+ * @brief A class for managing data in fixed-size chunks.
+ * @tparam T The type of elements stored in the chunk.
  */
 template <typename T>
 class Chunk {
@@ -38,6 +34,11 @@ private:
     }
 
 public:
+    /**
+     * @brief Constructs a Chunk with a specified size.
+     * @param size The size of each chunk.
+     * @throws std::invalid_argument if size is zero.
+     */
     explicit Chunk(size_t size) : chunk_size(size) {
         if (size == 0) {
             throw std::invalid_argument("Chunk size must be greater than 0");
@@ -52,20 +53,38 @@ public:
         return (data.size() + chunk_size - 1) / chunk_size;
     }
 
+    /**
+     * @brief Adds a single element to the chunk.
+     * @param element The element to add.
+     */
     void add(const T& element) {
         data.push_back(element);
         update_chunks();
     }
 
+    /**
+     * @brief Adds a vector of elements to the chunk.
+     * @param elements The elements to add.
+     */
     void add(const std::vector<T>& elements) {
         data.insert(data.end(), elements.begin(), elements.end());
         update_chunks();
     }
 
+    /**
+     * @brief Retrieves all chunks.
+     * @return A vector of vectors, where each inner vector is a chunk.
+     */
     std::vector<std::vector<T>> get_chunks() const {
         return chunks;
     }
 
+    /**
+     * @brief Retrieves a specific chunk by index.
+     * @param index The index of the chunk to retrieve.
+     * @return The chunk at the specified index.
+     * @throws std::out_of_range if index is invalid.
+     */
     std::vector<T> get_chunk(size_t index) const {
         size_t start = index * chunk_size;
         if (start >= data.size()) {
