@@ -197,7 +197,9 @@ int main(int argc, char* argv[]) {
     public:
         double calculateSimilarity(const std::string& s1, const std::string& s2) {
             // Simple example: compare lengths as a similarity metric
-            return std::abs(1.0 - static_cast<double>(std::abs(static_cast<int>(s1.length()) - static_cast<int>(s2.length()))) / std::max(s1.length(), s2.length()));
+            return std::abs(1.0 - static_cast<double>(std::abs(static_cast<int>(s1.length()) -
+                                                               static_cast<int>(s2.length()))) /
+                                      std::max(s1.length(), s2.length()));
         }
     };
 
