@@ -164,55 +164,6 @@ TEST(ChunkTreapTest, BasicOperations) {
     EXPECT_FALSE(treap.search(10));
 }
 
-TEST(AdaptiveChunkTreeTest, BasicOperations) {
-    AdaptiveChunkTree<int> tree;
-    std::vector<int> data = {1, 2, 3, 10, 11, 12, 20, 21, 22};
-    auto chunks = tree.chunk(data);
-
-    // Test that chunks were created
-    EXPECT_GT(chunks.size(), 0);
-
-    // Test that all elements are preserved
-    size_t total_elements = 0;
-    for (const auto& chunk : chunks) {
-        total_elements += chunk.size();
-    }
-    EXPECT_EQ(total_elements, data.size());
-}
-
-TEST(AdaptiveChunkTreeTest, SpecializedTypes) {
-    AdaptiveChunkTree<uint8_t> binary_tree;
-    std::vector<uint8_t> binary_data = {0x00, 0x00, 0xFF, 0xFF, 0xAA, 0x55};
-    auto binary_chunks = binary_tree.chunk(binary_data);
-    EXPECT_GT(binary_chunks.size(), 0);
-
-    AdaptiveChunkTree<char> char_tree;
-    std::vector<char> char_data = {'a', 'a', 'b', 'c', 'c', 'd'};
-    auto char_chunks = char_tree.chunk(char_data);
-    EXPECT_GT(char_chunks.size(), 0);
-}
-
-TEST(AdaptiveChunkTreeTest, EdgeCases) {
-    AdaptiveChunkTree<int> tree;
-
-    std::vector<int> empty_data;
-    auto empty_chunks = tree.chunk(empty_data);
-    EXPECT_TRUE(empty_chunks.empty());
-
-    std::vector<int> single_data = {1};
-    auto single_chunks = tree.chunk(single_data);
-    EXPECT_EQ(single_chunks.size(), 1);
-    EXPECT_EQ(single_chunks[0].size(), 1);
-
-    std::vector<int> uniform_data(10, 5);
-    auto uniform_chunks = tree.chunk(uniform_data);
-    EXPECT_GT(uniform_chunks.size(), 0);
-
-    std::vector<int> alternating_data = {1, 10, 1, 10, 1, 10};
-    auto alternating_chunks = tree.chunk(alternating_data);
-    EXPECT_GT(alternating_chunks.size(), 1);
-}
-
 TEST(SemanticBoundariesChunkTest, BasicOperations) {
     SemanticBoundariesChunk<std::string> chunk;
     std::vector<std::string> data = {"This", "is", "a", "test", "sentence"};
