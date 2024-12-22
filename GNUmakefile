@@ -137,3 +137,7 @@ docs-stop:
 		kill -9 `cat $(BUILD_DIR)/.docs-server.pid` 2>/dev/null || true ; \
 		rm $(DOC_DIR)/.docs-server.pid ; \
 	fi
+
+benchmark:
+	@g++ -std=c++17 src/benchmark.cpp -I./include -o benchmark
+	@./benchmark

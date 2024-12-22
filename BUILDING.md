@@ -25,8 +25,8 @@ sudo make
 sudo cp lib/*.a /usr/lib
 sudo ln -s /usr/src/gtest/include/gtest /usr/include/gtest
 
-# Install documentation tools
-sudo apt-get install doxygen graphviz libboost-all-dev
+# Install documentation and tools
+sudo apt-get install doxygen gnuplot graphviz libboost-all-dev
 ```
 
 ### macOS
@@ -206,11 +206,10 @@ make
 # Run the sophisticated chunking demo
 ./build/bin/sophisticated_chunking_demo
 
-# Run sophisticated chunking tests specifically
-make test-sophisticated
 ```
 
 The sophisticated chunking features are implemented in:
+
 - `include/sophisticated_chunking.hpp`: Core implementations
 - `src/sophisticated_chunking_demo.cpp`: Usage examples
 - `tests/chunking_methods_sophisticated_test.cpp`: Unit tests
@@ -235,11 +234,13 @@ make test-sophisticated
 To use sophisticated chunking in your project:
 
 1. Include the header:
+
 ```cpp
 #include "sophisticated_chunking.hpp"
 ```
 
 2. Link against the library in your CMakeLists.txt:
+
 ```cmake
 target_link_libraries(your_target PRIVATE sophisticated_chunking)
 ```
