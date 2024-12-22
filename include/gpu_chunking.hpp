@@ -1,31 +1,28 @@
 #pragma once
 
-#include <vector>
 #include <cuda_runtime.h>
 #include <device_launch_parameters.h>
 #include <memory>
 #include <stdexcept>
+#include <vector>
 
 namespace gpu_chunking {
 
 // CUDA error checking helper
-#define CUDA_CHECK(call) \
-    do { \
-        cudaError_t error = call; \
-        if (error != cudaSuccess) { \
-            throw std::runtime_error(std::string("CUDA error: ") + \
-                                   cudaGetErrorString(error)); \
-        } \
-    } while(0)
+#define CUDA_CHECK(call)                                                                           \
+    do {                                                                                           \
+        cudaError_t error = call;                                                                  \
+        if (error != cudaSuccess) {                                                                \
+            throw std::runtime_error(std::string("CUDA error: ") + cudaGetErrorString(error));     \
+        }                                                                                          \
+    } while (0)
 
 // Device code for parallel chunking
-__global__ void chunk_kernel(const int* data, 
-                           int* chunk_boundaries, 
-                           int data_size,
-                           int window_size,
-                           float threshold) {
+__global__ void chunk_kernel(const int* data, int* chunk_boundaries, int data_size, int window_size,
+                             float threshold) {
     int idx = blockIdx.x * blockDim.x + threadIdx.x;
-    if (idx >= data_size - window_size) return;
+    if (idx >= data_size - window_size)
+        return;
 
     // Compute local statistics for the window
     float window_sum = 0.0f;
@@ -57,14 +54,13 @@ __global__ void chunk_kernel(const int* data,
         float value_diff = abs(current_value - prev_value);
         float range = window_max - window_min;
 
-        is_boundary = (value_diff > threshold * range) && 
-                     (variance > threshold * window_mean);
+        is_boundary = (value_diff > threshold * range) && (variance > threshold * window_mean);
     }
 
     chunk_boundaries[idx] = is_boundary ? 1 : 0;
 }
 
-template<typename T>
+template <typename T>
 class GPUChunking {
 private:
     int window_size;
@@ -72,7 +68,7 @@ private:
     cudaStream_t stream;
 
     // Helper to allocate GPU memory
-    template<typename U>
+    template <typename U>
     U* allocate_device_memory(size_t size) {
         U* d_ptr;
         CUDA_CHECK(cudaMalloc(&d_ptr, size * sizeof(U)));
@@ -80,21 +76,19 @@ private:
     }
 
     // Helper to copy data to GPU
-    template<typename U>
+    template <typename U>
     void copy_to_device(U* d_ptr, const U* h_ptr, size_t size) {
-        CUDA_CHECK(cudaMemcpyAsync(d_ptr, h_ptr, size * sizeof(U), 
-                                 cudaMemcpyHostToDevice, stream));
+        CUDA_CHECK(cudaMemcpyAsync(d_ptr, h_ptr, size * sizeof(U), cudaMemcpyHostToDevice, stream));
     }
 
     // Helper to copy data from GPU
-    template<typename U>
+    template <typename U>
     void copy_from_device(U* h_ptr, const U* d_ptr, size_t size) {
-        CUDA_CHECK(cudaMemcpyAsync(h_ptr, d_ptr, size * sizeof(U), 
-                                 cudaMemcpyDeviceToHost, stream));
+        CUDA_CHECK(cudaMemcpyAsync(h_ptr, d_ptr, size * sizeof(U), cudaMemcpyDeviceToHost, stream));
     }
 
 public:
-    GPUChunking(int window_sz = 32, float thresh = 0.1f) 
+    GPUChunking(int window_sz = 32, float thresh = 0.1f)
         : window_size(window_sz), threshold(thresh) {
         CUDA_CHECK(cudaStreamCreate(&stream));
     }
@@ -104,7 +98,8 @@ public:
     }
 
     std::vector<std::vector<T>> chunk(const std::vector<T>& data) {
-        if (data.empty()) return {};
+        if (data.empty())
+            return {};
 
         // Allocate device memory
         int* d_data = allocate_device_memory<int>(data.size());
@@ -118,9 +113,8 @@ public:
         int num_blocks = (data.size() + BLOCK_SIZE - 1) / BLOCK_SIZE;
 
         // Launch kernel
-        chunk_kernel<<<num_blocks, BLOCK_SIZE, 0, stream>>>(
-            d_data, d_boundaries, data.size(), window_size, threshold
-        );
+        chunk_kernel<<<num_blocks, BLOCK_SIZE, 0, stream>>>(d_data, d_boundaries, data.size(),
+                                                            window_size, threshold);
 
         // Check for kernel errors
         CUDA_CHECK(cudaGetLastError());
@@ -168,8 +162,12 @@ public:
         threshold = thresh;
     }
 
-    int get_window_size() const { return window_size; }
-    float get_threshold() const { return threshold; }
+    int get_window_size() const {
+        return window_size;
+    }
+    float get_threshold() const {
+        return threshold;
+    }
 
     // Check if CUDA is available
     static bool is_gpu_available() {
@@ -187,11 +185,10 @@ public:
         cudaDeviceProp prop;
         CUDA_CHECK(cudaGetDeviceProperties(&prop, 0));
 
-        return std::string("GPU Device: ") + prop.name + 
-               "\nCompute capability: " + 
-               std::to_string(prop.major) + "." + 
+        return std::string("GPU Device: ") + prop.name +
+               "\nCompute capability: " + std::to_string(prop.major) + "." +
                std::to_string(prop.minor);
     }
 };
 
-} // namespace gpu_chunking 
+} // namespace gpu_chunking

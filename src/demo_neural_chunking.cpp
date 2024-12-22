@@ -1,7 +1,7 @@
-#include "../include/neural_chunking.hpp"
 #include "../include/chunk_visualization.hpp"
-#include <iostream>
+#include "../include/neural_chunking.hpp"
 #include <iomanip>
+#include <iostream>
 #include <vector>
 
 void print_chunks(const std::vector<std::vector<int>>& chunks) {
@@ -29,20 +29,20 @@ int main() {
 
     // Create neural chunking instance
     neural_chunking::NeuralChunking<int> chunker(8, 0.5);
-    
+
     std::cout << "Original data size: " << data.size() << std::endl;
     std::cout << "Window size: " << chunker.get_window_size() << std::endl;
-    
+
     // Try different thresholds
     std::vector<double> thresholds = {0.3, 0.5, 0.7};
-    
+
     for (double threshold : thresholds) {
         std::cout << "\nTesting with threshold: " << threshold << std::endl;
         chunker.set_threshold(threshold);
-        
+
         auto chunks = chunker.chunk(data);
         print_chunks(chunks);
-        
+
         // Use chunk visualizer
         chunk_viz::ChunkVisualizer<std::vector<int>> visualizer(chunks);
         visualizer.plot_chunk_sizes();
@@ -51,4 +51,4 @@ int main() {
     }
 
     return 0;
-} 
+}

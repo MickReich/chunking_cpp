@@ -1,11 +1,11 @@
 #pragma once
 
-#include <vector>
-#include <random>
+#include <algorithm>
 #include <cmath>
 #include <memory>
-#include <algorithm>
+#include <random>
 #include <stdexcept>
+#include <vector>
 
 namespace neural_chunking {
 
@@ -16,27 +16,25 @@ class Layer {
 private:
     std::vector<std::vector<double>> weights;
     std::vector<double> biases;
-    
+
     double sigmoid(double x) const {
         return 1.0 / (1.0 + std::exp(-x));
     }
 
 public:
-    Layer(size_t input_size, size_t output_size) 
-        : weights(output_size, std::vector<double>(input_size)),
-          biases(output_size) {
-        
+    Layer(size_t input_size, size_t output_size)
+        : weights(output_size, std::vector<double>(input_size)), biases(output_size) {
         // Initialize weights with Xavier initialization
         std::random_device rd;
         std::mt19937 gen(rd());
         std::normal_distribution<> d(0.0, std::sqrt(2.0 / (input_size + output_size)));
-        
+
         for (auto& neuron : weights) {
             for (auto& weight : neuron) {
                 weight = d(gen);
             }
         }
-        
+
         for (auto& bias : biases) {
             bias = d(gen);
         }
@@ -63,7 +61,7 @@ public:
  * @brief Neural network based chunking strategy
  * @tparam T The type of elements to be chunked
  */
-template<typename T>
+template <typename T>
 class NeuralChunking {
 private:
     std::vector<std::shared_ptr<Layer>> layers;
@@ -76,20 +74,21 @@ private:
      * @return Vector of normalized features
      */
     std::vector<double> extract_features(const std::vector<T>& window) const {
-        if (window.empty()) return {};
-        
+        if (window.empty())
+            return {};
+
         std::vector<double> features;
         features.reserve(window.size());
-        
+
         // Convert to double and normalize
         double min_val = static_cast<double>(*std::min_element(window.begin(), window.end()));
         double max_val = static_cast<double>(*std::max_element(window.begin(), window.end()));
         double range = max_val - min_val + 1e-10; // Avoid division by zero
-        
+
         for (const auto& val : window) {
             features.push_back((static_cast<double>(val) - min_val) / range);
         }
-        
+
         return features;
     }
 
@@ -121,9 +120,8 @@ public:
      * @param window_sz Size of the sliding window
      * @param boundary_threshold Threshold for boundary decision
      */
-    NeuralChunking(size_t window_sz = 8, double boundary_threshold = 0.5) 
+    NeuralChunking(size_t window_sz = 8, double boundary_threshold = 0.5)
         : window_size(window_sz), threshold(boundary_threshold) {
-        
         // Create a simple neural network architecture
         layers.push_back(std::make_shared<Layer>(window_size, window_size * 2));
         layers.push_back(std::make_shared<Layer>(window_size * 2, window_size));
@@ -187,4 +185,4 @@ public:
     }
 };
 
-} // namespace neural_chunking 
+} // namespace neural_chunking

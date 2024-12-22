@@ -660,28 +660,29 @@ protected:
     }
 };
 
-template<typename T>
+template <typename T>
 class ChunkLSMTree {
 private:
     struct Level {
         std::vector<T> data;
         size_t size_limit;
-        
+
         Level(size_t limit) : size_limit(limit) {}
-        
-        bool is_full() const { return data.size() >= size_limit; }
+
+        bool is_full() const {
+            return data.size() >= size_limit;
+        }
     };
 
     std::vector<std::shared_ptr<Level>> levels;
-    std::vector<T> memtable;  // In-memory buffer
+    std::vector<T> memtable; // In-memory buffer
     size_t memtable_size_limit;
-    size_t size_ratio;  // Size ratio between levels
+    size_t size_ratio; // Size ratio between levels
 
     void compact_level(size_t level_idx) {
         if (level_idx >= levels.size() - 1) {
             // Create new level if we're at the last one
-            levels.push_back(std::make_shared<Level>(
-                levels[level_idx]->size_limit * size_ratio));
+            levels.push_back(std::make_shared<Level>(levels[level_idx]->size_limit * size_ratio));
         }
 
         auto& current_level = levels[level_idx]->data;
@@ -689,9 +690,8 @@ private:
 
         // Merge current level into next level
         std::vector<T> merged;
-        std::merge(current_level.begin(), current_level.end(),
-                  next_level.begin(), next_level.end(),
-                  std::back_inserter(merged));
+        std::merge(current_level.begin(), current_level.end(), next_level.begin(), next_level.end(),
+                   std::back_inserter(merged));
 
         // Update levels
         current_level.clear();
@@ -704,7 +704,8 @@ private:
     }
 
     void flush_memtable() {
-        if (memtable.empty()) return;
+        if (memtable.empty())
+            return;
 
         // Sort memtable before flushing
         std::sort(memtable.begin(), memtable.end());
@@ -715,9 +716,8 @@ private:
 
         // Merge memtable with first level
         std::vector<T> merged;
-        std::merge(memtable.begin(), memtable.end(),
-                  levels[0]->data.begin(), levels[0]->data.end(),
-                  std::back_inserter(merged));
+        std::merge(memtable.begin(), memtable.end(), levels[0]->data.begin(), levels[0]->data.end(),
+                   std::back_inserter(merged));
 
         levels[0]->data = std::move(merged);
         memtable.clear();
@@ -734,7 +734,7 @@ public:
 
     void insert(const T& value) {
         memtable.push_back(value);
-        
+
         if (memtable.size() >= memtable_size_limit) {
             flush_memtable();
         }

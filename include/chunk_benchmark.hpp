@@ -1,19 +1,19 @@
 #pragma once
 
-#include <chrono>
-#include <vector>
-#include <memory>
-#include <iostream>
-#include <iomanip>
-#include <fstream>
-#include <unordered_map>
 #include <algorithm>
+#include <chrono>
 #include <filesystem>
+#include <fstream>
+#include <iomanip>
+#include <iostream>
+#include <memory>
 #include <sys/resource.h>
+#include <unordered_map>
+#include <vector>
 
 namespace chunk_benchmark {
 
-template<typename T>
+template <typename T>
 class ChunkStrategy {
 public:
     virtual std::vector<std::vector<T>> chunk(const std::vector<T>& data) = 0;
@@ -21,7 +21,7 @@ public:
     virtual ~ChunkStrategy() = default;
 };
 
-template<typename T>
+template <typename T>
 class ChunkBenchmark {
 private:
     const std::vector<T>& data;
@@ -58,7 +58,7 @@ public:
         try {
             // Remove any existing file with the same name
             std::filesystem::remove(output_dir);
-            
+
             // Create the directory and all parent directories
             std::filesystem::path dir(output_dir);
             if (!std::filesystem::exists(dir)) {
@@ -82,21 +82,20 @@ public:
      */
     void run_benchmark() {
         std::cout << "Starting benchmark comparison...\n\n";
-        
+
         // Measure throughput
         std::cout << "Measuring throughput...\n";
         measure_throughput();
-        
+
         // Measure memory usage
         std::cout << "Measuring memory usage...\n";
         measure_memory_usage();
-        
+
         // Compare strategies
         std::cout << "Comparing strategies...\n";
         compare_strategies();
-        
-        std::cout << "\nBenchmark completed. Results will be saved to: " 
-                  << output_dir << "\n";
+
+        std::cout << "\nBenchmark completed. Results will be saved to: " << output_dir << "\n";
     }
 
     /**
@@ -112,14 +111,14 @@ public:
             }
 
             summary << "Benchmark Summary Report\n"
-                   << "======================\n\n";
+                    << "======================\n\n";
 
             // Write throughput results
             summary << "Throughput Results:\n";
             summary << "-----------------\n";
             for (const auto& [strategy, throughput] : results.throughput_metrics) {
-                summary << strategy << ": " << std::fixed << std::setprecision(2)
-                       << throughput << " elements/second\n";
+                summary << strategy << ": " << std::fixed << std::setprecision(2) << throughput
+                        << " elements/second\n";
             }
             summary << "\n";
 
@@ -136,8 +135,9 @@ public:
             summary << "----------------\n";
             for (const auto& [strategy, count] : results.chunk_count_metrics) {
                 summary << strategy << ":\n"
-                       << "  - Chunk count: " << count << "\n"
-                       << "  - Average chunk size: " << results.avg_chunk_size_metrics[strategy] << "\n";
+                        << "  - Chunk count: " << count << "\n"
+                        << "  - Average chunk size: " << results.avg_chunk_size_metrics[strategy]
+                        << "\n";
             }
             summary << "\n";
 
@@ -148,10 +148,10 @@ public:
             summary << "Best memory usage: " << results.best_memory_strategy << "\n";
 
             std::cout << "Results have been saved to:\n"
-                     << "- " << summary_path.string() << "\n"
-                     << "- " << output_dir << "/throughput_report.txt\n"
-                     << "- " << output_dir << "/memory_report.txt\n"
-                     << "- " << output_dir << "/comparison_report.txt\n";
+                      << "- " << summary_path.string() << "\n"
+                      << "- " << output_dir << "/throughput_report.txt\n"
+                      << "- " << output_dir << "/memory_report.txt\n"
+                      << "- " << output_dir << "/comparison_report.txt\n";
 
         } catch (const std::exception& e) {
             std::cerr << "Error saving results: " << e.what() << "\n";
@@ -174,23 +174,23 @@ public:
 
             // Actual measurement
             auto start = std::chrono::high_resolution_clock::now();
-            
+
             const int NUM_ITERATIONS = 10;
             for (int i = 0; i < NUM_ITERATIONS; ++i) {
                 strategy->chunk(data);
             }
-            
+
             auto end = std::chrono::high_resolution_clock::now();
-            auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>
-                          (end - start) / NUM_ITERATIONS;
+            auto duration =
+                std::chrono::duration_cast<std::chrono::nanoseconds>(end - start) / NUM_ITERATIONS;
 
             double elements_per_second = (data.size() * 1e9) / duration.count();
-            
+
             report << "Strategy: " << strategy->name() << "\n"
-                  << "Average time: " << format_duration(duration) << "\n"
-                  << "Throughput: " << std::fixed << std::setprecision(2) 
-                  << elements_per_second << " elements/second\n\n";
-            
+                   << "Average time: " << format_duration(duration) << "\n"
+                   << "Throughput: " << std::fixed << std::setprecision(2) << elements_per_second
+                   << " elements/second\n\n";
+
             // Store results
             results.throughput_metrics[strategy->name()] = elements_per_second;
         }
@@ -204,10 +204,10 @@ public:
 
         for (const auto& strategy : strategies) {
             size_t initial_memory = get_current_memory_usage();
-            
+
             // Perform chunking
             auto chunks = strategy->chunk(data);
-            
+
             size_t peak_memory = get_current_memory_usage();
             size_t memory_used = peak_memory - initial_memory;
 
@@ -220,15 +220,15 @@ public:
             }
 
             report << "Strategy: " << strategy->name() << "\n"
-                  << "Memory used: " << (memory_used / 1024.0) << " KB\n"
-                  << "Number of chunks: " << chunks.size() << "\n"
-                  << "Average chunk size: " << (total_chunk_size / chunks.size()) << "\n"
-                  << "Max chunk size: " << max_chunk_size << "\n\n";
-            
+                   << "Memory used: " << (memory_used / 1024.0) << " KB\n"
+                   << "Number of chunks: " << chunks.size() << "\n"
+                   << "Average chunk size: " << (total_chunk_size / chunks.size()) << "\n"
+                   << "Max chunk size: " << max_chunk_size << "\n\n";
+
             // Store results
             results.memory_metrics[strategy->name()] = memory_used;
             results.chunk_count_metrics[strategy->name()] = chunks.size();
-            results.avg_chunk_size_metrics[strategy->name()] = 
+            results.avg_chunk_size_metrics[strategy->name()] =
                 static_cast<double>(total_chunk_size) / chunks.size();
         }
     }
@@ -264,39 +264,39 @@ public:
                 total_size += chunk.size();
             }
 
-            metrics[strategy->name()] = MetricData{
-                throughput,
-                memory_used,
-                chunks.size(),
-                static_cast<double>(total_size) / chunks.size()
-            };
+            metrics[strategy->name()] = MetricData{throughput, memory_used, chunks.size(),
+                                                   static_cast<double>(total_size) / chunks.size()};
         }
 
         // Find best performers
-        auto best_throughput = std::max_element(metrics.begin(), metrics.end(),
-            [](const auto& a, const auto& b) { return a.second.throughput < b.second.throughput; });
-        auto best_memory = std::min_element(metrics.begin(), metrics.end(),
-            [](const auto& a, const auto& b) { return a.second.memory_usage < b.second.memory_usage; });
+        auto best_throughput =
+            std::max_element(metrics.begin(), metrics.end(), [](const auto& a, const auto& b) {
+                return a.second.throughput < b.second.throughput;
+            });
+        auto best_memory =
+            std::min_element(metrics.begin(), metrics.end(), [](const auto& a, const auto& b) {
+                return a.second.memory_usage < b.second.memory_usage;
+            });
 
         // Write comparison report
         report << "Performance Summary:\n\n";
         for (const auto& [name, metric] : metrics) {
             report << "Strategy: " << name << "\n"
-                  << "- Throughput: " << std::fixed << std::setprecision(2) 
-                  << metric.throughput << " elements/second\n"
-                  << "- Memory usage: " << (metric.memory_usage / 1024.0) << " KB\n"
-                  << "- Number of chunks: " << metric.num_chunks << "\n"
-                  << "- Average chunk size: " << metric.avg_chunk_size << "\n\n";
+                   << "- Throughput: " << std::fixed << std::setprecision(2) << metric.throughput
+                   << " elements/second\n"
+                   << "- Memory usage: " << (metric.memory_usage / 1024.0) << " KB\n"
+                   << "- Number of chunks: " << metric.num_chunks << "\n"
+                   << "- Average chunk size: " << metric.avg_chunk_size << "\n\n";
         }
 
         report << "\nBest Performers:\n"
                << "- Highest throughput: " << best_throughput->first << "\n"
                << "- Lowest memory usage: " << best_memory->first << "\n";
-        
+
         // Store best performers
         results.best_throughput_strategy = best_throughput->first;
         results.best_memory_strategy = best_memory->first;
     }
 };
 
-} // namespace chunk_benchmark 
+} // namespace chunk_benchmark

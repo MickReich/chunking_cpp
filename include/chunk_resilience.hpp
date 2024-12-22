@@ -1,17 +1,17 @@
 #pragma once
 
-#include <iostream>
-#include <vector>
-#include <string>
-#include <fstream>
-#include <filesystem>
-#include <chrono>
-#include <memory>
-#include <stdexcept>
-#include <unordered_map>
 #include <atomic>
-#include <mutex>
+#include <chrono>
 #include <condition_variable>
+#include <filesystem>
+#include <fstream>
+#include <iostream>
+#include <memory>
+#include <mutex>
+#include <stdexcept>
+#include <string>
+#include <unordered_map>
+#include <vector>
 
 namespace chunk_resilience {
 
@@ -20,14 +20,13 @@ namespace chunk_resilience {
  */
 class ChunkingError : public std::runtime_error {
 public:
-    explicit ChunkingError(const std::string& message) 
-        : std::runtime_error(message) {}
+    explicit ChunkingError(const std::string& message) : std::runtime_error(message) {}
 };
 
 /**
  * @brief Checkpoint data structure
  */
-template<typename T>
+template <typename T>
 struct Checkpoint {
     size_t sequence_number;
     std::vector<std::vector<T>> chunks;
@@ -45,16 +44,15 @@ struct Checkpoint {
         // Write metadata
         file.write(reinterpret_cast<const char*>(&sequence_number), sizeof(sequence_number));
         file.write(reinterpret_cast<const char*>(&memory_usage), sizeof(memory_usage));
-        
+
         // Write chunks
         size_t num_chunks = chunks.size();
         file.write(reinterpret_cast<const char*>(&num_chunks), sizeof(num_chunks));
-        
+
         for (const auto& chunk : chunks) {
             size_t chunk_size = chunk.size();
             file.write(reinterpret_cast<const char*>(&chunk_size), sizeof(chunk_size));
-            file.write(reinterpret_cast<const char*>(chunk.data()), 
-                      chunk_size * sizeof(T));
+            file.write(reinterpret_cast<const char*>(chunk.data()), chunk_size * sizeof(T));
         }
     }
 
@@ -66,26 +64,25 @@ struct Checkpoint {
         }
 
         Checkpoint<T> checkpoint;
-        
+
         try {
             // Read metadata
-            file.read(reinterpret_cast<char*>(&checkpoint.sequence_number), 
-                     sizeof(checkpoint.sequence_number));
-            file.read(reinterpret_cast<char*>(&checkpoint.memory_usage), 
-                     sizeof(checkpoint.memory_usage));
+            file.read(reinterpret_cast<char*>(&checkpoint.sequence_number),
+                      sizeof(checkpoint.sequence_number));
+            file.read(reinterpret_cast<char*>(&checkpoint.memory_usage),
+                      sizeof(checkpoint.memory_usage));
 
             // Read chunks
             size_t num_chunks;
             file.read(reinterpret_cast<char*>(&num_chunks), sizeof(num_chunks));
-            
+
             checkpoint.chunks.resize(num_chunks);
             for (auto& chunk : checkpoint.chunks) {
                 size_t chunk_size;
                 file.read(reinterpret_cast<char*>(&chunk_size), sizeof(chunk_size));
-                
+
                 chunk.resize(chunk_size);
-                file.read(reinterpret_cast<char*>(chunk.data()), 
-                         chunk_size * sizeof(T));
+                file.read(reinterpret_cast<char*>(chunk.data()), chunk_size * sizeof(T));
             }
 
             checkpoint.timestamp = std::chrono::system_clock::now();
@@ -103,17 +100,17 @@ struct Checkpoint {
 /**
  * @brief Resilient chunking system with error recovery
  */
-template<typename T>
+template <typename T>
 class ResilientChunker {
 private:
     std::string checkpoint_dir;
     size_t max_memory_usage;
     size_t checkpoint_interval;
     std::atomic<size_t> current_sequence;
-    
+
     std::mutex mutex;
     std::condition_variable cv;
-    
+
     std::unordered_map<size_t, Checkpoint<T>> checkpoint_history;
     size_t max_history_size;
 
@@ -122,18 +119,13 @@ private:
      */
     void create_checkpoint(const std::vector<std::vector<T>>& chunks) {
         std::lock_guard<std::mutex> lock(mutex);
-        
-        Checkpoint<T> checkpoint{
-            current_sequence++,
-            chunks,
-            std::chrono::system_clock::now(),
-            get_memory_usage(),
-            false
-        };
+
+        Checkpoint<T> checkpoint{current_sequence++, chunks, std::chrono::system_clock::now(),
+                                 get_memory_usage(), false};
 
         // Save checkpoint to file
-        std::string filename = checkpoint_dir + "/checkpoint_" + 
-                             std::to_string(checkpoint.sequence_number) + ".bin";
+        std::string filename =
+            checkpoint_dir + "/checkpoint_" + std::to_string(checkpoint.sequence_number) + ".bin";
         checkpoint.serialize(filename);
 
         // Add to history
@@ -141,16 +133,14 @@ private:
 
         // Maintain history size
         if (checkpoint_history.size() > max_history_size) {
-            auto oldest = std::min_element(
-                checkpoint_history.begin(), 
-                checkpoint_history.end(),
-                [](const auto& a, const auto& b) {
-                    return a.second.sequence_number < b.second.sequence_number;
-                }
-            );
-            
-            std::filesystem::remove(checkpoint_dir + "/checkpoint_" + 
-                                  std::to_string(oldest->first) + ".bin");
+            auto oldest =
+                std::min_element(checkpoint_history.begin(), checkpoint_history.end(),
+                                 [](const auto& a, const auto& b) {
+                                     return a.second.sequence_number < b.second.sequence_number;
+                                 });
+
+            std::filesystem::remove(checkpoint_dir + "/checkpoint_" +
+                                    std::to_string(oldest->first) + ".bin");
             checkpoint_history.erase(oldest);
         }
     }
@@ -170,21 +160,17 @@ private:
      * @brief Verify checkpoint integrity
      */
     bool verify_checkpoint(const Checkpoint<T>& checkpoint) {
-        return !checkpoint.is_corrupted && 
-               checkpoint.memory_usage <= max_memory_usage;
+        return !checkpoint.is_corrupted && checkpoint.memory_usage <= max_memory_usage;
     }
 
 public:
     ResilientChunker(const std::string& checkpoint_directory = "./checkpoints",
-                     size_t max_mem_usage = 1024 * 1024 * 1024,  // 1GB
-                     size_t checkpoint_freq = 1000,               // chunks
-                     size_t history_size = 5)                     // checkpoints
-        : checkpoint_dir(checkpoint_directory)
-        , max_memory_usage(max_mem_usage)
-        , checkpoint_interval(checkpoint_freq)
-        , current_sequence(0)
-        , max_history_size(history_size) {
-        
+                     size_t max_mem_usage = 1024 * 1024 * 1024, // 1GB
+                     size_t checkpoint_freq = 1000,             // chunks
+                     size_t history_size = 5)                   // checkpoints
+        : checkpoint_dir(checkpoint_directory), max_memory_usage(max_mem_usage),
+          checkpoint_interval(checkpoint_freq), current_sequence(0),
+          max_history_size(history_size) {
         // Create checkpoint directory
         std::filesystem::create_directories(checkpoint_dir);
     }
@@ -204,10 +190,9 @@ public:
                 }
 
                 // Process next chunk
-                size_t chunk_size = std::min(checkpoint_interval, 
-                                           data.size() - processed);
+                size_t chunk_size = std::min(checkpoint_interval, data.size() - processed);
                 std::vector<T> current_chunk(data.begin() + processed,
-                                           data.begin() + processed + chunk_size);
+                                             data.begin() + processed + chunk_size);
                 result.push_back(current_chunk);
                 processed += chunk_size;
 
@@ -231,13 +216,11 @@ public:
      */
     void save_checkpoint() {
         if (!checkpoint_history.empty()) {
-            auto latest = std::max_element(
-                checkpoint_history.begin(),
-                checkpoint_history.end(),
-                [](const auto& a, const auto& b) {
-                    return a.second.sequence_number < b.second.sequence_number;
-                }
-            );
+            auto latest =
+                std::max_element(checkpoint_history.begin(), checkpoint_history.end(),
+                                 [](const auto& a, const auto& b) {
+                                     return a.second.sequence_number < b.second.sequence_number;
+                                 });
             latest->second.serialize(checkpoint_dir + "/latest_checkpoint.bin");
         }
     }
@@ -247,26 +230,22 @@ public:
      */
     std::vector<std::vector<T>> restore_from_checkpoint() {
         std::lock_guard<std::mutex> lock(mutex);
-  
+
         // Find latest valid checkpoint
         std::vector<size_t> keys;
         for (const auto& pair : checkpoint_history) {
             keys.push_back(pair.first);
         }
         std::sort(keys.begin(), keys.end(), std::greater<size_t>());
-  
-        auto latest_valid = std::find_if(
-            keys.begin(),
-            keys.end(),
-            [this](const auto& checkpoint) {
-                return verify_checkpoint(checkpoint_history[checkpoint]);
-            }
-        );
-  
+
+        auto latest_valid = std::find_if(keys.begin(), keys.end(), [this](const auto& checkpoint) {
+            return verify_checkpoint(checkpoint_history[checkpoint]);
+        });
+
         if (latest_valid == keys.end()) {
             throw ChunkingError("No valid checkpoint found for recovery");
         }
-  
+
         return checkpoint_history[*latest_valid].chunks;
     }
 
@@ -276,13 +255,13 @@ public:
     void handle_memory_exhaustion() {
         // Free up memory by clearing old checkpoints
         checkpoint_history.clear();
-        
+
         // Force garbage collection
         std::vector<std::vector<T>>().swap(checkpoint_history[current_sequence].chunks);
-        
+
         // Wait for memory to be freed
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
-        
+
         if (get_memory_usage() > max_memory_usage) {
             throw ChunkingError("Memory exhaustion: Unable to recover");
         }
@@ -292,16 +271,15 @@ public:
      * @brief Handle data corruption
      */
     void handle_corruption() {
-        std::cerr << "Data corruption detected at sequence " 
-                  << current_sequence << std::endl;
-        
+        std::cerr << "Data corruption detected at sequence " << current_sequence << std::endl;
+
         if (checkpoint_history.count(current_sequence)) {
             checkpoint_history[current_sequence].is_corrupted = true;
         }
-        
+
         // Attempt to restore from last valid checkpoint
         auto valid_checkpoint = restore_from_checkpoint();
-        
+
         // Find highest sequence number
         size_t max_seq = 0;
         for (const auto& [seq, _] : checkpoint_history) {

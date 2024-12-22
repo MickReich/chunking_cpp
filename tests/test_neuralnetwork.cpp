@@ -1,7 +1,7 @@
-#include <gtest/gtest.h>
 #include "../include/neural_chunking.hpp"
-#include <vector>
+#include <gtest/gtest.h>
 #include <stdexcept>
+#include <vector>
 
 // Test fixture for neural chunking tests
 class NeuralChunkingTest : public ::testing::Test {
@@ -26,7 +26,7 @@ TEST_F(NeuralChunkingTest, LayerInitialization) {
     neural_chunking::Layer layer(4, 2);
     std::vector<double> input = {0.1, 0.2, 0.3, 0.4};
     auto output = layer.forward(input);
-    
+
     EXPECT_EQ(output.size(), 2);
     for (const auto& val : output) {
         EXPECT_GE(val, 0.0);
@@ -37,7 +37,7 @@ TEST_F(NeuralChunkingTest, LayerInitialization) {
 TEST_F(NeuralChunkingTest, LayerInputValidation) {
     neural_chunking::Layer layer(4, 2);
     std::vector<double> invalid_input = {0.1, 0.2, 0.3}; // Wrong size
-    
+
     EXPECT_THROW(layer.forward(invalid_input), std::invalid_argument);
 }
 
@@ -56,7 +56,7 @@ TEST_F(NeuralChunkingTest, ThresholdValidation) {
 TEST_F(NeuralChunkingTest, SmallDataHandling) {
     std::vector<int> small_data = {1, 2, 3};
     auto chunks = chunker.chunk(small_data);
-    
+
     EXPECT_GE(chunks.size(), 1);
     size_t total_elements = 0;
     for (const auto& chunk : chunks) {
@@ -67,7 +67,7 @@ TEST_F(NeuralChunkingTest, SmallDataHandling) {
 
 TEST_F(NeuralChunkingTest, ChunkConsistency) {
     auto chunks = chunker.chunk(sample_data);
-    
+
     // Verify that all elements are preserved
     size_t total_elements = 0;
     for (const auto& chunk : chunks) {
@@ -81,10 +81,10 @@ TEST_F(NeuralChunkingTest, DifferentThresholds) {
     // Test with different thresholds
     chunker.set_threshold(0.3);
     auto chunks_loose = chunker.chunk(sample_data);
-    
+
     chunker.set_threshold(0.7);
     auto chunks_strict = chunker.chunk(sample_data);
-    
+
     // Higher threshold should result in fewer or equal number of chunks
     EXPECT_LE(chunks_strict.size(), chunks_loose.size());
 }
@@ -100,7 +100,7 @@ TEST_F(NeuralChunkingTest, DifferentDataTypes) {
     neural_chunking::NeuralChunking<double> double_chunker;
     std::vector<double> double_data = {1.1, 2.2, 3.3, 4.4, 5.5};
     auto chunks = double_chunker.chunk(double_data);
-    
+
     EXPECT_FALSE(chunks.empty());
 }
 
