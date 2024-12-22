@@ -34,8 +34,8 @@ void demonstrate_mutual_information_chunking() {
     std::cout << "\n=== Mutual Information Chunking Demonstration ===\n";
 
     // Word-level data
-    std::vector<std::string> words = {"the", "quick", "brown", "fox", "jumps", 
-                                     "over", "the", "lazy", "dog"};
+    std::vector<std::string> words = {"the",  "quick", "brown", "fox", "jumps",
+                                      "over", "the",   "lazy",  "dog"};
     MutualInformationChunking<std::string> mi_words(3, 0.4);
     auto word_chunks = mi_words.chunk(words);
 
@@ -56,8 +56,7 @@ void demonstrate_dtw_chunking() {
     std::cout << "\n=== DTW-based Chunking Demonstration ===\n";
 
     // Time series data
-    std::vector<float> time_series = {1.0f, 1.2f, 1.1f, 5.0f, 5.2f, 5.1f, 
-                                     2.0f, 2.2f, 2.1f};
+    std::vector<float> time_series = {1.0f, 1.2f, 1.1f, 5.0f, 5.2f, 5.1f, 2.0f, 2.2f, 2.1f};
     DTWChunking<float> dtw_numeric(5, 1.5);
     auto ts_chunks = dtw_numeric.chunk(time_series);
 
@@ -76,4 +75,4 @@ int main() {
     demonstrate_mutual_information_chunking();
     demonstrate_dtw_chunking();
     return 0;
-} 
+}

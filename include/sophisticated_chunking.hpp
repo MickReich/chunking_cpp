@@ -1,14 +1,14 @@
 #pragma once
-#include <vector>
-#include <string>
-#include <map>
-#include <set>
 #include <algorithm>
-#include <numeric>
 #include <cmath>
+#include <map>
 #include <memory>
+#include <numeric>
 #include <random>
+#include <set>
+#include <string>
 #include <type_traits>
+#include <vector>
 
 namespace sophisticated_chunking {
 
@@ -16,7 +16,7 @@ namespace sophisticated_chunking {
  * @brief Wavelet-based chunking strategy using signal processing principles
  * @tparam T The type of elements to be chunked
  */
-template<typename T>
+template <typename T>
 class WaveletChunking {
 private:
     size_t window_size_;
@@ -50,7 +50,7 @@ public:
  * @brief Information theory based chunking using mutual information
  * @tparam T The type of elements to be chunked
  */
-template<typename T>
+template <typename T>
 class MutualInformationChunking {
 private:
     size_t context_size_;
@@ -62,8 +62,8 @@ private:
      * @param segment2 Second segment
      * @return Mutual information value
      */
-    double calculateMutualInformation(const std::vector<T>& segment1, 
-                                    const std::vector<T>& segment2) const;
+    double calculateMutualInformation(const std::vector<T>& segment1,
+                                      const std::vector<T>& segment2) const;
 
 public:
     /**
@@ -86,7 +86,7 @@ public:
  * @brief Dynamic time warping based chunking for sequence alignment
  * @tparam T The type of elements to be chunked
  */
-template<typename T>
+template <typename T>
 class DTWChunking {
 private:
     size_t window_size_;
@@ -98,8 +98,7 @@ private:
      * @param seq2 Second sequence
      * @return DTW distance
      */
-    double computeDTWDistance(const std::vector<T>& seq1, 
-                            const std::vector<T>& seq2) const;
+    double computeDTWDistance(const std::vector<T>& seq1, const std::vector<T>& seq2) const;
 
 public:
     /**
@@ -118,8 +117,9 @@ public:
     std::vector<std::vector<T>> chunk(const std::vector<T>& data) const;
 };
 
-template<typename T>
-std::vector<double> WaveletChunking<T>::computeWaveletCoefficients(const std::vector<T>& data) const {
+template <typename T>
+std::vector<double>
+WaveletChunking<T>::computeWaveletCoefficients(const std::vector<T>& data) const {
     if (data.size() < window_size_) {
         return std::vector<double>();
     }
@@ -131,8 +131,8 @@ std::vector<double> WaveletChunking<T>::computeWaveletCoefficients(const std::ve
     for (size_t i = 0; i <= data.size() - window_size_; ++i) {
         double sum = 0.0;
         for (size_t j = 0; j < window_size_ / 2; ++j) {
-            double diff = static_cast<double>(data[i + j]) - 
-                         static_cast<double>(data[i + window_size_ - 1 - j]);
+            double diff = static_cast<double>(data[i + j]) -
+                          static_cast<double>(data[i + window_size_ - 1 - j]);
             sum += diff * diff;
         }
         coefficients.push_back(std::sqrt(sum / window_size_));
@@ -141,7 +141,7 @@ std::vector<double> WaveletChunking<T>::computeWaveletCoefficients(const std::ve
     return coefficients;
 }
 
-template<typename T>
+template <typename T>
 std::vector<std::vector<T>> WaveletChunking<T>::chunk(const std::vector<T>& data) const {
     if (data.empty()) {
         return {};
@@ -154,7 +154,7 @@ std::vector<std::vector<T>> WaveletChunking<T>::chunk(const std::vector<T>& data
     size_t i = 0;
     for (const T& value : data) {
         current_chunk.push_back(value);
-        
+
         if (i < coefficients.size() && coefficients[i] > threshold_) {
             if (!current_chunk.empty()) {
                 chunks.push_back(current_chunk);
@@ -171,9 +171,10 @@ std::vector<std::vector<T>> WaveletChunking<T>::chunk(const std::vector<T>& data
     return chunks;
 }
 
-template<typename T>
-double MutualInformationChunking<T>::calculateMutualInformation(
-    const std::vector<T>& segment1, const std::vector<T>& segment2) const {
+template <typename T>
+double
+MutualInformationChunking<T>::calculateMutualInformation(const std::vector<T>& segment1,
+                                                         const std::vector<T>& segment2) const {
     if (segment1.empty() || segment2.empty()) {
         return 0.0;
     }
@@ -181,11 +182,11 @@ double MutualInformationChunking<T>::calculateMutualInformation(
     // Calculate frequency distributions
     std::map<T, double> p1, p2;
     std::map<std::pair<T, T>, double> p12;
-    
+
     for (const auto& val : segment1) {
         p1[val] += 1.0 / segment1.size();
     }
-    
+
     for (const auto& val : segment2) {
         p2[val] += 1.0 / segment2.size();
     }
@@ -210,7 +211,7 @@ double MutualInformationChunking<T>::calculateMutualInformation(
     return mi;
 }
 
-template<typename T>
+template <typename T>
 std::vector<std::vector<T>> MutualInformationChunking<T>::chunk(const std::vector<T>& data) const {
     if (data.size() < 2 * context_size_) {
         return {data};
@@ -218,60 +219,61 @@ std::vector<std::vector<T>> MutualInformationChunking<T>::chunk(const std::vecto
 
     std::vector<std::vector<T>> chunks;
     std::vector<T> current_chunk;
-    
+
     for (size_t i = 0; i < data.size(); ++i) {
         current_chunk.push_back(data[i]);
-        
+
         if (current_chunk.size() >= context_size_ && i + context_size_ < data.size()) {
-            std::vector<T> next_segment(data.begin() + i + 1, 
-                                      data.begin() + std::min(i + 1 + context_size_, data.size()));
-            
+            std::vector<T> next_segment(
+                data.begin() + i + 1, data.begin() + std::min(i + 1 + context_size_, data.size()));
+
             double mi = calculateMutualInformation(current_chunk, next_segment);
-            
+
             if (mi < mi_threshold_) {
                 chunks.push_back(current_chunk);
                 current_chunk.clear();
             }
         }
     }
-    
+
     if (!current_chunk.empty()) {
         chunks.push_back(current_chunk);
     }
-    
+
     return chunks;
 }
 
-template<typename T>
-double DTWChunking<T>::computeDTWDistance(const std::vector<T>& seq1, 
-                                         const std::vector<T>& seq2) const {
+template <typename T>
+double DTWChunking<T>::computeDTWDistance(const std::vector<T>& seq1,
+                                          const std::vector<T>& seq2) const {
     if (seq1.empty() || seq2.empty()) {
         return std::numeric_limits<double>::infinity();
     }
 
     // Initialize DTW matrix
-    std::vector<std::vector<double>> dtw(seq1.size() + 1, 
-                                        std::vector<double>(seq2.size() + 1, 
-                                        std::numeric_limits<double>::infinity()));
+    std::vector<std::vector<double>> dtw(
+        seq1.size() + 1,
+        std::vector<double>(seq2.size() + 1, std::numeric_limits<double>::infinity()));
     dtw[0][0] = 0.0;
 
     // Fill DTW matrix
     for (size_t i = 1; i <= seq1.size(); ++i) {
-        for (size_t j = std::max(1ul, i - window_size_); 
+        for (size_t j = std::max(1ul, i - window_size_);
              j <= std::min(seq2.size(), i + window_size_); ++j) {
-            double cost = std::abs(static_cast<double>(seq1[i-1]) - static_cast<double>(seq2[j-1]));
+            double cost =
+                std::abs(static_cast<double>(seq1[i - 1]) - static_cast<double>(seq2[j - 1]));
             dtw[i][j] = cost + std::min({
-                dtw[i-1][j],      // insertion
-                dtw[i][j-1],      // deletion
-                dtw[i-1][j-1]     // match
-            });
+                                   dtw[i - 1][j],    // insertion
+                                   dtw[i][j - 1],    // deletion
+                                   dtw[i - 1][j - 1] // match
+                               });
         }
     }
 
     return dtw[seq1.size()][seq2.size()];
 }
 
-template<typename T>
+template <typename T>
 std::vector<std::vector<T>> DTWChunking<T>::chunk(const std::vector<T>& data) const {
     if (data.size() < 2 * window_size_) {
         return {data};
@@ -279,31 +281,29 @@ std::vector<std::vector<T>> DTWChunking<T>::chunk(const std::vector<T>& data) co
 
     std::vector<std::vector<T>> chunks;
     std::vector<T> current_chunk;
-    
+
     for (size_t i = 0; i < data.size(); ++i) {
         current_chunk.push_back(data[i]);
-        
+
         if (current_chunk.size() >= window_size_ && i + window_size_ < data.size()) {
-            std::vector<T> next_window(data.begin() + i + 1, 
-                                     data.begin() + i + 1 + window_size_);
-            
+            std::vector<T> next_window(data.begin() + i + 1, data.begin() + i + 1 + window_size_);
+
             double distance = computeDTWDistance(
                 std::vector<T>(current_chunk.end() - window_size_, current_chunk.end()),
-                next_window
-            );
-            
+                next_window);
+
             if (distance > dtw_threshold_) {
                 chunks.push_back(current_chunk);
                 current_chunk.clear();
             }
         }
     }
-    
+
     if (!current_chunk.empty()) {
         chunks.push_back(current_chunk);
     }
-    
+
     return chunks;
 }
 
-} // namespace sophisticated_chunking 
+} // namespace sophisticated_chunking
