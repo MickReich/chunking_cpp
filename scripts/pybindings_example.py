@@ -1,5 +1,9 @@
 import sys
-sys.path.append("../build/python")
+import os
+
+# Add the directory containing the compiled module to Python path
+sys.path.append(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'build/python'))
+
 import chunking_cpp as cc
 import numpy as np
 # Basic chunking

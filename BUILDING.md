@@ -71,7 +71,7 @@ pip install pybind11[global]
 These can be installed on ubuntu/debian with:
 
 ```bash
-sudo apt-get install libpq-dev libmongoc-dev libkafka-dev librabbitmq-dev libjsoncpp-dev
+sudo apt-get install libpq-dev libstdc++6 libmongoc-dev libkafka-dev librabbitmq-dev libjsoncpp-dev
 ```
 
 ## Building the Project

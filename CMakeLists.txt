@@ -361,8 +361,14 @@ target_link_libraries(chunking_cpp PRIVATE
 
 # Set Python module properties
 set_target_properties(chunking_cpp PROPERTIES
-    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/python
-    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/python
+    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/python/chunking_cpp
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/python/chunking_cpp
+)
+
+# Create Python package structure
+add_custom_command(TARGET chunking_cpp POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/python/chunking_cpp
+    COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_BINARY_DIR}/python/chunking_cpp/__init__.py
 )
 
 # Install Python module

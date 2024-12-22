@@ -40,3 +40,4 @@ run_tests[1]_*.cmake
 benchmark_results
 benchmark
 **/*.in
+dist/
