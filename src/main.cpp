@@ -1,18 +1,23 @@
 /*Copyright (C) 2024  Jonathan Reich
-
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation; either version 2 of the License, or
 (at your option) any later version.
-
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
-
 You should have received a copy of the GNU General Public License along
 with this program; if not, see <https://www.gnu.org/licenses/>.
 */
+
+/**
+ * @file main.cpp
+ * @brief Demonstrates various chunking strategies and operations.
+ *
+ * This file contains examples of how to use the chunking library to process
+ * data in different ways, including integer, float, and string chunking.
+ */
 
 #include "advanced_structures.hpp"
 #include "chunk.hpp"
@@ -476,6 +481,20 @@ int main() {
     ConditionalSubChunkStrategy<double> conditional_strategy(variance_strategy_ptr, condition, 2);
     auto conditional_result = conditional_strategy.apply(hierarchical_data);
     print_sub_chunks(conditional_result, "Conditional Sub-chunking");
+
+    // Example: String chunking
+    std::cout << "\n=== String Chunking Example ===" << std::endl;
+    Chunk<std::string> string_chunker(3); // Chunks of size 3
+    std::vector<std::string> string_data = {"apple", "banana", "cherry", "date", "elderberry"};
+    string_chunker.add(string_data);
+    print_chunks(string_chunker.get_chunks());
+
+    // Example: Character chunking
+    std::cout << "\n=== Character Chunking Example ===" << std::endl;
+    Chunk<char> char_chunker(4); // Chunks of size 4
+    std::string char_data = "abcdefghij";
+    char_chunker.add(std::vector<char>(char_data.begin(), char_data.end()));
+    print_chunks(char_chunker.get_chunks());
 
     return 0;
 }

@@ -1,3 +1,8 @@
+/**
+ * @file chunk_strategies.hpp
+ * @brief Defines various strategies for chunking data based on different criteria.
+ */
+
 #pragma once
 
 #include "chunk.hpp"
@@ -12,13 +17,22 @@
 namespace chunk_strategies {
 
 /**
- * @brief Base class for chunk strategies
- * @tparam T The type of elements to process
+ * @brief Base class for chunk strategies.
+ * @tparam T The type of elements to process.
  */
 template <typename T>
 class ChunkStrategy {
 public:
+    /**
+     * @brief Apply the chunking strategy to a dataset.
+     * @param data The input data to process.
+     * @return A vector of chunks.
+     */
     virtual std::vector<std::vector<T>> apply(const std::vector<T>& data) = 0;
+
+    /**
+     * @brief Virtual destructor for proper cleanup.
+     */
     virtual ~ChunkStrategy() = default;
 };
 
@@ -247,6 +261,54 @@ private:
     T initial_threshold_;
     T min_threshold_;
     double decay_rate_;
+};
+
+template <>
+class EntropyStrategy<std::string> : public ChunkStrategy<std::string> {
+    double threshold_;
+
+    double calculate_entropy(const std::vector<std::string>& values) {
+        if (values.empty())
+            return 0.0;
+
+        std::map<std::string, int> freq;
+        for (const auto& val : values) {
+            freq[val]++;
+        }
+
+        double entropy = 0.0;
+        for (const auto& [_, count] : freq) {
+            double p = static_cast<double>(count) / values.size();
+            entropy -= p * std::log2(p);
+        }
+
+        return entropy;
+    }
+
+public:
+    explicit EntropyStrategy(double threshold) : threshold_(threshold) {}
+
+    std::vector<std::vector<std::string>> apply(const std::vector<std::string>& data) override {
+        std::vector<std::vector<std::string>> chunks;
+        std::vector<std::string> current_chunk;
+
+        for (const auto& value : data) {
+            current_chunk.push_back(value);
+            if (calculate_entropy(current_chunk) > threshold_) {
+                if (current_chunk.size() > 1) {
+                    current_chunk.pop_back();
+                    chunks.push_back(current_chunk);
+                    current_chunk = {value};
+                }
+            }
+        }
+
+        if (!current_chunk.empty()) {
+            chunks.push_back(current_chunk);
+        }
+
+        return chunks;
+    }
 };
 
 } // namespace chunk_strategies

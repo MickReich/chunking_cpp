@@ -7,6 +7,12 @@ file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/docs/html)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+# Add compiler-specific flags
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
+endif()
 
 # Include directories
 include_directories(${PROJECT_SOURCE_DIR}/include)

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['calculate_5fentropy_0',['calculate_entropy',['../classchunk__strategies_1_1EntropyStrategy.html#a317d481326287f6833aa9f21f6a0d596',1,'chunk_strategies::EntropyStrategy']]],
+  ['calculate_5fentropy_0',['calculate_entropy',['../classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4.html#ada974294bf7efb37be6a8a6b61298562',1,'chunk_strategies::EntropyStrategy&lt; std::string &gt;::calculate_entropy()'],['../classchunk__strategies_1_1EntropyStrategy.html#a317d481326287f6833aa9f21f6a0d596',1,'chunk_strategies::EntropyStrategy::calculate_entropy()']]],
   ['calculate_5fvariance_1',['calculate_variance',['../classchunk__strategies_1_1VarianceStrategy.html#a105f2d476af517d0f1e2d9cf58fb08c0',1,'chunk_strategies::VarianceStrategy']]],
   ['capacity_2',['capacity',['../classCircularBuffer.html#ae1addc6782f9a3e4d66461223f496619',1,'CircularBuffer']]],
   ['chunk_3',['Chunk',['../classChunk.html#ae7a6f9e3ad1cd778aa340bb71ab923c4',1,'Chunk']]],
