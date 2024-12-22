@@ -100,22 +100,44 @@ std::vector<std::vector<T>> AdaptiveChunkTree<T>::chunk(const std::vector<T>& da
 
 template<typename T>
 double AdaptiveChunkTree<T>::measureComplexity(const std::vector<T>& data) {
-    if (data.empty()) return 0.0;
+    if (data.size() < 2) return 0.0;
     
-    // Calculate statistical variance as a measure of complexity
-    T sum = std::accumulate(data.begin(), data.end(), T());
-    double mean = static_cast<double>(sum) / data.size();
+    // Safe conversion to double for calculations
+    std::vector<double> double_data;
+    double_data.reserve(data.size());
+    for (const auto& val : data) {
+        double_data.push_back(static_cast<double>(val));
+    }
+    
+    // Calculate mean safely
+    double sum = 0.0;
+    for (const double& val : double_data) {
+        sum += val;
+    }
+    double mean = sum / double_data.size();
+    
+    // Calculate variance safely
+    double max_val = *std::max_element(double_data.begin(), double_data.end());
+    double min_val = *std::min_element(double_data.begin(), double_data.end());
+    double range = std::max(std::abs(max_val - min_val), 1.0);  // Avoid division by zero
     
     double variance = 0.0;
-    for (const T& value : data) {
-        double diff = static_cast<double>(value) - mean;
-        variance += diff * diff;
+    for (const double& val : double_data) {
+        double diff = val - mean;
+        variance += (diff * diff) / (range * range);  // Normalize as we go
     }
-    variance /= data.size();
+    variance /= double_data.size();
     
-    // Normalize variance to [0,1] using a reasonable maximum value
-    const double MAX_VARIANCE = 1000.0;
-    return std::min(1.0, variance / MAX_VARIANCE);
+    // Calculate rate of change safely
+    double rate_change = 0.0;
+    for (size_t i = 1; i < double_data.size(); ++i) {
+        double diff = std::abs(double_data[i] - double_data[i-1]);
+        rate_change += diff / range;  // Normalize as we go
+    }
+    rate_change /= (double_data.size() - 1);
+    
+    // Combine metrics safely
+    return std::min(1.0, std::max(variance, rate_change));
 }
 
 template<typename T>
@@ -135,24 +157,18 @@ size_t AdaptiveChunkTree<T>::calculateAdaptiveSize(double complexity) {
 // Specializations
 template<>
 double AdaptiveChunkTree<uint8_t>::measureComplexity(const std::vector<uint8_t>& data) {
-    if (data.empty()) return 0.0;
+    if (data.size() < 2) return 0.0;
     
-    // Calculate entropy as a measure of complexity
-    std::array<int, 256> frequency = {0};
-    for (uint8_t byte : data) {
-        frequency[byte]++;
+    double max_diff = 0.0;
+    for (size_t i = 1; i < data.size(); ++i) {
+        // Safe conversion to double before subtraction
+        double val1 = static_cast<double>(data[i]);
+        double val2 = static_cast<double>(data[i-1]);
+        double diff = std::abs(val1 - val2);
+        max_diff = std::max(max_diff, diff);
     }
     
-    double entropy = 0.0;
-    for (int count : frequency) {
-        if (count > 0) {
-            double probability = static_cast<double>(count) / data.size();
-            entropy -= probability * std::log2(probability);
-        }
-    }
-    
-    // Normalize entropy to [0,1]
-    return entropy / 8.0;
+    return max_diff / 255.0;  // Already normalized
 }
 
 template<>
