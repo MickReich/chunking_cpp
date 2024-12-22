@@ -167,24 +167,6 @@ int main(int argc, char* argv[]) {
 
     std::cout << "\n=== Demonstrating Advanced Chunking Structures ===\n";
 
-    // Binary data example
-    std::vector<uint8_t> binary_data = {0xFF, 0x00, 0xAA, 0x55, 0xCC};
-    AdaptiveChunkTree<uint8_t> binary_chunker;
-    auto binary_chunks = binary_chunker.chunk(binary_data);
-    std::cout << "Binary chunks created: " << binary_chunks.size() << "\n";
-
-    // Character data example
-    std::string char_data = "Hello, World!";
-    AdaptiveChunkTree<char> char_chunker;
-    auto char_chunks = char_chunker.chunk(std::vector<char>(char_data.begin(), char_data.end()));
-    std::cout << "Character chunks created: " << char_chunks.size() << "\n";
-
-    // Float data example
-    std::vector<float> float_data = {1.0f, 2.5f, 3.7f, 4.2f, 5.9f};
-    AdaptiveChunkTree<float> float_chunker;
-    auto float_chunks = float_chunker.chunk(float_data);
-    std::cout << "Float chunks created: " << float_chunks.size() << "\n";
-
     // Example: SemanticChunker usage
     std::cout << "\n=== SemanticChunker Example ===" << std::endl;
     SemanticChunker<std::string> text_chunker;
