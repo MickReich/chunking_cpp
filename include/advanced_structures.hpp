@@ -40,11 +40,12 @@ private:
     
     std::unique_ptr<ChunkNode> root;           ///< Root node of the chunk tree
     double complexity_threshold;                ///< Threshold for determining chunk boundaries
-    static constexpr size_t MAX_CHUNK_SIZE = 3;
+    static constexpr size_t MAX_CHUNK_SIZE = 4;
     
     // Declare but don't define these methods here
     double measureComplexity(const std::vector<T>& data);
     size_t calculateAdaptiveSize(double complexity);
+    std::vector<std::vector<T>> splitIntoChunks(const std::vector<T>& data);
 
 public:
     /**

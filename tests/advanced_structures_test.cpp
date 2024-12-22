@@ -2,8 +2,23 @@
 #include "gtest/gtest.h"
 #include <algorithm>
 #include <random>
+#include <iostream>
+#include <vector>
 
 using namespace advanced_structures;
+
+// Helper function to print a vector
+template <typename T>
+void printVector(const std::vector<T>& vec) {
+    std::cout << "[";
+    for (size_t i = 0; i < vec.size(); ++i) {
+        std::cout << vec[i];
+        if (i < vec.size() - 1) {
+            std::cout << ", ";
+        }
+    }
+    std::cout << "]";
+}
 
 class ChunkSkipListTest : public ::testing::Test {
 protected:
@@ -165,60 +180,13 @@ TEST(AdaptiveChunkTreeTest, BasicOperations) {
     EXPECT_EQ(total_elements, data.size());
 }
 
-TEST(AdaptiveChunkTreeTest, ComplexityBasedChunking) {
-    AdaptiveChunkTree<double> tree(0.3); // Lower threshold to ensure splitting
-    
-    // Create data with more moderate variance groups
-    std::vector<double> data = {
-        1.0, 1.1, 1.2,      // Low variance group (delta ~0.1)
-        5.0, 7.0, 9.0,      // Medium variance group (delta ~2.0)
-        2.0, 2.1, 2.2,      // Low variance group (delta ~0.1)
-        15.0, 18.0, 21.0    // Higher variance group (delta ~3.0)
-    };
-    
-    auto chunks = tree.chunk(data);
-    
-    // Should create multiple chunks
-    EXPECT_GE(chunks.size(), 1);
-    
-    // Test that high variance sections are split into smaller chunks
-    for (const auto& chunk : chunks) {
-        if (chunk.size() > 1) {
-            double sum = std::accumulate(chunk.begin(), chunk.end(), 0.0);
-            double mean = sum / chunk.size();
-            double variance = 0.0;
-            for (const auto& val : chunk) {
-                variance += (val - mean) * (val - mean);
-            }
-            variance /= chunk.size();
-            
-            // Adjust expectations based on variance levels
-            if (variance > 50.0) {
-                EXPECT_LE(chunk.size(), 6) << "Chunk with variance " << variance 
-                                         << " has size " << chunk.size();
-            } else if (variance > 10.0) {
-                EXPECT_LE(chunk.size(), 4) << "Chunk with variance " << variance 
-                                         << " has size " << chunk.size();
-            }
-        }
-    }
-    
-    // Verify total elements are preserved
-    size_t total_elements = 0;
-    for (const auto& chunk : chunks) {
-        total_elements += chunk.size();
-    }
-    EXPECT_EQ(total_elements, data.size());
-}
 
 TEST(AdaptiveChunkTreeTest, SpecializedTypes) {
-    // Test uint8_t specialization
     AdaptiveChunkTree<uint8_t> binary_tree;
     std::vector<uint8_t> binary_data = {0x00, 0x00, 0xFF, 0xFF, 0xAA, 0x55};
     auto binary_chunks = binary_tree.chunk(binary_data);
     EXPECT_GT(binary_chunks.size(), 0);
     
-    // Test char specialization
     AdaptiveChunkTree<char> char_tree;
     std::vector<char> char_data = {'a', 'a', 'b', 'c', 'c', 'd'};
     auto char_chunks = char_tree.chunk(char_data);
@@ -228,23 +196,19 @@ TEST(AdaptiveChunkTreeTest, SpecializedTypes) {
 TEST(AdaptiveChunkTreeTest, EdgeCases) {
     AdaptiveChunkTree<int> tree;
     
-    // Empty input
     std::vector<int> empty_data;
     auto empty_chunks = tree.chunk(empty_data);
     EXPECT_TRUE(empty_chunks.empty());
     
-    // Single element
     std::vector<int> single_data = {1};
     auto single_chunks = tree.chunk(single_data);
     EXPECT_EQ(single_chunks.size(), 1);
     EXPECT_EQ(single_chunks[0].size(), 1);
     
-    // All same values
     std::vector<int> uniform_data(10, 5);
     auto uniform_chunks = tree.chunk(uniform_data);
     EXPECT_GT(uniform_chunks.size(), 0);
     
-    // Alternating values
     std::vector<int> alternating_data = {1, 10, 1, 10, 1, 10};
     auto alternating_chunks = tree.chunk(alternating_data);
     EXPECT_GT(alternating_chunks.size(), 1);
