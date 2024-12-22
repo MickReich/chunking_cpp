@@ -1,0 +1,769 @@
+\doxysection{Chunk\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classChunk}{}\label{classChunk}\index{Chunk$<$ T $>$@{Chunk$<$ T $>$}}
+
+
+A template class for managing and processing data in chunks.  
+
+
+
+
+{\ttfamily \#include $<$chunk.\+hpp$>$}
+
+
+
+Collaboration diagram for Chunk\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=211pt]{classChunk__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classChunk_ae7a6f9e3ad1cd778aa340bb71ab923c4}{Chunk}} (size\+\_\+t \mbox{\hyperlink{classChunk_a160459077243c9e5ff642f478277e161}{size}})
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classChunk}{Chunk} with a specified size. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classChunk_acfcab88bdc71650a777dc96572a3dd20}{add}} (const std\+::vector$<$ T $>$ \&elements)
+\begin{DoxyCompactList}\small\item\em Adds a vector of elements to the chunk. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classChunk_aaa08401de48a718d93d3c25f4a9155cf}{add}} (const T \&element)
+\begin{DoxyCompactList}\small\item\em Adds a single element to the chunk. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classChunk_a3dc937cbb4ca8da19ad8dfe6bde7807f}{chunk\+\_\+by\+\_\+monotonicity}} () const
+\item 
+{\footnotesize template$<$typename Pred $>$ }\\std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classChunk_a69630b9586ba94c1df6a8c29df2aab40}{chunk\+\_\+by\+\_\+predicate}} (Pred predicate) const
+\item 
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classChunk_a6eb63fcaea91518ff55759a7de548b2b}{chunk\+\_\+by\+\_\+similarity}} (T threshold) const
+\item 
+{\footnotesize template$<$typename Stat\+Func $>$ }\\std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classChunk_abe62a4d4d72e24468d53ec0f58f5a43f}{chunk\+\_\+by\+\_\+statistic}} (T threshold, Stat\+Func stat\+\_\+func) const
+\item 
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classChunk_a3533c581decb67f8f9511dc6b7c264c7}{chunk\+\_\+by\+\_\+sum}} (T target\+\_\+sum) const
+\item 
+size\+\_\+t \mbox{\hyperlink{classChunk_addc46ee1885118a00bed3b5df55a96c5}{chunk\+\_\+count}} () const
+\item 
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classChunk_a8399db98c455ce9b00b45aace5919a05}{chunk\+\_\+into\+\_\+n}} (size\+\_\+t n) const
+\item 
+std\+::vector$<$ T $>$ \mbox{\hyperlink{classChunk_a2c1f2fb7b5a0d3eb875311362cb27580}{get\+\_\+chunk}} (size\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Retrieves a specific chunk by index. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classChunk_adbff639ac17c8d894373b0f67fa08658}{get\+\_\+chunks}} () const
+\begin{DoxyCompactList}\small\item\em Retrieves all chunks. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classChunk_ab833db41bbf73b77ce520712ed7c7239}{get\+\_\+overlapping\+\_\+chunks}} (size\+\_\+t overlap) const
+\item 
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classChunk_a016606afd5f7ea84a27020ddb02e5624}{get\+\_\+padded\+\_\+chunks}} (const T \&pad\+\_\+value) const
+\item 
+size\+\_\+t \mbox{\hyperlink{classChunk_a160459077243c9e5ff642f478277e161}{size}} () const
+\item 
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classChunk_aadb0e77dfcd8b7ab108b1556fdae21b2}{sliding\+\_\+window}} (size\+\_\+t window\+\_\+size, size\+\_\+t step=1) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classChunk_a82af79dbdc92786a8073a50389d75738}{update\+\_\+chunks}} ()
+\item 
+void \mbox{\hyperlink{classChunk_af09c384809b7238eb999b1d4d8fcfdd3}{validate\+\_\+size}} (size\+\_\+t \mbox{\hyperlink{classChunk_a160459077243c9e5ff642f478277e161}{size}}, const std\+::string \&param) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+size\+\_\+t \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\+\_\+size}}
+\item 
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classChunk_a1574993946fe5b28c6d89ce4bf77857b}{chunks}}
+\item 
+std\+::vector$<$ T $>$ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class Chunk$<$ T $>$}
+A template class for managing and processing data in chunks. 
+
+This class provides various methods for splitting data into chunks, including fixed-\/size chunks, overlapping chunks, and predicate-\/based chunking.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of elements stored in the chunk. \\
+\hline
+\end{DoxyTemplParams}
+
+
+Definition at line \mbox{\hyperlink{chunk_8hpp_source_l00029}{29}} of file \mbox{\hyperlink{chunk_8hpp_source}{chunk.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classChunk_ae7a6f9e3ad1cd778aa340bb71ab923c4}\label{classChunk_ae7a6f9e3ad1cd778aa340bb71ab923c4} 
+\index{Chunk$<$ T $>$@{Chunk$<$ T $>$}!Chunk@{Chunk}}
+\index{Chunk@{Chunk}!Chunk$<$ T $>$@{Chunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Chunk()}{Chunk()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classChunk}{Chunk}}$<$ T $>$\mbox{\hyperlink{classChunk}{\+::\+Chunk}} (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classChunk}{Chunk} with a specified size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & The size of each chunk. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if size is zero. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \mbox{\hyperlink{chunk_8hpp_source_l00048}{48}} of file \mbox{\hyperlink{chunk_8hpp_source}{chunk.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}}(\mbox{\hyperlink{classChunk_a160459077243c9e5ff642f478277e161}{size}})\ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classChunk_a160459077243c9e5ff642f478277e161}{size}}\ ==\ 0)\ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Chunk\ size\ must\ be\ greater\ than\ 0"{}});}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00052\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk_8hpp_source_l00054}{Chunk$<$ T $>$\+::size()}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classChunk_acfcab88bdc71650a777dc96572a3dd20}\label{classChunk_acfcab88bdc71650a777dc96572a3dd20} 
+\index{Chunk$<$ T $>$@{Chunk$<$ T $>$}!add@{add}}
+\index{add@{add}!Chunk$<$ T $>$@{Chunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{add()}{add()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classChunk}{Chunk}}$<$ T $>$\+::add (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ T $>$ \&}]{elements }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adds a vector of elements to the chunk. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em elements} & The elements to add. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{chunk_8hpp_source_l00075}{75}} of file \mbox{\hyperlink{chunk_8hpp_source}{chunk.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.insert(\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.end(),\ elements.begin(),\ elements.end());}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classChunk_a82af79dbdc92786a8073a50389d75738}{update\_chunks}}();}
+\DoxyCodeLine{00078\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk_8hpp_source_l00032}{Chunk$<$ T $>$\+::data}}, and \mbox{\hyperlink{chunk_8hpp_source_l00255}{Chunk$<$ T $>$\+::update\+\_\+chunks()}}.
+
+\Hypertarget{classChunk_aaa08401de48a718d93d3c25f4a9155cf}\label{classChunk_aaa08401de48a718d93d3c25f4a9155cf} 
+\index{Chunk$<$ T $>$@{Chunk$<$ T $>$}!add@{add}}
+\index{add@{add}!Chunk$<$ T $>$@{Chunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{add()}{add()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classChunk}{Chunk}}$<$ T $>$\+::add (\begin{DoxyParamCaption}\item[{const T \&}]{element }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adds a single element to the chunk. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em element} & The element to add. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{chunk_8hpp_source_l00066}{66}} of file \mbox{\hyperlink{chunk_8hpp_source}{chunk.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.push\_back(element);}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classChunk_a82af79dbdc92786a8073a50389d75738}{update\_chunks}}();}
+\DoxyCodeLine{00069\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk_8hpp_source_l00032}{Chunk$<$ T $>$\+::data}}, and \mbox{\hyperlink{chunk_8hpp_source_l00255}{Chunk$<$ T $>$\+::update\+\_\+chunks()}}.
+
+
+
+Referenced by \mbox{\hyperlink{chunk__strategies_8hpp_source_l00184}{chunk\+\_\+strategies\+::\+Pattern\+Based\+Strategy$<$ T $>$\+::apply()}}, \mbox{\hyperlink{chunk__strategies_8hpp_source_l00201}{chunk\+\_\+strategies\+::\+Adaptive\+Strategy$<$ T $>$\+::apply()}}, \mbox{\hyperlink{chunk__strategies_8hpp_source_l00218}{chunk\+\_\+strategies\+::\+Multi\+Criteria\+Strategy$<$ T $>$\+::apply()}}, \mbox{\hyperlink{chunk__strategies_8hpp_source_l00247}{chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy$<$ T $>$\+::apply()}}, and \mbox{\hyperlink{chunk__windows_8hpp_source_l00015}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::process()}}.
+
+\Hypertarget{classChunk_a3dc937cbb4ca8da19ad8dfe6bde7807f}\label{classChunk_a3dc937cbb4ca8da19ad8dfe6bde7807f} 
+\index{Chunk$<$ T $>$@{Chunk$<$ T $>$}!chunk\_by\_monotonicity@{chunk\_by\_monotonicity}}
+\index{chunk\_by\_monotonicity@{chunk\_by\_monotonicity}!Chunk$<$ T $>$@{Chunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{chunk\_by\_monotonicity()}{chunk\_by\_monotonicity()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classChunk}{Chunk}}$<$ T $>$\+::chunk\+\_\+by\+\_\+monotonicity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk_8hpp_source_l00171}{171}} of file \mbox{\hyperlink{chunk_8hpp_source}{chunk.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size()\ <\ 2)}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}\};}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ std::vector<T>\ current\_chunk\{\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[0]\};}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ increasing\ =\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[1]\ >\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[0];}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 1;\ i\ <\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size();\ ++i)\ \{}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[i]\ >\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[i\ -\/\ 1])\ !=\ increasing\ \&\&\ !current\_chunk.empty())\ \{}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.clear();}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ <\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size()\ -\/\ 1)}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ increasing\ =\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[i\ +\ 1]\ >\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[i];}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.push\_back(\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[i]);}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!current\_chunk.empty())}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00189\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk_8hpp_source_l00032}{Chunk$<$ T $>$\+::data}}.
+
+\Hypertarget{classChunk_a69630b9586ba94c1df6a8c29df2aab40}\label{classChunk_a69630b9586ba94c1df6a8c29df2aab40} 
+\index{Chunk$<$ T $>$@{Chunk$<$ T $>$}!chunk\_by\_predicate@{chunk\_by\_predicate}}
+\index{chunk\_by\_predicate@{chunk\_by\_predicate}!Chunk$<$ T $>$@{Chunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{chunk\_by\_predicate()}{chunk\_by\_predicate()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+template$<$typename Pred $>$ \\
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classChunk}{Chunk}}$<$ T $>$\+::chunk\+\_\+by\+\_\+predicate (\begin{DoxyParamCaption}\item[{Pred}]{predicate }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk_8hpp_source_l00116}{116}} of file \mbox{\hyperlink{chunk_8hpp_source}{chunk.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.empty())}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ std::vector<T>\ current\_chunk;}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ T\&\ item\ :\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}})\ \{}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (predicate(item)\ \&\&\ !current\_chunk.empty())\ \{}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.clear();}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.push\_back(item);}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!current\_chunk.empty())\ \{}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00132\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk_8hpp_source_l00032}{Chunk$<$ T $>$\+::data}}.
+
+
+
+Referenced by \mbox{\hyperlink{chunk__strategies_8hpp_source_l00184}{chunk\+\_\+strategies\+::\+Pattern\+Based\+Strategy$<$ T $>$\+::apply()}}, and \mbox{\hyperlink{chunk__strategies_8hpp_source_l00247}{chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy$<$ T $>$\+::apply()}}.
+
+\Hypertarget{classChunk_a6eb63fcaea91518ff55759a7de548b2b}\label{classChunk_a6eb63fcaea91518ff55759a7de548b2b} 
+\index{Chunk$<$ T $>$@{Chunk$<$ T $>$}!chunk\_by\_similarity@{chunk\_by\_similarity}}
+\index{chunk\_by\_similarity@{chunk\_by\_similarity}!Chunk$<$ T $>$@{Chunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{chunk\_by\_similarity()}{chunk\_by\_similarity()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classChunk}{Chunk}}$<$ T $>$\+::chunk\+\_\+by\+\_\+similarity (\begin{DoxyParamCaption}\item[{T}]{threshold }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk_8hpp_source_l00209}{209}} of file \mbox{\hyperlink{chunk_8hpp_source}{chunk.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.empty())}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ std::vector<T>\ current\_chunk\{\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[0]\};}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ T\ chunk\_mean\ =\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[0];}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 1;\ i\ <\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size();\ ++i)\ \{}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (std::abs(\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[i]\ -\/\ chunk\_mean)\ >\ threshold)\ \{}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.clear();}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ chunk\_mean\ =\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[i];}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.push\_back(\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[i]);}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ chunk\_mean\ =\ std::accumulate(current\_chunk.begin(),\ current\_chunk.end(),\ T(0))\ /}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(current\_chunk.size());}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!current\_chunk.empty())}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00228\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk_8hpp_source_l00032}{Chunk$<$ T $>$\+::data}}.
+
+
+
+Referenced by \mbox{\hyperlink{chunk__strategies_8hpp_source_l00218}{chunk\+\_\+strategies\+::\+Multi\+Criteria\+Strategy$<$ T $>$\+::apply()}}.
+
+\Hypertarget{classChunk_abe62a4d4d72e24468d53ec0f58f5a43f}\label{classChunk_abe62a4d4d72e24468d53ec0f58f5a43f} 
+\index{Chunk$<$ T $>$@{Chunk$<$ T $>$}!chunk\_by\_statistic@{chunk\_by\_statistic}}
+\index{chunk\_by\_statistic@{chunk\_by\_statistic}!Chunk$<$ T $>$@{Chunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{chunk\_by\_statistic()}{chunk\_by\_statistic()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+template$<$typename Stat\+Func $>$ \\
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classChunk}{Chunk}}$<$ T $>$\+::chunk\+\_\+by\+\_\+statistic (\begin{DoxyParamCaption}\item[{T}]{threshold,  }\item[{Stat\+Func}]{stat\+\_\+func }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk_8hpp_source_l00192}{192}} of file \mbox{\hyperlink{chunk_8hpp_source}{chunk.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.empty())}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ std::vector<T>\ current\_chunk\{\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[0]\};}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 1;\ i\ <\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size();\ ++i)\ \{}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stat\_func(current\_chunk)\ >\ threshold)\ \{}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.clear();}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.push\_back(\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[i]);}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!current\_chunk.empty())}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00207\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk_8hpp_source_l00032}{Chunk$<$ T $>$\+::data}}.
+
+
+
+Referenced by \mbox{\hyperlink{chunk__strategies_8hpp_source_l00201}{chunk\+\_\+strategies\+::\+Adaptive\+Strategy$<$ T $>$\+::apply()}}.
+
+\Hypertarget{classChunk_a3533c581decb67f8f9511dc6b7c264c7}\label{classChunk_a3533c581decb67f8f9511dc6b7c264c7} 
+\index{Chunk$<$ T $>$@{Chunk$<$ T $>$}!chunk\_by\_sum@{chunk\_by\_sum}}
+\index{chunk\_by\_sum@{chunk\_by\_sum}!Chunk$<$ T $>$@{Chunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{chunk\_by\_sum()}{chunk\_by\_sum()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classChunk}{Chunk}}$<$ T $>$\+::chunk\+\_\+by\+\_\+sum (\begin{DoxyParamCaption}\item[{T}]{target\+\_\+sum }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk_8hpp_source_l00134}{134}} of file \mbox{\hyperlink{chunk_8hpp_source}{chunk.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ std::vector<T>\ current\_chunk;}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ T\ current\_sum\ =\ T();}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ T\&\ item\ :\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}})\ \{}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_sum\ +\ item\ >\ target\_sum\ \&\&\ !current\_chunk.empty())\ \{}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.clear();}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_sum\ =\ T();}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.push\_back(item);}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ current\_sum\ +=\ item;}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!current\_chunk.empty())\ \{}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00151\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk_8hpp_source_l00032}{Chunk$<$ T $>$\+::data}}.
+
+\Hypertarget{classChunk_addc46ee1885118a00bed3b5df55a96c5}\label{classChunk_addc46ee1885118a00bed3b5df55a96c5} 
+\index{Chunk$<$ T $>$@{Chunk$<$ T $>$}!chunk\_count@{chunk\_count}}
+\index{chunk\_count@{chunk\_count}!Chunk$<$ T $>$@{Chunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{chunk\_count()}{chunk\_count()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+size\+\_\+t \mbox{\hyperlink{classChunk}{Chunk}}$<$ T $>$\+::chunk\+\_\+count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk_8hpp_source_l00058}{58}} of file \mbox{\hyperlink{chunk_8hpp_source}{chunk.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size()\ +\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}}\ -\/\ 1)\ /\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}};}
+\DoxyCodeLine{00060\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk_8hpp_source_l00031}{Chunk$<$ T $>$\+::chunk\+\_\+size}}, and \mbox{\hyperlink{chunk_8hpp_source_l00032}{Chunk$<$ T $>$\+::data}}.
+
+\Hypertarget{classChunk_a8399db98c455ce9b00b45aace5919a05}\label{classChunk_a8399db98c455ce9b00b45aace5919a05} 
+\index{Chunk$<$ T $>$@{Chunk$<$ T $>$}!chunk\_into\_n@{chunk\_into\_n}}
+\index{chunk\_into\_n@{chunk\_into\_n}!Chunk$<$ T $>$@{Chunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{chunk\_into\_n()}{chunk\_into\_n()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classChunk}{Chunk}}$<$ T $>$\+::chunk\+\_\+into\+\_\+n (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk_8hpp_source_l00153}{153}} of file \mbox{\hyperlink{chunk_8hpp_source}{chunk.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (n\ ==\ 0)}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Number\ of\ chunks\ must\ be\ greater\ than\ 0"{}});}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.empty())}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::vector<std::vector<T>>();}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ n\ =\ std::min(n,\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size());}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result(n);}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ base\_size\ =\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size()\ /\ n;}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ remainder\ =\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size()\ \%\ n;}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ pos\ =\ 0;}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}}\ =\ base\_size\ +\ (i\ <\ remainder\ ?\ 1\ :\ 0);}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ result[i]\ =\ std::vector<T>(\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.begin()\ +\ pos,\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.begin()\ +\ pos\ +\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}});}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ pos\ +=\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}};}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00169\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk_8hpp_source_l00031}{Chunk$<$ T $>$\+::chunk\+\_\+size}}, and \mbox{\hyperlink{chunk_8hpp_source_l00032}{Chunk$<$ T $>$\+::data}}.
+
+\Hypertarget{classChunk_a2c1f2fb7b5a0d3eb875311362cb27580}\label{classChunk_a2c1f2fb7b5a0d3eb875311362cb27580} 
+\index{Chunk$<$ T $>$@{Chunk$<$ T $>$}!get\_chunk@{get\_chunk}}
+\index{get\_chunk@{get\_chunk}!Chunk$<$ T $>$@{Chunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{get\_chunk()}{get\_chunk()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$ T $>$ \mbox{\hyperlink{classChunk}{Chunk}}$<$ T $>$\+::get\+\_\+chunk (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retrieves a specific chunk by index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the chunk to retrieve. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The chunk at the specified index. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::out\+\_\+of\+\_\+range} & if index is invalid. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \mbox{\hyperlink{chunk_8hpp_source_l00094}{94}} of file \mbox{\hyperlink{chunk_8hpp_source}{chunk.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ start\ =\ index\ *\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}};}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (start\ >=\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size())\ \{}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::out\_of\_range(\textcolor{stringliteral}{"{}Chunk\ index\ out\ of\ range"{}});}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ end\ =\ std::min(start\ +\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}},\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size());}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::vector<T>(\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.begin()\ +\ start,\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.begin()\ +\ end);}
+\DoxyCodeLine{00101\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk_8hpp_source_l00031}{Chunk$<$ T $>$\+::chunk\+\_\+size}}, and \mbox{\hyperlink{chunk_8hpp_source_l00032}{Chunk$<$ T $>$\+::data}}.
+
+\Hypertarget{classChunk_adbff639ac17c8d894373b0f67fa08658}\label{classChunk_adbff639ac17c8d894373b0f67fa08658} 
+\index{Chunk$<$ T $>$@{Chunk$<$ T $>$}!get\_chunks@{get\_chunks}}
+\index{get\_chunks@{get\_chunks}!Chunk$<$ T $>$@{Chunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{get\_chunks()}{get\_chunks()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classChunk}{Chunk}}$<$ T $>$\+::get\+\_\+chunks (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retrieves all chunks. 
+
+\begin{DoxyReturn}{Returns}
+A vector of vectors, where each inner vector is a chunk. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{chunk_8hpp_source_l00084}{84}} of file \mbox{\hyperlink{chunk_8hpp_source}{chunk.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classChunk_a1574993946fe5b28c6d89ce4bf77857b}{chunks}};}
+\DoxyCodeLine{00086\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk_8hpp_source_l00033}{Chunk$<$ T $>$\+::chunks}}.
+
+
+
+Referenced by \mbox{\hyperlink{chunk__strategies_8hpp_source_l00218}{chunk\+\_\+strategies\+::\+Multi\+Criteria\+Strategy$<$ T $>$\+::apply()}}.
+
+\Hypertarget{classChunk_ab833db41bbf73b77ce520712ed7c7239}\label{classChunk_ab833db41bbf73b77ce520712ed7c7239} 
+\index{Chunk$<$ T $>$@{Chunk$<$ T $>$}!get\_overlapping\_chunks@{get\_overlapping\_chunks}}
+\index{get\_overlapping\_chunks@{get\_overlapping\_chunks}!Chunk$<$ T $>$@{Chunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{get\_overlapping\_chunks()}{get\_overlapping\_chunks()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classChunk}{Chunk}}$<$ T $>$\+::get\+\_\+overlapping\+\_\+chunks (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{overlap }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk_8hpp_source_l00103}{103}} of file \mbox{\hyperlink{chunk_8hpp_source}{chunk.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (overlap\ >=\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}})\ \{}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Overlap\ must\ be\ less\ than\ chunk\ size"{}});}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ step\ =\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}}\ -\/\ overlap;}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ +\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}}\ <=\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size();\ i\ +=\ step)\ \{}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(std::vector<T>(\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.begin()\ +\ i,\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.begin()\ +\ i\ +\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}}));}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00113\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk_8hpp_source_l00031}{Chunk$<$ T $>$\+::chunk\+\_\+size}}, and \mbox{\hyperlink{chunk_8hpp_source_l00032}{Chunk$<$ T $>$\+::data}}.
+
+\Hypertarget{classChunk_a016606afd5f7ea84a27020ddb02e5624}\label{classChunk_a016606afd5f7ea84a27020ddb02e5624} 
+\index{Chunk$<$ T $>$@{Chunk$<$ T $>$}!get\_padded\_chunks@{get\_padded\_chunks}}
+\index{get\_padded\_chunks@{get\_padded\_chunks}!Chunk$<$ T $>$@{Chunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{get\_padded\_chunks()}{get\_padded\_chunks()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classChunk}{Chunk}}$<$ T $>$\+::get\+\_\+padded\+\_\+chunks (\begin{DoxyParamCaption}\item[{const T \&}]{pad\+\_\+value }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk_8hpp_source_l00230}{230}} of file \mbox{\hyperlink{chunk_8hpp_source}{chunk.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size();\ i\ +=\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}})\ \{}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<T>\ chunk;}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ remaining\ =\ std::min(\mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}},\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size()\ -\/\ i);}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \ \ \ \ chunk.insert(chunk.end(),\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.begin()\ +\ i,\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.begin()\ +\ i\ +\ remaining);}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (remaining\ <\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}})\ \{}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ chunk.insert(chunk.end(),\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}}\ -\/\ remaining,\ pad\_value);}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(chunk);}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00242\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk_8hpp_source_l00031}{Chunk$<$ T $>$\+::chunk\+\_\+size}}, and \mbox{\hyperlink{chunk_8hpp_source_l00032}{Chunk$<$ T $>$\+::data}}.
+
+\Hypertarget{classChunk_a160459077243c9e5ff642f478277e161}\label{classChunk_a160459077243c9e5ff642f478277e161} 
+\index{Chunk$<$ T $>$@{Chunk$<$ T $>$}!size@{size}}
+\index{size@{size}!Chunk$<$ T $>$@{Chunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+size\+\_\+t \mbox{\hyperlink{classChunk}{Chunk}}$<$ T $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk_8hpp_source_l00054}{54}} of file \mbox{\hyperlink{chunk_8hpp_source}{chunk.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size();}
+\DoxyCodeLine{00056\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk_8hpp_source_l00032}{Chunk$<$ T $>$\+::data}}.
+
+
+
+Referenced by \mbox{\hyperlink{chunk_8hpp_source_l00048}{Chunk$<$ T $>$\+::\+Chunk()}}, and \mbox{\hyperlink{chunk_8hpp_source_l00036}{Chunk$<$ T $>$\+::validate\+\_\+size()}}.
+
+\Hypertarget{classChunk_aadb0e77dfcd8b7ab108b1556fdae21b2}\label{classChunk_aadb0e77dfcd8b7ab108b1556fdae21b2} 
+\index{Chunk$<$ T $>$@{Chunk$<$ T $>$}!sliding\_window@{sliding\_window}}
+\index{sliding\_window@{sliding\_window}!Chunk$<$ T $>$@{Chunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{sliding\_window()}{sliding\_window()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classChunk}{Chunk}}$<$ T $>$\+::sliding\+\_\+window (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{window\+\_\+size,  }\item[{size\+\_\+t}]{step = {\ttfamily 1} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk_8hpp_source_l00244}{244}} of file \mbox{\hyperlink{chunk_8hpp_source}{chunk.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classChunk_af09c384809b7238eb999b1d4d8fcfdd3}{validate\_size}}(window\_size,\ \textcolor{stringliteral}{"{}Window\ size"{}});}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classChunk_af09c384809b7238eb999b1d4d8fcfdd3}{validate\_size}}(step,\ \textcolor{stringliteral}{"{}Step\ size"{}});}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ +\ window\_size\ <=\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size();\ i\ +=\ step)\ \{}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(std::vector<T>(\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.begin()\ +\ i,\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.begin()\ +\ i\ +\ window\_size));}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00252\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk_8hpp_source_l00032}{Chunk$<$ T $>$\+::data}}, and \mbox{\hyperlink{chunk_8hpp_source_l00036}{Chunk$<$ T $>$\+::validate\+\_\+size()}}.
+
+
+
+Referenced by \mbox{\hyperlink{chunk__windows_8hpp_source_l00015}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::process()}}.
+
+\Hypertarget{classChunk_a82af79dbdc92786a8073a50389d75738}\label{classChunk_a82af79dbdc92786a8073a50389d75738} 
+\index{Chunk$<$ T $>$@{Chunk$<$ T $>$}!update\_chunks@{update\_chunks}}
+\index{update\_chunks@{update\_chunks}!Chunk$<$ T $>$@{Chunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{update\_chunks()}{update\_chunks()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classChunk}{Chunk}}$<$ T $>$\+::update\+\_\+chunks (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk_8hpp_source_l00255}{255}} of file \mbox{\hyperlink{chunk_8hpp_source}{chunk.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classChunk_a1574993946fe5b28c6d89ce4bf77857b}{chunks}}.clear();}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size();\ i\ +=\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}})\ \{}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<T>\ chunk;}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ 0;\ j\ <\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}}\ \&\&\ i\ +\ j\ <\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size();\ ++j)\ \{}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ chunk.push\_back(\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[i\ +\ j]);}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classChunk_a1574993946fe5b28c6d89ce4bf77857b}{chunks}}.push\_back(chunk);}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00264\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk_8hpp_source_l00031}{Chunk$<$ T $>$\+::chunk\+\_\+size}}, \mbox{\hyperlink{chunk_8hpp_source_l00033}{Chunk$<$ T $>$\+::chunks}}, and \mbox{\hyperlink{chunk_8hpp_source_l00032}{Chunk$<$ T $>$\+::data}}.
+
+
+
+Referenced by \mbox{\hyperlink{chunk_8hpp_source_l00075}{Chunk$<$ T $>$\+::add()}}, and \mbox{\hyperlink{chunk_8hpp_source_l00066}{Chunk$<$ T $>$\+::add()}}.
+
+\Hypertarget{classChunk_af09c384809b7238eb999b1d4d8fcfdd3}\label{classChunk_af09c384809b7238eb999b1d4d8fcfdd3} 
+\index{Chunk$<$ T $>$@{Chunk$<$ T $>$}!validate\_size@{validate\_size}}
+\index{validate\_size@{validate\_size}!Chunk$<$ T $>$@{Chunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{validate\_size()}{validate\_size()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classChunk}{Chunk}}$<$ T $>$\+::validate\+\_\+size (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size,  }\item[{const std\+::string \&}]{param }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk_8hpp_source_l00036}{36}} of file \mbox{\hyperlink{chunk_8hpp_source}{chunk.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classChunk_a160459077243c9e5ff642f478277e161}{size}}\ ==\ 0)\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(param\ +\ \textcolor{stringliteral}{"{}\ must\ be\ greater\ than\ 0"{}});}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00040\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk_8hpp_source_l00054}{Chunk$<$ T $>$\+::size()}}.
+
+
+
+Referenced by \mbox{\hyperlink{chunk_8hpp_source_l00244}{Chunk$<$ T $>$\+::sliding\+\_\+window()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}\label{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f} 
+\index{Chunk$<$ T $>$@{Chunk$<$ T $>$}!chunk\_size@{chunk\_size}}
+\index{chunk\_size@{chunk\_size}!Chunk$<$ T $>$@{Chunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{chunk\_size}{chunk\_size}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+size\+\_\+t \mbox{\hyperlink{classChunk}{Chunk}}$<$ T $>$\+::chunk\+\_\+size\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk_8hpp_source_l00031}{31}} of file \mbox{\hyperlink{chunk_8hpp_source}{chunk.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{chunk_8hpp_source_l00058}{Chunk$<$ T $>$\+::chunk\+\_\+count()}}, \mbox{\hyperlink{chunk_8hpp_source_l00153}{Chunk$<$ T $>$\+::chunk\+\_\+into\+\_\+n()}}, \mbox{\hyperlink{chunk_8hpp_source_l00094}{Chunk$<$ T $>$\+::get\+\_\+chunk()}}, \mbox{\hyperlink{chunk_8hpp_source_l00103}{Chunk$<$ T $>$\+::get\+\_\+overlapping\+\_\+chunks()}}, \mbox{\hyperlink{chunk_8hpp_source_l00230}{Chunk$<$ T $>$\+::get\+\_\+padded\+\_\+chunks()}}, and \mbox{\hyperlink{chunk_8hpp_source_l00255}{Chunk$<$ T $>$\+::update\+\_\+chunks()}}.
+
+\Hypertarget{classChunk_a1574993946fe5b28c6d89ce4bf77857b}\label{classChunk_a1574993946fe5b28c6d89ce4bf77857b} 
+\index{Chunk$<$ T $>$@{Chunk$<$ T $>$}!chunks@{chunks}}
+\index{chunks@{chunks}!Chunk$<$ T $>$@{Chunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{chunks}{chunks}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$std\+::vector$<$T$>$ $>$ \mbox{\hyperlink{classChunk}{Chunk}}$<$ T $>$\+::chunks\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk_8hpp_source_l00033}{33}} of file \mbox{\hyperlink{chunk_8hpp_source}{chunk.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{chunk_8hpp_source_l00084}{Chunk$<$ T $>$\+::get\+\_\+chunks()}}, and \mbox{\hyperlink{chunk_8hpp_source_l00255}{Chunk$<$ T $>$\+::update\+\_\+chunks()}}.
+
+\Hypertarget{classChunk_aa808f6466a7244c14464b007214f6835}\label{classChunk_aa808f6466a7244c14464b007214f6835} 
+\index{Chunk$<$ T $>$@{Chunk$<$ T $>$}!data@{data}}
+\index{data@{data}!Chunk$<$ T $>$@{Chunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{data}{data}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$T$>$ \mbox{\hyperlink{classChunk}{Chunk}}$<$ T $>$\+::data\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk_8hpp_source_l00032}{32}} of file \mbox{\hyperlink{chunk_8hpp_source}{chunk.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{chunk_8hpp_source_l00075}{Chunk$<$ T $>$\+::add()}}, \mbox{\hyperlink{chunk_8hpp_source_l00066}{Chunk$<$ T $>$\+::add()}}, \mbox{\hyperlink{chunk_8hpp_source_l00171}{Chunk$<$ T $>$\+::chunk\+\_\+by\+\_\+monotonicity()}}, \mbox{\hyperlink{chunk_8hpp_source_l00116}{Chunk$<$ T $>$\+::chunk\+\_\+by\+\_\+predicate()}}, \mbox{\hyperlink{chunk_8hpp_source_l00209}{Chunk$<$ T $>$\+::chunk\+\_\+by\+\_\+similarity()}}, \mbox{\hyperlink{chunk_8hpp_source_l00192}{Chunk$<$ T $>$\+::chunk\+\_\+by\+\_\+statistic()}}, \mbox{\hyperlink{chunk_8hpp_source_l00134}{Chunk$<$ T $>$\+::chunk\+\_\+by\+\_\+sum()}}, \mbox{\hyperlink{chunk_8hpp_source_l00058}{Chunk$<$ T $>$\+::chunk\+\_\+count()}}, \mbox{\hyperlink{chunk_8hpp_source_l00153}{Chunk$<$ T $>$\+::chunk\+\_\+into\+\_\+n()}}, \mbox{\hyperlink{chunk_8hpp_source_l00094}{Chunk$<$ T $>$\+::get\+\_\+chunk()}}, \mbox{\hyperlink{chunk_8hpp_source_l00103}{Chunk$<$ T $>$\+::get\+\_\+overlapping\+\_\+chunks()}}, \mbox{\hyperlink{chunk_8hpp_source_l00230}{Chunk$<$ T $>$\+::get\+\_\+padded\+\_\+chunks()}}, \mbox{\hyperlink{chunk_8hpp_source_l00054}{Chunk$<$ T $>$\+::size()}}, \mbox{\hyperlink{chunk_8hpp_source_l00244}{Chunk$<$ T $>$\+::sliding\+\_\+window()}}, and \mbox{\hyperlink{chunk_8hpp_source_l00255}{Chunk$<$ T $>$\+::update\+\_\+chunks()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{chunk_8hpp}{chunk.\+hpp}}\end{DoxyCompactItemize}

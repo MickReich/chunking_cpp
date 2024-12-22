@@ -1,0 +1,117 @@
+\doxysection{parallel\+\_\+chunk.\+hpp}
+\hypertarget{parallel__chunk_8hpp_source}{}\label{parallel__chunk_8hpp_source}\mbox{\hyperlink{parallel__chunk_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ PARALLEL\_CHUNK\_HPP}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ PARALLEL\_CHUNK\_HPP}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{chunk_8hpp}{chunk.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <exception>}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <future>}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00012}\mbox{\hyperlink{namespaceparallel__chunk}{00012}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceparallel__chunk}{parallel\_chunk}}\ \{}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00013}00013\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00014}00014\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00015}00015\ \textcolor{comment}{\ *\ @brief\ Parallel\ chunk\ processor\ for\ concurrent\ operations}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00016}00016\ \textcolor{comment}{\ *\ @tparam\ T\ The\ type\ of\ elements\ to\ process}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00017}00017\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00018}00018\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00019}\mbox{\hyperlink{classparallel__chunk_1_1ParallelChunkProcessor}{00019}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classparallel__chunk_1_1ParallelChunkProcessor}{ParallelChunkProcessor}}\ \{}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00020}00020\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00021}\mbox{\hyperlink{classparallel__chunk_1_1ParallelChunkProcessor_a23bb62ea1badf84f9595eae0edd5dec5}{00021}}\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classparallel__chunk_1_1ParallelChunkProcessor_a23bb62ea1badf84f9595eae0edd5dec5}{ChunkOperation}}\ =\ std::function<void(std::vector<T>\&)>;}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00022}00022\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00023}00023\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00024}00024\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Process\ chunks\ in\ parallel}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00025}00025\ \textcolor{comment}{\ \ \ \ \ *\ @param\ chunks\ Vector\ of\ chunks\ to\ process}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00026}00026\ \textcolor{comment}{\ \ \ \ \ *\ @param\ operation\ Operation\ to\ apply\ to\ each\ chunk}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00027}00027\ \textcolor{comment}{\ \ \ \ \ *\ @param\ num\_threads\ Number\ of\ threads\ to\ use\ (default:\ hardware\ concurrency)}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00028}00028\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00029}\mbox{\hyperlink{classparallel__chunk_1_1ParallelChunkProcessor_a92eeb252a9c4d67a911d3c764802d260}{00029}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classparallel__chunk_1_1ParallelChunkProcessor_a92eeb252a9c4d67a911d3c764802d260}{process\_chunks}}(std::vector<std::vector<T>>\&\ chunks,}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::function<\textcolor{keywordtype}{void}(std::vector<T>\&)>\&\ operation)\ \{}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00031}00031\ \ \ \ \ \ \ \ \ std::mutex\ exception\_mutex;}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00032}00032\ \ \ \ \ \ \ \ \ std::exception\_ptr\ exception\_ptr\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00033}00033\ \ \ \ \ \ \ \ \ std::vector<std::thread>\ threads;}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00035}00035\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ chunk\ :\ chunks)\ \{}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ threads.emplace\_back([\&chunk,\ \&operation,\ \&exception\_mutex,\ \&exception\_ptr]()\ \{}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ operation(chunk);}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(exception\_mutex);}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!exception\_ptr)\ \{}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ exception\_ptr\ =\ std::current\_exception();}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00046}00046\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ thread\ :\ threads)\ \{}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ thread.join();}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00050}00050\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (exception\_ptr)\ \{}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ std::rethrow\_exception(exception\_ptr);}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00054}00054\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00055}00055\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00056}00056\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00057}00057\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00058}00058\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Map\ operation\ over\ chunks\ in\ parallel}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00059}00059\ \textcolor{comment}{\ \ \ \ \ *\ @param\ chunks\ Input\ chunks}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00060}00060\ \textcolor{comment}{\ \ \ \ \ *\ @param\ operation\ Mapping\ operation}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00061}00061\ \textcolor{comment}{\ \ \ \ \ *\ @return\ Transformed\ chunks}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00062}00062\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00063}00063\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00064}\mbox{\hyperlink{classparallel__chunk_1_1ParallelChunkProcessor_a1a5189644af96de911c983b816fa9532}{00064}}\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<std::vector<U>>\ \mbox{\hyperlink{classparallel__chunk_1_1ParallelChunkProcessor_a1a5189644af96de911c983b816fa9532}{map}}(\textcolor{keyword}{const}\ std::vector<std::vector<T>>\&\ chunks,}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<U(\textcolor{keyword}{const}\ T\&)>\ operation)\ \{}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00066}00066\ \ \ \ \ \ \ \ \ std::vector<std::vector<U>>\ result(chunks.size());}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00067}00067\ \ \ \ \ \ \ \ \ std::vector<std::future<void>>\ futures;}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00069}00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ chunks.size();\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ futures.push\_back(std::async(std::launch::async,\ [\&,\ i]()\ \{}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result[i].reserve(chunks[i].size());}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::transform(chunks[i].begin(),\ chunks[i].end(),\ std::back\_inserter(result[i]),}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ operation);}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \}));}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00075}00075\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ future\ :\ futures)\ \{}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ future.wait();}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00079}00079\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00081}00081\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00082}00082\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00083}00083\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00084}00084\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00085}00085\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Reduce\ chunks\ in\ parallel}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00086}00086\ \textcolor{comment}{\ \ \ \ \ *\ @param\ chunks\ Input\ chunks}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00087}00087\ \textcolor{comment}{\ \ \ \ \ *\ @param\ operation\ Reduction\ operation}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00088}00088\ \textcolor{comment}{\ \ \ \ \ *\ @param\ initial\ Initial\ value}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00089}00089\ \textcolor{comment}{\ \ \ \ \ *\ @return\ Reduced\ value}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00090}00090\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00091}\mbox{\hyperlink{classparallel__chunk_1_1ParallelChunkProcessor_a25c4f81d28c25048dd9845178284a76a}{00091}}\ \ \ \ \ \textcolor{keyword}{static}\ T\ \mbox{\hyperlink{classparallel__chunk_1_1ParallelChunkProcessor_a25c4f81d28c25048dd9845178284a76a}{reduce}}(\textcolor{keyword}{const}\ std::vector<std::vector<T>>\&\ chunks,}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<T(\textcolor{keyword}{const}\ T\&,\ \textcolor{keyword}{const}\ T\&)>\ operation,\ T\ initial)\ \{}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00093}00093\ \ \ \ \ \ \ \ \ std::vector<std::future<T>>\ futures;}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00095}00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ chunk\ :\ chunks)\ \{}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ futures.push\_back(std::async(std::launch::async,\ [\&]()\ \{}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::accumulate(chunk.begin(),\ chunk.end(),\ T(),\ operation);}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \}));}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00099}00099\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00101}00101\ \ \ \ \ \ \ \ \ T\ result\ =\ initial;}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00102}00102\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ future\ :\ futures)\ \{}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ result\ =\ operation(result,\ future.get());}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00104}00104\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00106}00106\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00107}00107\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00108}00108\ \};}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00110}00110\ \}\ \textcolor{comment}{//\ namespace\ parallel\_chunk}}
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{parallel__chunk_8hpp_source_l00112}00112\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ PARALLEL\_CHUNK\_HPP}}
+
+\end{DoxyCode}

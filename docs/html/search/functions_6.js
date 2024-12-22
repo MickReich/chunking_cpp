@@ -1,6 +1,10 @@
 var searchData=
 [
-  ['heapify_5fdown_0',['heapify_down',['../classPriorityQueue.html#a56e5f9d2fb1e1d5db7c04f00ff32d0c8',1,'PriorityQueue']]],
-  ['heapify_5fup_1',['heapify_up',['../classPriorityQueue.html#ac221c7a12a2f93f4bad4bc43f070ac02',1,'PriorityQueue']]],
-  ['hierarchicalsubchunkstrategy_2',['HierarchicalSubChunkStrategy',['../classchunk__strategies_1_1HierarchicalSubChunkStrategy.html#abe59c321f036269361c947bbb3284388',1,'chunk_strategies::HierarchicalSubChunkStrategy']]]
+  ['generate_5frandom_5fchunks_0',['generate_random_chunks',['../classchunk__utils_1_1ChunkGenerator.html#ae6136fb99fc953bbdf9f22314d61cae4',1,'chunk_utils::ChunkGenerator']]],
+  ['generate_5frandom_5fdata_1',['generate_random_data',['../classchunk__utils_1_1ChunkGenerator.html#a8de1ac93ada6f7969952af28ca6cf832',1,'chunk_utils::ChunkGenerator']]],
+  ['get_5fchunk_2',['get_chunk',['../classChunk.html#a2c1f2fb7b5a0d3eb875311362cb27580',1,'Chunk']]],
+  ['get_5fchunks_3',['get_chunks',['../classChunk.html#adbff639ac17c8d894373b0f67fa08658',1,'Chunk']]],
+  ['get_5foverlapping_5fchunks_4',['get_overlapping_chunks',['../classChunk.html#ab833db41bbf73b77ce520712ed7c7239',1,'Chunk']]],
+  ['get_5fpadded_5fchunks_5',['get_padded_chunks',['../classChunk.html#a016606afd5f7ea84a27020ddb02e5624',1,'Chunk']]],
+  ['graphbasedchunk_6',['GraphBasedChunk',['../classadvanced__structures_1_1GraphBasedChunk.html#a2caea02410d0cb3aae6f0c4c8e373f42',1,'advanced_structures::GraphBasedChunk']]]
 ];

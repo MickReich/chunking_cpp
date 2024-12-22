@@ -1,0 +1,165 @@
+\doxysection{chunk\+\_\+strategies\+::Quantile\+Strategy\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classchunk__strategies_1_1QuantileStrategy}{}\label{classchunk__strategies_1_1QuantileStrategy}\index{chunk\_strategies::QuantileStrategy$<$ T $>$@{chunk\_strategies::QuantileStrategy$<$ T $>$}}
+
+
+Strategy for chunking based on quantile thresholds.  
+
+
+
+
+{\ttfamily \#include $<$chunk\+\_\+strategies.\+hpp$>$}
+
+
+
+Inheritance diagram for chunk\+\_\+strategies\+::Quantile\+Strategy\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{classchunk__strategies_1_1QuantileStrategy__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for chunk\+\_\+strategies\+::Quantile\+Strategy\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{classchunk__strategies_1_1QuantileStrategy__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classchunk__strategies_1_1QuantileStrategy_a72c01766253b2849a819517e129c4aaf}{Quantile\+Strategy}} (double quantile)
+\item 
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__strategies_1_1QuantileStrategy_a5f9e790bc2f511e07632a2b1d128ad33}{apply}} (const std\+::vector$<$ T $>$ \&data) const override
+\begin{DoxyCompactList}\small\item\em Applies the chunking strategy to the data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classchunk__strategies_1_1QuantileStrategy_ace6f35eded09dd3a9d1ba78723a09644}{quantile\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class chunk\+\_\+strategies\+::\+Quantile\+Strategy$<$ T $>$}
+Strategy for chunking based on quantile thresholds. 
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00039}{39}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classchunk__strategies_1_1QuantileStrategy_a72c01766253b2849a819517e129c4aaf}\label{classchunk__strategies_1_1QuantileStrategy_a72c01766253b2849a819517e129c4aaf} 
+\index{chunk\_strategies::QuantileStrategy$<$ T $>$@{chunk\_strategies::QuantileStrategy$<$ T $>$}!QuantileStrategy@{QuantileStrategy}}
+\index{QuantileStrategy@{QuantileStrategy}!chunk\_strategies::QuantileStrategy$<$ T $>$@{chunk\_strategies::QuantileStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{QuantileStrategy()}{QuantileStrategy()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classchunk__strategies_1_1QuantileStrategy}{chunk\+\_\+strategies\+::\+Quantile\+Strategy}}$<$ T $>$\+::\+Quantile\+Strategy (\begin{DoxyParamCaption}\item[{double}]{quantile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00043}{43}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classchunk__strategies_1_1QuantileStrategy_ace6f35eded09dd3a9d1ba78723a09644}{quantile\_}}(quantile)\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (quantile\ <\ 0.0\ ||\ quantile\ >\ 1.0)\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Quantile\ must\ be\ between\ 0\ and\ 1"{}});}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00047\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classchunk__strategies_1_1QuantileStrategy_a5f9e790bc2f511e07632a2b1d128ad33}\label{classchunk__strategies_1_1QuantileStrategy_a5f9e790bc2f511e07632a2b1d128ad33} 
+\index{chunk\_strategies::QuantileStrategy$<$ T $>$@{chunk\_strategies::QuantileStrategy$<$ T $>$}!apply@{apply}}
+\index{apply@{apply}!chunk\_strategies::QuantileStrategy$<$ T $>$@{chunk\_strategies::QuantileStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{apply()}{apply()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__strategies_1_1QuantileStrategy}{chunk\+\_\+strategies\+::\+Quantile\+Strategy}}$<$ T $>$\+::apply (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ T $>$ \&}]{data }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Applies the chunking strategy to the data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data to chunk \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector of chunks 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classchunk__strategies_1_1ChunkStrategy_a403010d65da39c1a873874582760bfce}{chunk\+\_\+strategies\+::\+Chunk\+Strategy$<$ T $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00049}{49}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.empty())}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Calculate\ threshold\ value\ at\ the\ given\ quantile}}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ std::vector<T>\ sorted\_data\ =\ data;}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ std::sort(sorted\_data.begin(),\ sorted\_data.end());}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ T\ threshold\ =\ sorted\_data[\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(\mbox{\hyperlink{classchunk__strategies_1_1QuantileStrategy_ace6f35eded09dd3a9d1ba78723a09644}{quantile\_}}\ *\ (data.size()\ -\/\ 1))];}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Split\ into\ exactly\ two\ chunks:\ values\ <=\ threshold\ and\ values\ >\ threshold}}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ std::vector<T>\ lower\_chunk;}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ std::vector<T>\ upper\_chunk;}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ T\&\ value\ :\ data)\ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (value\ <=\ threshold)\ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lower\_chunk.push\_back(value);}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ upper\_chunk.push\_back(value);}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ chunks;}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!lower\_chunk.empty())\ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ chunks.push\_back(lower\_chunk);}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!upper\_chunk.empty())\ \{}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ chunks.push\_back(upper\_chunk);}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ chunks;}
+\DoxyCodeLine{00079\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk__strategies_8hpp_source_l00040}{chunk\+\_\+strategies\+::\+Quantile\+Strategy$<$ T $>$\+::quantile\+\_\+}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classchunk__strategies_1_1QuantileStrategy_ace6f35eded09dd3a9d1ba78723a09644}\label{classchunk__strategies_1_1QuantileStrategy_ace6f35eded09dd3a9d1ba78723a09644} 
+\index{chunk\_strategies::QuantileStrategy$<$ T $>$@{chunk\_strategies::QuantileStrategy$<$ T $>$}!quantile\_@{quantile\_}}
+\index{quantile\_@{quantile\_}!chunk\_strategies::QuantileStrategy$<$ T $>$@{chunk\_strategies::QuantileStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{quantile\_}{quantile\_}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+double \mbox{\hyperlink{classchunk__strategies_1_1QuantileStrategy}{chunk\+\_\+strategies\+::\+Quantile\+Strategy}}$<$ T $>$\+::quantile\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00040}{40}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{chunk__strategies_8hpp_source_l00049}{chunk\+\_\+strategies\+::\+Quantile\+Strategy$<$ T $>$\+::apply()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{chunk__strategies_8hpp}{chunk\+\_\+strategies.\+hpp}}\end{DoxyCompactItemize}

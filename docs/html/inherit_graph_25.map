@@ -1,0 +1,9 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classchunk__strategies_1_1SubChunkStrategy.html" title="Base class for sub&#45;chunking strategies." alt="" coords="5,69,212,109"/>
+<area shape="rect" id="Node000001" href="$classchunk__strategies_1_1ConditionalSubChunkStrategy.html" title="Strategy for conditional sub&#45;chunking based on chunk properties." alt="" coords="262,5,477,45"/>
+<area shape="poly" id="edge5_Node000000_Node000001" title=" " alt="" coords="203,63,287,43,288,48,205,69"/>
+<area shape="rect" id="Node000002" href="$classchunk__strategies_1_1HierarchicalSubChunkStrategy.html" title="Strategy for hierarchical sub&#45;chunking using multiple strategies." alt="" coords="260,69,479,109"/>
+<area shape="poly" id="edge6_Node000000_Node000002" title=" " alt="" coords="226,87,260,87,260,92,226,92"/>
+<area shape="rect" id="Node000003" href="$classchunk__strategies_1_1RecursiveSubChunkStrategy.html" title="Strategy for applying recursive sub&#45;chunking." alt="" coords="267,133,472,173"/>
+<area shape="poly" id="edge7_Node000000_Node000003" title=" " alt="" coords="205,110,288,131,287,136,203,115"/>
+</map>

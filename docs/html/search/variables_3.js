@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['forward_0',['forward',['../structadvanced__structures_1_1ChunkSkipList_1_1Node.html#aec5507e413075c1d8390cbe5aaed06f1',1,'advanced_structures::ChunkSkipList::Node']]]
+  ['edge_5fthreshold_0',['edge_threshold',['../classadvanced__structures_1_1GraphBasedChunk.html#a231995aebe0b15907b118e0bb879c33f',1,'advanced_structures::GraphBasedChunk']]]
 ];

@@ -1,0 +1,199 @@
+\doxysection{chunk\+\_\+strategies\+::Conditional\+Sub\+Chunk\+Strategy\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classchunk__strategies_1_1ConditionalSubChunkStrategy}{}\label{classchunk__strategies_1_1ConditionalSubChunkStrategy}\index{chunk\_strategies::ConditionalSubChunkStrategy$<$ T $>$@{chunk\_strategies::ConditionalSubChunkStrategy$<$ T $>$}}
+
+
+Strategy for conditional sub-\/chunking based on chunk properties.  
+
+
+
+
+{\ttfamily \#include $<$sub\+\_\+chunk\+\_\+strategies.\+hpp$>$}
+
+
+
+Inheritance diagram for chunk\+\_\+strategies\+::Conditional\+Sub\+Chunk\+Strategy\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=241pt]{classchunk__strategies_1_1ConditionalSubChunkStrategy__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for chunk\+\_\+strategies\+::Conditional\+Sub\+Chunk\+Strategy\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classchunk__strategies_1_1ConditionalSubChunkStrategy__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy_af71c64ffe37dea9bc55cb3633228a4f4}{Conditional\+Sub\+Chunk\+Strategy}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classchunk__strategies_1_1ChunkStrategy}{Chunk\+Strategy}}$<$ T $>$ $>$ strategy, std\+::function$<$ bool(const std\+::vector$<$ T $>$ \&)$>$ condition, size\+\_\+t min\+\_\+chunk\+\_\+size=1)
+\begin{DoxyCompactList}\small\item\em Construct a conditional sub-\/chunking strategy. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ T $>$ $>$ $>$ \mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy_a38db1133126e563c8f830fff399e47ef}{apply}} (const std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \&chunks) override
+\begin{DoxyCompactList}\small\item\em Apply conditional sub-\/chunking to the input chunks. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::function$<$ bool(const std\+::vector$<$ T $>$ \&)$>$ \mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy_abaf81b9f4fc1a975e24775f5e83b4872}{condition\+\_\+}}
+\item 
+size\+\_\+t \mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy_a6eb6d54a2aa99fabc99d3effb8be8b98}{min\+\_\+chunk\+\_\+size\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classchunk__strategies_1_1ChunkStrategy}{Chunk\+Strategy}}$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy_a370ac58350a750b40dfb5f05a952c653}{strategy\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class chunk\+\_\+strategies\+::\+Conditional\+Sub\+Chunk\+Strategy$<$ T $>$}
+Strategy for conditional sub-\/chunking based on chunk properties. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of elements to process \\
+\hline
+\end{DoxyTemplParams}
+
+
+Definition at line \mbox{\hyperlink{sub__chunk__strategies_8hpp_source_l00182}{182}} of file \mbox{\hyperlink{sub__chunk__strategies_8hpp_source}{sub\+\_\+chunk\+\_\+strategies.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classchunk__strategies_1_1ConditionalSubChunkStrategy_af71c64ffe37dea9bc55cb3633228a4f4}\label{classchunk__strategies_1_1ConditionalSubChunkStrategy_af71c64ffe37dea9bc55cb3633228a4f4} 
+\index{chunk\_strategies::ConditionalSubChunkStrategy$<$ T $>$@{chunk\_strategies::ConditionalSubChunkStrategy$<$ T $>$}!ConditionalSubChunkStrategy@{ConditionalSubChunkStrategy}}
+\index{ConditionalSubChunkStrategy@{ConditionalSubChunkStrategy}!chunk\_strategies::ConditionalSubChunkStrategy$<$ T $>$@{chunk\_strategies::ConditionalSubChunkStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{ConditionalSubChunkStrategy()}{ConditionalSubChunkStrategy()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy}{chunk\+\_\+strategies\+::\+Conditional\+Sub\+Chunk\+Strategy}}$<$ T $>$\+::\+Conditional\+Sub\+Chunk\+Strategy (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classchunk__strategies_1_1ChunkStrategy}{Chunk\+Strategy}}$<$ T $>$ $>$}]{strategy,  }\item[{std\+::function$<$ bool(const std\+::vector$<$ T $>$ \&)$>$}]{condition,  }\item[{size\+\_\+t}]{min\+\_\+chunk\+\_\+size = {\ttfamily 1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a conditional sub-\/chunking strategy. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em strategy} & The base chunking strategy to apply \\
+\hline
+{\em condition} & Function determining when to apply sub-\/chunking \\
+\hline
+{\em min\+\_\+chunk\+\_\+size} & Minimum size for chunks to be processed \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{sub__chunk__strategies_8hpp_source_l00195}{195}} of file \mbox{\hyperlink{sub__chunk__strategies_8hpp_source}{sub\+\_\+chunk\+\_\+strategies.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy_a370ac58350a750b40dfb5f05a952c653}{strategy\_}}(strategy),\ \mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy_abaf81b9f4fc1a975e24775f5e83b4872}{condition\_}}(condition),\ \mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy_a6eb6d54a2aa99fabc99d3effb8be8b98}{min\_chunk\_size\_}}(min\_chunk\_size)\ \{\}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classchunk__strategies_1_1ConditionalSubChunkStrategy_a38db1133126e563c8f830fff399e47ef}\label{classchunk__strategies_1_1ConditionalSubChunkStrategy_a38db1133126e563c8f830fff399e47ef} 
+\index{chunk\_strategies::ConditionalSubChunkStrategy$<$ T $>$@{chunk\_strategies::ConditionalSubChunkStrategy$<$ T $>$}!apply@{apply}}
+\index{apply@{apply}!chunk\_strategies::ConditionalSubChunkStrategy$<$ T $>$@{chunk\_strategies::ConditionalSubChunkStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{apply()}{apply()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ T $>$ $>$ $>$ \mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy}{chunk\+\_\+strategies\+::\+Conditional\+Sub\+Chunk\+Strategy}}$<$ T $>$\+::apply (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \&}]{chunks }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Apply conditional sub-\/chunking to the input chunks. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em chunks} & The input chunks to process \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector of vectors of vectors containing the conditionally sub-\/chunked data 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classchunk__strategies_1_1SubChunkStrategy_ae194f8e23262b2df78e9cf0248223254}{chunk\+\_\+strategies\+::\+Sub\+Chunk\+Strategy$<$ T $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{sub__chunk__strategies_8hpp_source_l00206}{206}} of file \mbox{\hyperlink{sub__chunk__strategies_8hpp_source}{sub\+\_\+chunk\+\_\+strategies.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ std::vector<std::vector<std::vector<T>>>\ result;}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ chunk\ :\ chunks)\ \{}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (chunk.size()\ <=\ \mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy_a6eb6d54a2aa99fabc99d3effb8be8b98}{min\_chunk\_size\_}}\ ||\ !\mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy_abaf81b9f4fc1a975e24775f5e83b4872}{condition\_}}(chunk))\ \{}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(\{chunk\});}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ sub\_chunks\ =\ \mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy_a370ac58350a750b40dfb5f05a952c653}{strategy\_}}-\/>apply(chunk);}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(sub\_chunks);}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00220\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{sub__chunk__strategies_8hpp_source_l00185}{chunk\+\_\+strategies\+::\+Conditional\+Sub\+Chunk\+Strategy$<$ T $>$\+::condition\+\_\+}}, \mbox{\hyperlink{sub__chunk__strategies_8hpp_source_l00186}{chunk\+\_\+strategies\+::\+Conditional\+Sub\+Chunk\+Strategy$<$ T $>$\+::min\+\_\+chunk\+\_\+size\+\_\+}}, and \mbox{\hyperlink{sub__chunk__strategies_8hpp_source_l00184}{chunk\+\_\+strategies\+::\+Conditional\+Sub\+Chunk\+Strategy$<$ T $>$\+::strategy\+\_\+}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classchunk__strategies_1_1ConditionalSubChunkStrategy_abaf81b9f4fc1a975e24775f5e83b4872}\label{classchunk__strategies_1_1ConditionalSubChunkStrategy_abaf81b9f4fc1a975e24775f5e83b4872} 
+\index{chunk\_strategies::ConditionalSubChunkStrategy$<$ T $>$@{chunk\_strategies::ConditionalSubChunkStrategy$<$ T $>$}!condition\_@{condition\_}}
+\index{condition\_@{condition\_}!chunk\_strategies::ConditionalSubChunkStrategy$<$ T $>$@{chunk\_strategies::ConditionalSubChunkStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{condition\_}{condition\_}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::function$<$bool(const std\+::vector$<$T$>$\&)$>$ \mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy}{chunk\+\_\+strategies\+::\+Conditional\+Sub\+Chunk\+Strategy}}$<$ T $>$\+::condition\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{sub__chunk__strategies_8hpp_source_l00185}{185}} of file \mbox{\hyperlink{sub__chunk__strategies_8hpp_source}{sub\+\_\+chunk\+\_\+strategies.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{sub__chunk__strategies_8hpp_source_l00206}{chunk\+\_\+strategies\+::\+Conditional\+Sub\+Chunk\+Strategy$<$ T $>$\+::apply()}}.
+
+\Hypertarget{classchunk__strategies_1_1ConditionalSubChunkStrategy_a6eb6d54a2aa99fabc99d3effb8be8b98}\label{classchunk__strategies_1_1ConditionalSubChunkStrategy_a6eb6d54a2aa99fabc99d3effb8be8b98} 
+\index{chunk\_strategies::ConditionalSubChunkStrategy$<$ T $>$@{chunk\_strategies::ConditionalSubChunkStrategy$<$ T $>$}!min\_chunk\_size\_@{min\_chunk\_size\_}}
+\index{min\_chunk\_size\_@{min\_chunk\_size\_}!chunk\_strategies::ConditionalSubChunkStrategy$<$ T $>$@{chunk\_strategies::ConditionalSubChunkStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{min\_chunk\_size\_}{min\_chunk\_size\_}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+size\+\_\+t \mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy}{chunk\+\_\+strategies\+::\+Conditional\+Sub\+Chunk\+Strategy}}$<$ T $>$\+::min\+\_\+chunk\+\_\+size\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{sub__chunk__strategies_8hpp_source_l00186}{186}} of file \mbox{\hyperlink{sub__chunk__strategies_8hpp_source}{sub\+\_\+chunk\+\_\+strategies.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{sub__chunk__strategies_8hpp_source_l00206}{chunk\+\_\+strategies\+::\+Conditional\+Sub\+Chunk\+Strategy$<$ T $>$\+::apply()}}.
+
+\Hypertarget{classchunk__strategies_1_1ConditionalSubChunkStrategy_a370ac58350a750b40dfb5f05a952c653}\label{classchunk__strategies_1_1ConditionalSubChunkStrategy_a370ac58350a750b40dfb5f05a952c653} 
+\index{chunk\_strategies::ConditionalSubChunkStrategy$<$ T $>$@{chunk\_strategies::ConditionalSubChunkStrategy$<$ T $>$}!strategy\_@{strategy\_}}
+\index{strategy\_@{strategy\_}!chunk\_strategies::ConditionalSubChunkStrategy$<$ T $>$@{chunk\_strategies::ConditionalSubChunkStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{strategy\_}{strategy\_}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classchunk__strategies_1_1ChunkStrategy}{Chunk\+Strategy}}$<$T$>$ $>$ \mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy}{chunk\+\_\+strategies\+::\+Conditional\+Sub\+Chunk\+Strategy}}$<$ T $>$\+::strategy\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{sub__chunk__strategies_8hpp_source_l00184}{184}} of file \mbox{\hyperlink{sub__chunk__strategies_8hpp_source}{sub\+\_\+chunk\+\_\+strategies.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{sub__chunk__strategies_8hpp_source_l00206}{chunk\+\_\+strategies\+::\+Conditional\+Sub\+Chunk\+Strategy$<$ T $>$\+::apply()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{sub__chunk__strategies_8hpp}{sub\+\_\+chunk\+\_\+strategies.\+hpp}}\end{DoxyCompactItemize}

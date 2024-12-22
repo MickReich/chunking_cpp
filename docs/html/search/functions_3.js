@@ -1,5 +1,9 @@
 var searchData=
 [
-  ['empty_0',['empty',['../classadvanced__structures_1_1ChunkDeque.html#ad264d210d7741c74a943d58e097a3148',1,'advanced_structures::ChunkDeque::empty()'],['../classadvanced__structures_1_1ChunkStack.html#a9e7c6b353dfcfe143aa6ba96cc673af9',1,'advanced_structures::ChunkStack::empty()'],['../classCircularBuffer.html#a7509cc5ef0dd0a9f731c47b05929580c',1,'CircularBuffer::empty()'],['../classPriorityQueue.html#a808431d87d33867fff1c5ec66244ad9a',1,'PriorityQueue::empty()'],['../classSlidingWindow.html#a905eecdbbdd5a066a17469e1f9dec824',1,'SlidingWindow::empty()'],['../classChunkList.html#abb8a93c3a579f974f65aadac03c07b52',1,'ChunkList::empty()']]],
-  ['entropystrategy_1',['entropystrategy',['../classchunk__strategies_1_1EntropyStrategy.html#a1f667ff61e3ddaf1db623c584998a173',1,'chunk_strategies::EntropyStrategy::EntropyStrategy()'],['../classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4.html#abc8a7bcb710fd2d18c9b2170d376a9b0',1,'chunk_strategies::EntropyStrategy&lt; std::string &gt;::EntropyStrategy()']]]
+  ['delta_5fdecode_0',['delta_decode',['../classchunk__compression_1_1ChunkCompressor.html#a946476140a49ecac06f68251762a6942',1,'chunk_compression::ChunkCompressor']]],
+  ['delta_5fencode_1',['delta_encode',['../classchunk__compression_1_1ChunkCompressor.html#a438ecfa6dc958ae561a6645861f6ef9a',1,'chunk_compression::ChunkCompressor']]],
+  ['demonstrate_5fadaptive_5fconditional_5fsubchunking_2',['demonstrate_adaptive_conditional_subchunking',['../main_8cpp.html#a8836fbb61c7f60a2aa5ea974eaab9fca',1,'main.cpp']]],
+  ['demonstrate_5fcomplex_5frecursive_5fsubchunking_3',['demonstrate_complex_recursive_subchunking',['../main_8cpp.html#a8e0e686ad74549b9321d9933a712aa74',1,'main.cpp']]],
+  ['demonstrate_5fmulti_5fstrategy_5fsubchunking_4',['demonstrate_multi_strategy_subchunking',['../main_8cpp.html#a81068034d44b99c1f2dfcac57ddcddf3',1,'main.cpp']]],
+  ['dynamicthresholdstrategy_5',['DynamicThresholdStrategy',['../classchunk__strategies_1_1DynamicThresholdStrategy.html#a85fd9149cd16f1704b17455d1b8b185e',1,'chunk_strategies::DynamicThresholdStrategy']]]
 ];

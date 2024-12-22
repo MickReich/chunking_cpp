@@ -1,15 +1,147 @@
-#ifndef ADVANCED_STRUCTURES_HPP
-#define ADVANCED_STRUCTURES_HPP
+#pragma once
 
 #include <algorithm>
+#include <boost/graph/adjacency_list.hpp>
+#include <boost/graph/connected_components.hpp>
+#include <cmath>
 #include <deque>
 #include <memory>
 #include <random>
 #include <stack>
 #include <stdexcept>
+#include <string>
+#include <unordered_map>
 #include <vector>
 
 namespace advanced_structures {
+
+// Default NLP model implementation
+struct DefaultNLPModel {
+    template <typename ContentType>
+    double calculateSimilarity(const ContentType& content1, const ContentType& content2) {
+        // Simple similarity calculation (e.g., based on length)
+        return 1.0 - static_cast<double>(std::abs(static_cast<int>(content1.size()) -
+                                                  static_cast<int>(content2.size()))) /
+                         std::max(content1.size(), content2.size());
+    }
+};
+
+/**
+ * @brief Template class for semantic-based content chunking
+ *
+ * SemanticChunker splits content based on semantic boundaries using
+ * configurable NLP models and similarity metrics.
+ *
+ * @tparam ContentType Type of content to be chunked
+ * @tparam ModelType Type of NLP model to use for similarity calculations
+ */
+template <typename ContentType, typename ModelType = DefaultNLPModel>
+class SemanticChunker {
+private:
+    ModelType model;             ///< NLP model instance
+    double similarity_threshold; ///< Threshold for determining chunk boundaries
+
+public:
+    /**
+     * @brief Construct a new Semantic Chunker
+     *
+     * @param threshold Similarity threshold for chunk boundaries (default: 0.7)
+     * @param custom_model Custom NLP model instance (optional)
+     */
+    explicit SemanticChunker(double threshold = 0.7, ModelType custom_model = ModelType())
+        : model(custom_model), similarity_threshold(threshold) {}
+
+    /**
+     * @brief Chunk content based on semantic boundaries
+     *
+     * @param content Input content to be chunked
+     * @return std::vector<ContentType> Vector of content chunks
+     */
+    std::vector<ContentType> chunk(const ContentType& content);
+
+    /**
+     * @brief Set a new NLP model
+     *
+     * @param new_model New model instance to use
+     */
+    void setModel(ModelType new_model) {
+        model = new_model;
+    }
+
+    /**
+     * @brief Set new similarity threshold
+     *
+     * @param threshold New threshold value between 0.0 and 1.0
+     */
+    void setSimilarityThreshold(double threshold) {
+        similarity_threshold = threshold;
+    }
+};
+
+/**
+ * @brief Specialization of SemanticChunker for string content
+ *
+ * Provides optimized implementation for string-based content chunking.
+ *
+ * @tparam ModelType Type of NLP model to use
+ */
+template <typename ModelType>
+class SemanticChunker<std::string, ModelType> {
+private:
+    ModelType model;             ///< NLP model instance
+    double similarity_threshold; ///< Similarity threshold for chunking
+
+public:
+    /**
+     * @brief Construct a new string-specialized Semantic Chunker
+     *
+     * @param threshold Similarity threshold (default: 0.7)
+     * @param custom_model Custom NLP model instance
+     */
+    explicit SemanticChunker(double threshold = 0.7, ModelType custom_model = ModelType())
+        : model(custom_model), similarity_threshold(threshold) {}
+
+    /**
+     * @brief Chunk string content into semantic segments
+     *
+     * @param content Input string to be chunked
+     * @return std::vector<std::string> Vector of string chunks
+     */
+    std::vector<std::string> chunk(const std::string& content) {
+        std::vector<std::string> chunks;
+        if (content.empty()) {
+            return chunks;
+        }
+
+        // Split by sentences (simple implementation)
+        size_t start = 0;
+        size_t pos = 0;
+        std::string current_chunk;
+
+        while ((pos = content.find_first_of(".!?", start)) != std::string::npos) {
+            // Include the punctuation mark and any following whitespace
+            size_t end = pos + 1;
+            while (end < content.length() && std::isspace(content[end])) {
+                end++;
+            }
+
+            // Extract the sentence
+            std::string sentence = content.substr(start, end - start);
+            if (!sentence.empty()) {
+                chunks.push_back(sentence);
+            }
+
+            start = end;
+        }
+
+        // Add remaining content if any
+        if (start < content.length()) {
+            chunks.push_back(content.substr(start));
+        }
+
+        return chunks;
+    }
+};
 
 /**
  * @brief A skip list implementation for efficient chunk searching
@@ -29,6 +161,10 @@ private:
     float p;
     int current_level;
 
+    /**
+     * @brief Generates a random level for node insertion
+     * @return The random level
+     */
     int random_level() {
         int lvl = 1;
         while ((static_cast<float>(rand()) / RAND_MAX) < p && lvl < max_level) {
@@ -38,11 +174,20 @@ private:
     }
 
 public:
+    /**
+     * @brief Constructs a new ChunkSkipList object
+     * @param max_lvl Maximum level of the skip list
+     * @param prob Probability factor for level generation
+     */
     ChunkSkipList(int max_lvl = 16, float prob = 0.5)
         : max_level(max_lvl), p(prob), current_level(1) {
         head = std::make_shared<Node>(T(), max_level);
     }
 
+    /**
+     * @brief Inserts a value into the skip list
+     * @param value The value to insert
+     */
     void insert(const T& value) {
         std::vector<std::shared_ptr<Node>> update(max_level);
         auto current = head;
@@ -69,6 +214,11 @@ public:
         }
     }
 
+    /**
+     * @brief Searches for a value in the skip list
+     * @param value The value to search for
+     * @return True if the value is found, false otherwise
+     */
     bool search(const T& value) const {
         auto current = head;
         for (int i = current_level - 1; i >= 0; i--) {
@@ -101,8 +251,15 @@ class ChunkBPlusTree {
     std::shared_ptr<Node> root;
 
 public:
+    /**
+     * @brief Constructs a new ChunkBPlusTree object
+     */
     ChunkBPlusTree() : root(std::make_shared<Node>()) {}
 
+    /**
+     * @brief Inserts a key into the B+ tree
+     * @param key The key to insert
+     */
     void insert(const T& key) {
         if (root->keys.empty()) {
             root->keys.push_back(key);
@@ -118,6 +275,11 @@ public:
         insert_non_full(root, key);
     }
 
+    /**
+     * @brief Searches for a key in the B+ tree
+     * @param key The key to search for
+     * @return True if the key is found, false otherwise
+     */
     bool search(const T& key) const {
         if (root == nullptr)
             return false;
@@ -335,6 +497,167 @@ public:
     }
 };
 
-} // namespace advanced_structures
+/**
+ * @brief Semantic boundaries-based chunking implementation
+ * @tparam T The type of elements to be chunked
+ */
+template <typename T>
+class SemanticBoundariesChunk {
+private:
+    double boundary_threshold;
 
-#endif // ADVANCED_STRUCTURES_HPP
+public:
+    explicit SemanticBoundariesChunk(double threshold = 0.5) : boundary_threshold(threshold) {}
+
+    std::vector<std::vector<T>> chunk(const std::vector<T>& data) {
+        std::vector<std::vector<T>> result;
+        if (data.empty())
+            return result;
+
+        std::vector<T> current_chunk;
+        for (const auto& item : data) {
+            current_chunk.push_back(item);
+            if (isBoundary(current_chunk)) {
+                result.push_back(current_chunk);
+                current_chunk.clear();
+            }
+        }
+
+        if (!current_chunk.empty()) {
+            result.push_back(current_chunk);
+        }
+
+        return result;
+    }
+
+protected:
+    virtual bool isBoundary(const std::vector<T>& chunk) {
+        return chunk.size() >= 3; // Default implementation
+    }
+};
+
+/**
+ * @brief Fractal pattern-based chunking implementation
+ * @tparam T The type of elements to be chunked
+ */
+template <typename T>
+class FractalPatternsChunk {
+private:
+    size_t pattern_size;
+    double similarity_threshold;
+
+public:
+    FractalPatternsChunk(size_t size = 3, double threshold = 0.8)
+        : pattern_size(size), similarity_threshold(threshold) {}
+
+    std::vector<std::vector<T>> chunk(const std::vector<T>& data) {
+        std::vector<std::vector<T>> result;
+        if (data.empty())
+            return result;
+
+        std::vector<T> current_chunk;
+        for (const auto& item : data) {
+            current_chunk.push_back(item);
+            if (hasPattern(current_chunk)) {
+                result.push_back(current_chunk);
+                current_chunk.clear();
+            }
+        }
+
+        if (!current_chunk.empty()) {
+            result.push_back(current_chunk);
+        }
+
+        return result;
+    }
+
+protected:
+    virtual bool hasPattern(const std::vector<T>& chunk) {
+        return chunk.size() >= pattern_size;
+    }
+};
+
+/**
+ * @brief Bloom filter-based chunking implementation
+ * @tparam T The type of elements to be chunked
+ */
+template <typename T>
+class BloomFilterChunk {
+private:
+    size_t filter_size;
+    size_t num_hash_functions;
+    std::vector<bool> filter;
+
+public:
+    BloomFilterChunk(size_t size = 1024, size_t num_funcs = 3)
+        : filter_size(size), num_hash_functions(num_funcs), filter(size, false) {}
+
+    std::vector<std::vector<T>> chunk(const std::vector<T>& data) {
+        std::vector<std::vector<T>> result;
+        if (data.empty())
+            return result;
+
+        std::vector<T> current_chunk;
+        for (const auto& item : data) {
+            current_chunk.push_back(item);
+            if (shouldSplit(current_chunk)) {
+                result.push_back(current_chunk);
+                current_chunk.clear();
+            }
+        }
+
+        if (!current_chunk.empty()) {
+            result.push_back(current_chunk);
+        }
+
+        return result;
+    }
+
+protected:
+    virtual bool shouldSplit(const std::vector<T>& chunk) {
+        return chunk.size() >= 4; // Default implementation
+    }
+};
+
+/**
+ * @brief Graph-based chunking implementation
+ * @tparam T The type of elements to be chunked
+ */
+template <typename T>
+class GraphBasedChunk {
+private:
+    using Graph = boost::adjacency_list<boost::vecS, boost::vecS, boost::undirectedS>;
+    double edge_threshold;
+
+public:
+    explicit GraphBasedChunk(double threshold = 0.5) : edge_threshold(threshold) {}
+
+    std::vector<std::vector<T>> chunk(const std::vector<T>& data) {
+        std::vector<std::vector<T>> result;
+        if (data.empty())
+            return result;
+
+        Graph g(data.size());
+        buildGraph(data, g);
+
+        std::vector<int> components(data.size());
+        int num_components = boost::connected_components(g, &components[0]);
+
+        result.resize(num_components);
+        for (size_t i = 0; i < data.size(); ++i) {
+            result[components[i]].push_back(data[i]);
+        }
+
+        return result;
+    }
+
+protected:
+    virtual void buildGraph(const std::vector<T>& data, Graph& g) {
+        // Default implementation: connect adjacent elements
+        for (size_t i = 1; i < data.size(); ++i) {
+            boost::add_edge(i - 1, i, g);
+        }
+    }
+};
+
+} // namespace advanced_structures

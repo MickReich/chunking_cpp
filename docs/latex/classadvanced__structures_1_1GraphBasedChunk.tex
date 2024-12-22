@@ -1,0 +1,166 @@
+\doxysection{advanced\+\_\+structures\+::Graph\+Based\+Chunk\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classadvanced__structures_1_1GraphBasedChunk}{}\label{classadvanced__structures_1_1GraphBasedChunk}\index{advanced\_structures::GraphBasedChunk$<$ T $>$@{advanced\_structures::GraphBasedChunk$<$ T $>$}}
+
+
+Graph-\/based chunking implementation.  
+
+
+
+
+{\ttfamily \#include $<$advanced\+\_\+structures.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk_a2caea02410d0cb3aae6f0c4c8e373f42}{Graph\+Based\+Chunk}} (double threshold=0.\+5)
+\item 
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk_ac7bd16a1287f40bfed27be74179774b9}{chunk}} (const std\+::vector$<$ T $>$ \&data)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk_abcb6c3c22de994ac8a0f887c4cf6330c}{build\+Graph}} (const std\+::vector$<$ T $>$ \&data, \mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk_a4d1d7bc330686388175affbb5076897c}{Graph}} \&g)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk_a4d1d7bc330686388175affbb5076897c}{Graph}} = boost\+::adjacency\+\_\+list$<$ boost\+::vecS, boost\+::vecS, boost\+::undirectedS $>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk_a231995aebe0b15907b118e0bb879c33f}{edge\+\_\+threshold}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class advanced\+\_\+structures\+::\+Graph\+Based\+Chunk$<$ T $>$}
+Graph-\/based chunking implementation. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of elements to be chunked \\
+\hline
+\end{DoxyTemplParams}
+
+
+Definition at line \mbox{\hyperlink{advanced__structures_8hpp_source_l00627}{627}} of file \mbox{\hyperlink{advanced__structures_8hpp_source}{advanced\+\_\+structures.\+hpp}}.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classadvanced__structures_1_1GraphBasedChunk_a4d1d7bc330686388175affbb5076897c}\label{classadvanced__structures_1_1GraphBasedChunk_a4d1d7bc330686388175affbb5076897c} 
+\index{advanced\_structures::GraphBasedChunk$<$ T $>$@{advanced\_structures::GraphBasedChunk$<$ T $>$}!Graph@{Graph}}
+\index{Graph@{Graph}!advanced\_structures::GraphBasedChunk$<$ T $>$@{advanced\_structures::GraphBasedChunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Graph}{Graph}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+using \mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk}{advanced\+\_\+structures\+::\+Graph\+Based\+Chunk}}$<$ T $>$\+::\+Graph =  boost\+::adjacency\+\_\+list$<$boost\+::vecS, boost\+::vecS, boost\+::undirectedS$>$\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{advanced__structures_8hpp_source_l00629}{629}} of file \mbox{\hyperlink{advanced__structures_8hpp_source}{advanced\+\_\+structures.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classadvanced__structures_1_1GraphBasedChunk_a2caea02410d0cb3aae6f0c4c8e373f42}\label{classadvanced__structures_1_1GraphBasedChunk_a2caea02410d0cb3aae6f0c4c8e373f42} 
+\index{advanced\_structures::GraphBasedChunk$<$ T $>$@{advanced\_structures::GraphBasedChunk$<$ T $>$}!GraphBasedChunk@{GraphBasedChunk}}
+\index{GraphBasedChunk@{GraphBasedChunk}!advanced\_structures::GraphBasedChunk$<$ T $>$@{advanced\_structures::GraphBasedChunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{GraphBasedChunk()}{GraphBasedChunk()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk}{advanced\+\_\+structures\+::\+Graph\+Based\+Chunk}}$<$ T $>$\+::\+Graph\+Based\+Chunk (\begin{DoxyParamCaption}\item[{double}]{threshold = {\ttfamily 0.5} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Definition at line \mbox{\hyperlink{advanced__structures_8hpp_source_l00633}{633}} of file \mbox{\hyperlink{advanced__structures_8hpp_source}{advanced\+\_\+structures.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00633\ :\ \mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk_a231995aebe0b15907b118e0bb879c33f}{edge\_threshold}}(threshold)\ \{\}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classadvanced__structures_1_1GraphBasedChunk_abcb6c3c22de994ac8a0f887c4cf6330c}\label{classadvanced__structures_1_1GraphBasedChunk_abcb6c3c22de994ac8a0f887c4cf6330c} 
+\index{advanced\_structures::GraphBasedChunk$<$ T $>$@{advanced\_structures::GraphBasedChunk$<$ T $>$}!buildGraph@{buildGraph}}
+\index{buildGraph@{buildGraph}!advanced\_structures::GraphBasedChunk$<$ T $>$@{advanced\_structures::GraphBasedChunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{buildGraph()}{buildGraph()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+virtual void \mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk}{advanced\+\_\+structures\+::\+Graph\+Based\+Chunk}}$<$ T $>$\+::build\+Graph (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ T $>$ \&}]{data,  }\item[{\mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk_a4d1d7bc330686388175affbb5076897c}{Graph}} \&}]{g }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Definition at line \mbox{\hyperlink{advanced__structures_8hpp_source_l00655}{655}} of file \mbox{\hyperlink{advanced__structures_8hpp_source}{advanced\+\_\+structures.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00655\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00656\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Default\ implementation:\ connect\ adjacent\ elements}}
+\DoxyCodeLine{00657\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 1;\ i\ <\ data.size();\ ++i)\ \{}
+\DoxyCodeLine{00658\ \ \ \ \ \ \ \ \ \ \ \ \ boost::add\_edge(i\ -\/\ 1,\ i,\ g);}
+\DoxyCodeLine{00659\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00660\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+Referenced by \mbox{\hyperlink{advanced__structures_8hpp_source_l00635}{advanced\+\_\+structures\+::\+Graph\+Based\+Chunk$<$ T $>$\+::chunk()}}.
+
+\Hypertarget{classadvanced__structures_1_1GraphBasedChunk_ac7bd16a1287f40bfed27be74179774b9}\label{classadvanced__structures_1_1GraphBasedChunk_ac7bd16a1287f40bfed27be74179774b9} 
+\index{advanced\_structures::GraphBasedChunk$<$ T $>$@{advanced\_structures::GraphBasedChunk$<$ T $>$}!chunk@{chunk}}
+\index{chunk@{chunk}!advanced\_structures::GraphBasedChunk$<$ T $>$@{advanced\_structures::GraphBasedChunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{chunk()}{chunk()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk}{advanced\+\_\+structures\+::\+Graph\+Based\+Chunk}}$<$ T $>$\+::chunk (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ T $>$ \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{advanced__structures_8hpp_source_l00635}{635}} of file \mbox{\hyperlink{advanced__structures_8hpp_source}{advanced\+\_\+structures.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00635\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00636\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
+\DoxyCodeLine{00637\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.empty())}
+\DoxyCodeLine{00638\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00639\ }
+\DoxyCodeLine{00640\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk_a4d1d7bc330686388175affbb5076897c}{Graph}}\ g(data.size());}
+\DoxyCodeLine{00641\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk_abcb6c3c22de994ac8a0f887c4cf6330c}{buildGraph}}(data,\ g);}
+\DoxyCodeLine{00642\ }
+\DoxyCodeLine{00643\ \ \ \ \ \ \ \ \ std::vector<int>\ components(data.size());}
+\DoxyCodeLine{00644\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ num\_components\ =\ boost::connected\_components(g,\ \&components[0]);}
+\DoxyCodeLine{00645\ }
+\DoxyCodeLine{00646\ \ \ \ \ \ \ \ \ result.resize(num\_components);}
+\DoxyCodeLine{00647\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ data.size();\ ++i)\ \{}
+\DoxyCodeLine{00648\ \ \ \ \ \ \ \ \ \ \ \ \ result[components[i]].push\_back(data[i]);}
+\DoxyCodeLine{00649\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00650\ }
+\DoxyCodeLine{00651\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00652\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{advanced__structures_8hpp_source_l00655}{advanced\+\_\+structures\+::\+Graph\+Based\+Chunk$<$ T $>$\+::build\+Graph()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classadvanced__structures_1_1GraphBasedChunk_a231995aebe0b15907b118e0bb879c33f}\label{classadvanced__structures_1_1GraphBasedChunk_a231995aebe0b15907b118e0bb879c33f} 
+\index{advanced\_structures::GraphBasedChunk$<$ T $>$@{advanced\_structures::GraphBasedChunk$<$ T $>$}!edge\_threshold@{edge\_threshold}}
+\index{edge\_threshold@{edge\_threshold}!advanced\_structures::GraphBasedChunk$<$ T $>$@{advanced\_structures::GraphBasedChunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{edge\_threshold}{edge\_threshold}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+double \mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk}{advanced\+\_\+structures\+::\+Graph\+Based\+Chunk}}$<$ T $>$\+::edge\+\_\+threshold\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{advanced__structures_8hpp_source_l00630}{630}} of file \mbox{\hyperlink{advanced__structures_8hpp_source}{advanced\+\_\+structures.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{advanced__structures_8hpp}{advanced\+\_\+structures.\+hpp}}\end{DoxyCompactItemize}

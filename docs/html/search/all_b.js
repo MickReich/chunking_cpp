@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['main_0',['main',['../main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main.cpp']]],
+  ['main_0',['main',['../main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main.cpp']]],
   ['main_2ecpp_1',['main.cpp',['../main_8cpp.html',1,'']]],
   ['map_2',['map',['../classparallel__chunk_1_1ParallelChunkProcessor.html#a1a5189644af96de911c983b816fa9532',1,'parallel_chunk::ParallelChunkProcessor']]],
   ['max_5fbuffer_5fsize_3',['MAX_BUFFER_SIZE',['../structchunk__config_1_1BufferSettings.html#a00b865d9e7adf992e68624735d7309c9',1,'chunk_config::BufferSettings']]],
@@ -14,12 +14,13 @@ var searchData=
   ['metric_5fcalculator_5f_11',['metric_calculator_',['../classchunk__strategies_1_1AdaptiveStrategy.html#ada5ef5e36bb56ceea46b67d49080a815',1,'chunk_strategies::AdaptiveStrategy']]],
   ['min_5fbuffer_5fsize_12',['MIN_BUFFER_SIZE',['../structchunk__config_1_1BufferSettings.html#adeab997492c063602e4b801c132f8c41',1,'chunk_config::BufferSettings']]],
   ['min_5fchunk_5fsize_13',['MIN_CHUNK_SIZE',['../structchunk__config_1_1ChunkSettings.html#a4ddea507f6a80871bdb753ea7bf6790c',1,'chunk_config::ChunkSettings']]],
-  ['min_5fchunk_5fsize_5f_14',['min_chunk_size_',['../classchunk__strategies_1_1RecursiveSubChunkStrategy.html#a9fe56d78ea247f106c773f6583d835eb',1,'chunk_strategies::RecursiveSubChunkStrategy::min_chunk_size_'],['../classchunk__strategies_1_1HierarchicalSubChunkStrategy.html#a5605cf82e759ff54f6775bdf36858cc6',1,'chunk_strategies::HierarchicalSubChunkStrategy::min_chunk_size_'],['../classchunk__strategies_1_1ConditionalSubChunkStrategy.html#a6eb6d54a2aa99fabc99d3effb8be8b98',1,'chunk_strategies::ConditionalSubChunkStrategy::min_chunk_size_']]],
+  ['min_5fchunk_5fsize_5f_14',['min_chunk_size_',['../classchunk__strategies_1_1RecursiveSubChunkStrategy.html#a9fe56d78ea247f106c773f6583d835eb',1,'chunk_strategies::RecursiveSubChunkStrategy::min_chunk_size_'],['../classchunk__strategies_1_1ConditionalSubChunkStrategy.html#a6eb6d54a2aa99fabc99d3effb8be8b98',1,'chunk_strategies::ConditionalSubChunkStrategy::min_chunk_size_'],['../classchunk__strategies_1_1HierarchicalSubChunkStrategy.html#a5605cf82e759ff54f6775bdf36858cc6',1,'chunk_strategies::HierarchicalSubChunkStrategy::min_chunk_size_']]],
   ['min_5fthreshold_5f_15',['min_threshold_',['../classchunk__strategies_1_1DynamicThresholdStrategy.html#ab7356983f39465ce95a1af3563c10dd6',1,'chunk_strategies::DynamicThresholdStrategy']]],
   ['mode_16',['mode',['../classchunk__utils_1_1Statistics.html#aaaf244247e7f592fcd650f9e514b7a6d',1,'chunk_utils::Statistics']]],
-  ['moving_5faverage_17',['moving_average',['../classchunk__windows_1_1WindowOperations.html#a929defeedb1b555fd782041e68927098',1,'chunk_windows::WindowOperations']]],
-  ['moving_5fmax_18',['moving_max',['../classchunk__windows_1_1WindowOperations.html#ac8191b96fc02bd1c9ff22be4ffd6123c',1,'chunk_windows::WindowOperations']]],
-  ['moving_5fmedian_19',['moving_median',['../classchunk__windows_1_1WindowOperations.html#a4dbe569c80436ddd61ee3a72a229d64a',1,'chunk_windows::WindowOperations']]],
-  ['moving_5fmin_20',['moving_min',['../classchunk__windows_1_1WindowOperations.html#af8b096abbcd32e1d5bbf50a0e5db6825',1,'chunk_windows::WindowOperations']]],
-  ['multicriteriastrategy_21',['multicriteriastrategy',['../classchunk__strategies_1_1MultiCriteriaStrategy.html#ac687cdaa7dfb1a90090de3eda9e322b8',1,'chunk_strategies::MultiCriteriaStrategy::MultiCriteriaStrategy()'],['../classchunk__strategies_1_1MultiCriteriaStrategy.html',1,'chunk_strategies::MultiCriteriaStrategy&lt; T &gt;']]]
+  ['model_17',['model',['../classadvanced__structures_1_1SemanticChunker.html#a182a896446640d802493df12a820101f',1,'advanced_structures::SemanticChunker::model'],['../classadvanced__structures_1_1SemanticChunker_3_01std_1_1string_00_01ModelType_01_4.html#a0a290cf2307d9e34f08e0e1f1925acba',1,'advanced_structures::SemanticChunker&lt; std::string, ModelType &gt;::model']]],
+  ['moving_5faverage_18',['moving_average',['../classchunk__windows_1_1WindowOperations.html#a929defeedb1b555fd782041e68927098',1,'chunk_windows::WindowOperations']]],
+  ['moving_5fmax_19',['moving_max',['../classchunk__windows_1_1WindowOperations.html#ac8191b96fc02bd1c9ff22be4ffd6123c',1,'chunk_windows::WindowOperations']]],
+  ['moving_5fmedian_20',['moving_median',['../classchunk__windows_1_1WindowOperations.html#a4dbe569c80436ddd61ee3a72a229d64a',1,'chunk_windows::WindowOperations']]],
+  ['moving_5fmin_21',['moving_min',['../classchunk__windows_1_1WindowOperations.html#af8b096abbcd32e1d5bbf50a0e5db6825',1,'chunk_windows::WindowOperations']]],
+  ['multicriteriastrategy_22',['multicriteriastrategy',['../classchunk__strategies_1_1MultiCriteriaStrategy.html#ac687cdaa7dfb1a90090de3eda9e322b8',1,'chunk_strategies::MultiCriteriaStrategy::MultiCriteriaStrategy()'],['../classchunk__strategies_1_1MultiCriteriaStrategy.html',1,'chunk_strategies::MultiCriteriaStrategy&lt; T &gt;']]]
 ];

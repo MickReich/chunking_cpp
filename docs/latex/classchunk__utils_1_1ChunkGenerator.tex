@@ -1,0 +1,113 @@
+\doxysection{chunk\+\_\+utils\+::Chunk\+Generator\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classchunk__utils_1_1ChunkGenerator}{}\label{classchunk__utils_1_1ChunkGenerator}\index{chunk\_utils::ChunkGenerator$<$ T $>$@{chunk\_utils::ChunkGenerator$<$ T $>$}}
+
+
+{\ttfamily \#include $<$utils.\+hpp$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_ae6136fb99fc953bbdf9f22314d61cae4}{generate\+\_\+random\+\_\+chunks}} (size\+\_\+t num\+\_\+chunks, size\+\_\+t chunk\+\_\+size, T min\+\_\+val, T max\+\_\+val)
+\item 
+static std\+::vector$<$ T $>$ \mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_a8de1ac93ada6f7969952af28ca6cf832}{generate\+\_\+random\+\_\+data}} (size\+\_\+t size, T min\+\_\+val, T max\+\_\+val)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::mt19937 \mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_aa12692893370479eb6e99dc3a9c10661}{gen}}
+\item 
+static std\+::random\+\_\+device \mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_a76e8487f13a2c6ea1a6a9d4f132251f0}{rd}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class chunk\+\_\+utils\+::\+Chunk\+Generator$<$ T $>$}
+
+
+Definition at line \mbox{\hyperlink{utils_8hpp_source_l00081}{81}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classchunk__utils_1_1ChunkGenerator_ae6136fb99fc953bbdf9f22314d61cae4}\label{classchunk__utils_1_1ChunkGenerator_ae6136fb99fc953bbdf9f22314d61cae4} 
+\index{chunk\_utils::ChunkGenerator$<$ T $>$@{chunk\_utils::ChunkGenerator$<$ T $>$}!generate\_random\_chunks@{generate\_random\_chunks}}
+\index{generate\_random\_chunks@{generate\_random\_chunks}!chunk\_utils::ChunkGenerator$<$ T $>$@{chunk\_utils::ChunkGenerator$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{generate\_random\_chunks()}{generate\_random\_chunks()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+static std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator}{chunk\+\_\+utils\+::\+Chunk\+Generator}}$<$ T $>$\+::generate\+\_\+random\+\_\+chunks (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{num\+\_\+chunks,  }\item[{size\+\_\+t}]{chunk\+\_\+size,  }\item[{T}]{min\+\_\+val,  }\item[{T}]{max\+\_\+val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{utils_8hpp_source_l00094}{94}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ chunks(num\_chunks);}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ chunk\ :\ chunks)\ \{}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ chunk\ =\ \mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_a8de1ac93ada6f7969952af28ca6cf832}{generate\_random\_data}}(chunk\_size,\ min\_val,\ max\_val);}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ chunks;}
+\DoxyCodeLine{00101\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{utils_8hpp_source_l00087}{chunk\+\_\+utils\+::\+Chunk\+Generator$<$ T $>$\+::generate\+\_\+random\+\_\+data()}}.
+
+\Hypertarget{classchunk__utils_1_1ChunkGenerator_a8de1ac93ada6f7969952af28ca6cf832}\label{classchunk__utils_1_1ChunkGenerator_a8de1ac93ada6f7969952af28ca6cf832} 
+\index{chunk\_utils::ChunkGenerator$<$ T $>$@{chunk\_utils::ChunkGenerator$<$ T $>$}!generate\_random\_data@{generate\_random\_data}}
+\index{generate\_random\_data@{generate\_random\_data}!chunk\_utils::ChunkGenerator$<$ T $>$@{chunk\_utils::ChunkGenerator$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{generate\_random\_data()}{generate\_random\_data()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+static std\+::vector$<$ T $>$ \mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator}{chunk\+\_\+utils\+::\+Chunk\+Generator}}$<$ T $>$\+::generate\+\_\+random\+\_\+data (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size,  }\item[{T}]{min\+\_\+val,  }\item[{T}]{max\+\_\+val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{utils_8hpp_source_l00087}{87}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ std::vector<T>\ data(size);}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ std::uniform\_real\_distribution<T>\ dis(min\_val,\ max\_val);}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ std::generate(data.begin(),\ data.end(),\ [\&]()\ \{\ return\ dis(gen);\ \});}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data;}
+\DoxyCodeLine{00092\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+Referenced by \mbox{\hyperlink{utils_8hpp_source_l00094}{chunk\+\_\+utils\+::\+Chunk\+Generator$<$ T $>$\+::generate\+\_\+random\+\_\+chunks()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classchunk__utils_1_1ChunkGenerator_aa12692893370479eb6e99dc3a9c10661}\label{classchunk__utils_1_1ChunkGenerator_aa12692893370479eb6e99dc3a9c10661} 
+\index{chunk\_utils::ChunkGenerator$<$ T $>$@{chunk\_utils::ChunkGenerator$<$ T $>$}!gen@{gen}}
+\index{gen@{gen}!chunk\_utils::ChunkGenerator$<$ T $>$@{chunk\_utils::ChunkGenerator$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{gen}{gen}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::mt19937 \mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator}{chunk\+\_\+utils\+::\+Chunk\+Generator}}$<$ T $>$\+::gen\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{utils_8hpp_source_l00084}{84}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
+
+\Hypertarget{classchunk__utils_1_1ChunkGenerator_a76e8487f13a2c6ea1a6a9d4f132251f0}\label{classchunk__utils_1_1ChunkGenerator_a76e8487f13a2c6ea1a6a9d4f132251f0} 
+\index{chunk\_utils::ChunkGenerator$<$ T $>$@{chunk\_utils::ChunkGenerator$<$ T $>$}!rd@{rd}}
+\index{rd@{rd}!chunk\_utils::ChunkGenerator$<$ T $>$@{chunk\_utils::ChunkGenerator$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{rd}{rd}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::random\+\_\+device \mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator}{chunk\+\_\+utils\+::\+Chunk\+Generator}}$<$ T $>$\+::rd\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{utils_8hpp_source_l00083}{83}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{utils_8hpp}{utils.\+hpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,228 @@
+\doxysection{sub\+\_\+chunk\+\_\+strategies.\+hpp}
+\hypertarget{sub__chunk__strategies_8hpp_source}{}\label{sub__chunk__strategies_8hpp_source}\mbox{\hyperlink{sub__chunk__strategies_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00001}00001\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00002}00002\ \textcolor{comment}{\ *\ @file\ sub\_chunk\_strategies.hpp}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00003}00003\ \textcolor{comment}{\ *\ @brief\ Advanced\ sub-\/chunking\ strategies\ for\ hierarchical\ data\ processing}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00004}00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00005}00005\ \textcolor{comment}{\ *\ This\ file\ provides\ implementations\ of\ various\ sub-\/chunking\ strategies:}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00006}00006\ \textcolor{comment}{\ *\ -\/\ Recursive\ sub-\/chunking\ for\ depth-\/based\ processing}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00007}00007\ \textcolor{comment}{\ *\ -\/\ Hierarchical\ sub-\/chunking\ for\ level-\/based\ processing}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00008}00008\ \textcolor{comment}{\ *\ -\/\ Conditional\ sub-\/chunking\ for\ property-\/based\ processing}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00009}00009\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{chunk__strategies_8hpp}{chunk\_strategies.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <cstddef>}\ \textcolor{comment}{//\ for\ size\_t\ and\ ptrdiff\_t}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00015}00015\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00016}00016\ \textcolor{preprocessor}{\#include\ <initializer\_list>}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00017}00017\ \textcolor{preprocessor}{\#include\ <memory>}\ \textcolor{comment}{//\ for\ shared\_ptr}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00018}00018\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00020}00020\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacechunk__strategies}{chunk\_strategies}}\ \{}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00021}00021\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00022}00022\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00023}00023\ \textcolor{comment}{\ *\ @brief\ Base\ class\ for\ sub-\/chunking\ strategies}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00024}00024\ \textcolor{comment}{\ *\ @tparam\ T\ The\ type\ of\ elements\ to\ process}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00025}00025\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00026}00026\ \textcolor{comment}{\ *\ This\ abstract\ class\ defines\ the\ interface\ for\ all\ sub-\/chunking\ strategies.}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00027}00027\ \textcolor{comment}{\ *\ Sub-\/chunking\ strategies\ operate\ on\ chunks\ of\ data\ to\ produce\ hierarchical}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00028}00028\ \textcolor{comment}{\ *\ or\ nested\ chunk\ structures.}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00029}00029\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00030}00030\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00031}\mbox{\hyperlink{classchunk__strategies_1_1SubChunkStrategy}{00031}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classchunk__strategies_1_1SubChunkStrategy}{SubChunkStrategy}}\ \{}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00032}00032\ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00033}00033\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00034}00034\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Apply\ the\ sub-\/chunking\ strategy\ to\ a\ set\ of\ chunks}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00035}00035\ \textcolor{comment}{\ \ \ \ \ *\ @param\ chunks\ The\ input\ chunks\ to\ process}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00036}00036\ \textcolor{comment}{\ \ \ \ \ *\ @return\ A\ vector\ of\ vectors\ of\ vectors\ containing\ the\ sub-\/chunked\ data}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00037}00037\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00038}00038\ \ \ \ \ \textcolor{keyword}{virtual}\ std::vector<std::vector<std::vector<T>>>}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00039}\mbox{\hyperlink{classchunk__strategies_1_1SubChunkStrategy_ae194f8e23262b2df78e9cf0248223254}{00039}}\ \ \ \ \ \mbox{\hyperlink{classchunk__strategies_1_1SubChunkStrategy_ae194f8e23262b2df78e9cf0248223254}{apply}}(\textcolor{keyword}{const}\ std::vector<std::vector<T>>\&\ chunks)\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00040}00040\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00041}00041\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00042}00042\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Virtual\ destructor\ for\ proper\ cleanup}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00043}00043\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00044}\mbox{\hyperlink{classchunk__strategies_1_1SubChunkStrategy_adc4742cc6d92783def9ffd2092509335}{00044}}\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classchunk__strategies_1_1SubChunkStrategy_adc4742cc6d92783def9ffd2092509335}{\string~SubChunkStrategy}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00045}00045\ \};}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00046}00046\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00047}00047\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00048}00048\ \textcolor{comment}{\ *\ @brief\ Strategy\ for\ applying\ recursive\ sub-\/chunking}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00049}00049\ \textcolor{comment}{\ *\ @tparam\ T\ The\ type\ of\ elements\ to\ process}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00050}00050\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00051}00051\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00052}\mbox{\hyperlink{classchunk__strategies_1_1RecursiveSubChunkStrategy}{00052}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classchunk__strategies_1_1RecursiveSubChunkStrategy}{RecursiveSubChunkStrategy}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classchunk__strategies_1_1SubChunkStrategy}{SubChunkStrategy}}<T>\ \{}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00053}00053\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00054}\mbox{\hyperlink{classchunk__strategies_1_1RecursiveSubChunkStrategy_a608fcf4eac9162e880d8a8ce75e6a7c0}{00054}}\ \ \ \ \ std::shared\_ptr<ChunkStrategy<T>>\ \mbox{\hyperlink{classchunk__strategies_1_1RecursiveSubChunkStrategy_a608fcf4eac9162e880d8a8ce75e6a7c0}{strategy\_}};}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00055}\mbox{\hyperlink{classchunk__strategies_1_1RecursiveSubChunkStrategy_aa9b1e7c524a7085f03293cb6d40e8c0c}{00055}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classchunk__strategies_1_1RecursiveSubChunkStrategy_aa9b1e7c524a7085f03293cb6d40e8c0c}{max\_depth\_}};}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00056}\mbox{\hyperlink{classchunk__strategies_1_1RecursiveSubChunkStrategy_a9fe56d78ea247f106c773f6583d835eb}{00056}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classchunk__strategies_1_1RecursiveSubChunkStrategy_a9fe56d78ea247f106c773f6583d835eb}{min\_chunk\_size\_}};}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00058}00058\ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00059}00059\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00060}00060\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Construct\ a\ recursive\ sub-\/chunking\ strategy}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00061}00061\ \textcolor{comment}{\ \ \ \ \ *\ @param\ strategy\ The\ base\ chunking\ strategy\ to\ apply\ recursively}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00062}00062\ \textcolor{comment}{\ \ \ \ \ *\ @param\ max\_depth\ Maximum\ recursion\ depth}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00063}00063\ \textcolor{comment}{\ \ \ \ \ *\ @param\ min\_chunk\_size\ Minimum\ size\ for\ chunks\ to\ be\ processed}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00064}00064\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00065}\mbox{\hyperlink{classchunk__strategies_1_1RecursiveSubChunkStrategy_ab9794b336f3d34c7556fe9835d3f5460}{00065}}\ \ \ \ \ \mbox{\hyperlink{classchunk__strategies_1_1RecursiveSubChunkStrategy_ab9794b336f3d34c7556fe9835d3f5460}{RecursiveSubChunkStrategy}}(std::shared\_ptr<\mbox{\hyperlink{classchunk__strategies_1_1ChunkStrategy}{ChunkStrategy<T>}}>\ strategy,\ \textcolor{keywordtype}{size\_t}\ max\_depth\ =\ 2,}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ min\_chunk\_size\ =\ 1)}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00067}00067\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classchunk__strategies_1_1RecursiveSubChunkStrategy_a608fcf4eac9162e880d8a8ce75e6a7c0}{strategy\_}}(strategy),\ \mbox{\hyperlink{classchunk__strategies_1_1RecursiveSubChunkStrategy_aa9b1e7c524a7085f03293cb6d40e8c0c}{max\_depth\_}}(max\_depth),\ \mbox{\hyperlink{classchunk__strategies_1_1RecursiveSubChunkStrategy_a9fe56d78ea247f106c773f6583d835eb}{min\_chunk\_size\_}}(min\_chunk\_size)\ \{\}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00068}00068\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00069}00069\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00070}00070\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Apply\ recursive\ sub-\/chunking\ to\ the\ input\ chunks}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00071}00071\ \textcolor{comment}{\ \ \ \ \ *\ @param\ chunks\ The\ input\ chunks\ to\ process}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00072}00072\ \textcolor{comment}{\ \ \ \ \ *\ @return\ A\ vector\ of\ vectors\ of\ vectors\ containing\ the\ recursively\ sub-\/chunked\ data}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00073}00073\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00074}00074\ \ \ \ \ std::vector<std::vector<std::vector<T>>>}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00075}\mbox{\hyperlink{classchunk__strategies_1_1RecursiveSubChunkStrategy_a3f7ec5fe668f98c2f9b6dd2a53877a0e}{00075}}\ \ \ \ \ \mbox{\hyperlink{classchunk__strategies_1_1RecursiveSubChunkStrategy_a3f7ec5fe668f98c2f9b6dd2a53877a0e}{apply}}(\textcolor{keyword}{const}\ std::vector<std::vector<T>>\&\ chunks)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classchunk__strategies_1_1RecursiveSubChunkStrategy_a7eb95ab50bd47d54f99de8bc157a3dd1}{apply\_recursive}}(chunks,\ 1);}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00077}00077\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00079}00079\ \textcolor{keyword}{private}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00080}00080\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00081}00081\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Helper\ function\ for\ recursive\ chunking}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00082}00082\ \textcolor{comment}{\ \ \ \ \ *\ @param\ chunks\ The\ chunks\ to\ process}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00083}00083\ \textcolor{comment}{\ \ \ \ \ *\ @param\ current\_depth\ Current\ recursion\ depth}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00084}00084\ \textcolor{comment}{\ \ \ \ \ *\ @return\ Processed\ sub-\/chunks}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00085}00085\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00086}00086\ \ \ \ \ std::vector<std::vector<std::vector<T>>>}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00087}\mbox{\hyperlink{classchunk__strategies_1_1RecursiveSubChunkStrategy_a7eb95ab50bd47d54f99de8bc157a3dd1}{00087}}\ \ \ \ \ \mbox{\hyperlink{classchunk__strategies_1_1RecursiveSubChunkStrategy_a7eb95ab50bd47d54f99de8bc157a3dd1}{apply\_recursive}}(\textcolor{keyword}{const}\ std::vector<std::vector<T>>\&\ chunks,\ \textcolor{keywordtype}{size\_t}\ current\_depth)\ \{\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00088}00088\ \textcolor{comment}{\ \ \ \ \ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00089}00089\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ @details\ This\ method\ recursively\ applies\ the\ chunking\ strategy:}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00090}00090\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ 1.\ Checks\ depth\ and\ size\ constraints}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00091}00091\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ 2.\ Applies\ base\ strategy\ to\ each\ chunk}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00092}00092\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ 3.\ Recursively\ processes\ sub-\/chunks\ if\ needed}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00093}00093\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ 4.\ Returns\ the\ hierarchical\ result}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00094}00094\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00095}00095\ \ \ \ \ \ \ \ \ std::vector<std::vector<std::vector<T>>>\ result;}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00097}00097\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ chunk\ :\ chunks)\ \{}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_depth\ >=\ \mbox{\hyperlink{classchunk__strategies_1_1RecursiveSubChunkStrategy_aa9b1e7c524a7085f03293cb6d40e8c0c}{max\_depth\_}}\ ||\ chunk.size()\ <=\ \mbox{\hyperlink{classchunk__strategies_1_1RecursiveSubChunkStrategy_a9fe56d78ea247f106c773f6583d835eb}{min\_chunk\_size\_}})\ \{}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(\{chunk\});}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ sub\_chunks\ =\ \mbox{\hyperlink{classchunk__strategies_1_1RecursiveSubChunkStrategy_a608fcf4eac9162e880d8a8ce75e6a7c0}{strategy\_}}-\/>apply(chunk);}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_depth\ <\ \mbox{\hyperlink{classchunk__strategies_1_1RecursiveSubChunkStrategy_aa9b1e7c524a7085f03293cb6d40e8c0c}{max\_depth\_}})\ \{}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ recursive\_result\ =\ \mbox{\hyperlink{classchunk__strategies_1_1RecursiveSubChunkStrategy_a7eb95ab50bd47d54f99de8bc157a3dd1}{apply\_recursive}}(sub\_chunks,\ current\_depth\ +\ 1);}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.insert(result.end(),\ recursive\_result.begin(),\ recursive\_result.end());}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(sub\_chunks);}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00110}00110\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00112}00112\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00113}00113\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00114}00114\ \};}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00115}00115\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00116}00116\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00117}00117\ \textcolor{comment}{\ *\ @brief\ Strategy\ for\ hierarchical\ sub-\/chunking\ using\ multiple\ strategies}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00118}00118\ \textcolor{comment}{\ *\ @tparam\ T\ The\ type\ of\ elements\ to\ process}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00119}00119\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00120}00120\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00121}\mbox{\hyperlink{classchunk__strategies_1_1HierarchicalSubChunkStrategy}{00121}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classchunk__strategies_1_1HierarchicalSubChunkStrategy}{HierarchicalSubChunkStrategy}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classchunk__strategies_1_1SubChunkStrategy}{SubChunkStrategy}}<T>\ \{}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00122}00122\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00123}\mbox{\hyperlink{classchunk__strategies_1_1HierarchicalSubChunkStrategy_a94dacae450867c20647e761f32d30e3d}{00123}}\ \ \ \ \ std::vector<std::shared\_ptr<ChunkStrategy<T>>>\ \mbox{\hyperlink{classchunk__strategies_1_1HierarchicalSubChunkStrategy_a94dacae450867c20647e761f32d30e3d}{strategies\_}};}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00124}\mbox{\hyperlink{classchunk__strategies_1_1HierarchicalSubChunkStrategy_a5605cf82e759ff54f6775bdf36858cc6}{00124}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classchunk__strategies_1_1HierarchicalSubChunkStrategy_a5605cf82e759ff54f6775bdf36858cc6}{min\_chunk\_size\_}};}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00126}00126\ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00127}00127\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00128}00128\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Construct\ a\ hierarchical\ sub-\/chunking\ strategy}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00129}00129\ \textcolor{comment}{\ \ \ \ \ *\ @param\ strategies\ Vector\ of\ strategies\ to\ apply\ at\ different\ levels}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00130}00130\ \textcolor{comment}{\ \ \ \ \ *\ @param\ min\_chunk\_size\ Minimum\ size\ for\ chunks\ to\ be\ processed}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00131}00131\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00132}\mbox{\hyperlink{classchunk__strategies_1_1HierarchicalSubChunkStrategy_abe59c321f036269361c947bbb3284388}{00132}}\ \ \ \ \ \mbox{\hyperlink{classchunk__strategies_1_1HierarchicalSubChunkStrategy_abe59c321f036269361c947bbb3284388}{HierarchicalSubChunkStrategy}}(std::vector<std::shared\_ptr<\mbox{\hyperlink{classchunk__strategies_1_1ChunkStrategy}{ChunkStrategy<T>}}>>\ strategies,}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ min\_chunk\_size\ =\ 1)}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00134}00134\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classchunk__strategies_1_1HierarchicalSubChunkStrategy_a94dacae450867c20647e761f32d30e3d}{strategies\_}}(strategies),\ \mbox{\hyperlink{classchunk__strategies_1_1HierarchicalSubChunkStrategy_a5605cf82e759ff54f6775bdf36858cc6}{min\_chunk\_size\_}}(min\_chunk\_size)\ \{\}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00135}00135\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00136}00136\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00137}00137\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Apply\ hierarchical\ sub-\/chunking\ to\ the\ input\ chunks}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00138}00138\ \textcolor{comment}{\ \ \ \ \ *\ @param\ chunks\ The\ input\ chunks\ to\ process}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00139}00139\ \textcolor{comment}{\ \ \ \ \ *\ @return\ A\ vector\ of\ vectors\ of\ vectors\ containing\ the\ hierarchically\ sub-\/chunked\ data}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00140}00140\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00141}00141\ \ \ \ \ std::vector<std::vector<std::vector<T>>>}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00142}\mbox{\hyperlink{classchunk__strategies_1_1HierarchicalSubChunkStrategy_a67a5b312e84029f51ea7743f6a1bd75c}{00142}}\ \ \ \ \ \mbox{\hyperlink{classchunk__strategies_1_1HierarchicalSubChunkStrategy_a67a5b312e84029f51ea7743f6a1bd75c}{apply}}(\textcolor{keyword}{const}\ std::vector<std::vector<T>>\&\ chunks)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00143}00143\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classchunk__strategies_1_1HierarchicalSubChunkStrategy_ace3ad79788be2c0f243bf8d01b0c3799}{apply\_hierarchical}}(chunks,\ 0);}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00144}00144\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00145}00145\ }
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00146}00146\ \textcolor{keyword}{private}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00147}00147\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00148}00148\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Helper\ function\ for\ hierarchical\ chunking}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00149}00149\ \textcolor{comment}{\ \ \ \ \ *\ @param\ chunks\ The\ chunks\ to\ process}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00150}00150\ \textcolor{comment}{\ \ \ \ \ *\ @param\ level\ Current\ hierarchy\ level}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00151}00151\ \textcolor{comment}{\ \ \ \ \ *\ @return\ Processed\ sub-\/chunks}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00152}00152\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00153}00153\ \ \ \ \ std::vector<std::vector<std::vector<T>>>}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00154}\mbox{\hyperlink{classchunk__strategies_1_1HierarchicalSubChunkStrategy_ace3ad79788be2c0f243bf8d01b0c3799}{00154}}\ \ \ \ \ \mbox{\hyperlink{classchunk__strategies_1_1HierarchicalSubChunkStrategy_ace3ad79788be2c0f243bf8d01b0c3799}{apply\_hierarchical}}(\textcolor{keyword}{const}\ std::vector<std::vector<T>>\&\ chunks,\ \textcolor{keywordtype}{size\_t}\ level)\ \{}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00155}00155\ \ \ \ \ \ \ \ \ std::vector<std::vector<std::vector<T>>>\ result;}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00157}00157\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (level\ >=\ \mbox{\hyperlink{classchunk__strategies_1_1HierarchicalSubChunkStrategy_a94dacae450867c20647e761f32d30e3d}{strategies\_}}.size())\ \{}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(chunks);}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00160}00160\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00162}00162\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ chunk\ :\ chunks)\ \{}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (chunk.size()\ <=\ \mbox{\hyperlink{classchunk__strategies_1_1HierarchicalSubChunkStrategy_a5605cf82e759ff54f6775bdf36858cc6}{min\_chunk\_size\_}})\ \{}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(\{chunk\});}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00167}00167\ }
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ sub\_chunks\ =\ \mbox{\hyperlink{classchunk__strategies_1_1HierarchicalSubChunkStrategy_a94dacae450867c20647e761f32d30e3d}{strategies\_}}[level]-\/>apply(chunk);}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ next\_level\_chunks\ =\ \mbox{\hyperlink{classchunk__strategies_1_1HierarchicalSubChunkStrategy_ace3ad79788be2c0f243bf8d01b0c3799}{apply\_hierarchical}}(sub\_chunks,\ level\ +\ 1);}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ result.insert(result.end(),\ next\_level\_chunks.begin(),\ next\_level\_chunks.end());}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00171}00171\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00172}00172\ }
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00173}00173\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00174}00174\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00175}00175\ \};}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00176}00176\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00177}00177\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00178}00178\ \textcolor{comment}{\ *\ @brief\ Strategy\ for\ conditional\ sub-\/chunking\ based\ on\ chunk\ properties}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00179}00179\ \textcolor{comment}{\ *\ @tparam\ T\ The\ type\ of\ elements\ to\ process}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00180}00180\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00181}00181\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00182}\mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy}{00182}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy}{ConditionalSubChunkStrategy}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classchunk__strategies_1_1SubChunkStrategy}{SubChunkStrategy}}<T>\ \{}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00183}00183\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00184}\mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy_a370ac58350a750b40dfb5f05a952c653}{00184}}\ \ \ \ \ std::shared\_ptr<ChunkStrategy<T>>\ \mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy_a370ac58350a750b40dfb5f05a952c653}{strategy\_}};}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00185}\mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy_abaf81b9f4fc1a975e24775f5e83b4872}{00185}}\ \ \ \ \ std::function<bool(\textcolor{keyword}{const}\ std::vector<T>\&)>\ \mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy_abaf81b9f4fc1a975e24775f5e83b4872}{condition\_}};}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00186}\mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy_a6eb6d54a2aa99fabc99d3effb8be8b98}{00186}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy_a6eb6d54a2aa99fabc99d3effb8be8b98}{min\_chunk\_size\_}};}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00187}00187\ }
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00188}00188\ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00189}00189\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00190}00190\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Construct\ a\ conditional\ sub-\/chunking\ strategy}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00191}00191\ \textcolor{comment}{\ \ \ \ \ *\ @param\ strategy\ The\ base\ chunking\ strategy\ to\ apply}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00192}00192\ \textcolor{comment}{\ \ \ \ \ *\ @param\ condition\ Function\ determining\ when\ to\ apply\ sub-\/chunking}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00193}00193\ \textcolor{comment}{\ \ \ \ \ *\ @param\ min\_chunk\_size\ Minimum\ size\ for\ chunks\ to\ be\ processed}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00194}00194\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00195}\mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy_af71c64ffe37dea9bc55cb3633228a4f4}{00195}}\ \ \ \ \ \mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy_af71c64ffe37dea9bc55cb3633228a4f4}{ConditionalSubChunkStrategy}}(std::shared\_ptr<\mbox{\hyperlink{classchunk__strategies_1_1ChunkStrategy}{ChunkStrategy<T>}}>\ strategy,}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{bool}(\textcolor{keyword}{const}\ std::vector<T>\&)>\ condition,}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ min\_chunk\_size\ =\ 1)}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00198}00198\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy_a370ac58350a750b40dfb5f05a952c653}{strategy\_}}(strategy),\ \mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy_abaf81b9f4fc1a975e24775f5e83b4872}{condition\_}}(condition),\ \mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy_a6eb6d54a2aa99fabc99d3effb8be8b98}{min\_chunk\_size\_}}(min\_chunk\_size)\ \{\}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00199}00199\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00200}00200\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00201}00201\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Apply\ conditional\ sub-\/chunking\ to\ the\ input\ chunks}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00202}00202\ \textcolor{comment}{\ \ \ \ \ *\ @param\ chunks\ The\ input\ chunks\ to\ process}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00203}00203\ \textcolor{comment}{\ \ \ \ \ *\ @return\ A\ vector\ of\ vectors\ of\ vectors\ containing\ the\ conditionally\ sub-\/chunked\ data}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00204}00204\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00205}00205\ \ \ \ \ std::vector<std::vector<std::vector<T>>>}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00206}\mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy_a38db1133126e563c8f830fff399e47ef}{00206}}\ \ \ \ \ \mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy_a38db1133126e563c8f830fff399e47ef}{apply}}(\textcolor{keyword}{const}\ std::vector<std::vector<T>>\&\ chunks)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00207}00207\ \ \ \ \ \ \ \ \ std::vector<std::vector<std::vector<T>>>\ result;}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00208}00208\ }
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00209}00209\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ chunk\ :\ chunks)\ \{}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (chunk.size()\ <=\ \mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy_a6eb6d54a2aa99fabc99d3effb8be8b98}{min\_chunk\_size\_}}\ ||\ !\mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy_abaf81b9f4fc1a975e24775f5e83b4872}{condition\_}}(chunk))\ \{}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(\{chunk\});}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00214}00214\ }
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ sub\_chunks\ =\ \mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy_a370ac58350a750b40dfb5f05a952c653}{strategy\_}}-\/>apply(chunk);}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(sub\_chunks);}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00217}00217\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00218}00218\ }
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00219}00219\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00220}00220\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00221}00221\ \};}
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00222}00222\ }
+\DoxyCodeLine{\Hypertarget{sub__chunk__strategies_8hpp_source_l00223}00223\ \}\ \textcolor{comment}{//\ namespace\ chunk\_strategies}}
+
+\end{DoxyCode}

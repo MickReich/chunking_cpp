@@ -1,0 +1,28 @@
+<map id="parallel_chunk.hpp" name="parallel_chunk.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="530,5,675,31"/>
+<area shape="rect" id="Node000002" href="$chunk_8hpp.html" title="Template class for chunk&#45;based data processing." alt="" coords="250,79,339,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="554,33,353,79,352,74,553,28"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="413,152,475,177"/>
+<area shape="poly" id="edge13_Node000001_Node000006" title=" " alt="" coords="531,29,480,47,458,61,440,80,434,94,432,108,437,138,432,139,426,108,428,92,435,77,454,57,477,42,529,24"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="449,79,535,104"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="586,33,523,73,520,69,583,28"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="559,79,646,104"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="605,31,605,65,600,65,600,31"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="671,79,732,104"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="620,29,676,68,673,73,617,33"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="756,79,820,104"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="633,28,746,71,744,76,631,33"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="844,79,908,104"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="647,28,831,76,830,81,646,33"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,152,80,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="255,107,94,152,93,147,253,101"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="105,152,191,177"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="272,106,185,148,183,144,270,102"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="216,152,275,177"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="289,106,263,142,259,139,284,103"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="320,102,408,144,406,148,318,106"/>
+<area shape="rect" id="Node000007" href="$config_8hpp.html" title=" " alt="" coords="299,152,389,177"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="305,103,330,139,326,142,301,106"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="309,225,379,251"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="347,178,347,212,341,212,341,178"/>
+</map>

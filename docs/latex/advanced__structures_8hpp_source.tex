@@ -1,0 +1,668 @@
+\doxysection{advanced\+\_\+structures.\+hpp}
+\hypertarget{advanced__structures_8hpp_source}{}\label{advanced__structures_8hpp_source}\mbox{\hyperlink{advanced__structures_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <boost/graph/adjacency\_list.hpp>}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <boost/graph/connected\_components.hpp>}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <deque>}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <random>}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <stack>}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00016}\mbox{\hyperlink{namespaceadvanced__structures}{00016}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceadvanced__structures}{advanced\_structures}}\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00018}00018\ \textcolor{comment}{//\ Default\ NLP\ model\ implementation}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00019}\mbox{\hyperlink{structadvanced__structures_1_1DefaultNLPModel}{00019}}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structadvanced__structures_1_1DefaultNLPModel}{DefaultNLPModel}}\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00020}00020\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ ContentType>}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00021}\mbox{\hyperlink{structadvanced__structures_1_1DefaultNLPModel_a4cdab22339ba7f166c158af6fd801178}{00021}}\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structadvanced__structures_1_1DefaultNLPModel_a4cdab22339ba7f166c158af6fd801178}{calculateSimilarity}}(\textcolor{keyword}{const}\ ContentType\&\ content1,\ \textcolor{keyword}{const}\ ContentType\&\ content2)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00022}00022\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Simple\ similarity\ calculation\ (e.g.,\ based\ on\ length)}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00023}00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1.0\ -\/\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(std::abs(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(content1.size())\ -\/}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(content2.size())))\ /}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::max(content1.size(),\ content2.size());}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00026}00026\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00027}00027\ \};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00028}00028\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00029}00029\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00030}00030\ \textcolor{comment}{\ *\ @brief\ Template\ class\ for\ semantic-\/based\ content\ chunking}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00031}00031\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00032}00032\ \textcolor{comment}{\ *\ SemanticChunker\ splits\ content\ based\ on\ semantic\ boundaries\ using}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00033}00033\ \textcolor{comment}{\ *\ configurable\ NLP\ models\ and\ similarity\ metrics.}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00034}00034\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00035}00035\ \textcolor{comment}{\ *\ @tparam\ ContentType\ Type\ of\ content\ to\ be\ chunked}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00036}00036\ \textcolor{comment}{\ *\ @tparam\ ModelType\ Type\ of\ NLP\ model\ to\ use\ for\ similarity\ calculations}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00037}00037\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00038}00038\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ ContentType,\ \textcolor{keyword}{typename}\ ModelType\ =\ DefaultNLPModel>}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00039}\mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker}{00039}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker}{SemanticChunker}}\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00040}00040\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00041}\mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_a182a896446640d802493df12a820101f}{00041}}\ \ \ \ \ ModelType\ \mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_a182a896446640d802493df12a820101f}{model}};\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{///<\ NLP\ model\ instance}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00042}\mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_a3f5aac8ec3993568e97122dc49cd2186}{00042}}\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_a3f5aac8ec3993568e97122dc49cd2186}{similarity\_threshold}};\ \textcolor{comment}{///<\ Threshold\ for\ determining\ chunk\ boundaries}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00044}00044\ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00045}00045\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00046}00046\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Construct\ a\ new\ Semantic\ Chunker}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00047}00047\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00048}00048\ \textcolor{comment}{\ \ \ \ \ *\ @param\ threshold\ Similarity\ threshold\ for\ chunk\ boundaries\ (default:\ 0.7)}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00049}00049\ \textcolor{comment}{\ \ \ \ \ *\ @param\ custom\_model\ Custom\ NLP\ model\ instance\ (optional)}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00050}00050\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00051}\mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_a31d18ecc89cee0cb07ef3f36c078f644}{00051}}\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_a31d18ecc89cee0cb07ef3f36c078f644}{SemanticChunker}}(\textcolor{keywordtype}{double}\ threshold\ =\ 0.7,\ ModelType\ custom\_model\ =\ ModelType())}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00052}00052\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_a182a896446640d802493df12a820101f}{model}}(custom\_model),\ \mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_a3f5aac8ec3993568e97122dc49cd2186}{similarity\_threshold}}(threshold)\ \{\}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00053}00053\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00054}00054\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00055}00055\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Chunk\ content\ based\ on\ semantic\ boundaries}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00056}00056\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00057}00057\ \textcolor{comment}{\ \ \ \ \ *\ @param\ content\ Input\ content\ to\ be\ chunked}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00058}00058\ \textcolor{comment}{\ \ \ \ \ *\ @return\ std::vector<ContentType>\ Vector\ of\ content\ chunks}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00059}00059\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00060}\mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_a2b30319a99b4480cff75f118d6233f39}{00060}}\ \ \ \ \ std::vector<ContentType>\ \mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_a2b30319a99b4480cff75f118d6233f39}{chunk}}(\textcolor{keyword}{const}\ ContentType\&\ content);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00061}00061\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00062}00062\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00063}00063\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Set\ a\ new\ NLP\ model}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00064}00064\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00065}00065\ \textcolor{comment}{\ \ \ \ \ *\ @param\ new\_model\ New\ model\ instance\ to\ use}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00066}00066\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00067}\mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_aab79a41b3730e0e7056e543ed9a9ec82}{00067}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_aab79a41b3730e0e7056e543ed9a9ec82}{setModel}}(ModelType\ new\_model)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00068}00068\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_a182a896446640d802493df12a820101f}{model}}\ =\ new\_model;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00069}00069\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00070}00070\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00071}00071\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00072}00072\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Set\ new\ similarity\ threshold}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00073}00073\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00074}00074\ \textcolor{comment}{\ \ \ \ \ *\ @param\ threshold\ New\ threshold\ value\ between\ 0.0\ and\ 1.0}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00075}00075\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00076}\mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_ab41281b93e5f1529350246f5db3567d4}{00076}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_ab41281b93e5f1529350246f5db3567d4}{setSimilarityThreshold}}(\textcolor{keywordtype}{double}\ threshold)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00077}00077\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_a3f5aac8ec3993568e97122dc49cd2186}{similarity\_threshold}}\ =\ threshold;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00078}00078\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00079}00079\ \};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00080}00080\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00081}00081\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00082}00082\ \textcolor{comment}{\ *\ @brief\ Specialization\ of\ SemanticChunker\ for\ string\ content}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00083}00083\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00084}00084\ \textcolor{comment}{\ *\ Provides\ optimized\ implementation\ for\ string-\/based\ content\ chunking.}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00085}00085\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00086}00086\ \textcolor{comment}{\ *\ @tparam\ ModelType\ Type\ of\ NLP\ model\ to\ use}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00087}00087\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00088}00088\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ ModelType>}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00089}\mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_3_01std_1_1string_00_01ModelType_01_4}{00089}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker}{SemanticChunker}}<std::string,\ ModelType>\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00090}00090\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00091}\mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_3_01std_1_1string_00_01ModelType_01_4_a0a290cf2307d9e34f08e0e1f1925acba}{00091}}\ \ \ \ \ ModelType\ \mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_3_01std_1_1string_00_01ModelType_01_4_a0a290cf2307d9e34f08e0e1f1925acba}{model}};\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{///<\ NLP\ model\ instance}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00092}\mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_3_01std_1_1string_00_01ModelType_01_4_accdd798eefd8533d560cc09300e9e86e}{00092}}\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_3_01std_1_1string_00_01ModelType_01_4_accdd798eefd8533d560cc09300e9e86e}{similarity\_threshold}};\ \textcolor{comment}{///<\ Similarity\ threshold\ for\ chunking}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00094}00094\ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00095}00095\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00096}00096\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Construct\ a\ new\ string-\/specialized\ Semantic\ Chunker}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00097}00097\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00098}00098\ \textcolor{comment}{\ \ \ \ \ *\ @param\ threshold\ Similarity\ threshold\ (default:\ 0.7)}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00099}00099\ \textcolor{comment}{\ \ \ \ \ *\ @param\ custom\_model\ Custom\ NLP\ model\ instance}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00100}00100\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00101}\mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_3_01std_1_1string_00_01ModelType_01_4_abe803abeee49a4c3fc6fd00c1ced9ccf}{00101}}\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_3_01std_1_1string_00_01ModelType_01_4_abe803abeee49a4c3fc6fd00c1ced9ccf}{SemanticChunker}}(\textcolor{keywordtype}{double}\ threshold\ =\ 0.7,\ ModelType\ custom\_model\ =\ ModelType())}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00102}00102\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_a182a896446640d802493df12a820101f}{model}}(custom\_model),\ \mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_a3f5aac8ec3993568e97122dc49cd2186}{similarity\_threshold}}(threshold)\ \{\}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00103}00103\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00104}00104\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00105}00105\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Chunk\ string\ content\ into\ semantic\ segments}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00106}00106\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00107}00107\ \textcolor{comment}{\ \ \ \ \ *\ @param\ content\ Input\ string\ to\ be\ chunked}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00108}00108\ \textcolor{comment}{\ \ \ \ \ *\ @return\ std::vector<std::string>\ Vector\ of\ string\ chunks}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00109}00109\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00110}\mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_3_01std_1_1string_00_01ModelType_01_4_a87b66357895f146354ac1e35a4b10777}{00110}}\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_3_01std_1_1string_00_01ModelType_01_4_a87b66357895f146354ac1e35a4b10777}{chunk}}(\textcolor{keyword}{const}\ std::string\&\ content)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00111}00111\ \ \ \ \ \ \ \ \ std::vector<std::string>\ chunks;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00112}00112\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (content.empty())\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ chunks;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00114}00114\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00116}00116\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Split\ by\ sentences\ (simple\ implementation)}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00117}00117\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ start\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00118}00118\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ pos\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00119}00119\ \ \ \ \ \ \ \ \ std::string\ current\_chunk;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00121}00121\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ ((pos\ =\ content.find\_first\_of(\textcolor{stringliteral}{"{}.!?"{}},\ start))\ !=\ std::string::npos)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Include\ the\ punctuation\ mark\ and\ any\ following\ whitespace}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ end\ =\ pos\ +\ 1;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (end\ <\ content.length()\ \&\&\ std::isspace(content[end]))\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ end++;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Extract\ the\ sentence}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ sentence\ =\ content.substr(start,\ end\ -\/\ start);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!sentence.empty())\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ chunks.push\_back(sentence);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ start\ =\ end;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00135}00135\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00137}00137\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ remaining\ content\ if\ any}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00138}00138\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (start\ <\ content.length())\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ chunks.push\_back(content.substr(start));}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00140}00140\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00142}00142\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ chunks;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00143}00143\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00144}00144\ \};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00145}00145\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00146}00146\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00147}00147\ \textcolor{comment}{\ *\ @brief\ A\ skip\ list\ implementation\ for\ efficient\ chunk\ searching}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00148}00148\ \textcolor{comment}{\ *\ @tparam\ T\ The\ type\ of\ elements\ stored\ in\ the\ skip\ list}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00149}00149\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00150}00150\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00151}\mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList}{00151}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList}{ChunkSkipList}}\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00152}00152\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00153}\mbox{\hyperlink{structadvanced__structures_1_1ChunkSkipList_1_1Node}{00153}}\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structadvanced__structures_1_1ChunkSkipList_1_1Node}{Node}}\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00154}\mbox{\hyperlink{structadvanced__structures_1_1ChunkSkipList_1_1Node_ad695ad75f0262fd7ba19fe795cbf0cc4}{00154}}\ \ \ \ \ \ \ \ \ T\ \mbox{\hyperlink{structadvanced__structures_1_1ChunkSkipList_1_1Node_ad695ad75f0262fd7ba19fe795cbf0cc4}{value}};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00155}\mbox{\hyperlink{structadvanced__structures_1_1ChunkSkipList_1_1Node_aec5507e413075c1d8390cbe5aaed06f1}{00155}}\ \ \ \ \ \ \ \ \ std::vector<std::shared\_ptr<Node>>\ \mbox{\hyperlink{structadvanced__structures_1_1ChunkSkipList_1_1Node_aec5507e413075c1d8390cbe5aaed06f1}{forward}};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00156}\mbox{\hyperlink{structadvanced__structures_1_1ChunkSkipList_1_1Node_ade4a2d21749cd0266341a52e1cdd2b2d}{00156}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{structadvanced__structures_1_1ChunkSkipList_1_1Node_ade4a2d21749cd0266341a52e1cdd2b2d}{Node}}(T\ val,\ \textcolor{keywordtype}{int}\ level)\ :\ \mbox{\hyperlink{structadvanced__structures_1_1ChunkSkipList_1_1Node_ad695ad75f0262fd7ba19fe795cbf0cc4}{value}}(val),\ \mbox{\hyperlink{structadvanced__structures_1_1ChunkSkipList_1_1Node_aec5507e413075c1d8390cbe5aaed06f1}{forward}}(level)\ \{\}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00157}00157\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00159}\mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_ab57eee3b6e3a4baf840c7a474e9d6808}{00159}}\ \ \ \ \ std::shared\_ptr<Node>\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_ab57eee3b6e3a4baf840c7a474e9d6808}{head}};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00160}\mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a4513a91224338557279cc6e03fa5abb4}{00160}}\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a4513a91224338557279cc6e03fa5abb4}{max\_level}};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00161}\mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a55850229a7163c185f510621cdbd360b}{00161}}\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a55850229a7163c185f510621cdbd360b}{p}};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00162}\mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a642cbae0a13509a0616bcdb6112610f9}{00162}}\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a642cbae0a13509a0616bcdb6112610f9}{current\_level}};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00163}00163\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00164}00164\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00165}00165\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Generates\ a\ random\ level\ for\ node\ insertion}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00166}00166\ \textcolor{comment}{\ \ \ \ \ *\ @return\ The\ random\ level}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00167}00167\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00168}\mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a375b2d50bc56e6cdb067f64729b20aae}{00168}}\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a375b2d50bc56e6cdb067f64729b20aae}{random\_level}}()\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00169}00169\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ lvl\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00170}00170\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ ((\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(rand())\ /\ RAND\_MAX)\ <\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a55850229a7163c185f510621cdbd360b}{p}}\ \&\&\ lvl\ <\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a4513a91224338557279cc6e03fa5abb4}{max\_level}})\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ lvl++;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00172}00172\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00173}00173\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ lvl;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00174}00174\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00175}00175\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00176}00176\ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00177}00177\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00178}00178\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Constructs\ a\ new\ ChunkSkipList\ object}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00179}00179\ \textcolor{comment}{\ \ \ \ \ *\ @param\ max\_lvl\ Maximum\ level\ of\ the\ skip\ list}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00180}00180\ \textcolor{comment}{\ \ \ \ \ *\ @param\ prob\ Probability\ factor\ for\ level\ generation}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00181}00181\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00182}\mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a358f6d1eb351d99cf1fd6b74b48d3181}{00182}}\ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a358f6d1eb351d99cf1fd6b74b48d3181}{ChunkSkipList}}(\textcolor{keywordtype}{int}\ max\_lvl\ =\ 16,\ \textcolor{keywordtype}{float}\ prob\ =\ 0.5)}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00183}00183\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a4513a91224338557279cc6e03fa5abb4}{max\_level}}(max\_lvl),\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a55850229a7163c185f510621cdbd360b}{p}}(prob),\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a642cbae0a13509a0616bcdb6112610f9}{current\_level}}(1)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00184}00184\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_ab57eee3b6e3a4baf840c7a474e9d6808}{head}}\ =\ std::make\_shared<Node>(T(),\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a4513a91224338557279cc6e03fa5abb4}{max\_level}});}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00185}00185\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00186}00186\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00187}00187\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00188}00188\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Inserts\ a\ value\ into\ the\ skip\ list}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00189}00189\ \textcolor{comment}{\ \ \ \ \ *\ @param\ value\ The\ value\ to\ insert}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00190}00190\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00191}\mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a5bb5a4e03c0a22adebf77793aa87d2d1}{00191}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a5bb5a4e03c0a22adebf77793aa87d2d1}{insert}}(\textcolor{keyword}{const}\ T\&\ value)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00192}00192\ \ \ \ \ \ \ \ \ std::vector<std::shared\_ptr<Node>>\ update(\mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a4513a91224338557279cc6e03fa5abb4}{max\_level}});}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00193}00193\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ current\ =\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_ab57eee3b6e3a4baf840c7a474e9d6808}{head}};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00194}00194\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00195}00195\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a642cbae0a13509a0616bcdb6112610f9}{current\_level}}\ -\/\ 1;\ i\ >=\ 0;\ i-\/-\/)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (current-\/>forward[i]\ \&\&\ current-\/>forward[i]-\/>value\ <\ value)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\ =\ current-\/>forward[i];}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00199}00199\ \ \ \ \ \ \ \ \ \ \ \ \ update[i]\ =\ current;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00200}00200\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00201}00201\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00202}00202\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ new\_level\ =\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a375b2d50bc56e6cdb067f64729b20aae}{random\_level}}();}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00203}00203\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (new\_level\ >\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a642cbae0a13509a0616bcdb6112610f9}{current\_level}})\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a642cbae0a13509a0616bcdb6112610f9}{current\_level}};\ i\ <\ new\_level;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ update[i]\ =\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_ab57eee3b6e3a4baf840c7a474e9d6808}{head}};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a642cbae0a13509a0616bcdb6112610f9}{current\_level}}\ =\ new\_level;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00208}00208\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00209}00209\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00210}00210\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ new\_node\ =\ std::make\_shared<Node>(value,\ new\_level);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00211}00211\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ new\_level;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ new\_node-\/>forward[i]\ =\ update[i]-\/>forward[i];}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ update[i]-\/>forward[i]\ =\ new\_node;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00214}00214\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00215}00215\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00216}00216\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00217}00217\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00218}00218\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Searches\ for\ a\ value\ in\ the\ skip\ list}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00219}00219\ \textcolor{comment}{\ \ \ \ \ *\ @param\ value\ The\ value\ to\ search\ for}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00220}00220\ \textcolor{comment}{\ \ \ \ \ *\ @return\ True\ if\ the\ value\ is\ found,\ false\ otherwise}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00221}00221\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00222}\mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_ad0f1935e9193d98c9fa6213b1e5d9968}{00222}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_ad0f1935e9193d98c9fa6213b1e5d9968}{search}}(\textcolor{keyword}{const}\ T\&\ value)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00223}00223\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ current\ =\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_ab57eee3b6e3a4baf840c7a474e9d6808}{head}};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00224}00224\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkSkipList_a642cbae0a13509a0616bcdb6112610f9}{current\_level}}\ -\/\ 1;\ i\ >=\ 0;\ i-\/-\/)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (current-\/>forward[i]\ \&\&\ current-\/>forward[i]-\/>value\ <\ value)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00226}00226\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\ =\ current-\/>forward[i];}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00227}00227\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00228}00228\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00229}00229\ \ \ \ \ \ \ \ \ current\ =\ current-\/>forward[0];}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00230}00230\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ current\ \&\&\ current-\/>value\ ==\ value;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00231}00231\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00232}00232\ \};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00233}00233\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00234}00234\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00235}00235\ \textcolor{comment}{\ *\ @brief\ A\ B+\ tree\ implementation\ for\ chunk\ indexing}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00236}00236\ \textcolor{comment}{\ *\ @tparam\ T\ The\ type\ of\ elements\ stored\ in\ the\ tree}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00237}00237\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00238}00238\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00239}\mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree}{00239}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree}{ChunkBPlusTree}}\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00240}\mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_aeb6e577f38b6d398c0836917692d9126}{00240}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_aeb6e577f38b6d398c0836917692d9126}{ORDER}}\ =\ 4;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00241}00241\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00242}\mbox{\hyperlink{structadvanced__structures_1_1ChunkBPlusTree_1_1Node}{00242}}\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structadvanced__structures_1_1ChunkBPlusTree_1_1Node}{Node}}\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00243}\mbox{\hyperlink{structadvanced__structures_1_1ChunkBPlusTree_1_1Node_af95539116997aaf592a2d938ad1b16a3}{00243}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structadvanced__structures_1_1ChunkBPlusTree_1_1Node_af95539116997aaf592a2d938ad1b16a3}{is\_leaf}};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00244}\mbox{\hyperlink{structadvanced__structures_1_1ChunkBPlusTree_1_1Node_abfcb85beab82189e87b5eb417d6fc3e5}{00244}}\ \ \ \ \ \ \ \ \ std::vector<T>\ \mbox{\hyperlink{structadvanced__structures_1_1ChunkBPlusTree_1_1Node_abfcb85beab82189e87b5eb417d6fc3e5}{keys}};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00245}\mbox{\hyperlink{structadvanced__structures_1_1ChunkBPlusTree_1_1Node_a665314b6b31d02ee09e4bad70f055eab}{00245}}\ \ \ \ \ \ \ \ \ std::vector<std::shared\_ptr<Node>>\ \mbox{\hyperlink{structadvanced__structures_1_1ChunkBPlusTree_1_1Node_a665314b6b31d02ee09e4bad70f055eab}{children}};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00246}\mbox{\hyperlink{structadvanced__structures_1_1ChunkBPlusTree_1_1Node_a01d6e9020063c3c5f311c09ed82dda5a}{00246}}\ \ \ \ \ \ \ \ \ std::shared\_ptr<Node>\ \mbox{\hyperlink{structadvanced__structures_1_1ChunkBPlusTree_1_1Node_a01d6e9020063c3c5f311c09ed82dda5a}{next}};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00247}00247\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00248}\mbox{\hyperlink{structadvanced__structures_1_1ChunkBPlusTree_1_1Node_ad82822bde19c4a8fde799e108255df52}{00248}}\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structadvanced__structures_1_1ChunkBPlusTree_1_1Node_ad82822bde19c4a8fde799e108255df52}{Node}}(\textcolor{keywordtype}{bool}\ leaf\ =\ \textcolor{keyword}{true})\ :\ \mbox{\hyperlink{structadvanced__structures_1_1ChunkBPlusTree_1_1Node_af95539116997aaf592a2d938ad1b16a3}{is\_leaf}}(leaf)\ \{\}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00249}00249\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00250}00250\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00251}\mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_a461b6e266ecdc394626e9307c8134f92}{00251}}\ \ \ \ \ std::shared\_ptr<Node>\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_a461b6e266ecdc394626e9307c8134f92}{root}};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00252}00252\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00253}00253\ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00254}00254\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00255}00255\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Constructs\ a\ new\ ChunkBPlusTree\ object}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00256}00256\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00257}\mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_af4e204340891061a29d59b5d542717d9}{00257}}\ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_af4e204340891061a29d59b5d542717d9}{ChunkBPlusTree}}()\ :\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_a461b6e266ecdc394626e9307c8134f92}{root}}(std::make\_shared<\mbox{\hyperlink{structadvanced__structures_1_1ChunkBPlusTree_1_1Node}{Node}}>())\ \{\}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00258}00258\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00259}00259\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00260}00260\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Inserts\ a\ key\ into\ the\ B+\ tree}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00261}00261\ \textcolor{comment}{\ \ \ \ \ *\ @param\ key\ The\ key\ to\ insert}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00262}00262\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00263}\mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_a24a557be77c94069b36695bd35b0ce80}{00263}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_a24a557be77c94069b36695bd35b0ce80}{insert}}(\textcolor{keyword}{const}\ T\&\ key)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00264}00264\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_a461b6e266ecdc394626e9307c8134f92}{root}}-\/>keys.empty())\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00265}00265\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_a461b6e266ecdc394626e9307c8134f92}{root}}-\/>keys.push\_back(key);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00266}00266\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00267}00267\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00268}00268\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00269}00269\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_a461b6e266ecdc394626e9307c8134f92}{root}}-\/>keys.size()\ ==\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_aeb6e577f38b6d398c0836917692d9126}{ORDER}}\ -\/\ 1)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00270}00270\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ new\_root\ =\ std::make\_shared<Node>(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00271}00271\ \ \ \ \ \ \ \ \ \ \ \ \ new\_root-\/>children.push\_back(\mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_a461b6e266ecdc394626e9307c8134f92}{root}});}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00272}00272\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_ac44f91d7cc5ce269e9f5d10bfc639e9c}{split\_child}}(new\_root,\ 0);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00273}00273\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_a461b6e266ecdc394626e9307c8134f92}{root}}\ =\ new\_root;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00274}00274\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00275}00275\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_a895a38fcff176405e85aae33a68ecdab}{insert\_non\_full}}(\mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_a461b6e266ecdc394626e9307c8134f92}{root}},\ key);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00276}00276\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00277}00277\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00278}00278\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00279}00279\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Searches\ for\ a\ key\ in\ the\ B+\ tree}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00280}00280\ \textcolor{comment}{\ \ \ \ \ *\ @param\ key\ The\ key\ to\ search\ for}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00281}00281\ \textcolor{comment}{\ \ \ \ \ *\ @return\ True\ if\ the\ key\ is\ found,\ false\ otherwise}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00282}00282\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00283}\mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_ae636111c0ed86e6c0150fbd9dfd12dc1}{00283}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_ae636111c0ed86e6c0150fbd9dfd12dc1}{search}}(\textcolor{keyword}{const}\ T\&\ key)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00284}00284\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_a461b6e266ecdc394626e9307c8134f92}{root}}\ ==\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00285}00285\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00286}00286\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00287}00287\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_af75b371357e7a43564c1a9c9d68e163a}{search\_node}}(\mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_a461b6e266ecdc394626e9307c8134f92}{root}},\ key);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00288}00288\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00289}00289\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00290}00290\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00291}\mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_ac44f91d7cc5ce269e9f5d10bfc639e9c}{00291}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_ac44f91d7cc5ce269e9f5d10bfc639e9c}{split\_child}}(std::shared\_ptr<Node>\ parent,\ \textcolor{keywordtype}{int}\ index)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00292}00292\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ child\ =\ parent-\/>children[index];}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00293}00293\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ new\_child\ =\ std::make\_shared<Node>(child-\/>is\_leaf);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00294}00294\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00295}00295\ \ \ \ \ \ \ \ \ parent-\/>keys.insert(parent-\/>keys.begin()\ +\ index,\ child-\/>keys[\mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_aeb6e577f38b6d398c0836917692d9126}{ORDER}}\ /\ 2\ -\/\ 1]);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00296}00296\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00297}00297\ \ \ \ \ \ \ \ \ parent-\/>children.insert(parent-\/>children.begin()\ +\ index\ +\ 1,\ new\_child);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00298}00298\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00299}00299\ \ \ \ \ \ \ \ \ new\_child-\/>keys.assign(child-\/>keys.begin()\ +\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_aeb6e577f38b6d398c0836917692d9126}{ORDER}}\ /\ 2,\ child-\/>keys.end());}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00300}00300\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00301}00301\ \ \ \ \ \ \ \ \ child-\/>keys.resize(\mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_aeb6e577f38b6d398c0836917692d9126}{ORDER}}\ /\ 2\ -\/\ 1);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00302}00302\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00303}00303\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!child-\/>is\_leaf)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00304}00304\ \ \ \ \ \ \ \ \ \ \ \ \ new\_child-\/>children.assign(child-\/>children.begin()\ +\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_aeb6e577f38b6d398c0836917692d9126}{ORDER}}\ /\ 2,\ child-\/>children.end());}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00305}00305\ \ \ \ \ \ \ \ \ \ \ \ \ child-\/>children.resize(\mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_aeb6e577f38b6d398c0836917692d9126}{ORDER}}\ /\ 2);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00306}00306\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00307}00307\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00308}00308\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00309}\mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_a895a38fcff176405e85aae33a68ecdab}{00309}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_a895a38fcff176405e85aae33a68ecdab}{insert\_non\_full}}(std::shared\_ptr<Node>\ node,\ \textcolor{keyword}{const}\ T\&\ key)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00310}00310\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ i\ =\ node-\/>keys.size()\ -\/\ 1;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00311}00311\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00312}00312\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (node-\/>is\_leaf)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00313}00313\ \ \ \ \ \ \ \ \ \ \ \ \ node-\/>keys.push\_back(T());}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00314}00314\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (i\ >=\ 0\ \&\&\ key\ <\ node-\/>keys[i])\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00315}00315\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ node-\/>keys[i\ +\ 1]\ =\ node-\/>keys[i];}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00316}00316\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i-\/-\/;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00317}00317\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00318}00318\ \ \ \ \ \ \ \ \ \ \ \ \ node-\/>keys[i\ +\ 1]\ =\ key;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00319}00319\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00320}00320\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (i\ >=\ 0\ \&\&\ key\ <\ node-\/>keys[i])\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00321}00321\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i-\/-\/;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00322}00322\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00323}00323\ \ \ \ \ \ \ \ \ \ \ \ \ i++;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00324}00324\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00325}00325\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (node-\/>children[i]-\/>keys.size()\ ==\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_aeb6e577f38b6d398c0836917692d9126}{ORDER}}\ -\/\ 1)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00326}00326\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_ac44f91d7cc5ce269e9f5d10bfc639e9c}{split\_child}}(node,\ i);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00327}00327\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (key\ >\ node-\/>keys[i])\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00328}00328\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i++;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00329}00329\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00330}00330\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00331}00331\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_a895a38fcff176405e85aae33a68ecdab}{insert\_non\_full}}(node-\/>children[i],\ key);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00332}00332\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00333}00333\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00334}00334\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00335}\mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_af75b371357e7a43564c1a9c9d68e163a}{00335}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_af75b371357e7a43564c1a9c9d68e163a}{search\_node}}(\textcolor{keyword}{const}\ std::shared\_ptr<Node>\&\ node,\ \textcolor{keyword}{const}\ T\&\ key)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00336}00336\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ i\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00337}00337\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (i\ <\ node-\/>keys.size()\ \&\&\ key\ >\ node-\/>keys[i])\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00338}00338\ \ \ \ \ \ \ \ \ \ \ \ \ i++;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00339}00339\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00340}00340\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00341}00341\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ <\ node-\/>keys.size()\ \&\&\ key\ ==\ node-\/>keys[i])\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00342}00342\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00343}00343\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00344}00344\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00345}00345\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (node-\/>is\_leaf)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00346}00346\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00347}00347\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00348}00348\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00349}00349\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkBPlusTree_af75b371357e7a43564c1a9c9d68e163a}{search\_node}}(node-\/>children[i],\ key);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00350}00350\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00351}00351\ \};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00352}00352\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00353}00353\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00354}00354\ \textcolor{comment}{\ *\ @brief\ A\ deque-\/based\ chunk\ structure\ for\ double-\/ended\ operations}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00355}00355\ \textcolor{comment}{\ *\ @tparam\ T\ The\ type\ of\ elements\ stored\ in\ the\ chunk\ deque}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00356}00356\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00357}00357\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00358}\mbox{\hyperlink{classadvanced__structures_1_1ChunkDeque}{00358}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classadvanced__structures_1_1ChunkDeque}{ChunkDeque}}\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00359}00359\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00360}\mbox{\hyperlink{classadvanced__structures_1_1ChunkDeque_ad47f9ecfc53465142080151c38accce7}{00360}}\ \ \ \ \ std::deque<T>\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkDeque_ad47f9ecfc53465142080151c38accce7}{data\_}};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00361}00361\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00362}00362\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00363}\mbox{\hyperlink{classadvanced__structures_1_1ChunkDeque_a1002dca753c69f20cf2b69a9b1eddcaa}{00363}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkDeque_a1002dca753c69f20cf2b69a9b1eddcaa}{push\_back}}(\textcolor{keyword}{const}\ T\&\ value)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00364}00364\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1ChunkDeque_ad47f9ecfc53465142080151c38accce7}{data\_}}.push\_back(value);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00365}00365\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00366}00366\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00367}\mbox{\hyperlink{classadvanced__structures_1_1ChunkDeque_abdcb27d2bc3db1290f375ecfdb903be9}{00367}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkDeque_abdcb27d2bc3db1290f375ecfdb903be9}{push\_front}}(\textcolor{keyword}{const}\ T\&\ value)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00368}00368\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1ChunkDeque_ad47f9ecfc53465142080151c38accce7}{data\_}}.push\_front(value);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00369}00369\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00370}00370\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00371}\mbox{\hyperlink{classadvanced__structures_1_1ChunkDeque_ad596a92cbab68c01c9994f0ef63f4bec}{00371}}\ \ \ \ \ T\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkDeque_ad596a92cbab68c01c9994f0ef63f4bec}{pop\_back}}()\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00372}00372\ \ \ \ \ \ \ \ \ T\ value\ =\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkDeque_ad47f9ecfc53465142080151c38accce7}{data\_}}.back();}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00373}00373\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1ChunkDeque_ad47f9ecfc53465142080151c38accce7}{data\_}}.pop\_back();}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00374}00374\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ value;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00375}00375\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00376}00376\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00377}\mbox{\hyperlink{classadvanced__structures_1_1ChunkDeque_a5273be663a52d7c755f7ba8533ecfcf9}{00377}}\ \ \ \ \ T\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkDeque_a5273be663a52d7c755f7ba8533ecfcf9}{pop\_front}}()\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00378}00378\ \ \ \ \ \ \ \ \ T\ value\ =\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkDeque_ad47f9ecfc53465142080151c38accce7}{data\_}}.front();}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00379}00379\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1ChunkDeque_ad47f9ecfc53465142080151c38accce7}{data\_}}.pop\_front();}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00380}00380\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ value;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00381}00381\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00382}00382\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00383}\mbox{\hyperlink{classadvanced__structures_1_1ChunkDeque_a1136f4736ebdaa2bd76803e6b0c2ce52}{00383}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkDeque_a1136f4736ebdaa2bd76803e6b0c2ce52}{size}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00384}00384\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkDeque_ad47f9ecfc53465142080151c38accce7}{data\_}}.size();}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00385}00385\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00386}00386\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00387}\mbox{\hyperlink{classadvanced__structures_1_1ChunkDeque_ad264d210d7741c74a943d58e097a3148}{00387}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkDeque_ad264d210d7741c74a943d58e097a3148}{empty}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00388}00388\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkDeque_ad47f9ecfc53465142080151c38accce7}{data\_}}.empty();}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00389}00389\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00390}00390\ \};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00391}00391\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00392}00392\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00393}00393\ \textcolor{comment}{\ *\ @brief\ A\ stack-\/based\ chunk\ structure\ for\ LIFO\ operations}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00394}00394\ \textcolor{comment}{\ *\ @tparam\ T\ The\ type\ of\ elements\ stored\ in\ the\ chunk\ stack}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00395}00395\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00396}00396\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00397}\mbox{\hyperlink{classadvanced__structures_1_1ChunkStack}{00397}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classadvanced__structures_1_1ChunkStack}{ChunkStack}}\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00398}00398\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00399}\mbox{\hyperlink{classadvanced__structures_1_1ChunkStack_a447b8132bb9a86a2d57b1a6d8b834953}{00399}}\ \ \ \ \ std::stack<T>\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkStack_a447b8132bb9a86a2d57b1a6d8b834953}{data\_}};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00400}00400\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00401}00401\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00402}\mbox{\hyperlink{classadvanced__structures_1_1ChunkStack_a363e41b4896d02458acd92a3995164f2}{00402}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkStack_a363e41b4896d02458acd92a3995164f2}{push}}(\textcolor{keyword}{const}\ T\&\ value)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00403}00403\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1ChunkStack_a447b8132bb9a86a2d57b1a6d8b834953}{data\_}}.push(value);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00404}00404\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00405}00405\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00406}\mbox{\hyperlink{classadvanced__structures_1_1ChunkStack_a7c001fa9b4648f8696f931cf1b753939}{00406}}\ \ \ \ \ T\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkStack_a7c001fa9b4648f8696f931cf1b753939}{pop}}()\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00407}00407\ \ \ \ \ \ \ \ \ T\ value\ =\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkStack_a447b8132bb9a86a2d57b1a6d8b834953}{data\_}}.top();}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00408}00408\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1ChunkStack_a447b8132bb9a86a2d57b1a6d8b834953}{data\_}}.pop();}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00409}00409\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ value;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00410}00410\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00411}00411\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00412}\mbox{\hyperlink{classadvanced__structures_1_1ChunkStack_a35d2a137137737e4fc2562d527cad2b5}{00412}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkStack_a35d2a137137737e4fc2562d527cad2b5}{size}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00413}00413\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkStack_a447b8132bb9a86a2d57b1a6d8b834953}{data\_}}.size();}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00414}00414\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00415}00415\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00416}\mbox{\hyperlink{classadvanced__structures_1_1ChunkStack_a9e7c6b353dfcfe143aa6ba96cc673af9}{00416}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkStack_a9e7c6b353dfcfe143aa6ba96cc673af9}{empty}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00417}00417\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkStack_a447b8132bb9a86a2d57b1a6d8b834953}{data\_}}.empty();}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00418}00418\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00419}00419\ \};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00420}00420\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00421}00421\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00422}00422\ \textcolor{comment}{\ *\ @brief\ A\ treap\ implementation\ for\ efficient\ chunk\ searching\ and\ manipulation}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00423}00423\ \textcolor{comment}{\ *\ @tparam\ T\ The\ type\ of\ elements\ stored\ in\ the\ treap}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00424}00424\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00425}00425\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00426}\mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap}{00426}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap}{ChunkTreap}}\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00427}00427\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00428}\mbox{\hyperlink{structadvanced__structures_1_1ChunkTreap_1_1Node}{00428}}\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structadvanced__structures_1_1ChunkTreap_1_1Node}{Node}}\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00429}\mbox{\hyperlink{structadvanced__structures_1_1ChunkTreap_1_1Node_a100c856bdfa08adafe2ce04dc80bb7a4}{00429}}\ \ \ \ \ \ \ \ \ T\ \mbox{\hyperlink{structadvanced__structures_1_1ChunkTreap_1_1Node_a100c856bdfa08adafe2ce04dc80bb7a4}{value}};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00430}\mbox{\hyperlink{structadvanced__structures_1_1ChunkTreap_1_1Node_a568c50d851230db5746c43c85e50e098}{00430}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structadvanced__structures_1_1ChunkTreap_1_1Node_a568c50d851230db5746c43c85e50e098}{priority}};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00431}\mbox{\hyperlink{structadvanced__structures_1_1ChunkTreap_1_1Node_ade60be809534ea9c19ea27b44e225784}{00431}}\ \ \ \ \ \ \ \ \ std::shared\_ptr<Node>\ \mbox{\hyperlink{structadvanced__structures_1_1ChunkTreap_1_1Node_ade60be809534ea9c19ea27b44e225784}{left}};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00432}\mbox{\hyperlink{structadvanced__structures_1_1ChunkTreap_1_1Node_aae8a457ee310d0125afcf389021279b8}{00432}}\ \ \ \ \ \ \ \ \ std::shared\_ptr<Node>\ \mbox{\hyperlink{structadvanced__structures_1_1ChunkTreap_1_1Node_aae8a457ee310d0125afcf389021279b8}{right}};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00433}00433\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00434}\mbox{\hyperlink{structadvanced__structures_1_1ChunkTreap_1_1Node_afcccb73be088a3d63f185a475b86eff1}{00434}}\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structadvanced__structures_1_1ChunkTreap_1_1Node_afcccb73be088a3d63f185a475b86eff1}{Node}}(T\ val,\ \textcolor{keywordtype}{int}\ prio)\ :\ \mbox{\hyperlink{structadvanced__structures_1_1ChunkTreap_1_1Node_a100c856bdfa08adafe2ce04dc80bb7a4}{value}}(val),\ \mbox{\hyperlink{structadvanced__structures_1_1ChunkTreap_1_1Node_a568c50d851230db5746c43c85e50e098}{priority}}(prio),\ \mbox{\hyperlink{structadvanced__structures_1_1ChunkTreap_1_1Node_ade60be809534ea9c19ea27b44e225784}{left}}(nullptr),\ \mbox{\hyperlink{structadvanced__structures_1_1ChunkTreap_1_1Node_aae8a457ee310d0125afcf389021279b8}{right}}(nullptr)\ \{\}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00435}00435\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00436}00436\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00437}\mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_a2d4ed70e327a49308295746e6caabf70}{00437}}\ \ \ \ \ std::shared\_ptr<Node>\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_a2d4ed70e327a49308295746e6caabf70}{root}};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00438}\mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_a20c39e84fd693b4c4f9eb125b09d964a}{00438}}\ \ \ \ \ std::mt19937\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_a20c39e84fd693b4c4f9eb125b09d964a}{gen}};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00439}00439\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00440}\mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_a90934f55f671edf771041f8ede3b3b9a}{00440}}\ \ \ \ \ std::shared\_ptr<Node>\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_a90934f55f671edf771041f8ede3b3b9a}{rotate\_right}}(std::shared\_ptr<Node>\ node)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00441}00441\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ new\_root\ =\ node-\/>left;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00442}00442\ \ \ \ \ \ \ \ \ node-\/>left\ =\ new\_root-\/>right;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00443}00443\ \ \ \ \ \ \ \ \ new\_root-\/>right\ =\ node;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00444}00444\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ new\_root;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00445}00445\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00446}00446\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00447}\mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_a975e87632814ead53cd4aab8c96aa04a}{00447}}\ \ \ \ \ std::shared\_ptr<Node>\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_a975e87632814ead53cd4aab8c96aa04a}{rotate\_left}}(std::shared\_ptr<Node>\ node)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00448}00448\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ new\_root\ =\ node-\/>right;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00449}00449\ \ \ \ \ \ \ \ \ node-\/>right\ =\ new\_root-\/>left;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00450}00450\ \ \ \ \ \ \ \ \ new\_root-\/>left\ =\ node;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00451}00451\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ new\_root;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00452}00452\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00453}00453\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00454}\mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_a77fb27ffd9d4f99cde64d00e4f192a35}{00454}}\ \ \ \ \ std::shared\_ptr<Node>\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_a77fb27ffd9d4f99cde64d00e4f192a35}{insert}}(std::shared\_ptr<Node>\ node,\ T\ value,\ \textcolor{keywordtype}{int}\ priority)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00455}00455\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!node)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00456}00456\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::make\_shared<Node>(value,\ priority);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00457}00457\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00458}00458\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00459}00459\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (value\ <\ node-\/>value)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00460}00460\ \ \ \ \ \ \ \ \ \ \ \ \ node-\/>left\ =\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_a77fb27ffd9d4f99cde64d00e4f192a35}{insert}}(node-\/>left,\ value,\ priority);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00461}00461\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (node-\/>left-\/>priority\ >\ node-\/>priority)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00462}00462\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ node\ =\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_a90934f55f671edf771041f8ede3b3b9a}{rotate\_right}}(node);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00463}00463\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00464}00464\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00465}00465\ \ \ \ \ \ \ \ \ \ \ \ \ node-\/>right\ =\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_a77fb27ffd9d4f99cde64d00e4f192a35}{insert}}(node-\/>right,\ value,\ priority);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00466}00466\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (node-\/>right-\/>priority\ >\ node-\/>priority)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00467}00467\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ node\ =\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_a975e87632814ead53cd4aab8c96aa04a}{rotate\_left}}(node);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00468}00468\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00469}00469\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00470}00470\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ node;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00471}00471\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00472}00472\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00473}\mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_af8bbc71c112667019e3404e58cd47ace}{00473}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_af8bbc71c112667019e3404e58cd47ace}{search}}(\textcolor{keyword}{const}\ std::shared\_ptr<Node>\&\ node,\ T\ value)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00474}00474\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!node)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00475}00475\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00476}00476\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00477}00477\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (node-\/>value\ ==\ value)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00478}00478\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00479}00479\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00480}00480\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (value\ <\ node-\/>value)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00481}00481\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_af8bbc71c112667019e3404e58cd47ace}{search}}(node-\/>left,\ value);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00482}00482\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00483}00483\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_af8bbc71c112667019e3404e58cd47ace}{search}}(node-\/>right,\ value);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00484}00484\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00485}00485\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00486}00486\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00487}00487\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00488}\mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_a85ec561116c9d278769ff3b18a174557}{00488}}\ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_a85ec561116c9d278769ff3b18a174557}{ChunkTreap}}()\ :\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_a2d4ed70e327a49308295746e6caabf70}{root}}(nullptr),\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_a20c39e84fd693b4c4f9eb125b09d964a}{gen}}(std::random\_device\{\}())\ \{\}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00489}00489\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00490}\mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_a3a892ec24a83012c8f497ff9b94f75fa}{00490}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_a3a892ec24a83012c8f497ff9b94f75fa}{insert}}(T\ value)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00491}00491\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ priority\ =\ std::uniform\_int\_distribution<>(1,\ 100)(\mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_a20c39e84fd693b4c4f9eb125b09d964a}{gen}});}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00492}00492\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_a2d4ed70e327a49308295746e6caabf70}{root}}\ =\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_a77fb27ffd9d4f99cde64d00e4f192a35}{insert}}(\mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_a2d4ed70e327a49308295746e6caabf70}{root}},\ value,\ priority);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00493}00493\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00494}00494\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00495}\mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_a4ceb6067495a440e324808bfceff7102}{00495}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_a4ceb6067495a440e324808bfceff7102}{search}}(T\ value)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00496}00496\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_af8bbc71c112667019e3404e58cd47ace}{search}}(\mbox{\hyperlink{classadvanced__structures_1_1ChunkTreap_a2d4ed70e327a49308295746e6caabf70}{root}},\ value);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00497}00497\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00498}00498\ \};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00499}00499\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00500}00500\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00501}00501\ \textcolor{comment}{\ *\ @brief\ Semantic\ boundaries-\/based\ chunking\ implementation}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00502}00502\ \textcolor{comment}{\ *\ @tparam\ T\ The\ type\ of\ elements\ to\ be\ chunked}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00503}00503\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00504}00504\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00505}\mbox{\hyperlink{classadvanced__structures_1_1SemanticBoundariesChunk}{00505}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classadvanced__structures_1_1SemanticBoundariesChunk}{SemanticBoundariesChunk}}\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00506}00506\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00507}\mbox{\hyperlink{classadvanced__structures_1_1SemanticBoundariesChunk_a59f37d922130f44da884e79729f8572b}{00507}}\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classadvanced__structures_1_1SemanticBoundariesChunk_a59f37d922130f44da884e79729f8572b}{boundary\_threshold}};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00508}00508\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00509}00509\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00510}\mbox{\hyperlink{classadvanced__structures_1_1SemanticBoundariesChunk_a29c3faf214a7ab661cff46166d98ac19}{00510}}\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classadvanced__structures_1_1SemanticBoundariesChunk_a29c3faf214a7ab661cff46166d98ac19}{SemanticBoundariesChunk}}(\textcolor{keywordtype}{double}\ threshold\ =\ 0.5)\ :\ \mbox{\hyperlink{classadvanced__structures_1_1SemanticBoundariesChunk_a59f37d922130f44da884e79729f8572b}{boundary\_threshold}}(threshold)\ \{\}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00511}00511\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00512}\mbox{\hyperlink{classadvanced__structures_1_1SemanticBoundariesChunk_a8989548ecf99455cb3b119761642c752}{00512}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classadvanced__structures_1_1SemanticBoundariesChunk_a8989548ecf99455cb3b119761642c752}{chunk}}(\textcolor{keyword}{const}\ std::vector<T>\&\ data)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00513}00513\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00514}00514\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.empty())}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00515}00515\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00516}00516\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00517}00517\ \ \ \ \ \ \ \ \ std::vector<T>\ current\_chunk;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00518}00518\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ item\ :\ data)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00519}00519\ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.push\_back(item);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00520}00520\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classadvanced__structures_1_1SemanticBoundariesChunk_ae896186812a0424ef9a315dcf287ada8}{isBoundary}}(current\_chunk))\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00521}00521\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00522}00522\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.clear();}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00523}00523\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00524}00524\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00525}00525\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00526}00526\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!current\_chunk.empty())\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00527}00527\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00528}00528\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00529}00529\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00530}00530\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00531}00531\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00532}00532\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00533}00533\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00534}\mbox{\hyperlink{classadvanced__structures_1_1SemanticBoundariesChunk_ae896186812a0424ef9a315dcf287ada8}{00534}}\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classadvanced__structures_1_1SemanticBoundariesChunk_ae896186812a0424ef9a315dcf287ada8}{isBoundary}}(\textcolor{keyword}{const}\ std::vector<T>\&\ \mbox{\hyperlink{classadvanced__structures_1_1SemanticBoundariesChunk_a8989548ecf99455cb3b119761642c752}{chunk}})\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00535}00535\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classadvanced__structures_1_1SemanticBoundariesChunk_a8989548ecf99455cb3b119761642c752}{chunk}}.size()\ >=\ 3;\ \textcolor{comment}{//\ Default\ implementation}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00536}00536\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00537}00537\ \};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00538}00538\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00539}00539\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00540}00540\ \textcolor{comment}{\ *\ @brief\ Fractal\ pattern-\/based\ chunking\ implementation}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00541}00541\ \textcolor{comment}{\ *\ @tparam\ T\ The\ type\ of\ elements\ to\ be\ chunked}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00542}00542\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00543}00543\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00544}\mbox{\hyperlink{classadvanced__structures_1_1FractalPatternsChunk}{00544}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classadvanced__structures_1_1FractalPatternsChunk}{FractalPatternsChunk}}\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00545}00545\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00546}\mbox{\hyperlink{classadvanced__structures_1_1FractalPatternsChunk_a8736011996663d025f8b4191bd2156b0}{00546}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classadvanced__structures_1_1FractalPatternsChunk_a8736011996663d025f8b4191bd2156b0}{pattern\_size}};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00547}\mbox{\hyperlink{classadvanced__structures_1_1FractalPatternsChunk_a82a2732ff021e61db4b5419f5ded766c}{00547}}\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classadvanced__structures_1_1FractalPatternsChunk_a82a2732ff021e61db4b5419f5ded766c}{similarity\_threshold}};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00548}00548\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00549}00549\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00550}\mbox{\hyperlink{classadvanced__structures_1_1FractalPatternsChunk_a6171e243d7fe094bea4aeeaa2ae06adc}{00550}}\ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1FractalPatternsChunk_a6171e243d7fe094bea4aeeaa2ae06adc}{FractalPatternsChunk}}(\textcolor{keywordtype}{size\_t}\ size\ =\ 3,\ \textcolor{keywordtype}{double}\ threshold\ =\ 0.8)}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00551}00551\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classadvanced__structures_1_1FractalPatternsChunk_a8736011996663d025f8b4191bd2156b0}{pattern\_size}}(size),\ \mbox{\hyperlink{classadvanced__structures_1_1FractalPatternsChunk_a82a2732ff021e61db4b5419f5ded766c}{similarity\_threshold}}(threshold)\ \{\}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00552}00552\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00553}\mbox{\hyperlink{classadvanced__structures_1_1FractalPatternsChunk_a231cdb63b91850a33cf9af3e293c6fd4}{00553}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classadvanced__structures_1_1FractalPatternsChunk_a231cdb63b91850a33cf9af3e293c6fd4}{chunk}}(\textcolor{keyword}{const}\ std::vector<T>\&\ data)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00554}00554\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00555}00555\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.empty())}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00556}00556\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00557}00557\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00558}00558\ \ \ \ \ \ \ \ \ std::vector<T>\ current\_chunk;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00559}00559\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ item\ :\ data)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00560}00560\ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.push\_back(item);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00561}00561\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classadvanced__structures_1_1FractalPatternsChunk_a4ee9e3121dec8d0f258110374fb0e60c}{hasPattern}}(current\_chunk))\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00562}00562\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00563}00563\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.clear();}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00564}00564\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00565}00565\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00566}00566\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00567}00567\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!current\_chunk.empty())\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00568}00568\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00569}00569\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00570}00570\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00571}00571\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00572}00572\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00573}00573\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00574}00574\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00575}\mbox{\hyperlink{classadvanced__structures_1_1FractalPatternsChunk_a4ee9e3121dec8d0f258110374fb0e60c}{00575}}\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classadvanced__structures_1_1FractalPatternsChunk_a4ee9e3121dec8d0f258110374fb0e60c}{hasPattern}}(\textcolor{keyword}{const}\ std::vector<T>\&\ \mbox{\hyperlink{classadvanced__structures_1_1FractalPatternsChunk_a231cdb63b91850a33cf9af3e293c6fd4}{chunk}})\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00576}00576\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classadvanced__structures_1_1FractalPatternsChunk_a231cdb63b91850a33cf9af3e293c6fd4}{chunk}}.size()\ >=\ \mbox{\hyperlink{classadvanced__structures_1_1FractalPatternsChunk_a8736011996663d025f8b4191bd2156b0}{pattern\_size}};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00577}00577\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00578}00578\ \};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00579}00579\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00580}00580\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00581}00581\ \textcolor{comment}{\ *\ @brief\ Bloom\ filter-\/based\ chunking\ implementation}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00582}00582\ \textcolor{comment}{\ *\ @tparam\ T\ The\ type\ of\ elements\ to\ be\ chunked}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00583}00583\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00584}00584\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00585}\mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk}{00585}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk}{BloomFilterChunk}}\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00586}00586\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00587}\mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk_aa3fc3b02a0e5148ffb2fc52f965db677}{00587}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk_aa3fc3b02a0e5148ffb2fc52f965db677}{filter\_size}};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00588}\mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk_a0971ed7fde596ec76a46169c9c4be523}{00588}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk_a0971ed7fde596ec76a46169c9c4be523}{num\_hash\_functions}};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00589}\mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk_acca6758d2c97bf203269c7a74295bcaa}{00589}}\ \ \ \ \ std::vector<bool>\ \mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk_acca6758d2c97bf203269c7a74295bcaa}{filter}};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00590}00590\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00591}00591\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00592}\mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk_a6e445b86b98fd71855686798f7e11b59}{00592}}\ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk_a6e445b86b98fd71855686798f7e11b59}{BloomFilterChunk}}(\textcolor{keywordtype}{size\_t}\ size\ =\ 1024,\ \textcolor{keywordtype}{size\_t}\ num\_funcs\ =\ 3)}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00593}00593\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk_aa3fc3b02a0e5148ffb2fc52f965db677}{filter\_size}}(size),\ \mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk_a0971ed7fde596ec76a46169c9c4be523}{num\_hash\_functions}}(num\_funcs),\ \mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk_acca6758d2c97bf203269c7a74295bcaa}{filter}}(size,\ false)\ \{\}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00594}00594\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00595}\mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk_a4f1a6a96f8f140c63a7b32a8e36c0ae3}{00595}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk_a4f1a6a96f8f140c63a7b32a8e36c0ae3}{chunk}}(\textcolor{keyword}{const}\ std::vector<T>\&\ data)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00596}00596\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00597}00597\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.empty())}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00598}00598\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00599}00599\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00600}00600\ \ \ \ \ \ \ \ \ std::vector<T>\ current\_chunk;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00601}00601\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ item\ :\ data)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00602}00602\ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.push\_back(item);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00603}00603\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk_a0c616279eadb29f875622fcb137c54b8}{shouldSplit}}(current\_chunk))\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00604}00604\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00605}00605\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.clear();}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00606}00606\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00607}00607\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00608}00608\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00609}00609\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!current\_chunk.empty())\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00610}00610\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00611}00611\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00612}00612\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00613}00613\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00614}00614\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00615}00615\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00616}00616\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00617}\mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk_a0c616279eadb29f875622fcb137c54b8}{00617}}\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk_a0c616279eadb29f875622fcb137c54b8}{shouldSplit}}(\textcolor{keyword}{const}\ std::vector<T>\&\ \mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk_a4f1a6a96f8f140c63a7b32a8e36c0ae3}{chunk}})\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00618}00618\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk_a4f1a6a96f8f140c63a7b32a8e36c0ae3}{chunk}}.size()\ >=\ 4;\ \textcolor{comment}{//\ Default\ implementation}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00619}00619\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00620}00620\ \};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00621}00621\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00622}00622\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00623}00623\ \textcolor{comment}{\ *\ @brief\ Graph-\/based\ chunking\ implementation}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00624}00624\ \textcolor{comment}{\ *\ @tparam\ T\ The\ type\ of\ elements\ to\ be\ chunked}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00625}00625\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00626}00626\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00627}\mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk}{00627}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk}{GraphBasedChunk}}\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00628}00628\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00629}\mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk_a4d1d7bc330686388175affbb5076897c}{00629}}\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk_a4d1d7bc330686388175affbb5076897c}{Graph}}\ =\ boost::adjacency\_list<boost::vecS,\ boost::vecS,\ boost::undirectedS>;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00630}\mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk_a231995aebe0b15907b118e0bb879c33f}{00630}}\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk_a231995aebe0b15907b118e0bb879c33f}{edge\_threshold}};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00631}00631\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00632}00632\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00633}\mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk_a2caea02410d0cb3aae6f0c4c8e373f42}{00633}}\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk_a2caea02410d0cb3aae6f0c4c8e373f42}{GraphBasedChunk}}(\textcolor{keywordtype}{double}\ threshold\ =\ 0.5)\ :\ \mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk_a231995aebe0b15907b118e0bb879c33f}{edge\_threshold}}(threshold)\ \{\}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00634}00634\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00635}\mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk_ac7bd16a1287f40bfed27be74179774b9}{00635}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk_ac7bd16a1287f40bfed27be74179774b9}{chunk}}(\textcolor{keyword}{const}\ std::vector<T>\&\ data)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00636}00636\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00637}00637\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.empty())}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00638}00638\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00639}00639\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00640}00640\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk_a4d1d7bc330686388175affbb5076897c}{Graph}}\ g(data.size());}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00641}00641\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk_abcb6c3c22de994ac8a0f887c4cf6330c}{buildGraph}}(data,\ g);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00642}00642\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00643}00643\ \ \ \ \ \ \ \ \ std::vector<int>\ components(data.size());}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00644}00644\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ num\_components\ =\ boost::connected\_components(g,\ \&components[0]);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00645}00645\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00646}00646\ \ \ \ \ \ \ \ \ result.resize(num\_components);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00647}00647\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ data.size();\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00648}00648\ \ \ \ \ \ \ \ \ \ \ \ \ result[components[i]].push\_back(data[i]);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00649}00649\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00650}00650\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00651}00651\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00652}00652\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00653}00653\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00654}00654\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00655}\mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk_abcb6c3c22de994ac8a0f887c4cf6330c}{00655}}\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk_abcb6c3c22de994ac8a0f887c4cf6330c}{buildGraph}}(\textcolor{keyword}{const}\ std::vector<T>\&\ data,\ \mbox{\hyperlink{classadvanced__structures_1_1GraphBasedChunk_a4d1d7bc330686388175affbb5076897c}{Graph}}\&\ g)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00656}00656\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Default\ implementation:\ connect\ adjacent\ elements}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00657}00657\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 1;\ i\ <\ data.size();\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00658}00658\ \ \ \ \ \ \ \ \ \ \ \ \ boost::add\_edge(i\ -\/\ 1,\ i,\ g);}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00659}00659\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00660}00660\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00661}00661\ \};}
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00662}00662\ }
+\DoxyCodeLine{\Hypertarget{advanced__structures_8hpp_source_l00663}00663\ \}\ \textcolor{comment}{//\ namespace\ advanced\_structures}}
+
+\end{DoxyCode}

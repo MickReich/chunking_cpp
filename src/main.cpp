@@ -41,7 +41,11 @@ using namespace chunk_compression;   // For ChunkCompressor
 using namespace chunk_strategies;    // For QuantileStrategy, VarianceStrategy, etc.
 using namespace chunk_windows;
 
-// Helper function to print chunks
+/**
+ * @brief Helper function to print chunks
+ * @tparam T The type of elements in the chunks
+ * @param chunks The vector of chunks to print
+ */
 template <typename T>
 void print_chunks(const std::vector<std::vector<T>>& chunks) {
     std::cout << "Chunks: [" << std::endl;
@@ -160,10 +164,34 @@ void demonstrate_adaptive_conditional_subchunking() {
  * @brief Main function demonstrating various chunking strategies
  * @return 0 on successful execution
  */
-int main() {
+int main(int argc, char* argv[]) {
     demonstrate_complex_recursive_subchunking();
     demonstrate_multi_strategy_subchunking();
     demonstrate_adaptive_conditional_subchunking();
+
+    std::cout << "\n=== Demonstrating Advanced Chunking Structures ===\n";
+
+    // Example: SemanticChunker usage
+    std::cout << "\n=== SemanticChunker Example ===" << std::endl;
+    SemanticChunker<std::string> text_chunker;
+    std::string text = "This is the first sentence. This is the second one. And here's a third!";
+    auto text_chunks = text_chunker.chunk(text);
+    std::cout << "Text chunks created: " << text_chunks.size() << "\n";
+
+    // Custom NLP model example
+    class CustomNLPModel {
+    public:
+        double calculateSimilarity(const std::string& s1, const std::string& s2) {
+            // Simple example: compare lengths as a similarity metric
+            return std::abs(1.0 - static_cast<double>(std::abs(static_cast<int>(s1.length()) -
+                                                               static_cast<int>(s2.length()))) /
+                                      std::max(s1.length(), s2.length()));
+        }
+    };
+
+    SemanticChunker<std::string, CustomNLPModel> custom_chunker;
+    auto custom_chunks = custom_chunker.chunk(text);
+    std::cout << "Custom model chunks created: " << custom_chunks.size() << "\n\n";
 
     return 0;
 }

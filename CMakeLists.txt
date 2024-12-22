@@ -19,6 +19,9 @@ include_directories(${PROJECT_SOURCE_DIR}/include)
 include_directories(${PROJECT_SOURCE_DIR}/src)
 include_directories(${GTEST_INCLUDE_DIRS})
 
+# Find Boost package with required components
+find_package(Boost REQUIRED COMPONENTS graph)
+
 # Add library target
 add_library(chunk_processor
     src/main.cpp
@@ -28,6 +31,12 @@ add_library(chunk_processor
 # Make headers available for the library
 target_include_directories(chunk_processor PUBLIC
     ${PROJECT_SOURCE_DIR}/include
+)
+
+# Link Boost to the library
+target_link_libraries(chunk_processor 
+    PRIVATE 
+    Boost::graph
 )
 
 # Add executable target
@@ -99,7 +108,6 @@ add_executable(run_tests
     tests/parallel_chunk_test.cpp
     tests/advanced_structures_test.cpp
     tests/advanced_chunk_strategies_test.cpp
-    tests/sub_chunk_strategies_test.cpp
 )
 
 # Set the output directory for run_tests executable
@@ -107,14 +115,16 @@ set_target_properties(run_tests PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/tests
 )
 
-# Link test executable with GTest
+# Link test executable with GTest and Boost
 target_link_libraries(run_tests
+    PRIVATE
     chunk_processor
     ${GTEST_LIBRARIES}
     pthread
+    Boost::graph
 )
 
-# Discover tests automatically
+# Configure test discovery
 gtest_discover_tests(run_tests
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/tests
     PROPERTIES

@@ -1,0 +1,20 @@
+<map id="config.hpp" name="config.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,95,31"/>
+<area shape="rect" id="Node000002" href="$main_8cpp.html" title="Demonstrates various chunking strategies and operations." alt="" coords="43,299,225,368"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="49,44,47,85,47,137,53,194,68,250,82,275,100,297,96,300,78,278,64,252,48,195,41,138,41,85,44,44"/>
+<area shape="rect" id="Node000003" href="$chunk_8hpp.html" title="Template class for chunk&#45;based data processing." alt="" coords="123,79,212,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="82,35,150,76,147,81,79,40"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="123,112,97,129,76,153,69,171,67,190,73,228,89,265,109,297,105,300,85,268,68,230,62,190,64,170,72,151,93,125,120,108"/>
+<area shape="rect" id="Node000004" href="$chunk__strategies_8hpp.html" title="Defines various strategies for chunking data based on different criteria." alt="" coords="87,152,248,177"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="170,118,170,152,165,152,165,118"/>
+<area shape="rect" id="Node000006" href="$chunk__windows_8hpp.html" title=" " alt="" coords="320,225,473,251"/>
+<area shape="poly" id="edge8_Node000003_Node000006" title=" " alt="" coords="199,109,380,223,377,227,196,114"/>
+<area shape="rect" id="Node000007" href="$parallel__chunk_8hpp.html" title=" " alt="" coords="408,152,553,177"/>
+<area shape="poly" id="edge10_Node000003_Node000007" title=" " alt="" coords="226,103,431,149,430,155,225,108"/>
+<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="134,187,112,204,95,226,91,244,93,262,109,297,104,299,88,263,85,244,90,224,108,200,130,182"/>
+<area shape="rect" id="Node000005" href="$sub__chunk__strategies_8hpp.html" title="Advanced sub&#45;chunking strategies for hierarchical data processing." alt="" coords="105,225,296,251"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="181,189,198,224,193,226,176,191"/>
+<area shape="poly" id="edge7_Node000005_Node000002" title=" " alt="" coords="187,263,160,300,156,297,183,260"/>
+<area shape="poly" id="edge9_Node000006_Node000002" title=" " alt="" coords="352,258,227,302,225,297,351,253"/>
+<area shape="poly" id="edge11_Node000007_Node000002" title=" " alt="" coords="493,191,497,222,494,238,487,252,470,267,445,280,379,301,301,316,226,326,225,321,300,311,377,296,443,275,467,263,483,249,489,236,491,222,487,191"/>
+</map>
