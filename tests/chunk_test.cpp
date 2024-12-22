@@ -190,3 +190,19 @@ TEST_F(ChunkTest, InvalidOperations) {
     EXPECT_THROW(basic_chunker.chunk_into_n(0), std::invalid_argument);
     EXPECT_THROW(basic_chunker.sliding_window(0), std::invalid_argument);
 }
+
+TEST_F(ChunkTest, StringChunking) {
+    Chunk<std::string> string_chunker(2);
+    std::vector<std::string> string_data = {"apple", "banana", "cherry"};
+    string_chunker.add(string_data);
+    auto chunks = string_chunker.get_chunks();
+    EXPECT_EQ(chunks.size(), 2); // ["apple", "banana"], ["cherry"]
+}
+
+TEST_F(ChunkTest, CharChunking) {
+    Chunk<char> char_chunker(3);
+    std::string char_data = "abcdef";
+    char_chunker.add(std::vector<char>(char_data.begin(), char_data.end()));
+    auto chunks = char_chunker.get_chunks();
+    EXPECT_EQ(chunks.size(), 2); // ['a', 'b', 'c'], ['d', 'e', 'f']
+}

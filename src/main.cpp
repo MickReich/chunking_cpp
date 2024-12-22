@@ -477,5 +477,19 @@ int main() {
     auto conditional_result = conditional_strategy.apply(hierarchical_data);
     print_sub_chunks(conditional_result, "Conditional Sub-chunking");
 
+    // Example: String chunking
+    std::cout << "\n=== String Chunking Example ===" << std::endl;
+    Chunk<std::string> string_chunker(3); // Chunks of size 3
+    std::vector<std::string> string_data = {"apple", "banana", "cherry", "date", "elderberry"};
+    string_chunker.add(string_data);
+    print_chunks(string_chunker.get_chunks());
+
+    // Example: Character chunking
+    std::cout << "\n=== Character Chunking Example ===" << std::endl;
+    Chunk<char> char_chunker(4); // Chunks of size 4
+    std::string char_data = "abcdefghij";
+    char_chunker.add(std::vector<char>(char_data.begin(), char_data.end()));
+    print_chunks(char_chunker.get_chunks());
+
     return 0;
 }
