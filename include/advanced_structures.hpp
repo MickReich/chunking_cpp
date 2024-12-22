@@ -124,13 +124,13 @@ public:
             while (end < content.length() && std::isspace(content[end])) {
                 end++;
             }
-            
+
             // Extract the sentence
             std::string sentence = content.substr(start, end - start);
             if (!sentence.empty()) {
                 chunks.push_back(sentence);
             }
-            
+
             start = end;
         }
 
