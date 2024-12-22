@@ -47,27 +47,34 @@ public:
     }
 
     std::vector<std::vector<T>> apply(const std::vector<T>& data) const override {
-        if (data.empty()) return {};
-        
+        if (data.empty())
+            return {};
+
+        // Calculate threshold value at the given quantile
         std::vector<T> sorted_data = data;
         std::sort(sorted_data.begin(), sorted_data.end());
         T threshold = sorted_data[static_cast<size_t>(quantile_ * (data.size() - 1))];
-        
-        std::vector<std::vector<T>> chunks;
-        std::vector<T> current_chunk;
-        
+
+        // Split into exactly two chunks: values <= threshold and values > threshold
+        std::vector<T> lower_chunk;
+        std::vector<T> upper_chunk;
+
         for (const T& value : data) {
-            if (!current_chunk.empty() && value > threshold) {
-                chunks.push_back(current_chunk);
-                current_chunk.clear();
+            if (value <= threshold) {
+                lower_chunk.push_back(value);
+            } else {
+                upper_chunk.push_back(value);
             }
-            current_chunk.push_back(value);
         }
-        
-        if (!current_chunk.empty()) {
-            chunks.push_back(current_chunk);
+
+        std::vector<std::vector<T>> chunks;
+        if (!lower_chunk.empty()) {
+            chunks.push_back(lower_chunk);
         }
-        
+        if (!upper_chunk.empty()) {
+            chunks.push_back(upper_chunk);
+        }
+
         return chunks;
     }
 };
@@ -283,7 +290,8 @@ class EntropyStrategy<std::string> : public ChunkStrategy<std::string> {
 public:
     explicit EntropyStrategy(double threshold) : threshold_(threshold) {}
 
-    std::vector<std::vector<std::string>> apply(const std::vector<std::string>& data) const override {
+    std::vector<std::vector<std::string>>
+    apply(const std::vector<std::string>& data) const override {
         std::vector<std::vector<std::string>> chunks;
         std::vector<std::string> current_chunk;
 

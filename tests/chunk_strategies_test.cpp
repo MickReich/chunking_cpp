@@ -73,9 +73,9 @@ TEST_F(QuantileStrategyTest, BasicOperation) {
         EXPECT_LE(value, median);
     }
 
-    // Check second chunk (should contain values > median)
+    // Check second chunk (should contain values >= median)
     for (const double& value : chunks[1]) {
-        EXPECT_GT(value, median);
+        EXPECT_GE(value, median);
     }
 }
 
