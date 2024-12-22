@@ -33,10 +33,10 @@ with this program; if not, see <https://www.gnu.org/licenses/>.
 #include <iostream>
 #include <vector>
 
-    using namespace advanced_structures; // For ChunkSkipList and ChunkBPlusTree
-using namespace parallel_chunk;          // For ParallelChunkProcessor
-using namespace chunk_compression;       // For ChunkCompressor
-using namespace chunk_strategies;        // For QuantileStrategy, VarianceStrategy, etc.
+using namespace advanced_structures; // For ChunkSkipList and ChunkBPlusTree
+using namespace parallel_chunk;      // For ParallelChunkProcessor
+using namespace chunk_compression;   // For ChunkCompressor
+using namespace chunk_strategies;    // For QuantileStrategy, VarianceStrategy, etc.
 using namespace chunk_windows;
 
 // Helper function to print chunks

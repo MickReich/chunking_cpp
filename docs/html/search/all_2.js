@@ -38,13 +38,14 @@ var searchData=
   ['chunkstrategy_35',['ChunkStrategy',['../classchunk__strategies_1_1ChunkStrategy.html',1,'chunk_strategies']]],
   ['chunkstrategy_3c_20std_3a_3astring_20_3e_36',['ChunkStrategy&lt; std::string &gt;',['../classchunk__strategies_1_1ChunkStrategy.html',1,'chunk_strategies']]],
   ['circularbuffer_37',['circularbuffer',['../classCircularBuffer.html#af34ba5fadb7bea7372c892acde3baf7a',1,'CircularBuffer::CircularBuffer()'],['../classCircularBuffer.html',1,'CircularBuffer&lt; T &gt;']]],
-  ['citation_38',['Citation',['../index.html#autotoc_md16',1,'']]],
+  ['citation_38',['Citation',['../index.html#autotoc_md18',1,'']]],
   ['clear_39',['clear',['../classChunkList.html#a81d821906a5ec8c79f1a9ed27cf1480a',1,'ChunkList']]],
   ['comp_5f_40',['comp_',['../classPriorityQueue.html#a4fa43ad50be95b27d62d62d73a83f19c',1,'PriorityQueue']]],
   ['condition_5f_41',['condition_',['../classchunk__strategies_1_1ConditionalSubChunkStrategy.html#abaf81b9f4fc1a975e24775f5e83b4872',1,'chunk_strategies::ConditionalSubChunkStrategy']]],
   ['conditionalsubchunkstrategy_42',['conditionalsubchunkstrategy',['../classchunk__strategies_1_1ConditionalSubChunkStrategy.html#af71c64ffe37dea9bc55cb3633228a4f4',1,'chunk_strategies::ConditionalSubChunkStrategy::ConditionalSubChunkStrategy()'],['../classchunk__strategies_1_1ConditionalSubChunkStrategy.html',1,'chunk_strategies::ConditionalSubChunkStrategy&lt; T &gt;']]],
   ['config_2ehpp_43',['config.hpp',['../config_8hpp.html',1,'']]],
-  ['contributing_44',['Contributing',['../index.html#autotoc_md14',1,'']]],
-  ['core_20functionality_45',['Core Functionality',['../index.html#autotoc_md3',1,'']]],
-  ['current_5flevel_46',['current_level',['../classadvanced__structures_1_1ChunkSkipList.html#a642cbae0a13509a0616bcdb6112610f9',1,'advanced_structures::ChunkSkipList']]]
+  ['considerations_44',['Performance Considerations',['../index.html#autotoc_md14',1,'']]],
+  ['contributing_45',['Contributing',['../index.html#autotoc_md16',1,'']]],
+  ['core_20functionality_46',['Core Functionality',['../index.html#autotoc_md3',1,'']]],
+  ['current_5flevel_47',['current_level',['../classadvanced__structures_1_1ChunkSkipList.html#a642cbae0a13509a0616bcdb6112610f9',1,'advanced_structures::ChunkSkipList']]]
 ];

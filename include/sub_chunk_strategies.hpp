@@ -9,13 +9,13 @@
  */
 #pragma once
 
-#include <cstddef>     // for size_t and ptrdiff_t
-#include <memory>      // for shared_ptr
-#include <vector>
-#include <functional>
-#include <algorithm>
-#include <initializer_list>
 #include "chunk_strategies.hpp"
+#include <algorithm>
+#include <cstddef> // for size_t and ptrdiff_t
+#include <functional>
+#include <initializer_list>
+#include <memory> // for shared_ptr
+#include <vector>
 
 namespace chunk_strategies {
 

@@ -121,31 +121,40 @@ make docs-serve
 
 ```markdown
 .
-├── include/          # Header files
-│   ├── chunk.hpp
-│   ├── config.hpp
-│   ├── advanced_structures.hpp
-│   ├── chunk_compression.hpp
-│   ├── chunk_strategies.hpp
-│   ├── sub_chunk_strategies.hpp
-│   ├── parallel_chunk.hpp
-│   └── utils.hpp
-├── src/             # Source files
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+│       └── docs.yml
+├── docs/
+│   └── html/
+├── include/
+   ├── chunk.hpp
+   ├── config.hpp
+   ├── chunk_strategies.hpp
+   ├── chunk_compression.hpp
+   ├── sub_chunk_strategies.hpp
+   ├── parallel_chunk.hpp
+   ├── advanced_structures.hpp
+   ├── data_structures.hpp
+   └── utils.hpp
+├── src/
 │   └── main.cpp
-├── tests/           # Test files
-│   ├── test_main.cpp
-│   ├── chunk_test.cpp
-│   ├── chunk_strategies_test.cpp
-│   ├── chunk_compression_test.cpp
-│   ├── parallel_chunk_test.cpp
+├── tests/
+│   ├── advanced_chunk_strategies_test.cpp
 │   ├── advanced_structures_test.cpp
-│   ├── sub_chunk_strategies_test.cpp
-│   └── utils_test.cpp
-├── build/           # Build artifacts
-├── docs/           # Generated documentation
+│   ├── chunk_compression_test.cpp
+│   ├── chunk_strategies_test.cpp
+│   ├── data_structures_test.cpp
+│   ├── parallel_chunk_test.cpp
+|   ├── sub_chunk_strategies_test.cpp
+|   ├── test_main.cpp
+|   └── utils_test.cpp
 ├── Makefile
+├── CMakeLists.txt
+├── Doxyfile
 ├── README.md
-└── BUILDING.md
+├── BUILDING.md
+└── LICENSE
 ```
 
 ## Make Targets

@@ -16,7 +16,7 @@ var searchData=
   ['strategies_13',['strategies',['../index.html#autotoc_md4',1,'Advanced Chunking Strategies'],['../index.html#autotoc_md5',1,'Sub-Chunking Strategies']]],
   ['strategies_5f_14',['strategies_',['../classchunk__strategies_1_1HierarchicalSubChunkStrategy.html#a94dacae450867c20647e761f32d30e3d',1,'chunk_strategies::HierarchicalSubChunkStrategy']]],
   ['strategy_5f_15',['strategy_',['../classchunk__strategies_1_1RecursiveSubChunkStrategy.html#a608fcf4eac9162e880d8a8ce75e6a7c0',1,'chunk_strategies::RecursiveSubChunkStrategy::strategy_'],['../classchunk__strategies_1_1ConditionalSubChunkStrategy.html#a370ac58350a750b40dfb5f05a952c653',1,'chunk_strategies::ConditionalSubChunkStrategy::strategy_']]],
-  ['structure_16',['Project Structure',['../index.html#autotoc_md17',1,'']]],
+  ['structure_16',['Project Structure',['../index.html#autotoc_md19',1,'']]],
   ['structures_17',['Data Structures',['../index.html#autotoc_md6',1,'']]],
   ['sub_20chunking_20strategies_18',['Sub-Chunking Strategies',['../index.html#autotoc_md5',1,'']]],
   ['sub_5fchunk_5fstrategies_2ehpp_19',['sub_chunk_strategies.hpp',['../sub__chunk__strategies_8hpp.html',1,'']]],

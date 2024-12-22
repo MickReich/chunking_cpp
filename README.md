@@ -42,6 +42,8 @@ This library offers a comprehensive suite of tools for handling data in chunks, 
 - Sliding window
 - Priority queue
 - Chunk list
+- Skip list
+- B+ tree
 
 ### Analysis & Utilities
 
@@ -101,7 +103,32 @@ auto chunks = chunker.get_chunks(); // Returns: {{1,2}, {3,4}, {5}}
 
 ### Advanced Features
 
+- **Recursive Sub-chunking**: Apply a strategy recursively to create hierarchical chunks
+- **Hierarchical Sub-chunking**: Apply different strategies at each level
+- **Conditional Sub-chunking**: Apply sub-chunking based on chunk properties
+- **Parallel Processing**: Process chunks in parallel using multiple threads
+- **Chunk Compression**: Compress chunks using various algorithms
+- **Chunk Manipulation**: Add, remove, and modify chunks
+- **Chunk Analysis**: Perform statistical analysis on chunks
+- **Chunk Randomization**: Randomize chunks
+- **Overlapping Chunks**: Create chunks that overlap
+- **Predictive Chunking**: Create chunks based on a predictive model
+- **Sum-based Chunking**: Create chunks based on the sum of the elements
+- **Equal Division Chunking**: Create chunks based on the equal division of the elements
+- **Sliding Window Chunking**: Create chunks based on a sliding window
+- **Statistical Threshold-based Chunking**: Create chunks based on a statistical threshold
+- **Similarity-based Chunking**: Create chunks based on similarity
+- **Monotonicity-based Chunking**: Create chunks based on monotonicity
+- **Padded Fixed-size Chunking**: Create chunks based on a padded fixed-size
+
 ```cpp
+#include "chunk.hpp"
+#include "chunk_strategies.hpp"
+#include "sub_chunk_strategies.hpp"
+#include <iostream>
+#include <vector>
+
+using namespace chunk_strategies;
 // Sub-chunking example
 auto variance_strategy = std::make_shared<VarianceStrategy<double>>(5.0);
 RecursiveSubChunkStrategy<double> recursive_strategy(variance_strategy, 2, 2);
@@ -116,6 +143,34 @@ auto similar_chunks = chunker.chunk_by_similarity(3);
 // Parallel processing
 ParallelChunkProcessor<int> parallel_chunker(4); // 4 threads
 parallel_chunker.process_chunks(chunks, [](int x) { return x * 2; });
+
+// Recursive sub-chunking
+auto variance_strategy = std::make_shared<VarianceStrategy<double>>(3.0);
+RecursiveSubChunkStrategy<double> recursive_strategy(variance_strategy, 2, 2);
+auto recursive_result = recursive_strategy.apply(data);
+
+// Hierarchical sub-chunking
+std::vector<std::shared_ptr<ChunkStrategy<double>>> strategies = {
+    std::make_shared<VarianceStrategy<double>>(5.0),
+    std::make_shared<EntropyStrategy<double>>(1.0)
+};
+HierarchicalSubChunkStrategy<double> hierarchical_strategy(strategies, 2);
+auto hierarchical_result = hierarchical_strategy.apply(data);
+
+// Conditional sub-chunking
+auto condition = [](const std::vector<double>& chunk) {
+    double mean = std::accumulate(chunk.begin(), chunk.end(), 0.0) / chunk.size();
+    double variance = 0.0;
+    for (const auto& val : chunk) {
+        variance += (val - mean) * (val - mean);
+    }
+    variance /= chunk.size();
+    return variance > 50.0;
+  };
+
+ConditionalSubChunkStrategy<double> conditional_strategy(variance_strategy, condition, 2);
+auto conditional_result = conditional_strategy.apply(data);
+
 ```
 
 See `src/main.cpp` for more comprehensive examples.
@@ -131,6 +186,21 @@ The library is extensively documented using Doxygen. You can:
 make docs
 make docs-serve
 ```
+
+### Performance Considerations
+
+- **Chunk Size**: Choose an appropriate chunk size based on your data and processing requirements. Larger chunks may reduce overhead but increase memory usage.
+- **Parallel Processing**: Utilize the `ParallelChunkProcessor` for operations that can be parallelized to improve performance on multi-core systems.
+- **Memory Management**: Be mindful of memory usage, especially when dealing with large datasets. Use efficient data structures like `CircularBuffer` to manage memory effectively.
+- **Algorithm Complexity**: Consider the complexity of the chunking strategies and operations you use. Some strategies may have higher computational costs.
+
+### Best Practices
+
+- **Use Smart Pointers**: Use `std::shared_ptr` and `std::unique_ptr` to manage dynamic memory and avoid memory leaks.
+- **Leverage STL Algorithms**: Utilize standard library algorithms for common operations like sorting and accumulating to improve code readability and performance.
+- **Modular Design**: Keep your code modular by separating chunking logic from data processing logic. This makes it easier to test and maintain.
+- **Testing**: Write comprehensive tests for your chunking strategies and operations to ensure correctness and reliability.
+- **Documentation**: Document your code and strategies using Doxygen-style comments to make it easier for others to understand and use your library.
 
 ## Contributing
 
@@ -163,37 +233,34 @@ If you use this library in your research, please cite:
 
 ```markdown
 .
-├── include/
-│   ├── core/
-│   │   ├── chunk.hpp
-│   │   └── config.hpp
-│   ├── strategies/
-│   │   ├── chunk_strategies.hpp
-│   │   ├── chunk_compression.hpp
-│   │   └── sub_chunk_strategies.hpp
-│   ├── parallel/
-│   │   └── parallel_chunk.hpp
-│   ├── structures/
-│   │   ├── advanced_structures.hpp
-│   │   └── data_structures.hpp
-│   └── utils/
-│       └── utils.hpp
-├── src/
-│   └── main.cpp
-├── tests/
-│   ├── test_main.cpp
-│   ├── chunk_test.cpp
-│   ├── chunk_strategies_test.cpp
-│   ├── chunk_compression_test.cpp
-│   ├── parallel_chunk_test.cpp
-│   ├── advanced_structures_test.cpp
-│   ├── data_structures_test.cpp
-│   └── utils_test.cpp
-├── scripts/
-│   └── run_tests.sh
 ├── .github/
 │   └── workflows/
 │       └── ci.yml
+│       └── docs.yml
+├── docs/
+│   └── html/
+├── include/
+   ├── chunk.hpp
+   ├── config.hpp
+   ├── chunk_strategies.hpp
+   ├── chunk_compression.hpp
+   ├── sub_chunk_strategies.hpp
+   ├── parallel_chunk.hpp
+   ├── advanced_structures.hpp
+   ├── data_structures.hpp
+   └── utils.hpp
+├── src/
+│   └── main.cpp
+├── tests/
+│   ├── advanced_chunk_strategies_test.cpp
+│   ├── advanced_structures_test.cpp
+│   ├── chunk_compression_test.cpp
+│   ├── chunk_strategies_test.cpp
+│   ├── data_structures_test.cpp
+│   ├── parallel_chunk_test.cpp
+|   ├── sub_chunk_strategies_test.cpp
+|   ├── test_main.cpp
+|   └── utils_test.cpp
 ├── Makefile
 ├── CMakeLists.txt
 ├── Doxyfile
