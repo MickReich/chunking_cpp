@@ -3,6 +3,7 @@
 #include <vector>
 #include <stdexcept>
 
+// Test fixture for neural chunking tests
 class NeuralChunkingTest : public ::testing::Test {
 protected:
     neural_chunking::NeuralChunking<int> chunker;
@@ -13,6 +14,10 @@ protected:
         for (int i = 0; i < 20; ++i) {
             sample_data.push_back(i % 5);
         }
+    }
+
+    void TearDown() override {
+        // Cleanup code
     }
 };
 
@@ -99,7 +104,7 @@ TEST_F(NeuralChunkingTest, DifferentDataTypes) {
     EXPECT_FALSE(chunks.empty());
 }
 
-int main(int argc, char **argv) {
-    testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
-} 
+TEST_F(NeuralChunkingTest, InitializationTest) {
+    neural_chunking::NeuralChunking<double> chunker(8, 0.5);
+    EXPECT_EQ(chunker.get_window_size(), 8);
+}

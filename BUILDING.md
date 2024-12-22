@@ -52,6 +52,28 @@ brew install doxygen graphviz boost
 vcpkg install gtest:x64-windows
 ```
 
+## Python Bindings
+
+To build the Python bindings, you need to have Python and pybind11 installed.
+
+```bash
+pip install pybind11
+```
+
+## Optional Dependencies
+
+- PostgreSQL
+- MongoDB
+- Kafka
+- RabbitMQ
+- JSON
+
+These can be installed on ubuntu/debian with:
+
+```bash
+sudo apt-get install libpq-dev libmongoc-dev libkafka-dev librabbitmq-dev libjsoncpp-dev
+```
+
 ## Building the Project
 
 1.Clone the repository:
