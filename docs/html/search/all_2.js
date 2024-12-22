@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['calculate_5fentropy_0',['calculate_entropy',['../classchunk__strategies_1_1EntropyStrategy.html#a317d481326287f6833aa9f21f6a0d596',1,'chunk_strategies::EntropyStrategy']]],
+  ['calculate_5fentropy_0',['calculate_entropy',['../classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4.html#ada974294bf7efb37be6a8a6b61298562',1,'chunk_strategies::EntropyStrategy&lt; std::string &gt;::calculate_entropy()'],['../classchunk__strategies_1_1EntropyStrategy.html#a317d481326287f6833aa9f21f6a0d596',1,'chunk_strategies::EntropyStrategy::calculate_entropy()']]],
   ['calculate_5fvariance_1',['calculate_variance',['../classchunk__strategies_1_1VarianceStrategy.html#a105f2d476af517d0f1e2d9cf58fb08c0',1,'chunk_strategies::VarianceStrategy']]],
   ['capacity_2',['capacity',['../classCircularBuffer.html#ae1addc6782f9a3e4d66461223f496619',1,'CircularBuffer']]],
   ['capacity_5f_3',['capacity_',['../classCircularBuffer.html#ad7ae2a7aded5a1a1524e050abc88a438',1,'CircularBuffer']]],
@@ -36,14 +36,15 @@ var searchData=
   ['chunksettings_33',['ChunkSettings',['../structchunk__config_1_1ChunkSettings.html',1,'chunk_config']]],
   ['chunkskiplist_34',['chunkskiplist',['../classadvanced__structures_1_1ChunkSkipList.html',1,'advanced_structures::ChunkSkipList&lt; T &gt;'],['../classadvanced__structures_1_1ChunkSkipList.html#a358f6d1eb351d99cf1fd6b74b48d3181',1,'advanced_structures::ChunkSkipList::ChunkSkipList()']]],
   ['chunkstrategy_35',['ChunkStrategy',['../classchunk__strategies_1_1ChunkStrategy.html',1,'chunk_strategies']]],
-  ['circularbuffer_36',['circularbuffer',['../classCircularBuffer.html#af34ba5fadb7bea7372c892acde3baf7a',1,'CircularBuffer::CircularBuffer()'],['../classCircularBuffer.html',1,'CircularBuffer&lt; T &gt;']]],
-  ['citation_37',['Citation',['../index.html#autotoc_md16',1,'']]],
-  ['clear_38',['clear',['../classChunkList.html#a81d821906a5ec8c79f1a9ed27cf1480a',1,'ChunkList']]],
-  ['comp_5f_39',['comp_',['../classPriorityQueue.html#a4fa43ad50be95b27d62d62d73a83f19c',1,'PriorityQueue']]],
-  ['condition_5f_40',['condition_',['../classchunk__strategies_1_1ConditionalSubChunkStrategy.html#abaf81b9f4fc1a975e24775f5e83b4872',1,'chunk_strategies::ConditionalSubChunkStrategy']]],
-  ['conditionalsubchunkstrategy_41',['conditionalsubchunkstrategy',['../classchunk__strategies_1_1ConditionalSubChunkStrategy.html#af71c64ffe37dea9bc55cb3633228a4f4',1,'chunk_strategies::ConditionalSubChunkStrategy::ConditionalSubChunkStrategy()'],['../classchunk__strategies_1_1ConditionalSubChunkStrategy.html',1,'chunk_strategies::ConditionalSubChunkStrategy&lt; T &gt;']]],
-  ['config_2ehpp_42',['config.hpp',['../config_8hpp.html',1,'']]],
-  ['contributing_43',['Contributing',['../index.html#autotoc_md14',1,'']]],
-  ['core_20functionality_44',['Core Functionality',['../index.html#autotoc_md3',1,'']]],
-  ['current_5flevel_45',['current_level',['../classadvanced__structures_1_1ChunkSkipList.html#a642cbae0a13509a0616bcdb6112610f9',1,'advanced_structures::ChunkSkipList']]]
+  ['chunkstrategy_3c_20std_3a_3astring_20_3e_36',['ChunkStrategy&lt; std::string &gt;',['../classchunk__strategies_1_1ChunkStrategy.html',1,'chunk_strategies']]],
+  ['circularbuffer_37',['circularbuffer',['../classCircularBuffer.html#af34ba5fadb7bea7372c892acde3baf7a',1,'CircularBuffer::CircularBuffer()'],['../classCircularBuffer.html',1,'CircularBuffer&lt; T &gt;']]],
+  ['citation_38',['Citation',['../index.html#autotoc_md16',1,'']]],
+  ['clear_39',['clear',['../classChunkList.html#a81d821906a5ec8c79f1a9ed27cf1480a',1,'ChunkList']]],
+  ['comp_5f_40',['comp_',['../classPriorityQueue.html#a4fa43ad50be95b27d62d62d73a83f19c',1,'PriorityQueue']]],
+  ['condition_5f_41',['condition_',['../classchunk__strategies_1_1ConditionalSubChunkStrategy.html#abaf81b9f4fc1a975e24775f5e83b4872',1,'chunk_strategies::ConditionalSubChunkStrategy']]],
+  ['conditionalsubchunkstrategy_42',['conditionalsubchunkstrategy',['../classchunk__strategies_1_1ConditionalSubChunkStrategy.html#af71c64ffe37dea9bc55cb3633228a4f4',1,'chunk_strategies::ConditionalSubChunkStrategy::ConditionalSubChunkStrategy()'],['../classchunk__strategies_1_1ConditionalSubChunkStrategy.html',1,'chunk_strategies::ConditionalSubChunkStrategy&lt; T &gt;']]],
+  ['config_2ehpp_43',['config.hpp',['../config_8hpp.html',1,'']]],
+  ['contributing_44',['Contributing',['../index.html#autotoc_md14',1,'']]],
+  ['core_20functionality_45',['Core Functionality',['../index.html#autotoc_md3',1,'']]],
+  ['current_5flevel_46',['current_level',['../classadvanced__structures_1_1ChunkSkipList.html#a642cbae0a13509a0616bcdb6112610f9',1,'advanced_structures::ChunkSkipList']]]
 ];

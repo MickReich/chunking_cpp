@@ -10,6 +10,7 @@ var searchData=
   ['chunksettings_7',['ChunkSettings',['../structchunk__config_1_1ChunkSettings.html',1,'chunk_config']]],
   ['chunkskiplist_8',['ChunkSkipList',['../classadvanced__structures_1_1ChunkSkipList.html',1,'advanced_structures']]],
   ['chunkstrategy_9',['ChunkStrategy',['../classchunk__strategies_1_1ChunkStrategy.html',1,'chunk_strategies']]],
-  ['circularbuffer_10',['CircularBuffer',['../classCircularBuffer.html',1,'']]],
-  ['conditionalsubchunkstrategy_11',['ConditionalSubChunkStrategy',['../classchunk__strategies_1_1ConditionalSubChunkStrategy.html',1,'chunk_strategies']]]
+  ['chunkstrategy_3c_20std_3a_3astring_20_3e_10',['ChunkStrategy&lt; std::string &gt;',['../classchunk__strategies_1_1ChunkStrategy.html',1,'chunk_strategies']]],
+  ['circularbuffer_11',['CircularBuffer',['../classCircularBuffer.html',1,'']]],
+  ['conditionalsubchunkstrategy_12',['ConditionalSubChunkStrategy',['../classchunk__strategies_1_1ConditionalSubChunkStrategy.html',1,'chunk_strategies']]]
 ];
