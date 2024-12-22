@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <deque>
 #include <memory>
+#include <random>
 #include <stack>
 #include <stdexcept>
 #include <vector>
@@ -252,6 +253,85 @@ public:
 
     bool empty() const {
         return data_.empty();
+    }
+};
+
+/**
+ * @brief A treap implementation for efficient chunk searching and manipulation
+ * @tparam T The type of elements stored in the treap
+ */
+template <typename T>
+class ChunkTreap {
+private:
+    struct Node {
+        T value;
+        int priority;
+        std::shared_ptr<Node> left;
+        std::shared_ptr<Node> right;
+
+        Node(T val, int prio) : value(val), priority(prio), left(nullptr), right(nullptr) {}
+    };
+
+    std::shared_ptr<Node> root;
+    std::mt19937 gen;
+
+    std::shared_ptr<Node> rotate_right(std::shared_ptr<Node> node) {
+        auto new_root = node->left;
+        node->left = new_root->right;
+        new_root->right = node;
+        return new_root;
+    }
+
+    std::shared_ptr<Node> rotate_left(std::shared_ptr<Node> node) {
+        auto new_root = node->right;
+        node->right = new_root->left;
+        new_root->left = node;
+        return new_root;
+    }
+
+    std::shared_ptr<Node> insert(std::shared_ptr<Node> node, T value, int priority) {
+        if (!node) {
+            return std::make_shared<Node>(value, priority);
+        }
+
+        if (value < node->value) {
+            node->left = insert(node->left, value, priority);
+            if (node->left->priority > node->priority) {
+                node = rotate_right(node);
+            }
+        } else {
+            node->right = insert(node->right, value, priority);
+            if (node->right->priority > node->priority) {
+                node = rotate_left(node);
+            }
+        }
+        return node;
+    }
+
+    bool search(const std::shared_ptr<Node>& node, T value) const {
+        if (!node) {
+            return false;
+        }
+        if (node->value == value) {
+            return true;
+        }
+        if (value < node->value) {
+            return search(node->left, value);
+        } else {
+            return search(node->right, value);
+        }
+    }
+
+public:
+    ChunkTreap() : root(nullptr), gen(std::random_device{}()) {}
+
+    void insert(T value) {
+        int priority = std::uniform_int_distribution<>(1, 100)(gen);
+        root = insert(root, value, priority);
+    }
+
+    bool search(T value) const {
+        return search(root, value);
     }
 };
 

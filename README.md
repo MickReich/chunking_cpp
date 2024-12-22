@@ -46,6 +46,7 @@ This library offers a comprehensive suite of tools for handling data in chunks, 
 - B+ tree
 - ChunkDeque
 - ChunkStack
+- ChunkTreap
 
 ### Analysis & Utilities
 
@@ -124,6 +125,9 @@ auto chunks = chunker.get_chunks(); // Returns: {{1,2}, {3,4}, {5}}
 - **Padded Fixed-size Chunking**: Create chunks based on a padded fixed-size
 - **ChunkDeque**: A deque-based chunk structure for double-ended operations
 - **ChunkStack**: A stack-based chunk structure for LIFO operations
+- **ChunkTreap**: A treap-based chunk structure for efficient searching and manipulation
+
+#### Example Usage
 
 ```cpp
 #include "chunk.hpp"
@@ -131,6 +135,7 @@ auto chunks = chunker.get_chunks(); // Returns: {{1,2}, {3,4}, {5}}
 #include "sub_chunk_strategies.hpp"
 #include <iostream>
 #include <vector>
+#include "advanced_structures.hpp"
 
 using namespace chunk_strategies;
 // Sub-chunking example
@@ -174,6 +179,12 @@ auto condition = [](const std::vector<double>& chunk) {
 
 ConditionalSubChunkStrategy<double> conditional_strategy(variance_strategy, condition, 2);
 auto conditional_result = conditional_strategy.apply(data);
+// ChunkTreap example
+ChunkTreap<int> chunk_treap;
+chunk_treap.insert(5);
+chunk_treap.insert(3);
+chunk_treap.insert(8);
+chunk_treap.search(5);
 
 ```
 

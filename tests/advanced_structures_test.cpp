@@ -134,3 +134,17 @@ TEST(ChunkStackTest, BasicOperations) {
     EXPECT_EQ(stack.pop(), 1);
     EXPECT_TRUE(stack.empty());
 }
+
+TEST(ChunkTreapTest, BasicOperations) {
+    ChunkTreap<int> treap;
+    EXPECT_FALSE(treap.search(5));
+
+    treap.insert(5);
+    treap.insert(3);
+    treap.insert(8);
+
+    EXPECT_TRUE(treap.search(5));
+    EXPECT_TRUE(treap.search(3));
+    EXPECT_TRUE(treap.search(8));
+    EXPECT_FALSE(treap.search(10));
+}

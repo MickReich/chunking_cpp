@@ -12,6 +12,6 @@ var searchData=
   ['demonstrate_5fadaptive_5fconditional_5fsubchunking_9',['demonstrate_adaptive_conditional_subchunking',['../main_8cpp.html#a8836fbb61c7f60a2aa5ea974eaab9fca',1,'main.cpp']]],
   ['demonstrate_5fcomplex_5frecursive_5fsubchunking_10',['demonstrate_complex_recursive_subchunking',['../main_8cpp.html#a8e0e686ad74549b9321d9933a712aa74',1,'main.cpp']]],
   ['demonstrate_5fmulti_5fstrategy_5fsubchunking_11',['demonstrate_multi_strategy_subchunking',['../main_8cpp.html#a81068034d44b99c1f2dfcac57ddcddf3',1,'main.cpp']]],
-  ['documentation_12',['Documentation',['../index.html#autotoc_md13',1,'']]],
+  ['documentation_12',['Documentation',['../index.html#autotoc_md14',1,'']]],
   ['dynamicthresholdstrategy_13',['dynamicthresholdstrategy',['../classchunk__strategies_1_1DynamicThresholdStrategy.html#a85fd9149cd16f1704b17455d1b8b185e',1,'chunk_strategies::DynamicThresholdStrategy::DynamicThresholdStrategy()'],['../classchunk__strategies_1_1DynamicThresholdStrategy.html',1,'chunk_strategies::DynamicThresholdStrategy&lt; T &gt;']]]
 ];

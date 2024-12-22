@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['search_0',['search',['../classadvanced__structures_1_1ChunkSkipList.html#ad0f1935e9193d98c9fa6213b1e5d9968',1,'advanced_structures::ChunkSkipList::search()'],['../classadvanced__structures_1_1ChunkBPlusTree.html#ae636111c0ed86e6c0150fbd9dfd12dc1',1,'advanced_structures::ChunkBPlusTree::search(const T &amp;key) const']]],
+  ['search_0',['search',['../classadvanced__structures_1_1ChunkSkipList.html#ad0f1935e9193d98c9fa6213b1e5d9968',1,'advanced_structures::ChunkSkipList::search()'],['../classadvanced__structures_1_1ChunkBPlusTree.html#ae636111c0ed86e6c0150fbd9dfd12dc1',1,'advanced_structures::ChunkBPlusTree::search()'],['../classadvanced__structures_1_1ChunkTreap.html#af8bbc71c112667019e3404e58cd47ace',1,'advanced_structures::ChunkTreap::search(const std::shared_ptr&lt; Node &gt; &amp;node, T value) const'],['../classadvanced__structures_1_1ChunkTreap.html#a4ceb6067495a440e324808bfceff7102',1,'advanced_structures::ChunkTreap::search(T value) const']]],
   ['search_5fnode_1',['search_node',['../classadvanced__structures_1_1ChunkBPlusTree.html#af75b371357e7a43564c1a9c9d68e163a',1,'advanced_structures::ChunkBPlusTree']]],
   ['similarity_5fthreshold_5f_2',['similarity_threshold_',['../classchunk__strategies_1_1MultiCriteriaStrategy.html#a73310ee374122d57e5dfcdeaee0d05f8',1,'chunk_strategies::MultiCriteriaStrategy']]],
   ['size_3',['size',['../classChunkList.html#a5e024a47318415463cc12ac53366413e',1,'ChunkList::size()'],['../classSlidingWindow.html#a42887fa629607e1a838f8f859054692f',1,'SlidingWindow::size()'],['../classadvanced__structures_1_1ChunkDeque.html#a1136f4736ebdaa2bd76803e6b0c2ce52',1,'advanced_structures::ChunkDeque::size()'],['../classadvanced__structures_1_1ChunkStack.html#a35d2a137137737e4fc2562d527cad2b5',1,'advanced_structures::ChunkStack::size()'],['../classChunk.html#a160459077243c9e5ff642f478277e161',1,'Chunk::size()'],['../classCircularBuffer.html#a73d5df7a33d545554fffeaaf843f36d9',1,'CircularBuffer::size()'],['../classPriorityQueue.html#ad2f921bbd345c3b6b7f038ab37bf33f1',1,'PriorityQueue::size()']]],
@@ -16,7 +16,7 @@ var searchData=
   ['strategies_13',['strategies',['../index.html#autotoc_md4',1,'Advanced Chunking Strategies'],['../index.html#autotoc_md5',1,'Sub-Chunking Strategies']]],
   ['strategies_5f_14',['strategies_',['../classchunk__strategies_1_1HierarchicalSubChunkStrategy.html#a94dacae450867c20647e761f32d30e3d',1,'chunk_strategies::HierarchicalSubChunkStrategy']]],
   ['strategy_5f_15',['strategy_',['../classchunk__strategies_1_1RecursiveSubChunkStrategy.html#a608fcf4eac9162e880d8a8ce75e6a7c0',1,'chunk_strategies::RecursiveSubChunkStrategy::strategy_'],['../classchunk__strategies_1_1ConditionalSubChunkStrategy.html#a370ac58350a750b40dfb5f05a952c653',1,'chunk_strategies::ConditionalSubChunkStrategy::strategy_']]],
-  ['structure_16',['Project Structure',['../index.html#autotoc_md19',1,'']]],
+  ['structure_16',['Project Structure',['../index.html#autotoc_md20',1,'']]],
   ['structures_17',['Data Structures',['../index.html#autotoc_md6',1,'']]],
   ['sub_20chunking_20strategies_18',['Sub-Chunking Strategies',['../index.html#autotoc_md5',1,'']]],
   ['sub_5fchunk_5fstrategies_2ehpp_19',['sub_chunk_strategies.hpp',['../sub__chunk__strategies_8hpp.html',1,'']]],

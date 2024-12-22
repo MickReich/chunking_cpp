@@ -13,6 +13,7 @@ var searchData=
   ['chunkstack_10',['ChunkStack',['../classadvanced__structures_1_1ChunkStack.html',1,'advanced_structures']]],
   ['chunkstrategy_11',['ChunkStrategy',['../classchunk__strategies_1_1ChunkStrategy.html',1,'chunk_strategies']]],
   ['chunkstrategy_3c_20std_3a_3astring_20_3e_12',['ChunkStrategy&lt; std::string &gt;',['../classchunk__strategies_1_1ChunkStrategy.html',1,'chunk_strategies']]],
-  ['circularbuffer_13',['CircularBuffer',['../classCircularBuffer.html',1,'']]],
-  ['conditionalsubchunkstrategy_14',['ConditionalSubChunkStrategy',['../classchunk__strategies_1_1ConditionalSubChunkStrategy.html',1,'chunk_strategies']]]
+  ['chunktreap_13',['ChunkTreap',['../classadvanced__structures_1_1ChunkTreap.html',1,'advanced_structures']]],
+  ['circularbuffer_14',['CircularBuffer',['../classCircularBuffer.html',1,'']]],
+  ['conditionalsubchunkstrategy_15',['ConditionalSubChunkStrategy',['../classchunk__strategies_1_1ConditionalSubChunkStrategy.html',1,'chunk_strategies']]]
 ];

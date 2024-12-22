@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['gen_0',['gen',['../classchunk__utils_1_1ChunkGenerator.html#aa12692893370479eb6e99dc3a9c10661',1,'chunk_utils::ChunkGenerator']]],
+  ['gen_0',['gen',['../classadvanced__structures_1_1ChunkTreap.html#a20c39e84fd693b4c4f9eb125b09d964a',1,'advanced_structures::ChunkTreap::gen'],['../classchunk__utils_1_1ChunkGenerator.html#aa12692893370479eb6e99dc3a9c10661',1,'chunk_utils::ChunkGenerator::gen']]],
   ['generate_5frandom_5fchunks_1',['generate_random_chunks',['../classchunk__utils_1_1ChunkGenerator.html#ae6136fb99fc953bbdf9f22314d61cae4',1,'chunk_utils::ChunkGenerator']]],
   ['generate_5frandom_5fdata_2',['generate_random_data',['../classchunk__utils_1_1ChunkGenerator.html#a8de1ac93ada6f7969952af28ca6cf832',1,'chunk_utils::ChunkGenerator']]],
   ['get_5fchunk_3',['get_chunk',['../classChunk.html#a2c1f2fb7b5a0d3eb875311362cb27580',1,'Chunk']]],
