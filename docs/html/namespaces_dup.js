@@ -6,5 +6,6 @@ var namespaces_dup =
     [ "chunk_strategies", "namespacechunk__strategies.html", "namespacechunk__strategies" ],
     [ "chunk_utils", "namespacechunk__utils.html", "namespacechunk__utils" ],
     [ "chunk_windows", "namespacechunk__windows.html", "namespacechunk__windows" ],
-    [ "parallel_chunk", "namespaceparallel__chunk.html", "namespaceparallel__chunk" ]
+    [ "parallel_chunk", "namespaceparallel__chunk.html", "namespaceparallel__chunk" ],
+    [ "sophisticated_chunking", "namespacesophisticated__chunking.html", "namespacesophisticated__chunking" ]
 ];

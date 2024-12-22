@@ -24,6 +24,10 @@ run: setup-build
 	@echo "Running program..."
 	@$(BUILD_DIR)/chunk_processor_exe
 
+sophisticated_chunking_demo: setup-build
+	@echo "Running program..."
+	@$(BUILD_DIR)/sophisticated_chunking_demo
+
 # Override CMake's test target
 test: setup-build
 	@echo "Running tests..."

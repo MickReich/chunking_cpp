@@ -1,5 +1,4 @@
-#ifndef CHUNK_COMPRESSION_HPP
-#define CHUNK_COMPRESSION_HPP
+#pragma once
 
 #include <algorithm>
 #include <cmath>
@@ -82,5 +81,3 @@ public:
 };
 
 } // namespace chunk_compression
-
-#endif // CHUNK_COMPRESSION_HPP

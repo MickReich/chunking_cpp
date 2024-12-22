@@ -178,6 +178,45 @@ run_tests/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/build
 .PHONY : run_tests/fast
 
+#=============================================================================
+# Target rules for targets named sophisticated_chunking
+
+# Build rule for target.
+sophisticated_chunking: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sophisticated_chunking
+.PHONY : sophisticated_chunking
+
+# fast build rule for target.
+sophisticated_chunking/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sophisticated_chunking.dir/build.make CMakeFiles/sophisticated_chunking.dir/build
+.PHONY : sophisticated_chunking/fast
+
+#=============================================================================
+# Target rules for targets named sophisticated_chunking_demo
+
+# Build rule for target.
+sophisticated_chunking_demo: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sophisticated_chunking_demo
+.PHONY : sophisticated_chunking_demo
+
+# fast build rule for target.
+sophisticated_chunking_demo/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sophisticated_chunking_demo.dir/build.make CMakeFiles/sophisticated_chunking_demo.dir/build
+.PHONY : sophisticated_chunking_demo/fast
+
+#=============================================================================
+# Target rules for targets named chunking_methods_sophisticated_test
+
+# Build rule for target.
+chunking_methods_sophisticated_test: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 chunking_methods_sophisticated_test
+.PHONY : chunking_methods_sophisticated_test
+
+# fast build rule for target.
+chunking_methods_sophisticated_test/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chunking_methods_sophisticated_test.dir/build.make CMakeFiles/chunking_methods_sophisticated_test.dir/build
+.PHONY : chunking_methods_sophisticated_test/fast
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -204,6 +243,57 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chunk_processor.dir/build.make CMakeFiles/chunk_processor.dir/src/main.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chunk_processor_exe.dir/build.make CMakeFiles/chunk_processor_exe.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
+
+src/sophisticated_chunking_demo.o: src/sophisticated_chunking_demo.cpp.o
+.PHONY : src/sophisticated_chunking_demo.o
+
+# target to build an object file
+src/sophisticated_chunking_demo.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sophisticated_chunking.dir/build.make CMakeFiles/sophisticated_chunking.dir/src/sophisticated_chunking_demo.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sophisticated_chunking_demo.dir/build.make CMakeFiles/sophisticated_chunking_demo.dir/src/sophisticated_chunking_demo.cpp.o
+.PHONY : src/sophisticated_chunking_demo.cpp.o
+
+src/sophisticated_chunking_demo.i: src/sophisticated_chunking_demo.cpp.i
+.PHONY : src/sophisticated_chunking_demo.i
+
+# target to preprocess a source file
+src/sophisticated_chunking_demo.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sophisticated_chunking.dir/build.make CMakeFiles/sophisticated_chunking.dir/src/sophisticated_chunking_demo.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sophisticated_chunking_demo.dir/build.make CMakeFiles/sophisticated_chunking_demo.dir/src/sophisticated_chunking_demo.cpp.i
+.PHONY : src/sophisticated_chunking_demo.cpp.i
+
+src/sophisticated_chunking_demo.s: src/sophisticated_chunking_demo.cpp.s
+.PHONY : src/sophisticated_chunking_demo.s
+
+# target to generate assembly for a file
+src/sophisticated_chunking_demo.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sophisticated_chunking.dir/build.make CMakeFiles/sophisticated_chunking.dir/src/sophisticated_chunking_demo.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sophisticated_chunking_demo.dir/build.make CMakeFiles/sophisticated_chunking_demo.dir/src/sophisticated_chunking_demo.cpp.s
+.PHONY : src/sophisticated_chunking_demo.cpp.s
+
+tests/advanced_chunk_strategies_test.o: tests/advanced_chunk_strategies_test.cpp.o
+.PHONY : tests/advanced_chunk_strategies_test.o
+
+# target to build an object file
+tests/advanced_chunk_strategies_test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/advanced_chunk_strategies_test.cpp.o
+.PHONY : tests/advanced_chunk_strategies_test.cpp.o
+
+tests/advanced_chunk_strategies_test.i: tests/advanced_chunk_strategies_test.cpp.i
+.PHONY : tests/advanced_chunk_strategies_test.i
+
+# target to preprocess a source file
+tests/advanced_chunk_strategies_test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/advanced_chunk_strategies_test.cpp.i
+.PHONY : tests/advanced_chunk_strategies_test.cpp.i
+
+tests/advanced_chunk_strategies_test.s: tests/advanced_chunk_strategies_test.cpp.s
+.PHONY : tests/advanced_chunk_strategies_test.s
+
+# target to generate assembly for a file
+tests/advanced_chunk_strategies_test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/advanced_chunk_strategies_test.cpp.s
+.PHONY : tests/advanced_chunk_strategies_test.cpp.s
 
 tests/advanced_structures_test.o: tests/advanced_structures_test.cpp.o
 .PHONY : tests/advanced_structures_test.o
@@ -301,6 +391,30 @@ tests/chunk_test.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/chunk_test.cpp.s
 .PHONY : tests/chunk_test.cpp.s
 
+tests/chunking_methods_sophisticated_test.o: tests/chunking_methods_sophisticated_test.cpp.o
+.PHONY : tests/chunking_methods_sophisticated_test.o
+
+# target to build an object file
+tests/chunking_methods_sophisticated_test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chunking_methods_sophisticated_test.dir/build.make CMakeFiles/chunking_methods_sophisticated_test.dir/tests/chunking_methods_sophisticated_test.cpp.o
+.PHONY : tests/chunking_methods_sophisticated_test.cpp.o
+
+tests/chunking_methods_sophisticated_test.i: tests/chunking_methods_sophisticated_test.cpp.i
+.PHONY : tests/chunking_methods_sophisticated_test.i
+
+# target to preprocess a source file
+tests/chunking_methods_sophisticated_test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chunking_methods_sophisticated_test.dir/build.make CMakeFiles/chunking_methods_sophisticated_test.dir/tests/chunking_methods_sophisticated_test.cpp.i
+.PHONY : tests/chunking_methods_sophisticated_test.cpp.i
+
+tests/chunking_methods_sophisticated_test.s: tests/chunking_methods_sophisticated_test.cpp.s
+.PHONY : tests/chunking_methods_sophisticated_test.s
+
+# target to generate assembly for a file
+tests/chunking_methods_sophisticated_test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chunking_methods_sophisticated_test.dir/build.make CMakeFiles/chunking_methods_sophisticated_test.dir/tests/chunking_methods_sophisticated_test.cpp.s
+.PHONY : tests/chunking_methods_sophisticated_test.cpp.s
+
 tests/parallel_chunk_test.o: tests/parallel_chunk_test.cpp.o
 .PHONY : tests/parallel_chunk_test.o
 
@@ -385,10 +499,19 @@ help:
 	@echo "... coverage"
 	@echo "... chunk_processor"
 	@echo "... chunk_processor_exe"
+	@echo "... chunking_methods_sophisticated_test"
 	@echo "... run_tests"
+	@echo "... sophisticated_chunking"
+	@echo "... sophisticated_chunking_demo"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/sophisticated_chunking_demo.o"
+	@echo "... src/sophisticated_chunking_demo.i"
+	@echo "... src/sophisticated_chunking_demo.s"
+	@echo "... tests/advanced_chunk_strategies_test.o"
+	@echo "... tests/advanced_chunk_strategies_test.i"
+	@echo "... tests/advanced_chunk_strategies_test.s"
 	@echo "... tests/advanced_structures_test.o"
 	@echo "... tests/advanced_structures_test.i"
 	@echo "... tests/advanced_structures_test.s"
@@ -401,6 +524,9 @@ help:
 	@echo "... tests/chunk_test.o"
 	@echo "... tests/chunk_test.i"
 	@echo "... tests/chunk_test.s"
+	@echo "... tests/chunking_methods_sophisticated_test.o"
+	@echo "... tests/chunking_methods_sophisticated_test.i"
+	@echo "... tests/chunking_methods_sophisticated_test.s"
 	@echo "... tests/parallel_chunk_test.o"
 	@echo "... tests/parallel_chunk_test.i"
 	@echo "... tests/parallel_chunk_test.s"

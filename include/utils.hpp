@@ -1,5 +1,4 @@
-#ifndef UTILS_HPP
-#define UTILS_HPP
+#pragma once
 
 #include <algorithm>
 #include <functional>
@@ -107,5 +106,3 @@ template <typename T>
 std::mt19937 ChunkGenerator<T>::gen(ChunkGenerator<T>::rd());
 
 } // namespace chunk_utils
-
-#endif // UTILS_HPP

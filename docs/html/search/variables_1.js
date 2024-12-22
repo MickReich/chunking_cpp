@@ -6,5 +6,6 @@ var searchData=
   ['chunks_3',['chunks',['../classChunk.html#a1574993946fe5b28c6d89ce4bf77857b',1,'Chunk']]],
   ['comp_5f_4',['comp_',['../classPriorityQueue.html#a4fa43ad50be95b27d62d62d73a83f19c',1,'PriorityQueue']]],
   ['condition_5f_5',['condition_',['../classchunk__strategies_1_1ConditionalSubChunkStrategy.html#abaf81b9f4fc1a975e24775f5e83b4872',1,'chunk_strategies::ConditionalSubChunkStrategy']]],
-  ['current_5flevel_6',['current_level',['../classadvanced__structures_1_1ChunkSkipList.html#a642cbae0a13509a0616bcdb6112610f9',1,'advanced_structures::ChunkSkipList']]]
+  ['context_5fsize_5f_6',['context_size_',['../classsophisticated__chunking_1_1MutualInformationChunking.html#a70acda7d7a1260ef794bf9195483c6ac',1,'sophisticated_chunking::MutualInformationChunking']]],
+  ['current_5flevel_7',['current_level',['../classadvanced__structures_1_1ChunkSkipList.html#a642cbae0a13509a0616bcdb6112610f9',1,'advanced_structures::ChunkSkipList']]]
 ];

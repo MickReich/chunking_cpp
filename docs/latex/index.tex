@@ -25,6 +25,9 @@ This library offers a comprehensive suite of tools for handling data in chunks, 
 \item Similarity-\/based chunking
 \item Monotonicity-\/based chunking
 \item Padded fixed-\/size chunking
+\item Wavelet-\/based chunking
+\item Mutual Information-\/based chunking
+\item Dynamic Time Warping (DTW) based chunking
 \end{DoxyItemize}\hypertarget{index_autotoc_md5}{}\doxysubsection{\texorpdfstring{Sub-\/\+Chunking Strategies}{Sub-Chunking Strategies}}\label{index_autotoc_md5}
 
 \begin{DoxyItemize}
@@ -122,6 +125,10 @@ For detailed build instructions, dependencies, and configuration options, see BU
 \item {\bfseries{Chunk\+Deque}}\+: A deque-\/based chunk structure for double-\/ended operations
 \item {\bfseries{Chunk\+Stack}}\+: A stack-\/based chunk structure for LIFO operations
 \item {\bfseries{Chunk\+Treap}}\+: A treap-\/based chunk structure for efficient searching and manipulation
+\item {\bfseries{Semantic Chunking}}\+: Create chunks based on semantic/cosine similarity
+\item {\bfseries{Wavelet-\/based Chunking}}\+: Create chunks based on wavelet coefficients
+\item {\bfseries{Mutual Information-\/based Chunking}}\+: Create chunks based on mutual information
+\item {\bfseries{Dynamic Time Warping (DTW) based Chunking}}\+: Create chunks based on dynamic time warping
 \end{DoxyItemize}\hypertarget{index_autotoc_md13}{}\doxysubsubsection{\texorpdfstring{Example Usage}{Example Usage}}\label{index_autotoc_md13}
 
 \begin{DoxyCode}{0}
@@ -256,33 +263,64 @@ If you use this library in your research, please cite\+:
 \DoxyCodeLine{├──\ docs/}
 \DoxyCodeLine{│\ \ \ └──\ html/}
 \DoxyCodeLine{├──\ include/}
-\DoxyCodeLine{\ \ \ ├──\ chunk.hpp}
-\DoxyCodeLine{\ \ \ ├──\ config.hpp}
-\DoxyCodeLine{\ \ \ ├──\ chunk\_strategies.hpp}
-\DoxyCodeLine{\ \ \ ├──\ chunk\_compression.hpp}
-\DoxyCodeLine{\ \ \ ├──\ sub\_chunk\_strategies.hpp}
-\DoxyCodeLine{\ \ \ ├──\ parallel\_chunk.hpp}
-\DoxyCodeLine{\ \ \ ├──\ advanced\_structures.hpp}
-\DoxyCodeLine{\ \ \ ├──\ data\_structures.hpp}
-\DoxyCodeLine{\ \ \ └──\ utils.hpp}
+\DoxyCodeLine{│\ \ \ ├──\ chunk.hpp}
+\DoxyCodeLine{│\ \ \ ├──\ config.hpp}
+\DoxyCodeLine{│\ \ \ ├──\ chunk\_strategies.hpp}
+\DoxyCodeLine{│\ \ \ ├──\ chunk\_compression.hpp}
+\DoxyCodeLine{│\ \ \ ├──\ sub\_chunk\_strategies.hpp}
+\DoxyCodeLine{│\ \ \ ├──\ parallel\_chunk.hpp}
+\DoxyCodeLine{│\ \ \ ├──\ advanced\_structures.hpp}
+\DoxyCodeLine{│\ \ \ ├──\ sophisticated\_chunking.hpp}
+\DoxyCodeLine{│\ \ \ ├──\ data\_structures.hpp}
+\DoxyCodeLine{│\ \ \ └──\ utils.hpp}
 \DoxyCodeLine{├──\ src/}
-\DoxyCodeLine{│\ \ \ └──\ main.cpp}
+\DoxyCodeLine{│\ \ \ ├──\ main.cpp}
+\DoxyCodeLine{│\ \ \ └──\ sophisticated\_chunking\_demo.cpp}
 \DoxyCodeLine{├──\ tests/}
 \DoxyCodeLine{│\ \ \ ├──\ advanced\_chunk\_strategies\_test.cpp}
 \DoxyCodeLine{│\ \ \ ├──\ advanced\_structures\_test.cpp}
 \DoxyCodeLine{│\ \ \ ├──\ chunk\_compression\_test.cpp}
 \DoxyCodeLine{│\ \ \ ├──\ chunk\_strategies\_test.cpp}
+\DoxyCodeLine{│\ \ \ ├──\ chunking\_methods\_sophisticated\_test.cpp}
 \DoxyCodeLine{│\ \ \ ├──\ data\_structures\_test.cpp}
 \DoxyCodeLine{│\ \ \ ├──\ parallel\_chunk\_test.cpp}
-\DoxyCodeLine{|\ \ \ ├──\ sub\_chunk\_strategies\_test.cpp}
-\DoxyCodeLine{|\ \ \ ├──\ test\_main.cpp}
-\DoxyCodeLine{|\ \ \ └──\ utils\_test.cpp}
+\DoxyCodeLine{│\ \ \ ├──\ sub\_chunk\_strategies\_test.cpp}
+\DoxyCodeLine{│\ \ \ ├──\ test\_main.cpp}
+\DoxyCodeLine{│\ \ \ └──\ utils\_test.cpp}
 \DoxyCodeLine{├──\ Makefile}
 \DoxyCodeLine{├──\ CMakeLists.txt}
 \DoxyCodeLine{├──\ Doxyfile}
 \DoxyCodeLine{├──\ README.md}
 \DoxyCodeLine{├──\ BUILDING.md}
 \DoxyCodeLine{└──\ LICENSE}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md21}{}\doxysubsection{\texorpdfstring{Sophisticated Chunking Examples}{Sophisticated Chunking Examples}}\label{index_autotoc_md21}
+For detailed examples of the sophisticated chunking algorithms, see {\ttfamily \doxylink{sophisticated__chunking__demo_8cpp}{src/sophisticated\+\_\+chunking\+\_\+demo.\+cpp}}\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{sophisticated__chunking_8hpp}{sophisticated\_chunking.hpp}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Example\ from\ sophisticated\_chunking\_demo.cpp}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{sophisticated__chunking__demo_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Wavelet-\/based\ chunking\ example}}
+\DoxyCodeLine{\ \ \ \ std::vector<double>\ signal\_data\ =\ \{1.0,\ 1.2,\ 1.1,\ 5.0,\ 5.2,\ 5.1,\ 2.0,\ 2.1\};}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classsophisticated__chunking_1_1WaveletChunking}{sophisticated\_chunking::WaveletChunking<double>}}\ wavelet\_chunker(8,\ 0.5);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ wavelet\_chunks\ =\ wavelet\_chunker.chunk(signal\_data);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Mutual\ Information\ chunking\ example}}
+\DoxyCodeLine{\ \ \ \ std::vector<int>\ pattern\_data\ =\ \{1,\ 2,\ 3,\ 10,\ 11,\ 12,\ 4,\ 5,\ 6\};}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classsophisticated__chunking_1_1MutualInformationChunking}{sophisticated\_chunking::MutualInformationChunking<int>}}\ mi\_chunker(5,\ 0.3);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ mi\_chunks\ =\ mi\_chunker.chunk(pattern\_data);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ DTW\ chunking\ example}}
+\DoxyCodeLine{\ \ \ \ std::vector<float>\ time\_series\ =\ \{1.0f,\ 1.1f,\ 1.2f,\ 5.0f,\ 5.1f,\ 5.2f\};}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classsophisticated__chunking_1_1DTWChunking}{sophisticated\_chunking::DTWChunking<float>}}\ dtw\_chunker(10,\ 2.0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ dtw\_chunks\ =\ dtw\_chunker.chunk(time\_series);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\}}
 
 \end{DoxyCode}
  

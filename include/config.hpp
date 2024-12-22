@@ -1,5 +1,4 @@
-#ifndef CONFIG_HPP
-#define CONFIG_HPP
+#pragma once
 
 #include <cstddef>
 
@@ -22,5 +21,3 @@ struct BufferSettings {
 };
 
 } // namespace chunk_config
-
-#endif // CONFIG_HPP

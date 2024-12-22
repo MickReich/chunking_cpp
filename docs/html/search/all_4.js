@@ -5,5 +5,5 @@ var searchData=
   ['entropystrategy_2',['entropystrategy',['../classchunk__strategies_1_1EntropyStrategy.html',1,'chunk_strategies::EntropyStrategy&lt; T &gt;'],['../classchunk__strategies_1_1EntropyStrategy.html#a1f667ff61e3ddaf1db623c584998a173',1,'chunk_strategies::EntropyStrategy::EntropyStrategy()'],['../classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4.html#abc8a7bcb710fd2d18c9b2170d376a9b0',1,'chunk_strategies::EntropyStrategy&lt; std::string &gt;::EntropyStrategy()']]],
   ['entropystrategy_3c_20std_3a_3astring_20_3e_3',['EntropyStrategy&lt; std::string &gt;',['../classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4.html',1,'chunk_strategies']]],
   ['example_20usage_4',['Example Usage',['../index.html#autotoc_md13',1,'']]],
-  ['examples_5',['Usage Examples',['../index.html#autotoc_md10',1,'']]]
+  ['examples_5',['examples',['../index.html#autotoc_md21',1,'Sophisticated Chunking Examples'],['../index.html#autotoc_md10',1,'Usage Examples']]]
 ];

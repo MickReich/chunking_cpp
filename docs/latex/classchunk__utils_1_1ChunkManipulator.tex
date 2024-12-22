@@ -20,7 +20,7 @@ static std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__
 class chunk\+\_\+utils\+::\+Chunk\+Manipulator$<$ T $>$}
 
 
-Definition at line \mbox{\hyperlink{utils_8hpp_source_l00053}{53}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
+Definition at line \mbox{\hyperlink{utils_8hpp_source_l00052}{52}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
 
 
 
@@ -34,15 +34,15 @@ static std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__
 
 
 
-Definition at line \mbox{\hyperlink{utils_8hpp_source_l00063}{63}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
+Definition at line \mbox{\hyperlink{utils_8hpp_source_l00062}{62}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
-\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ std::copy\_if(chunks.begin(),\ chunks.end(),\ std::back\_inserter(result),\ predicate);}
-\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
-\DoxyCodeLine{00068\ \ \ \ \ \}}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ std::copy\_if(chunks.begin(),\ chunks.end(),\ std::back\_inserter(result),\ predicate);}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00067\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \Hypertarget{classchunk__utils_1_1ChunkManipulator_aad43e878aa138c2a57312f13e56cacc8}\label{classchunk__utils_1_1ChunkManipulator_aad43e878aa138c2a57312f13e56cacc8} 
@@ -54,15 +54,15 @@ static std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__
 
 
 
-Definition at line \mbox{\hyperlink{utils_8hpp_source_l00055}{55}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
+Definition at line \mbox{\hyperlink{utils_8hpp_source_l00054}{54}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result\ =\ chunks1;}
-\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ result.insert(result.end(),\ chunks2.begin(),\ chunks2.end());}
-\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
-\DoxyCodeLine{00060\ \ \ \ \ \}}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result\ =\ chunks1;}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ result.insert(result.end(),\ chunks2.begin(),\ chunks2.end());}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00059\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \Hypertarget{classchunk__utils_1_1ChunkManipulator_a673159f2b0528f27d649bc1b20ef4aad}\label{classchunk__utils_1_1ChunkManipulator_a673159f2b0528f27d649bc1b20ef4aad} 
@@ -74,15 +74,15 @@ static std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__
 
 
 
-Definition at line \mbox{\hyperlink{utils_8hpp_source_l00071}{71}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
+Definition at line \mbox{\hyperlink{utils_8hpp_source_l00070}{70}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
-\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ std::transform(chunks.begin(),\ chunks.end(),\ std::back\_inserter(result),\ transformer);}
-\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
-\DoxyCodeLine{00076\ \ \ \ \ \}}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ std::transform(chunks.begin(),\ chunks.end(),\ std::back\_inserter(result),\ transformer);}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00075\ \ \ \ \ \}}
 
 \end{DoxyCode}
 

@@ -111,7 +111,7 @@ Static Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
 class chunk_utils::ChunkManipulator&lt; T &gt;</div>
-<p class="definition">Definition at line <a class="el" href="utils_8hpp_source.html#l00053">53</a> of file <a class="el" href="utils_8hpp_source.html">utils.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8hpp_source.html#l00052">52</a> of file <a class="el" href="utils_8hpp_source.html">utils.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ac5cc27e53560990ba7154bf82632e4d4" name="ac5cc27e53560990ba7154bf82632e4d4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac5cc27e53560990ba7154bf82632e4d4">&#9670;&#160;</a></span>filter_chunks()</h2>
@@ -149,12 +149,12 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="utils_8hpp_source.html#l00063">63</a> of file <a class="el" href="utils_8hpp_source.html">utils.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   64</span>                                                                    {</div>
-<div class="line"><span class="lineno">   65</span>        std::vector&lt;std::vector&lt;T&gt;&gt; result;</div>
-<div class="line"><span class="lineno">   66</span>        std::copy_if(chunks.begin(), chunks.end(), std::back_inserter(result), predicate);</div>
-<div class="line"><span class="lineno">   67</span>        <span class="keywordflow">return</span> result;</div>
-<div class="line"><span class="lineno">   68</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="utils_8hpp_source.html#l00062">62</a> of file <a class="el" href="utils_8hpp_source.html">utils.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   63</span>                                                                    {</div>
+<div class="line"><span class="lineno">   64</span>        std::vector&lt;std::vector&lt;T&gt;&gt; result;</div>
+<div class="line"><span class="lineno">   65</span>        std::copy_if(chunks.begin(), chunks.end(), std::back_inserter(result), predicate);</div>
+<div class="line"><span class="lineno">   66</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">   67</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -194,12 +194,12 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="utils_8hpp_source.html#l00055">55</a> of file <a class="el" href="utils_8hpp_source.html">utils.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   56</span>                                                                                            {</div>
-<div class="line"><span class="lineno">   57</span>        std::vector&lt;std::vector&lt;T&gt;&gt; result = chunks1;</div>
-<div class="line"><span class="lineno">   58</span>        result.insert(result.end(), chunks2.begin(), chunks2.end());</div>
-<div class="line"><span class="lineno">   59</span>        <span class="keywordflow">return</span> result;</div>
-<div class="line"><span class="lineno">   60</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="utils_8hpp_source.html#l00054">54</a> of file <a class="el" href="utils_8hpp_source.html">utils.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   55</span>                                                                                            {</div>
+<div class="line"><span class="lineno">   56</span>        std::vector&lt;std::vector&lt;T&gt;&gt; result = chunks1;</div>
+<div class="line"><span class="lineno">   57</span>        result.insert(result.end(), chunks2.begin(), chunks2.end());</div>
+<div class="line"><span class="lineno">   58</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">   59</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -239,12 +239,12 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="utils_8hpp_source.html#l00071">71</a> of file <a class="el" href="utils_8hpp_source.html">utils.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   72</span>                                                                                 {</div>
-<div class="line"><span class="lineno">   73</span>        std::vector&lt;std::vector&lt;T&gt;&gt; result;</div>
-<div class="line"><span class="lineno">   74</span>        std::transform(chunks.begin(), chunks.end(), std::back_inserter(result), transformer);</div>
-<div class="line"><span class="lineno">   75</span>        <span class="keywordflow">return</span> result;</div>
-<div class="line"><span class="lineno">   76</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="utils_8hpp_source.html#l00070">70</a> of file <a class="el" href="utils_8hpp_source.html">utils.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   71</span>                                                                                 {</div>
+<div class="line"><span class="lineno">   72</span>        std::vector&lt;std::vector&lt;T&gt;&gt; result;</div>
+<div class="line"><span class="lineno">   73</span>        std::transform(chunks.begin(), chunks.end(), std::back_inserter(result), transformer);</div>
+<div class="line"><span class="lineno">   74</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">   75</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -257,7 +257,7 @@ template&lt;typename T &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacechunk__utils.html">chunk_utils</a></li><li class="navelem"><a class="el" href="classchunk__utils_1_1ChunkManipulator.html">ChunkManipulator</a></li>
-    <li class="footer">Generated on Sun Dec 22 2024 22:05:07 for Advanced Chunk Processing Library by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Dec 22 2024 23:52:19 for Advanced Chunk Processing Library by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

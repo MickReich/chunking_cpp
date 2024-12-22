@@ -120,6 +120,9 @@ Advanced Chunking Strategies</h2>
 <li>Similarity-based chunking</li>
 <li>Monotonicity-based chunking</li>
 <li>Padded fixed-size chunking</li>
+<li>Wavelet-based chunking</li>
+<li>Mutual Information-based chunking</li>
+<li>Dynamic Time Warping (DTW) based chunking</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md5"></a>
 Sub-Chunking Strategies</h2>
@@ -194,7 +197,7 @@ Basic Usage</h2>
 <div class="line"><span class="comment">// Get fixed-size chunks</span></div>
 <div class="line"><span class="keyword">auto</span> chunks = chunker.get_chunks(); <span class="comment">// Returns: {{1,2}, {3,4}, {5}}</span></div>
 <div class="ttc" id="achunk_8hpp_html"><div class="ttname"><a href="chunk_8hpp.html">chunk.hpp</a></div><div class="ttdoc">Template class for chunk-based data processing.</div></div>
-<div class="ttc" id="aclassChunk_html"><div class="ttname"><a href="classChunk.html">Chunk</a></div><div class="ttdoc">A template class for managing and processing data in chunks.</div><div class="ttdef"><b>Definition</b> <a href="chunk_8hpp_source.html#l00029">chunk.hpp:29</a></div></div>
+<div class="ttc" id="aclassChunk_html"><div class="ttname"><a href="classChunk.html">Chunk</a></div><div class="ttdoc">A template class for managing and processing data in chunks.</div><div class="ttdef"><b>Definition</b> <a href="chunk_8hpp_source.html#l00026">chunk.hpp:26</a></div></div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md12"></a>
 Advanced Features</h2>
 <ul>
@@ -218,6 +221,10 @@ Advanced Features</h2>
 <li><b>ChunkDeque</b>: A deque-based chunk structure for double-ended operations</li>
 <li><b>ChunkStack</b>: A stack-based chunk structure for LIFO operations</li>
 <li><b>ChunkTreap</b>: A treap-based chunk structure for efficient searching and manipulation</li>
+<li><b>Semantic Chunking</b>: Create chunks based on semantic/cosine similarity</li>
+<li><b>Wavelet-based Chunking</b>: Create chunks based on wavelet coefficients</li>
+<li><b>Mutual Information-based Chunking</b>: Create chunks based on mutual information</li>
+<li><b>Dynamic Time Warping (DTW) based Chunking</b>: Create chunks based on dynamic time warping</li>
 </ul>
 <h3><a class="anchor" id="autotoc_md13"></a>
 Example Usage</h3>
@@ -350,40 +357,72 @@ Project Structure</h1>
 <div class="line">├── docs/</div>
 <div class="line">│   └── html/</div>
 <div class="line">├── include/</div>
-<div class="line">   ├── chunk.hpp</div>
-<div class="line">   ├── config.hpp</div>
-<div class="line">   ├── chunk_strategies.hpp</div>
-<div class="line">   ├── chunk_compression.hpp</div>
-<div class="line">   ├── sub_chunk_strategies.hpp</div>
-<div class="line">   ├── parallel_chunk.hpp</div>
-<div class="line">   ├── advanced_structures.hpp</div>
-<div class="line">   ├── data_structures.hpp</div>
-<div class="line">   └── utils.hpp</div>
+<div class="line">│   ├── chunk.hpp</div>
+<div class="line">│   ├── config.hpp</div>
+<div class="line">│   ├── chunk_strategies.hpp</div>
+<div class="line">│   ├── chunk_compression.hpp</div>
+<div class="line">│   ├── sub_chunk_strategies.hpp</div>
+<div class="line">│   ├── parallel_chunk.hpp</div>
+<div class="line">│   ├── advanced_structures.hpp</div>
+<div class="line">│   ├── sophisticated_chunking.hpp</div>
+<div class="line">│   ├── data_structures.hpp</div>
+<div class="line">│   └── utils.hpp</div>
 <div class="line">├── src/</div>
-<div class="line">│   └── main.cpp</div>
+<div class="line">│   ├── main.cpp</div>
+<div class="line">│   └── sophisticated_chunking_demo.cpp</div>
 <div class="line">├── tests/</div>
 <div class="line">│   ├── advanced_chunk_strategies_test.cpp</div>
 <div class="line">│   ├── advanced_structures_test.cpp</div>
 <div class="line">│   ├── chunk_compression_test.cpp</div>
 <div class="line">│   ├── chunk_strategies_test.cpp</div>
+<div class="line">│   ├── chunking_methods_sophisticated_test.cpp</div>
 <div class="line">│   ├── data_structures_test.cpp</div>
 <div class="line">│   ├── parallel_chunk_test.cpp</div>
-<div class="line">|   ├── sub_chunk_strategies_test.cpp</div>
-<div class="line">|   ├── test_main.cpp</div>
-<div class="line">|   └── utils_test.cpp</div>
+<div class="line">│   ├── sub_chunk_strategies_test.cpp</div>
+<div class="line">│   ├── test_main.cpp</div>
+<div class="line">│   └── utils_test.cpp</div>
 <div class="line">├── Makefile</div>
 <div class="line">├── CMakeLists.txt</div>
 <div class="line">├── Doxyfile</div>
 <div class="line">├── README.md</div>
 <div class="line">├── BUILDING.md</div>
 <div class="line">└── LICENSE</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md21"></a>
+Sophisticated Chunking Examples</h2>
+<p>For detailed examples of the sophisticated chunking algorithms, see <code><a class="el" href="sophisticated__chunking__demo_8cpp.html">src/sophisticated_chunking_demo.cpp</a></code>:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="sophisticated__chunking_8hpp.html">sophisticated_chunking.hpp</a>&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Example from sophisticated_chunking_demo.cpp</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="sophisticated__chunking__demo_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>() {</div>
+<div class="line">    <span class="comment">// Wavelet-based chunking example</span></div>
+<div class="line">    std::vector&lt;double&gt; signal_data = {1.0, 1.2, 1.1, 5.0, 5.2, 5.1, 2.0, 2.1};</div>
+<div class="line">    <a class="code hl_class" href="classsophisticated__chunking_1_1WaveletChunking.html">sophisticated_chunking::WaveletChunking&lt;double&gt;</a> wavelet_chunker(8, 0.5);</div>
+<div class="line">    <span class="keyword">auto</span> wavelet_chunks = wavelet_chunker.chunk(signal_data);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Mutual Information chunking example</span></div>
+<div class="line">    std::vector&lt;int&gt; pattern_data = {1, 2, 3, 10, 11, 12, 4, 5, 6};</div>
+<div class="line">    <a class="code hl_class" href="classsophisticated__chunking_1_1MutualInformationChunking.html">sophisticated_chunking::MutualInformationChunking&lt;int&gt;</a> mi_chunker(5, 0.3);</div>
+<div class="line">    <span class="keyword">auto</span> mi_chunks = mi_chunker.chunk(pattern_data);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// DTW chunking example</span></div>
+<div class="line">    std::vector&lt;float&gt; time_series = {1.0f, 1.1f, 1.2f, 5.0f, 5.1f, 5.2f};</div>
+<div class="line">    <a class="code hl_class" href="classsophisticated__chunking_1_1DTWChunking.html">sophisticated_chunking::DTWChunking&lt;float&gt;</a> dtw_chunker(10, 2.0);</div>
+<div class="line">    <span class="keyword">auto</span> dtw_chunks = dtw_chunker.chunk(time_series);</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+<div class="ttc" id="aclasssophisticated__chunking_1_1DTWChunking_html"><div class="ttname"><a href="classsophisticated__chunking_1_1DTWChunking.html">sophisticated_chunking::DTWChunking</a></div><div class="ttdoc">Dynamic time warping based chunking for sequence alignment.</div><div class="ttdef"><b>Definition</b> <a href="sophisticated__chunking_8hpp_source.html#l00090">sophisticated_chunking.hpp:90</a></div></div>
+<div class="ttc" id="aclasssophisticated__chunking_1_1MutualInformationChunking_html"><div class="ttname"><a href="classsophisticated__chunking_1_1MutualInformationChunking.html">sophisticated_chunking::MutualInformationChunking</a></div><div class="ttdoc">Information theory based chunking using mutual information.</div><div class="ttdef"><b>Definition</b> <a href="sophisticated__chunking_8hpp_source.html#l00054">sophisticated_chunking.hpp:54</a></div></div>
+<div class="ttc" id="aclasssophisticated__chunking_1_1WaveletChunking_html"><div class="ttname"><a href="classsophisticated__chunking_1_1WaveletChunking.html">sophisticated_chunking::WaveletChunking</a></div><div class="ttdoc">Wavelet-based chunking strategy using signal processing principles.</div><div class="ttdef"><b>Definition</b> <a href="sophisticated__chunking_8hpp_source.html#l00020">sophisticated_chunking.hpp:20</a></div></div>
+<div class="ttc" id="asophisticated__chunking_8hpp_html"><div class="ttname"><a href="sophisticated__chunking_8hpp.html">sophisticated_chunking.hpp</a></div></div>
+<div class="ttc" id="asophisticated__chunking__demo_8cpp_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="sophisticated__chunking__demo_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdef"><b>Definition</b> <a href="sophisticated__chunking__demo_8cpp_source.html#l00074">sophisticated_chunking_demo.cpp:74</a></div></div>
 </div><!-- fragment --> </div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Dec 22 2024 22:05:08 for Advanced Chunk Processing Library by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Dec 22 2024 23:52:19 for Advanced Chunk Processing Library by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

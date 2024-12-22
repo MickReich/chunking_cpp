@@ -48,7 +48,9 @@ var NAVTREE =
     [ "Contributing", "index.html#autotoc_md17", null ],
     [ "License", "index.html#autotoc_md18", null ],
     [ "Citation", "index.html#autotoc_md19", null ],
-    [ "Project Structure", "index.html#autotoc_md20", null ],
+    [ "Project Structure", "index.html#autotoc_md20", [
+      [ "Sophisticated Chunking Examples", "index.html#autotoc_md21", null ]
+    ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -81,7 +83,7 @@ var NAVTREEINDEX =
 [
 "advanced__structures_8hpp.html",
 "classchunk__strategies_1_1AdaptiveStrategy.html#ada5ef5e36bb56ceea46b67d49080a815",
-"namespacemembers_func.html"
+"index.html#autotoc_md1"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

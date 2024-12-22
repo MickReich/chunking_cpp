@@ -48,6 +48,11 @@ var annotated_dup =
     [ "parallel_chunk", "namespaceparallel__chunk.html", [
       [ "ParallelChunkProcessor", "classparallel__chunk_1_1ParallelChunkProcessor.html", "classparallel__chunk_1_1ParallelChunkProcessor" ]
     ] ],
+    [ "sophisticated_chunking", "namespacesophisticated__chunking.html", [
+      [ "DTWChunking", "classsophisticated__chunking_1_1DTWChunking.html", "classsophisticated__chunking_1_1DTWChunking" ],
+      [ "MutualInformationChunking", "classsophisticated__chunking_1_1MutualInformationChunking.html", "classsophisticated__chunking_1_1MutualInformationChunking" ],
+      [ "WaveletChunking", "classsophisticated__chunking_1_1WaveletChunking.html", "classsophisticated__chunking_1_1WaveletChunking" ]
+    ] ],
     [ "Chunk", "classChunk.html", "classChunk" ],
     [ "ChunkList", "classChunkList.html", "classChunkList" ],
     [ "ChunkNode", "structChunkNode.html", "structChunkNode" ],

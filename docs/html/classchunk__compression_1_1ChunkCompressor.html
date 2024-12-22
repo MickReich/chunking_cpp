@@ -118,7 +118,7 @@ Static Public Member Functions</h2></td></tr>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
 class chunk_compression::ChunkCompressor&lt; T &gt;</div><p>Compression strategies for chunk data. </p>
 
-<p class="definition">Definition at line <a class="el" href="chunk__compression_8hpp_source.html#l00014">14</a> of file <a class="el" href="chunk__compression_8hpp_source.html">chunk_compression.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="chunk__compression_8hpp_source.html#l00013">13</a> of file <a class="el" href="chunk__compression_8hpp_source.html">chunk_compression.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a946476140a49ecac06f68251762a6942" name="a946476140a49ecac06f68251762a6942"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a946476140a49ecac06f68251762a6942">&#9670;&#160;</a></span>delta_decode()</h2>
@@ -155,21 +155,21 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Decoded chunk </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="chunk__compression_8hpp_source.html#l00068">68</a> of file <a class="el" href="chunk__compression_8hpp_source.html">chunk_compression.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   68</span>                                                                {</div>
-<div class="line"><span class="lineno">   69</span>        <span class="keywordflow">if</span> (chunk.empty())</div>
-<div class="line"><span class="lineno">   70</span>            <span class="keywordflow">return</span> {};</div>
-<div class="line"><span class="lineno">   71</span> </div>
-<div class="line"><span class="lineno">   72</span>        std::vector&lt;T&gt; result;</div>
-<div class="line"><span class="lineno">   73</span>        result.reserve(chunk.size());</div>
-<div class="line"><span class="lineno">   74</span>        result.push_back(chunk[0]);</div>
-<div class="line"><span class="lineno">   75</span> </div>
-<div class="line"><span class="lineno">   76</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt; chunk.size(); ++i) {</div>
-<div class="line"><span class="lineno">   77</span>            result.push_back(result.back() + chunk[i]);</div>
-<div class="line"><span class="lineno">   78</span>        }</div>
-<div class="line"><span class="lineno">   79</span> </div>
-<div class="line"><span class="lineno">   80</span>        <span class="keywordflow">return</span> result;</div>
-<div class="line"><span class="lineno">   81</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="chunk__compression_8hpp_source.html#l00067">67</a> of file <a class="el" href="chunk__compression_8hpp_source.html">chunk_compression.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   67</span>                                                                {</div>
+<div class="line"><span class="lineno">   68</span>        <span class="keywordflow">if</span> (chunk.empty())</div>
+<div class="line"><span class="lineno">   69</span>            <span class="keywordflow">return</span> {};</div>
+<div class="line"><span class="lineno">   70</span> </div>
+<div class="line"><span class="lineno">   71</span>        std::vector&lt;T&gt; result;</div>
+<div class="line"><span class="lineno">   72</span>        result.reserve(chunk.size());</div>
+<div class="line"><span class="lineno">   73</span>        result.push_back(chunk[0]);</div>
+<div class="line"><span class="lineno">   74</span> </div>
+<div class="line"><span class="lineno">   75</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt; chunk.size(); ++i) {</div>
+<div class="line"><span class="lineno">   76</span>            result.push_back(result.back() + chunk[i]);</div>
+<div class="line"><span class="lineno">   77</span>        }</div>
+<div class="line"><span class="lineno">   78</span> </div>
+<div class="line"><span class="lineno">   79</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">   80</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -208,21 +208,21 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Delta-encoded chunk </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="chunk__compression_8hpp_source.html#l00048">48</a> of file <a class="el" href="chunk__compression_8hpp_source.html">chunk_compression.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   48</span>                                                                {</div>
-<div class="line"><span class="lineno">   49</span>        <span class="keywordflow">if</span> (chunk.empty())</div>
-<div class="line"><span class="lineno">   50</span>            <span class="keywordflow">return</span> {};</div>
-<div class="line"><span class="lineno">   51</span> </div>
-<div class="line"><span class="lineno">   52</span>        std::vector&lt;T&gt; result;</div>
-<div class="line"><span class="lineno">   53</span>        result.reserve(chunk.size());</div>
-<div class="line"><span class="lineno">   54</span>        result.push_back(chunk[0]);</div>
-<div class="line"><span class="lineno">   55</span> </div>
-<div class="line"><span class="lineno">   56</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt; chunk.size(); ++i) {</div>
-<div class="line"><span class="lineno">   57</span>            result.push_back(chunk[i] - chunk[i - 1]);</div>
-<div class="line"><span class="lineno">   58</span>        }</div>
-<div class="line"><span class="lineno">   59</span> </div>
-<div class="line"><span class="lineno">   60</span>        <span class="keywordflow">return</span> result;</div>
-<div class="line"><span class="lineno">   61</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="chunk__compression_8hpp_source.html#l00047">47</a> of file <a class="el" href="chunk__compression_8hpp_source.html">chunk_compression.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   47</span>                                                                {</div>
+<div class="line"><span class="lineno">   48</span>        <span class="keywordflow">if</span> (chunk.empty())</div>
+<div class="line"><span class="lineno">   49</span>            <span class="keywordflow">return</span> {};</div>
+<div class="line"><span class="lineno">   50</span> </div>
+<div class="line"><span class="lineno">   51</span>        std::vector&lt;T&gt; result;</div>
+<div class="line"><span class="lineno">   52</span>        result.reserve(chunk.size());</div>
+<div class="line"><span class="lineno">   53</span>        result.push_back(chunk[0]);</div>
+<div class="line"><span class="lineno">   54</span> </div>
+<div class="line"><span class="lineno">   55</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt; chunk.size(); ++i) {</div>
+<div class="line"><span class="lineno">   56</span>            result.push_back(chunk[i] - chunk[i - 1]);</div>
+<div class="line"><span class="lineno">   57</span>        }</div>
+<div class="line"><span class="lineno">   58</span> </div>
+<div class="line"><span class="lineno">   59</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">   60</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -261,28 +261,28 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Encoded chunk with value-count pairs </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="chunk__compression_8hpp_source.html#l00021">21</a> of file <a class="el" href="chunk__compression_8hpp_source.html">chunk_compression.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   21</span>                                                                                      {</div>
-<div class="line"><span class="lineno">   22</span>        std::vector&lt;std::pair&lt;T, size_t&gt;&gt; result;</div>
-<div class="line"><span class="lineno">   23</span>        <span class="keywordflow">if</span> (chunk.empty())</div>
-<div class="line"><span class="lineno">   24</span>            <span class="keywordflow">return</span> result;</div>
-<div class="line"><span class="lineno">   25</span> </div>
-<div class="line"><span class="lineno">   26</span>        T current = chunk[0];</div>
-<div class="line"><span class="lineno">   27</span>        <span class="keywordtype">size_t</span> count = 1;</div>
-<div class="line"><span class="lineno">   28</span> </div>
-<div class="line"><span class="lineno">   29</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt; chunk.size(); ++i) {</div>
-<div class="line"><span class="lineno">   30</span>            <span class="keywordflow">if</span> (chunk[i] == current) {</div>
-<div class="line"><span class="lineno">   31</span>                ++count;</div>
-<div class="line"><span class="lineno">   32</span>            } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">   33</span>                result.emplace_back(current, count);</div>
-<div class="line"><span class="lineno">   34</span>                current = chunk[i];</div>
-<div class="line"><span class="lineno">   35</span>                count = 1;</div>
-<div class="line"><span class="lineno">   36</span>            }</div>
-<div class="line"><span class="lineno">   37</span>        }</div>
-<div class="line"><span class="lineno">   38</span>        result.emplace_back(current, count);</div>
-<div class="line"><span class="lineno">   39</span> </div>
-<div class="line"><span class="lineno">   40</span>        <span class="keywordflow">return</span> result;</div>
-<div class="line"><span class="lineno">   41</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="chunk__compression_8hpp_source.html#l00020">20</a> of file <a class="el" href="chunk__compression_8hpp_source.html">chunk_compression.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   20</span>                                                                                      {</div>
+<div class="line"><span class="lineno">   21</span>        std::vector&lt;std::pair&lt;T, size_t&gt;&gt; result;</div>
+<div class="line"><span class="lineno">   22</span>        <span class="keywordflow">if</span> (chunk.empty())</div>
+<div class="line"><span class="lineno">   23</span>            <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">   24</span> </div>
+<div class="line"><span class="lineno">   25</span>        T current = chunk[0];</div>
+<div class="line"><span class="lineno">   26</span>        <span class="keywordtype">size_t</span> count = 1;</div>
+<div class="line"><span class="lineno">   27</span> </div>
+<div class="line"><span class="lineno">   28</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt; chunk.size(); ++i) {</div>
+<div class="line"><span class="lineno">   29</span>            <span class="keywordflow">if</span> (chunk[i] == current) {</div>
+<div class="line"><span class="lineno">   30</span>                ++count;</div>
+<div class="line"><span class="lineno">   31</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">   32</span>                result.emplace_back(current, count);</div>
+<div class="line"><span class="lineno">   33</span>                current = chunk[i];</div>
+<div class="line"><span class="lineno">   34</span>                count = 1;</div>
+<div class="line"><span class="lineno">   35</span>            }</div>
+<div class="line"><span class="lineno">   36</span>        }</div>
+<div class="line"><span class="lineno">   37</span>        result.emplace_back(current, count);</div>
+<div class="line"><span class="lineno">   38</span> </div>
+<div class="line"><span class="lineno">   39</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">   40</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -295,7 +295,7 @@ template&lt;typename T &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacechunk__compression.html">chunk_compression</a></li><li class="navelem"><a class="el" href="classchunk__compression_1_1ChunkCompressor.html">ChunkCompressor</a></li>
-    <li class="footer">Generated on Sun Dec 22 2024 22:05:07 for Advanced Chunk Processing Library by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Dec 22 2024 23:52:19 for Advanced Chunk Processing Library by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

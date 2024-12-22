@@ -20,7 +20,7 @@ static std\+::pair$<$ T, size\+\_\+t $>$ \mbox{\hyperlink{classchunk__utils_1_1S
 class chunk\+\_\+utils\+::\+Statistics$<$ T $>$}
 
 
-Definition at line \mbox{\hyperlink{utils_8hpp_source_l00017}{17}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
+Definition at line \mbox{\hyperlink{utils_8hpp_source_l00016}{16}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
 
 
 
@@ -34,15 +34,15 @@ static T \mbox{\hyperlink{classchunk__utils_1_1Statistics}{chunk\+\_\+utils\+::\
 
 
 
-Definition at line \mbox{\hyperlink{utils_8hpp_source_l00019}{19}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
+Definition at line \mbox{\hyperlink{utils_8hpp_source_l00018}{18}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.empty())}
-\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ T();}
-\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::accumulate(data.begin(),\ data.end(),\ T())\ /\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(data.size());}
-\DoxyCodeLine{00023\ \ \ \ \ \}}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.empty())}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ T();}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::accumulate(data.begin(),\ data.end(),\ T())\ /\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(data.size());}
+\DoxyCodeLine{00022\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \Hypertarget{classchunk__utils_1_1Statistics_a2de339505cc415f0a10975bdf388ad7d}\label{classchunk__utils_1_1Statistics_a2de339505cc415f0a10975bdf388ad7d} 
@@ -54,23 +54,23 @@ static T \mbox{\hyperlink{classchunk__utils_1_1Statistics}{chunk\+\_\+utils\+::\
 
 
 
-Definition at line \mbox{\hyperlink{utils_8hpp_source_l00025}{25}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
+Definition at line \mbox{\hyperlink{utils_8hpp_source_l00024}{24}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.empty())}
-\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ T();}
-\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ std::sort(data.begin(),\ data.end());}
-\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.size()\ \%\ 2\ ==\ 0)\ \{}
-\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ For\ even\ number\ of\ elements,\ return\ average\ of\ two\ middle\ values}}
-\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ mid\ =\ data.size()\ /\ 2;}
-\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (data[mid\ -\/\ 1]\ +\ data[mid])\ /\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(2);}
-\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ For\ odd\ number\ of\ elements,\ return\ middle\ value}}
-\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data[data.size()\ /\ 2];}
-\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00037\ \ \ \ \ \}}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.empty())}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ T();}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ std::sort(data.begin(),\ data.end());}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.size()\ \%\ 2\ ==\ 0)\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ For\ even\ number\ of\ elements,\ return\ average\ of\ two\ middle\ values}}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ mid\ =\ data.size()\ /\ 2;}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (data[mid\ -\/\ 1]\ +\ data[mid])\ /\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(2);}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ For\ odd\ number\ of\ elements,\ return\ middle\ value}}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data[data.size()\ /\ 2];}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00036\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \Hypertarget{classchunk__utils_1_1Statistics_aaaf244247e7f592fcd650f9e514b7a6d}\label{classchunk__utils_1_1Statistics_aaaf244247e7f592fcd650f9e514b7a6d} 
@@ -82,20 +82,20 @@ static std\+::pair$<$ T, size\+\_\+t $>$ \mbox{\hyperlink{classchunk__utils_1_1S
 
 
 
-Definition at line \mbox{\hyperlink{utils_8hpp_source_l00039}{39}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
+Definition at line \mbox{\hyperlink{utils_8hpp_source_l00038}{38}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.empty())}
-\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{T(),\ 0\};}
-\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ std::map<T,\ size\_t>\ freq;}
-\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ val\ :\ data)}
-\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ freq[val]++;}
-\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *std::max\_element(freq.begin(),\ freq.end(),\ [](\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ p1,\ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ p2)\ \{}
-\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ return\ p1.second\ <\ p2.second;}
-\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \});}
-\DoxyCodeLine{00048\ \ \ \ \ \}}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.empty())}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{T(),\ 0\};}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ std::map<T,\ size\_t>\ freq;}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ val\ :\ data)}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ freq[val]++;}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *std::max\_element(freq.begin(),\ freq.end(),\ [](\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ p1,\ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ p2)\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ return\ p1.second\ <\ p2.second;}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{00047\ \ \ \ \ \}}
 
 \end{DoxyCode}
 
