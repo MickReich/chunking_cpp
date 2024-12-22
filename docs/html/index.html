@@ -139,6 +139,7 @@ Data Structures</h2>
 <li>B+ tree</li>
 <li>ChunkDeque</li>
 <li>ChunkStack</li>
+<li>ChunkTreap</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md7"></a>
 Analysis &amp; Utilities</h2>
@@ -274,6 +275,13 @@ Example Usage</h3>
 <div class="line">chunk_treap.insert(3);</div>
 <div class="line">chunk_treap.insert(8);</div>
 <div class="line">chunk_treap.search(5);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// ChunkDeque example</span></div>
+<div class="line">ChunkDeque&lt;int&gt; chunk_deque;</div>
+<div class="line">chunk_deque.push_back(1);</div>
+<div class="line">chunk_deque.push_front(0);</div>
+<div class="line">chunk_deque.pop_back();</div>
+<div class="line">chunk_deque.pop_front();</div>
 <div class="ttc" id="aadvanced__structures_8hpp_html"><div class="ttname"><a href="advanced__structures_8hpp.html">advanced_structures.hpp</a></div></div>
 <div class="ttc" id="achunk__strategies_8hpp_html"><div class="ttname"><a href="chunk__strategies_8hpp.html">chunk_strategies.hpp</a></div><div class="ttdoc">Defines various strategies for chunking data based on different criteria.</div></div>
 <div class="ttc" id="aclasschunk__strategies_1_1ConditionalSubChunkStrategy_html"><div class="ttname"><a href="classchunk__strategies_1_1ConditionalSubChunkStrategy.html">chunk_strategies::ConditionalSubChunkStrategy</a></div><div class="ttdoc">Strategy for conditional sub-chunking based on chunk properties.</div><div class="ttdef"><b>Definition</b> <a href="sub__chunk__strategies_8hpp_source.html#l00182">sub_chunk_strategies.hpp:182</a></div></div>
@@ -374,7 +382,7 @@ Project Structure</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Dec 22 2024 14:05:57 for Advanced Chunk Processing Library by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Dec 22 2024 18:28:13 for Advanced Chunk Processing Library by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

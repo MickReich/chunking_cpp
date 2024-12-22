@@ -10,7 +10,7 @@ CXX := g++
 CXXFLAGS := -std=c++17 -Wall -Wextra
 
 # Ensure build directory exists and is configured
-.PHONY: setup-build test docs docs-clean docs-serve local-help run uninstall format format-check
+.PHONY: setup-build test docs docs-clean docs-serve docs-stop local-help run uninstall format format-check
 
 setup-build:
 	@mkdir -p $(BUILD_DIR)
@@ -77,14 +77,14 @@ docs-serve: docs
 		echo "Error: Documentation not found. Running 'make docs' first..."; \
 		$(MAKE) docs; \
 	fi
-	@mkdir -p $(BUILD_DIR)
+	@mkdir -p $(DOC_DIR)
 	@echo "Starting documentation server on port 8000..."
 	@if lsof -Pi :8000 -sTCP:LISTEN -t >/dev/null ; then \
 		echo "Port 8000 is already in use. Killing existing process..." ; \
 		lsof -ti :8000 | xargs kill -9 ; \
 	fi
 	@cd $(DOC_DIR)/html && \
-	(python3 -m http.server --bind 127.0.0.1 8000 2>/dev/null & echo $$! > $(BUILD_DIR)/.docs-server.pid) && \
+	(python3 -m http.server --bind 127.0.0.1 8000 2>/dev/null & echo $$! > $(DOC_DIR)/.docs-server.pid) && \
 	echo "Documentation server started. Visit http://localhost:8000"
 
 # Help target
@@ -95,6 +95,7 @@ local-help:
 	@echo "  docs         - Generate documentation"
 	@echo "  docs-clean   - Remove generated documentation"
 	@echo "  docs-serve   - Serve documentation locally at http://localhost:8000"
+	@echo "  docs-stop    - Stop the documentation server"
 	@echo "  uninstall    - Remove all build artifacts (alias for clean)"
 	@echo "  format       - Format source files using clang-format"
 	@echo "  format-check - Check if source files are properly formatted"
@@ -125,11 +126,10 @@ format-check:
 	@clang-format --dry-run -Werror $(SRC_FILES)
 	@echo "All files are properly formatted"
 
-.PHONY: docs-stop
 docs-stop:
-	@mkdir -p $(BUILD_DIR)
-	@if [ -f $(BUILD_DIR)/.docs-server.pid ]; then \
-		echo "Stopping documentation server..." ; \
+	@mkdir -p $(DOC_DIR)
+	@if [ -f $(DOC_DIR)/.docs-server.pid ]; then \
+		echo "Stopping DOC_DIR server..." ; \
 		kill -9 `cat $(BUILD_DIR)/.docs-server.pid` 2>/dev/null || true ; \
-		rm $(BUILD_DIR)/.docs-server.pid ; \
+		rm $(DOC_DIR)/.docs-server.pid ; \
 	fi
