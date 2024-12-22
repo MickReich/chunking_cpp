@@ -41,45 +41,9 @@ private:
     std::unique_ptr<ChunkNode> root;           ///< Root node of the chunk tree
     double complexity_threshold;                ///< Threshold for determining chunk boundaries
     
-    /**
-     * @brief Measures the complexity of a data segment
-     * 
-     * @param data Vector of data to analyze
-     * @return double Complexity score between 0.0 and 1.0
-     */
-    double measureComplexity(const std::vector<T>& data) {
-        if (data.size() < 2) return 0.0;
-        
-        T mean = std::accumulate(data.begin(), data.end(), T(0)) / data.size();
-        double variance = 0.0;
-        
-        for (const auto& val : data) {
-            double diff = val - mean;
-            variance += diff * diff;
-        }
-        variance /= data.size();
-        
-        // Normalize variance to [0,1] range using a suitable scale factor
-        return std::min(1.0, variance / (complexity_threshold * complexity_threshold));
-    }
-    
-    std::vector<std::vector<T>> splitChunk(const std::vector<T>& chunk) {
-        if (chunk.size() <= 3) return {chunk};  // Base case: small enough chunk
-        
-        double complexity = measureComplexity(chunk);
-        if (complexity < complexity_threshold) return {chunk};  // Simple enough chunk
-        
-        // Split into smaller chunks
-        std::vector<std::vector<T>> result;
-        size_t chunk_size = 3;  // Maximum chunk size
-        
-        for (size_t i = 0; i < chunk.size(); i += chunk_size) {
-            size_t end = std::min(i + chunk_size, chunk.size());
-            result.push_back(std::vector<T>(chunk.begin() + i, chunk.begin() + end));
-        }
-        
-        return result;
-    }
+    // Declare but don't define these methods here
+    double measureComplexity(const std::vector<T>& data);
+    size_t calculateAdaptiveSize(double complexity);
 
 public:
     /**
@@ -91,49 +55,123 @@ public:
         root = std::make_unique<ChunkNode>();
     }
 
-    /**
-     * @brief Chunks the input data adaptively
-     * 
-     * @param data Input data to be chunked
-     * @return std::vector<std::vector<T>> Vector of chunks
-     */
-    std::vector<std::vector<T>> chunk(const std::vector<T>& data) {
-        if (data.empty()) return {};
-        
-        std::vector<std::vector<T>> result;
-        std::vector<T> current_chunk;
-        
-        for (size_t i = 0; i < data.size(); ++i) {
-            current_chunk.push_back(data[i]);
-            
-            if (current_chunk.size() == 3 || i == data.size() - 1) {
-                auto sub_chunks = splitChunk(current_chunk);
-                result.insert(result.end(), sub_chunks.begin(), sub_chunks.end());
-                current_chunk.clear();
-            }
-        }
-        
-        return result;
-    }
+    // Declare but don't define this method here
+    std::vector<std::vector<T>> chunk(const std::vector<T>& data);
 };
 
-/**
- * @brief Specialization of measureComplexity for uint8_t data
- * 
- * @param data Binary data to analyze
- * @return double Complexity score
- */
-template<>
-double AdaptiveChunkTree<uint8_t>::measureComplexity(const std::vector<uint8_t>& data);
+// Define the methods outside the class
+template<typename T>
+std::vector<std::vector<T>> AdaptiveChunkTree<T>::chunk(const std::vector<T>& data) {
+    std::vector<std::vector<T>> result;
+    if (data.empty()) {
+        return result;
+    }
 
-/**
- * @brief Specialization of measureComplexity for character data
- * 
- * @param data Character data to analyze
- * @return double Complexity score
- */
+    // Calculate initial complexity
+    double complexity = measureComplexity(data);
+    size_t chunk_size = calculateAdaptiveSize(complexity);
+
+    // Create chunks based on adaptive size
+    std::vector<T> current_chunk;
+    for (const T& element : data) {
+        current_chunk.push_back(element);
+        
+        if (current_chunk.size() >= chunk_size) {
+            // Check if current chunk needs further splitting
+            double chunk_complexity = measureComplexity(current_chunk);
+            if (chunk_complexity > complexity_threshold) {
+                // Split into smaller chunks recursively
+                auto sub_chunks = chunk(current_chunk);
+                result.insert(result.end(), sub_chunks.begin(), sub_chunks.end());
+            } else {
+                result.push_back(current_chunk);
+            }
+            current_chunk.clear();
+        }
+    }
+
+    // Handle remaining elements
+    if (!current_chunk.empty()) {
+        result.push_back(current_chunk);
+    }
+
+    return result;
+}
+
+template<typename T>
+double AdaptiveChunkTree<T>::measureComplexity(const std::vector<T>& data) {
+    if (data.empty()) return 0.0;
+    
+    // Calculate statistical variance as a measure of complexity
+    T sum = std::accumulate(data.begin(), data.end(), T());
+    double mean = static_cast<double>(sum) / data.size();
+    
+    double variance = 0.0;
+    for (const T& value : data) {
+        double diff = static_cast<double>(value) - mean;
+        variance += diff * diff;
+    }
+    variance /= data.size();
+    
+    // Normalize variance to [0,1] using a reasonable maximum value
+    const double MAX_VARIANCE = 1000.0;
+    return std::min(1.0, variance / MAX_VARIANCE);
+}
+
+template<typename T>
+size_t AdaptiveChunkTree<T>::calculateAdaptiveSize(double complexity) {
+    // Base chunk size range
+    const size_t MIN_CHUNK_SIZE = 2;
+    const size_t MAX_CHUNK_SIZE = 64;
+    
+    // Inverse relationship between complexity and chunk size
+    double size_factor = 1.0 - complexity;
+    size_t adaptive_size = MIN_CHUNK_SIZE + 
+        static_cast<size_t>((MAX_CHUNK_SIZE - MIN_CHUNK_SIZE) * size_factor);
+    
+    return std::max(MIN_CHUNK_SIZE, std::min(MAX_CHUNK_SIZE, adaptive_size));
+}
+
+// Specializations
 template<>
-double AdaptiveChunkTree<char>::measureComplexity(const std::vector<char>& data);
+double AdaptiveChunkTree<uint8_t>::measureComplexity(const std::vector<uint8_t>& data) {
+    if (data.empty()) return 0.0;
+    
+    // Calculate entropy as a measure of complexity
+    std::array<int, 256> frequency = {0};
+    for (uint8_t byte : data) {
+        frequency[byte]++;
+    }
+    
+    double entropy = 0.0;
+    for (int count : frequency) {
+        if (count > 0) {
+            double probability = static_cast<double>(count) / data.size();
+            entropy -= probability * std::log2(probability);
+        }
+    }
+    
+    // Normalize entropy to [0,1]
+    return entropy / 8.0;
+}
+
+template<>
+double AdaptiveChunkTree<char>::measureComplexity(const std::vector<char>& data) {
+    if (data.empty()) return 0.0;
+    
+    // Calculate character diversity as a measure of complexity
+    std::array<int, 128> frequency = {0};
+    int unique_chars = 0;
+    
+    for (char c : data) {
+        if (frequency[static_cast<unsigned char>(c)]++ == 0) {
+            unique_chars++;
+        }
+    }
+    
+    // Return normalized complexity score
+    return static_cast<double>(unique_chars) / 128.0;
+}
 
 // Default NLP model implementation
 struct DefaultNLPModel {
@@ -554,121 +592,6 @@ public:
         return search(root, value);
     }
 };
-
-template<typename T>
-std::vector<std::vector<T>> AdaptiveChunkTree<T>::chunk(const std::vector<T>& data) {
-    std::vector<std::vector<T>> result;
-    if (data.empty()) {
-        return result;
-    }
-
-    // Calculate initial complexity
-    double complexity = measureComplexity(data);
-    size_t chunk_size = calculateAdaptiveSize(complexity);
-
-    // Create chunks based on adaptive size
-    std::vector<T> current_chunk;
-    for (const T& element : data) {
-        current_chunk.push_back(element);
-        
-        if (current_chunk.size() >= chunk_size) {
-            // Check if current chunk needs further splitting
-            double chunk_complexity = measureComplexity(current_chunk);
-            if (chunk_complexity > complexity_threshold) {
-                // Split into smaller chunks recursively
-                auto sub_chunks = chunk(current_chunk);
-                result.insert(result.end(), sub_chunks.begin(), sub_chunks.end());
-            } else {
-                result.push_back(current_chunk);
-            }
-            current_chunk.clear();
-        }
-    }
-
-    // Handle remaining elements
-    if (!current_chunk.empty()) {
-        result.push_back(current_chunk);
-    }
-
-    return result;
-}
-
-// Specialization for uint8_t
-template<>
-double AdaptiveChunkTree<uint8_t>::measureComplexity(const std::vector<uint8_t>& data) {
-    if (data.empty()) return 0.0;
-    
-    // Calculate entropy as a measure of complexity
-    std::array<int, 256> frequency = {0};
-    for (uint8_t byte : data) {
-        frequency[byte]++;
-    }
-    
-    double entropy = 0.0;
-    for (int count : frequency) {
-        if (count > 0) {
-            double probability = static_cast<double>(count) / data.size();
-            entropy -= probability * std::log2(probability);
-        }
-    }
-    
-    // Normalize entropy to [0,1]
-    return entropy / 8.0;
-}
-
-// Specialization for char
-template<>
-double AdaptiveChunkTree<char>::measureComplexity(const std::vector<char>& data) {
-    if (data.empty()) return 0.0;
-    
-    // Calculate character diversity as a measure of complexity
-    std::array<int, 128> frequency = {0};
-    int unique_chars = 0;
-    
-    for (char c : data) {
-        if (frequency[static_cast<unsigned char>(c)]++ == 0) {
-            unique_chars++;
-        }
-    }
-    
-    // Return normalized complexity score
-    return static_cast<double>(unique_chars) / 128.0;
-}
-
-// Default implementation for other types
-template<typename T>
-double AdaptiveChunkTree<T>::measureComplexity(const std::vector<T>& data) {
-    if (data.empty()) return 0.0;
-    
-    // Calculate statistical variance as a measure of complexity
-    T sum = std::accumulate(data.begin(), data.end(), T());
-    double mean = static_cast<double>(sum) / data.size();
-    
-    double variance = 0.0;
-    for (const T& value : data) {
-        double diff = static_cast<double>(value) - mean;
-        variance += diff * diff;
-    }
-    variance /= data.size();
-    
-    // Normalize variance to [0,1] using a reasonable maximum value
-    const double MAX_VARIANCE = 1000.0;
-    return std::min(1.0, variance / MAX_VARIANCE);
-}
-
-template<typename T>
-size_t AdaptiveChunkTree<T>::calculateAdaptiveSize(double complexity) {
-    // Base chunk size range
-    const size_t MIN_CHUNK_SIZE = 2;
-    const size_t MAX_CHUNK_SIZE = 64;
-    
-    // Inverse relationship between complexity and chunk size
-    double size_factor = 1.0 - complexity;
-    size_t adaptive_size = MIN_CHUNK_SIZE + 
-        static_cast<size_t>((MAX_CHUNK_SIZE - MIN_CHUNK_SIZE) * size_factor);
-    
-    return std::max(MIN_CHUNK_SIZE, std::min(MAX_CHUNK_SIZE, adaptive_size));
-}
 
 /**
  * @brief Semantic boundaries-based chunking implementation
