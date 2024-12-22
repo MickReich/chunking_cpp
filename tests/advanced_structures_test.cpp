@@ -108,3 +108,29 @@ TEST_F(ChunkBPlusTreeTest, EdgeCases) {
     EXPECT_TRUE(tree.search(2));
     EXPECT_FALSE(tree.search(3));
 }
+
+TEST(ChunkDequeTest, BasicOperations) {
+    ChunkDeque<int> deque;
+    EXPECT_TRUE(deque.empty());
+
+    deque.push_back(1);
+    deque.push_front(0);
+    EXPECT_EQ(deque.size(), 2);
+
+    EXPECT_EQ(deque.pop_back(), 1);
+    EXPECT_EQ(deque.pop_front(), 0);
+    EXPECT_TRUE(deque.empty());
+}
+
+TEST(ChunkStackTest, BasicOperations) {
+    ChunkStack<int> stack;
+    EXPECT_TRUE(stack.empty());
+
+    stack.push(1);
+    stack.push(2);
+    EXPECT_EQ(stack.size(), 2);
+
+    EXPECT_EQ(stack.pop(), 2);
+    EXPECT_EQ(stack.pop(), 1);
+    EXPECT_TRUE(stack.empty());
+}

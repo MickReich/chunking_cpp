@@ -44,6 +44,8 @@ This library offers a comprehensive suite of tools for handling data in chunks, 
 - Chunk list
 - Skip list
 - B+ tree
+- ChunkDeque
+- ChunkStack
 
 ### Analysis & Utilities
 
@@ -120,6 +122,8 @@ auto chunks = chunker.get_chunks(); // Returns: {{1,2}, {3,4}, {5}}
 - **Similarity-based Chunking**: Create chunks based on similarity
 - **Monotonicity-based Chunking**: Create chunks based on monotonicity
 - **Padded Fixed-size Chunking**: Create chunks based on a padded fixed-size
+- **ChunkDeque**: A deque-based chunk structure for double-ended operations
+- **ChunkStack**: A stack-based chunk structure for LIFO operations
 
 ```cpp
 #include "chunk.hpp"

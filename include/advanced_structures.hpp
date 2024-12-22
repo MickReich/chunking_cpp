@@ -5,6 +5,8 @@
 #include <memory>
 #include <stdexcept>
 #include <vector>
+#include <deque>
+#include <stack>
 
 namespace advanced_structures {
 
@@ -182,6 +184,74 @@ private:
         }
 
         return search_node(node->children[i], key);
+    }
+};
+
+/**
+ * @brief A deque-based chunk structure for double-ended operations
+ * @tparam T The type of elements stored in the chunk deque
+ */
+template <typename T>
+class ChunkDeque {
+private:
+    std::deque<T> data_;
+
+public:
+    void push_back(const T& value) {
+        data_.push_back(value);
+    }
+
+    void push_front(const T& value) {
+        data_.push_front(value);
+    }
+
+    T pop_back() {
+        T value = data_.back();
+        data_.pop_back();
+        return value;
+    }
+
+    T pop_front() {
+        T value = data_.front();
+        data_.pop_front();
+        return value;
+    }
+
+    size_t size() const {
+        return data_.size();
+    }
+
+    bool empty() const {
+        return data_.empty();
+    }
+};
+
+/**
+ * @brief A stack-based chunk structure for LIFO operations
+ * @tparam T The type of elements stored in the chunk stack
+ */
+template <typename T>
+class ChunkStack {
+private:
+    std::stack<T> data_;
+
+public:
+    void push(const T& value) {
+        data_.push(value);
+    }
+
+    T pop() {
+        T value = data_.top();
+        data_.pop();
+        return value;
+    }
+
+    size_t size() const {
+        return data_.size();
+    }
+
+    bool empty() const {
+        return data_.empty();
     }
 };
 

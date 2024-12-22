@@ -496,5 +496,22 @@ int main() {
     char_chunker.add(std::vector<char>(char_data.begin(), char_data.end()));
     print_chunks(char_chunker.get_chunks());
 
+    // Example: ChunkDeque usage
+    std::cout << "\n=== ChunkDeque Example ===" << std::endl;
+    advanced_structures::ChunkDeque<int> chunk_deque;
+    chunk_deque.push_back(1);
+    chunk_deque.push_front(0);
+    std::cout << "Deque size: " << chunk_deque.size() << std::endl;
+    std::cout << "Popped from back: " << chunk_deque.pop_back() << std::endl;
+    std::cout << "Popped from front: " << chunk_deque.pop_front() << std::endl;
+
+    // Example: ChunkStack usage
+    std::cout << "\n=== ChunkStack Example ===" << std::endl;
+    advanced_structures::ChunkStack<int> chunk_stack;
+    chunk_stack.push(1);
+    chunk_stack.push(2);
+    std::cout << "Stack size: " << chunk_stack.size() << std::endl;
+    std::cout << "Popped from stack: " << chunk_stack.pop() << std::endl;
+
     return 0;
 }
