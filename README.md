@@ -186,6 +186,12 @@ chunk_treap.insert(3);
 chunk_treap.insert(8);
 chunk_treap.search(5);
 
+// ChunkDeque example
+ChunkDeque<int> chunk_deque;
+chunk_deque.push_back(1);
+chunk_deque.push_front(0);
+chunk_deque.pop_back();
+chunk_deque.pop_front();
 ```
 
 See `src/main.cpp` for more comprehensive examples.
