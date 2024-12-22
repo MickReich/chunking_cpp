@@ -40,6 +40,7 @@ private:
     
     std::unique_ptr<ChunkNode> root;           ///< Root node of the chunk tree
     double complexity_threshold;                ///< Threshold for determining chunk boundaries
+    static constexpr size_t MAX_CHUNK_SIZE = 3;
     
     // Declare but don't define these methods here
     double measureComplexity(const std::vector<T>& data);
@@ -102,41 +103,46 @@ template<typename T>
 double AdaptiveChunkTree<T>::measureComplexity(const std::vector<T>& data) {
     if (data.size() < 2) return 0.0;
     
-    // Safe conversion to double for calculations
-    std::vector<double> double_data;
-    double_data.reserve(data.size());
+    // Convert to doubles and find range for normalization
+    std::vector<double> values;
+    values.reserve(data.size());
+    
+    double min_val = static_cast<double>(data[0]);
+    double max_val = min_val;
+    
     for (const auto& val : data) {
-        double_data.push_back(static_cast<double>(val));
+        double d_val = static_cast<double>(val);
+        values.push_back(d_val);
+        min_val = std::min(min_val, d_val);
+        max_val = std::max(max_val, d_val);
     }
     
-    // Calculate mean safely
+    // Normalize values to [0,1] range
+    double range = max_val - min_val;
+    if (range < std::numeric_limits<double>::epsilon()) {
+        return 0.0;  // All values are the same
+    }
+    
+    // Calculate normalized variance
     double sum = 0.0;
-    for (const double& val : double_data) {
-        sum += val;
+    double sq_sum = 0.0;
+    
+    for (double val : values) {
+        double normalized = (val - min_val) / range;
+        sum += normalized;
+        sq_sum += normalized * normalized;
     }
-    double mean = sum / double_data.size();
     
-    // Calculate variance safely
-    double max_val = *std::max_element(double_data.begin(), double_data.end());
-    double min_val = *std::min_element(double_data.begin(), double_data.end());
-    double range = std::max(std::abs(max_val - min_val), 1.0);  // Avoid division by zero
+    double mean = sum / values.size();
+    double variance = (sq_sum / values.size()) - (mean * mean);
     
-    double variance = 0.0;
-    for (const double& val : double_data) {
-        double diff = val - mean;
-        variance += (diff * diff) / (range * range);  // Normalize as we go
-    }
-    variance /= double_data.size();
-    
-    // Calculate rate of change safely
+    // Calculate normalized rate of change
     double rate_change = 0.0;
-    for (size_t i = 1; i < double_data.size(); ++i) {
-        double diff = std::abs(double_data[i] - double_data[i-1]);
-        rate_change += diff / range;  // Normalize as we go
+    for (size_t i = 1; i < values.size(); ++i) {
+        double diff = std::abs(values[i] - values[i-1]) / range;
+        rate_change = std::max(rate_change, diff);
     }
-    rate_change /= (double_data.size() - 1);
     
-    // Combine metrics safely
     return std::min(1.0, std::max(variance, rate_change));
 }
 
@@ -159,16 +165,26 @@ template<>
 double AdaptiveChunkTree<uint8_t>::measureComplexity(const std::vector<uint8_t>& data) {
     if (data.size() < 2) return 0.0;
     
+    // For uint8_t, we can work directly with the values
+    uint8_t min_val = data[0];
+    uint8_t max_val = data[0];
+    
+    for (uint8_t val : data) {
+        min_val = std::min(min_val, val);
+        max_val = std::max(max_val, val);
+    }
+    
+    // Calculate normalized differences
+    double range = static_cast<double>(max_val - min_val);
+    if (range < 1.0) return 0.0;  // All values are the same
+    
     double max_diff = 0.0;
     for (size_t i = 1; i < data.size(); ++i) {
-        // Safe conversion to double before subtraction
-        double val1 = static_cast<double>(data[i]);
-        double val2 = static_cast<double>(data[i-1]);
-        double diff = std::abs(val1 - val2);
+        double diff = std::abs(static_cast<double>(data[i]) - static_cast<double>(data[i-1])) / range;
         max_diff = std::max(max_diff, diff);
     }
     
-    return max_diff / 255.0;  // Already normalized
+    return max_diff;
 }
 
 template<>
