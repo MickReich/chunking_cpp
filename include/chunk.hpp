@@ -10,13 +10,16 @@
 
 /**
  * @file chunk.hpp
- * @brief Defines the Chunk class for managing data in fixed-size chunks.
  */
 
 #pragma once
 
 /**
- * @brief A class for managing data in fixed-size chunks.
+ * @brief A template class for managing and processing data in chunks
+ *
+ * This class provides various methods for splitting data into chunks,
+ * including fixed-size chunks, overlapping chunks, and predicate-based chunking.
+ *
  * @tparam T The type of elements stored in the chunk.
  */
 template <typename T>
