@@ -17,22 +17,18 @@
 namespace chunk_strategies {
 
 /**
- * @brief Base class for chunk strategies.
- * @tparam T The type of elements to process.
+ * @brief Base class for chunking strategies
+ * @tparam T The type of elements to be chunked
  */
 template <typename T>
 class ChunkStrategy {
 public:
     /**
-     * @brief Apply the chunking strategy to a dataset.
-     * @param data The input data to process.
-     * @return A vector of chunks.
+     * @brief Applies the chunking strategy to the data
+     * @param data The data to chunk
+     * @return A vector of chunks
      */
-    virtual std::vector<std::vector<T>> apply(const std::vector<T>& data) = 0;
-
-    /**
-     * @brief Virtual destructor for proper cleanup.
-     */
+    virtual std::vector<std::vector<T>> apply(const std::vector<T>& data) const = 0;
     virtual ~ChunkStrategy() = default;
 };
 
@@ -50,30 +46,28 @@ public:
         }
     }
 
-    std::vector<std::vector<T>> apply(const std::vector<T>& data) override {
-        if (data.empty())
-            return {};
-        if (data.size() == 1)
-            return {data};
-
-        std::vector<T> sorted = data;
-        std::sort(sorted.begin(), sorted.end());
-        T threshold = sorted[sorted.size() / 2];
-
+    std::vector<std::vector<T>> apply(const std::vector<T>& data) const override {
+        if (data.empty()) return {};
+        
+        std::vector<T> sorted_data = data;
+        std::sort(sorted_data.begin(), sorted_data.end());
+        T threshold = sorted_data[static_cast<size_t>(quantile_ * (data.size() - 1))];
+        
         std::vector<std::vector<T>> chunks;
-        std::vector<T> lower_chunk, upper_chunk;
-
+        std::vector<T> current_chunk;
+        
         for (const T& value : data) {
-            if (value <= threshold) {
-                lower_chunk.push_back(value);
-            } else {
-                upper_chunk.push_back(value);
+            if (!current_chunk.empty() && value > threshold) {
+                chunks.push_back(current_chunk);
+                current_chunk.clear();
             }
+            current_chunk.push_back(value);
         }
-
-        chunks.push_back(lower_chunk);
-        chunks.push_back(upper_chunk);
-
+        
+        if (!current_chunk.empty()) {
+            chunks.push_back(current_chunk);
+        }
+        
         return chunks;
     }
 };
@@ -85,25 +79,26 @@ template <typename T>
 class VarianceStrategy : public ChunkStrategy<T> {
     double threshold_;
 
-    double calculate_variance(const std::vector<T>& values) {
-        if (values.size() < 2)
+    double calculate_variance(const std::vector<T>& chunk) const {
+        if (chunk.size() < 2)
             return 0.0;
-        double mean = std::accumulate(values.begin(), values.end(), 0.0) / values.size();
+        double mean = std::accumulate(chunk.begin(), chunk.end(), 0.0) / chunk.size();
         double sq_sum = 0.0;
-        for (const T& val : values) {
-            sq_sum += (val - mean) * (val - mean);
+        for (const T& val : chunk) {
+            double diff = val - mean;
+            sq_sum += diff * diff;
         }
-        return sq_sum / values.size();
+        return sq_sum / chunk.size();
     }
 
 public:
     explicit VarianceStrategy(double threshold) : threshold_(threshold) {}
 
-    std::vector<std::vector<T>> apply(const std::vector<T>& data) override {
+    std::vector<std::vector<T>> apply(const std::vector<T>& data) const override {
         std::vector<std::vector<T>> chunks;
         std::vector<T> current_chunk;
 
-        for (const T& value : data) {
+        for (const auto& value : data) {
             current_chunk.push_back(value);
             if (calculate_variance(current_chunk) > threshold_) {
                 if (current_chunk.size() > 1) {
@@ -129,18 +124,18 @@ template <typename T>
 class EntropyStrategy : public ChunkStrategy<T> {
     double threshold_;
 
-    double calculate_entropy(const std::vector<T>& values) {
-        if (values.empty())
+    double calculate_entropy(const std::vector<T>& chunk) const {
+        if (chunk.empty())
             return 0.0;
 
         std::map<T, int> freq;
-        for (const T& val : values) {
+        for (const auto& val : chunk) {
             freq[val]++;
         }
 
         double entropy = 0.0;
         for (const auto& [_, count] : freq) {
-            double p = static_cast<double>(count) / values.size();
+            double p = static_cast<double>(count) / chunk.size();
             entropy -= p * std::log2(p);
         }
 
@@ -150,11 +145,11 @@ class EntropyStrategy : public ChunkStrategy<T> {
 public:
     explicit EntropyStrategy(double threshold) : threshold_(threshold) {}
 
-    std::vector<std::vector<T>> apply(const std::vector<T>& data) override {
+    std::vector<std::vector<T>> apply(const std::vector<T>& data) const override {
         std::vector<std::vector<T>> chunks;
         std::vector<T> current_chunk;
 
-        for (const T& value : data) {
+        for (const auto& value : data) {
             current_chunk.push_back(value);
             if (calculate_entropy(current_chunk) > threshold_) {
                 if (current_chunk.size() > 1) {
@@ -267,7 +262,7 @@ template <>
 class EntropyStrategy<std::string> : public ChunkStrategy<std::string> {
     double threshold_;
 
-    double calculate_entropy(const std::vector<std::string>& values) {
+    double calculate_entropy(const std::vector<std::string>& values) const {
         if (values.empty())
             return 0.0;
 
@@ -288,7 +283,7 @@ class EntropyStrategy<std::string> : public ChunkStrategy<std::string> {
 public:
     explicit EntropyStrategy(double threshold) : threshold_(threshold) {}
 
-    std::vector<std::vector<std::string>> apply(const std::vector<std::string>& data) override {
+    std::vector<std::vector<std::string>> apply(const std::vector<std::string>& data) const override {
         std::vector<std::vector<std::string>> chunks;
         std::vector<std::string> current_chunk;
 

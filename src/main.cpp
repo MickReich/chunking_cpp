@@ -41,7 +41,11 @@ using namespace chunk_compression;   // For ChunkCompressor
 using namespace chunk_strategies;    // For QuantileStrategy, VarianceStrategy, etc.
 using namespace chunk_windows;
 
-// Helper function to print chunks
+/**
+ * @brief Helper function to print chunks
+ * @tparam T The type of elements in the chunks
+ * @param chunks The vector of chunks to print
+ */
 template <typename T>
 void print_chunks(const std::vector<std::vector<T>>& chunks) {
     std::cout << "Chunks: [" << std::endl;

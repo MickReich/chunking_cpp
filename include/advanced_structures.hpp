@@ -161,6 +161,10 @@ private:
     float p;
     int current_level;
 
+    /**
+     * @brief Generates a random level for node insertion
+     * @return The random level
+     */
     int random_level() {
         int lvl = 1;
         while ((static_cast<float>(rand()) / RAND_MAX) < p && lvl < max_level) {
@@ -170,11 +174,20 @@ private:
     }
 
 public:
+    /**
+     * @brief Constructs a new ChunkSkipList object
+     * @param max_lvl Maximum level of the skip list
+     * @param prob Probability factor for level generation
+     */
     ChunkSkipList(int max_lvl = 16, float prob = 0.5)
         : max_level(max_lvl), p(prob), current_level(1) {
         head = std::make_shared<Node>(T(), max_level);
     }
 
+    /**
+     * @brief Inserts a value into the skip list
+     * @param value The value to insert
+     */
     void insert(const T& value) {
         std::vector<std::shared_ptr<Node>> update(max_level);
         auto current = head;
@@ -201,6 +214,11 @@ public:
         }
     }
 
+    /**
+     * @brief Searches for a value in the skip list
+     * @param value The value to search for
+     * @return True if the value is found, false otherwise
+     */
     bool search(const T& value) const {
         auto current = head;
         for (int i = current_level - 1; i >= 0; i--) {
@@ -233,8 +251,15 @@ class ChunkBPlusTree {
     std::shared_ptr<Node> root;
 
 public:
+    /**
+     * @brief Constructs a new ChunkBPlusTree object
+     */
     ChunkBPlusTree() : root(std::make_shared<Node>()) {}
 
+    /**
+     * @brief Inserts a key into the B+ tree
+     * @param key The key to insert
+     */
     void insert(const T& key) {
         if (root->keys.empty()) {
             root->keys.push_back(key);
@@ -250,6 +275,11 @@ public:
         insert_non_full(root, key);
     }
 
+    /**
+     * @brief Searches for a key in the B+ tree
+     * @param key The key to search for
+     * @return True if the key is found, false otherwise
+     */
     bool search(const T& key) const {
         if (root == nullptr)
             return false;

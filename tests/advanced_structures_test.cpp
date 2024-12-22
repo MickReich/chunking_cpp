@@ -7,7 +7,11 @@
 
 using namespace advanced_structures;
 
-// Helper function to print a vector
+/**
+ * @brief Helper function to print a vector
+ * @tparam T The type of elements in the vector
+ * @param vec The vector to print
+ */
 template <typename T>
 void printVector(const std::vector<T>& vec) {
     std::cout << "[";
@@ -20,6 +24,9 @@ void printVector(const std::vector<T>& vec) {
     std::cout << "]";
 }
 
+/**
+ * @brief Test fixture for ChunkSkipList tests
+ */
 class ChunkSkipListTest : public ::testing::Test {
 protected:
     void SetUp() override {
@@ -28,6 +35,9 @@ protected:
     std::vector<int> test_data;
 };
 
+/**
+ * @brief Test fixture for ChunkBPlusTree tests
+ */
 class ChunkBPlusTreeTest : public ::testing::Test {
 protected:
     void SetUp() override {
@@ -36,6 +46,9 @@ protected:
     std::vector<int> test_data;
 };
 
+/**
+ * @brief Tests basic operations of ChunkSkipList
+ */
 TEST_F(ChunkSkipListTest, BasicOperations) {
     ChunkSkipList<int> skip_list;
 
@@ -68,6 +81,9 @@ TEST_F(ChunkSkipListTest, BasicOperations) {
     }
 }
 
+/**
+ * @brief Tests basic operations of ChunkBPlusTree
+ */
 TEST_F(ChunkBPlusTreeTest, BasicOperations) {
     ChunkBPlusTree<int> tree;
 
@@ -87,6 +103,9 @@ TEST_F(ChunkBPlusTreeTest, BasicOperations) {
     EXPECT_FALSE(tree.search(10));
 }
 
+/**
+ * @brief Stress test for ChunkSkipList
+ */
 TEST_F(ChunkSkipListTest, StressTest) {
     ChunkSkipList<int> skip_list;
     const int NUM_ELEMENTS = 10000;
@@ -107,12 +126,18 @@ TEST_F(ChunkSkipListTest, StressTest) {
     }
 }
 
+/**
+ * @brief Tests empty operations of ChunkSkipList
+ */
 TEST_F(ChunkSkipListTest, EmptyOperations) {
     ChunkSkipList<int> list;
     EXPECT_TRUE(list.search(1) == false);
     EXPECT_TRUE(list.search(0) == false);
 }
 
+/**
+ * @brief Tests edge cases for ChunkBPlusTree
+ */
 TEST_F(ChunkBPlusTreeTest, EdgeCases) {
     ChunkBPlusTree<int> tree;
     tree.insert(1);
@@ -124,6 +149,9 @@ TEST_F(ChunkBPlusTreeTest, EdgeCases) {
     EXPECT_FALSE(tree.search(3));
 }
 
+/**
+ * @brief Tests basic operations of ChunkDeque
+ */
 TEST(ChunkDequeTest, BasicOperations) {
     ChunkDeque<int> deque;
     EXPECT_TRUE(deque.empty());
@@ -137,6 +165,9 @@ TEST(ChunkDequeTest, BasicOperations) {
     EXPECT_TRUE(deque.empty());
 }
 
+/**
+ * @brief Tests basic operations of ChunkStack
+ */
 TEST(ChunkStackTest, BasicOperations) {
     ChunkStack<int> stack;
     EXPECT_TRUE(stack.empty());
@@ -150,6 +181,9 @@ TEST(ChunkStackTest, BasicOperations) {
     EXPECT_TRUE(stack.empty());
 }
 
+/**
+ * @brief Tests basic operations of ChunkTreap
+ */
 TEST(ChunkTreapTest, BasicOperations) {
     ChunkTreap<int> treap;
     EXPECT_FALSE(treap.search(5));
@@ -164,6 +198,9 @@ TEST(ChunkTreapTest, BasicOperations) {
     EXPECT_FALSE(treap.search(10));
 }
 
+/**
+ * @brief Tests basic operations of SemanticBoundariesChunk
+ */
 TEST(SemanticBoundariesChunkTest, BasicOperations) {
     SemanticBoundariesChunk<std::string> chunk;
     std::vector<std::string> data = {"This", "is", "a", "test", "sentence"};
@@ -171,6 +208,9 @@ TEST(SemanticBoundariesChunkTest, BasicOperations) {
     EXPECT_GT(result.size(), 0);
 }
 
+/**
+ * @brief Tests basic operations of FractalPatternsChunk
+ */
 TEST(FractalPatternsChunkTest, BasicOperations) {
     FractalPatternsChunk<int> chunk;
     std::vector<int> data = {1, 2, 3, 4, 5, 1, 2, 3};
@@ -178,6 +218,9 @@ TEST(FractalPatternsChunkTest, BasicOperations) {
     EXPECT_GT(result.size(), 0);
 }
 
+/**
+ * @brief Tests basic operations of BloomFilterChunk
+ */
 TEST(BloomFilterChunkTest, BasicOperations) {
     BloomFilterChunk<int> chunk;
     std::vector<int> data = {1, 2, 3, 4, 5};
@@ -185,6 +228,9 @@ TEST(BloomFilterChunkTest, BasicOperations) {
     EXPECT_GT(result.size(), 0);
 }
 
+/**
+ * @brief Tests basic operations of GraphBasedChunk
+ */
 TEST(GraphBasedChunkTest, BasicOperations) {
     GraphBasedChunk<int> chunk;
     std::vector<int> data = {1, 2, 3, 4, 5};
