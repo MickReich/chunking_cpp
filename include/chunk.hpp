@@ -10,7 +10,7 @@
 
 /**
  * @file chunk.hpp
-  * @brief Template class for chunk-based data processing
+  *@brief Template class for chunk-based data processing
  * @author Jonathan Reich
  * @date 2024-12-19
  */
