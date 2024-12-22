@@ -1,0 +1,47 @@
+\doxysection{advanced\+\_\+structures\+::Default\+NLPModel Struct Reference}
+\hypertarget{structadvanced__structures_1_1DefaultNLPModel}{}\label{structadvanced__structures_1_1DefaultNLPModel}\index{advanced\_structures::DefaultNLPModel@{advanced\_structures::DefaultNLPModel}}
+
+
+{\ttfamily \#include $<$advanced\+\_\+structures.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Content\+Type $>$ }\\double \mbox{\hyperlink{structadvanced__structures_1_1DefaultNLPModel_a4cdab22339ba7f166c158af6fd801178}{calculate\+Similarity}} (const Content\+Type \&content1, const Content\+Type \&content2)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{advanced__structures_8hpp_source_l00019}{19}} of file \mbox{\hyperlink{advanced__structures_8hpp_source}{advanced\+\_\+structures.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structadvanced__structures_1_1DefaultNLPModel_a4cdab22339ba7f166c158af6fd801178}\label{structadvanced__structures_1_1DefaultNLPModel_a4cdab22339ba7f166c158af6fd801178} 
+\index{advanced\_structures::DefaultNLPModel@{advanced\_structures::DefaultNLPModel}!calculateSimilarity@{calculateSimilarity}}
+\index{calculateSimilarity@{calculateSimilarity}!advanced\_structures::DefaultNLPModel@{advanced\_structures::DefaultNLPModel}}
+\doxysubsubsection{\texorpdfstring{calculateSimilarity()}{calculateSimilarity()}}
+{\footnotesize\ttfamily template$<$typename Content\+Type $>$ \\
+double advanced\+\_\+structures\+::\+Default\+NLPModel\+::calculate\+Similarity (\begin{DoxyParamCaption}\item[{const Content\+Type \&}]{content1,  }\item[{const Content\+Type \&}]{content2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{advanced__structures_8hpp_source_l00021}{21}} of file \mbox{\hyperlink{advanced__structures_8hpp_source}{advanced\+\_\+structures.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Simple\ similarity\ calculation\ (e.g.,\ based\ on\ length)}}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1.0\ -\/\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(std::abs(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(content1.size())\ -\/}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(content2.size())))\ /}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::max(content1.size(),\ content2.size());}
+\DoxyCodeLine{00026\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{advanced__structures_8hpp}{advanced\+\_\+structures.\+hpp}}\end{DoxyCompactItemize}

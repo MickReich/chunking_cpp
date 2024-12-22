@@ -1,0 +1,107 @@
+\doxysection{chunk\+\_\+windows\+::Window\+Operations\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classchunk__windows_1_1WindowOperations}{}\label{classchunk__windows_1_1WindowOperations}\index{chunk\_windows::WindowOperations$<$ T $>$@{chunk\_windows::WindowOperations$<$ T $>$}}
+
+
+{\ttfamily \#include $<$chunk\+\_\+windows.\+hpp$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static T \mbox{\hyperlink{classchunk__windows_1_1WindowOperations_a929defeedb1b555fd782041e68927098}{moving\+\_\+average}} (const std\+::vector$<$ T $>$ \&window)
+\item 
+static T \mbox{\hyperlink{classchunk__windows_1_1WindowOperations_ac8191b96fc02bd1c9ff22be4ffd6123c}{moving\+\_\+max}} (const std\+::vector$<$ T $>$ \&window)
+\item 
+static T \mbox{\hyperlink{classchunk__windows_1_1WindowOperations_a4dbe569c80436ddd61ee3a72a229d64a}{moving\+\_\+median}} (std\+::vector$<$ T $>$ window)
+\item 
+static T \mbox{\hyperlink{classchunk__windows_1_1WindowOperations_af8b096abbcd32e1d5bbf50a0e5db6825}{moving\+\_\+min}} (const std\+::vector$<$ T $>$ \&window)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class chunk\+\_\+windows\+::\+Window\+Operations$<$ T $>$}
+
+
+Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00035}{35}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classchunk__windows_1_1WindowOperations_a929defeedb1b555fd782041e68927098}\label{classchunk__windows_1_1WindowOperations_a929defeedb1b555fd782041e68927098} 
+\index{chunk\_windows::WindowOperations$<$ T $>$@{chunk\_windows::WindowOperations$<$ T $>$}!moving\_average@{moving\_average}}
+\index{moving\_average@{moving\_average}!chunk\_windows::WindowOperations$<$ T $>$@{chunk\_windows::WindowOperations$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{moving\_average()}{moving\_average()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+static T \mbox{\hyperlink{classchunk__windows_1_1WindowOperations}{chunk\+\_\+windows\+::\+Window\+Operations}}$<$ T $>$\+::moving\+\_\+average (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ T $>$ \&}]{window }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00037}{37}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::accumulate(window.begin(),\ window.end(),\ T\{\})\ /\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(window.size());}
+\DoxyCodeLine{00039\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{classchunk__windows_1_1WindowOperations_ac8191b96fc02bd1c9ff22be4ffd6123c}\label{classchunk__windows_1_1WindowOperations_ac8191b96fc02bd1c9ff22be4ffd6123c} 
+\index{chunk\_windows::WindowOperations$<$ T $>$@{chunk\_windows::WindowOperations$<$ T $>$}!moving\_max@{moving\_max}}
+\index{moving\_max@{moving\_max}!chunk\_windows::WindowOperations$<$ T $>$@{chunk\_windows::WindowOperations$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{moving\_max()}{moving\_max()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+static T \mbox{\hyperlink{classchunk__windows_1_1WindowOperations}{chunk\+\_\+windows\+::\+Window\+Operations}}$<$ T $>$\+::moving\+\_\+max (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ T $>$ \&}]{window }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00046}{46}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *std::max\_element(window.begin(),\ window.end());}
+\DoxyCodeLine{00048\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{classchunk__windows_1_1WindowOperations_a4dbe569c80436ddd61ee3a72a229d64a}\label{classchunk__windows_1_1WindowOperations_a4dbe569c80436ddd61ee3a72a229d64a} 
+\index{chunk\_windows::WindowOperations$<$ T $>$@{chunk\_windows::WindowOperations$<$ T $>$}!moving\_median@{moving\_median}}
+\index{moving\_median@{moving\_median}!chunk\_windows::WindowOperations$<$ T $>$@{chunk\_windows::WindowOperations$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{moving\_median()}{moving\_median()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+static T \mbox{\hyperlink{classchunk__windows_1_1WindowOperations}{chunk\+\_\+windows\+::\+Window\+Operations}}$<$ T $>$\+::moving\+\_\+median (\begin{DoxyParamCaption}\item[{std\+::vector$<$ T $>$}]{window }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00041}{41}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ std::sort(window.begin(),\ window.end());}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ window[window.size()\ /\ 2];}
+\DoxyCodeLine{00044\ \ \ \ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{classchunk__windows_1_1WindowOperations_af8b096abbcd32e1d5bbf50a0e5db6825}\label{classchunk__windows_1_1WindowOperations_af8b096abbcd32e1d5bbf50a0e5db6825} 
+\index{chunk\_windows::WindowOperations$<$ T $>$@{chunk\_windows::WindowOperations$<$ T $>$}!moving\_min@{moving\_min}}
+\index{moving\_min@{moving\_min}!chunk\_windows::WindowOperations$<$ T $>$@{chunk\_windows::WindowOperations$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{moving\_min()}{moving\_min()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+static T \mbox{\hyperlink{classchunk__windows_1_1WindowOperations}{chunk\+\_\+windows\+::\+Window\+Operations}}$<$ T $>$\+::moving\+\_\+min (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ T $>$ \&}]{window }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00050}{50}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *std::min\_element(window.begin(),\ window.end());}
+\DoxyCodeLine{00052\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{chunk__windows_8hpp}{chunk\+\_\+windows.\+hpp}}\end{DoxyCompactItemize}

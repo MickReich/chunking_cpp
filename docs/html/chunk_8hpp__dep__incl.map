@@ -1,0 +1,17 @@
+<map id="chunk.hpp" name="chunk.hpp">
+<area shape="rect" id="Node000001" title="Template class for chunk&#45;based data processing." alt="" coords="140,5,229,31"/>
+<area shape="rect" id="Node000002" href="$main_8cpp.html" title="Demonstrates various chunking strategies and operations." alt="" coords="34,225,217,295"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="128,32,79,50,56,64,36,81,23,97,17,113,11,152,8,165,11,176,30,202,56,223,52,227,26,206,6,178,3,165,6,152,12,111,18,95,32,77,53,59,77,45,126,27"/>
+<area shape="rect" id="Node000003" href="$chunk__strategies_8hpp.html" title="Defines various strategies for chunking data based on different criteria." alt="" coords="45,79,206,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="168,43,137,80,133,77,164,40"/>
+<area shape="rect" id="Node000005" href="$chunk__windows_8hpp.html" title=" " alt="" coords="245,152,398,177"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="207,39,313,150,309,154,203,43"/>
+<area shape="rect" id="Node000006" href="$parallel__chunk_8hpp.html" title=" " alt="" coords="342,79,488,104"/>
+<area shape="poly" id="edge8_Node000001_Node000006" title=" " alt="" coords="236,32,379,76,377,81,234,37"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="73,111,43,129,20,153,15,172,22,191,37,208,58,223,54,227,33,212,17,193,10,173,15,151,40,124,70,107"/>
+<area shape="rect" id="Node000004" href="$sub__chunk__strategies_8hpp.html" title="Advanced sub&#45;chunking strategies for hierarchical data processing." alt="" coords="30,152,221,177"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="128,118,128,152,123,152,123,118"/>
+<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="128,191,128,225,123,225,123,191"/>
+<area shape="poly" id="edge7_Node000005_Node000002" title=" " alt="" coords="287,186,198,228,195,223,284,181"/>
+<area shape="poly" id="edge9_Node000006_Node000002" title=" " alt="" coords="424,118,425,148,421,165,413,179,400,191,382,201,334,220,276,235,218,247,217,242,275,230,332,215,380,196,397,186,409,176,416,163,419,148,418,118"/>
+</map>

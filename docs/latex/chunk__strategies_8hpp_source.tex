@@ -1,0 +1,322 @@
+\doxysection{chunk\+\_\+strategies.\+hpp}
+\hypertarget{chunk__strategies_8hpp_source}{}\label{chunk__strategies_8hpp_source}\mbox{\hyperlink{chunk__strategies_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00001}00001\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00002}00002\ \textcolor{comment}{\ *\ @file\ chunk\_strategies.hpp}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00003}00003\ \textcolor{comment}{\ *\ @brief\ Defines\ various\ strategies\ for\ chunking\ data\ based\ on\ different\ criteria.}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00004}00004\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00006}00006\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00008}00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{chunk_8hpp}{chunk.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <numeric>}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00015}00015\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00017}\mbox{\hyperlink{namespacechunk__strategies}{00017}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacechunk__strategies}{chunk\_strategies}}\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00018}00018\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00019}00019\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00020}00020\ \textcolor{comment}{\ *\ @brief\ Base\ class\ for\ chunking\ strategies}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00021}00021\ \textcolor{comment}{\ *\ @tparam\ T\ The\ type\ of\ elements\ to\ be\ chunked}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00022}00022\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00023}00023\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00024}\mbox{\hyperlink{classchunk__strategies_1_1ChunkStrategy}{00024}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classchunk__strategies_1_1ChunkStrategy}{ChunkStrategy}}\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00025}00025\ \textcolor{keyword}{public}:\textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00026}00026\ \textcolor{comment}{\ \ \ \ /**}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00027}00027\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Applies\ the\ chunking\ strategy\ to\ the\ data}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00028}00028\ \textcolor{comment}{\ \ \ \ \ *\ @param\ data\ The\ data\ to\ chunk}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00029}00029\ \textcolor{comment}{\ \ \ \ \ *\ @return\ A\ vector\ of\ chunks}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00030}00030\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00031}\mbox{\hyperlink{classchunk__strategies_1_1ChunkStrategy_a403010d65da39c1a873874582760bfce}{00031}}\ \ \ \ \ \textcolor{keyword}{virtual}\ std::vector<std::vector<T>>\ \mbox{\hyperlink{classchunk__strategies_1_1ChunkStrategy_a403010d65da39c1a873874582760bfce}{apply}}(\textcolor{keyword}{const}\ std::vector<T>\&\ data)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00032}\mbox{\hyperlink{classchunk__strategies_1_1ChunkStrategy_a97ae36602114d8b5e18b765a7a72ede7}{00032}}\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classchunk__strategies_1_1ChunkStrategy_a97ae36602114d8b5e18b765a7a72ede7}{\string~ChunkStrategy}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00033}00033\ \};}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00034}00034\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00035}00035\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00036}00036\ \textcolor{comment}{\ *\ @brief\ Strategy\ for\ chunking\ based\ on\ quantile\ thresholds}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00037}00037\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00038}00038\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00039}\mbox{\hyperlink{classchunk__strategies_1_1QuantileStrategy}{00039}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classchunk__strategies_1_1QuantileStrategy}{QuantileStrategy}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classchunk__strategies_1_1ChunkStrategy}{ChunkStrategy}}<T>\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00040}\mbox{\hyperlink{classchunk__strategies_1_1QuantileStrategy_ace6f35eded09dd3a9d1ba78723a09644}{00040}}\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classchunk__strategies_1_1QuantileStrategy_ace6f35eded09dd3a9d1ba78723a09644}{quantile\_}};}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00042}00042\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00043}\mbox{\hyperlink{classchunk__strategies_1_1QuantileStrategy_a72c01766253b2849a819517e129c4aaf}{00043}}\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classchunk__strategies_1_1QuantileStrategy_a72c01766253b2849a819517e129c4aaf}{QuantileStrategy}}(\textcolor{keywordtype}{double}\ quantile)\ :\ \mbox{\hyperlink{classchunk__strategies_1_1QuantileStrategy_ace6f35eded09dd3a9d1ba78723a09644}{quantile\_}}(quantile)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (quantile\ <\ 0.0\ ||\ quantile\ >\ 1.0)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Quantile\ must\ be\ between\ 0\ and\ 1"{}});}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00046}00046\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00047}00047\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00049}\mbox{\hyperlink{classchunk__strategies_1_1QuantileStrategy_a5f9e790bc2f511e07632a2b1d128ad33}{00049}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classchunk__strategies_1_1QuantileStrategy_a5f9e790bc2f511e07632a2b1d128ad33}{apply}}(\textcolor{keyword}{const}\ std::vector<T>\&\ data)\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00050}00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.empty())}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\};}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Calculate\ threshold\ value\ at\ the\ given\ quantile}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00054}00054\ \ \ \ \ \ \ \ \ std::vector<T>\ sorted\_data\ =\ data;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00055}00055\ \ \ \ \ \ \ \ \ std::sort(sorted\_data.begin(),\ sorted\_data.end());}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00056}00056\ \ \ \ \ \ \ \ \ T\ threshold\ =\ sorted\_data[\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(\mbox{\hyperlink{classchunk__strategies_1_1QuantileStrategy_ace6f35eded09dd3a9d1ba78723a09644}{quantile\_}}\ *\ (data.size()\ -\/\ 1))];}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Split\ into\ exactly\ two\ chunks:\ values\ <=\ threshold\ and\ values\ >\ threshold}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00059}00059\ \ \ \ \ \ \ \ \ std::vector<T>\ lower\_chunk;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00060}00060\ \ \ \ \ \ \ \ \ std::vector<T>\ upper\_chunk;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ T\&\ value\ :\ data)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (value\ <=\ threshold)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lower\_chunk.push\_back(value);}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ upper\_chunk.push\_back(value);}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00068}00068\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00070}00070\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ chunks;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!lower\_chunk.empty())\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ chunks.push\_back(lower\_chunk);}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00073}00073\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00074}00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!upper\_chunk.empty())\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ chunks.push\_back(upper\_chunk);}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00076}00076\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00078}00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ chunks;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00079}00079\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00080}00080\ \};}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00081}00081\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00082}00082\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00083}00083\ \textcolor{comment}{\ *\ @brief\ Strategy\ for\ chunking\ based\ on\ variance\ thresholds}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00084}00084\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00085}00085\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00086}\mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy}{00086}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy}{VarianceStrategy}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classchunk__strategies_1_1ChunkStrategy}{ChunkStrategy}}<T>\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00087}\mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy_a57923fa38b90022ba7786ef882b137f1}{00087}}\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy_a57923fa38b90022ba7786ef882b137f1}{threshold\_}};}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00089}\mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy_a24c8c0a7f512c23a4b7baa60eb5c4d5c}{00089}}\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy_a24c8c0a7f512c23a4b7baa60eb5c4d5c}{calculate\_variance}}(\textcolor{keyword}{const}\ std::vector<T>\&\ chunk)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00090}00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (chunk.size()\ <\ 2)}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0.0;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00092}00092\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ mean\ =\ std::accumulate(chunk.begin(),\ chunk.end(),\ 0.0)\ /\ chunk.size();}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00093}00093\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ sq\_sum\ =\ 0.0;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00094}00094\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ T\&\ val\ :\ chunk)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ diff\ =\ val\ -\/\ mean;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ sq\_sum\ +=\ diff\ *\ diff;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00097}00097\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00098}00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ sq\_sum\ /\ chunk.size();}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00099}00099\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00101}00101\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00102}\mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy_a87c90894b351203403bd32aa4ecd07a3}{00102}}\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy_a87c90894b351203403bd32aa4ecd07a3}{VarianceStrategy}}(\textcolor{keywordtype}{double}\ threshold)\ :\ \mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy_a57923fa38b90022ba7786ef882b137f1}{threshold\_}}(threshold)\ \{\}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00104}\mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy_a4398d1a575689801304c0a6e2b51ce60}{00104}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy_a4398d1a575689801304c0a6e2b51ce60}{apply}}(\textcolor{keyword}{const}\ std::vector<T>\&\ data)\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00105}00105\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ chunks;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00106}00106\ \ \ \ \ \ \ \ \ std::vector<T>\ current\_chunk;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00108}00108\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ value\ :\ data)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.push\_back(value);}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy_a24c8c0a7f512c23a4b7baa60eb5c4d5c}{calculate\_variance}}(current\_chunk)\ >\ \mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy_a57923fa38b90022ba7786ef882b137f1}{threshold\_}})\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_chunk.size()\ >\ 1)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.pop\_back();}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ chunks.push\_back(current\_chunk);}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk\ =\ \{value\};}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00117}00117\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00119}00119\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!current\_chunk.empty())\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ chunks.push\_back(current\_chunk);}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00121}00121\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00123}00123\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ chunks;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00124}00124\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00125}00125\ \};}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00126}00126\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00127}00127\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00128}00128\ \textcolor{comment}{\ *\ @brief\ Strategy\ for\ chunking\ based\ on\ entropy\ thresholds}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00129}00129\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00130}00130\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00131}\mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy}{00131}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy}{EntropyStrategy}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classchunk__strategies_1_1ChunkStrategy}{ChunkStrategy}}<T>\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00132}\mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_a527a489dc2c4929e198ba83b32fb4390}{00132}}\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_a527a489dc2c4929e198ba83b32fb4390}{threshold\_}};}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00134}\mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_af6c9a14a283c6432eea4e0893d8154a6}{00134}}\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_af6c9a14a283c6432eea4e0893d8154a6}{calculate\_entropy}}(\textcolor{keyword}{const}\ std::vector<T>\&\ chunk)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00135}00135\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (chunk.empty())}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0.0;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00138}00138\ \ \ \ \ \ \ \ \ std::map<T,\ int>\ freq;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00139}00139\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ val\ :\ chunk)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ freq[val]++;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00141}00141\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00143}00143\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ entropy\ =\ 0.0;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00144}00144\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ [\_,\ count]\ :\ freq)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ p\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(count)\ /\ chunk.size();}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ entropy\ -\/=\ p\ *\ std::log2(p);}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00147}00147\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00149}00149\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ entropy;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00150}00150\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00152}00152\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00153}\mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_a1f667ff61e3ddaf1db623c584998a173}{00153}}\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_a1f667ff61e3ddaf1db623c584998a173}{EntropyStrategy}}(\textcolor{keywordtype}{double}\ threshold)\ :\ \mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_a527a489dc2c4929e198ba83b32fb4390}{threshold\_}}(threshold)\ \{\}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00155}\mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_ae2711e19e00fec2b2ab6074407bc600a}{00155}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_ae2711e19e00fec2b2ab6074407bc600a}{apply}}(\textcolor{keyword}{const}\ std::vector<T>\&\ data)\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00156}00156\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ chunks;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00157}00157\ \ \ \ \ \ \ \ \ std::vector<T>\ current\_chunk;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00159}00159\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ value\ :\ data)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.push\_back(value);}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_af6c9a14a283c6432eea4e0893d8154a6}{calculate\_entropy}}(current\_chunk)\ >\ \mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_a527a489dc2c4929e198ba83b32fb4390}{threshold\_}})\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_chunk.size()\ >\ 1)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.pop\_back();}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ chunks.push\_back(current\_chunk);}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk\ =\ \{value\};}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00168}00168\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00169}00169\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00170}00170\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!current\_chunk.empty())\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ chunks.push\_back(current\_chunk);}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00172}00172\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00173}00173\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00174}00174\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ chunks;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00175}00175\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00176}00176\ \};}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00177}00177\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00178}00178\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00179}\mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy}{00179}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy}{PatternBasedStrategy}}\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00180}00180\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00181}\mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_a64c4a3870afe7771e6a5976e515be070}{00181}}\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_a64c4a3870afe7771e6a5976e515be070}{PatternBasedStrategy}}(std::function<\textcolor{keywordtype}{bool}(T)>\ pattern\_detector)}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00182}00182\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_af0e374df9e8183e17f23f3416762084f}{pattern\_detector\_}}(pattern\_detector)\ \{\}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00183}00183\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00184}\mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_acc28f3ed8e292fd6bbf3f3705b56f40f}{00184}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_acc28f3ed8e292fd6bbf3f3705b56f40f}{apply}}(\textcolor{keyword}{const}\ std::vector<T>\&\ data)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00185}00185\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classChunk}{Chunk<T>}}\ chunker(1);}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00186}00186\ \ \ \ \ \ \ \ \ chunker.\mbox{\hyperlink{classChunk_aaa08401de48a718d93d3c25f4a9155cf}{add}}(data);}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00187}00187\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ chunker.\mbox{\hyperlink{classChunk_a69630b9586ba94c1df6a8c29df2aab40}{chunk\_by\_predicate}}(\mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_af0e374df9e8183e17f23f3416762084f}{pattern\_detector\_}});}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00188}00188\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00190}00190\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00191}\mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_af0e374df9e8183e17f23f3416762084f}{00191}}\ \ \ \ \ std::function<bool(T)>\ \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_af0e374df9e8183e17f23f3416762084f}{pattern\_detector\_}};}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00192}00192\ \};}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00193}00193\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00194}00194\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00195}\mbox{\hyperlink{classchunk__strategies_1_1AdaptiveStrategy}{00195}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classchunk__strategies_1_1AdaptiveStrategy}{AdaptiveStrategy}}\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00196}00196\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00197}\mbox{\hyperlink{classchunk__strategies_1_1AdaptiveStrategy_a2df4576ec8ea496324042c1d4d53b60c}{00197}}\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classchunk__strategies_1_1AdaptiveStrategy_a2df4576ec8ea496324042c1d4d53b60c}{AdaptiveStrategy}}(T\ initial\_threshold,}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<T(\textcolor{keyword}{const}\ std::vector<T>\&)>\ metric\_calculator)}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00199}00199\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classchunk__strategies_1_1AdaptiveStrategy_abf5a2f9c2fa8d9fa468dd85047ee929d}{threshold\_}}(initial\_threshold),\ \mbox{\hyperlink{classchunk__strategies_1_1AdaptiveStrategy_ada5ef5e36bb56ceea46b67d49080a815}{metric\_calculator\_}}(metric\_calculator)\ \{\}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00200}00200\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00201}\mbox{\hyperlink{classchunk__strategies_1_1AdaptiveStrategy_a8a6683fba6d4c15da98582918e117f6f}{00201}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classchunk__strategies_1_1AdaptiveStrategy_a8a6683fba6d4c15da98582918e117f6f}{apply}}(\textcolor{keyword}{const}\ std::vector<T>\&\ data)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00202}00202\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classChunk}{Chunk<T>}}\ chunker(1);}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00203}00203\ \ \ \ \ \ \ \ \ chunker.\mbox{\hyperlink{classChunk_aaa08401de48a718d93d3c25f4a9155cf}{add}}(data);}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00204}00204\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ chunker.\mbox{\hyperlink{classChunk_abe62a4d4d72e24468d53ec0f58f5a43f}{chunk\_by\_statistic}}(\mbox{\hyperlink{classchunk__strategies_1_1AdaptiveStrategy_abf5a2f9c2fa8d9fa468dd85047ee929d}{threshold\_}},\ \mbox{\hyperlink{classchunk__strategies_1_1AdaptiveStrategy_ada5ef5e36bb56ceea46b67d49080a815}{metric\_calculator\_}});}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00205}00205\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00206}00206\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00207}00207\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00208}\mbox{\hyperlink{classchunk__strategies_1_1AdaptiveStrategy_abf5a2f9c2fa8d9fa468dd85047ee929d}{00208}}\ \ \ \ \ T\ \mbox{\hyperlink{classchunk__strategies_1_1AdaptiveStrategy_abf5a2f9c2fa8d9fa468dd85047ee929d}{threshold\_}};}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00209}\mbox{\hyperlink{classchunk__strategies_1_1AdaptiveStrategy_ada5ef5e36bb56ceea46b67d49080a815}{00209}}\ \ \ \ \ std::function<T(\textcolor{keyword}{const}\ std::vector<T>\&)>\ \mbox{\hyperlink{classchunk__strategies_1_1AdaptiveStrategy_ada5ef5e36bb56ceea46b67d49080a815}{metric\_calculator\_}};}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00210}00210\ \};}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00211}00211\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00212}00212\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00213}\mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy}{00213}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy}{MultiCriteriaStrategy}}\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00214}00214\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00215}\mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_ac687cdaa7dfb1a90090de3eda9e322b8}{00215}}\ \ \ \ \ \mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_ac687cdaa7dfb1a90090de3eda9e322b8}{MultiCriteriaStrategy}}(T\ similarity\_threshold,\ \textcolor{keywordtype}{size\_t}\ size\_threshold)}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00216}00216\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_a73310ee374122d57e5dfcdeaee0d05f8}{similarity\_threshold\_}}(similarity\_threshold),\ \mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_acddcbcfb32bc36ed74ec0664c906c175}{size\_threshold\_}}(size\_threshold)\ \{\}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00217}00217\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00218}\mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_a8a85a1b358887a7cac4885b432e8c967}{00218}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_a8a85a1b358887a7cac4885b432e8c967}{apply}}(\textcolor{keyword}{const}\ std::vector<T>\&\ data)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00219}00219\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Step\ 1:\ Similarity-\/based\ chunking}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00220}00220\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classChunk}{Chunk<T>}}\ initial\_chunker(1);}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00221}00221\ \ \ \ \ \ \ \ \ initial\_chunker.\mbox{\hyperlink{classChunk_aaa08401de48a718d93d3c25f4a9155cf}{add}}(data);}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00222}00222\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ similarity\_chunks\ =\ initial\_chunker.\mbox{\hyperlink{classChunk_a6eb63fcaea91518ff55759a7de548b2b}{chunk\_by\_similarity}}(\mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_a73310ee374122d57e5dfcdeaee0d05f8}{similarity\_threshold\_}});}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00223}00223\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00224}00224\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Step\ 2:\ Size-\/based\ chunking}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00225}00225\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00226}00226\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ chunk\ :\ similarity\_chunks)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00227}00227\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classChunk}{Chunk<T>}}\ size\_chunker(\mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_acddcbcfb32bc36ed74ec0664c906c175}{size\_threshold\_}});}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ size\_chunker.\mbox{\hyperlink{classChunk_aaa08401de48a718d93d3c25f4a9155cf}{add}}(chunk);}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00229}00229\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ sized\_chunks\ =\ size\_chunker.\mbox{\hyperlink{classChunk_adbff639ac17c8d894373b0f67fa08658}{get\_chunks}}();}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \ \ result.insert(result.end(),\ sized\_chunks.begin(),\ sized\_chunks.end());}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00231}00231\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00232}00232\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00233}00233\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00234}00234\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00235}00235\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00236}\mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_a73310ee374122d57e5dfcdeaee0d05f8}{00236}}\ \ \ \ \ T\ \mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_a73310ee374122d57e5dfcdeaee0d05f8}{similarity\_threshold\_}};}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00237}\mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_acddcbcfb32bc36ed74ec0664c906c175}{00237}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_acddcbcfb32bc36ed74ec0664c906c175}{size\_threshold\_}};}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00238}00238\ \};}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00239}00239\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00240}00240\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00241}\mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy}{00241}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy}{DynamicThresholdStrategy}}\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00242}00242\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00243}\mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_a85fd9149cd16f1704b17455d1b8b185e}{00243}}\ \ \ \ \ \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_a85fd9149cd16f1704b17455d1b8b185e}{DynamicThresholdStrategy}}(T\ initial\_threshold,\ T\ min\_threshold,\ \textcolor{keywordtype}{double}\ decay\_rate)}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00244}00244\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_a65205da0285271fc7f1220f13ccf91e7}{initial\_threshold\_}}(initial\_threshold),\ \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_ab7356983f39465ce95a1af3563c10dd6}{min\_threshold\_}}(min\_threshold),}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00245}00245\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_a5aa3d0f901a01c0abc35e1b816a4bd58}{decay\_rate\_}}(decay\_rate)\ \{\}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00246}00246\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00247}\mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_a63091382e9074ef041cb4d5f4b1d07fe}{00247}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_a63091382e9074ef041cb4d5f4b1d07fe}{apply}}(\textcolor{keyword}{const}\ std::vector<T>\&\ data)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00248}00248\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classChunk}{Chunk<T>}}\ chunker(1);}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00249}00249\ \ \ \ \ \ \ \ \ chunker.\mbox{\hyperlink{classChunk_aaa08401de48a718d93d3c25f4a9155cf}{add}}(data);}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00250}00250\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00251}00251\ \ \ \ \ \ \ \ \ T\ current\_threshold\ =\ \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_a65205da0285271fc7f1220f13ccf91e7}{initial\_threshold\_}};}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00252}00252\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ chunker.\mbox{\hyperlink{classChunk_a69630b9586ba94c1df6a8c29df2aab40}{chunk\_by\_predicate}}([\textcolor{keyword}{this},\ \&current\_threshold](T\ x)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ T\ last\ =\ x;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ start\_new\ =\ std::abs(x\ -\/\ last)\ >\ current\_threshold;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00255}00255\ \ \ \ \ \ \ \ \ \ \ \ \ current\_threshold\ =}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00256}00256\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::max(\mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_ab7356983f39465ce95a1af3563c10dd6}{min\_threshold\_}},\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(current\_threshold\ *\ \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_a5aa3d0f901a01c0abc35e1b816a4bd58}{decay\_rate\_}}));}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00257}00257\ \ \ \ \ \ \ \ \ \ \ \ \ last\ =\ x;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ start\_new;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00259}00259\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00260}00260\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00261}00261\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00262}00262\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00263}\mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_a65205da0285271fc7f1220f13ccf91e7}{00263}}\ \ \ \ \ T\ \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_a65205da0285271fc7f1220f13ccf91e7}{initial\_threshold\_}};}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00264}\mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_ab7356983f39465ce95a1af3563c10dd6}{00264}}\ \ \ \ \ T\ \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_ab7356983f39465ce95a1af3563c10dd6}{min\_threshold\_}};}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00265}\mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_a5aa3d0f901a01c0abc35e1b816a4bd58}{00265}}\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_a5aa3d0f901a01c0abc35e1b816a4bd58}{decay\_rate\_}};}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00266}00266\ \};}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00267}00267\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00268}00268\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00269}\mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4}{00269}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy}{EntropyStrategy}}<std::string>\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classchunk__strategies_1_1ChunkStrategy}{ChunkStrategy}}<std::string>\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00270}\mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4_ab76d84aa029eb8a5691aaf4b1e662531}{00270}}\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4_ab76d84aa029eb8a5691aaf4b1e662531}{threshold\_}};}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00271}00271\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00272}\mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4_acf313613a958786314458ad73859e063}{00272}}\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4_acf313613a958786314458ad73859e063}{calculate\_entropy}}(\textcolor{keyword}{const}\ std::vector<std::string>\&\ values)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00273}00273\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (values.empty())}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00274}00274\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0.0;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00275}00275\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00276}00276\ \ \ \ \ \ \ \ \ std::map<std::string,\ int>\ freq;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00277}00277\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ val\ :\ values)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00278}00278\ \ \ \ \ \ \ \ \ \ \ \ \ freq[val]++;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00279}00279\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00280}00280\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00281}00281\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ entropy\ =\ 0.0;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00282}00282\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ [\_,\ count]\ :\ freq)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00283}00283\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ p\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(count)\ /\ values.size();}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00284}00284\ \ \ \ \ \ \ \ \ \ \ \ \ entropy\ -\/=\ p\ *\ std::log2(p);}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00285}00285\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00286}00286\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00287}00287\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ entropy;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00288}00288\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00289}00289\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00290}00290\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00291}\mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4_abc8a7bcb710fd2d18c9b2170d376a9b0}{00291}}\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4_abc8a7bcb710fd2d18c9b2170d376a9b0}{EntropyStrategy}}(\textcolor{keywordtype}{double}\ threshold)\ :\ \mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_a527a489dc2c4929e198ba83b32fb4390}{threshold\_}}(threshold)\ \{\}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00292}00292\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00293}00293\ \ \ \ \ std::vector<std::vector<std::string>>}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00294}\mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4_a7a6343fba5c26df2cec744163907129b}{00294}}\ \ \ \ \ \mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4_a7a6343fba5c26df2cec744163907129b}{apply}}(\textcolor{keyword}{const}\ std::vector<std::string>\&\ data)\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00295}00295\ \ \ \ \ \ \ \ \ std::vector<std::vector<std::string>>\ chunks;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00296}00296\ \ \ \ \ \ \ \ \ std::vector<std::string>\ current\_chunk;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00297}00297\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00298}00298\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ value\ :\ data)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00299}00299\ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.push\_back(value);}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00300}00300\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_af6c9a14a283c6432eea4e0893d8154a6}{calculate\_entropy}}(current\_chunk)\ >\ \mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_a527a489dc2c4929e198ba83b32fb4390}{threshold\_}})\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00301}00301\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_chunk.size()\ >\ 1)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00302}00302\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.pop\_back();}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00303}00303\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ chunks.push\_back(current\_chunk);}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00304}00304\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk\ =\ \{value\};}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00305}00305\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00306}00306\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00307}00307\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00308}00308\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00309}00309\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!current\_chunk.empty())\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00310}00310\ \ \ \ \ \ \ \ \ \ \ \ \ chunks.push\_back(current\_chunk);}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00311}00311\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00312}00312\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00313}00313\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ chunks;}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00314}00314\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00315}00315\ \};}
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00316}00316\ }
+\DoxyCodeLine{\Hypertarget{chunk__strategies_8hpp_source_l00317}00317\ \}\ \textcolor{comment}{//\ namespace\ chunk\_strategies}}
+
+\end{DoxyCode}

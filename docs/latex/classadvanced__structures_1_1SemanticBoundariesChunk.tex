@@ -1,0 +1,154 @@
+\doxysection{advanced\+\_\+structures\+::Semantic\+Boundaries\+Chunk\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classadvanced__structures_1_1SemanticBoundariesChunk}{}\label{classadvanced__structures_1_1SemanticBoundariesChunk}\index{advanced\_structures::SemanticBoundariesChunk$<$ T $>$@{advanced\_structures::SemanticBoundariesChunk$<$ T $>$}}
+
+
+Semantic boundaries-\/based chunking implementation.  
+
+
+
+
+{\ttfamily \#include $<$advanced\+\_\+structures.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classadvanced__structures_1_1SemanticBoundariesChunk_a29c3faf214a7ab661cff46166d98ac19}{Semantic\+Boundaries\+Chunk}} (double threshold=0.\+5)
+\item 
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classadvanced__structures_1_1SemanticBoundariesChunk_a8989548ecf99455cb3b119761642c752}{chunk}} (const std\+::vector$<$ T $>$ \&data)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \mbox{\hyperlink{classadvanced__structures_1_1SemanticBoundariesChunk_ae896186812a0424ef9a315dcf287ada8}{is\+Boundary}} (const std\+::vector$<$ T $>$ \&\mbox{\hyperlink{classadvanced__structures_1_1SemanticBoundariesChunk_a8989548ecf99455cb3b119761642c752}{chunk}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classadvanced__structures_1_1SemanticBoundariesChunk_a59f37d922130f44da884e79729f8572b}{boundary\+\_\+threshold}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class advanced\+\_\+structures\+::\+Semantic\+Boundaries\+Chunk$<$ T $>$}
+Semantic boundaries-\/based chunking implementation. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of elements to be chunked \\
+\hline
+\end{DoxyTemplParams}
+
+
+Definition at line \mbox{\hyperlink{advanced__structures_8hpp_source_l00505}{505}} of file \mbox{\hyperlink{advanced__structures_8hpp_source}{advanced\+\_\+structures.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classadvanced__structures_1_1SemanticBoundariesChunk_a29c3faf214a7ab661cff46166d98ac19}\label{classadvanced__structures_1_1SemanticBoundariesChunk_a29c3faf214a7ab661cff46166d98ac19} 
+\index{advanced\_structures::SemanticBoundariesChunk$<$ T $>$@{advanced\_structures::SemanticBoundariesChunk$<$ T $>$}!SemanticBoundariesChunk@{SemanticBoundariesChunk}}
+\index{SemanticBoundariesChunk@{SemanticBoundariesChunk}!advanced\_structures::SemanticBoundariesChunk$<$ T $>$@{advanced\_structures::SemanticBoundariesChunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{SemanticBoundariesChunk()}{SemanticBoundariesChunk()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classadvanced__structures_1_1SemanticBoundariesChunk}{advanced\+\_\+structures\+::\+Semantic\+Boundaries\+Chunk}}$<$ T $>$\+::\+Semantic\+Boundaries\+Chunk (\begin{DoxyParamCaption}\item[{double}]{threshold = {\ttfamily 0.5} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Definition at line \mbox{\hyperlink{advanced__structures_8hpp_source_l00510}{510}} of file \mbox{\hyperlink{advanced__structures_8hpp_source}{advanced\+\_\+structures.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00510\ :\ \mbox{\hyperlink{classadvanced__structures_1_1SemanticBoundariesChunk_a59f37d922130f44da884e79729f8572b}{boundary\_threshold}}(threshold)\ \{\}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classadvanced__structures_1_1SemanticBoundariesChunk_a8989548ecf99455cb3b119761642c752}\label{classadvanced__structures_1_1SemanticBoundariesChunk_a8989548ecf99455cb3b119761642c752} 
+\index{advanced\_structures::SemanticBoundariesChunk$<$ T $>$@{advanced\_structures::SemanticBoundariesChunk$<$ T $>$}!chunk@{chunk}}
+\index{chunk@{chunk}!advanced\_structures::SemanticBoundariesChunk$<$ T $>$@{advanced\_structures::SemanticBoundariesChunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{chunk()}{chunk()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classadvanced__structures_1_1SemanticBoundariesChunk}{advanced\+\_\+structures\+::\+Semantic\+Boundaries\+Chunk}}$<$ T $>$\+::chunk (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ T $>$ \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{advanced__structures_8hpp_source_l00512}{512}} of file \mbox{\hyperlink{advanced__structures_8hpp_source}{advanced\+\_\+structures.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00512\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00513\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
+\DoxyCodeLine{00514\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.empty())}
+\DoxyCodeLine{00515\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00516\ }
+\DoxyCodeLine{00517\ \ \ \ \ \ \ \ \ std::vector<T>\ current\_chunk;}
+\DoxyCodeLine{00518\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ item\ :\ data)\ \{}
+\DoxyCodeLine{00519\ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.push\_back(item);}
+\DoxyCodeLine{00520\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classadvanced__structures_1_1SemanticBoundariesChunk_ae896186812a0424ef9a315dcf287ada8}{isBoundary}}(current\_chunk))\ \{}
+\DoxyCodeLine{00521\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
+\DoxyCodeLine{00522\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.clear();}
+\DoxyCodeLine{00523\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00524\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00525\ }
+\DoxyCodeLine{00526\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!current\_chunk.empty())\ \{}
+\DoxyCodeLine{00527\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
+\DoxyCodeLine{00528\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00529\ }
+\DoxyCodeLine{00530\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00531\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{advanced__structures_8hpp_source_l00534}{advanced\+\_\+structures\+::\+Semantic\+Boundaries\+Chunk$<$ T $>$\+::is\+Boundary()}}.
+
+
+
+Referenced by \mbox{\hyperlink{advanced__structures_8hpp_source_l00534}{advanced\+\_\+structures\+::\+Semantic\+Boundaries\+Chunk$<$ T $>$\+::is\+Boundary()}}.
+
+\Hypertarget{classadvanced__structures_1_1SemanticBoundariesChunk_ae896186812a0424ef9a315dcf287ada8}\label{classadvanced__structures_1_1SemanticBoundariesChunk_ae896186812a0424ef9a315dcf287ada8} 
+\index{advanced\_structures::SemanticBoundariesChunk$<$ T $>$@{advanced\_structures::SemanticBoundariesChunk$<$ T $>$}!isBoundary@{isBoundary}}
+\index{isBoundary@{isBoundary}!advanced\_structures::SemanticBoundariesChunk$<$ T $>$@{advanced\_structures::SemanticBoundariesChunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{isBoundary()}{isBoundary()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+virtual bool \mbox{\hyperlink{classadvanced__structures_1_1SemanticBoundariesChunk}{advanced\+\_\+structures\+::\+Semantic\+Boundaries\+Chunk}}$<$ T $>$\+::is\+Boundary (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ T $>$ \&}]{chunk }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Definition at line \mbox{\hyperlink{advanced__structures_8hpp_source_l00534}{534}} of file \mbox{\hyperlink{advanced__structures_8hpp_source}{advanced\+\_\+structures.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00534\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00535\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classadvanced__structures_1_1SemanticBoundariesChunk_a8989548ecf99455cb3b119761642c752}{chunk}}.size()\ >=\ 3;\ \textcolor{comment}{//\ Default\ implementation}}
+\DoxyCodeLine{00536\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{advanced__structures_8hpp_source_l00512}{advanced\+\_\+structures\+::\+Semantic\+Boundaries\+Chunk$<$ T $>$\+::chunk()}}.
+
+
+
+Referenced by \mbox{\hyperlink{advanced__structures_8hpp_source_l00512}{advanced\+\_\+structures\+::\+Semantic\+Boundaries\+Chunk$<$ T $>$\+::chunk()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classadvanced__structures_1_1SemanticBoundariesChunk_a59f37d922130f44da884e79729f8572b}\label{classadvanced__structures_1_1SemanticBoundariesChunk_a59f37d922130f44da884e79729f8572b} 
+\index{advanced\_structures::SemanticBoundariesChunk$<$ T $>$@{advanced\_structures::SemanticBoundariesChunk$<$ T $>$}!boundary\_threshold@{boundary\_threshold}}
+\index{boundary\_threshold@{boundary\_threshold}!advanced\_structures::SemanticBoundariesChunk$<$ T $>$@{advanced\_structures::SemanticBoundariesChunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{boundary\_threshold}{boundary\_threshold}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+double \mbox{\hyperlink{classadvanced__structures_1_1SemanticBoundariesChunk}{advanced\+\_\+structures\+::\+Semantic\+Boundaries\+Chunk}}$<$ T $>$\+::boundary\+\_\+threshold\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{advanced__structures_8hpp_source_l00507}{507}} of file \mbox{\hyperlink{advanced__structures_8hpp_source}{advanced\+\_\+structures.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{advanced__structures_8hpp}{advanced\+\_\+structures.\+hpp}}\end{DoxyCompactItemize}

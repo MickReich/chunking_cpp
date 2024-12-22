@@ -1,0 +1,260 @@
+\doxysection{Priority\+Queue\texorpdfstring{$<$}{<} T, Compare \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classPriorityQueue}{}\label{classPriorityQueue}\index{PriorityQueue$<$ T, Compare $>$@{PriorityQueue$<$ T, Compare $>$}}
+
+
+{\ttfamily \#include $<$data\+\_\+structures.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classPriorityQueue_a808431d87d33867fff1c5ec66244ad9a}{empty}} () const
+\item 
+T \mbox{\hyperlink{classPriorityQueue_adc6b1a207f02f2bfd5fdf758a7746b0c}{pop}} ()
+\item 
+void \mbox{\hyperlink{classPriorityQueue_a0b71ca9bf78de4cf33517c67c987f2b2}{push}} (const T \&item)
+\item 
+size\+\_\+t \mbox{\hyperlink{classPriorityQueue_ad2f921bbd345c3b6b7f038ab37bf33f1}{size}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classPriorityQueue_a56e5f9d2fb1e1d5db7c04f00ff32d0c8}{heapify\+\_\+down}} (size\+\_\+t index)
+\item 
+void \mbox{\hyperlink{classPriorityQueue_ac221c7a12a2f93f4bad4bc43f070ac02}{heapify\+\_\+up}} (size\+\_\+t index)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Compare \mbox{\hyperlink{classPriorityQueue_a4fa43ad50be95b27d62d62d73a83f19c}{comp\+\_\+}}
+\item 
+std\+::vector$<$ T $>$ \mbox{\hyperlink{classPriorityQueue_a2dc28580b01197178f598f15b3182370}{heap\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T, typename Compare = std\+::less$<$\+T$>$$>$\newline
+class Priority\+Queue$<$ T, Compare $>$}
+
+
+Definition at line \mbox{\hyperlink{data__structures_8hpp_source_l00072}{72}} of file \mbox{\hyperlink{data__structures_8hpp_source}{data\+\_\+structures.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classPriorityQueue_a808431d87d33867fff1c5ec66244ad9a}\label{classPriorityQueue_a808431d87d33867fff1c5ec66244ad9a} 
+\index{PriorityQueue$<$ T, Compare $>$@{PriorityQueue$<$ T, Compare $>$}!empty@{empty}}
+\index{empty@{empty}!PriorityQueue$<$ T, Compare $>$@{PriorityQueue$<$ T, Compare $>$}}
+\doxysubsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily template$<$typename T , typename Compare  = std\+::less$<$\+T$>$$>$ \\
+bool \mbox{\hyperlink{classPriorityQueue}{Priority\+Queue}}$<$ T, Compare $>$\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{data__structures_8hpp_source_l00129}{129}} of file \mbox{\hyperlink{data__structures_8hpp_source}{data\+\_\+structures.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classPriorityQueue_a2dc28580b01197178f598f15b3182370}{heap\_}}.empty();}
+\DoxyCodeLine{00131\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{data__structures_8hpp_source_l00074}{Priority\+Queue$<$ T, Compare $>$\+::heap\+\_\+}}.
+
+
+
+Referenced by \mbox{\hyperlink{data__structures_8hpp_source_l00117}{Priority\+Queue$<$ T, Compare $>$\+::pop()}}.
+
+\Hypertarget{classPriorityQueue_a56e5f9d2fb1e1d5db7c04f00ff32d0c8}\label{classPriorityQueue_a56e5f9d2fb1e1d5db7c04f00ff32d0c8} 
+\index{PriorityQueue$<$ T, Compare $>$@{PriorityQueue$<$ T, Compare $>$}!heapify\_down@{heapify\_down}}
+\index{heapify\_down@{heapify\_down}!PriorityQueue$<$ T, Compare $>$@{PriorityQueue$<$ T, Compare $>$}}
+\doxysubsubsection{\texorpdfstring{heapify\_down()}{heapify\_down()}}
+{\footnotesize\ttfamily template$<$typename T , typename Compare  = std\+::less$<$\+T$>$$>$ \\
+void \mbox{\hyperlink{classPriorityQueue}{Priority\+Queue}}$<$ T, Compare $>$\+::heapify\+\_\+down (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{data__structures_8hpp_source_l00089}{89}} of file \mbox{\hyperlink{data__structures_8hpp_source}{data\+\_\+structures.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})\ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ largest\ =\ index;}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ left\ =\ 2\ *\ index\ +\ 1;}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ right\ =\ 2\ *\ index\ +\ 2;}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (left\ <\ \mbox{\hyperlink{classPriorityQueue_a2dc28580b01197178f598f15b3182370}{heap\_}}.size()\ \&\&\ \mbox{\hyperlink{classPriorityQueue_a4fa43ad50be95b27d62d62d73a83f19c}{comp\_}}(\mbox{\hyperlink{classPriorityQueue_a2dc28580b01197178f598f15b3182370}{heap\_}}[largest],\ \mbox{\hyperlink{classPriorityQueue_a2dc28580b01197178f598f15b3182370}{heap\_}}[left]))\ \{}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ largest\ =\ left;}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (right\ <\ \mbox{\hyperlink{classPriorityQueue_a2dc28580b01197178f598f15b3182370}{heap\_}}.size()\ \&\&\ \mbox{\hyperlink{classPriorityQueue_a4fa43ad50be95b27d62d62d73a83f19c}{comp\_}}(\mbox{\hyperlink{classPriorityQueue_a2dc28580b01197178f598f15b3182370}{heap\_}}[largest],\ \mbox{\hyperlink{classPriorityQueue_a2dc28580b01197178f598f15b3182370}{heap\_}}[right]))\ \{}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ largest\ =\ right;}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (largest\ ==\ index)\ \{}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ std::swap(\mbox{\hyperlink{classPriorityQueue_a2dc28580b01197178f598f15b3182370}{heap\_}}[index],\ \mbox{\hyperlink{classPriorityQueue_a2dc28580b01197178f598f15b3182370}{heap\_}}[largest]);}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ index\ =\ largest;}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00109\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{data__structures_8hpp_source_l00075}{Priority\+Queue$<$ T, Compare $>$\+::comp\+\_\+}}, and \mbox{\hyperlink{data__structures_8hpp_source_l00074}{Priority\+Queue$<$ T, Compare $>$\+::heap\+\_\+}}.
+
+
+
+Referenced by \mbox{\hyperlink{data__structures_8hpp_source_l00117}{Priority\+Queue$<$ T, Compare $>$\+::pop()}}.
+
+\Hypertarget{classPriorityQueue_ac221c7a12a2f93f4bad4bc43f070ac02}\label{classPriorityQueue_ac221c7a12a2f93f4bad4bc43f070ac02} 
+\index{PriorityQueue$<$ T, Compare $>$@{PriorityQueue$<$ T, Compare $>$}!heapify\_up@{heapify\_up}}
+\index{heapify\_up@{heapify\_up}!PriorityQueue$<$ T, Compare $>$@{PriorityQueue$<$ T, Compare $>$}}
+\doxysubsubsection{\texorpdfstring{heapify\_up()}{heapify\_up()}}
+{\footnotesize\ttfamily template$<$typename T , typename Compare  = std\+::less$<$\+T$>$$>$ \\
+void \mbox{\hyperlink{classPriorityQueue}{Priority\+Queue}}$<$ T, Compare $>$\+::heapify\+\_\+up (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{data__structures_8hpp_source_l00077}{77}} of file \mbox{\hyperlink{data__structures_8hpp_source}{data\+\_\+structures.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (index\ >\ 0)\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ parent\ =\ (index\ -\/\ 1)\ /\ 2;}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classPriorityQueue_a4fa43ad50be95b27d62d62d73a83f19c}{comp\_}}(\mbox{\hyperlink{classPriorityQueue_a2dc28580b01197178f598f15b3182370}{heap\_}}[parent],\ \mbox{\hyperlink{classPriorityQueue_a2dc28580b01197178f598f15b3182370}{heap\_}}[index]))\ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::swap(\mbox{\hyperlink{classPriorityQueue_a2dc28580b01197178f598f15b3182370}{heap\_}}[parent],\ \mbox{\hyperlink{classPriorityQueue_a2dc28580b01197178f598f15b3182370}{heap\_}}[index]);}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ index\ =\ parent;}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00087\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{data__structures_8hpp_source_l00075}{Priority\+Queue$<$ T, Compare $>$\+::comp\+\_\+}}, and \mbox{\hyperlink{data__structures_8hpp_source_l00074}{Priority\+Queue$<$ T, Compare $>$\+::heap\+\_\+}}.
+
+
+
+Referenced by \mbox{\hyperlink{data__structures_8hpp_source_l00112}{Priority\+Queue$<$ T, Compare $>$\+::push()}}.
+
+\Hypertarget{classPriorityQueue_adc6b1a207f02f2bfd5fdf758a7746b0c}\label{classPriorityQueue_adc6b1a207f02f2bfd5fdf758a7746b0c} 
+\index{PriorityQueue$<$ T, Compare $>$@{PriorityQueue$<$ T, Compare $>$}!pop@{pop}}
+\index{pop@{pop}!PriorityQueue$<$ T, Compare $>$@{PriorityQueue$<$ T, Compare $>$}}
+\doxysubsubsection{\texorpdfstring{pop()}{pop()}}
+{\footnotesize\ttfamily template$<$typename T , typename Compare  = std\+::less$<$\+T$>$$>$ \\
+T \mbox{\hyperlink{classPriorityQueue}{Priority\+Queue}}$<$ T, Compare $>$\+::pop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{data__structures_8hpp_source_l00117}{117}} of file \mbox{\hyperlink{data__structures_8hpp_source}{data\+\_\+structures.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classPriorityQueue_a808431d87d33867fff1c5ec66244ad9a}{empty}}())}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Queue\ is\ empty"{}});}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ T\ result\ =\ \mbox{\hyperlink{classPriorityQueue_a2dc28580b01197178f598f15b3182370}{heap\_}}[0];}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classPriorityQueue_a2dc28580b01197178f598f15b3182370}{heap\_}}[0]\ =\ \mbox{\hyperlink{classPriorityQueue_a2dc28580b01197178f598f15b3182370}{heap\_}}.back();}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classPriorityQueue_a2dc28580b01197178f598f15b3182370}{heap\_}}.pop\_back();}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classPriorityQueue_a808431d87d33867fff1c5ec66244ad9a}{empty}}())\ \{}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classPriorityQueue_a56e5f9d2fb1e1d5db7c04f00ff32d0c8}{heapify\_down}}(0);}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00127\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{data__structures_8hpp_source_l00129}{Priority\+Queue$<$ T, Compare $>$\+::empty()}}, \mbox{\hyperlink{data__structures_8hpp_source_l00074}{Priority\+Queue$<$ T, Compare $>$\+::heap\+\_\+}}, and \mbox{\hyperlink{data__structures_8hpp_source_l00089}{Priority\+Queue$<$ T, Compare $>$\+::heapify\+\_\+down()}}.
+
+\Hypertarget{classPriorityQueue_a0b71ca9bf78de4cf33517c67c987f2b2}\label{classPriorityQueue_a0b71ca9bf78de4cf33517c67c987f2b2} 
+\index{PriorityQueue$<$ T, Compare $>$@{PriorityQueue$<$ T, Compare $>$}!push@{push}}
+\index{push@{push}!PriorityQueue$<$ T, Compare $>$@{PriorityQueue$<$ T, Compare $>$}}
+\doxysubsubsection{\texorpdfstring{push()}{push()}}
+{\footnotesize\ttfamily template$<$typename T , typename Compare  = std\+::less$<$\+T$>$$>$ \\
+void \mbox{\hyperlink{classPriorityQueue}{Priority\+Queue}}$<$ T, Compare $>$\+::push (\begin{DoxyParamCaption}\item[{const T \&}]{item }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{data__structures_8hpp_source_l00112}{112}} of file \mbox{\hyperlink{data__structures_8hpp_source}{data\+\_\+structures.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classPriorityQueue_a2dc28580b01197178f598f15b3182370}{heap\_}}.push\_back(item);}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classPriorityQueue_ac221c7a12a2f93f4bad4bc43f070ac02}{heapify\_up}}(\mbox{\hyperlink{classPriorityQueue_a2dc28580b01197178f598f15b3182370}{heap\_}}.size()\ -\/\ 1);}
+\DoxyCodeLine{00115\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{data__structures_8hpp_source_l00074}{Priority\+Queue$<$ T, Compare $>$\+::heap\+\_\+}}, and \mbox{\hyperlink{data__structures_8hpp_source_l00077}{Priority\+Queue$<$ T, Compare $>$\+::heapify\+\_\+up()}}.
+
+\Hypertarget{classPriorityQueue_ad2f921bbd345c3b6b7f038ab37bf33f1}\label{classPriorityQueue_ad2f921bbd345c3b6b7f038ab37bf33f1} 
+\index{PriorityQueue$<$ T, Compare $>$@{PriorityQueue$<$ T, Compare $>$}!size@{size}}
+\index{size@{size}!PriorityQueue$<$ T, Compare $>$@{PriorityQueue$<$ T, Compare $>$}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$typename T , typename Compare  = std\+::less$<$\+T$>$$>$ \\
+size\+\_\+t \mbox{\hyperlink{classPriorityQueue}{Priority\+Queue}}$<$ T, Compare $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{data__structures_8hpp_source_l00132}{132}} of file \mbox{\hyperlink{data__structures_8hpp_source}{data\+\_\+structures.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classPriorityQueue_a2dc28580b01197178f598f15b3182370}{heap\_}}.size();}
+\DoxyCodeLine{00134\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{data__structures_8hpp_source_l00074}{Priority\+Queue$<$ T, Compare $>$\+::heap\+\_\+}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classPriorityQueue_a4fa43ad50be95b27d62d62d73a83f19c}\label{classPriorityQueue_a4fa43ad50be95b27d62d62d73a83f19c} 
+\index{PriorityQueue$<$ T, Compare $>$@{PriorityQueue$<$ T, Compare $>$}!comp\_@{comp\_}}
+\index{comp\_@{comp\_}!PriorityQueue$<$ T, Compare $>$@{PriorityQueue$<$ T, Compare $>$}}
+\doxysubsubsection{\texorpdfstring{comp\_}{comp\_}}
+{\footnotesize\ttfamily template$<$typename T , typename Compare  = std\+::less$<$\+T$>$$>$ \\
+Compare \mbox{\hyperlink{classPriorityQueue}{Priority\+Queue}}$<$ T, Compare $>$\+::comp\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{data__structures_8hpp_source_l00075}{75}} of file \mbox{\hyperlink{data__structures_8hpp_source}{data\+\_\+structures.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{data__structures_8hpp_source_l00089}{Priority\+Queue$<$ T, Compare $>$\+::heapify\+\_\+down()}}, and \mbox{\hyperlink{data__structures_8hpp_source_l00077}{Priority\+Queue$<$ T, Compare $>$\+::heapify\+\_\+up()}}.
+
+\Hypertarget{classPriorityQueue_a2dc28580b01197178f598f15b3182370}\label{classPriorityQueue_a2dc28580b01197178f598f15b3182370} 
+\index{PriorityQueue$<$ T, Compare $>$@{PriorityQueue$<$ T, Compare $>$}!heap\_@{heap\_}}
+\index{heap\_@{heap\_}!PriorityQueue$<$ T, Compare $>$@{PriorityQueue$<$ T, Compare $>$}}
+\doxysubsubsection{\texorpdfstring{heap\_}{heap\_}}
+{\footnotesize\ttfamily template$<$typename T , typename Compare  = std\+::less$<$\+T$>$$>$ \\
+std\+::vector$<$T$>$ \mbox{\hyperlink{classPriorityQueue}{Priority\+Queue}}$<$ T, Compare $>$\+::heap\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{data__structures_8hpp_source_l00074}{74}} of file \mbox{\hyperlink{data__structures_8hpp_source}{data\+\_\+structures.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{data__structures_8hpp_source_l00129}{Priority\+Queue$<$ T, Compare $>$\+::empty()}}, \mbox{\hyperlink{data__structures_8hpp_source_l00089}{Priority\+Queue$<$ T, Compare $>$\+::heapify\+\_\+down()}}, \mbox{\hyperlink{data__structures_8hpp_source_l00077}{Priority\+Queue$<$ T, Compare $>$\+::heapify\+\_\+up()}}, \mbox{\hyperlink{data__structures_8hpp_source_l00117}{Priority\+Queue$<$ T, Compare $>$\+::pop()}}, \mbox{\hyperlink{data__structures_8hpp_source_l00112}{Priority\+Queue$<$ T, Compare $>$\+::push()}}, and \mbox{\hyperlink{data__structures_8hpp_source_l00132}{Priority\+Queue$<$ T, Compare $>$\+::size()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{data__structures_8hpp}{data\+\_\+structures.\+hpp}}\end{DoxyCompactItemize}

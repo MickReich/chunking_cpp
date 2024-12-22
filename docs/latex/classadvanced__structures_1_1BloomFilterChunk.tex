@@ -1,0 +1,189 @@
+\doxysection{advanced\+\_\+structures\+::Bloom\+Filter\+Chunk\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classadvanced__structures_1_1BloomFilterChunk}{}\label{classadvanced__structures_1_1BloomFilterChunk}\index{advanced\_structures::BloomFilterChunk$<$ T $>$@{advanced\_structures::BloomFilterChunk$<$ T $>$}}
+
+
+Bloom filter-\/based chunking implementation.  
+
+
+
+
+{\ttfamily \#include $<$advanced\+\_\+structures.\+hpp$>$}
+
+
+
+Collaboration diagram for advanced\+\_\+structures\+::Bloom\+Filter\+Chunk\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=218pt]{classadvanced__structures_1_1BloomFilterChunk__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk_a6e445b86b98fd71855686798f7e11b59}{Bloom\+Filter\+Chunk}} (size\+\_\+t size=1024, size\+\_\+t num\+\_\+funcs=3)
+\item 
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk_a4f1a6a96f8f140c63a7b32a8e36c0ae3}{chunk}} (const std\+::vector$<$ T $>$ \&data)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk_a0c616279eadb29f875622fcb137c54b8}{should\+Split}} (const std\+::vector$<$ T $>$ \&\mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk_a4f1a6a96f8f140c63a7b32a8e36c0ae3}{chunk}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ bool $>$ \mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk_acca6758d2c97bf203269c7a74295bcaa}{filter}}
+\item 
+size\+\_\+t \mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk_aa3fc3b02a0e5148ffb2fc52f965db677}{filter\+\_\+size}}
+\item 
+size\+\_\+t \mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk_a0971ed7fde596ec76a46169c9c4be523}{num\+\_\+hash\+\_\+functions}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class advanced\+\_\+structures\+::\+Bloom\+Filter\+Chunk$<$ T $>$}
+Bloom filter-\/based chunking implementation. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of elements to be chunked \\
+\hline
+\end{DoxyTemplParams}
+
+
+Definition at line \mbox{\hyperlink{advanced__structures_8hpp_source_l00585}{585}} of file \mbox{\hyperlink{advanced__structures_8hpp_source}{advanced\+\_\+structures.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classadvanced__structures_1_1BloomFilterChunk_a6e445b86b98fd71855686798f7e11b59}\label{classadvanced__structures_1_1BloomFilterChunk_a6e445b86b98fd71855686798f7e11b59} 
+\index{advanced\_structures::BloomFilterChunk$<$ T $>$@{advanced\_structures::BloomFilterChunk$<$ T $>$}!BloomFilterChunk@{BloomFilterChunk}}
+\index{BloomFilterChunk@{BloomFilterChunk}!advanced\_structures::BloomFilterChunk$<$ T $>$@{advanced\_structures::BloomFilterChunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{BloomFilterChunk()}{BloomFilterChunk()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk}{advanced\+\_\+structures\+::\+Bloom\+Filter\+Chunk}}$<$ T $>$\+::\+Bloom\+Filter\+Chunk (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size = {\ttfamily 1024},  }\item[{size\+\_\+t}]{num\+\_\+funcs = {\ttfamily 3} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{advanced__structures_8hpp_source_l00592}{592}} of file \mbox{\hyperlink{advanced__structures_8hpp_source}{advanced\+\_\+structures.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00593\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk_aa3fc3b02a0e5148ffb2fc52f965db677}{filter\_size}}(size),\ \mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk_a0971ed7fde596ec76a46169c9c4be523}{num\_hash\_functions}}(num\_funcs),\ \mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk_acca6758d2c97bf203269c7a74295bcaa}{filter}}(size,\ \textcolor{keyword}{false})\ \{\}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classadvanced__structures_1_1BloomFilterChunk_a4f1a6a96f8f140c63a7b32a8e36c0ae3}\label{classadvanced__structures_1_1BloomFilterChunk_a4f1a6a96f8f140c63a7b32a8e36c0ae3} 
+\index{advanced\_structures::BloomFilterChunk$<$ T $>$@{advanced\_structures::BloomFilterChunk$<$ T $>$}!chunk@{chunk}}
+\index{chunk@{chunk}!advanced\_structures::BloomFilterChunk$<$ T $>$@{advanced\_structures::BloomFilterChunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{chunk()}{chunk()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk}{advanced\+\_\+structures\+::\+Bloom\+Filter\+Chunk}}$<$ T $>$\+::chunk (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ T $>$ \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{advanced__structures_8hpp_source_l00595}{595}} of file \mbox{\hyperlink{advanced__structures_8hpp_source}{advanced\+\_\+structures.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00595\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00596\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
+\DoxyCodeLine{00597\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.empty())}
+\DoxyCodeLine{00598\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00599\ }
+\DoxyCodeLine{00600\ \ \ \ \ \ \ \ \ std::vector<T>\ current\_chunk;}
+\DoxyCodeLine{00601\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ item\ :\ data)\ \{}
+\DoxyCodeLine{00602\ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.push\_back(item);}
+\DoxyCodeLine{00603\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk_a0c616279eadb29f875622fcb137c54b8}{shouldSplit}}(current\_chunk))\ \{}
+\DoxyCodeLine{00604\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
+\DoxyCodeLine{00605\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.clear();}
+\DoxyCodeLine{00606\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00607\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00608\ }
+\DoxyCodeLine{00609\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!current\_chunk.empty())\ \{}
+\DoxyCodeLine{00610\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
+\DoxyCodeLine{00611\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00612\ }
+\DoxyCodeLine{00613\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00614\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{advanced__structures_8hpp_source_l00617}{advanced\+\_\+structures\+::\+Bloom\+Filter\+Chunk$<$ T $>$\+::should\+Split()}}.
+
+
+
+Referenced by \mbox{\hyperlink{advanced__structures_8hpp_source_l00617}{advanced\+\_\+structures\+::\+Bloom\+Filter\+Chunk$<$ T $>$\+::should\+Split()}}.
+
+\Hypertarget{classadvanced__structures_1_1BloomFilterChunk_a0c616279eadb29f875622fcb137c54b8}\label{classadvanced__structures_1_1BloomFilterChunk_a0c616279eadb29f875622fcb137c54b8} 
+\index{advanced\_structures::BloomFilterChunk$<$ T $>$@{advanced\_structures::BloomFilterChunk$<$ T $>$}!shouldSplit@{shouldSplit}}
+\index{shouldSplit@{shouldSplit}!advanced\_structures::BloomFilterChunk$<$ T $>$@{advanced\_structures::BloomFilterChunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{shouldSplit()}{shouldSplit()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+virtual bool \mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk}{advanced\+\_\+structures\+::\+Bloom\+Filter\+Chunk}}$<$ T $>$\+::should\+Split (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ T $>$ \&}]{chunk }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Definition at line \mbox{\hyperlink{advanced__structures_8hpp_source_l00617}{617}} of file \mbox{\hyperlink{advanced__structures_8hpp_source}{advanced\+\_\+structures.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00617\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00618\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk_a4f1a6a96f8f140c63a7b32a8e36c0ae3}{chunk}}.size()\ >=\ 4;\ \textcolor{comment}{//\ Default\ implementation}}
+\DoxyCodeLine{00619\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{advanced__structures_8hpp_source_l00595}{advanced\+\_\+structures\+::\+Bloom\+Filter\+Chunk$<$ T $>$\+::chunk()}}.
+
+
+
+Referenced by \mbox{\hyperlink{advanced__structures_8hpp_source_l00595}{advanced\+\_\+structures\+::\+Bloom\+Filter\+Chunk$<$ T $>$\+::chunk()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classadvanced__structures_1_1BloomFilterChunk_acca6758d2c97bf203269c7a74295bcaa}\label{classadvanced__structures_1_1BloomFilterChunk_acca6758d2c97bf203269c7a74295bcaa} 
+\index{advanced\_structures::BloomFilterChunk$<$ T $>$@{advanced\_structures::BloomFilterChunk$<$ T $>$}!filter@{filter}}
+\index{filter@{filter}!advanced\_structures::BloomFilterChunk$<$ T $>$@{advanced\_structures::BloomFilterChunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{filter}{filter}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$bool$>$ \mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk}{advanced\+\_\+structures\+::\+Bloom\+Filter\+Chunk}}$<$ T $>$\+::filter\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{advanced__structures_8hpp_source_l00589}{589}} of file \mbox{\hyperlink{advanced__structures_8hpp_source}{advanced\+\_\+structures.\+hpp}}.
+
+\Hypertarget{classadvanced__structures_1_1BloomFilterChunk_aa3fc3b02a0e5148ffb2fc52f965db677}\label{classadvanced__structures_1_1BloomFilterChunk_aa3fc3b02a0e5148ffb2fc52f965db677} 
+\index{advanced\_structures::BloomFilterChunk$<$ T $>$@{advanced\_structures::BloomFilterChunk$<$ T $>$}!filter\_size@{filter\_size}}
+\index{filter\_size@{filter\_size}!advanced\_structures::BloomFilterChunk$<$ T $>$@{advanced\_structures::BloomFilterChunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{filter\_size}{filter\_size}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+size\+\_\+t \mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk}{advanced\+\_\+structures\+::\+Bloom\+Filter\+Chunk}}$<$ T $>$\+::filter\+\_\+size\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{advanced__structures_8hpp_source_l00587}{587}} of file \mbox{\hyperlink{advanced__structures_8hpp_source}{advanced\+\_\+structures.\+hpp}}.
+
+\Hypertarget{classadvanced__structures_1_1BloomFilterChunk_a0971ed7fde596ec76a46169c9c4be523}\label{classadvanced__structures_1_1BloomFilterChunk_a0971ed7fde596ec76a46169c9c4be523} 
+\index{advanced\_structures::BloomFilterChunk$<$ T $>$@{advanced\_structures::BloomFilterChunk$<$ T $>$}!num\_hash\_functions@{num\_hash\_functions}}
+\index{num\_hash\_functions@{num\_hash\_functions}!advanced\_structures::BloomFilterChunk$<$ T $>$@{advanced\_structures::BloomFilterChunk$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{num\_hash\_functions}{num\_hash\_functions}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+size\+\_\+t \mbox{\hyperlink{classadvanced__structures_1_1BloomFilterChunk}{advanced\+\_\+structures\+::\+Bloom\+Filter\+Chunk}}$<$ T $>$\+::num\+\_\+hash\+\_\+functions\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{advanced__structures_8hpp_source_l00588}{588}} of file \mbox{\hyperlink{advanced__structures_8hpp_source}{advanced\+\_\+structures.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{advanced__structures_8hpp}{advanced\+\_\+structures.\+hpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,113 @@
+\doxysection{chunk\+\_\+strategies\+::Adaptive\+Strategy\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classchunk__strategies_1_1AdaptiveStrategy}{}\label{classchunk__strategies_1_1AdaptiveStrategy}\index{chunk\_strategies::AdaptiveStrategy$<$ T $>$@{chunk\_strategies::AdaptiveStrategy$<$ T $>$}}
+
+
+{\ttfamily \#include $<$chunk\+\_\+strategies.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classchunk__strategies_1_1AdaptiveStrategy_a2df4576ec8ea496324042c1d4d53b60c}{Adaptive\+Strategy}} (T initial\+\_\+threshold, std\+::function$<$ T(const std\+::vector$<$ T $>$ \&)$>$ metric\+\_\+calculator)
+\item 
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__strategies_1_1AdaptiveStrategy_a8a6683fba6d4c15da98582918e117f6f}{apply}} (const std\+::vector$<$ T $>$ \&data)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::function$<$ T(const std\+::vector$<$ T $>$ \&)$>$ \mbox{\hyperlink{classchunk__strategies_1_1AdaptiveStrategy_ada5ef5e36bb56ceea46b67d49080a815}{metric\+\_\+calculator\+\_\+}}
+\item 
+T \mbox{\hyperlink{classchunk__strategies_1_1AdaptiveStrategy_abf5a2f9c2fa8d9fa468dd85047ee929d}{threshold\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class chunk\+\_\+strategies\+::\+Adaptive\+Strategy$<$ T $>$}
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00195}{195}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classchunk__strategies_1_1AdaptiveStrategy_a2df4576ec8ea496324042c1d4d53b60c}\label{classchunk__strategies_1_1AdaptiveStrategy_a2df4576ec8ea496324042c1d4d53b60c} 
+\index{chunk\_strategies::AdaptiveStrategy$<$ T $>$@{chunk\_strategies::AdaptiveStrategy$<$ T $>$}!AdaptiveStrategy@{AdaptiveStrategy}}
+\index{AdaptiveStrategy@{AdaptiveStrategy}!chunk\_strategies::AdaptiveStrategy$<$ T $>$@{chunk\_strategies::AdaptiveStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{AdaptiveStrategy()}{AdaptiveStrategy()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classchunk__strategies_1_1AdaptiveStrategy}{chunk\+\_\+strategies\+::\+Adaptive\+Strategy}}$<$ T $>$\+::\+Adaptive\+Strategy (\begin{DoxyParamCaption}\item[{T}]{initial\+\_\+threshold,  }\item[{std\+::function$<$ T(const std\+::vector$<$ T $>$ \&)$>$}]{metric\+\_\+calculator }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00197}{197}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classchunk__strategies_1_1AdaptiveStrategy_abf5a2f9c2fa8d9fa468dd85047ee929d}{threshold\_}}(initial\_threshold),\ \mbox{\hyperlink{classchunk__strategies_1_1AdaptiveStrategy_ada5ef5e36bb56ceea46b67d49080a815}{metric\_calculator\_}}(metric\_calculator)\ \{\}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classchunk__strategies_1_1AdaptiveStrategy_a8a6683fba6d4c15da98582918e117f6f}\label{classchunk__strategies_1_1AdaptiveStrategy_a8a6683fba6d4c15da98582918e117f6f} 
+\index{chunk\_strategies::AdaptiveStrategy$<$ T $>$@{chunk\_strategies::AdaptiveStrategy$<$ T $>$}!apply@{apply}}
+\index{apply@{apply}!chunk\_strategies::AdaptiveStrategy$<$ T $>$@{chunk\_strategies::AdaptiveStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{apply()}{apply()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__strategies_1_1AdaptiveStrategy}{chunk\+\_\+strategies\+::\+Adaptive\+Strategy}}$<$ T $>$\+::apply (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ T $>$ \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00201}{201}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classChunk}{Chunk<T>}}\ chunker(1);}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ chunker.add(data);}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ chunker.chunk\_by\_statistic(\mbox{\hyperlink{classchunk__strategies_1_1AdaptiveStrategy_abf5a2f9c2fa8d9fa468dd85047ee929d}{threshold\_}},\ \mbox{\hyperlink{classchunk__strategies_1_1AdaptiveStrategy_ada5ef5e36bb56ceea46b67d49080a815}{metric\_calculator\_}});}
+\DoxyCodeLine{00205\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk_8hpp_source_l00066}{Chunk$<$ T $>$\+::add()}}, \mbox{\hyperlink{chunk_8hpp_source_l00192}{Chunk$<$ T $>$\+::chunk\+\_\+by\+\_\+statistic()}}, \mbox{\hyperlink{chunk__strategies_8hpp_source_l00209}{chunk\+\_\+strategies\+::\+Adaptive\+Strategy$<$ T $>$\+::metric\+\_\+calculator\+\_\+}}, and \mbox{\hyperlink{chunk__strategies_8hpp_source_l00208}{chunk\+\_\+strategies\+::\+Adaptive\+Strategy$<$ T $>$\+::threshold\+\_\+}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classchunk__strategies_1_1AdaptiveStrategy_ada5ef5e36bb56ceea46b67d49080a815}\label{classchunk__strategies_1_1AdaptiveStrategy_ada5ef5e36bb56ceea46b67d49080a815} 
+\index{chunk\_strategies::AdaptiveStrategy$<$ T $>$@{chunk\_strategies::AdaptiveStrategy$<$ T $>$}!metric\_calculator\_@{metric\_calculator\_}}
+\index{metric\_calculator\_@{metric\_calculator\_}!chunk\_strategies::AdaptiveStrategy$<$ T $>$@{chunk\_strategies::AdaptiveStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{metric\_calculator\_}{metric\_calculator\_}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::function$<$T(const std\+::vector$<$T$>$\&)$>$ \mbox{\hyperlink{classchunk__strategies_1_1AdaptiveStrategy}{chunk\+\_\+strategies\+::\+Adaptive\+Strategy}}$<$ T $>$\+::metric\+\_\+calculator\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00209}{209}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{chunk__strategies_8hpp_source_l00201}{chunk\+\_\+strategies\+::\+Adaptive\+Strategy$<$ T $>$\+::apply()}}.
+
+\Hypertarget{classchunk__strategies_1_1AdaptiveStrategy_abf5a2f9c2fa8d9fa468dd85047ee929d}\label{classchunk__strategies_1_1AdaptiveStrategy_abf5a2f9c2fa8d9fa468dd85047ee929d} 
+\index{chunk\_strategies::AdaptiveStrategy$<$ T $>$@{chunk\_strategies::AdaptiveStrategy$<$ T $>$}!threshold\_@{threshold\_}}
+\index{threshold\_@{threshold\_}!chunk\_strategies::AdaptiveStrategy$<$ T $>$@{chunk\_strategies::AdaptiveStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{threshold\_}{threshold\_}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T \mbox{\hyperlink{classchunk__strategies_1_1AdaptiveStrategy}{chunk\+\_\+strategies\+::\+Adaptive\+Strategy}}$<$ T $>$\+::threshold\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00208}{208}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{chunk__strategies_8hpp_source_l00201}{chunk\+\_\+strategies\+::\+Adaptive\+Strategy$<$ T $>$\+::apply()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{chunk__strategies_8hpp}{chunk\+\_\+strategies.\+hpp}}\end{DoxyCompactItemize}
