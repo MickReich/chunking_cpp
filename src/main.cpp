@@ -160,10 +160,50 @@ void demonstrate_adaptive_conditional_subchunking() {
  * @brief Main function demonstrating various chunking strategies
  * @return 0 on successful execution
  */
-int main() {
+int main(int argc, char* argv[]) {
     demonstrate_complex_recursive_subchunking();
     demonstrate_multi_strategy_subchunking();
     demonstrate_adaptive_conditional_subchunking();
+
+    std::cout << "\n=== Demonstrating Advanced Chunking Structures ===\n";
+
+    // Binary data example
+    std::vector<uint8_t> binary_data = {0xFF, 0x00, 0xAA, 0x55, 0xCC};
+    AdaptiveChunkTree<uint8_t> binary_chunker;
+    auto binary_chunks = binary_chunker.chunk(binary_data);
+    std::cout << "Binary chunks created: " << binary_chunks.size() << "\n";
+
+    // Character data example
+    std::string char_data = "Hello, World!";
+    AdaptiveChunkTree<char> char_chunker;
+    auto char_chunks = char_chunker.chunk(std::vector<char>(char_data.begin(), char_data.end()));
+    std::cout << "Character chunks created: " << char_chunks.size() << "\n";
+
+    // Float data example
+    std::vector<float> float_data = {1.0f, 2.5f, 3.7f, 4.2f, 5.9f};
+    AdaptiveChunkTree<float> float_chunker;
+    auto float_chunks = float_chunker.chunk(float_data);
+    std::cout << "Float chunks created: " << float_chunks.size() << "\n";
+
+    // Example: SemanticChunker usage
+    std::cout << "\n=== SemanticChunker Example ===" << std::endl;
+    SemanticChunker<std::string> text_chunker;
+    std::string text = "This is the first sentence. This is the second one. And here's a third!";
+    auto text_chunks = text_chunker.chunk(text);
+    std::cout << "Text chunks created: " << text_chunks.size() << "\n";
+
+    // Custom NLP model example
+    class CustomNLPModel {
+    public:
+        double calculateSimilarity(const std::string& s1, const std::string& s2) {
+            // Simple example: compare lengths as a similarity metric
+            return std::abs(1.0 - static_cast<double>(std::abs(static_cast<int>(s1.length()) - static_cast<int>(s2.length()))) / std::max(s1.length(), s2.length()));
+        }
+    };
+
+    SemanticChunker<std::string, CustomNLPModel> custom_chunker;
+    auto custom_chunks = custom_chunker.chunk(text);
+    std::cout << "Custom model chunks created: " << custom_chunks.size() << "\n\n";
 
     return 0;
 }

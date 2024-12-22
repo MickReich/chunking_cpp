@@ -148,3 +148,121 @@ TEST(ChunkTreapTest, BasicOperations) {
     EXPECT_TRUE(treap.search(8));
     EXPECT_FALSE(treap.search(10));
 }
+
+TEST(AdaptiveChunkTreeTest, BasicOperations) {
+    AdaptiveChunkTree<int> tree;
+    std::vector<int> data = {1, 2, 3, 10, 11, 12, 20, 21, 22};
+    auto chunks = tree.chunk(data);
+    
+    // Test that chunks were created
+    EXPECT_GT(chunks.size(), 0);
+    
+    // Test that all elements are preserved
+    size_t total_elements = 0;
+    for (const auto& chunk : chunks) {
+        total_elements += chunk.size();
+    }
+    EXPECT_EQ(total_elements, data.size());
+}
+
+TEST(AdaptiveChunkTreeTest, ComplexityBasedChunking) {
+    AdaptiveChunkTree<double> tree(0.5); // Set threshold to 0.5
+    
+    // Create data with varying complexity
+    std::vector<double> data = {
+        1.0, 1.1, 1.2,     // Low variance group
+        5.0, 10.0, 15.0,   // High variance group
+        2.0, 2.1, 2.2,     // Low variance group
+        20.0, 25.0, 30.0   // High variance group
+    };
+    
+    auto chunks = tree.chunk(data);
+    
+    // Should create multiple chunks based on complexity
+    EXPECT_GT(chunks.size(), 1);
+    
+    // Test that each chunk maintains local complexity characteristics
+    for (const auto& chunk : chunks) {
+        if (chunk.size() > 1) {
+            double sum = std::accumulate(chunk.begin(), chunk.end(), 0.0);
+            double mean = sum / chunk.size();
+            double variance = 0.0;
+            for (const auto& val : chunk) {
+                variance += (val - mean) * (val - mean);
+            }
+            variance /= chunk.size();
+            
+            // For demonstration, we consider a chunk "high variance" if variance > 50
+            if (variance > 50.0) {
+                EXPECT_LE(chunk.size(), 3); // High variance chunks should be smaller
+            }
+        }
+    }
+}
+
+TEST(AdaptiveChunkTreeTest, SpecializedTypes) {
+    // Test uint8_t specialization
+    AdaptiveChunkTree<uint8_t> binary_tree;
+    std::vector<uint8_t> binary_data = {0x00, 0x00, 0xFF, 0xFF, 0xAA, 0x55};
+    auto binary_chunks = binary_tree.chunk(binary_data);
+    EXPECT_GT(binary_chunks.size(), 0);
+    
+    // Test char specialization
+    AdaptiveChunkTree<char> char_tree;
+    std::vector<char> char_data = {'a', 'a', 'b', 'c', 'c', 'd'};
+    auto char_chunks = char_tree.chunk(char_data);
+    EXPECT_GT(char_chunks.size(), 0);
+}
+
+TEST(AdaptiveChunkTreeTest, EdgeCases) {
+    AdaptiveChunkTree<int> tree;
+    
+    // Empty input
+    std::vector<int> empty_data;
+    auto empty_chunks = tree.chunk(empty_data);
+    EXPECT_TRUE(empty_chunks.empty());
+    
+    // Single element
+    std::vector<int> single_data = {1};
+    auto single_chunks = tree.chunk(single_data);
+    EXPECT_EQ(single_chunks.size(), 1);
+    EXPECT_EQ(single_chunks[0].size(), 1);
+    
+    // All same values
+    std::vector<int> uniform_data(10, 5);
+    auto uniform_chunks = tree.chunk(uniform_data);
+    EXPECT_GT(uniform_chunks.size(), 0);
+    
+    // Alternating values
+    std::vector<int> alternating_data = {1, 10, 1, 10, 1, 10};
+    auto alternating_chunks = tree.chunk(alternating_data);
+    EXPECT_GT(alternating_chunks.size(), 1);
+}
+
+TEST(SemanticBoundariesChunkTest, BasicOperations) {
+    SemanticBoundariesChunk<std::string> chunk;
+    std::vector<std::string> data = {"This", "is", "a", "test", "sentence"};
+    auto result = chunk.chunk(data);
+    EXPECT_GT(result.size(), 0);
+}
+
+TEST(FractalPatternsChunkTest, BasicOperations) {
+    FractalPatternsChunk<int> chunk;
+    std::vector<int> data = {1, 2, 3, 4, 5, 1, 2, 3};
+    auto result = chunk.chunk(data);
+    EXPECT_GT(result.size(), 0);
+}
+
+TEST(BloomFilterChunkTest, BasicOperations) {
+    BloomFilterChunk<int> chunk;
+    std::vector<int> data = {1, 2, 3, 4, 5};
+    auto result = chunk.chunk(data);
+    EXPECT_GT(result.size(), 0);
+}
+
+TEST(GraphBasedChunkTest, BasicOperations) {
+    GraphBasedChunk<int> chunk;
+    std::vector<int> data = {1, 2, 3, 4, 5};
+    auto result = chunk.chunk(data);
+    EXPECT_GT(result.size(), 0);
+}

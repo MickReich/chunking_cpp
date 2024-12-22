@@ -61,6 +61,7 @@ This library offers a comprehensive suite of tools for handling data in chunks, 
 - Google Test (for testing)
 - Doxygen (for documentation)
 - Graphviz (for documentation graphs)
+- Boost (for advanced structures)
 
 ## Quick Start
 

@@ -26,7 +26,7 @@ sudo cp lib/*.a /usr/lib
 sudo ln -s /usr/src/gtest/include/gtest /usr/include/gtest
 
 # Install documentation tools
-sudo apt-get install doxygen graphviz
+sudo apt-get install doxygen graphviz libboost-all-dev
 ```
 
 ### macOS
@@ -39,7 +39,7 @@ xcode-select --install
 brew install googletest
 
 # Install documentation tools
-brew install doxygen graphviz
+brew install doxygen graphviz boost
 ```
 
 ### Windows
