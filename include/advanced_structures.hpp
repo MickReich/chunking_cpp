@@ -2,11 +2,11 @@
 #define ADVANCED_STRUCTURES_HPP
 
 #include <algorithm>
+#include <deque>
 #include <memory>
+#include <stack>
 #include <stdexcept>
 #include <vector>
-#include <deque>
-#include <stack>
 
 namespace advanced_structures {
 
