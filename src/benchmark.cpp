@@ -6,15 +6,15 @@
 
 // Strategy wrapper for neural chunking
 template<typename T>
-class NeuralChunkingStrategy : public chunk_benchmark::ChunkStrategy {
+class NeuralChunkingStrategy : public chunk_benchmark::ChunkStrategy<T> {
 private:
-    neural_chunking::NeuralChunking<T> chunker;
+    neural_chunking::NeuralChunking<T> neural_chunker;
 
 public:
-    NeuralChunkingStrategy() : chunker(8, 0.5) {}
+    NeuralChunkingStrategy() : neural_chunker(8, 0.5) {}
     
     std::vector<std::vector<T>> chunk(const std::vector<T>& data) override {
-        return chunker.chunk(data);
+        return neural_chunker.chunk(data);
     }
     
     std::string name() const override {
@@ -24,21 +24,23 @@ public:
 
 // Strategy wrapper for similarity-based chunking
 template<typename T>
-class SimilarityChunkingStrategy : public chunk_benchmark::ChunkStrategy {
+class SimilarityChunkingStrategy : public chunk_benchmark::ChunkStrategy<T> {
 private:
-    Chunk<T> chunker;
-    T threshold;
+    double threshold;
 
 public:
-    SimilarityChunkingStrategy(T thresh) : chunker(10), threshold(thresh) {}
+    explicit SimilarityChunkingStrategy(double t) : threshold(t) {}
     
     std::vector<std::vector<T>> chunk(const std::vector<T>& data) override {
-        chunker.add(data);
+        Chunk<T> chunker(data.size());
+        for (const auto& item : data) {
+            chunker.add(item);
+        }
         return chunker.chunk_by_similarity(threshold);
     }
     
     std::string name() const override {
-        return "Similarity-based Chunking";
+        return "Similarity Chunking";
     }
 };
 
@@ -65,26 +67,22 @@ std::vector<int> generate_test_data(size_t size) {
     return data;
 }
 
+// Update the benchmark function to use templated strategies
+template<typename T>
+void run_benchmark(const std::vector<T>& data) {
+    chunk_benchmark::ChunkBenchmark<T> benchmark(data);
+    
+    benchmark.add_strategy(std::make_shared<NeuralChunkingStrategy<T>>());
+    benchmark.add_strategy(std::make_shared<SimilarityChunkingStrategy<T>>(0.5));
+    
+    benchmark.run_benchmark();
+    benchmark.save_results();
+}
+
 int main() {
-    try {
-        // Use the generate_test_data instead of the simple test data for better testing
-        std::vector<int> test_data = generate_test_data(1000);
-        chunk_benchmark::ChunkBenchmark<int> benchmark(test_data, "./benchmark_results");
-        
-        // Add strategies and run benchmarks
-        auto neural_strategy = std::make_shared<NeuralChunkingStrategy<int>>();
-        auto similarity_strategy = std::make_shared<SimilarityChunkingStrategy<int>>(0.3);
-        
-        benchmark.add_strategy(neural_strategy);
-        benchmark.add_strategy(similarity_strategy);
-        
-        // Run the benchmark and output results
-        benchmark.run_benchmark();
-        benchmark.save_results();
-        
-    } catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << "\n";
-        return 1;
-    }
+    // Generate test data with patterns
+    std::vector<int> data = generate_test_data(1000);
+  
+    run_benchmark<int>(data);
     return 0;
 }

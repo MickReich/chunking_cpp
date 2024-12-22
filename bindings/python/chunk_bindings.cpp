@@ -25,10 +25,10 @@ PYBIND11_MODULE(chunking_cpp, m) {
     // Basic Chunking
     py::class_<Chunk<double>>(m, "Chunk")
         .def(py::init<size_t>())
-        .def("add", &Chunk<double>::add)
-        .def("chunk_by_size", &Chunk<double>::chunk_by_size)
-        .def("chunk_by_threshold", &Chunk<double>::chunk_by_threshold)
-        .def("chunk_by_similarity", &Chunk<double>::chunk_by_similarity);
+        .def("add", static_cast<void (Chunk<double>::*)(const double&)>(&Chunk<double>::add))
+        .def("chunk_by_size", static_cast<std::vector<std::vector<double>> (Chunk<double>::*)(size_t)>(&Chunk<double>::chunk_by_size))
+        .def("chunk_by_threshold", static_cast<std::vector<std::vector<double>> (Chunk<double>::*)(double)>(&Chunk<double>::chunk_by_threshold))
+        .def("chunk_by_similarity", static_cast<std::vector<std::vector<double>> (Chunk<double>::*)(double)>(&Chunk<double>::chunk_by_similarity));
 
     // Neural Chunking
     py::class_<neural_chunking::NeuralChunking<double>>(m, "NeuralChunking")

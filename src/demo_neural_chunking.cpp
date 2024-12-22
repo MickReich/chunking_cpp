@@ -47,7 +47,7 @@ int main() {
         chunk_viz::ChunkVisualizer<std::vector<int>> visualizer(chunks);
         visualizer.plot_chunk_sizes();
         visualizer.visualize_boundaries();
-        visualizer.export_to_graphviz();
+        visualizer.export_to_graphviz("neural_chunks.dot");
     }
 
     return 0;

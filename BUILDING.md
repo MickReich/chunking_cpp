@@ -57,7 +57,7 @@ vcpkg install gtest:x64-windows
 To build the Python bindings, you need to have Python and pybind11 installed.
 
 ```bash
-pip install pybind11
+pip install pybind11[global]
 ```
 
 ## Optional Dependencies

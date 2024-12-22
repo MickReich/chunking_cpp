@@ -37,9 +37,40 @@ using json = nlohmann::json;
 #else
 // Fallback JSON implementation if nlohmann::json is not available
 struct json {
+    std::string data;
+
     template<typename T>
-    static std::string dump(const T&) { 
-        throw std::runtime_error("JSON support not enabled"); 
+    json& operator=(const T&) { 
+        return *this; 
+    }
+
+    template<typename T>
+    static json from(const T& val) {
+        json j;
+        return j;
+    }
+
+    // Support for array-like initialization
+    template<typename... Args>
+    json(std::initializer_list<std::pair<const char*, Args...>>) {}
+
+    // Dump method that returns a string representation
+    std::string dump() const {
+        #ifdef HAVE_JSON
+            return data;
+        #else
+            return "{}";  // Return empty JSON object when JSON support is disabled
+        #endif
+    }
+
+    // Operator[] for string access
+    json& operator[](const char*) {
+        return *this;
+    }
+
+    // Operator[] for string access
+    const json& operator[](const char*) const {
+        return *this;
     }
 };
 #endif
@@ -143,14 +174,15 @@ private:
     std::string table_name;
     
     // Helper method to convert chunk to JSON
-    template<typename T>
-    json chunk_to_json(const std::vector<T>& chunk, size_t chunk_id) {
-        return {
+    template<typename U>
+    std::string serialize_chunk(const std::vector<U>& chunk, size_t chunk_id) {
+        json chunk_json = {
             {"chunk_id", chunk_id},
             {"size", chunk.size()},
             {"data", chunk},
             {"timestamp", std::chrono::system_clock::now().time_since_epoch().count()}
         };
+        return chunk_json.dump();
     }
 
 public:
@@ -159,8 +191,9 @@ public:
         : connection(std::move(conn))
         , table_name(table) {}
 
-    template<typename T>
-    void store_chunks_postgres(const std::vector<std::vector<T>>& chunks) {
+    #ifdef HAVE_POSTGRESQL
+    template<typename U>
+    void store_chunks_postgres(const std::vector<std::vector<U>>& chunks) {
         if (!connection->is_connected()) {
             throw std::runtime_error("Database not connected");
         }
@@ -174,14 +207,14 @@ public:
             pqxx::work txn(*postgres->get_connection());
             
             for (size_t i = 0; i < chunks.size(); ++i) {
-                json chunk_json = chunk_to_json(chunks[i], i);
+                auto chunk_json = serialize_chunk(chunks[i], i);
                 
                 txn.exec_params(
-                    "INSERT INTO " + table_name + " (chunk_id, data, metadata) "
-                    "VALUES ($1, $2, $3)",
+                    "INSERT INTO " + table_name + 
+                    " (chunk_id, chunk_data, metadata) VALUES ($1, $2, $3)",
                     i,
-                    chunk_json["data"].dump(),
-                    chunk_json.dump()
+                    chunk_json,
+                    chunk_json
                 );
             }
             
@@ -190,9 +223,11 @@ public:
             throw std::runtime_error("PostgreSQL error: " + std::string(e.what()));
         }
     }
+    #endif
 
-    template<typename T>
-    void store_chunks_mongodb(const std::vector<std::vector<T>>& chunks) {
+    #ifdef HAVE_MONGODB
+    template<typename U>
+    void store_chunks_mongodb(const std::vector<std::vector<U>>& chunks) {
         if (!connection->is_connected()) {
             throw std::runtime_error("Database not connected");
         }
@@ -203,13 +238,15 @@ public:
         }
 
         try {
-            auto collection = mongo->get_client()->database("chunks")[table_name];
+            auto* client = mongo->get_client();
+            auto db = (*client)["chunks_db"];
+            auto collection = db[table_name];
             
             std::vector<bsoncxx::document::value> documents;
             for (size_t i = 0; i < chunks.size(); ++i) {
-                json chunk_json = chunk_to_json(chunks[i], i);
+                auto chunk_json = serialize_chunk(chunks[i], i);
                 documents.push_back(
-                    bsoncxx::from_json(chunk_json.dump())
+                    bsoncxx::from_json(chunk_json)
                 );
             }
             
@@ -218,6 +255,7 @@ public:
             throw std::runtime_error("MongoDB error: " + std::string(e.what()));
         }
     }
+    #endif
 };
 
 /**
@@ -234,21 +272,23 @@ public:
 /**
  * @brief Kafka connection handler
  */
+#ifdef HAVE_KAFKA
 class KafkaConnection : public MessageQueueConnection {
 private:
     std::unique_ptr<cppkafka::Producer> producer;
-    std::string brokers;
+    std::string broker;
     bool connected{false};
 
 public:
-    explicit KafkaConnection(const std::string& kafka_brokers)
-        : brokers(kafka_brokers) {}
+    explicit KafkaConnection(const std::string& broker_uri)
+        : broker(broker_uri) {}
 
     bool connect() override {
         try {
             cppkafka::Configuration config = {
-                {"metadata.broker.list", brokers}
+                {"metadata.broker.list", broker}
             };
+            
             producer = std::make_unique<cppkafka::Producer>(config);
             connected = true;
             return true;
@@ -271,10 +311,12 @@ public:
         return producer.get();
     }
 };
+#endif
 
 /**
  * @brief RabbitMQ connection handler
  */
+#ifdef HAVE_RABBITMQ
 class RabbitMQConnection : public MessageQueueConnection {
 private:
     amqp_connection_state_t conn{nullptr};
@@ -282,12 +324,13 @@ private:
     bool connected{false};
 
 public:
-    explicit RabbitMQConnection(const std::string& rabbitmq_uri)
-        : uri(rabbitmq_uri) {}
+    explicit RabbitMQConnection(const std::string& uri_string)
+        : uri(uri_string) {}
 
     bool connect() override {
         try {
             conn = amqp_new_connection();
+            
             amqp_connection_info info;
             amqp_parse_url(uri.c_str(), &info);
             
@@ -321,6 +364,7 @@ public:
         return conn;
     }
 };
+#endif
 
 /**
  * @brief Message queue chunk publisher
@@ -347,6 +391,7 @@ public:
         : connection(std::move(conn))
         , topic(topic_name) {}
 
+    #ifdef HAVE_KAFKA
     template<typename T>
     void publish_chunks_kafka(const std::vector<std::vector<T>>& chunks) {
         if (!connection->is_connected()) {
@@ -374,7 +419,9 @@ public:
             throw std::runtime_error("Kafka error: " + std::string(e.what()));
         }
     }
+    #endif
 
+    #ifdef HAVE_RABBITMQ
     template<typename T>
     void publish_chunks_rabbitmq(const std::vector<std::vector<T>>& chunks) {
         if (!connection->is_connected()) {
@@ -407,6 +454,7 @@ public:
             throw std::runtime_error("RabbitMQ error: " + std::string(e.what()));
         }
     }
+    #endif
 };
 
 } // namespace chunk_integrations

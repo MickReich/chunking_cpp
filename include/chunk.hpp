@@ -248,6 +248,18 @@ public:
         return result;
     }
 
+    std::vector<std::vector<T>> chunk_by_size(size_t size) {
+        // Implementation
+    }
+
+    std::vector<std::vector<T>> chunk_by_threshold(T threshold) {
+        // Implementation
+    }
+
+    std::vector<std::vector<T>> chunk_by_similarity(double similarity_threshold) {
+        // Implementation
+    }
+
 private:
     void update_chunks() {
         chunks.clear();

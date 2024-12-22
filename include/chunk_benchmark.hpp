@@ -13,9 +13,10 @@
 
 namespace chunk_benchmark {
 
+template<typename T>
 class ChunkStrategy {
 public:
-    virtual std::vector<std::vector<int>> chunk(const std::vector<int>& data) = 0;
+    virtual std::vector<std::vector<T>> chunk(const std::vector<T>& data) = 0;
     virtual std::string name() const = 0;
     virtual ~ChunkStrategy() = default;
 };
@@ -23,8 +24,8 @@ public:
 template<typename T>
 class ChunkBenchmark {
 private:
-    std::vector<T>& data;
-    std::vector<std::shared_ptr<ChunkStrategy>> strategies;
+    const std::vector<T>& data;
+    std::vector<std::shared_ptr<ChunkStrategy<T>>> strategies;
     std::string output_dir;
 
     // Helper to get current memory usage in bytes
@@ -52,7 +53,7 @@ private:
     BenchmarkResults results;
 
 public:
-    ChunkBenchmark(std::vector<T>& input_data, const std::string& output_path = "./benchmark")
+    ChunkBenchmark(const std::vector<T>& input_data, const std::string& output_path = "./benchmark")
         : data(input_data), output_dir(output_path) {
         try {
             // Remove any existing file with the same name
@@ -72,7 +73,7 @@ public:
         }
     }
 
-    void add_strategy(std::shared_ptr<ChunkStrategy> strategy) {
+    void add_strategy(std::shared_ptr<ChunkStrategy<T>> strategy) {
         strategies.push_back(strategy);
     }
 

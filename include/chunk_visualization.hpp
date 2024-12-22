@@ -3,6 +3,8 @@
 #include <fstream>
 #include <filesystem>
 #include <string>
+#include <sstream>
+#include <type_traits>
 
 namespace chunk_viz {
     template<typename T>
@@ -12,10 +14,29 @@ namespace chunk_viz {
         std::vector<T>& chunks;
         std::string output_dir;
 
+        // Helper function to format chunk contents
+        std::string format_chunk(const T& chunk) {
+            if constexpr (std::is_same_v<T, std::vector<int>> || 
+                         std::is_same_v<T, std::vector<double>>) {
+                std::stringstream ss;
+                ss << "[";
+                for (size_t i = 0; i < chunk.size(); ++i) {
+                    ss << chunk[i];
+                    if (i < chunk.size() - 1) ss << ",";
+                }
+                ss << "]";
+                return ss.str();
+            } else {
+                return std::to_string(chunk);
+            }
+        }
+
     public:
         // Constructor
         explicit ChunkVisualizer(std::vector<T>& chunks_, const std::string& output_dir_ = "./viz")
-            : chunks(chunks_), output_dir(output_dir_) {}
+            : chunks(chunks_), output_dir(output_dir_) {
+            std::filesystem::create_directories(output_dir);
+        }
 
         // ... existing declarations ...
 
@@ -28,7 +49,12 @@ namespace chunk_viz {
             
             // Write chunk sizes
             for (size_t i = 0; i < chunks.size(); ++i) {
-                plot_data << i << " " << chunks[i].size() << "\n";
+                if constexpr (std::is_same_v<T, std::vector<int>> || 
+                             std::is_same_v<T, std::vector<double>>) {
+                    plot_data << i << " " << chunks[i].size() << "\n";
+                } else {
+                    plot_data << i << " " << 1 << "\n";  // Single value counts as size 1
+                }
             }
             
             // Generate gnuplot script
@@ -46,33 +72,34 @@ namespace chunk_viz {
             
             size_t total_size = 0;
             for (const auto& chunk : chunks) {
+                size_t chunk_size;
+                if constexpr (std::is_same_v<T, std::vector<int>> || 
+                             std::is_same_v<T, std::vector<double>>) {
+                    chunk_size = chunk.size();
+                } else {
+                    chunk_size = 1;  // Single value counts as size 1
+                }
                 // Draw boundary marker
-                viz_file << "=== Chunk Boundary (size: " << chunk.size() << ") ===\n";
-                total_size += chunk.size();
+                viz_file << "=== Chunk Boundary (size: " << chunk_size << ") ===\n";
+                total_size += chunk_size;
             }
             
             viz_file << "\nTotal size: " << total_size << " elements\n";
         }
 
-        void export_to_graphviz() {
-            std::ofstream dot_file(output_dir + "/chunks.dot");
+        void export_to_graphviz(const std::string& filename = "") {
+            std::string actual_filename = filename.empty() ? 
+                output_dir + "/chunks.dot" : filename;
             
-            // Write DOT file header
-            dot_file << "digraph ChunkVisualization {\n";
-            dot_file << "  node [shape=record];\n";
+            std::ofstream file(actual_filename);
+            file << "digraph chunks {\n";
             
-            // Create nodes for each chunk
             for (size_t i = 0; i < chunks.size(); ++i) {
-                dot_file << "  chunk" << i << " [label=\"Chunk " << i 
-                        << "\\nSize: " << chunks[i].size() << "\"];\n";
-                
-                // Add edge to next chunk if not last
-                if (i < chunks.size() - 1) {
-                    dot_file << "  chunk" << i << " -> chunk" << (i + 1) << ";\n";
-                }
+                file << "  chunk" << i << " [label=\"Chunk " << i 
+                     << "\\nValues: " << format_chunk(chunks[i]) << "\"];\n";
             }
             
-            dot_file << "}\n";
+            file << "}\n";
         }
     };
 }

@@ -247,21 +247,27 @@ public:
      */
     std::vector<std::vector<T>> restore_from_checkpoint() {
         std::lock_guard<std::mutex> lock(mutex);
-
+  
         // Find latest valid checkpoint
+        std::vector<size_t> keys;
+        for (const auto& pair : checkpoint_history) {
+            keys.push_back(pair.first);
+        }
+        std::sort(keys.begin(), keys.end(), std::greater<size_t>());
+  
         auto latest_valid = std::find_if(
-            checkpoint_history.rbegin(),
-            checkpoint_history.rend(),
+            keys.begin(),
+            keys.end(),
             [this](const auto& checkpoint) {
-                return verify_checkpoint(checkpoint.second);
+                return verify_checkpoint(checkpoint_history[checkpoint]);
             }
         );
-
-        if (latest_valid == checkpoint_history.rend()) {
+  
+        if (latest_valid == keys.end()) {
             throw ChunkingError("No valid checkpoint found for recovery");
         }
-
-        return latest_valid->second.chunks;
+  
+        return checkpoint_history[*latest_valid].chunks;
     }
 
     /**
@@ -286,11 +292,9 @@ public:
      * @brief Handle data corruption
      */
     void handle_corruption() {
-        // Log corruption event
         std::cerr << "Data corruption detected at sequence " 
                   << current_sequence << std::endl;
         
-        // Mark current checkpoint as corrupted
         if (checkpoint_history.count(current_sequence)) {
             checkpoint_history[current_sequence].is_corrupted = true;
         }
@@ -298,8 +302,12 @@ public:
         // Attempt to restore from last valid checkpoint
         auto valid_checkpoint = restore_from_checkpoint();
         
-        // Reset sequence number
-        current_sequence = checkpoint_history.rbegin()->first;
+        // Find highest sequence number
+        size_t max_seq = 0;
+        for (const auto& [seq, _] : checkpoint_history) {
+            max_seq = std::max(max_seq, seq);
+        }
+        current_sequence.store(max_seq);
     }
 };
 
