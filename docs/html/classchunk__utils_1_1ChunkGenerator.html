@@ -117,7 +117,7 @@ Static Private Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
 class chunk_utils::ChunkGenerator&lt; T &gt;</div>
-<p class="definition">Definition at line <a class="el" href="utils_8hpp_source.html#l00081">81</a> of file <a class="el" href="utils_8hpp_source.html">utils.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8hpp_source.html#l00080">80</a> of file <a class="el" href="utils_8hpp_source.html">utils.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ae6136fb99fc953bbdf9f22314d61cae4" name="ae6136fb99fc953bbdf9f22314d61cae4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae6136fb99fc953bbdf9f22314d61cae4">&#9670;&#160;</a></span>generate_random_chunks()</h2>
@@ -167,17 +167,17 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="utils_8hpp_source.html#l00094">94</a> of file <a class="el" href="utils_8hpp_source.html">utils.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   95</span>                                                                                    {</div>
-<div class="line"><span class="lineno">   96</span>        std::vector&lt;std::vector&lt;T&gt;&gt; chunks(num_chunks);</div>
-<div class="line"><span class="lineno">   97</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; chunk : chunks) {</div>
-<div class="line"><span class="lineno">   98</span>            chunk = <a class="code hl_function" href="classchunk__utils_1_1ChunkGenerator.html#a8de1ac93ada6f7969952af28ca6cf832">generate_random_data</a>(chunk_size, min_val, max_val);</div>
-<div class="line"><span class="lineno">   99</span>        }</div>
-<div class="line"><span class="lineno">  100</span>        <span class="keywordflow">return</span> chunks;</div>
-<div class="line"><span class="lineno">  101</span>    }</div>
-<div class="ttc" id="aclasschunk__utils_1_1ChunkGenerator_html_a8de1ac93ada6f7969952af28ca6cf832"><div class="ttname"><a href="classchunk__utils_1_1ChunkGenerator.html#a8de1ac93ada6f7969952af28ca6cf832">chunk_utils::ChunkGenerator::generate_random_data</a></div><div class="ttdeci">static std::vector&lt; T &gt; generate_random_data(size_t size, T min_val, T max_val)</div><div class="ttdef"><b>Definition</b> <a href="utils_8hpp_source.html#l00087">utils.hpp:87</a></div></div>
+<p class="definition">Definition at line <a class="el" href="utils_8hpp_source.html#l00093">93</a> of file <a class="el" href="utils_8hpp_source.html">utils.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   94</span>                                                                                    {</div>
+<div class="line"><span class="lineno">   95</span>        std::vector&lt;std::vector&lt;T&gt;&gt; chunks(num_chunks);</div>
+<div class="line"><span class="lineno">   96</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; chunk : chunks) {</div>
+<div class="line"><span class="lineno">   97</span>            chunk = <a class="code hl_function" href="classchunk__utils_1_1ChunkGenerator.html#a8de1ac93ada6f7969952af28ca6cf832">generate_random_data</a>(chunk_size, min_val, max_val);</div>
+<div class="line"><span class="lineno">   98</span>        }</div>
+<div class="line"><span class="lineno">   99</span>        <span class="keywordflow">return</span> chunks;</div>
+<div class="line"><span class="lineno">  100</span>    }</div>
+<div class="ttc" id="aclasschunk__utils_1_1ChunkGenerator_html_a8de1ac93ada6f7969952af28ca6cf832"><div class="ttname"><a href="classchunk__utils_1_1ChunkGenerator.html#a8de1ac93ada6f7969952af28ca6cf832">chunk_utils::ChunkGenerator::generate_random_data</a></div><div class="ttdeci">static std::vector&lt; T &gt; generate_random_data(size_t size, T min_val, T max_val)</div><div class="ttdef"><b>Definition</b> <a href="utils_8hpp_source.html#l00086">utils.hpp:86</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="utils_8hpp_source.html#l00087">chunk_utils::ChunkGenerator&lt; T &gt;::generate_random_data()</a>.</p>
+<p class="reference">References <a class="el" href="utils_8hpp_source.html#l00086">chunk_utils::ChunkGenerator&lt; T &gt;::generate_random_data()</a>.</p>
 
 </div>
 </div>
@@ -223,15 +223,15 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="utils_8hpp_source.html#l00087">87</a> of file <a class="el" href="utils_8hpp_source.html">utils.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   87</span>                                                                                {</div>
-<div class="line"><span class="lineno">   88</span>        std::vector&lt;T&gt; data(size);</div>
-<div class="line"><span class="lineno">   89</span>        std::uniform_real_distribution&lt;T&gt; dis(min_val, max_val);</div>
-<div class="line"><span class="lineno">   90</span>        std::generate(data.begin(), data.end(), [&amp;]() { return dis(gen); });</div>
-<div class="line"><span class="lineno">   91</span>        <span class="keywordflow">return</span> data;</div>
-<div class="line"><span class="lineno">   92</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="utils_8hpp_source.html#l00086">86</a> of file <a class="el" href="utils_8hpp_source.html">utils.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   86</span>                                                                                {</div>
+<div class="line"><span class="lineno">   87</span>        std::vector&lt;T&gt; data(size);</div>
+<div class="line"><span class="lineno">   88</span>        std::uniform_real_distribution&lt;T&gt; dis(min_val, max_val);</div>
+<div class="line"><span class="lineno">   89</span>        std::generate(data.begin(), data.end(), [&amp;]() { return dis(gen); });</div>
+<div class="line"><span class="lineno">   90</span>        <span class="keywordflow">return</span> data;</div>
+<div class="line"><span class="lineno">   91</span>    }</div>
 </div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="utils_8hpp_source.html#l00094">chunk_utils::ChunkGenerator&lt; T &gt;::generate_random_chunks()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="utils_8hpp_source.html#l00093">chunk_utils::ChunkGenerator&lt; T &gt;::generate_random_chunks()</a>.</p>
 
 </div>
 </div>
@@ -258,7 +258,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="utils_8hpp_source.html#l00084">84</a> of file <a class="el" href="utils_8hpp_source.html">utils.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8hpp_source.html#l00083">83</a> of file <a class="el" href="utils_8hpp_source.html">utils.hpp</a>.</p>
 
 </div>
 </div>
@@ -284,7 +284,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="utils_8hpp_source.html#l00083">83</a> of file <a class="el" href="utils_8hpp_source.html">utils.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8hpp_source.html#l00082">82</a> of file <a class="el" href="utils_8hpp_source.html">utils.hpp</a>.</p>
 
 </div>
 </div>
@@ -297,7 +297,7 @@ template&lt;typename T &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacechunk__utils.html">chunk_utils</a></li><li class="navelem"><a class="el" href="classchunk__utils_1_1ChunkGenerator.html">ChunkGenerator</a></li>
-    <li class="footer">Generated on Sun Dec 22 2024 22:05:07 for Advanced Chunk Processing Library by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sun Dec 22 2024 23:52:19 for Advanced Chunk Processing Library by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

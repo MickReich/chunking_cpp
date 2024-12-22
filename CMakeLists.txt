@@ -108,6 +108,7 @@ add_executable(run_tests
     tests/parallel_chunk_test.cpp
     tests/advanced_structures_test.cpp
     tests/advanced_chunk_strategies_test.cpp
+    tests/chunking_methods_sophisticated_test.cpp
 )
 
 # Set the output directory for run_tests executable
@@ -190,4 +191,36 @@ add_test(NAME create_test_output
 )
 set_tests_properties(create_test_output PROPERTIES
     FIXTURES_SETUP test_output
-) 
+)
+
+# Add the sophisticated chunking library
+add_library(sophisticated_chunking
+    src/sophisticated_chunking_demo.cpp
+)
+
+target_include_directories(sophisticated_chunking PUBLIC
+    ${PROJECT_SOURCE_DIR}/include
+)
+
+# Add the demo executable
+add_executable(sophisticated_chunking_demo
+    src/sophisticated_chunking_demo.cpp
+)
+
+target_link_libraries(sophisticated_chunking_demo
+    sophisticated_chunking
+)
+
+# Add the test
+add_executable(chunking_methods_sophisticated_test
+    tests/chunking_methods_sophisticated_test.cpp
+)
+
+target_link_libraries(chunking_methods_sophisticated_test
+    sophisticated_chunking
+    gtest
+    gtest_main
+)
+
+# Add to test suite
+add_test(NAME chunking_methods_sophisticated COMMAND chunking_methods_sophisticated_test) 

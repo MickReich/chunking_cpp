@@ -128,27 +128,30 @@ make docs-serve
 ├── docs/
 │   └── html/
 ├── include/
-   ├── chunk.hpp
-   ├── config.hpp
-   ├── chunk_strategies.hpp
-   ├── chunk_compression.hpp
-   ├── sub_chunk_strategies.hpp
-   ├── parallel_chunk.hpp
-   ├── advanced_structures.hpp
-   ├── data_structures.hpp
-   └── utils.hpp
+│   ├── chunk.hpp
+│   ├── config.hpp
+│   ├── chunk_strategies.hpp
+│   ├── chunk_compression.hpp
+│   ├── sub_chunk_strategies.hpp
+│   ├── parallel_chunk.hpp
+│   ├── advanced_structures.hpp
+│   ├── sophisticated_chunking.hpp
+│   ├── data_structures.hpp
+│   └── utils.hpp
 ├── src/
-│   └── main.cpp
+│   ├── main.cpp
+│   └── sophisticated_chunking_demo.cpp
 ├── tests/
 │   ├── advanced_chunk_strategies_test.cpp
 │   ├── advanced_structures_test.cpp
 │   ├── chunk_compression_test.cpp
 │   ├── chunk_strategies_test.cpp
+│   ├── chunking_methods_sophisticated_test.cpp
 │   ├── data_structures_test.cpp
 │   ├── parallel_chunk_test.cpp
-|   ├── sub_chunk_strategies_test.cpp
-|   ├── test_main.cpp
-|   └── utils_test.cpp
+│   ├── sub_chunk_strategies_test.cpp
+│   ├── test_main.cpp
+│   └── utils_test.cpp
 ├── Makefile
 ├── CMakeLists.txt
 ├── Doxyfile
@@ -160,10 +163,14 @@ make docs-serve
 ## Make Targets
 
 - `make`: Build the project
+- `make run`: Run the main program
+- `make run-sophisticated`: Run the sophisticated chunking demo
 - `make test`: Run all tests
 - `make test-<name>`: Run specific test suite
 - `make docs`: Generate documentation
 - `make docs-serve`: Serve documentation locally
+- `make docs-clean`: Clean documentation build artifacts
+- `make docs-stop`: Stop documentation server
 - `make clean`: Clean build artifacts
 - `make format`: Format source code
 - `make format-check`: Check source code formatting
@@ -187,3 +194,58 @@ auto strategy = std::make_shared<VarianceStrategy<double>>(5.0);
 RecursiveSubChunkStrategy<double> recursive(strategy, 2, 2);
 auto sub_chunks = recursive.apply(data);
 ```
+
+### Building and Testing Sophisticated Chunking
+
+To build and run the sophisticated chunking examples:
+
+```bash
+# Build the project including sophisticated chunking demo
+make
+
+# Run the sophisticated chunking demo
+./build/bin/sophisticated_chunking_demo
+
+# Run sophisticated chunking tests specifically
+make test-sophisticated
+```
+
+The sophisticated chunking features are implemented in:
+- `include/sophisticated_chunking.hpp`: Core implementations
+- `src/sophisticated_chunking_demo.cpp`: Usage examples
+- `tests/chunking_methods_sophisticated_test.cpp`: Unit tests
+
+### Running Sophisticated Chunking Tests
+
+To run only the sophisticated chunking tests:
+
+```bash
+cd build
+ctest -R sophisticated
+```
+
+Or using make:
+
+```bash
+make test-sophisticated
+```
+
+### Sophisticated Chunking Integration
+
+To use sophisticated chunking in your project:
+
+1. Include the header:
+```cpp
+#include "sophisticated_chunking.hpp"
+```
+
+2. Link against the library in your CMakeLists.txt:
+```cmake
+target_link_libraries(your_target PRIVATE sophisticated_chunking)
+```
+
+### Performance Considerations for Sophisticated Chunking
+
+- **Wavelet Chunking**: O(n * window_size) complexity. Choose smaller window sizes for better performance.
+- **Mutual Information**: O(n * context_size) complexity. Larger context sizes impact performance significantly.
+- **DTW Chunking**: O(n * window_size²) complexity. Window size has quadratic impact on performance.

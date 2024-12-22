@@ -48,7 +48,8 @@ INPUT                = README.md \
                       include/chunk_windows.hpp \
                       include/data_structures.hpp \
                       include/utils.hpp \
-                      include/config.hpp
+                      include/config.hpp \
+                      include/sophisticated_chunking.hpp
 USE_MDFILE_AS_MAINPAGE = README.md
 FILE_PATTERNS        = *.cpp \
                       *.hpp \

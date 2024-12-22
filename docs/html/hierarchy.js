@@ -25,10 +25,12 @@ var hierarchy =
     [ "advanced_structures::ChunkTreap< T >", "classadvanced__structures_1_1ChunkTreap.html", null ],
     [ "CircularBuffer< T >", "classCircularBuffer.html", null ],
     [ "advanced_structures::DefaultNLPModel", "structadvanced__structures_1_1DefaultNLPModel.html", null ],
+    [ "sophisticated_chunking::DTWChunking< T >", "classsophisticated__chunking_1_1DTWChunking.html", null ],
     [ "chunk_strategies::DynamicThresholdStrategy< T >", "classchunk__strategies_1_1DynamicThresholdStrategy.html", null ],
     [ "advanced_structures::FractalPatternsChunk< T >", "classadvanced__structures_1_1FractalPatternsChunk.html", null ],
     [ "advanced_structures::GraphBasedChunk< T >", "classadvanced__structures_1_1GraphBasedChunk.html", null ],
     [ "chunk_strategies::MultiCriteriaStrategy< T >", "classchunk__strategies_1_1MultiCriteriaStrategy.html", null ],
+    [ "sophisticated_chunking::MutualInformationChunking< T >", "classsophisticated__chunking_1_1MutualInformationChunking.html", null ],
     [ "advanced_structures::ChunkBPlusTree< T >::Node", "structadvanced__structures_1_1ChunkBPlusTree_1_1Node.html", null ],
     [ "advanced_structures::ChunkSkipList< T >::Node", "structadvanced__structures_1_1ChunkSkipList_1_1Node.html", null ],
     [ "advanced_structures::ChunkTreap< T >::Node", "structadvanced__structures_1_1ChunkTreap_1_1Node.html", null ],
@@ -46,5 +48,6 @@ var hierarchy =
       [ "chunk_strategies::HierarchicalSubChunkStrategy< T >", "classchunk__strategies_1_1HierarchicalSubChunkStrategy.html", null ],
       [ "chunk_strategies::RecursiveSubChunkStrategy< T >", "classchunk__strategies_1_1RecursiveSubChunkStrategy.html", null ]
     ] ],
+    [ "sophisticated_chunking::WaveletChunking< T >", "classsophisticated__chunking_1_1WaveletChunking.html", null ],
     [ "chunk_windows::WindowOperations< T >", "classchunk__windows_1_1WindowOperations.html", null ]
 ];

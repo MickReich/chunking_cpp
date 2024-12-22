@@ -25,7 +25,7 @@ static std\+::vector$<$ std\+::pair$<$ T, size\+\_\+t $>$ $>$ \mbox{\hyperlink{c
 class chunk\+\_\+compression\+::\+Chunk\+Compressor$<$ T $>$}
 Compression strategies for chunk data. 
 
-Definition at line \mbox{\hyperlink{chunk__compression_8hpp_source_l00014}{14}} of file \mbox{\hyperlink{chunk__compression_8hpp_source}{chunk\+\_\+compression.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__compression_8hpp_source_l00013}{13}} of file \mbox{\hyperlink{chunk__compression_8hpp_source}{chunk\+\_\+compression.\+hpp}}.
 
 
 
@@ -51,24 +51,24 @@ Decoded chunk
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{chunk__compression_8hpp_source_l00068}{68}} of file \mbox{\hyperlink{chunk__compression_8hpp_source}{chunk\+\_\+compression.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__compression_8hpp_source_l00067}{67}} of file \mbox{\hyperlink{chunk__compression_8hpp_source}{chunk\+\_\+compression.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (chunk.empty())}
-\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\};}
-\DoxyCodeLine{00071\ }
-\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ std::vector<T>\ result;}
-\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ result.reserve(chunk.size());}
-\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ result.push\_back(chunk[0]);}
-\DoxyCodeLine{00075\ }
-\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 1;\ i\ <\ chunk.size();\ ++i)\ \{}
-\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(result.back()\ +\ chunk[i]);}
-\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00079\ }
-\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
-\DoxyCodeLine{00081\ \ \ \ \ \}}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (chunk.empty())}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\};}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ std::vector<T>\ result;}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ result.reserve(chunk.size());}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ result.push\_back(chunk[0]);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 1;\ i\ <\ chunk.size();\ ++i)\ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(result.back()\ +\ chunk[i]);}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00080\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \Hypertarget{classchunk__compression_1_1ChunkCompressor_a438ecfa6dc958ae561a6645861f6ef9a}\label{classchunk__compression_1_1ChunkCompressor_a438ecfa6dc958ae561a6645861f6ef9a} 
@@ -92,24 +92,24 @@ Delta-\/encoded chunk
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{chunk__compression_8hpp_source_l00048}{48}} of file \mbox{\hyperlink{chunk__compression_8hpp_source}{chunk\+\_\+compression.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__compression_8hpp_source_l00047}{47}} of file \mbox{\hyperlink{chunk__compression_8hpp_source}{chunk\+\_\+compression.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (chunk.empty())}
-\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\};}
-\DoxyCodeLine{00051\ }
-\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ std::vector<T>\ result;}
-\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ result.reserve(chunk.size());}
-\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ result.push\_back(chunk[0]);}
-\DoxyCodeLine{00055\ }
-\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 1;\ i\ <\ chunk.size();\ ++i)\ \{}
-\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(chunk[i]\ -\/\ chunk[i\ -\/\ 1]);}
-\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00059\ }
-\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
-\DoxyCodeLine{00061\ \ \ \ \ \}}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (chunk.empty())}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ std::vector<T>\ result;}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ result.reserve(chunk.size());}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ result.push\_back(chunk[0]);}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 1;\ i\ <\ chunk.size();\ ++i)\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(chunk[i]\ -\/\ chunk[i\ -\/\ 1]);}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00060\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \Hypertarget{classchunk__compression_1_1ChunkCompressor_a6d988809687b8a7ddb5706df444c5f2e}\label{classchunk__compression_1_1ChunkCompressor_a6d988809687b8a7ddb5706df444c5f2e} 
@@ -133,31 +133,31 @@ Encoded chunk with value-\/count pairs
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{chunk__compression_8hpp_source_l00021}{21}} of file \mbox{\hyperlink{chunk__compression_8hpp_source}{chunk\+\_\+compression.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__compression_8hpp_source_l00020}{20}} of file \mbox{\hyperlink{chunk__compression_8hpp_source}{chunk\+\_\+compression.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ std::vector<std::pair<T,\ size\_t>>\ result;}
-\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (chunk.empty())}
-\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
-\DoxyCodeLine{00025\ }
-\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ T\ current\ =\ chunk[0];}
-\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ count\ =\ 1;}
-\DoxyCodeLine{00028\ }
-\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 1;\ i\ <\ chunk.size();\ ++i)\ \{}
-\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (chunk[i]\ ==\ current)\ \{}
-\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ++count;}
-\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.emplace\_back(current,\ count);}
-\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\ =\ chunk[i];}
-\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ count\ =\ 1;}
-\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ result.emplace\_back(current,\ count);}
-\DoxyCodeLine{00039\ }
-\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
-\DoxyCodeLine{00041\ \ \ \ \ \}}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ std::vector<std::pair<T,\ size\_t>>\ result;}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (chunk.empty())}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ T\ current\ =\ chunk[0];}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ count\ =\ 1;}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 1;\ i\ <\ chunk.size();\ ++i)\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (chunk[i]\ ==\ current)\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ++count;}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.emplace\_back(current,\ count);}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\ =\ chunk[i];}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ count\ =\ 1;}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ result.emplace\_back(current,\ count);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00040\ \ \ \ \ \}}
 
 \end{DoxyCode}
 

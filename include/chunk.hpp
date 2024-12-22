@@ -1,5 +1,4 @@
-#ifndef CHUNK_HPP
-#define CHUNK_HPP
+#pragma once
 
 #include <numeric>
 #include <stdexcept>
@@ -14,8 +13,6 @@
  * @author Jonathan Reich
  * @date 2024-12-19
  */
-
-#pragma once
 
 /**
  * @brief A template class for managing and processing data in chunks
@@ -263,5 +260,3 @@ private:
         }
     }
 };
-
-#endif // CHUNK_HPP

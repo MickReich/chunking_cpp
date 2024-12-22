@@ -29,6 +29,9 @@ This library offers a comprehensive suite of tools for handling data in chunks, 
 - Similarity-based chunking
 - Monotonicity-based chunking
 - Padded fixed-size chunking
+- Wavelet-based chunking
+- Mutual Information-based chunking
+- Dynamic Time Warping (DTW) based chunking
 
 ### Sub-Chunking Strategies
 
@@ -127,6 +130,10 @@ auto chunks = chunker.get_chunks(); // Returns: {{1,2}, {3,4}, {5}}
 - **ChunkDeque**: A deque-based chunk structure for double-ended operations
 - **ChunkStack**: A stack-based chunk structure for LIFO operations
 - **ChunkTreap**: A treap-based chunk structure for efficient searching and manipulation
+- **Semantic Chunking**: Create chunks based on semantic/cosine similarity
+- **Wavelet-based Chunking**: Create chunks based on wavelet coefficients
+- **Mutual Information-based Chunking**: Create chunks based on mutual information
+- **Dynamic Time Warping (DTW) based Chunking**: Create chunks based on dynamic time warping
 
 #### Example Usage
 
@@ -262,31 +269,62 @@ If you use this library in your research, please cite:
 ├── docs/
 │   └── html/
 ├── include/
-   ├── chunk.hpp
-   ├── config.hpp
-   ├── chunk_strategies.hpp
-   ├── chunk_compression.hpp
-   ├── sub_chunk_strategies.hpp
-   ├── parallel_chunk.hpp
-   ├── advanced_structures.hpp
-   ├── data_structures.hpp
-   └── utils.hpp
+│   ├── chunk.hpp
+│   ├── config.hpp
+│   ├── chunk_strategies.hpp
+│   ├── chunk_compression.hpp
+│   ├── sub_chunk_strategies.hpp
+│   ├── parallel_chunk.hpp
+│   ├── advanced_structures.hpp
+│   ├── sophisticated_chunking.hpp
+│   ├── data_structures.hpp
+│   └── utils.hpp
 ├── src/
-│   └── main.cpp
+│   ├── main.cpp
+│   └── sophisticated_chunking_demo.cpp
 ├── tests/
 │   ├── advanced_chunk_strategies_test.cpp
 │   ├── advanced_structures_test.cpp
 │   ├── chunk_compression_test.cpp
 │   ├── chunk_strategies_test.cpp
+│   ├── chunking_methods_sophisticated_test.cpp
 │   ├── data_structures_test.cpp
 │   ├── parallel_chunk_test.cpp
-|   ├── sub_chunk_strategies_test.cpp
-|   ├── test_main.cpp
-|   └── utils_test.cpp
+│   ├── sub_chunk_strategies_test.cpp
+│   ├── test_main.cpp
+│   └── utils_test.cpp
 ├── Makefile
 ├── CMakeLists.txt
 ├── Doxyfile
 ├── README.md
 ├── BUILDING.md
 └── LICENSE
+```
+
+### Sophisticated Chunking Examples
+
+For detailed examples of the sophisticated chunking algorithms, see `src/sophisticated_chunking_demo.cpp`:
+
+```cpp
+#include "sophisticated_chunking.hpp"
+
+// Example from sophisticated_chunking_demo.cpp
+int main() {
+    // Wavelet-based chunking example
+    std::vector<double> signal_data = {1.0, 1.2, 1.1, 5.0, 5.2, 5.1, 2.0, 2.1};
+    sophisticated_chunking::WaveletChunking<double> wavelet_chunker(8, 0.5);
+    auto wavelet_chunks = wavelet_chunker.chunk(signal_data);
+
+    // Mutual Information chunking example
+    std::vector<int> pattern_data = {1, 2, 3, 10, 11, 12, 4, 5, 6};
+    sophisticated_chunking::MutualInformationChunking<int> mi_chunker(5, 0.3);
+    auto mi_chunks = mi_chunker.chunk(pattern_data);
+
+    // DTW chunking example
+    std::vector<float> time_series = {1.0f, 1.1f, 1.2f, 5.0f, 5.1f, 5.2f};
+    sophisticated_chunking::DTWChunking<float> dtw_chunker(10, 2.0);
+    auto dtw_chunks = dtw_chunker.chunk(time_series);
+
+    return 0;
+}
 ```

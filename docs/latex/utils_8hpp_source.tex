@@ -1,116 +1,113 @@
 \doxysection{utils.\+hpp}
 \hypertarget{utils_8hpp_source}{}\label{utils_8hpp_source}\mbox{\hyperlink{utils_8hpp}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ UTILS\_HPP}}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ UTILS\_HPP}}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00003}00003\ }
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <algorithm>}}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <functional>}}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <map>}}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <numeric>}}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <random>}}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <sstream>}}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <string>}}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <vector>}}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00012}00012\ }
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00013}\mbox{\hyperlink{namespacechunk__utils}{00013}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacechunk__utils}{chunk\_utils}}\ \{}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00014}00014\ }
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00015}00015\ \textcolor{comment}{//\ Statistics\ utilities}}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00016}00016\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00017}\mbox{\hyperlink{classchunk__utils_1_1Statistics}{00017}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classchunk__utils_1_1Statistics}{Statistics}}\ \{}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00018}00018\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00019}\mbox{\hyperlink{classchunk__utils_1_1Statistics_ab1c472157d5bacc357dcebe0fc19cf5d}{00019}}\ \ \ \ \ \textcolor{keyword}{static}\ T\ \mbox{\hyperlink{classchunk__utils_1_1Statistics_ab1c472157d5bacc357dcebe0fc19cf5d}{mean}}(\textcolor{keyword}{const}\ std::vector<T>\&\ data)\ \{}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00020}00020\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.empty())}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00021}00021\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ T();}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00022}00022\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::accumulate(data.begin(),\ data.end(),\ T())\ /\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(data.size());}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00023}00023\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00024}00024\ }
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00025}\mbox{\hyperlink{classchunk__utils_1_1Statistics_a2de339505cc415f0a10975bdf388ad7d}{00025}}\ \ \ \ \ \textcolor{keyword}{static}\ T\ \mbox{\hyperlink{classchunk__utils_1_1Statistics_a2de339505cc415f0a10975bdf388ad7d}{median}}(std::vector<T>\ data)\ \{}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00026}00026\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.empty())}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ T();}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00028}00028\ \ \ \ \ \ \ \ \ std::sort(data.begin(),\ data.end());}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.size()\ \%\ 2\ ==\ 0)\ \{}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ For\ even\ number\ of\ elements,\ return\ average\ of\ two\ middle\ values}}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ mid\ =\ data.size()\ /\ 2;}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (data[mid\ -\/\ 1]\ +\ data[mid])\ /\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(2);}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00033}00033\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ For\ odd\ number\ of\ elements,\ return\ middle\ value}}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data[data.size()\ /\ 2];}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00036}00036\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00037}00037\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00038}00038\ }
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00039}\mbox{\hyperlink{classchunk__utils_1_1Statistics_aaaf244247e7f592fcd650f9e514b7a6d}{00039}}\ \ \ \ \ \textcolor{keyword}{static}\ std::pair<T,\ size\_t>\ \mbox{\hyperlink{classchunk__utils_1_1Statistics_aaaf244247e7f592fcd650f9e514b7a6d}{mode}}(\textcolor{keyword}{const}\ std::vector<T>\&\ data)\ \{}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00040}00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.empty())}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{T(),\ 0\};}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00042}00042\ \ \ \ \ \ \ \ \ std::map<T,\ size\_t>\ freq;}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00043}00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ val\ :\ data)}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ freq[val]++;}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00045}00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *std::max\_element(freq.begin(),\ freq.end(),\ [](\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ p1,\ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ p2)\ \{}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ return\ p1.second\ <\ p2.second;}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00047}00047\ \ \ \ \ \ \ \ \ \});}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00048}00048\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00049}00049\ \};}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00050}00050\ }
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00051}00051\ \textcolor{comment}{//\ Chunk\ manipulation\ utilities}}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00052}00052\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00053}\mbox{\hyperlink{classchunk__utils_1_1ChunkManipulator}{00053}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classchunk__utils_1_1ChunkManipulator}{ChunkManipulator}}\ \{}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00054}00054\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00055}\mbox{\hyperlink{classchunk__utils_1_1ChunkManipulator_aad43e878aa138c2a57312f13e56cacc8}{00055}}\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<std::vector<T>>\ \mbox{\hyperlink{classchunk__utils_1_1ChunkManipulator_aad43e878aa138c2a57312f13e56cacc8}{merge\_chunks}}(\textcolor{keyword}{const}\ std::vector<std::vector<T>>\&\ chunks1,}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::vector<T>>\&\ chunks2)\ \{}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00057}00057\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result\ =\ chunks1;}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00058}00058\ \ \ \ \ \ \ \ \ result.insert(result.end(),\ chunks2.begin(),\ chunks2.end());}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00059}00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00060}00060\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00061}00061\ }
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00062}00062\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<std::vector<T>>}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00063}\mbox{\hyperlink{classchunk__utils_1_1ChunkManipulator_ac5cc27e53560990ba7154bf82632e4d4}{00063}}\ \ \ \ \ \mbox{\hyperlink{classchunk__utils_1_1ChunkManipulator_ac5cc27e53560990ba7154bf82632e4d4}{filter\_chunks}}(\textcolor{keyword}{const}\ std::vector<std::vector<T>>\&\ chunks,}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{bool}(\textcolor{keyword}{const}\ std::vector<T>\&)>\ predicate)\ \{}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00065}00065\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00066}00066\ \ \ \ \ \ \ \ \ std::copy\_if(chunks.begin(),\ chunks.end(),\ std::back\_inserter(result),\ predicate);}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00068}00068\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00069}00069\ }
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00070}00070\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<std::vector<T>>}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00071}\mbox{\hyperlink{classchunk__utils_1_1ChunkManipulator_a673159f2b0528f27d649bc1b20ef4aad}{00071}}\ \ \ \ \ \mbox{\hyperlink{classchunk__utils_1_1ChunkManipulator_a673159f2b0528f27d649bc1b20ef4aad}{transform\_chunks}}(\textcolor{keyword}{const}\ std::vector<std::vector<T>>\&\ chunks,}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<std::vector<T>(\textcolor{keyword}{const}\ std::vector<T>\&)>\ transformer)\ \{}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00073}00073\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00074}00074\ \ \ \ \ \ \ \ \ std::transform(chunks.begin(),\ chunks.end(),\ std::back\_inserter(result),\ transformer);}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00075}00075\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00076}00076\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00077}00077\ \};}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00078}00078\ }
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00079}00079\ \textcolor{comment}{//\ Random\ chunk\ generation}}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00080}00080\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00081}\mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator}{00081}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator}{ChunkGenerator}}\ \{}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00082}00082\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00083}\mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_a76e8487f13a2c6ea1a6a9d4f132251f0}{00083}}\ \ \ \ \ \textcolor{keyword}{static}\ std::random\_device\ \mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_a76e8487f13a2c6ea1a6a9d4f132251f0}{rd}};}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00084}\mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_aa12692893370479eb6e99dc3a9c10661}{00084}}\ \ \ \ \ \textcolor{keyword}{static}\ std::mt19937\ \mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_aa12692893370479eb6e99dc3a9c10661}{gen}};}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00085}00085\ }
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00086}00086\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00087}\mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_a8de1ac93ada6f7969952af28ca6cf832}{00087}}\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<T>\ \mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_a8de1ac93ada6f7969952af28ca6cf832}{generate\_random\_data}}(\textcolor{keywordtype}{size\_t}\ size,\ T\ min\_val,\ T\ max\_val)\ \{}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00088}00088\ \ \ \ \ \ \ \ \ std::vector<T>\ data(size);}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00089}00089\ \ \ \ \ \ \ \ \ std::uniform\_real\_distribution<T>\ dis(min\_val,\ max\_val);}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00090}00090\ \ \ \ \ \ \ \ \ std::generate(data.begin(),\ data.end(),\ [\&]()\ \{\ return\ dis(gen);\ \});}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00091}00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data;}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00092}00092\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00093}00093\ }
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00094}\mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_ae6136fb99fc953bbdf9f22314d61cae4}{00094}}\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<std::vector<T>>\ \mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_ae6136fb99fc953bbdf9f22314d61cae4}{generate\_random\_chunks}}(\textcolor{keywordtype}{size\_t}\ num\_chunks,\ \textcolor{keywordtype}{size\_t}\ chunk\_size,}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ T\ min\_val,\ T\ max\_val)\ \{}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00096}00096\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ chunks(num\_chunks);}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00097}00097\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ chunk\ :\ chunks)\ \{}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ chunk\ =\ \mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_a8de1ac93ada6f7969952af28ca6cf832}{generate\_random\_data}}(chunk\_size,\ min\_val,\ max\_val);}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00099}00099\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00100}00100\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ chunks;}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00101}00101\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00102}00102\ \};}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00103}00103\ }
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00104}00104\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00105}00105\ std::random\_device\ \mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_a76e8487f13a2c6ea1a6a9d4f132251f0}{ChunkGenerator<T>::rd}};}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00106}00106\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00107}00107\ std::mt19937\ \mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_aa12692893370479eb6e99dc3a9c10661}{ChunkGenerator<T>::gen}}(\mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_a76e8487f13a2c6ea1a6a9d4f132251f0}{ChunkGenerator<T>::rd}}());}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00108}00108\ }
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00109}00109\ \}\ \textcolor{comment}{//\ namespace\ chunk\_utils}}
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00110}00110\ }
-\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00111}00111\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ UTILS\_HPP}}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <numeric>}}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <random>}}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00012}\mbox{\hyperlink{namespacechunk__utils}{00012}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacechunk__utils}{chunk\_utils}}\ \{}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00014}00014\ \textcolor{comment}{//\ Statistics\ utilities}}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00015}00015\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00016}\mbox{\hyperlink{classchunk__utils_1_1Statistics}{00016}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classchunk__utils_1_1Statistics}{Statistics}}\ \{}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00017}00017\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00018}\mbox{\hyperlink{classchunk__utils_1_1Statistics_ab1c472157d5bacc357dcebe0fc19cf5d}{00018}}\ \ \ \ \ \textcolor{keyword}{static}\ T\ \mbox{\hyperlink{classchunk__utils_1_1Statistics_ab1c472157d5bacc357dcebe0fc19cf5d}{mean}}(\textcolor{keyword}{const}\ std::vector<T>\&\ data)\ \{}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00019}00019\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.empty())}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00020}00020\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ T();}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00021}00021\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::accumulate(data.begin(),\ data.end(),\ T())\ /\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(data.size());}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00022}00022\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00024}\mbox{\hyperlink{classchunk__utils_1_1Statistics_a2de339505cc415f0a10975bdf388ad7d}{00024}}\ \ \ \ \ \textcolor{keyword}{static}\ T\ \mbox{\hyperlink{classchunk__utils_1_1Statistics_a2de339505cc415f0a10975bdf388ad7d}{median}}(std::vector<T>\ data)\ \{}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00025}00025\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.empty())}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ T();}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00027}00027\ \ \ \ \ \ \ \ \ std::sort(data.begin(),\ data.end());}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00028}00028\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.size()\ \%\ 2\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ For\ even\ number\ of\ elements,\ return\ average\ of\ two\ middle\ values}}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ mid\ =\ data.size()\ /\ 2;}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (data[mid\ -\/\ 1]\ +\ data[mid])\ /\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(2);}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00032}00032\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ For\ odd\ number\ of\ elements,\ return\ middle\ value}}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data[data.size()\ /\ 2];}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00035}00035\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00036}00036\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00038}\mbox{\hyperlink{classchunk__utils_1_1Statistics_aaaf244247e7f592fcd650f9e514b7a6d}{00038}}\ \ \ \ \ \textcolor{keyword}{static}\ std::pair<T,\ size\_t>\ \mbox{\hyperlink{classchunk__utils_1_1Statistics_aaaf244247e7f592fcd650f9e514b7a6d}{mode}}(\textcolor{keyword}{const}\ std::vector<T>\&\ data)\ \{}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00039}00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.empty())}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{T(),\ 0\};}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00041}00041\ \ \ \ \ \ \ \ \ std::map<T,\ size\_t>\ freq;}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ val\ :\ data)}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ freq[val]++;}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *std::max\_element(freq.begin(),\ freq.end(),\ [](\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ p1,\ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ p2)\ \{}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ return\ p1.second\ <\ p2.second;}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00046}00046\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00047}00047\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00048}00048\ \};}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00050}00050\ \textcolor{comment}{//\ Chunk\ manipulation\ utilities}}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00051}00051\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00052}\mbox{\hyperlink{classchunk__utils_1_1ChunkManipulator}{00052}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classchunk__utils_1_1ChunkManipulator}{ChunkManipulator}}\ \{}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00053}00053\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00054}\mbox{\hyperlink{classchunk__utils_1_1ChunkManipulator_aad43e878aa138c2a57312f13e56cacc8}{00054}}\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<std::vector<T>>\ \mbox{\hyperlink{classchunk__utils_1_1ChunkManipulator_aad43e878aa138c2a57312f13e56cacc8}{merge\_chunks}}(\textcolor{keyword}{const}\ std::vector<std::vector<T>>\&\ chunks1,}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::vector<T>>\&\ chunks2)\ \{}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00056}00056\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result\ =\ chunks1;}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00057}00057\ \ \ \ \ \ \ \ \ result.insert(result.end(),\ chunks2.begin(),\ chunks2.end());}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00059}00059\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00061}00061\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<std::vector<T>>}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00062}\mbox{\hyperlink{classchunk__utils_1_1ChunkManipulator_ac5cc27e53560990ba7154bf82632e4d4}{00062}}\ \ \ \ \ \mbox{\hyperlink{classchunk__utils_1_1ChunkManipulator_ac5cc27e53560990ba7154bf82632e4d4}{filter\_chunks}}(\textcolor{keyword}{const}\ std::vector<std::vector<T>>\&\ chunks,}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{bool}(\textcolor{keyword}{const}\ std::vector<T>\&)>\ predicate)\ \{}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00064}00064\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00065}00065\ \ \ \ \ \ \ \ \ std::copy\_if(chunks.begin(),\ chunks.end(),\ std::back\_inserter(result),\ predicate);}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00067}00067\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00069}00069\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<std::vector<T>>}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00070}\mbox{\hyperlink{classchunk__utils_1_1ChunkManipulator_a673159f2b0528f27d649bc1b20ef4aad}{00070}}\ \ \ \ \ \mbox{\hyperlink{classchunk__utils_1_1ChunkManipulator_a673159f2b0528f27d649bc1b20ef4aad}{transform\_chunks}}(\textcolor{keyword}{const}\ std::vector<std::vector<T>>\&\ chunks,}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<std::vector<T>(\textcolor{keyword}{const}\ std::vector<T>\&)>\ transformer)\ \{}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00072}00072\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00073}00073\ \ \ \ \ \ \ \ \ std::transform(chunks.begin(),\ chunks.end(),\ std::back\_inserter(result),\ transformer);}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00074}00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00075}00075\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00076}00076\ \};}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00078}00078\ \textcolor{comment}{//\ Random\ chunk\ generation}}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00079}00079\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00080}\mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator}{00080}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator}{ChunkGenerator}}\ \{}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00081}00081\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00082}\mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_a76e8487f13a2c6ea1a6a9d4f132251f0}{00082}}\ \ \ \ \ \textcolor{keyword}{static}\ std::random\_device\ \mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_a76e8487f13a2c6ea1a6a9d4f132251f0}{rd}};}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00083}\mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_aa12692893370479eb6e99dc3a9c10661}{00083}}\ \ \ \ \ \textcolor{keyword}{static}\ std::mt19937\ \mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_aa12692893370479eb6e99dc3a9c10661}{gen}};}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00085}00085\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00086}\mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_a8de1ac93ada6f7969952af28ca6cf832}{00086}}\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<T>\ \mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_a8de1ac93ada6f7969952af28ca6cf832}{generate\_random\_data}}(\textcolor{keywordtype}{size\_t}\ size,\ T\ min\_val,\ T\ max\_val)\ \{}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00087}00087\ \ \ \ \ \ \ \ \ std::vector<T>\ data(size);}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00088}00088\ \ \ \ \ \ \ \ \ std::uniform\_real\_distribution<T>\ dis(min\_val,\ max\_val);}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00089}00089\ \ \ \ \ \ \ \ \ std::generate(data.begin(),\ data.end(),\ [\&]()\ \{\ return\ dis(gen);\ \});}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00090}00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data;}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00091}00091\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00093}\mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_ae6136fb99fc953bbdf9f22314d61cae4}{00093}}\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<std::vector<T>>\ \mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_ae6136fb99fc953bbdf9f22314d61cae4}{generate\_random\_chunks}}(\textcolor{keywordtype}{size\_t}\ num\_chunks,\ \textcolor{keywordtype}{size\_t}\ chunk\_size,}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ T\ min\_val,\ T\ max\_val)\ \{}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00095}00095\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ chunks(num\_chunks);}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00096}00096\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ chunk\ :\ chunks)\ \{}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ chunk\ =\ \mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_a8de1ac93ada6f7969952af28ca6cf832}{generate\_random\_data}}(chunk\_size,\ min\_val,\ max\_val);}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00098}00098\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00099}00099\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ chunks;}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00100}00100\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00101}00101\ \};}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00103}00103\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00104}00104\ std::random\_device\ \mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_a76e8487f13a2c6ea1a6a9d4f132251f0}{ChunkGenerator<T>::rd}};}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00105}00105\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00106}00106\ std::mt19937\ \mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_aa12692893370479eb6e99dc3a9c10661}{ChunkGenerator<T>::gen}}(\mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_a76e8487f13a2c6ea1a6a9d4f132251f0}{ChunkGenerator<T>::rd}}());}
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{utils_8hpp_source_l00108}00108\ \}\ \textcolor{comment}{//\ namespace\ chunk\_utils}}
 
 \end{DoxyCode}

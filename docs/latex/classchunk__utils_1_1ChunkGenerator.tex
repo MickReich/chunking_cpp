@@ -25,7 +25,7 @@ static std\+::random\+\_\+device \mbox{\hyperlink{classchunk__utils_1_1ChunkGene
 class chunk\+\_\+utils\+::\+Chunk\+Generator$<$ T $>$}
 
 
-Definition at line \mbox{\hyperlink{utils_8hpp_source_l00081}{81}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
+Definition at line \mbox{\hyperlink{utils_8hpp_source_l00080}{80}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
 
 
 
@@ -39,22 +39,22 @@ static std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__
 
 
 
-Definition at line \mbox{\hyperlink{utils_8hpp_source_l00094}{94}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
+Definition at line \mbox{\hyperlink{utils_8hpp_source_l00093}{93}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ chunks(num\_chunks);}
-\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ chunk\ :\ chunks)\ \{}
-\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ chunk\ =\ \mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_a8de1ac93ada6f7969952af28ca6cf832}{generate\_random\_data}}(chunk\_size,\ min\_val,\ max\_val);}
-\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ chunks;}
-\DoxyCodeLine{00101\ \ \ \ \ \}}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ chunks(num\_chunks);}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ chunk\ :\ chunks)\ \{}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ chunk\ =\ \mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator_a8de1ac93ada6f7969952af28ca6cf832}{generate\_random\_data}}(chunk\_size,\ min\_val,\ max\_val);}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ chunks;}
+\DoxyCodeLine{00100\ \ \ \ \ \}}
 
 \end{DoxyCode}
 
 
-References \mbox{\hyperlink{utils_8hpp_source_l00087}{chunk\+\_\+utils\+::\+Chunk\+Generator$<$ T $>$\+::generate\+\_\+random\+\_\+data()}}.
+References \mbox{\hyperlink{utils_8hpp_source_l00086}{chunk\+\_\+utils\+::\+Chunk\+Generator$<$ T $>$\+::generate\+\_\+random\+\_\+data()}}.
 
 \Hypertarget{classchunk__utils_1_1ChunkGenerator_a8de1ac93ada6f7969952af28ca6cf832}\label{classchunk__utils_1_1ChunkGenerator_a8de1ac93ada6f7969952af28ca6cf832} 
 \index{chunk\_utils::ChunkGenerator$<$ T $>$@{chunk\_utils::ChunkGenerator$<$ T $>$}!generate\_random\_data@{generate\_random\_data}}
@@ -65,21 +65,21 @@ static std\+::vector$<$ T $>$ \mbox{\hyperlink{classchunk__utils_1_1ChunkGenerat
 
 
 
-Definition at line \mbox{\hyperlink{utils_8hpp_source_l00087}{87}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
+Definition at line \mbox{\hyperlink{utils_8hpp_source_l00086}{86}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ std::vector<T>\ data(size);}
-\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ std::uniform\_real\_distribution<T>\ dis(min\_val,\ max\_val);}
-\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ std::generate(data.begin(),\ data.end(),\ [\&]()\ \{\ return\ dis(gen);\ \});}
-\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data;}
-\DoxyCodeLine{00092\ \ \ \ \ \}}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ std::vector<T>\ data(size);}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ std::uniform\_real\_distribution<T>\ dis(min\_val,\ max\_val);}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ std::generate(data.begin(),\ data.end(),\ [\&]()\ \{\ return\ dis(gen);\ \});}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data;}
+\DoxyCodeLine{00091\ \ \ \ \ \}}
 
 \end{DoxyCode}
 
 
-Referenced by \mbox{\hyperlink{utils_8hpp_source_l00094}{chunk\+\_\+utils\+::\+Chunk\+Generator$<$ T $>$\+::generate\+\_\+random\+\_\+chunks()}}.
+Referenced by \mbox{\hyperlink{utils_8hpp_source_l00093}{chunk\+\_\+utils\+::\+Chunk\+Generator$<$ T $>$\+::generate\+\_\+random\+\_\+chunks()}}.
 
 
 
@@ -93,7 +93,7 @@ std\+::mt19937 \mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator}{chunk\+\_\+
 
 
 
-Definition at line \mbox{\hyperlink{utils_8hpp_source_l00084}{84}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
+Definition at line \mbox{\hyperlink{utils_8hpp_source_l00083}{83}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
 
 \Hypertarget{classchunk__utils_1_1ChunkGenerator_a76e8487f13a2c6ea1a6a9d4f132251f0}\label{classchunk__utils_1_1ChunkGenerator_a76e8487f13a2c6ea1a6a9d4f132251f0} 
 \index{chunk\_utils::ChunkGenerator$<$ T $>$@{chunk\_utils::ChunkGenerator$<$ T $>$}!rd@{rd}}
@@ -104,7 +104,7 @@ std\+::random\+\_\+device \mbox{\hyperlink{classchunk__utils_1_1ChunkGenerator}{
 
 
 
-Definition at line \mbox{\hyperlink{utils_8hpp_source_l00083}{83}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
+Definition at line \mbox{\hyperlink{utils_8hpp_source_l00082}{82}} of file \mbox{\hyperlink{utils_8hpp_source}{utils.\+hpp}}.
 
 
 
