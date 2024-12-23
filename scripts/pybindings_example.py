@@ -9,7 +9,11 @@ import numpy as np
 # Basic chunking
 chunker = cc.Chunk(10)
 data = [1.0, 2.0, 3.0, 4.0, 5.0]
-chunker.add(data)
+# Can now use either method:
+chunker.add(data)  # Add list at once
+# Or add individually:
+for value in data:
+    chunker.add(value)
 chunks = chunker.chunk_by_size(2)
 
 # Neural chunking

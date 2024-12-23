@@ -41,3 +41,4 @@ benchmark_results
 benchmark
 **/*.in
 dist/
+viz/

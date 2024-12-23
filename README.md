@@ -348,13 +348,13 @@ make run-visualization
 To use the visualisation as a standalone tool with gnuplot run:
 
 ```bash
-gnuplot plot_chunks.gnu
+gnuplot visualization/plot_chunks.gnu
 ```
 
 Or with graphviz:
 
 ```bash
-dot -Tpng chunks.dot -o chunks.png
+dot -Tpng visualization/chunks.dot -o visualization/chunks.png
 ```
 
 ### Chunk Benchmarking

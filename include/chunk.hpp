@@ -36,6 +36,18 @@ private:
         }
     }
 
+    // Ensure data is properly copied
+    std::vector<std::vector<T>> make_chunks(size_t size) const {
+        std::vector<std::vector<T>> result;
+        result.reserve((data.size() + size - 1) / size);
+        
+        for (size_t i = 0; i < data.size(); i += size) {
+            size_t chunk_end = std::min(i + size, data.size());
+            result.emplace_back(data.begin() + i, data.begin() + chunk_end);
+        }
+        return result;
+    }
+
 public:
     /**
      * @brief Constructs a Chunk with a specified size.
@@ -249,7 +261,7 @@ public:
     }
 
     std::vector<std::vector<T>> chunk_by_size(size_t size) {
-        // Implementation
+        return make_chunks(size);
     }
 
     std::vector<std::vector<T>> chunk_by_threshold(T threshold) {

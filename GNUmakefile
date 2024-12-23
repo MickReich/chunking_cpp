@@ -141,3 +141,8 @@ docs-stop:
 benchmark:
 	@g++ -std=c++17 src/benchmark.cpp -I./include -o benchmark
 	@./benchmark
+
+visualization:
+	@g++ -std=c++17 src/chunk_visualization_demo.cpp -I./include -o chunk_visualization_demo
+	@./chunk_visualization_demo
+

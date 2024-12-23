@@ -98,14 +98,7 @@ git clone git@github.com:JohnnyTeutonic/chunking_cpp.git
 cd chunking_cpp
 ```
 
-2.Conversion of the configure script to unix line endings (Windows only):
-
-```bash
-
-unix2dos configure
-```
-
-Make configure script executable
+2.Make configure script executable
 
 ```bash
 chmod +x configure
@@ -115,6 +108,13 @@ chmod +x configure
 
 ```bash
 ./configure
+```
+
+Windows Only - Conversion of the configure script to unix line endings:
+
+```bash
+
+unix2dos configure
 ```
 
 Configuration options:
@@ -127,7 +127,7 @@ Configuration options:
 example:
 
 ```bash
-./configure --prefix=/usr/local --build-type=Debug --disable-tests --disable-docs
+./configure --prefix=/usr/local --build-type=Debug
 ```
 
 3.Build and install the project:
