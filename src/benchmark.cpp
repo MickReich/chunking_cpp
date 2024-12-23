@@ -1,3 +1,10 @@
+/**
+ * @file benchmark.cpp
+ * @brief Implementation of benchmarking utilities
+ * @author Jonathan Reich
+ * @date 2024-12-07
+ */
+
 #include "../include/chunk.hpp"
 #include "../include/chunk_benchmark.hpp"
 #include "../include/neural_chunking.hpp"
@@ -70,19 +77,17 @@ std::vector<int> generate_test_data(size_t size) {
 // Update the benchmark function to use templated strategies
 template <typename T>
 void run_benchmark(const std::vector<T>& data) {
-    chunk_benchmark::ChunkBenchmark<T> benchmark(data);
+    chunk_benchmark::ChunkBenchmark<T> benchmark(data, "./benchmark_results");
 
     benchmark.add_strategy(std::make_shared<NeuralChunkingStrategy<T>>());
     benchmark.add_strategy(std::make_shared<SimilarityChunkingStrategy<T>>(0.5));
 
-    benchmark.run_benchmark();
+    auto results = benchmark.run_benchmark();
     benchmark.save_results();
 }
 
 int main() {
-    // Generate test data with patterns
     std::vector<int> data = generate_test_data(1000);
-
     run_benchmark<int>(data);
     return 0;
 }

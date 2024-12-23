@@ -1,3 +1,10 @@
+/**
+ * @file chunk_visualization.hpp
+ * @brief Visualization utilities for chunk data
+ * @author Jonathan Reich
+ * @date 2024-12-07
+ */
+
 #pragma once
 #include <filesystem>
 #include <fstream>
@@ -7,14 +14,22 @@
 #include <vector>
 
 namespace chunk_viz {
+
+/**
+ * @brief Class for visualizing chunk data in various formats
+ * @tparam T The data type of the chunks (must be arithmetic)
+ */
 template <typename T>
 class ChunkVisualizer {
 private:
-    // Store reference to chunks or data structure
-    std::vector<T>& chunks;
-    std::string output_dir;
+    std::vector<T>& chunks; ///< Reference to the chunks to visualize
+    std::string output_dir; ///< Directory for output files
 
-    // Helper function to format chunk contents
+    /**
+     * @brief Helper function to format chunk contents for visualization
+     * @param chunk The chunk to format
+     * @return Formatted string representation of the chunk
+     */
     std::string format_chunk(const T& chunk) {
         if constexpr (std::is_same_v<T, std::vector<int>> ||
                       std::is_same_v<T, std::vector<double>>) {
@@ -33,14 +48,20 @@ private:
     }
 
 public:
-    // Constructor
+    /**
+     * @brief Constructor
+     * @param chunks_ Reference to the chunks to visualize
+     * @param output_dir_ Directory for output files (default: "./viz")
+     */
     explicit ChunkVisualizer(std::vector<T>& chunks_, const std::string& output_dir_ = "./viz")
         : chunks(chunks_), output_dir(output_dir_) {
         std::filesystem::create_directories(output_dir);
     }
 
-    // ... existing declarations ...
-
+    /**
+     * @brief Generate plot of chunk sizes
+     * @throws std::runtime_error if file operations fail
+     */
     void plot_chunk_sizes() {
         // Create output directory if it doesn't exist
         std::filesystem::create_directories(output_dir);
@@ -80,6 +101,10 @@ public:
         }
     }
 
+    /**
+     * @brief Visualize chunk boundaries in text format
+     * @throws std::runtime_error if file operations fail
+     */
     void visualize_boundaries() {
         std::ofstream viz_file(output_dir + "/boundaries.txt");
 
@@ -100,6 +125,11 @@ public:
         viz_file << "\nTotal size: " << total_size << " elements\n";
     }
 
+    /**
+     * @brief Export chunk structure to GraphViz format
+     * @param filename Optional custom filename for the output
+     * @throws std::runtime_error if file operations fail
+     */
     void export_to_graphviz(const std::string& filename = "") {
         std::string actual_filename = filename.empty() ? output_dir + "/chunks.dot" : filename;
 

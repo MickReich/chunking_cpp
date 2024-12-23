@@ -1,9 +1,19 @@
+/**
+ * @file chunk_visualization_demo.cpp
+ * @brief Demonstration of chunk visualization capabilities
+ * @author Jonathan Reich
+ * @date 2024-12-07
+ */
+
 #include "chunk_visualization.hpp"
 #include <iostream>
 #include <random>
 #include <vector>
 
-// Helper function to generate sample data with natural breakpoints
+/**
+ * @brief Generate sample data with natural breakpoints for visualization
+ * @return Vector of vectors containing sample chunk data
+ */
 std::vector<std::vector<double>> generate_sample_chunks() {
     std::vector<std::vector<double>> chunks;
     std::random_device rd;
@@ -38,6 +48,10 @@ std::vector<std::vector<double>> generate_sample_chunks() {
     return chunks;
 }
 
+/**
+ * @brief Main function demonstrating chunk visualization features
+ * @return 0 on success, 1 on error
+ */
 int main() {
     try {
         // Create output directory

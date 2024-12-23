@@ -1,3 +1,10 @@
+/**
+ * @file demo_neural_chunking.cpp
+ * @brief Demonstration of neural network-based chunking capabilities
+ * @author Jonathan Reich
+ * @date 2024-12-07
+ */
+
 #include "../include/chunk_visualization.hpp"
 #include "../include/neural_chunking.hpp"
 #include <iomanip>
