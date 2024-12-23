@@ -8,7 +8,7 @@ std::vector<std::vector<double>> generate_sample_chunks() {
     std::vector<std::vector<double>> chunks;
     std::random_device rd;
     std::mt19937 gen(rd());
-    
+
     // Create normal distributions with different means
     std::normal_distribution<double> dist1(0.0, 1.0);
     std::normal_distribution<double> dist2(5.0, 1.0);
@@ -16,7 +16,7 @@ std::vector<std::vector<double>> generate_sample_chunks() {
 
     // Generate chunks with different characteristics
     std::vector<double> chunk1, chunk2, chunk3;
-    
+
     // First chunk: 10 values around mean 0
     for (int i = 0; i < 10; ++i) {
         chunk1.push_back(dist1(gen));
@@ -62,14 +62,15 @@ int main() {
         // 2. Visualize chunk boundaries
         std::cout << "\nGenerating boundary visualization..." << std::endl;
         visualizer.visualize_boundaries();
-        std::cout << "Boundary visualization saved to " << viz_dir << "/boundaries.txt" << std::endl;
+        std::cout << "Boundary visualization saved to " << viz_dir << "/boundaries.txt"
+                  << std::endl;
 
         // 3. Export to GraphViz
         std::cout << "\nGenerating GraphViz visualization..." << std::endl;
         visualizer.export_to_graphviz();
         std::cout << "GraphViz file saved to " << viz_dir << "/chunks.dot" << std::endl;
-        std::cout << "To generate PNG, run: dot -Tpng " << viz_dir 
-                  << "/chunks.dot -o " << viz_dir << "/chunks.png" << std::endl;
+        std::cout << "To generate PNG, run: dot -Tpng " << viz_dir << "/chunks.dot -o " << viz_dir
+                  << "/chunks.png" << std::endl;
 
         // Create a second visualization with single values
         std::cout << "\nCreating alternative visualization with individual values..." << std::endl;
@@ -87,4 +88,4 @@ int main() {
     }
 
     return 0;
-} 
+}
