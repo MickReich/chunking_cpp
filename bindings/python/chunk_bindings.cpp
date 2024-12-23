@@ -22,14 +22,30 @@ namespace py = pybind11;
 PYBIND11_MODULE(chunking_cpp, m) {
     m.doc() = "Python bindings for the C++ chunking library";
 
+    // Register exception translators
+    py::register_exception_translator([](std::exception_ptr p) {
+        try {
+            if (p) std::rethrow_exception(p);
+        } catch (const std::invalid_argument& e) {
+            PyErr_SetString(PyExc_ValueError, e.what());
+        } catch (const std::runtime_error& e) {
+            PyErr_SetString(PyExc_RuntimeError, e.what());
+        } catch (const std::exception& e) {
+            PyErr_SetString(PyExc_RuntimeError, e.what());
+        }
+    });
+
     // Basic Chunking
     py::class_<Chunk<double>>(m, "Chunk")
         .def(py::init<size_t>())
-        .def("add", static_cast<void (Chunk<double>::*)(const double&)>(&Chunk<double>::add),
+        .def("add", py::overload_cast<const double&>(&Chunk<double>::add),
              "Add a single element")
-        .def("add",
-             static_cast<void (Chunk<double>::*)(const std::vector<double>&)>(&Chunk<double>::add),
-             "Add multiple elements")
+        .def("add", [](Chunk<double>& self, const std::vector<double>& data) {
+            if (data.empty()) {
+                throw std::invalid_argument("Cannot add empty vector");
+            }
+            self.add(data);
+        }, "Add multiple elements")
         .def("chunk_by_size",
              static_cast<std::vector<std::vector<double>> (Chunk<double>::*)(size_t)>(
                  &Chunk<double>::chunk_by_size),

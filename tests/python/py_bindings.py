@@ -90,6 +90,7 @@ def test_resilient_chunker_initialization():
 
 def test_process_with_recovery(sample_data):
     chunker = ResilientChunker("test_checkpoint", 3, 2, 1)
+    chunker.save_checkpoint()
     try:
         result = chunker.process(sample_data)
         assert result is not None
@@ -109,7 +110,7 @@ def test_checkpoint_operations(sample_data):
     None,  # None input
 ])
 def test_invalid_inputs(invalid_input):
-    with pytest.raises(Exception):
+    with pytest.raises(ValueError):
         chunk = Chunk(3)
         if invalid_input is not None:
             chunk.add(invalid_input)

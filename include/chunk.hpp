@@ -108,6 +108,15 @@ private:
         return result;
     }
 
+    void validate_input() const {
+        if (data.empty()) {
+            throw std::invalid_argument("Empty input: Cannot chunk empty data");
+        }
+        if (data.size() < chunk_size) {
+            throw std::invalid_argument("Input too small: Data size must be >= chunk size");
+        }
+    }
+
 public:
     /**
      * @brief Constructs a Chunk with a specified size.
@@ -312,13 +321,14 @@ public:
     }
 
     std::vector<std::vector<T>> chunk_by_threshold(T threshold) {
+        validate_input();
         if (threshold <= T{}) {
             throw std::invalid_argument("Threshold must be positive");
         }
         try {
             return create_threshold_chunks(threshold);
         } catch (const std::exception& e) {
-            return std::vector<std::vector<T>>{data};
+            throw;
         }
     }
 
