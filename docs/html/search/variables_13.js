@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['value_0',['value',['../structadvanced__structures_1_1ChunkSkipList_1_1Node.html#ad695ad75f0262fd7ba19fe795cbf0cc4',1,'advanced_structures::ChunkSkipList::Node::value'],['../structadvanced__structures_1_1ChunkTreap_1_1Node.html#a100c856bdfa08adafe2ce04dc80bb7a4',1,'advanced_structures::ChunkTreap::Node::value']]],
-  ['variance_1',['variance',['../classchunk__metrics_1_1ChunkQualityAnalyzer.html#a0d0ea511164e3e77d2779a1287dcc85a',1,'chunk_metrics::ChunkQualityAnalyzer::SizeMetrics']]]
+  ['weights_5f_0',['weights_',['../classneural__chunking_1_1Layer.html#a5423cd6c264816bc29334275913fcdb3',1,'neural_chunking::Layer']]],
+  ['window_5f_1',['window_',['../classSlidingWindow.html#ad0b73b799043286e9835b91063686564',1,'SlidingWindow']]],
+  ['window_5fsize_2',['window_size',['../classgpu__chunking_1_1GPUChunking.html#aa6b3b38894f40d82acebfa29fc54dc33',1,'gpu_chunking::GPUChunking']]],
+  ['window_5fsize_5f_3',['window_size_',['../classchunk__windows_1_1SlidingWindowProcessor.html#ad1f68ca74895994142bd3b3ddf96d289',1,'chunk_windows::SlidingWindowProcessor::window_size_'],['../classsophisticated__chunking_1_1WaveletChunking.html#ad354851e31b0fdac2858fd1882d9ff5c',1,'sophisticated_chunking::WaveletChunking::window_size_'],['../classsophisticated__chunking_1_1DTWChunking.html#ad2dcee28d0ae7d766aea5ac2003d9019',1,'sophisticated_chunking::DTWChunking::window_size_']]]
 ];

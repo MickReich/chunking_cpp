@@ -1,8 +1,19 @@
 var searchData=
 [
-  ['best_5fmemory_5fstrategy_0',['best_memory_strategy',['../classchunk__benchmark_1_1ChunkBenchmark.html#a693eeb944b4067d0340e357d5bd8ab65',1,'chunk_benchmark::ChunkBenchmark::BenchmarkResults']]],
-  ['best_5fthroughput_5fstrategy_1',['best_throughput_strategy',['../classchunk__benchmark_1_1ChunkBenchmark.html#a16c0a822331fb50846d0f0bd979bc79e',1,'chunk_benchmark::ChunkBenchmark::BenchmarkResults']]],
-  ['biases_2',['biases',['../classneural__chunking_1_1Layer.html#a06d0db868f3b14e60f877aaef70ecbb3',1,'neural_chunking::Layer']]],
-  ['boundary_5fthreshold_3',['boundary_threshold',['../classadvanced__structures_1_1SemanticBoundariesChunk.html#a59f37d922130f44da884e79729f8572b',1,'advanced_structures::SemanticBoundariesChunk']]],
-  ['buffer_5f_4',['buffer_',['../classCircularBuffer.html#a8dec6941db72a0d1111de5d261878c51',1,'CircularBuffer']]]
+  ['cached_5fcohesion_0',['cached_cohesion',['../classchunk__metrics_1_1ChunkQualityAnalyzer.html#a5b17bbfb357af4c2dd959694ff418445',1,'chunk_metrics::ChunkQualityAnalyzer']]],
+  ['cached_5fseparation_1',['cached_separation',['../classchunk__metrics_1_1ChunkQualityAnalyzer.html#ab8fa679923ff7b550952ee02e6f1f6e4',1,'chunk_metrics::ChunkQualityAnalyzer']]],
+  ['capacity_5f_2',['capacity_',['../classCircularBuffer.html#ad7ae2a7aded5a1a1524e050abc88a438',1,'CircularBuffer']]],
+  ['checkpoint_5fdir_3',['checkpoint_dir',['../classchunk__resilience_1_1ResilientChunker.html#ab36142ea4284db4fc6eb44691ea46fae',1,'chunk_resilience::ResilientChunker']]],
+  ['checkpoint_5fhistory_4',['checkpoint_history',['../classchunk__resilience_1_1ResilientChunker.html#ac1dbcc039b4b4569997d897e708169d1',1,'chunk_resilience::ResilientChunker']]],
+  ['checkpoint_5finterval_5',['checkpoint_interval',['../classchunk__resilience_1_1ResilientChunker.html#aad4536856d71e4966455fb3154fe9202',1,'chunk_resilience::ResilientChunker']]],
+  ['children_6',['children',['../structadvanced__structures_1_1ChunkBPlusTree_1_1Node.html#a665314b6b31d02ee09e4bad70f055eab',1,'advanced_structures::ChunkBPlusTree::Node']]],
+  ['chunk_5fsize_7',['chunk_size',['../classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f',1,'Chunk']]],
+  ['chunks_8',['chunks',['../structchunk__resilience_1_1Checkpoint.html#a1021b42214667b3f3748b46145960418',1,'chunk_resilience::Checkpoint::chunks'],['../classchunk__viz_1_1ChunkVisualizer.html#a74f35af575d02f5fc934017833d9df73',1,'chunk_viz::ChunkVisualizer::chunks'],['../classChunk.html#a1574993946fe5b28c6d89ce4bf77857b',1,'Chunk::chunks']]],
+  ['comp_5f_9',['comp_',['../classPriorityQueue.html#a4fa43ad50be95b27d62d62d73a83f19c',1,'PriorityQueue']]],
+  ['condition_5f_10',['condition_',['../classchunk__strategies_1_1ConditionalSubChunkStrategy.html#abaf81b9f4fc1a975e24775f5e83b4872',1,'chunk_strategies::ConditionalSubChunkStrategy']]],
+  ['config_11',['config',['../classneural__chunking_1_1NeuralChunking.html#ab75b65bc5d7fb51099d911367d56a3e9',1,'neural_chunking::NeuralChunking']]],
+  ['context_5fsize_5f_12',['context_size_',['../classsophisticated__chunking_1_1MutualInformationChunking.html#a70acda7d7a1260ef794bf9195483c6ac',1,'sophisticated_chunking::MutualInformationChunking']]],
+  ['current_5flevel_13',['current_level',['../classadvanced__structures_1_1ChunkSkipList.html#a642cbae0a13509a0616bcdb6112610f9',1,'advanced_structures::ChunkSkipList']]],
+  ['current_5fsequence_14',['current_sequence',['../classchunk__resilience_1_1ResilientChunker.html#a12030c277ed6b1145be01e85e6c87c58',1,'chunk_resilience::ResilientChunker']]],
+  ['cv_15',['cv',['../classchunk__resilience_1_1ResilientChunker.html#a84d0c703db0fef2aa79e3d37708abbe2',1,'chunk_resilience::ResilientChunker']]]
 ];

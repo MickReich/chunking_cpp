@@ -9,6 +9,7 @@ var searchData=
   ['chunk_5fserialization_2ehpp_6',['chunk_serialization.hpp',['../chunk__serialization_8hpp.html',1,'']]],
   ['chunk_5fstrategies_2ehpp_7',['chunk_strategies.hpp',['../chunk__strategies_8hpp.html',1,'']]],
   ['chunk_5fvisualization_2ehpp_8',['chunk_visualization.hpp',['../chunk__visualization_8hpp.html',1,'']]],
-  ['chunk_5fwindows_2ehpp_9',['chunk_windows.hpp',['../chunk__windows_8hpp.html',1,'']]],
-  ['config_2ehpp_10',['config.hpp',['../config_8hpp.html',1,'']]]
+  ['chunk_5fvisualization_5fdemo_2ecpp_9',['chunk_visualization_demo.cpp',['../chunk__visualization__demo_8cpp.html',1,'']]],
+  ['chunk_5fwindows_2ehpp_10',['chunk_windows.hpp',['../chunk__windows_8hpp.html',1,'']]],
+  ['config_2ehpp_11',['config.hpp',['../config_8hpp.html',1,'']]]
 ];

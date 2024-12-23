@@ -1,18 +1,7 @@
 var searchData=
 [
-  ['main_0',['main',['../sophisticated__chunking__demo_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;sophisticated_chunking_demo.cpp'],['../main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;main.cpp'],['../demo__neural__chunking_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;demo_neural_chunking.cpp'],['../demo__gpu__chunking_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;demo_gpu_chunking.cpp'],['../benchmark_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;benchmark.cpp']]],
-  ['make_5fchunks_1',['make_chunks',['../classChunk.html#a5fe346af2e780a31ad2d16466648ce8a',1,'Chunk']]],
-  ['map_2',['map',['../classparallel__chunk_1_1ParallelChunkProcessor.html#a1a5189644af96de911c983b816fa9532',1,'parallel_chunk::ParallelChunkProcessor']]],
-  ['mean_3',['mean',['../classchunk__utils_1_1Statistics.html#ab1c472157d5bacc357dcebe0fc19cf5d',1,'chunk_utils::Statistics']]],
-  ['measure_5fmemory_5fusage_4',['measure_memory_usage',['../classchunk__benchmark_1_1ChunkBenchmark.html#a7be5011a42a2a3c91db0c098b3b93ca5',1,'chunk_benchmark::ChunkBenchmark']]],
-  ['measure_5fthroughput_5',['measure_throughput',['../classchunk__benchmark_1_1ChunkBenchmark.html#ade7e70f86a0abda21ae18afe408d9be8',1,'chunk_benchmark::ChunkBenchmark']]],
-  ['median_6',['median',['../classchunk__utils_1_1Statistics.html#a2de339505cc415f0a10975bdf388ad7d',1,'chunk_utils::Statistics']]],
-  ['merge_5fchunks_7',['merge_chunks',['../classchunk__utils_1_1ChunkManipulator.html#aad43e878aa138c2a57312f13e56cacc8',1,'chunk_utils::ChunkManipulator']]],
-  ['mode_8',['mode',['../classchunk__utils_1_1Statistics.html#aaaf244247e7f592fcd650f9e514b7a6d',1,'chunk_utils::Statistics']]],
-  ['moving_5faverage_9',['moving_average',['../classchunk__windows_1_1WindowOperations.html#a929defeedb1b555fd782041e68927098',1,'chunk_windows::WindowOperations']]],
-  ['moving_5fmax_10',['moving_max',['../classchunk__windows_1_1WindowOperations.html#ac8191b96fc02bd1c9ff22be4ffd6123c',1,'chunk_windows::WindowOperations']]],
-  ['moving_5fmedian_11',['moving_median',['../classchunk__windows_1_1WindowOperations.html#a4dbe569c80436ddd61ee3a72a229d64a',1,'chunk_windows::WindowOperations']]],
-  ['moving_5fmin_12',['moving_min',['../classchunk__windows_1_1WindowOperations.html#af8b096abbcd32e1d5bbf50a0e5db6825',1,'chunk_windows::WindowOperations']]],
-  ['multicriteriastrategy_13',['multicriteriastrategy',['../classMultiCriteriaStrategy.html#a1dbd13b149111826b2005aeae017ec5f',1,'MultiCriteriaStrategy::MultiCriteriaStrategy()'],['../classchunk__strategies_1_1MultiCriteriaStrategy.html#ac687cdaa7dfb1a90090de3eda9e322b8',1,'chunk_strategies::MultiCriteriaStrategy::MultiCriteriaStrategy()']]],
-  ['mutualinformationchunking_14',['MutualInformationChunking',['../classsophisticated__chunking_1_1MutualInformationChunking.html#a81ceffc95d9913a666069e3093661914',1,'sophisticated_chunking::MutualInformationChunking']]]
+  ['name_0',['name',['../classchunk__benchmark_1_1ChunkStrategy.html#a55e7ae0ac493592e053c8d765158f9f3',1,'chunk_benchmark::ChunkStrategy::name()'],['../classNeuralChunkingStrategy.html#ab735caab20e4d38b303fbec6e4a36bc3',1,'NeuralChunkingStrategy::name()'],['../classSimilarityChunkingStrategy.html#a07f241696da0832ff046e0f1efb27716',1,'SimilarityChunkingStrategy::name()']]],
+  ['neuralchunking_1',['NeuralChunking',['../classneural__chunking_1_1NeuralChunking.html#a500b5f6c280bd7dfb86a409aeb26858d',1,'neural_chunking::NeuralChunking']]],
+  ['neuralchunkingstrategy_2',['NeuralChunkingStrategy',['../classNeuralChunkingStrategy.html#aeeaf3410648afc185ee1632a1686f948',1,'NeuralChunkingStrategy']]],
+  ['node_3',['node',['../structadvanced__structures_1_1ChunkSkipList_1_1Node.html#ade4a2d21749cd0266341a52e1cdd2b2d',1,'advanced_structures::ChunkSkipList::Node::Node()'],['../structadvanced__structures_1_1ChunkBPlusTree_1_1Node.html#ad82822bde19c4a8fde799e108255df52',1,'advanced_structures::ChunkBPlusTree::Node::Node()'],['../structadvanced__structures_1_1ChunkTreap_1_1Node.html#afcccb73be088a3d63f185a475b86eff1',1,'advanced_structures::ChunkTreap::Node::Node()']]]
 ];

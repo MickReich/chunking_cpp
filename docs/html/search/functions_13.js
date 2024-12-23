@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['update_5fchunks_0',['update_chunks',['../classChunk.html#a82af79dbdc92786a8073a50389d75738',1,'Chunk']]]
+  ['waveletchunking_0',['WaveletChunking',['../classsophisticated__chunking_1_1WaveletChunking.html#ad3d4c87f6006dfcfaa3d08ca34387e59',1,'sophisticated_chunking::WaveletChunking']]],
+  ['window_1',['window',['../classSlidingWindow.html#aa5e3ead2a56d735d50b2dd0442e03a58',1,'SlidingWindow']]]
 ];
