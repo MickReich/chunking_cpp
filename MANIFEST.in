@@ -1,0 +1,3 @@
+include build/python/chunking_cpp/*.so
+include build/python/chunking_cpp/*.pyd
+include build/python/chunking_cpp/__init__.py 
