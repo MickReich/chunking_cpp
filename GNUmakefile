@@ -10,7 +10,7 @@ CXX := g++
 CXXFLAGS := -std=c++17 -Wall -Wextra
 
 # Ensure build directory exists and is configured
-.PHONY: setup-build test docs docs-clean docs-serve docs-stop local-help run uninstall format format-check
+.PHONY: setup-build test docs docs-clean docs-serve docs-stop local-help run uninstall format format-check neural_chunking_demo sophisticated_chunking_demo
 
 setup-build:
 	@mkdir -p $(BUILD_DIR)
@@ -24,9 +24,27 @@ run: setup-build
 	@echo "Running program..."
 	@$(BUILD_DIR)/chunk_processor_exe
 
+# Run the neural chunking demo
+neural_chunking_demo: setup-build
+	@echo "Running neural chunking demo..."
+	@if [ -f "$(BUILD_DIR)/neural_chunking_demo" ]; then \
+		$(BUILD_DIR)/neural_chunking_demo; \
+	else \
+		echo "Error: neural_chunking_demo executable not found"; \
+		echo "Build failed. Try running 'make clean' followed by 'make'"; \
+		exit 1; \
+	fi
+
+# Run the sophisticated chunking demo
 sophisticated_chunking_demo: setup-build
-	@echo "Running program..."
-	@$(BUILD_DIR)/sophisticated_chunking_demo
+	@echo "Running sophisticated chunking demo..."
+	@if [ -f "$(BUILD_DIR)/sophisticated_chunking_demo" ]; then \
+		$(BUILD_DIR)/sophisticated_chunking_demo; \
+	else \
+		echo "Error: sophisticated_chunking_demo executable not found"; \
+		echo "Build failed. Try running 'make clean' followed by 'make'"; \
+		exit 1; \
+	fi
 
 # Override CMake's test target
 test: setup-build
@@ -95,6 +113,8 @@ docs-serve: docs
 local-help:
 	@echo "Custom targets available:"
 	@echo "  setup-build  - Configure and build the project"
+	@echo "  neural_chunking_demo - Run the neural chunking demo"
+	@echo "  sophisticated_chunking_demo - Run the sophisticated chunking demo"
 	@echo "  test         - Run tests"
 	@echo "  docs         - Generate documentation"
 	@echo "  docs-clean   - Remove generated documentation"

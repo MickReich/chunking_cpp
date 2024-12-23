@@ -305,7 +305,13 @@ If you use this library in your research, please cite:
 
 ### Sophisticated Chunking Examples
 
-For detailed examples of the sophisticated chunking algorithms, see `src/sophisticated_chunking_demo.cpp`:
+To run the sophisticated chunking demo, use:
+
+```bash
+make sophisticated_chunking_demo
+```
+
+For more detailed examples of the sophisticated chunking algorithms, see `src/sophisticated_chunking_demo.cpp`:
 
 ```cpp
 #include "sophisticated_chunking.hpp"
