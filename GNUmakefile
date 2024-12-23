@@ -166,3 +166,9 @@ visualization:
 	@g++ -std=c++17 src/chunk_visualization_demo.cpp -I./include -o chunk_visualization_demo
 	@./chunk_visualization_demo
 
+pytest:
+	@pytest tests/python/py_bindings.py
+
+pytest-coverage:
+	@pytest --cov=chunking_cpp --cov-report=html --cov-report=term tests/python/py_bindings.py
+	@echo "Coverage report generated in htmlcov/index.html"

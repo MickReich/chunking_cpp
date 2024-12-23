@@ -43,3 +43,8 @@ benchmark
 dist/
 viz/
 *.txt
+.coverage
+*cache
+**/__pycache__/
+**/htmlcov/
+**/build/

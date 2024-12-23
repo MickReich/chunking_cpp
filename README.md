@@ -270,6 +270,9 @@ If you use this library in your research, please cite:
 │       └── docs.yml
 ├── docs/
 │   └── html/
+├── bindings/
+│   └── python/
+│       └── chunk_bindings.cpp
 ├── include/
 │   ├── chunk.hpp
 │   ├── config.hpp
@@ -280,9 +283,11 @@ If you use this library in your research, please cite:
 │   ├── advanced_structures.hpp
 │   ├── sophisticated_chunking.hpp
 │   ├── data_structures.hpp
+│   ├── neural_chunking.hpp
 │   └── utils.hpp
 ├── src/
 │   ├── main.cpp
+│   ├── demo_neural_chunking.cpp
 │   └── sophisticated_chunking_demo.cpp
 ├── tests/
 │   ├── advanced_chunk_strategies_test.cpp
@@ -293,11 +298,17 @@ If you use this library in your research, please cite:
 │   ├── data_structures_test.cpp
 │   ├── parallel_chunk_test.cpp
 │   ├── sub_chunk_strategies_test.cpp
+│   ├── test_neuralnetwork.cpp
 │   ├── test_main.cpp
+│   ├── python/
+│   │   └── py_bindings.py
 │   └── utils_test.cpp
+├── scripts/
+│   └── pybindings_example.py
 ├── Makefile
 ├── CMakeLists.txt
 ├── Doxyfile
+├── setup.py
 ├── README.md
 ├── BUILDING.md
 └── LICENSE

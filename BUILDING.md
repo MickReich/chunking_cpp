@@ -88,13 +88,16 @@ pip install .
 - Kafka
 - RabbitMQ
 - JSON
+- Pytest
+- pytest-cov (for test coverage)
 
 These can be installed on ubuntu/debian with:
 
 ```bash
 sudo apt-get install libpq-dev libstdc++6 libmongoc-dev \
 -     librdkafka-dev librabbitmq-dev libjsoncpp-dev
-+     librdkafka-dev librdkafka++1 librabbitmq-dev libjsoncpp-dev
++     librdkafka-dev librdkafka++1 librabbitmq-dev libjsoncpp-dev \
++     python3-pytest python3-pytest-cov
 ```
 
 ## Configuration Options
@@ -154,6 +157,24 @@ make docs
 make docs-serve
 ```
 
+7.Run tests:
+
+```bash
+make test
+```
+
+8.Run tests with pytest:
+
+```bash
+make pytest
+```
+
+9.Run tests with pytest and coverage:
+
+```bash
+make pytest-coverage
+```
+
 ## Project Structure
 
 ```markdown
@@ -164,6 +185,9 @@ make docs-serve
 │       └── docs.yml
 ├── docs/
 │   └── html/
+├── bindings/
+│   └── python/
+│       └── chunk_bindings.cpp
 ├── include/
 │   ├── chunk.hpp
 │   ├── config.hpp
@@ -174,9 +198,11 @@ make docs-serve
 │   ├── advanced_structures.hpp
 │   ├── sophisticated_chunking.hpp
 │   ├── data_structures.hpp
+│   ├── neural_chunking.hpp
 │   └── utils.hpp
 ├── src/
 │   ├── main.cpp
+│   ├── demo_neural_chunking.cpp
 │   └── sophisticated_chunking_demo.cpp
 ├── tests/
 │   ├── advanced_chunk_strategies_test.cpp
@@ -187,14 +213,20 @@ make docs-serve
 │   ├── data_structures_test.cpp
 │   ├── parallel_chunk_test.cpp
 │   ├── sub_chunk_strategies_test.cpp
+│   ├── test_neuralnetwork.cpp
 │   ├── test_main.cpp
+│   ├── python/
+│   │   └── py_bindings.py
 │   └── utils_test.cpp
+├── scripts/
+│   └── pybindings_example.py
 ├── Makefile
 ├── CMakeLists.txt
 ├── Doxyfile
+├── setup.py
 ├── README.md
 ├── BUILDING.md
-└─ LICENSE
+└── LICENSE
 ```
 
 ## Make Targets
