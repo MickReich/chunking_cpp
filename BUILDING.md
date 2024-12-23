@@ -25,8 +25,8 @@ sudo make
 sudo cp lib/*.a /usr/lib
 sudo ln -s /usr/src/gtest/include/gtest /usr/include/gtest
 
-# Install documentation tools
-sudo apt-get install doxygen graphviz libboost-all-dev
+# Install documentation and tools
+sudo apt-get install doxygen gnuplot graphviz libboost-all-dev
 ```
 
 ### macOS
@@ -52,6 +52,45 @@ brew install doxygen graphviz boost
 vcpkg install gtest:x64-windows
 ```
 
+## Python Bindings
+
+To build the Python bindings, you need to have Python and pybind11 installed:
+
+```bash
+pip install pybind11[global]
+
+# If you're using conda, ensure you have the latest libstdc++:
+conda install -c conda-forge libstdcxx-ng
+```
+
+On ubuntu/debian, you can install pybind11 using:
+
+```bash
+sudo apt-get install python3-pybind11
+```
+
+You then can install the Python bindings using the setup.py script:
+
+```bash
+pip install .
+```
+
+## Optional Dependencies
+
+- PostgreSQL
+- MongoDB
+- Kafka
+- RabbitMQ
+- JSON
+
+These can be installed on ubuntu/debian with:
+
+```bash
+sudo apt-get install libpq-dev libstdc++6 libmongoc-dev \
+-     libkafka-dev librabbitmq-dev libjsoncpp-dev
++     librdkafka-dev librabbitmq-dev libjsoncpp-dev
+```
+
 ## Building the Project
 
 1.Clone the repository:
@@ -61,14 +100,7 @@ git clone git@github.com:JohnnyTeutonic/chunking_cpp.git
 cd chunking_cpp
 ```
 
-2.Conversion of the configure script to unix line endings (Windows only):
-
-```bash
-
-unix2dos configure
-```
-
-Make configure script executable
+2.Make configure script executable
 
 ```bash
 chmod +x configure
@@ -78,6 +110,13 @@ chmod +x configure
 
 ```bash
 ./configure
+```
+
+Windows Only - Conversion of the configure script to unix line endings:
+
+```bash
+
+unix2dos configure
 ```
 
 Configuration options:
@@ -90,7 +129,7 @@ Configuration options:
 example:
 
 ```bash
-./configure --prefix=/usr/local --build-type=Debug --disable-tests --disable-docs
+./configure --prefix=/usr/local --build-type=Debug
 ```
 
 3.Build and install the project:
@@ -157,7 +196,7 @@ make docs-serve
 ├── Doxyfile
 ├── README.md
 ├── BUILDING.md
-└── LICENSE
+└─ LICENSE
 ```
 
 ## Make Targets
@@ -206,11 +245,10 @@ make
 # Run the sophisticated chunking demo
 ./build/bin/sophisticated_chunking_demo
 
-# Run sophisticated chunking tests specifically
-make test-sophisticated
 ```
 
 The sophisticated chunking features are implemented in:
+
 - `include/sophisticated_chunking.hpp`: Core implementations
 - `src/sophisticated_chunking_demo.cpp`: Usage examples
 - `tests/chunking_methods_sophisticated_test.cpp`: Unit tests
@@ -235,11 +273,13 @@ make test-sophisticated
 To use sophisticated chunking in your project:
 
 1. Include the header:
+
 ```cpp
 #include "sophisticated_chunking.hpp"
 ```
 
 2. Link against the library in your CMakeLists.txt:
+
 ```cmake
 target_link_libraries(your_target PRIVATE sophisticated_chunking)
 ```
@@ -249,3 +289,10 @@ target_link_libraries(your_target PRIVATE sophisticated_chunking)
 - **Wavelet Chunking**: O(n * window_size) complexity. Choose smaller window sizes for better performance.
 - **Mutual Information**: O(n * context_size) complexity. Larger context sizes impact performance significantly.
 - **DTW Chunking**: O(n * window_size²) complexity. Window size has quadratic impact on performance.
+
+### Troubleshooting
+
+If you encounter GLIBCXX version errors when installing the Python bindings:
+
+1. Update conda's libstdc++: `conda install -c conda-forge libstdcxx-ng`
+2. Or use system libraries: `export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH`

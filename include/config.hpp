@@ -1,23 +1,15 @@
 #pragma once
 
-#include <cstddef>
+// Database support
+/* #undef HAVE_POSTGRESQL */
+/* #undef HAVE_MONGODB */
 
-namespace chunk_config {
+// Message queue support
+/* #undef HAVE_KAFKA */
+/* #undef HAVE_RABBITMQ */
 
-struct ChunkSettings {
-    static constexpr size_t DEFAULT_CHUNK_SIZE = 4;
-    static constexpr size_t MAX_CHUNK_SIZE = 1024;
-    static constexpr size_t MIN_CHUNK_SIZE = 1;
-};
+// Serialization support
+/* #undef HAVE_JSON */
 
-static constexpr bool is_valid_chunk_size(size_t size) {
-    return size >= ChunkSettings::MIN_CHUNK_SIZE && size <= ChunkSettings::MAX_CHUNK_SIZE;
-}
-
-struct BufferSettings {
-    static constexpr size_t DEFAULT_BUFFER_SIZE = 1024;
-    static constexpr size_t MAX_BUFFER_SIZE = 1024 * 1024;
-    static constexpr size_t MIN_BUFFER_SIZE = 1;
-};
-
-} // namespace chunk_config
+// GPU support
+/* #undef HAVE_CUDA */

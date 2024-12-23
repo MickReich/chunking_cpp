@@ -660,4 +660,104 @@ protected:
     }
 };
 
+template <typename T>
+class ChunkLSMTree {
+private:
+    struct Level {
+        std::vector<T> data;
+        size_t size_limit;
+
+        Level(size_t limit) : size_limit(limit) {}
+
+        bool is_full() const {
+            return data.size() >= size_limit;
+        }
+    };
+
+    std::vector<std::shared_ptr<Level>> levels;
+    std::vector<T> memtable; // In-memory buffer
+    size_t memtable_size_limit;
+    size_t size_ratio; // Size ratio between levels
+
+    void compact_level(size_t level_idx) {
+        if (level_idx >= levels.size() - 1) {
+            // Create new level if we're at the last one
+            levels.push_back(std::make_shared<Level>(levels[level_idx]->size_limit * size_ratio));
+        }
+
+        auto& current_level = levels[level_idx]->data;
+        auto& next_level = levels[level_idx + 1]->data;
+
+        // Merge current level into next level
+        std::vector<T> merged;
+        std::merge(current_level.begin(), current_level.end(), next_level.begin(), next_level.end(),
+                   std::back_inserter(merged));
+
+        // Update levels
+        current_level.clear();
+        next_level = std::move(merged);
+
+        // If next level is full, compact it too
+        if (levels[level_idx + 1]->is_full()) {
+            compact_level(level_idx + 1);
+        }
+    }
+
+    void flush_memtable() {
+        if (memtable.empty())
+            return;
+
+        // Sort memtable before flushing
+        std::sort(memtable.begin(), memtable.end());
+
+        if (levels.empty()) {
+            levels.push_back(std::make_shared<Level>(memtable_size_limit * size_ratio));
+        }
+
+        // Merge memtable with first level
+        std::vector<T> merged;
+        std::merge(memtable.begin(), memtable.end(), levels[0]->data.begin(), levels[0]->data.end(),
+                   std::back_inserter(merged));
+
+        levels[0]->data = std::move(merged);
+        memtable.clear();
+
+        // If level 0 is full, trigger compaction
+        if (levels[0]->is_full()) {
+            compact_level(0);
+        }
+    }
+
+public:
+    ChunkLSMTree(size_t memtable_limit = 1024, size_t ratio = 4)
+        : memtable_size_limit(memtable_limit), size_ratio(ratio) {}
+
+    void insert(const T& value) {
+        memtable.push_back(value);
+
+        if (memtable.size() >= memtable_size_limit) {
+            flush_memtable();
+        }
+    }
+
+    bool search(const T& value) const {
+        // Search memtable first
+        if (std::binary_search(memtable.begin(), memtable.end(), value)) {
+            return true;
+        }
+
+        // Search through all levels
+        for (const auto& level : levels) {
+            if (std::binary_search(level->data.begin(), level->data.end(), value)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void force_flush() {
+        flush_memtable();
+    }
+};
+
 } // namespace advanced_structures

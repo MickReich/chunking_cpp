@@ -37,3 +37,8 @@ config.mk
 *.conf
 run_tests[1]_*.cmake
 *_tests.cmake
+benchmark_results
+benchmark
+**/*.in
+dist/
+viz/

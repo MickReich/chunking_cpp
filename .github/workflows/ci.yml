@@ -28,7 +28,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential cmake libgtest-dev lcov doxygen graphviz libboost-all-dev
+        sudo apt-get install -y build-essential cmake libstdc++6 libgtest-dev lcov doxygen graphviz libboost-all-dev libpq-dev libmongoc-dev librdkafka++1 librdkafka-dev librabbitmq-dev libjsoncpp-dev python3-pybind11
 
     - name: Configure build
       run: |

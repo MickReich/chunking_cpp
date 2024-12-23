@@ -56,6 +56,8 @@ This library offers a comprehensive suite of tools for handling data in chunks, 
 - Statistical operations
 - Random chunk generation
 - Chunk manipulation utilities
+- Chunk visualization
+- Chunk benchmarking
 
 ## Requirements
 
@@ -327,4 +329,45 @@ int main() {
 
     return 0;
 }
+```
+
+### Chunk Visualization
+
+For detailed examples of the chunk visualization, see `src/chunk_visualization_demo.cpp`:
+
+```cpp
+#include "chunk_visualization.hpp"
+```
+
+To run the chunk visualization demo, use:
+
+```bash
+make run-visualization
+```
+
+To use the visualisation as a standalone tool with gnuplot run:
+
+```bash
+gnuplot visualization/plot_chunks.gnu
+```
+
+Or with graphviz:
+
+```bash
+dot -Tpng visualization/chunks.dot -o visualization/chunks.png
+```
+
+### Chunk Benchmarking
+
+To compile and run the benchmark demo, use:
+
+```bash
+make benchmark
+```
+
+Or to use it as a standalone tool:
+
+```cpp
+#include "chunk_benchmark.hpp"
+...
 ```

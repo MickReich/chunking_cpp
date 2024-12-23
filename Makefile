@@ -95,6 +95,51 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 .PHONY : rebuild_cache/fast
 
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+.PHONY : list_install_components/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
+
 # The main all target
 all: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start "/mnt/c/Users/jonat/OneDrive/Documents/Python Scripts/chunking_cpp/CMakeFiles" "/mnt/c/Users/jonat/OneDrive/Documents/Python Scripts/chunking_cpp//CMakeFiles/progress.marks"
@@ -153,6 +198,32 @@ chunk_processor_exe/fast:
 .PHONY : chunk_processor_exe/fast
 
 #=============================================================================
+# Target rules for targets named benchmark_exe
+
+# Build rule for target.
+benchmark_exe: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 benchmark_exe
+.PHONY : benchmark_exe
+
+# fast build rule for target.
+benchmark_exe/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_exe.dir/build.make CMakeFiles/benchmark_exe.dir/build
+.PHONY : benchmark_exe/fast
+
+#=============================================================================
+# Target rules for targets named neural_chunking_demo
+
+# Build rule for target.
+neural_chunking_demo: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 neural_chunking_demo
+.PHONY : neural_chunking_demo
+
+# fast build rule for target.
+neural_chunking_demo/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/neural_chunking_demo.dir/build.make CMakeFiles/neural_chunking_demo.dir/build
+.PHONY : neural_chunking_demo/fast
+
+#=============================================================================
 # Target rules for targets named coverage
 
 # Build rule for target.
@@ -192,17 +263,30 @@ sophisticated_chunking/fast:
 .PHONY : sophisticated_chunking/fast
 
 #=============================================================================
-# Target rules for targets named sophisticated_chunking_demo
+# Target rules for targets named neural_chunking
 
 # Build rule for target.
-sophisticated_chunking_demo: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sophisticated_chunking_demo
-.PHONY : sophisticated_chunking_demo
+neural_chunking: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 neural_chunking
+.PHONY : neural_chunking
 
 # fast build rule for target.
-sophisticated_chunking_demo/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sophisticated_chunking_demo.dir/build.make CMakeFiles/sophisticated_chunking_demo.dir/build
-.PHONY : sophisticated_chunking_demo/fast
+neural_chunking/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/neural_chunking.dir/build.make CMakeFiles/neural_chunking.dir/build
+.PHONY : neural_chunking/fast
+
+#=============================================================================
+# Target rules for targets named chunk_benchmark
+
+# Build rule for target.
+chunk_benchmark: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 chunk_benchmark
+.PHONY : chunk_benchmark
+
+# fast build rule for target.
+chunk_benchmark/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chunk_benchmark.dir/build.make CMakeFiles/chunk_benchmark.dir/build
+.PHONY : chunk_benchmark/fast
 
 #=============================================================================
 # Target rules for targets named chunking_methods_sophisticated_test
@@ -216,6 +300,116 @@ chunking_methods_sophisticated_test: cmake_check_build_system
 chunking_methods_sophisticated_test/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chunking_methods_sophisticated_test.dir/build.make CMakeFiles/chunking_methods_sophisticated_test.dir/build
 .PHONY : chunking_methods_sophisticated_test/fast
+
+#=============================================================================
+# Target rules for targets named neural_network_test
+
+# Build rule for target.
+neural_network_test: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 neural_network_test
+.PHONY : neural_network_test
+
+# fast build rule for target.
+neural_network_test/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/neural_network_test.dir/build.make CMakeFiles/neural_network_test.dir/build
+.PHONY : neural_network_test/fast
+
+#=============================================================================
+# Target rules for targets named chunking_cpp
+
+# Build rule for target.
+chunking_cpp: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 chunking_cpp
+.PHONY : chunking_cpp
+
+# fast build rule for target.
+chunking_cpp/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chunking_cpp.dir/build.make CMakeFiles/chunking_cpp.dir/build
+.PHONY : chunking_cpp/fast
+
+bindings/python/chunk_bindings.o: bindings/python/chunk_bindings.cpp.o
+.PHONY : bindings/python/chunk_bindings.o
+
+# target to build an object file
+bindings/python/chunk_bindings.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chunking_cpp.dir/build.make CMakeFiles/chunking_cpp.dir/bindings/python/chunk_bindings.cpp.o
+.PHONY : bindings/python/chunk_bindings.cpp.o
+
+bindings/python/chunk_bindings.i: bindings/python/chunk_bindings.cpp.i
+.PHONY : bindings/python/chunk_bindings.i
+
+# target to preprocess a source file
+bindings/python/chunk_bindings.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chunking_cpp.dir/build.make CMakeFiles/chunking_cpp.dir/bindings/python/chunk_bindings.cpp.i
+.PHONY : bindings/python/chunk_bindings.cpp.i
+
+bindings/python/chunk_bindings.s: bindings/python/chunk_bindings.cpp.s
+.PHONY : bindings/python/chunk_bindings.s
+
+# target to generate assembly for a file
+bindings/python/chunk_bindings.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chunking_cpp.dir/build.make CMakeFiles/chunking_cpp.dir/bindings/python/chunk_bindings.cpp.s
+.PHONY : bindings/python/chunk_bindings.cpp.s
+
+src/benchmark.o: src/benchmark.cpp.o
+.PHONY : src/benchmark.o
+
+# target to build an object file
+src/benchmark.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chunk_processor.dir/build.make CMakeFiles/chunk_processor.dir/src/benchmark.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_exe.dir/build.make CMakeFiles/benchmark_exe.dir/src/benchmark.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chunk_benchmark.dir/build.make CMakeFiles/chunk_benchmark.dir/src/benchmark.cpp.o
+.PHONY : src/benchmark.cpp.o
+
+src/benchmark.i: src/benchmark.cpp.i
+.PHONY : src/benchmark.i
+
+# target to preprocess a source file
+src/benchmark.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chunk_processor.dir/build.make CMakeFiles/chunk_processor.dir/src/benchmark.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_exe.dir/build.make CMakeFiles/benchmark_exe.dir/src/benchmark.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chunk_benchmark.dir/build.make CMakeFiles/chunk_benchmark.dir/src/benchmark.cpp.i
+.PHONY : src/benchmark.cpp.i
+
+src/benchmark.s: src/benchmark.cpp.s
+.PHONY : src/benchmark.s
+
+# target to generate assembly for a file
+src/benchmark.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chunk_processor.dir/build.make CMakeFiles/chunk_processor.dir/src/benchmark.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/benchmark_exe.dir/build.make CMakeFiles/benchmark_exe.dir/src/benchmark.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chunk_benchmark.dir/build.make CMakeFiles/chunk_benchmark.dir/src/benchmark.cpp.s
+.PHONY : src/benchmark.cpp.s
+
+src/demo_neural_chunking.o: src/demo_neural_chunking.cpp.o
+.PHONY : src/demo_neural_chunking.o
+
+# target to build an object file
+src/demo_neural_chunking.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chunk_processor.dir/build.make CMakeFiles/chunk_processor.dir/src/demo_neural_chunking.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/neural_chunking_demo.dir/build.make CMakeFiles/neural_chunking_demo.dir/src/demo_neural_chunking.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/neural_chunking.dir/build.make CMakeFiles/neural_chunking.dir/src/demo_neural_chunking.cpp.o
+.PHONY : src/demo_neural_chunking.cpp.o
+
+src/demo_neural_chunking.i: src/demo_neural_chunking.cpp.i
+.PHONY : src/demo_neural_chunking.i
+
+# target to preprocess a source file
+src/demo_neural_chunking.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chunk_processor.dir/build.make CMakeFiles/chunk_processor.dir/src/demo_neural_chunking.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/neural_chunking_demo.dir/build.make CMakeFiles/neural_chunking_demo.dir/src/demo_neural_chunking.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/neural_chunking.dir/build.make CMakeFiles/neural_chunking.dir/src/demo_neural_chunking.cpp.i
+.PHONY : src/demo_neural_chunking.cpp.i
+
+src/demo_neural_chunking.s: src/demo_neural_chunking.cpp.s
+.PHONY : src/demo_neural_chunking.s
+
+# target to generate assembly for a file
+src/demo_neural_chunking.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chunk_processor.dir/build.make CMakeFiles/chunk_processor.dir/src/demo_neural_chunking.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/neural_chunking_demo.dir/build.make CMakeFiles/neural_chunking_demo.dir/src/demo_neural_chunking.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/neural_chunking.dir/build.make CMakeFiles/neural_chunking.dir/src/demo_neural_chunking.cpp.s
+.PHONY : src/demo_neural_chunking.cpp.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
@@ -249,8 +443,8 @@ src/sophisticated_chunking_demo.o: src/sophisticated_chunking_demo.cpp.o
 
 # target to build an object file
 src/sophisticated_chunking_demo.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chunk_processor.dir/build.make CMakeFiles/chunk_processor.dir/src/sophisticated_chunking_demo.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sophisticated_chunking.dir/build.make CMakeFiles/sophisticated_chunking.dir/src/sophisticated_chunking_demo.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sophisticated_chunking_demo.dir/build.make CMakeFiles/sophisticated_chunking_demo.dir/src/sophisticated_chunking_demo.cpp.o
 .PHONY : src/sophisticated_chunking_demo.cpp.o
 
 src/sophisticated_chunking_demo.i: src/sophisticated_chunking_demo.cpp.i
@@ -258,8 +452,8 @@ src/sophisticated_chunking_demo.i: src/sophisticated_chunking_demo.cpp.i
 
 # target to preprocess a source file
 src/sophisticated_chunking_demo.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chunk_processor.dir/build.make CMakeFiles/chunk_processor.dir/src/sophisticated_chunking_demo.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sophisticated_chunking.dir/build.make CMakeFiles/sophisticated_chunking.dir/src/sophisticated_chunking_demo.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sophisticated_chunking_demo.dir/build.make CMakeFiles/sophisticated_chunking_demo.dir/src/sophisticated_chunking_demo.cpp.i
 .PHONY : src/sophisticated_chunking_demo.cpp.i
 
 src/sophisticated_chunking_demo.s: src/sophisticated_chunking_demo.cpp.s
@@ -267,8 +461,8 @@ src/sophisticated_chunking_demo.s: src/sophisticated_chunking_demo.cpp.s
 
 # target to generate assembly for a file
 src/sophisticated_chunking_demo.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/chunk_processor.dir/build.make CMakeFiles/chunk_processor.dir/src/sophisticated_chunking_demo.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sophisticated_chunking.dir/build.make CMakeFiles/sophisticated_chunking.dir/src/sophisticated_chunking_demo.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sophisticated_chunking_demo.dir/build.make CMakeFiles/sophisticated_chunking_demo.dir/src/sophisticated_chunking_demo.cpp.s
 .PHONY : src/sophisticated_chunking_demo.cpp.s
 
 tests/advanced_chunk_strategies_test.o: tests/advanced_chunk_strategies_test.cpp.o
@@ -396,6 +590,7 @@ tests/chunking_methods_sophisticated_test.o: tests/chunking_methods_sophisticate
 
 # target to build an object file
 tests/chunking_methods_sophisticated_test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/chunking_methods_sophisticated_test.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chunking_methods_sophisticated_test.dir/build.make CMakeFiles/chunking_methods_sophisticated_test.dir/tests/chunking_methods_sophisticated_test.cpp.o
 .PHONY : tests/chunking_methods_sophisticated_test.cpp.o
 
@@ -404,6 +599,7 @@ tests/chunking_methods_sophisticated_test.i: tests/chunking_methods_sophisticate
 
 # target to preprocess a source file
 tests/chunking_methods_sophisticated_test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/chunking_methods_sophisticated_test.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chunking_methods_sophisticated_test.dir/build.make CMakeFiles/chunking_methods_sophisticated_test.dir/tests/chunking_methods_sophisticated_test.cpp.i
 .PHONY : tests/chunking_methods_sophisticated_test.cpp.i
 
@@ -412,6 +608,7 @@ tests/chunking_methods_sophisticated_test.s: tests/chunking_methods_sophisticate
 
 # target to generate assembly for a file
 tests/chunking_methods_sophisticated_test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/chunking_methods_sophisticated_test.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chunking_methods_sophisticated_test.dir/build.make CMakeFiles/chunking_methods_sophisticated_test.dir/tests/chunking_methods_sophisticated_test.cpp.s
 .PHONY : tests/chunking_methods_sophisticated_test.cpp.s
 
@@ -463,6 +660,33 @@ tests/test_main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/test_main.cpp.s
 .PHONY : tests/test_main.cpp.s
 
+tests/test_neuralnetwork.o: tests/test_neuralnetwork.cpp.o
+.PHONY : tests/test_neuralnetwork.o
+
+# target to build an object file
+tests/test_neuralnetwork.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/test_neuralnetwork.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/neural_network_test.dir/build.make CMakeFiles/neural_network_test.dir/tests/test_neuralnetwork.cpp.o
+.PHONY : tests/test_neuralnetwork.cpp.o
+
+tests/test_neuralnetwork.i: tests/test_neuralnetwork.cpp.i
+.PHONY : tests/test_neuralnetwork.i
+
+# target to preprocess a source file
+tests/test_neuralnetwork.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/test_neuralnetwork.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/neural_network_test.dir/build.make CMakeFiles/neural_network_test.dir/tests/test_neuralnetwork.cpp.i
+.PHONY : tests/test_neuralnetwork.cpp.i
+
+tests/test_neuralnetwork.s: tests/test_neuralnetwork.cpp.s
+.PHONY : tests/test_neuralnetwork.s
+
+# target to generate assembly for a file
+tests/test_neuralnetwork.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/test_neuralnetwork.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/neural_network_test.dir/build.make CMakeFiles/neural_network_test.dir/tests/test_neuralnetwork.cpp.s
+.PHONY : tests/test_neuralnetwork.cpp.s
+
 tests/utils_test.o: tests/utils_test.cpp.o
 .PHONY : tests/utils_test.o
 
@@ -494,15 +718,33 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
+	@echo "... install"
+	@echo "... install/local"
+	@echo "... install/strip"
+	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... test"
 	@echo "... coverage"
+	@echo "... benchmark_exe"
+	@echo "... chunk_benchmark"
 	@echo "... chunk_processor"
 	@echo "... chunk_processor_exe"
+	@echo "... chunking_cpp"
 	@echo "... chunking_methods_sophisticated_test"
+	@echo "... neural_chunking"
+	@echo "... neural_chunking_demo"
+	@echo "... neural_network_test"
 	@echo "... run_tests"
 	@echo "... sophisticated_chunking"
-	@echo "... sophisticated_chunking_demo"
+	@echo "... bindings/python/chunk_bindings.o"
+	@echo "... bindings/python/chunk_bindings.i"
+	@echo "... bindings/python/chunk_bindings.s"
+	@echo "... src/benchmark.o"
+	@echo "... src/benchmark.i"
+	@echo "... src/benchmark.s"
+	@echo "... src/demo_neural_chunking.o"
+	@echo "... src/demo_neural_chunking.i"
+	@echo "... src/demo_neural_chunking.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
@@ -533,6 +775,9 @@ help:
 	@echo "... tests/test_main.o"
 	@echo "... tests/test_main.i"
 	@echo "... tests/test_main.s"
+	@echo "... tests/test_neuralnetwork.o"
+	@echo "... tests/test_neuralnetwork.i"
+	@echo "... tests/test_neuralnetwork.s"
 	@echo "... tests/utils_test.o"
 	@echo "... tests/utils_test.i"
 	@echo "... tests/utils_test.s"

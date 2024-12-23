@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(ChunkProcessor)
+project(ChunkProcessor VERSION 0.1.0)
 
 # Create documentation directories
 file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/docs)
@@ -9,9 +9,64 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+
+set(PYBIND11_FINDPYTHON ON)
+find_package(pybind11 CONFIG REQUIRED)
+
+# Find Python and get site-packages directory
+execute_process(
+    COMMAND "${Python_EXECUTABLE}" -c "import site; print(site.getsitepackages()[0])"
+    OUTPUT_VARIABLE Python_SITEARCH
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+
+# Add Python support
+# enable_language(Python)
+
 # Add compiler-specific flags
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
+endif()
+
+# Check for CUDA support
+find_package(CUDA QUIET)
+if(CUDA_FOUND)
+    find_path(CUDA_RUNTIME_HEADER cuda_runtime.h
+        HINTS ${CUDA_TOOLKIT_ROOT_DIR}/include
+        PATH_SUFFIXES cuda
+    )
+    if(CUDA_RUNTIME_HEADER)
+        message(STATUS "CUDA Runtime found - enabling GPU support")
+        add_definitions(-DHAVE_CUDA)
+        include_directories(${CUDA_RUNTIME_HEADER})
+        
+        # Add GPU chunking library only if CUDA is available
+        add_library(gpu_chunking
+            src/demo_gpu_chunking.cpp
+        )
+        
+        target_include_directories(gpu_chunking PUBLIC
+            ${PROJECT_SOURCE_DIR}/include
+            ${CUDA_RUNTIME_HEADER}
+        )
+        
+        target_link_libraries(gpu_chunking
+            PRIVATE
+            ${CUDA_LIBRARIES}
+        )
+        
+        # Add GPU demo executable
+        add_executable(gpu_chunking_demo src/demo_gpu_chunking.cpp)
+        target_link_libraries(gpu_chunking_demo
+            PRIVATE
+            gpu_chunking
+            ${CUDA_LIBRARIES}
+        )
+    else()
+        message(STATUS "CUDA Runtime not found - disabling GPU support")
+    endif()
+else()
+    message(STATUS "CUDA not found - disabling GPU support")
 endif()
 
 # Include directories
@@ -22,10 +77,12 @@ include_directories(${GTEST_INCLUDE_DIRS})
 # Find Boost package with required components
 find_package(Boost REQUIRED COMPONENTS graph)
 
-# Add library target
+# Add library target with all source files
 add_library(chunk_processor
     src/main.cpp
-    # Add other source files here
+    src/sophisticated_chunking_demo.cpp
+    src/benchmark.cpp
+    src/demo_neural_chunking.cpp
 )
 
 # Make headers available for the library
@@ -37,11 +94,18 @@ target_include_directories(chunk_processor PUBLIC
 target_link_libraries(chunk_processor 
     PRIVATE 
     Boost::graph
+    $<$<BOOL:${CUDA_FOUND}>:gpu_chunking>
 )
 
-# Add executable target
+# Add executable targets
 add_executable(chunk_processor_exe src/main.cpp)
+add_executable(benchmark_exe src/benchmark.cpp)
+add_executable(neural_chunking_demo src/demo_neural_chunking.cpp)
+
+# Link executables with the library
 target_link_libraries(chunk_processor_exe chunk_processor)
+target_link_libraries(benchmark_exe chunk_processor)
+target_link_libraries(neural_chunking_demo chunk_processor)
 
 # Enable testing
 enable_testing()
@@ -98,7 +162,7 @@ endif()
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
-# Add test executable
+# Add test executable with all test files
 add_executable(run_tests
     tests/test_main.cpp
     tests/chunk_test.cpp
@@ -109,6 +173,7 @@ add_executable(run_tests
     tests/advanced_structures_test.cpp
     tests/advanced_chunk_strategies_test.cpp
     tests/chunking_methods_sophisticated_test.cpp
+    tests/test_neuralnetwork.cpp  # Added new test file
 )
 
 # Set the output directory for run_tests executable
@@ -120,6 +185,9 @@ set_target_properties(run_tests PROPERTIES
 target_link_libraries(run_tests
     PRIVATE
     chunk_processor
+    sophisticated_chunking
+    neural_chunking
+    chunk_benchmark
     ${GTEST_LIBRARIES}
     pthread
     Boost::graph
@@ -202,25 +270,214 @@ target_include_directories(sophisticated_chunking PUBLIC
     ${PROJECT_SOURCE_DIR}/include
 )
 
-# Add the demo executable
-add_executable(sophisticated_chunking_demo
-    src/sophisticated_chunking_demo.cpp
+# Add neural chunking library
+add_library(neural_chunking
+    src/demo_neural_chunking.cpp
 )
 
-target_link_libraries(sophisticated_chunking_demo
+target_include_directories(neural_chunking PUBLIC
+    ${PROJECT_SOURCE_DIR}/include
+)
+
+# Link the specialized libraries to the main library
+target_link_libraries(chunk_processor
+    PRIVATE
     sophisticated_chunking
+    neural_chunking
 )
 
-# Add the test
+# Add benchmark library
+add_library(chunk_benchmark
+    src/benchmark.cpp
+)
+
+target_include_directories(chunk_benchmark PUBLIC
+    ${PROJECT_SOURCE_DIR}/include
+)
+
+target_link_libraries(chunk_benchmark
+    PRIVATE
+    chunk_processor
+)
+
+# Add individual test executables
 add_executable(chunking_methods_sophisticated_test
     tests/chunking_methods_sophisticated_test.cpp
 )
 
+add_executable(neural_network_test
+    tests/test_neuralnetwork.cpp
+)
+
+# Link test executables
 target_link_libraries(chunking_methods_sophisticated_test
     sophisticated_chunking
     gtest
     gtest_main
 )
 
+target_link_libraries(neural_network_test
+    neural_chunking
+    gtest
+    gtest_main
+)
+
 # Add to test suite
-add_test(NAME chunking_methods_sophisticated COMMAND chunking_methods_sophisticated_test) 
+add_test(NAME chunking_methods_sophisticated COMMAND chunking_methods_sophisticated_test)
+add_test(NAME neural_network COMMAND neural_network_test)
+
+# Install targets
+install(TARGETS 
+    chunk_processor
+    sophisticated_chunking
+    neural_chunking
+    chunk_benchmark
+    LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib
+    RUNTIME DESTINATION bin
+)
+
+install(DIRECTORY include/
+    DESTINATION include
+    FILES_MATCHING PATTERN "*.hpp"
+)
+
+# Find pybind11
+find_package(pybind11 REQUIRED)
+
+# Add Python module
+pybind11_add_module(chunking_cpp 
+    bindings/python/chunk_bindings.cpp
+)
+
+# Link with our libraries
+target_link_libraries(chunking_cpp PRIVATE
+    chunk_processor
+    sophisticated_chunking
+    neural_chunking
+    chunk_benchmark
+    $<$<BOOL:${nlohmann_json_FOUND}>:nlohmann_json::nlohmann_json>
+)
+
+# Set Python module properties
+set_target_properties(chunking_cpp PROPERTIES
+    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/python/chunking_cpp
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/python/chunking_cpp
+)
+
+# Install Python module
+install(TARGETS chunking_cpp
+    LIBRARY DESTINATION ${Python_SITEARCH}/chunking_cpp
+    RUNTIME DESTINATION ${Python_SITEARCH}/chunking_cpp
+)
+
+# Create Python package structure
+add_custom_command(TARGET chunking_cpp POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/python/chunking_cpp
+    COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_BINARY_DIR}/python/chunking_cpp/__init__.py
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:chunking_cpp> ${CMAKE_BINARY_DIR}/python/chunking_cpp/
+)
+
+# Add Python tests directory
+if(BUILD_TESTING)
+    add_subdirectory(tests/python)
+endif()
+
+# Add dependencies for Python bindings
+find_package(PostgreSQL QUIET)
+find_package(libpqxx QUIET)
+find_package(mongocxx QUIET)
+find_package(RdKafka QUIET)
+find_package(RabbitMQ QUIET)
+find_package(nlohmann_json QUIET)
+
+# Create build directory for generated headers
+file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/include)
+
+# Configure optional features
+configure_file(
+    ${CMAKE_SOURCE_DIR}/include/config.hpp.in
+    ${CMAKE_BINARY_DIR}/include/config.hpp
+)
+
+# Add generated config directory to include paths
+include_directories(${CMAKE_BINARY_DIR}/include)
+
+# Define compile definitions based on available packages
+if(PostgreSQL_FOUND AND libpqxx_FOUND)
+    target_compile_definitions(chunking_cpp PRIVATE HAVE_POSTGRESQL)
+    target_compile_definitions(chunk_processor PRIVATE HAVE_POSTGRESQL)
+    target_link_libraries(chunking_cpp PRIVATE 
+        PostgreSQL::PostgreSQL
+        libpqxx::pqxx
+    )
+else()
+    message(STATUS "PostgreSQL support disabled - libpqxx not found")
+endif()
+
+if(mongocxx_FOUND)
+    target_compile_definitions(chunking_cpp PRIVATE HAVE_MONGODB)
+    target_compile_definitions(chunk_processor PRIVATE HAVE_MONGODB)
+    target_link_libraries(chunking_cpp PRIVATE 
+        mongocxx::mongocxx
+    )
+else()
+    message(STATUS "MongoDB support disabled - mongocxx not found")
+endif()
+
+if(RdKafka_FOUND)
+    target_compile_definitions(chunking_cpp PRIVATE HAVE_KAFKA)
+    target_link_libraries(chunking_cpp PRIVATE 
+        RdKafka::rdkafka++
+    )
+else()
+    message(STATUS "Kafka support disabled - RdKafka not found")
+endif()
+
+if(RabbitMQ_FOUND)
+    target_compile_definitions(chunking_cpp PRIVATE HAVE_RABBITMQ)
+    target_link_libraries(chunking_cpp PRIVATE 
+        RabbitMQ::rabbitmq
+    )
+endif()
+
+if(nlohmann_json_FOUND)
+    target_compile_definitions(chunking_cpp PRIVATE HAVE_JSON)
+    target_link_libraries(chunking_cpp PRIVATE 
+        nlohmann_json::nlohmann_json
+    )
+endif()
+
+# Add include directories for Python module
+target_include_directories(chunking_cpp PRIVATE
+    ${PYTHON_INCLUDE_DIRS}
+    ${pybind11_INCLUDE_DIRS}
+)
+
+# Force using system libstdc++
+set_target_properties(chunking_cpp PROPERTIES
+    BUILD_WITH_INSTALL_RPATH TRUE
+    INSTALL_RPATH "/usr/lib/x86_64-linux-gnu"
+)
+
+# Check C++ compiler version and available features
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+    execute_process(
+        COMMAND ${CMAKE_CXX_COMPILER} -dumpversion
+        OUTPUT_VARIABLE GCC_VERSION
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+    
+    if(GCC_VERSION VERSION_LESS 9.1)
+        set(CMAKE_CXX_STANDARD 14)
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_GLIBCXX_USE_CXX11_ABI=0")
+        message(STATUS "Using C++14 due to older GCC version")
+    else()
+        set(CMAKE_CXX_STANDARD 17)
+    endif()
+endif()
+
+# Add rpath settings for better library resolution
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+list(APPEND CMAKE_INSTALL_RPATH "/usr/lib/x86_64-linux-gnu")
+  
