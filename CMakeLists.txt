@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(ChunkProcessor)
+project(ChunkProcessor VERSION 0.1.0)
 
 # Create documentation directories
 file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/docs)
@@ -390,6 +390,9 @@ find_package(mongocxx QUIET)
 find_package(RdKafka QUIET)
 find_package(RabbitMQ QUIET)
 find_package(nlohmann_json QUIET)
+
+# Create build directory for generated headers
+file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/include)
 
 # Configure optional features
 configure_file(
