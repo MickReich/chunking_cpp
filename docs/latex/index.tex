@@ -2,7 +2,7 @@
 \hypertarget{index}{}\label{index}\index{Building Instructions@{Building Instructions}}
 \label{index_md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2BUILDING}%
 \Hypertarget{index_md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2BUILDING}%
- \hypertarget{index_autotoc_md25}{}\doxysection{\texorpdfstring{Prerequisites}{Prerequisites}}\label{index_autotoc_md25}
+ \hypertarget{index_prerequisites}{}\doxysection{\texorpdfstring{Prerequisites}{Prerequisites}}\label{index_prerequisites}
 
 \begin{DoxyItemize}
 \item C++17 compiler (g++ or clang++)
@@ -12,8 +12,8 @@
 \item Graphviz (for documentation graphs)
 \item CMake 3.\+10 or higher
 \item pybind11 (for Python bindings)
-\end{DoxyItemize}\hypertarget{index_autotoc_md26}{}\doxysection{\texorpdfstring{Installing Dependencies}{Installing Dependencies}}\label{index_autotoc_md26}
-\hypertarget{index_autotoc_md27}{}\doxysubsection{\texorpdfstring{Ubuntu/\+Debian}{Ubuntu/Debian}}\label{index_autotoc_md27}
+\end{DoxyItemize}\hypertarget{index_installing-dependencies}{}\doxysection{\texorpdfstring{Installing Dependencies}{Installing Dependencies}}\label{index_installing-dependencies}
+\hypertarget{index_ubuntudebian}{}\doxysubsection{\texorpdfstring{Ubuntu/\+Debian}{Ubuntu/Debian}}\label{index_ubuntudebian}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\#\ Install\ build\ tools}
@@ -32,7 +32,7 @@
 \DoxyCodeLine{sudo\ apt-\/get\ install\ doxygen\ gnuplot\ graphviz\ libboost-\/all-\/dev\ python3-\/pybind11}
 
 \end{DoxyCode}
-\hypertarget{index_autotoc_md28}{}\doxysubsection{\texorpdfstring{mac\+OS}{macOS}}\label{index_autotoc_md28}
+\hypertarget{index_macos}{}\doxysubsection{\texorpdfstring{mac\+OS}{macOS}}\label{index_macos}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\#\ Install\ build\ tools}
@@ -45,7 +45,7 @@
 \DoxyCodeLine{brew\ install\ doxygen\ graphviz\ boost}
 
 \end{DoxyCode}
-\hypertarget{index_autotoc_md29}{}\doxysubsection{\texorpdfstring{Windows}{Windows}}\label{index_autotoc_md29}
+\hypertarget{index_windows}{}\doxysubsection{\texorpdfstring{Windows}{Windows}}\label{index_windows}
 
 \begin{DoxyEnumerate}
 \item Install Min\+GW or Visual Studio
@@ -58,7 +58,7 @@
 \DoxyCodeLine{vcpkg\ install\ gtest:x64-\/windows}
 
 \end{DoxyCode}
-\hypertarget{index_autotoc_md30}{}\doxysection{\texorpdfstring{Python Bindings}{Python Bindings}}\label{index_autotoc_md30}
+\hypertarget{index_python-bindings}{}\doxysection{\texorpdfstring{Python Bindings}{Python Bindings}}\label{index_python-bindings}
 To build the Python bindings, you need to have Python and pybind11 installed\+:
 
 
@@ -70,7 +70,7 @@ To build the Python bindings, you need to have Python and pybind11 installed\+:
 \DoxyCodeLine{sudo\ apt-\/get\ install\ python3-\/dev\ python3-\/pybind11}
 \DoxyCodeLine{}
 \DoxyCodeLine{\#\ If\ you're\ using\ conda,\ ensure\ you\ have\ the\ latest\ libstdc++:}
-\DoxyCodeLine{conda\ install\ -\/c\ conda-\/forge\ libstdcxx-\/ng}
+\DoxyCodeLine{conda\ install\ -\/c\ conda-\/forge\ libstdcxx-\/ng\ pybind11[global]}
 
 \end{DoxyCode}
 
@@ -84,14 +84,29 @@ On ubuntu/debian, you can install pybind11 using\+:
 \end{DoxyCode}
 
 
-You then can install the Python bindings using the setup.\+py script\+:
+You then can install the Python bindings (and pytest) using the setup.\+py script\+:
 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{pip\ install\ .}
 
 \end{DoxyCode}
-\hypertarget{index_autotoc_md31}{}\doxysection{\texorpdfstring{Optional Dependencies}{Optional Dependencies}}\label{index_autotoc_md31}
+
+
+You can then mock the same functionality in python\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{from}\ chunking\_cpp\ \textcolor{keyword}{import}\ chunking\_cpp\ \textcolor{keyword}{as}\ cc}
+\DoxyCodeLine{}
+\DoxyCodeLine{chunk\ =\ cc.Chunk(3)}
+\DoxyCodeLine{chunk.add(1)}
+\DoxyCodeLine{chunk.add(2)}
+\DoxyCodeLine{chunk.add(3)}
+\DoxyCodeLine{chunk.chunk\_by\_threshold(1.0)}
+
+\end{DoxyCode}
+\hypertarget{index_optional-dependencies}{}\doxysection{\texorpdfstring{Optional Dependencies}{Optional Dependencies}}\label{index_optional-dependencies}
 
 \begin{DoxyItemize}
 \item Postgre\+SQL
@@ -99,6 +114,8 @@ You then can install the Python bindings using the setup.\+py script\+:
 \item Kafka
 \item Rabbit\+MQ
 \item JSON
+\item Pytest
+\item pytest-\/cov (for test coverage)
 \end{DoxyItemize}
 
 These can be installed on ubuntu/debian with\+:
@@ -107,10 +124,11 @@ These can be installed on ubuntu/debian with\+:
 \begin{DoxyCode}{0}
 \DoxyCodeLine{sudo\ apt-\/get\ install\ libpq-\/dev\ libstdc++6\ libmongoc-\/dev\ \(\backslash\)}
 \DoxyCodeLine{-\/\ \ \ \ \ librdkafka-\/dev\ librabbitmq-\/dev\ libjsoncpp-\/dev}
-\DoxyCodeLine{+\ \ \ \ \ librdkafka-\/dev\ librdkafka++1\ librabbitmq-\/dev\ libjsoncpp-\/dev}
+\DoxyCodeLine{+\ \ \ \ \ librdkafka-\/dev\ librdkafka++1\ librabbitmq-\/dev\ libjsoncpp-\/dev\ \(\backslash\)}
+\DoxyCodeLine{+\ \ \ \ \ python3-\/pytest\ python3-\/pytest-\/cov}
 
 \end{DoxyCode}
-\hypertarget{index_autotoc_md32}{}\doxysection{\texorpdfstring{Configuration Options}{Configuration Options}}\label{index_autotoc_md32}
+\hypertarget{index_configuration-options}{}\doxysection{\texorpdfstring{Configuration Options}{Configuration Options}}\label{index_configuration-options}
 The project uses CMake for configuration. Available options\+:
 
 
@@ -120,16 +138,7 @@ The project uses CMake for configuration. Available options\+:
 \DoxyCodeLine{-\/DBUILD\_TESTING=ON\ \ \ \ \ \ \#\ Enable\ building\ tests}
 
 \end{DoxyCode}
-
-
-Example configuration\+:
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{cmake\ -\/DENABLE\_COVERAGE=ON\ -\/DENABLE\_SANITIZERS=ON\ -\/DBUILD\_TESTING=ON\ ..}
-
-\end{DoxyCode}
-\hypertarget{index_autotoc_md33}{}\doxysection{\texorpdfstring{Building the Project}{Building the Project}}\label{index_autotoc_md33}
+\hypertarget{index_building-the-project}{}\doxysection{\texorpdfstring{Building the Project}{Building the Project}}\label{index_building-the-project}
 1.\+Clone the repository\+:
 
 
@@ -141,11 +150,11 @@ Example configuration\+:
 \end{DoxyCode}
 
 
-2.\+Configure and build\+:
+2.\+Configure, build and install (with all options enabled by default)\+:
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{cmake\ ..}
+\DoxyCodeLine{./configure\ -\/-\/enable-\/tests\ -\/-\/enable-\/docs\ -\/-\/enable-\/sanitizers\ -\/-\/enable-\/coverage}
 \DoxyCodeLine{make}
 
 \end{DoxyCode}
@@ -160,16 +169,7 @@ Example configuration\+:
 \end{DoxyCode}
 
 
-4.\+Install\+:
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{sudo\ make\ install}
-
-\end{DoxyCode}
-
-
-5.\+Generate documentation\+:
+4.\+Generate documentation\+:
 
 
 \begin{DoxyCode}{0}
@@ -178,14 +178,32 @@ Example configuration\+:
 \end{DoxyCode}
 
 
-6.\+Serve documentation locally\+:
+5.\+Serve documentation locally\+:
 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{make\ docs-\/serve}
 
 \end{DoxyCode}
-\hypertarget{index_autotoc_md34}{}\doxysection{\texorpdfstring{Project Structure}{Project Structure}}\label{index_autotoc_md34}
+
+
+6.\+Run tests with pytest\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make\ pytest}
+
+\end{DoxyCode}
+
+
+7.\+Run tests with pytest and coverage\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make\ pytest-\/coverage}
+
+\end{DoxyCode}
+\hypertarget{index_project-structure}{}\doxysection{\texorpdfstring{Project Structure}{Project Structure}}\label{index_project-structure}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{.}
@@ -195,6 +213,9 @@ Example configuration\+:
 \DoxyCodeLine{│\ \ \ \ \ \ \ └──\ docs.yml}
 \DoxyCodeLine{├──\ docs/}
 \DoxyCodeLine{│\ \ \ └──\ html/}
+\DoxyCodeLine{├──\ bindings/}
+\DoxyCodeLine{│\ \ \ └──\ python/}
+\DoxyCodeLine{│\ \ \ \ \ \ \ └──\ chunk\_bindings.cpp}
 \DoxyCodeLine{├──\ include/}
 \DoxyCodeLine{│\ \ \ ├──\ chunk.hpp}
 \DoxyCodeLine{│\ \ \ ├──\ config.hpp}
@@ -205,9 +226,11 @@ Example configuration\+:
 \DoxyCodeLine{│\ \ \ ├──\ advanced\_structures.hpp}
 \DoxyCodeLine{│\ \ \ ├──\ sophisticated\_chunking.hpp}
 \DoxyCodeLine{│\ \ \ ├──\ data\_structures.hpp}
+\DoxyCodeLine{│\ \ \ ├──\ neural\_chunking.hpp}
 \DoxyCodeLine{│\ \ \ └──\ utils.hpp}
 \DoxyCodeLine{├──\ src/}
 \DoxyCodeLine{│\ \ \ ├──\ main.cpp}
+\DoxyCodeLine{│\ \ \ ├──\ demo\_neural\_chunking.cpp}
 \DoxyCodeLine{│\ \ \ └──\ sophisticated\_chunking\_demo.cpp}
 \DoxyCodeLine{├──\ tests/}
 \DoxyCodeLine{│\ \ \ ├──\ advanced\_chunk\_strategies\_test.cpp}
@@ -218,17 +241,23 @@ Example configuration\+:
 \DoxyCodeLine{│\ \ \ ├──\ data\_structures\_test.cpp}
 \DoxyCodeLine{│\ \ \ ├──\ parallel\_chunk\_test.cpp}
 \DoxyCodeLine{│\ \ \ ├──\ sub\_chunk\_strategies\_test.cpp}
+\DoxyCodeLine{│\ \ \ ├──\ test\_neuralnetwork.cpp}
 \DoxyCodeLine{│\ \ \ ├──\ test\_main.cpp}
+\DoxyCodeLine{│\ \ \ ├──\ python/}
+\DoxyCodeLine{│\ \ \ │\ \ \ └──\ py\_bindings.py}
 \DoxyCodeLine{│\ \ \ └──\ utils\_test.cpp}
+\DoxyCodeLine{├──\ scripts/}
+\DoxyCodeLine{│\ \ \ └──\ pybindings\_example.py}
 \DoxyCodeLine{├──\ Makefile}
 \DoxyCodeLine{├──\ CMakeLists.txt}
 \DoxyCodeLine{├──\ Doxyfile}
+\DoxyCodeLine{├──\ setup.py}
 \DoxyCodeLine{├──\ README.md}
 \DoxyCodeLine{├──\ BUILDING.md}
-\DoxyCodeLine{└─\ LICENSE}
+\DoxyCodeLine{└──\ LICENSE}
 
 \end{DoxyCode}
-\hypertarget{index_autotoc_md35}{}\doxysection{\texorpdfstring{Make Targets}{Make Targets}}\label{index_autotoc_md35}
+\hypertarget{index_make-targets}{}\doxysection{\texorpdfstring{Make Targets}{Make Targets}}\label{index_make-targets}
 
 \begin{DoxyItemize}
 \item {\ttfamily make}\+: Build the project
@@ -245,8 +274,10 @@ Example configuration\+:
 \item {\ttfamily make format-\/check}\+: Check source code formatting
 \item {\ttfamily make install}\+: Install the project
 \item {\ttfamily make uninstall}\+: Uninstall the project
-\end{DoxyItemize}\hypertarget{index_autotoc_md36}{}\doxysection{\texorpdfstring{Advanced Features}{Advanced Features}}\label{index_autotoc_md36}
-\hypertarget{index_autotoc_md37}{}\doxysubsection{\texorpdfstring{Sub-\/\+Chunking Strategies}{Sub-Chunking Strategies}}\label{index_autotoc_md37}
+\item {\ttfamily make pytest}\+: Run tests with pytest
+\item {\ttfamily make pytest-\/coverage}\+: Run tests with pytest and coverage
+\end{DoxyItemize}\hypertarget{index_advanced-features}{}\doxysection{\texorpdfstring{Advanced Features}{Advanced Features}}\label{index_advanced-features}
+\hypertarget{index_sub-chunking-strategies}{}\doxysubsection{\texorpdfstring{Sub-\/\+Chunking Strategies}{Sub-Chunking Strategies}}\label{index_sub-chunking-strategies}
 The library provides several sub-\/chunking strategies\+:
 
 
@@ -265,7 +296,7 @@ Example\+:
 \DoxyCodeLine{\textcolor{keyword}{auto}\ sub\_chunks\ =\ recursive.apply(data);}
 
 \end{DoxyCode}
-\hypertarget{index_autotoc_md38}{}\doxysubsection{\texorpdfstring{Building and Testing Sophisticated Chunking}{Building and Testing Sophisticated Chunking}}\label{index_autotoc_md38}
+\hypertarget{index_building-and-testing-sophisticated-chunking}{}\doxysubsection{\texorpdfstring{Building and Testing Sophisticated Chunking}{Building and Testing Sophisticated Chunking}}\label{index_building-and-testing-sophisticated-chunking}
 To build and run the sophisticated chunking examples\+:
 
 
@@ -286,7 +317,7 @@ The sophisticated chunking features are implemented in\+:
 \item {\ttfamily \doxylink{sophisticated__chunking_8hpp}{include/sophisticated\+\_\+chunking.\+hpp}}\+: Core implementations
 \item {\ttfamily \doxylink{sophisticated__chunking__demo_8cpp}{src/sophisticated\+\_\+chunking\+\_\+demo.\+cpp}}\+: Usage examples
 \item {\ttfamily tests/chunking\+\_\+methods\+\_\+sophisticated\+\_\+test.\+cpp}\+: Unit tests
-\end{DoxyItemize}\hypertarget{index_autotoc_md39}{}\doxysubsection{\texorpdfstring{Running Sophisticated Chunking Tests}{Running Sophisticated Chunking Tests}}\label{index_autotoc_md39}
+\end{DoxyItemize}\hypertarget{index_running-sophisticated-chunking-tests}{}\doxysubsection{\texorpdfstring{Running Sophisticated Chunking Tests}{Running Sophisticated Chunking Tests}}\label{index_running-sophisticated-chunking-tests}
 To run only the sophisticated chunking tests\+:
 
 
@@ -304,7 +335,7 @@ Or using make\+:
 \DoxyCodeLine{make\ test-\/sophisticated}
 
 \end{DoxyCode}
-\hypertarget{index_autotoc_md40}{}\doxysubsection{\texorpdfstring{Sophisticated Chunking Integration}{Sophisticated Chunking Integration}}\label{index_autotoc_md40}
+\hypertarget{index_sophisticated-chunking-integration}{}\doxysubsection{\texorpdfstring{Sophisticated Chunking Integration}{Sophisticated Chunking Integration}}\label{index_sophisticated-chunking-integration}
 To use sophisticated chunking in your project\+:
 
 
@@ -319,23 +350,20 @@ To use sophisticated chunking in your project\+:
 \end{DoxyCode}
 
 
-
-\begin{DoxyEnumerate}
-\item Link against the library in your CMake\+Lists.\+txt\+:
-\end{DoxyEnumerate}
+2.\+Link against the library in your CMake\+Lists.\+txt\+:
 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{target\_link\_libraries(your\_target\ PRIVATE\ sophisticated\_chunking)}
 
 \end{DoxyCode}
-\hypertarget{index_autotoc_md41}{}\doxysubsection{\texorpdfstring{Performance Considerations for Sophisticated Chunking}{Performance Considerations for Sophisticated Chunking}}\label{index_autotoc_md41}
+\hypertarget{index_performance-considerations-for-sophisticated-chunking}{}\doxysubsection{\texorpdfstring{Performance Considerations for Sophisticated Chunking}{Performance Considerations for Sophisticated Chunking}}\label{index_performance-considerations-for-sophisticated-chunking}
 
 \begin{DoxyItemize}
 \item {\bfseries{Wavelet Chunking}}\+: O(n \texorpdfstring{$\ast$}{*} window\+\_\+size) complexity. Choose smaller window sizes for better performance.
 \item {\bfseries{Mutual Information}}\+: O(n \texorpdfstring{$\ast$}{*} context\+\_\+size) complexity. Larger context sizes impact performance significantly.
 \item {\bfseries{DTW Chunking}}\+: O(n \texorpdfstring{$\ast$}{*} window\+\_\+size²) complexity. Window size has quadratic impact on performance.
-\end{DoxyItemize}\hypertarget{index_autotoc_md42}{}\doxysubsection{\texorpdfstring{Troubleshooting}{Troubleshooting}}\label{index_autotoc_md42}
+\end{DoxyItemize}\hypertarget{index_troubleshooting}{}\doxysubsection{\texorpdfstring{Troubleshooting}{Troubleshooting}}\label{index_troubleshooting}
 If you encounter GLIBCXX version errors when installing the Python bindings\+:
 
 

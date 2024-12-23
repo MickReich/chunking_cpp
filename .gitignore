@@ -49,4 +49,6 @@ viz/
 **/htmlcov/
 **/build/
 *.egg-info/
-**/*.egg-info/
+**/*.egg-info/*.dot
+*.dot
+chunk_visualization_demo

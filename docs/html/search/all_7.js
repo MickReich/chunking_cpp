@@ -8,5 +8,6 @@ var searchData=
   ['heap_5f_5',['heap_',['../classPriorityQueue.html#a2dc28580b01197178f598f15b3182370',1,'PriorityQueue']]],
   ['heapify_5fdown_6',['heapify_down',['../classPriorityQueue.html#a56e5f9d2fb1e1d5db7c04f00ff32d0c8',1,'PriorityQueue']]],
   ['heapify_5fup_7',['heapify_up',['../classPriorityQueue.html#ac221c7a12a2f93f4bad4bc43f070ac02',1,'PriorityQueue']]],
-  ['hierarchicalsubchunkstrategy_8',['hierarchicalsubchunkstrategy',['../classchunk__strategies_1_1HierarchicalSubChunkStrategy.html',1,'chunk_strategies::HierarchicalSubChunkStrategy&lt; T &gt;'],['../classchunk__strategies_1_1HierarchicalSubChunkStrategy.html#abe59c321f036269361c947bbb3284388',1,'chunk_strategies::HierarchicalSubChunkStrategy::HierarchicalSubChunkStrategy()']]]
+  ['hidden_5fsize_8',['hidden_size',['../namespaceneural__chunking.html#adfa6e200833d8878d9f14f6a39295cfa',1,'neural_chunking::NeuralChunkConfig']]],
+  ['hierarchicalsubchunkstrategy_9',['hierarchicalsubchunkstrategy',['../classchunk__strategies_1_1HierarchicalSubChunkStrategy.html',1,'chunk_strategies::HierarchicalSubChunkStrategy&lt; T &gt;'],['../classchunk__strategies_1_1HierarchicalSubChunkStrategy.html#abe59c321f036269361c947bbb3284388',1,'chunk_strategies::HierarchicalSubChunkStrategy::HierarchicalSubChunkStrategy()']]]
 ];

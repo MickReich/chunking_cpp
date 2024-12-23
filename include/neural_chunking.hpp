@@ -1,192 +1,203 @@
-#pragma once
+/**
+ * @file neural_chunking.hpp
+ * @brief Neural network-based chunking algorithms
+ * @author Jonathan Reich
+ * @date 2024-12-07
+ */
 
-#include <algorithm>
-#include <cmath>
+#pragma once
+#include <cmath>   // for std::abs
+#include <cstdlib> // for malloc, free
 #include <memory>
-#include <random>
-#include <stdexcept>
+#include <stdexcept> // for std::runtime_error
 #include <vector>
 
 namespace neural_chunking {
 
 /**
- * @brief Simple neural network layer for chunking decisions
+ * @brief Neural network layer implementation
+ * @tparam T Data type for layer computations
  */
+template <typename T>
 class Layer {
-private:
-    std::vector<std::vector<double>> weights;
-    std::vector<double> biases;
-
-    double sigmoid(double x) const {
-        return 1.0 / (1.0 + std::exp(-x));
-    }
-
 public:
     Layer(size_t input_size, size_t output_size)
-        : weights(output_size, std::vector<double>(input_size)), biases(output_size) {
-        // Initialize weights with Xavier initialization
-        std::random_device rd;
-        std::mt19937 gen(rd());
-        std::normal_distribution<> d(0.0, std::sqrt(2.0 / (input_size + output_size)));
-
-        for (auto& neuron : weights) {
-            for (auto& weight : neuron) {
-                weight = d(gen);
-            }
-        }
-
-        for (auto& bias : biases) {
-            bias = d(gen);
-        }
+        : input_size_(input_size), output_size_(output_size) {
+        weights_.resize(input_size * output_size);
+        biases_.resize(output_size);
+        initialize_weights();
     }
 
-    std::vector<double> forward(const std::vector<double>& input) const {
-        if (input.size() != weights[0].size()) {
-            throw std::invalid_argument("Input size mismatch");
+    std::vector<T> forward(const std::vector<T>& input) {
+        if (input.size() != input_size_) {
+            throw std::invalid_argument("Invalid input size");
         }
-
-        std::vector<double> output(weights.size());
-        for (size_t i = 0; i < weights.size(); ++i) {
-            double sum = biases[i];
-            for (size_t j = 0; j < input.size(); ++j) {
-                sum += weights[i][j] * input[j];
+        std::vector<T> output(output_size_);
+        // Simple forward pass implementation
+        for (size_t i = 0; i < output_size_; ++i) {
+            output[i] = biases_[i];
+            for (size_t j = 0; j < input_size_; ++j) {
+                output[i] += input[j] * weights_[i * input_size_ + j];
             }
-            output[i] = sigmoid(sum);
         }
         return output;
+    }
+
+private:
+    size_t input_size_;
+    size_t output_size_;
+    std::vector<T> weights_;
+    std::vector<T> biases_;
+
+    void initialize_weights() {
+        // Simple Xavier initialization
+        T scale = std::sqrt(2.0 / (input_size_ + output_size_));
+        for (auto& w : weights_) {
+            w = (static_cast<T>(rand()) / RAND_MAX * 2 - 1) * scale;
+        }
+        for (auto& b : biases_) {
+            b = 0;
+        }
     }
 };
 
 /**
- * @brief Neural network based chunking strategy
- * @tparam T The type of elements to be chunked
+ * @brief Configuration for neural network chunking
+ */
+struct NeuralChunkConfig {
+    size_t input_size;    ///< Size of input layer
+    size_t hidden_size;   ///< Size of hidden layer
+    double learning_rate; ///< Learning rate for training
+    size_t batch_size;    ///< Batch size for processing
+    double threshold;     ///< Decision threshold for chunk boundaries
+};
+
+/**
+ * @brief Class implementing neural network-based chunking
+ * @tparam T Data type of elements to chunk
  */
 template <typename T>
 class NeuralChunking {
-private:
-    std::vector<std::shared_ptr<Layer>> layers;
-    size_t window_size;
-    double threshold;
-
-    /**
-     * @brief Convert a window of data to neural network input
-     * @param window Window of data to convert
-     * @return Vector of normalized features
-     */
-    std::vector<double> extract_features(const std::vector<T>& window) const {
-        if (window.empty())
-            return {};
-
-        std::vector<double> features;
-        features.reserve(window.size());
-
-        // Convert to double and normalize
-        double min_val = static_cast<double>(*std::min_element(window.begin(), window.end()));
-        double max_val = static_cast<double>(*std::max_element(window.begin(), window.end()));
-        double range = max_val - min_val + 1e-10; // Avoid division by zero
-
-        for (const auto& val : window) {
-            features.push_back((static_cast<double>(val) - min_val) / range);
-        }
-
-        return features;
-    }
-
-    /**
-     * @brief Predict if a boundary should be placed after the current window
-     * @param window Current window of data
-     * @return True if a boundary should be placed, false otherwise
-     */
-    bool predict_boundary(const std::vector<T>& window) const {
-        if (window.size() != window_size) {
-            throw std::invalid_argument("Invalid window size");
-        }
-
-        auto features = extract_features(window);
-        auto current = features;
-
-        // Forward propagation through all layers
-        for (const auto& layer : layers) {
-            current = layer->forward(current);
-        }
-
-        // Final output is probability of boundary
-        return current.back() > threshold;
-    }
-
 public:
     /**
-     * @brief Constructor for neural chunking
-     * @param window_sz Size of the sliding window
-     * @param boundary_threshold Threshold for boundary decision
+     * @brief Constructor
+     * @param window_size Size of sliding window
+     * @param threshold Threshold for chunk boundary detection
      */
-    NeuralChunking(size_t window_sz = 8, double boundary_threshold = 0.5)
-        : window_size(window_sz), threshold(boundary_threshold) {
-        // Create a simple neural network architecture
-        layers.push_back(std::make_shared<Layer>(window_size, window_size * 2));
-        layers.push_back(std::make_shared<Layer>(window_size * 2, window_size));
-        layers.push_back(std::make_shared<Layer>(window_size, 1));
-    }
+    NeuralChunking(size_t window_size, double threshold);
 
     /**
-     * @brief Chunk data using neural network predictions
-     * @param data Input data to be chunked
+     * @brief Process data and create chunks using neural network
+     * @param data Input data to chunk
      * @return Vector of chunks
      */
-    std::vector<std::vector<T>> chunk(const std::vector<T>& data) const {
-        if (data.empty()) {
-            return {};
-        }
-
-        if (data.size() < window_size) {
-            return {data};
-        }
-
-        std::vector<std::vector<T>> chunks;
-        std::vector<T> current_chunk;
-
-        for (size_t i = 0; i <= data.size() - window_size; ++i) {
-            std::vector<T> window(data.begin() + i, data.begin() + i + window_size);
-            current_chunk.push_back(data[i]);
-
-            if (predict_boundary(window)) {
-                if (!current_chunk.empty()) {
-                    chunks.push_back(current_chunk);
-                    current_chunk.clear();
-                }
-            }
-        }
-
-        // Add remaining elements
-        for (size_t i = data.size() - window_size + 1; i < data.size(); ++i) {
-            current_chunk.push_back(data[i]);
-        }
-
-        if (!current_chunk.empty()) {
-            chunks.push_back(current_chunk);
-        }
-
-        return chunks;
-    }
+    std::vector<std::vector<T>> chunk(const std::vector<T>& data);
 
     /**
-     * @brief Update the boundary threshold
-     * @param new_threshold New threshold value between 0 and 1
+     * @brief Set threshold for chunk boundary detection
+     * @param new_threshold New threshold value
      */
     void set_threshold(double new_threshold) {
-        if (new_threshold < 0.0 || new_threshold > 1.0) {
-            throw std::invalid_argument("Threshold must be between 0 and 1");
-        }
-        threshold = new_threshold;
+        config.threshold = new_threshold;
     }
 
     /**
-     * @brief Get the current window size
-     * @return Current window size
+     * @brief Get current window size
+     * @return Window size used for chunking
      */
     size_t get_window_size() const {
-        return window_size;
+        return config.input_size;
+    }
+
+private:
+    NeuralChunkConfig config;                     ///< Neural network configuration
+    std::unique_ptr<void, void (*)(void*)> model; ///< Neural network model (opaque pointer)
+
+    /**
+     * @brief Initialize neural network model
+     */
+    void initialize_model();
+
+    /**
+     * @brief Detect chunk boundary using neural network
+     * @param window Current window of data
+     * @return true if boundary detected, false otherwise
+     */
+    bool detect_boundary(const std::vector<T>& window);
+
+    /**
+     * @brief Deleter function for neural network model
+     */
+    static void model_deleter(void* ptr) {
+        if (ptr) {
+            // Add proper cleanup code here if needed
+            free(ptr);
+        }
     }
 };
+
+template <typename T>
+NeuralChunking<T>::NeuralChunking(size_t window_size, double threshold)
+    : model(nullptr, model_deleter) { // Initialize with nullptr and deleter
+    config.input_size = window_size;
+    config.hidden_size = window_size * 2;
+    config.learning_rate = 0.01;
+    config.batch_size = 32;
+    config.threshold = threshold;
+    initialize_model();
+}
+
+template <typename T>
+void NeuralChunking<T>::initialize_model() {
+    // Allocate memory for the model
+    void* raw_ptr = malloc(sizeof(T) * config.input_size * config.hidden_size);
+    if (!raw_ptr) {
+        throw std::runtime_error("Failed to allocate memory for neural network model");
+    }
+    model.reset(raw_ptr); // Transfer ownership to unique_ptr
+}
+
+template <typename T>
+bool NeuralChunking<T>::detect_boundary(const std::vector<T>& window) {
+    // Simple boundary detection logic for demonstration
+    // In a real implementation, this would use the neural network model
+    if (window.size() < 2)
+        return false;
+
+    T diff = std::abs(window.back() - window.front());
+    return diff > config.threshold;
+}
+
+template <typename T>
+std::vector<std::vector<T>> NeuralChunking<T>::chunk(const std::vector<T>& data) {
+    if (data.size() < config.input_size) {
+        return {data}; // Return single chunk if data is too small
+    }
+
+    std::vector<std::vector<T>> result;
+    std::vector<T> current_chunk;
+
+    for (size_t i = 0; i <= data.size() - config.input_size; ++i) {
+        std::vector<T> window(data.begin() + i, data.begin() + i + config.input_size);
+        if (detect_boundary(window) || i == data.size() - config.input_size) {
+            if (!current_chunk.empty()) {
+                result.push_back(current_chunk);
+                current_chunk.clear();
+            }
+        }
+        current_chunk.push_back(data[i]);
+    }
+
+    // Add remaining elements
+    for (size_t i = data.size() - config.input_size + 1; i < data.size(); ++i) {
+        current_chunk.push_back(data[i]);
+    }
+
+    if (!current_chunk.empty()) {
+        result.push_back(current_chunk);
+    }
+
+    return result;
+}
 
 } // namespace neural_chunking

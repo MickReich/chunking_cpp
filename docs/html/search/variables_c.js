@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['neural_5fchunker_0',['neural_chunker',['../classNeuralChunkingStrategy.html#acfb46545bd20a4da2729153c159f2e50',1,'NeuralChunkingStrategy']]],
-  ['next_1',['next',['../structadvanced__structures_1_1ChunkBPlusTree_1_1Node.html#a01d6e9020063c3c5f311c09ed82dda5a',1,'advanced_structures::ChunkBPlusTree::Node::next'],['../structChunkNode.html#a9ed2c0bfaa2987be7534020dd1aab66a',1,'ChunkNode::next']]],
-  ['num_5fhash_5ffunctions_2',['num_hash_functions',['../classadvanced__structures_1_1BloomFilterChunk.html#a0971ed7fde596ec76a46169c9c4be523',1,'advanced_structures::BloomFilterChunk']]]
+  ['order_0',['ORDER',['../classadvanced__structures_1_1ChunkBPlusTree.html#aeb6e577f38b6d398c0836917692d9126',1,'advanced_structures::ChunkBPlusTree']]],
+  ['output_5fdir_1',['output_dir',['../classchunk__viz_1_1ChunkVisualizer.html#a3b4df998e0548b8e680b3fb4db594f9e',1,'chunk_viz::ChunkVisualizer']]],
+  ['output_5fsize_5f_2',['output_size_',['../classneural__chunking_1_1Layer.html#af7ce933348fee2b6082ba2ebc513cf6f',1,'neural_chunking::Layer']]]
 ];

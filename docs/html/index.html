@@ -94,7 +94,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2BUILDING"></a> </p>
-<h1><a class="anchor" id="autotoc_md25"></a>
+<h1><a class="anchor" id="prerequisites"></a>
 Prerequisites</h1>
 <ul>
 <li>C++17 compiler (g++ or clang++)</li>
@@ -105,9 +105,9 @@ Prerequisites</h1>
 <li>CMake 3.10 or higher</li>
 <li>pybind11 (for Python bindings)</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md26"></a>
+<h1><a class="anchor" id="installing-dependencies"></a>
 Installing Dependencies</h1>
-<h2><a class="anchor" id="autotoc_md27"></a>
+<h2><a class="anchor" id="ubuntudebian"></a>
 Ubuntu/Debian</h2>
 <div class="fragment"><div class="line"># Install build tools</div>
 <div class="line">sudo apt-get update</div>
@@ -123,7 +123,7 @@ Ubuntu/Debian</h2>
 <div class="line"> </div>
 <div class="line"># Install documentation and tools</div>
 <div class="line">sudo apt-get install doxygen gnuplot graphviz libboost-all-dev python3-pybind11</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md28"></a>
+</div><!-- fragment --><h2><a class="anchor" id="macos"></a>
 macOS</h2>
 <div class="fragment"><div class="line"># Install build tools</div>
 <div class="line">xcode-select --install</div>
@@ -133,7 +133,7 @@ macOS</h2>
 <div class="line"> </div>
 <div class="line"># Install documentation tools</div>
 <div class="line">brew install doxygen graphviz boost</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md29"></a>
+</div><!-- fragment --><h2><a class="anchor" id="windows"></a>
 Windows</h2>
 <ol type="1">
 <li>Install MinGW or Visual Studio</li>
@@ -141,7 +141,7 @@ Windows</h2>
 <li>Install Google Test through vcpkg:</li>
 </ol>
 <div class="fragment"><div class="line">vcpkg install gtest:x64-windows</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md30"></a>
+</div><!-- fragment --><h1><a class="anchor" id="python-bindings"></a>
 Python Bindings</h1>
 <p>To build the Python bindings, you need to have Python and pybind11 installed:</p>
 <div class="fragment"><div class="line"># Method 1: Using pip (recommended)</div>
@@ -151,12 +151,20 @@ Python Bindings</h1>
 <div class="line">sudo apt-get install python3-dev python3-pybind11</div>
 <div class="line"> </div>
 <div class="line"># If you&#39;re using conda, ensure you have the latest libstdc++:</div>
-<div class="line">conda install -c conda-forge libstdcxx-ng</div>
+<div class="line">conda install -c conda-forge libstdcxx-ng pybind11[global]</div>
 </div><!-- fragment --><p>On ubuntu/debian, you can install pybind11 using:</p>
 <div class="fragment"><div class="line">sudo apt-get install python3-pybind11</div>
-</div><!-- fragment --><p>You then can install the Python bindings using the setup.py script:</p>
+</div><!-- fragment --><p>You then can install the Python bindings (and pytest) using the setup.py script:</p>
 <div class="fragment"><div class="line">pip install .</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md31"></a>
+</div><!-- fragment --><p>You can then mock the same functionality in python:</p>
+<div class="fragment"><div class="line"><span class="keyword">from</span> chunking_cpp <span class="keyword">import</span> chunking_cpp <span class="keyword">as</span> cc</div>
+<div class="line"> </div>
+<div class="line">chunk = cc.Chunk(3)</div>
+<div class="line">chunk.add(1)</div>
+<div class="line">chunk.add(2)</div>
+<div class="line">chunk.add(3)</div>
+<div class="line">chunk.chunk_by_threshold(1.0)</div>
+</div><!-- fragment --><h1><a class="anchor" id="optional-dependencies"></a>
 Optional Dependencies</h1>
 <ul>
 <li>PostgreSQL</li>
@@ -164,37 +172,40 @@ Optional Dependencies</h1>
 <li>Kafka</li>
 <li>RabbitMQ</li>
 <li>JSON</li>
+<li>Pytest</li>
+<li>pytest-cov (for test coverage)</li>
 </ul>
 <p>These can be installed on ubuntu/debian with:</p>
 <div class="fragment"><div class="line">sudo apt-get install libpq-dev libstdc++6 libmongoc-dev \</div>
 <div class="line">-     librdkafka-dev librabbitmq-dev libjsoncpp-dev</div>
-<div class="line">+     librdkafka-dev librdkafka++1 librabbitmq-dev libjsoncpp-dev</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md32"></a>
+<div class="line">+     librdkafka-dev librdkafka++1 librabbitmq-dev libjsoncpp-dev \</div>
+<div class="line">+     python3-pytest python3-pytest-cov</div>
+</div><!-- fragment --><h1><a class="anchor" id="configuration-options"></a>
 Configuration Options</h1>
 <p>The project uses CMake for configuration. Available options:</p>
 <div class="fragment"><div class="line">-DENABLE_COVERAGE=ON    # Enable code coverage reporting</div>
 <div class="line">-DENABLE_SANITIZERS=ON  # Enable address and undefined behavior sanitizers</div>
 <div class="line">-DBUILD_TESTING=ON      # Enable building tests</div>
-</div><!-- fragment --><p>Example configuration:</p>
-<div class="fragment"><div class="line">cmake -DENABLE_COVERAGE=ON -DENABLE_SANITIZERS=ON -DBUILD_TESTING=ON ..</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md33"></a>
+</div><!-- fragment --><h1><a class="anchor" id="building-the-project"></a>
 Building the Project</h1>
 <p>1.Clone the repository:</p>
 <div class="fragment"><div class="line">git clone git@github.com:JohnnyTeutonic/chunking_cpp.git</div>
 <div class="line">cd chunking_cpp</div>
 <div class="line">mkdir build &amp;&amp; cd build</div>
-</div><!-- fragment --><p>2.Configure and build:</p>
-<div class="fragment"><div class="line">cmake ..</div>
+</div><!-- fragment --><p>2.Configure, build and install (with all options enabled by default):</p>
+<div class="fragment"><div class="line">./configure --enable-tests --enable-docs --enable-sanitizers --enable-coverage</div>
 <div class="line">make</div>
 </div><!-- fragment --><p>3.Run tests:</p>
 <div class="fragment"><div class="line">make test</div>
-</div><!-- fragment --><p>4.Install:</p>
-<div class="fragment"><div class="line">sudo make install</div>
-</div><!-- fragment --><p>5.Generate documentation:</p>
+</div><!-- fragment --><p>4.Generate documentation:</p>
 <div class="fragment"><div class="line">make docs</div>
-</div><!-- fragment --><p>6.Serve documentation locally:</p>
+</div><!-- fragment --><p>5.Serve documentation locally:</p>
 <div class="fragment"><div class="line">make docs-serve</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md34"></a>
+</div><!-- fragment --><p>6.Run tests with pytest:</p>
+<div class="fragment"><div class="line">make pytest</div>
+</div><!-- fragment --><p>7.Run tests with pytest and coverage:</p>
+<div class="fragment"><div class="line">make pytest-coverage</div>
+</div><!-- fragment --><h1><a class="anchor" id="project-structure"></a>
 Project Structure</h1>
 <div class="fragment"><div class="line">.</div>
 <div class="line">├── .github/</div>
@@ -203,6 +214,9 @@ Project Structure</h1>
 <div class="line">│       └── docs.yml</div>
 <div class="line">├── docs/</div>
 <div class="line">│   └── html/</div>
+<div class="line">├── bindings/</div>
+<div class="line">│   └── python/</div>
+<div class="line">│       └── chunk_bindings.cpp</div>
 <div class="line">├── include/</div>
 <div class="line">│   ├── chunk.hpp</div>
 <div class="line">│   ├── config.hpp</div>
@@ -213,9 +227,11 @@ Project Structure</h1>
 <div class="line">│   ├── advanced_structures.hpp</div>
 <div class="line">│   ├── sophisticated_chunking.hpp</div>
 <div class="line">│   ├── data_structures.hpp</div>
+<div class="line">│   ├── neural_chunking.hpp</div>
 <div class="line">│   └── utils.hpp</div>
 <div class="line">├── src/</div>
 <div class="line">│   ├── main.cpp</div>
+<div class="line">│   ├── demo_neural_chunking.cpp</div>
 <div class="line">│   └── sophisticated_chunking_demo.cpp</div>
 <div class="line">├── tests/</div>
 <div class="line">│   ├── advanced_chunk_strategies_test.cpp</div>
@@ -226,15 +242,21 @@ Project Structure</h1>
 <div class="line">│   ├── data_structures_test.cpp</div>
 <div class="line">│   ├── parallel_chunk_test.cpp</div>
 <div class="line">│   ├── sub_chunk_strategies_test.cpp</div>
+<div class="line">│   ├── test_neuralnetwork.cpp</div>
 <div class="line">│   ├── test_main.cpp</div>
+<div class="line">│   ├── python/</div>
+<div class="line">│   │   └── py_bindings.py</div>
 <div class="line">│   └── utils_test.cpp</div>
+<div class="line">├── scripts/</div>
+<div class="line">│   └── pybindings_example.py</div>
 <div class="line">├── Makefile</div>
 <div class="line">├── CMakeLists.txt</div>
 <div class="line">├── Doxyfile</div>
+<div class="line">├── setup.py</div>
 <div class="line">├── README.md</div>
 <div class="line">├── BUILDING.md</div>
-<div class="line">└─ LICENSE</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md35"></a>
+<div class="line">└── LICENSE</div>
+</div><!-- fragment --><h1><a class="anchor" id="make-targets"></a>
 Make Targets</h1>
 <ul>
 <li><code>make</code>: Build the project</li>
@@ -251,10 +273,12 @@ Make Targets</h1>
 <li><code>make format-check</code>: Check source code formatting</li>
 <li><code>make install</code>: Install the project</li>
 <li><code>make uninstall</code>: Uninstall the project</li>
+<li><code>make pytest</code>: Run tests with pytest</li>
+<li><code>make pytest-coverage</code>: Run tests with pytest and coverage</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md36"></a>
+<h1><a class="anchor" id="advanced-features"></a>
 Advanced Features</h1>
-<h2><a class="anchor" id="autotoc_md37"></a>
+<h2><a class="anchor" id="sub-chunking-strategies"></a>
 Sub-Chunking Strategies</h2>
 <p>The library provides several sub-chunking strategies:</p>
 <ul>
@@ -266,7 +290,7 @@ Sub-Chunking Strategies</h2>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> strategy = std::make_shared&lt;VarianceStrategy&lt;double&gt;&gt;(5.0);</div>
 <div class="line">RecursiveSubChunkStrategy&lt;double&gt; recursive(strategy, 2, 2);</div>
 <div class="line"><span class="keyword">auto</span> sub_chunks = recursive.apply(data);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md38"></a>
+</div><!-- fragment --><h2><a class="anchor" id="building-and-testing-sophisticated-chunking"></a>
 Building and Testing Sophisticated Chunking</h2>
 <p>To build and run the sophisticated chunking examples:</p>
 <div class="fragment"><div class="line"># Build the project including sophisticated chunking demo</div>
@@ -280,14 +304,14 @@ Building and Testing Sophisticated Chunking</h2>
 <li><code><a class="el" href="sophisticated__chunking__demo_8cpp.html">src/sophisticated_chunking_demo.cpp</a></code>: Usage examples</li>
 <li><code>tests/chunking_methods_sophisticated_test.cpp</code>: Unit tests</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md39"></a>
+<h2><a class="anchor" id="running-sophisticated-chunking-tests"></a>
 Running Sophisticated Chunking Tests</h2>
 <p>To run only the sophisticated chunking tests:</p>
 <div class="fragment"><div class="line">cd build</div>
 <div class="line">ctest -R sophisticated</div>
 </div><!-- fragment --><p>Or using make:</p>
 <div class="fragment"><div class="line">make test-sophisticated</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md40"></a>
+</div><!-- fragment --><h2><a class="anchor" id="sophisticated-chunking-integration"></a>
 Sophisticated Chunking Integration</h2>
 <p>To use sophisticated chunking in your project:</p>
 <ol type="1">
@@ -295,18 +319,16 @@ Sophisticated Chunking Integration</h2>
 </ol>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="sophisticated__chunking_8hpp.html">sophisticated_chunking.hpp</a>&quot;</span></div>
 <div class="ttc" id="asophisticated__chunking_8hpp_html"><div class="ttname"><a href="sophisticated__chunking_8hpp.html">sophisticated_chunking.hpp</a></div></div>
-</div><!-- fragment --><ol type="1">
-<li>Link against the library in your CMakeLists.txt:</li>
-</ol>
+</div><!-- fragment --><p>2.Link against the library in your CMakeLists.txt:</p>
 <div class="fragment"><div class="line">target_link_libraries(your_target PRIVATE sophisticated_chunking)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md41"></a>
+</div><!-- fragment --><h2><a class="anchor" id="performance-considerations-for-sophisticated-chunking"></a>
 Performance Considerations for Sophisticated Chunking</h2>
 <ul>
 <li><b>Wavelet Chunking</b>: O(n * window_size) complexity. Choose smaller window sizes for better performance.</li>
 <li><b>Mutual Information</b>: O(n * context_size) complexity. Larger context sizes impact performance significantly.</li>
 <li><b>DTW Chunking</b>: O(n * window_size²) complexity. Window size has quadratic impact on performance.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md42"></a>
+<h2><a class="anchor" id="troubleshooting"></a>
 Troubleshooting</h2>
 <p>If you encounter GLIBCXX version errors when installing the Python bindings:</p>
 <ol type="1">
@@ -323,7 +345,7 @@ Troubleshooting</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Dec 23 2024 15:08:26 for Advanced Chunk Processing Library by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Tue Dec 24 2024 10:05:58 for Advanced Chunk Processing Library by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

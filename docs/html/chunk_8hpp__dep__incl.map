@@ -1,6 +1,6 @@
 <map id="chunk.hpp" name="chunk.hpp">
 <area shape="rect" id="Node000001" title="Template class for chunk&#45;based data processing." alt="" coords="332,5,421,31"/>
-<area shape="rect" id="Node000002" href="$benchmark_8cpp.html" title=" " alt="" coords="5,79,188,148"/>
+<area shape="rect" id="Node000002" href="$benchmark_8cpp.html" title="Implementation of benchmarking utilities." alt="" coords="5,79,188,148"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="330,37,189,84,188,79,329,32"/>
 <area shape="rect" id="Node000003" href="$main_8cpp.html" title="Demonstrates various chunking strategies and operations." alt="" coords="319,269,501,339"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="333,39,307,56,287,80,271,117,268,150,276,183,295,220,316,246,343,267,339,271,312,250,290,223,271,185,262,151,266,116,282,77,304,52,330,35"/>

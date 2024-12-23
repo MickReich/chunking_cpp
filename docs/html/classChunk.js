@@ -23,6 +23,7 @@ var classChunk =
     [ "size", "classChunk.html#a160459077243c9e5ff642f478277e161", null ],
     [ "sliding_window", "classChunk.html#aadb0e77dfcd8b7ab108b1556fdae21b2", null ],
     [ "update_chunks", "classChunk.html#a82af79dbdc92786a8073a50389d75738", null ],
+    [ "validate_input", "classChunk.html#a3a557ba7a07db5363d92edfe5a6fa5c4", null ],
     [ "validate_size", "classChunk.html#af09c384809b7238eb999b1d4d8fcfdd3", null ],
     [ "chunk_size", "classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f", null ],
     [ "chunks", "classChunk.html#a1574993946fe5b28c6d89ce4bf77857b", null ],

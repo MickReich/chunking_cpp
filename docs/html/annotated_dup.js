@@ -26,7 +26,6 @@ var annotated_dup =
       [ "ChunkMessageQueue", "classchunk__integrations_1_1ChunkMessageQueue.html", "classchunk__integrations_1_1ChunkMessageQueue" ],
       [ "DatabaseChunkStore", "classchunk__integrations_1_1DatabaseChunkStore.html", "classchunk__integrations_1_1DatabaseChunkStore" ],
       [ "DatabaseConnection", "classchunk__integrations_1_1DatabaseConnection.html", "classchunk__integrations_1_1DatabaseConnection" ],
-      [ "json", "structchunk__integrations_1_1json.html", "structchunk__integrations_1_1json" ],
       [ "MessageQueueConnection", "classchunk__integrations_1_1MessageQueueConnection.html", "classchunk__integrations_1_1MessageQueueConnection" ]
     ] ],
     [ "chunk_metrics", "namespacechunk__metrics.html", [
@@ -72,6 +71,7 @@ var annotated_dup =
     ] ],
     [ "neural_chunking", "namespaceneural__chunking.html", [
       [ "Layer", "classneural__chunking_1_1Layer.html", "classneural__chunking_1_1Layer" ],
+      [ "NeuralChunkConfig", "namespaceneural__chunking.html#structneural__chunking_1_1NeuralChunkConfig", "namespaceneural__chunking_structneural__chunking_1_1NeuralChunkConfig_dup" ],
       [ "NeuralChunking", "classneural__chunking_1_1NeuralChunking.html", "classneural__chunking_1_1NeuralChunking" ]
     ] ],
     [ "parallel_chunk", "namespaceparallel__chunk.html", [
