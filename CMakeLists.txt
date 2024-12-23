@@ -130,11 +130,17 @@ target_link_libraries(chunk_processor
 add_executable(chunk_processor_exe src/main.cpp)
 add_executable(benchmark_exe src/benchmark.cpp)
 add_executable(neural_chunking_demo src/demo_neural_chunking.cpp)
+add_executable(sophisticated_chunking_demo src/sophisticated_chunking_demo.cpp)
 
 # Link executables with the library
 target_link_libraries(chunk_processor_exe chunk_processor)
 target_link_libraries(benchmark_exe chunk_processor)
 target_link_libraries(neural_chunking_demo chunk_processor)
+target_link_libraries(sophisticated_chunking_demo 
+    PRIVATE
+    chunk_processor
+    sophisticated_chunking
+)
 
 # Enable testing
 enable_testing()
