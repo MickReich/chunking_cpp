@@ -356,6 +356,7 @@ target_link_libraries(chunking_cpp PRIVATE
     sophisticated_chunking
     neural_chunking
     chunk_benchmark
+    $<$<BOOL:${nlohmann_json_FOUND}>:nlohmann_json::nlohmann_json>
 )
 
 # Set Python module properties
@@ -446,4 +447,32 @@ endif()
 target_include_directories(chunking_cpp PRIVATE
     ${PYTHON_INCLUDE_DIRS}
     ${pybind11_INCLUDE_DIRS}
-) 
+)
+
+# Force using system libstdc++
+set_target_properties(chunking_cpp PROPERTIES
+    BUILD_WITH_INSTALL_RPATH TRUE
+    INSTALL_RPATH "/usr/lib/x86_64-linux-gnu"
+)
+
+# Check C++ compiler version and available features
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+    execute_process(
+        COMMAND ${CMAKE_CXX_COMPILER} -dumpversion
+        OUTPUT_VARIABLE GCC_VERSION
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+    
+    if(GCC_VERSION VERSION_LESS 9.1)
+        set(CMAKE_CXX_STANDARD 14)
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_GLIBCXX_USE_CXX11_ABI=0")
+        message(STATUS "Using C++14 due to older GCC version")
+    else()
+        set(CMAKE_CXX_STANDARD 17)
+    endif()
+endif()
+
+# Add rpath settings for better library resolution
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+list(APPEND CMAKE_INSTALL_RPATH "/usr/lib/x86_64-linux-gnu")
+  

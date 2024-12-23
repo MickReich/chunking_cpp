@@ -58,6 +58,9 @@ To build the Python bindings, you need to have Python and pybind11 installed:
 
 ```bash
 pip install pybind11[global]
+
+# If you're using conda, ensure you have the latest libstdc++:
+conda install -c conda-forge libstdcxx-ng
 ```
 
 On ubuntu/debian, you can install pybind11 using:
@@ -69,7 +72,7 @@ sudo apt-get install python3-pybind11
 You then can install the Python bindings using the setup.py script:
 
 ```bash
-python setup.py build
+pip install .
 ```
 
 ## Optional Dependencies
@@ -191,7 +194,7 @@ make docs-serve
 ├── Doxyfile
 ├── README.md
 ├── BUILDING.md
-└── LICENSE
+└─��� LICENSE
 ```
 
 ## Make Targets
@@ -284,3 +287,10 @@ target_link_libraries(your_target PRIVATE sophisticated_chunking)
 - **Wavelet Chunking**: O(n * window_size) complexity. Choose smaller window sizes for better performance.
 - **Mutual Information**: O(n * context_size) complexity. Larger context sizes impact performance significantly.
 - **DTW Chunking**: O(n * window_size²) complexity. Window size has quadratic impact on performance.
+
+### Troubleshooting
+
+If you encounter GLIBCXX version errors when installing the Python bindings:
+
+1. Update conda's libstdc++: `conda install -c conda-forge libstdcxx-ng`
+2. Or use system libraries: `export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH`
