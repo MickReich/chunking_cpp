@@ -1,14 +1,10 @@
-#include <gtest/gtest.h>
 #include "chunk_serialization.hpp"
+#include <gtest/gtest.h>
 
 class ChunkSerializerTest : public ::testing::Test {
 protected:
     void SetUp() override {
-        chunks = {
-            {1.0, 2.0, 3.0},
-            {4.0, 5.0},
-            {6.0, 7.0, 8.0}
-        };
+        chunks = {{1.0, 2.0, 3.0}, {4.0, 5.0}, {6.0, 7.0, 8.0}};
     }
 
     std::vector<std::vector<double>> chunks;
@@ -44,4 +40,4 @@ TEST_F(ChunkSerializerTest, MessagePackSerialization) {
 TEST_F(ChunkSerializerTest, EmptyChunks) {
     std::vector<std::vector<double>> empty_chunks;
     EXPECT_NO_THROW(serializer.to_json(empty_chunks));
-} 
+}

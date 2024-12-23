@@ -45,7 +45,7 @@ public:
         // Create output directory if it doesn't exist
         std::filesystem::create_directories(output_dir);
 
-        {   // Use RAII scope blocks for file handles
+        { // Use RAII scope blocks for file handles
             std::ofstream plot_data(output_dir + "/chunk_sizes.dat");
             if (!plot_data.is_open()) {
                 throw std::runtime_error("Failed to create chunk_sizes.dat");
@@ -54,28 +54,29 @@ public:
             // Write chunk sizes
             for (size_t i = 0; i < chunks.size(); ++i) {
                 if constexpr (std::is_same_v<T, std::vector<int>> ||
-                             std::is_same_v<T, std::vector<double>>) {
+                              std::is_same_v<T, std::vector<double>>) {
                     plot_data << i << " " << chunks[i].size() << "\n";
                 } else {
                     plot_data << i << " " << 1 << "\n"; // Single value counts as size 1
                 }
             }
-            plot_data.close();  // Explicitly close the file
+            plot_data.close(); // Explicitly close the file
         }
 
-        {   // Separate scope for gnuplot script
+        { // Separate scope for gnuplot script
             std::ofstream gnuplot_script(output_dir + "/plot_chunks.gnu");
             if (!gnuplot_script.is_open()) {
                 throw std::runtime_error("Failed to create plot_chunks.gnu");
             }
 
             gnuplot_script << "set terminal png\n"
-                          << "set output '" << output_dir << "/chunk_sizes.png'\n"
-                          << "set title 'Chunk Size Distribution'\n"
-                          << "set xlabel 'Chunk Index'\n"
-                          << "set ylabel 'Size'\n"
-                          << "plot '" << output_dir << "/chunk_sizes.dat' with lines title 'Chunk Sizes'\n";
-            gnuplot_script.close();  // Explicitly close the file
+                           << "set output '" << output_dir << "/chunk_sizes.png'\n"
+                           << "set title 'Chunk Size Distribution'\n"
+                           << "set xlabel 'Chunk Index'\n"
+                           << "set ylabel 'Size'\n"
+                           << "plot '" << output_dir
+                           << "/chunk_sizes.dat' with lines title 'Chunk Sizes'\n";
+            gnuplot_script.close(); // Explicitly close the file
         }
     }
 
