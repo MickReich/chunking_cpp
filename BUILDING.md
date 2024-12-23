@@ -86,7 +86,9 @@ pip install .
 These can be installed on ubuntu/debian with:
 
 ```bash
-sudo apt-get install libpq-dev libstdc++6 libmongoc-dev libkafka-dev librabbitmq-dev libjsoncpp-dev
+sudo apt-get install libpq-dev libstdc++6 libmongoc-dev \
+-     libkafka-dev librabbitmq-dev libjsoncpp-dev
++     librdkafka-dev librabbitmq-dev libjsoncpp-dev
 ```
 
 ## Building the Project
@@ -194,7 +196,7 @@ make docs-serve
 ├── Doxyfile
 ├── README.md
 ├── BUILDING.md
-└─��� LICENSE
+└─ LICENSE
 ```
 
 ## Make Targets
