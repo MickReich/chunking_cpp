@@ -14,7 +14,6 @@ set(PYBIND11_FINDPYTHON ON)
 find_package(pybind11 CONFIG REQUIRED)
 
 # Find Python and get site-packages directory
-find_package(Python COMPONENTS Interpreter Development REQUIRED)
 execute_process(
     COMMAND "${Python_EXECUTABLE}" -c "import site; print(site.getsitepackages()[0])"
     OUTPUT_VARIABLE Python_SITEARCH
@@ -365,16 +364,17 @@ set_target_properties(chunking_cpp PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/python/chunking_cpp
 )
 
+# Install Python module
+install(TARGETS chunking_cpp
+    LIBRARY DESTINATION ${Python_SITEARCH}/chunking_cpp
+    RUNTIME DESTINATION ${Python_SITEARCH}/chunking_cpp
+)
+
 # Create Python package structure
 add_custom_command(TARGET chunking_cpp POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/python/chunking_cpp
     COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_BINARY_DIR}/python/chunking_cpp/__init__.py
-)
-
-# Install Python module
-install(TARGETS chunking_cpp
-    LIBRARY DESTINATION ${Python_SITEARCH}
-    RUNTIME DESTINATION ${Python_SITEARCH}
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:chunking_cpp> ${CMAKE_BINARY_DIR}/python/chunking_cpp/
 )
 
 # Add Python tests directory
