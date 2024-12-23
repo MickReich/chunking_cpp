@@ -1,4 +1,4 @@
-template<typename T>
+template <typename T>
 class MultiCriteriaStrategy {
 private:
     mutable std::mutex strategy_mutex;
@@ -12,29 +12,30 @@ public:
     std::vector<std::vector<T>> apply(const std::vector<T>& data) const {
         std::lock_guard<std::mutex> lock(strategy_mutex);
         try {
-            if (data.empty()) return {};
+            if (data.empty())
+                return {};
 
             std::vector<std::vector<T>> result;
             std::vector<T> current_chunk;
-            
+
             for (size_t i = 0; i < data.size(); ++i) {
                 current_chunk.push_back(data[i]);
-                
+
                 // Check both criteria
                 bool size_criterion = current_chunk.size() >= min_size;
-                bool similarity_criterion = i > 0 && 
-                    std::abs(data[i] - data[i-1]) > similarity_threshold;
-                
+                bool similarity_criterion =
+                    i > 0 && std::abs(data[i] - data[i - 1]) > similarity_threshold;
+
                 if ((size_criterion || similarity_criterion) && !current_chunk.empty()) {
                     result.push_back(current_chunk);
                     current_chunk.clear();
                 }
             }
-            
+
             if (!current_chunk.empty()) {
                 result.push_back(current_chunk);
             }
-            
+
             return result;
         } catch (const std::exception& e) {
             throw std::runtime_error("Error in MultiCriteriaStrategy: " + std::string(e.what()));
@@ -53,4 +54,4 @@ public:
             throw std::invalid_argument("Input data size must be at least minimum chunk size");
         }
     }
-}; 
+};

@@ -78,9 +78,9 @@ TEST_F(AdvancedChunkStrategiesTest, MultiCriteriaWithSizeAndSimilarity) {
     try {
         std::vector<double> data = {1.0, 1.1, 1.2, 5.0, 5.1, 5.2, 2.0, 2.1};
         MultiCriteriaStrategy<double> strategy(3, 2.0);
-        
+
         auto chunks = strategy.apply(data);
-        
+
         ASSERT_GT(chunks.size(), 0);
         for (const auto& chunk : chunks) {
             ASSERT_FALSE(chunk.empty());

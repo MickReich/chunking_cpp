@@ -1,7 +1,7 @@
 #pragma once
-#include <vector>
 #include <chrono>
 #include <stdexcept>
+#include <vector>
 
 #ifdef HAVE_JSON
 #include <nlohmann/json.hpp>
@@ -12,15 +12,15 @@ template <typename T>
 class ChunkSerializer {
 public:
     void to_json(const std::vector<std::vector<T>>& chunks) {
-        #ifdef HAVE_JSON
+#ifdef HAVE_JSON
         // Implementation using nlohmann::json
         nlohmann::json j;
         j["chunks"] = chunks;
         j["timestamp"] = std::chrono::system_clock::now().time_since_epoch().count();
         return j.dump();
-        #else
+#else
         throw std::runtime_error("JSON serialization not available");
-        #endif
+#endif
     }
 
     void to_protobuf(const std::vector<std::vector<T>>& chunks) {

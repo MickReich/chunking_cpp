@@ -40,7 +40,7 @@ private:
     std::vector<std::vector<T>> make_chunks(size_t size) const {
         std::vector<std::vector<T>> result;
         result.reserve((data.size() + size - 1) / size);
-        
+
         for (size_t i = 0; i < data.size(); i += size) {
             size_t chunk_end = std::min(i + size, data.size());
             result.emplace_back(data.begin() + i, data.begin() + chunk_end);
@@ -59,36 +59,38 @@ private:
 
     // Helper function to safely create chunks based on similarity
     std::vector<std::vector<T>> create_similarity_chunks(double threshold) const {
-        if (data.empty()) return {};
-        
+        if (data.empty())
+            return {};
+
         std::vector<std::vector<T>> result;
         std::vector<T> current_chunk;
         current_chunk.push_back(data[0]);
-        
+
         for (size_t i = 1; i < data.size(); ++i) {
-            double sim = calculate_similarity(data[i], data[i-1]);
+            double sim = calculate_similarity(data[i], data[i - 1]);
             if (sim > threshold && !current_chunk.empty()) {
                 result.push_back(current_chunk);
                 current_chunk.clear();
             }
             current_chunk.push_back(data[i]);
         }
-        
+
         if (!current_chunk.empty()) {
             result.push_back(current_chunk);
         }
-        
+
         return result;
     }
 
     // Helper function for threshold-based chunking
     std::vector<std::vector<T>> create_threshold_chunks(T threshold) const {
-        if (data.empty()) return {};
-        
+        if (data.empty())
+            return {};
+
         std::vector<std::vector<T>> result;
         std::vector<T> current_chunk;
-        T running_sum = T{};  // Zero-initialize
-        
+        T running_sum = T{}; // Zero-initialize
+
         for (const T& value : data) {
             if (running_sum + value > threshold && !current_chunk.empty()) {
                 result.push_back(current_chunk);
@@ -98,11 +100,11 @@ private:
             current_chunk.push_back(value);
             running_sum += value;
         }
-        
+
         if (!current_chunk.empty()) {
             result.push_back(current_chunk);
         }
-        
+
         return result;
     }
 

@@ -97,7 +97,7 @@ TEST_F(NeuralChunkingTest, EmptyInput) {
 }
 
 TEST_F(NeuralChunkingTest, SmallInput) {
-    std::vector<int> small_data = {1};  // Smaller than window size
+    std::vector<int> small_data = {1}; // Smaller than window size
     auto chunks = chunker.chunk(small_data);
     EXPECT_EQ(chunks.size(), 1);
     EXPECT_FALSE(chunks[0].empty());

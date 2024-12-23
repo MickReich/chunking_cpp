@@ -27,7 +27,8 @@ PYBIND11_MODULE(chunking_cpp, m) {
         .def(py::init<size_t>())
         .def("add", static_cast<void (Chunk<double>::*)(const double&)>(&Chunk<double>::add),
              "Add a single element")
-        .def("add", static_cast<void (Chunk<double>::*)(const std::vector<double>&)>(&Chunk<double>::add),
+        .def("add",
+             static_cast<void (Chunk<double>::*)(const std::vector<double>&)>(&Chunk<double>::add),
              "Add multiple elements")
         .def("chunk_by_size",
              static_cast<std::vector<std::vector<double>> (Chunk<double>::*)(size_t)>(
@@ -36,10 +37,8 @@ PYBIND11_MODULE(chunking_cpp, m) {
         .def("chunk_by_threshold",
              static_cast<std::vector<std::vector<double>> (Chunk<double>::*)(double)>(
                  &Chunk<double>::chunk_by_threshold),
-             py::return_value_policy::copy,
-             py::call_guard<py::gil_scoped_release>(),
-             "Create chunks based on threshold value",
-             py::arg("threshold"));
+             py::return_value_policy::copy, py::call_guard<py::gil_scoped_release>(),
+             "Create chunks based on threshold value", py::arg("threshold"));
 
     // Neural Chunking
     py::class_<neural_chunking::NeuralChunking<double>>(m, "NeuralChunking")
