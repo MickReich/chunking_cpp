@@ -6,8 +6,8 @@ var searchData=
   ['entropystrategy_3',['entropystrategy',['../classchunk__strategies_1_1EntropyStrategy.html',1,'chunk_strategies::EntropyStrategy&lt; T &gt;'],['../classchunk__strategies_1_1EntropyStrategy.html#a1f667ff61e3ddaf1db623c584998a173',1,'chunk_strategies::EntropyStrategy::EntropyStrategy()'],['../classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4.html#abc8a7bcb710fd2d18c9b2170d376a9b0',1,'chunk_strategies::EntropyStrategy&lt; std::string &gt;::EntropyStrategy()']]],
   ['entropystrategy_3c_20std_3a_3astring_20_3e_4',['EntropyStrategy&lt; std::string &gt;',['../classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4.html',1,'chunk_strategies']]],
   ['euclidean_5fdistance_5',['euclidean_distance',['../classchunk__metrics_1_1ChunkQualityAnalyzer.html#a8f2639605a52262ec2180503c6e95621',1,'chunk_metrics::ChunkQualityAnalyzer']]],
-  ['example_20usage_6',['Example Usage',['../index.html#autotoc_md13',1,'']]],
-  ['examples_7',['examples',['../index.html#autotoc_md21',1,'Sophisticated Chunking Examples'],['../index.html#autotoc_md10',1,'Usage Examples']]],
+  ['example_20usage_6',['Example Usage',['../md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#autotoc_md13',1,'']]],
+  ['examples_7',['examples',['../md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#autotoc_md21',1,'Sophisticated Chunking Examples'],['../md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#autotoc_md10',1,'Usage Examples']]],
   ['export_5fto_5fgraphviz_8',['export_to_graphviz',['../classchunk__viz_1_1ChunkVisualizer.html#a3f2507eeafeb386e6e1958574d95cfd5',1,'chunk_viz::ChunkVisualizer']]],
   ['extract_5ffeatures_9',['extract_features',['../classneural__chunking_1_1NeuralChunking.html#a8cb2f820a0b14621d03b99ff193c844e',1,'neural_chunking::NeuralChunking']]]
 ];

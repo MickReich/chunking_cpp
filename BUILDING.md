@@ -276,7 +276,7 @@ To use sophisticated chunking in your project:
 #include "sophisticated_chunking.hpp"
 ```
 
-2. Link against the library in your CMakeLists.txt:
+2.Link against the library in your CMakeLists.txt:
 
 ```cmake
 target_link_libraries(your_target PRIVATE sophisticated_chunking)

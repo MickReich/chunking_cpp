@@ -25,33 +25,36 @@
 var NAVTREE =
 [
   [ "Advanced Chunk Processing Library", "index.html", [
-    [ "Overview", "index.html#autotoc_md1", null ],
-    [ "Features", "index.html#autotoc_md2", [
-      [ "Core Functionality", "index.html#autotoc_md3", null ],
-      [ "Advanced Chunking Strategies", "index.html#autotoc_md4", null ],
-      [ "Sub-Chunking Strategies", "index.html#autotoc_md5", null ],
-      [ "Data Structures", "index.html#autotoc_md6", null ],
-      [ "Analysis & Utilities", "index.html#autotoc_md7", null ]
-    ] ],
-    [ "Requirements", "index.html#autotoc_md8", null ],
-    [ "Quick Start", "index.html#autotoc_md9", null ],
-    [ "Usage Examples", "index.html#autotoc_md10", [
-      [ "Basic Usage", "index.html#autotoc_md11", null ],
-      [ "Advanced Features", "index.html#autotoc_md12", [
-        [ "Example Usage", "index.html#autotoc_md13", null ]
+    [ "Building Instructions", "index.html", "index" ],
+    [ "Advanced Chunk Processing Library", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html", [
+      [ "Overview", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#autotoc_md1", null ],
+      [ "Features", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#autotoc_md2", [
+        [ "Core Functionality", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#autotoc_md3", null ],
+        [ "Advanced Chunking Strategies", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#autotoc_md4", null ],
+        [ "Sub-Chunking Strategies", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#autotoc_md5", null ],
+        [ "Data Structures", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#autotoc_md6", null ],
+        [ "Analysis & Utilities", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#autotoc_md7", null ]
+      ] ],
+      [ "Requirements", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#autotoc_md8", null ],
+      [ "Quick Start", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#autotoc_md9", null ],
+      [ "Usage Examples", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#autotoc_md10", [
+        [ "Basic Usage", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#autotoc_md11", null ],
+        [ "Advanced Features", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#autotoc_md12", [
+          [ "Example Usage", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#autotoc_md13", null ]
+        ] ]
+      ] ],
+      [ "Documentation", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#autotoc_md14", [
+        [ "Performance Considerations", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#autotoc_md15", null ],
+        [ "Best Practices", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#autotoc_md16", null ]
+      ] ],
+      [ "Contributing", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#autotoc_md17", null ],
+      [ "License", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#autotoc_md18", null ],
+      [ "Citation", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#autotoc_md19", null ],
+      [ "Project Structure", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#autotoc_md20", [
+        [ "Sophisticated Chunking Examples", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#autotoc_md21", null ],
+        [ "Chunk Visualization", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#autotoc_md22", null ],
+        [ "Chunk Benchmarking", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#autotoc_md23", null ]
       ] ]
-    ] ],
-    [ "Documentation", "index.html#autotoc_md14", [
-      [ "Performance Considerations", "index.html#autotoc_md15", null ],
-      [ "Best Practices", "index.html#autotoc_md16", null ]
-    ] ],
-    [ "Contributing", "index.html#autotoc_md17", null ],
-    [ "License", "index.html#autotoc_md18", null ],
-    [ "Citation", "index.html#autotoc_md19", null ],
-    [ "Project Structure", "index.html#autotoc_md20", [
-      [ "Sophisticated Chunking Examples", "index.html#autotoc_md21", null ],
-      [ "Chunk Visualization", "index.html#autotoc_md22", null ],
-      [ "Chunk Benchmarking", "index.html#autotoc_md23", null ]
     ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
@@ -88,7 +91,7 @@ var NAVTREEINDEX =
 "classadvanced__structures_1_1FractalPatternsChunk.html#a8736011996663d025f8b4191bd2156b0",
 "classchunk__strategies_1_1ChunkStrategy.html",
 "classparallel__chunk_1_1ParallelChunkProcessor.html#a23bb62ea1badf84f9595eae0edd5dec5",
-"structchunk__resilience_1_1Checkpoint.html#a55cf1e8c1a4f028d2c521960b93137e6"
+"structchunk__integrations_1_1json.html#a3d0fa65efa0a94c0e78d28d62571ece2"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

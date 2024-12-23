@@ -1,260 +1,191 @@
-\chapter{Advanced Chunk Processing Library}
-\hypertarget{index}{}\label{index}\index{Advanced Chunk Processing Library@{Advanced Chunk Processing Library}}
-\label{index_md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README}%
-\Hypertarget{index_md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README}%
- \href{https://codecov.io/gh/JohnnyTeutonic/chunking_cpp/}{\texttt{ }} \href{https://github.com/JohnnyTeutonic/chunking_cpp/actions/workflows/ci.yml}{\texttt{ }}
-
-A modern C++17 library providing advanced data chunking and processing capabilities with a focus on performance and flexibility.\hypertarget{index_autotoc_md1}{}\doxysection{\texorpdfstring{Overview}{Overview}}\label{index_autotoc_md1}
-This library offers a comprehensive suite of tools for handling data in chunks, with features ranging from basic chunking to advanced parallel processing and compression techniques. It\textquotesingle{}s designed to be efficient, type-\/safe, and easy to integrate into existing C++ projects.\hypertarget{index_autotoc_md2}{}\doxysection{\texorpdfstring{Features}{Features}}\label{index_autotoc_md2}
-\hypertarget{index_autotoc_md3}{}\doxysubsection{\texorpdfstring{Core Functionality}{Core Functionality}}\label{index_autotoc_md3}
+\chapter{Building Instructions}
+\hypertarget{index}{}\label{index}\index{Building Instructions@{Building Instructions}}
+\label{index_md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2BUILDING}%
+\Hypertarget{index_md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2BUILDING}%
+ \hypertarget{index_autotoc_md25}{}\doxysection{\texorpdfstring{Prerequisites}{Prerequisites}}\label{index_autotoc_md25}
 
 \begin{DoxyItemize}
-\item Parallel chunk processing
-\item \doxylink{classChunk}{Chunk} compression (RLE, Delta)
-\item Basic chunking operations
-\item Sub-\/chunking strategies
-\end{DoxyItemize}\hypertarget{index_autotoc_md4}{}\doxysubsection{\texorpdfstring{Advanced Chunking Strategies}{Advanced Chunking Strategies}}\label{index_autotoc_md4}
-
-\begin{DoxyItemize}
-\item Overlapping chunks
-\item Predicate-\/based chunking
-\item Sum-\/based chunking
-\item Equal division chunking
-\item Sliding window chunking
-\item Statistical threshold-\/based chunking
-\item Similarity-\/based chunking
-\item Monotonicity-\/based chunking
-\item Padded fixed-\/size chunking
-\item Wavelet-\/based chunking
-\item Mutual Information-\/based chunking
-\item Dynamic Time Warping (DTW) based chunking
-\end{DoxyItemize}\hypertarget{index_autotoc_md5}{}\doxysubsection{\texorpdfstring{Sub-\/\+Chunking Strategies}{Sub-Chunking Strategies}}\label{index_autotoc_md5}
-
-\begin{DoxyItemize}
-\item Recursive sub-\/chunking
-\item Hierarchical sub-\/chunking
-\item Conditional sub-\/chunking
-\end{DoxyItemize}\hypertarget{index_autotoc_md6}{}\doxysubsection{\texorpdfstring{Data Structures}{Data Structures}}\label{index_autotoc_md6}
-
-\begin{DoxyItemize}
-\item Circular buffer
-\item Sliding window
-\item Priority queue
-\item \doxylink{classChunk}{Chunk} list
-\item Skip list
-\item B+ tree
-\item Chunk\+Deque
-\item Chunk\+Stack
-\item Chunk\+Treap
-\end{DoxyItemize}\hypertarget{index_autotoc_md7}{}\doxysubsection{\texorpdfstring{Analysis \& Utilities}{Analysis \& Utilities}}\label{index_autotoc_md7}
-
-\begin{DoxyItemize}
-\item Statistical operations
-\item Random chunk generation
-\item \doxylink{classChunk}{Chunk} manipulation utilities
-\item \doxylink{classChunk}{Chunk} visualization
-\item \doxylink{classChunk}{Chunk} benchmarking
-\end{DoxyItemize}\hypertarget{index_autotoc_md8}{}\doxysection{\texorpdfstring{Requirements}{Requirements}}\label{index_autotoc_md8}
-
-\begin{DoxyItemize}
-\item C++17 compatible compiler (GCC 7+, Clang 5+, MSVC 2017+)
-\item CMake 3.\+10 or higher
+\item C++17 compiler (g++ or clang++)
+\item Make
 \item Google Test (for testing)
 \item Doxygen (for documentation)
 \item Graphviz (for documentation graphs)
-\item Boost (for advanced structures)
-\end{DoxyItemize}\hypertarget{index_autotoc_md9}{}\doxysection{\texorpdfstring{Quick Start}{Quick Start}}\label{index_autotoc_md9}
+\item CMake 3.\+10 or higher
+\item pybind11 (for Python bindings)
+\end{DoxyItemize}\hypertarget{index_autotoc_md26}{}\doxysection{\texorpdfstring{Installing Dependencies}{Installing Dependencies}}\label{index_autotoc_md26}
+\hypertarget{index_autotoc_md27}{}\doxysubsection{\texorpdfstring{Ubuntu/\+Debian}{Ubuntu/Debian}}\label{index_autotoc_md27}
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\#\ Clone\ the\ repository}
-\DoxyCodeLine{git\ clone\ git@github.com:JohnnyTeutonic/chunking\_cpp.git}
-\DoxyCodeLine{cd\ chunking\_cpp}
+\DoxyCodeLine{\#\ Install\ build\ tools}
+\DoxyCodeLine{sudo\ apt-\/get\ update}
+\DoxyCodeLine{sudo\ apt-\/get\ install\ g++\ make\ cmake}
 \DoxyCodeLine{}
-\DoxyCodeLine{\#\ Configure\ the\ project\ (optionally\ with\ tests,\ documentation,\ sanitizers,\ and\ coverage\ enabled)}
-\DoxyCodeLine{chmod\ +x\ configure}
-\DoxyCodeLine{./configure\ \ -\/-\/enable-\/tests\ -\/-\/enable-\/docs\ -\/-\/enable-\/sanitizers\ -\/-\/enable-\/coverage}
+\DoxyCodeLine{\#\ Install\ Google\ Test}
+\DoxyCodeLine{sudo\ apt-\/get\ install\ libgtest-\/dev\ cmake}
+\DoxyCodeLine{cd\ /usr/src/gtest}
+\DoxyCodeLine{sudo\ cmake\ CMakeLists.txt}
+\DoxyCodeLine{sudo\ make}
+\DoxyCodeLine{sudo\ cp\ lib/*.a\ /usr/lib}
+\DoxyCodeLine{sudo\ ln\ -\/s\ /usr/src/gtest/include/gtest\ /usr/include/gtest}
 \DoxyCodeLine{}
-\DoxyCodeLine{\#\ Build\ the\ project}
-\DoxyCodeLine{make}
-\DoxyCodeLine{}
-\DoxyCodeLine{\#\ To\ execute\ the\ example\ program}
-\DoxyCodeLine{make\ run}
-\DoxyCodeLine{\#\ Run\ tests}
-\DoxyCodeLine{make\ test}
-\DoxyCodeLine{\#\ Uninstall\ if\ needed}
-\DoxyCodeLine{make\ uninstall}
+\DoxyCodeLine{\#\ Install\ documentation\ and\ tools}
+\DoxyCodeLine{sudo\ apt-\/get\ install\ doxygen\ gnuplot\ graphviz\ libboost-\/all-\/dev\ python3-\/pybind11}
 
 \end{DoxyCode}
-
-
-For detailed build instructions, dependencies, and configuration options, see BUILDING.md.\hypertarget{index_autotoc_md10}{}\doxysection{\texorpdfstring{Usage Examples}{Usage Examples}}\label{index_autotoc_md10}
-\hypertarget{index_autotoc_md11}{}\doxysubsection{\texorpdfstring{Basic Usage}{Basic Usage}}\label{index_autotoc_md11}
+\hypertarget{index_autotoc_md28}{}\doxysubsection{\texorpdfstring{mac\+OS}{macOS}}\label{index_autotoc_md28}
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{chunk_8hpp}{chunk.hpp}}"{}}}
+\DoxyCodeLine{\#\ Install\ build\ tools}
+\DoxyCodeLine{xcode-\/select\ -\/-\/install}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{//\ Create\ a\ chunk\ processor\ with\ size\ 2}}
-\DoxyCodeLine{\mbox{\hyperlink{classChunk}{Chunk<int>}}\ chunker(2);}
+\DoxyCodeLine{\#\ Install\ Google\ Test}
+\DoxyCodeLine{brew\ install\ googletest}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{//\ Add\ data}}
-\DoxyCodeLine{std::vector<int>\ data\ =\ \{1,\ 2,\ 3,\ 4,\ 5\};}
-\DoxyCodeLine{chunker.add(data);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{//\ Get\ fixed-\/size\ chunks}}
-\DoxyCodeLine{\textcolor{keyword}{auto}\ chunks\ =\ chunker.get\_chunks();\ \textcolor{comment}{//\ Returns:\ \{\{1,2\},\ \{3,4\},\ \{5\}\}}}
+\DoxyCodeLine{\#\ Install\ documentation\ tools}
+\DoxyCodeLine{brew\ install\ doxygen\ graphviz\ boost}
 
 \end{DoxyCode}
-\hypertarget{index_autotoc_md12}{}\doxysubsection{\texorpdfstring{Advanced Features}{Advanced Features}}\label{index_autotoc_md12}
-
-\begin{DoxyItemize}
-\item {\bfseries{Recursive Sub-\/chunking}}\+: Apply a strategy recursively to create hierarchical chunks
-\item {\bfseries{Hierarchical Sub-\/chunking}}\+: Apply different strategies at each level
-\item {\bfseries{Conditional Sub-\/chunking}}\+: Apply sub-\/chunking based on chunk properties
-\item {\bfseries{Parallel Processing}}\+: Process chunks in parallel using multiple threads
-\item {\bfseries{\doxylink{classChunk}{Chunk} Compression}}\+: Compress chunks using various algorithms
-\item {\bfseries{\doxylink{classChunk}{Chunk} Manipulation}}\+: Add, remove, and modify chunks
-\item {\bfseries{\doxylink{classChunk}{Chunk} Analysis}}\+: Perform statistical analysis on chunks
-\item {\bfseries{\doxylink{classChunk}{Chunk} Randomization}}\+: Randomize chunks
-\item {\bfseries{Overlapping Chunks}}\+: Create chunks that overlap
-\item {\bfseries{Predictive Chunking}}\+: Create chunks based on a predictive model
-\item {\bfseries{Sum-\/based Chunking}}\+: Create chunks based on the sum of the elements
-\item {\bfseries{Equal Division Chunking}}\+: Create chunks based on the equal division of the elements
-\item {\bfseries{Sliding Window Chunking}}\+: Create chunks based on a sliding window
-\item {\bfseries{Statistical Threshold-\/based Chunking}}\+: Create chunks based on a statistical threshold
-\item {\bfseries{Similarity-\/based Chunking}}\+: Create chunks based on similarity
-\item {\bfseries{Monotonicity-\/based Chunking}}\+: Create chunks based on monotonicity
-\item {\bfseries{Padded Fixed-\/size Chunking}}\+: Create chunks based on a padded fixed-\/size
-\item {\bfseries{Chunk\+Deque}}\+: A deque-\/based chunk structure for double-\/ended operations
-\item {\bfseries{Chunk\+Stack}}\+: A stack-\/based chunk structure for LIFO operations
-\item {\bfseries{Chunk\+Treap}}\+: A treap-\/based chunk structure for efficient searching and manipulation
-\item {\bfseries{Semantic Chunking}}\+: Create chunks based on semantic/cosine similarity
-\item {\bfseries{Wavelet-\/based Chunking}}\+: Create chunks based on wavelet coefficients
-\item {\bfseries{Mutual Information-\/based Chunking}}\+: Create chunks based on mutual information
-\item {\bfseries{Dynamic Time Warping (DTW) based Chunking}}\+: Create chunks based on dynamic time warping
-\end{DoxyItemize}\hypertarget{index_autotoc_md13}{}\doxysubsubsection{\texorpdfstring{Example Usage}{Example Usage}}\label{index_autotoc_md13}
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{chunk_8hpp}{chunk.hpp}}"{}}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{chunk__strategies_8hpp}{chunk\_strategies.hpp}}"{}}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{sub__chunk__strategies_8hpp}{sub\_chunk\_strategies.hpp}}"{}}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <iostream>}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <vector>}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{advanced__structures_8hpp}{advanced\_structures.hpp}}"{}}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keyword}{using\ namespace\ }\mbox{\hyperlink{namespacechunk__strategies}{chunk\_strategies}};}
-\DoxyCodeLine{\textcolor{comment}{//\ Sub-\/chunking\ example}}
-\DoxyCodeLine{\textcolor{keyword}{auto}\ variance\_strategy\ =\ std::make\_shared<VarianceStrategy<double>>(5.0);}
-\DoxyCodeLine{\mbox{\hyperlink{classchunk__strategies_1_1RecursiveSubChunkStrategy}{RecursiveSubChunkStrategy<double>}}\ recursive\_strategy(variance\_strategy,\ 2,\ 2);}
-\DoxyCodeLine{\textcolor{keyword}{auto}\ sub\_chunks\ =\ recursive\_strategy.apply(data);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{//\ Predicate-\/based\ chunking}}
-\DoxyCodeLine{\textcolor{keyword}{auto}\ even\_chunks\ =\ chunker.chunk\_by\_predicate([](\textcolor{keywordtype}{int}\ x)\ \{\ \textcolor{keywordflow}{return}\ x\ \%\ 2\ ==\ 0;\ \});}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{//\ Similarity-\/based\ chunking}}
-\DoxyCodeLine{\textcolor{keyword}{auto}\ similar\_chunks\ =\ chunker.chunk\_by\_similarity(3);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{//\ Parallel\ processing}}
-\DoxyCodeLine{ParallelChunkProcessor<int>\ parallel\_chunker(4);\ \textcolor{comment}{//\ 4\ threads}}
-\DoxyCodeLine{parallel\_chunker.process\_chunks(chunks,\ [](\textcolor{keywordtype}{int}\ x)\ \{\ \textcolor{keywordflow}{return}\ x\ *\ 2;\ \});}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{//\ Recursive\ sub-\/chunking}}
-\DoxyCodeLine{\textcolor{keyword}{auto}\ variance\_strategy\ =\ std::make\_shared<VarianceStrategy<double>>(3.0);}
-\DoxyCodeLine{\mbox{\hyperlink{classchunk__strategies_1_1RecursiveSubChunkStrategy}{RecursiveSubChunkStrategy<double>}}\ recursive\_strategy(variance\_strategy,\ 2,\ 2);}
-\DoxyCodeLine{\textcolor{keyword}{auto}\ recursive\_result\ =\ recursive\_strategy.apply(data);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{//\ Hierarchical\ sub-\/chunking}}
-\DoxyCodeLine{std::vector<std::shared\_ptr<ChunkStrategy<double>>>\ strategies\ =\ \{}
-\DoxyCodeLine{\ \ \ \ std::make\_shared<VarianceStrategy<double>>(5.0),}
-\DoxyCodeLine{\ \ \ \ std::make\_shared<\mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy}{EntropyStrategy<double>}}>(1.0)}
-\DoxyCodeLine{\};}
-\DoxyCodeLine{\mbox{\hyperlink{classchunk__strategies_1_1HierarchicalSubChunkStrategy}{HierarchicalSubChunkStrategy<double>}}\ hierarchical\_strategy(strategies,\ 2);}
-\DoxyCodeLine{\textcolor{keyword}{auto}\ hierarchical\_result\ =\ hierarchical\_strategy.apply(data);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{//\ Conditional\ sub-\/chunking}}
-\DoxyCodeLine{\textcolor{keyword}{auto}\ condition\ =\ [](\textcolor{keyword}{const}\ std::vector<double>\&\ chunk)\ \{}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ mean\ =\ std::accumulate(chunk.begin(),\ chunk.end(),\ 0.0)\ /\ chunk.size();}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ variance\ =\ 0.0;}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ val\ :\ chunk)\ \{}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ variance\ +=\ (val\ -\/\ mean)\ *\ (val\ -\/\ mean);}
-\DoxyCodeLine{\ \ \ \ \}}
-\DoxyCodeLine{\ \ \ \ variance\ /=\ chunk.size();}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ variance\ >\ 50.0;}
-\DoxyCodeLine{\ \ \};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy}{ConditionalSubChunkStrategy<double>}}\ conditional\_strategy(variance\_strategy,\ condition,\ 2);}
-\DoxyCodeLine{\textcolor{keyword}{auto}\ conditional\_result\ =\ conditional\_strategy.apply(data);}
-\DoxyCodeLine{\textcolor{comment}{//\ ChunkTreap\ example}}
-\DoxyCodeLine{ChunkTreap<int>\ chunk\_treap;}
-\DoxyCodeLine{chunk\_treap.insert(5);}
-\DoxyCodeLine{chunk\_treap.insert(3);}
-\DoxyCodeLine{chunk\_treap.insert(8);}
-\DoxyCodeLine{chunk\_treap.search(5);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{//\ ChunkDeque\ example}}
-\DoxyCodeLine{ChunkDeque<int>\ chunk\_deque;}
-\DoxyCodeLine{chunk\_deque.push\_back(1);}
-\DoxyCodeLine{chunk\_deque.push\_front(0);}
-\DoxyCodeLine{chunk\_deque.pop\_back();}
-\DoxyCodeLine{chunk\_deque.pop\_front();}
-
-\end{DoxyCode}
-
-
-See {\ttfamily \doxylink{main_8cpp}{src/main.\+cpp}} for more comprehensive examples.\hypertarget{index_autotoc_md14}{}\doxysection{\texorpdfstring{Documentation}{Documentation}}\label{index_autotoc_md14}
-The library is extensively documented using Doxygen. You can\+:
-
+\hypertarget{index_autotoc_md29}{}\doxysubsection{\texorpdfstring{Windows}{Windows}}\label{index_autotoc_md29}
 
 \begin{DoxyEnumerate}
-\item View the online documentation at \href{https://johnnyteutonic.github.io/chunking_cpp/}{\texttt{ Git\+Hub Pages}}
-\item Generate documentation locally\+:
+\item Install Min\+GW or Visual Studio
+\item Install vcpkg
+\item Install Google Test through vcpkg\+:
 \end{DoxyEnumerate}
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{make\ docs}
-\DoxyCodeLine{make\ docs-\/serve}
+\DoxyCodeLine{vcpkg\ install\ gtest:x64-\/windows}
 
 \end{DoxyCode}
-\hypertarget{index_autotoc_md15}{}\doxysubsection{\texorpdfstring{Performance Considerations}{Performance Considerations}}\label{index_autotoc_md15}
-
-\begin{DoxyItemize}
-\item {\bfseries{\doxylink{classChunk}{Chunk} Size}}\+: Choose an appropriate chunk size based on your data and processing requirements. Larger chunks may reduce overhead but increase memory usage.
-\item {\bfseries{Parallel Processing}}\+: Utilize the {\ttfamily Parallel\+Chunk\+Processor} for operations that can be parallelized to improve performance on multi-\/core systems.
-\item {\bfseries{Memory Management}}\+: Be mindful of memory usage, especially when dealing with large datasets. Use efficient data structures like {\ttfamily \doxylink{classCircularBuffer}{Circular\+Buffer}} to manage memory effectively.
-\item {\bfseries{Algorithm Complexity}}\+: Consider the complexity of the chunking strategies and operations you use. Some strategies may have higher computational costs.
-\end{DoxyItemize}\hypertarget{index_autotoc_md16}{}\doxysubsection{\texorpdfstring{Best Practices}{Best Practices}}\label{index_autotoc_md16}
-
-\begin{DoxyItemize}
-\item {\bfseries{Use Smart Pointers}}\+: Use {\ttfamily std\+::shared\+\_\+ptr} and {\ttfamily std\+::unique\+\_\+ptr} to manage dynamic memory and avoid memory leaks.
-\item {\bfseries{Leverage STL Algorithms}}\+: Utilize standard library algorithms for common operations like sorting and accumulating to improve code readability and performance.
-\item {\bfseries{Modular Design}}\+: Keep your code modular by separating chunking logic from data processing logic. This makes it easier to test and maintain.
-\item {\bfseries{Testing}}\+: Write comprehensive tests for your chunking strategies and operations to ensure correctness and reliability.
-\item {\bfseries{Documentation}}\+: Document your code and strategies using Doxygen-\/style comments to make it easier for others to understand and use your library.
-\end{DoxyItemize}\hypertarget{index_autotoc_md17}{}\doxysection{\texorpdfstring{Contributing}{Contributing}}\label{index_autotoc_md17}
-Contributions are welcome! Please\+:
-
-
-\begin{DoxyEnumerate}
-\item Fork the repository
-\item Create a feature branch
-\item Write tests for new functionality
-\item Ensure all tests pass
-\item Submit a pull request
-\end{DoxyEnumerate}\hypertarget{index_autotoc_md18}{}\doxysection{\texorpdfstring{License}{License}}\label{index_autotoc_md18}
-This project is licensed under the GNU General Public License v2.\+0 -\/ see the \mbox{[}LICENSE\mbox{]}(LICENSE) file for details.\hypertarget{index_autotoc_md19}{}\doxysection{\texorpdfstring{Citation}{Citation}}\label{index_autotoc_md19}
-If you use this library in your research, please cite\+:
+\hypertarget{index_autotoc_md30}{}\doxysection{\texorpdfstring{Python Bindings}{Python Bindings}}\label{index_autotoc_md30}
+To build the Python bindings, you need to have Python and pybind11 installed\+:
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{@software\{chunking\_cpp,}
-\DoxyCodeLine{\ \ author\ =\ \{Reich,\ Jonathan\},}
-\DoxyCodeLine{\ \ title\ =\ \{Advanced\ Chunk\ Processing\ Library\},}
-\DoxyCodeLine{\ \ year\ =\ \{2024\},}
-\DoxyCodeLine{\ \ url\ =\ \{https://github.com/JohnnyTeutonic/chunking\_cpp\}}
-\DoxyCodeLine{\}}
+\DoxyCodeLine{\#\ Method\ 1:\ Using\ pip\ (recommended)}
+\DoxyCodeLine{pip\ install\ pybind11[global]}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Method\ 2:\ Using\ system\ package\ manager\ (Ubuntu/Debian)}
+\DoxyCodeLine{sudo\ apt-\/get\ install\ python3-\/dev\ python3-\/pybind11}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ If\ you're\ using\ conda,\ ensure\ you\ have\ the\ latest\ libstdc++:}
+\DoxyCodeLine{conda\ install\ -\/c\ conda-\/forge\ libstdcxx-\/ng}
 
 \end{DoxyCode}
-\hypertarget{index_autotoc_md20}{}\doxysection{\texorpdfstring{Project Structure}{Project Structure}}\label{index_autotoc_md20}
+
+
+On ubuntu/debian, you can install pybind11 using\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{sudo\ apt-\/get\ install\ python3-\/pybind11}
+
+\end{DoxyCode}
+
+
+You then can install the Python bindings using the setup.\+py script\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{pip\ install\ .}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md31}{}\doxysection{\texorpdfstring{Optional Dependencies}{Optional Dependencies}}\label{index_autotoc_md31}
+
+\begin{DoxyItemize}
+\item Postgre\+SQL
+\item Mongo\+DB
+\item Kafka
+\item Rabbit\+MQ
+\item JSON
+\end{DoxyItemize}
+
+These can be installed on ubuntu/debian with\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{sudo\ apt-\/get\ install\ libpq-\/dev\ libstdc++6\ libmongoc-\/dev\ \(\backslash\)}
+\DoxyCodeLine{-\/\ \ \ \ \ librdkafka-\/dev\ librabbitmq-\/dev\ libjsoncpp-\/dev}
+\DoxyCodeLine{+\ \ \ \ \ librdkafka-\/dev\ librdkafka++1\ librabbitmq-\/dev\ libjsoncpp-\/dev}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md32}{}\doxysection{\texorpdfstring{Configuration Options}{Configuration Options}}\label{index_autotoc_md32}
+The project uses CMake for configuration. Available options\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{-\/DENABLE\_COVERAGE=ON\ \ \ \ \#\ Enable\ code\ coverage\ reporting}
+\DoxyCodeLine{-\/DENABLE\_SANITIZERS=ON\ \ \#\ Enable\ address\ and\ undefined\ behavior\ sanitizers}
+\DoxyCodeLine{-\/DBUILD\_TESTING=ON\ \ \ \ \ \ \#\ Enable\ building\ tests}
+
+\end{DoxyCode}
+
+
+Example configuration\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cmake\ -\/DENABLE\_COVERAGE=ON\ -\/DENABLE\_SANITIZERS=ON\ -\/DBUILD\_TESTING=ON\ ..}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md33}{}\doxysection{\texorpdfstring{Building the Project}{Building the Project}}\label{index_autotoc_md33}
+1.\+Clone the repository\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git\ clone\ git@github.com:JohnnyTeutonic/chunking\_cpp.git}
+\DoxyCodeLine{cd\ chunking\_cpp}
+\DoxyCodeLine{mkdir\ build\ \&\&\ cd\ build}
+
+\end{DoxyCode}
+
+
+2.\+Configure and build\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cmake\ ..}
+\DoxyCodeLine{make}
+
+\end{DoxyCode}
+
+
+3.\+Run tests\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make\ test}
+
+\end{DoxyCode}
+
+
+4.\+Install\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{sudo\ make\ install}
+
+\end{DoxyCode}
+
+
+5.\+Generate documentation\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make\ docs}
+
+\end{DoxyCode}
+
+
+6.\+Serve documentation locally\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make\ docs-\/serve}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md34}{}\doxysection{\texorpdfstring{Project Structure}{Project Structure}}\label{index_autotoc_md34}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{.}
@@ -294,88 +225,132 @@ If you use this library in your research, please cite\+:
 \DoxyCodeLine{├──\ Doxyfile}
 \DoxyCodeLine{├──\ README.md}
 \DoxyCodeLine{├──\ BUILDING.md}
-\DoxyCodeLine{└──\ LICENSE}
+\DoxyCodeLine{└─\ LICENSE}
 
 \end{DoxyCode}
-\hypertarget{index_autotoc_md21}{}\doxysubsection{\texorpdfstring{Sophisticated Chunking Examples}{Sophisticated Chunking Examples}}\label{index_autotoc_md21}
-For detailed examples of the sophisticated chunking algorithms, see {\ttfamily \doxylink{sophisticated__chunking__demo_8cpp}{src/sophisticated\+\_\+chunking\+\_\+demo.\+cpp}}\+:
+\hypertarget{index_autotoc_md35}{}\doxysection{\texorpdfstring{Make Targets}{Make Targets}}\label{index_autotoc_md35}
+
+\begin{DoxyItemize}
+\item {\ttfamily make}\+: Build the project
+\item {\ttfamily make run}\+: Run the main program
+\item {\ttfamily make run-\/sophisticated}\+: Run the sophisticated chunking demo
+\item {\ttfamily make test}\+: Run all tests
+\item {\ttfamily make test-\/\texorpdfstring{$<$}{<}name\texorpdfstring{$>$}{>}}\+: Run specific test suite
+\item {\ttfamily make docs}\+: Generate documentation
+\item {\ttfamily make docs-\/serve}\+: Serve documentation locally
+\item {\ttfamily make docs-\/clean}\+: Clean documentation build artifacts
+\item {\ttfamily make docs-\/stop}\+: Stop documentation server
+\item {\ttfamily make clean}\+: Clean build artifacts
+\item {\ttfamily make format}\+: Format source code
+\item {\ttfamily make format-\/check}\+: Check source code formatting
+\item {\ttfamily make install}\+: Install the project
+\item {\ttfamily make uninstall}\+: Uninstall the project
+\end{DoxyItemize}\hypertarget{index_autotoc_md36}{}\doxysection{\texorpdfstring{Advanced Features}{Advanced Features}}\label{index_autotoc_md36}
+\hypertarget{index_autotoc_md37}{}\doxysubsection{\texorpdfstring{Sub-\/\+Chunking Strategies}{Sub-Chunking Strategies}}\label{index_autotoc_md37}
+The library provides several sub-\/chunking strategies\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Recursive Sub-\/chunking}}\+: Apply a strategy recursively to create hierarchical chunks
+\item {\bfseries{Hierarchical Sub-\/chunking}}\+: Apply different strategies at each level
+\item {\bfseries{Conditional Sub-\/chunking}}\+: Apply sub-\/chunking based on chunk properties
+\end{DoxyItemize}
+
+Example\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto}\ strategy\ =\ std::make\_shared<VarianceStrategy<double>>(5.0);}
+\DoxyCodeLine{RecursiveSubChunkStrategy<double>\ recursive(strategy,\ 2,\ 2);}
+\DoxyCodeLine{\textcolor{keyword}{auto}\ sub\_chunks\ =\ recursive.apply(data);}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md38}{}\doxysubsection{\texorpdfstring{Building and Testing Sophisticated Chunking}{Building and Testing Sophisticated Chunking}}\label{index_autotoc_md38}
+To build and run the sophisticated chunking examples\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Build\ the\ project\ including\ sophisticated\ chunking\ demo}
+\DoxyCodeLine{make}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Run\ the\ sophisticated\ chunking\ demo}
+\DoxyCodeLine{./build/bin/sophisticated\_chunking\_demo}
+
+\end{DoxyCode}
+
+
+The sophisticated chunking features are implemented in\+:
+
+
+\begin{DoxyItemize}
+\item {\ttfamily \doxylink{sophisticated__chunking_8hpp}{include/sophisticated\+\_\+chunking.\+hpp}}\+: Core implementations
+\item {\ttfamily \doxylink{sophisticated__chunking__demo_8cpp}{src/sophisticated\+\_\+chunking\+\_\+demo.\+cpp}}\+: Usage examples
+\item {\ttfamily tests/chunking\+\_\+methods\+\_\+sophisticated\+\_\+test.\+cpp}\+: Unit tests
+\end{DoxyItemize}\hypertarget{index_autotoc_md39}{}\doxysubsection{\texorpdfstring{Running Sophisticated Chunking Tests}{Running Sophisticated Chunking Tests}}\label{index_autotoc_md39}
+To run only the sophisticated chunking tests\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ build}
+\DoxyCodeLine{ctest\ -\/R\ sophisticated}
+
+\end{DoxyCode}
+
+
+Or using make\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make\ test-\/sophisticated}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md40}{}\doxysubsection{\texorpdfstring{Sophisticated Chunking Integration}{Sophisticated Chunking Integration}}\label{index_autotoc_md40}
+To use sophisticated chunking in your project\+:
+
+
+\begin{DoxyEnumerate}
+\item Include the header\+:
+\end{DoxyEnumerate}
 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{sophisticated__chunking_8hpp}{sophisticated\_chunking.hpp}}"{}}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{//\ Example\ from\ sophisticated\_chunking\_demo.cpp}}
-\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{benchmark_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()\ \{}
-\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Wavelet-\/based\ chunking\ example}}
-\DoxyCodeLine{\ \ \ \ std::vector<double>\ signal\_data\ =\ \{1.0,\ 1.2,\ 1.1,\ 5.0,\ 5.2,\ 5.1,\ 2.0,\ 2.1\};}
-\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classsophisticated__chunking_1_1WaveletChunking}{sophisticated\_chunking::WaveletChunking<double>}}\ wavelet\_chunker(8,\ 0.5);}
-\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ wavelet\_chunks\ =\ wavelet\_chunker.chunk(signal\_data);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Mutual\ Information\ chunking\ example}}
-\DoxyCodeLine{\ \ \ \ std::vector<int>\ pattern\_data\ =\ \{1,\ 2,\ 3,\ 10,\ 11,\ 12,\ 4,\ 5,\ 6\};}
-\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classsophisticated__chunking_1_1MutualInformationChunking}{sophisticated\_chunking::MutualInformationChunking<int>}}\ mi\_chunker(5,\ 0.3);}
-\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ mi\_chunks\ =\ mi\_chunker.chunk(pattern\_data);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ DTW\ chunking\ example}}
-\DoxyCodeLine{\ \ \ \ std::vector<float>\ time\_series\ =\ \{1.0f,\ 1.1f,\ 1.2f,\ 5.0f,\ 5.1f,\ 5.2f\};}
-\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classsophisticated__chunking_1_1DTWChunking}{sophisticated\_chunking::DTWChunking<float>}}\ dtw\_chunker(10,\ 2.0);}
-\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ dtw\_chunks\ =\ dtw\_chunker.chunk(time\_series);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ 0;}
-\DoxyCodeLine{\}}
-
-\end{DoxyCode}
-\hypertarget{index_autotoc_md22}{}\doxysubsection{\texorpdfstring{Chunk Visualization}{Chunk Visualization}}\label{index_autotoc_md22}
-For detailed examples of the chunk visualization, see {\ttfamily src/chunk\+\_\+visualization\+\_\+demo.\+cpp}\+:
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{chunk__visualization_8hpp}{chunk\_visualization.hpp}}"{}}}
 
 \end{DoxyCode}
 
 
-To run the chunk visualization demo, use\+:
+
+\begin{DoxyEnumerate}
+\item Link against the library in your CMake\+Lists.\+txt\+:
+\end{DoxyEnumerate}
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{make\ run-\/visualization}
+\DoxyCodeLine{target\_link\_libraries(your\_target\ PRIVATE\ sophisticated\_chunking)}
 
 \end{DoxyCode}
+\hypertarget{index_autotoc_md41}{}\doxysubsection{\texorpdfstring{Performance Considerations for Sophisticated Chunking}{Performance Considerations for Sophisticated Chunking}}\label{index_autotoc_md41}
+
+\begin{DoxyItemize}
+\item {\bfseries{Wavelet Chunking}}\+: O(n \texorpdfstring{$\ast$}{*} window\+\_\+size) complexity. Choose smaller window sizes for better performance.
+\item {\bfseries{Mutual Information}}\+: O(n \texorpdfstring{$\ast$}{*} context\+\_\+size) complexity. Larger context sizes impact performance significantly.
+\item {\bfseries{DTW Chunking}}\+: O(n \texorpdfstring{$\ast$}{*} window\+\_\+size²) complexity. Window size has quadratic impact on performance.
+\end{DoxyItemize}\hypertarget{index_autotoc_md42}{}\doxysubsection{\texorpdfstring{Troubleshooting}{Troubleshooting}}\label{index_autotoc_md42}
+If you encounter GLIBCXX version errors when installing the Python bindings\+:
 
 
-To use the visualisation as a standalone tool with gnuplot run\+:
+\begin{DoxyEnumerate}
+\item Update conda\textquotesingle{}s libstdc++\+: {\ttfamily conda install -\/c conda-\/forge libstdcxx-\/ng}
+\item Or use system libraries\+: {\ttfamily export LD\+\_\+\+LIBRARY\+\_\+\+PATH=/usr/lib/x86\+\_\+64-\/linux-\/gnu\+:\$LD\+\_\+\+LIBRARY\+\_\+\+PATH}
+\end{DoxyEnumerate}
 
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{gnuplot\ visualization/plot\_chunks.gnu}
-
-\end{DoxyCode}
-
-
-Or with graphviz\+:
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{dot\ -\/Tpng\ visualization/chunks.dot\ -\/o\ visualization/chunks.png}
-
-\end{DoxyCode}
-\hypertarget{index_autotoc_md23}{}\doxysubsection{\texorpdfstring{Chunk Benchmarking}{Chunk Benchmarking}}\label{index_autotoc_md23}
-To compile and run the benchmark demo, use\+:
+The library version can be accessed through the following macros\+:
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{make\ benchmark}
-
-\end{DoxyCode}
-
-
-Or to use it as a standalone tool\+:
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{chunk__benchmark_8hpp}{chunk\_benchmark.hpp}}"{}}}
-\DoxyCodeLine{...}
+\DoxyCodeLine{CHUNKING\_VERSION\_MAJOR}
+\DoxyCodeLine{CHUNKING\_VERSION\_MINOR}
+\DoxyCodeLine{CHUNKING\_VERSION\_PATCH}
 
 \end{DoxyCode}
  

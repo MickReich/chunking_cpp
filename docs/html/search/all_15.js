@@ -6,6 +6,6 @@ var searchData=
   ['variance_3',['variance',['../classchunk__metrics_1_1ChunkQualityAnalyzer.html#a0d0ea511164e3e77d2779a1287dcc85a',1,'chunk_metrics::ChunkQualityAnalyzer::SizeMetrics']]],
   ['variancestrategy_4',['variancestrategy',['../classchunk__strategies_1_1VarianceStrategy.html',1,'chunk_strategies::VarianceStrategy&lt; T &gt;'],['../classchunk__strategies_1_1VarianceStrategy.html#a87c90894b351203403bd32aa4ecd07a3',1,'chunk_strategies::VarianceStrategy::VarianceStrategy()']]],
   ['verify_5fcheckpoint_5',['verify_checkpoint',['../classchunk__resilience_1_1ResilientChunker.html#a041f7ce0b71833e74ff03404d100273f',1,'chunk_resilience::ResilientChunker']]],
-  ['visualization_6',['Chunk Visualization',['../index.html#autotoc_md22',1,'']]],
+  ['visualization_6',['Chunk Visualization',['../md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#autotoc_md22',1,'']]],
   ['visualize_5fboundaries_7',['visualize_boundaries',['../classchunk__viz_1_1ChunkVisualizer.html#a8f56c0c10b440271e11d9356fa3a110c',1,'chunk_viz::ChunkVisualizer']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Advanced Chunk Processing Library: Advanced Chunk Processing Library</title>
+<title>Advanced Chunk Processing Library: Building Instructions</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,266 +90,111 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Advanced <a class="el" href="classChunk.html" title="A template class for managing and processing data in chunks.">Chunk</a> Processing Library </div></div>
+  <div class="headertitle"><div class="title">Building Instructions </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README"></a> <a href="https://codecov.io/gh/JohnnyTeutonic/chunking_cpp/"><img src="https://codecov.io/gh/JohnnyTeutonic/chunking_cpp/branch/main/graph/badge.svg" alt="codecov" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/JohnnyTeutonic/chunking_cpp/actions/workflows/ci.yml"><img src="https://github.com/JohnnyTeutonic/chunking_cpp/actions/workflows/ci.yml/badge.svg" alt="Tests" style="pointer-events: none;" class="inline"/></a></p>
-<p>A modern C++17 library providing advanced data chunking and processing capabilities with a focus on performance and flexibility.</p>
-<h1><a class="anchor" id="autotoc_md1"></a>
-Overview</h1>
-<p>This library offers a comprehensive suite of tools for handling data in chunks, with features ranging from basic chunking to advanced parallel processing and compression techniques. It's designed to be efficient, type-safe, and easy to integrate into existing C++ projects.</p>
-<h1><a class="anchor" id="autotoc_md2"></a>
-Features</h1>
-<h2><a class="anchor" id="autotoc_md3"></a>
-Core Functionality</h2>
+<div class="textblock"><p><a class="anchor" id="md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2BUILDING"></a> </p>
+<h1><a class="anchor" id="autotoc_md25"></a>
+Prerequisites</h1>
 <ul>
-<li>Parallel chunk processing</li>
-<li><a class="el" href="classChunk.html" title="A template class for managing and processing data in chunks.">Chunk</a> compression (RLE, Delta)</li>
-<li>Basic chunking operations</li>
-<li>Sub-chunking strategies</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md4"></a>
-Advanced Chunking Strategies</h2>
-<ul>
-<li>Overlapping chunks</li>
-<li>Predicate-based chunking</li>
-<li>Sum-based chunking</li>
-<li>Equal division chunking</li>
-<li>Sliding window chunking</li>
-<li>Statistical threshold-based chunking</li>
-<li>Similarity-based chunking</li>
-<li>Monotonicity-based chunking</li>
-<li>Padded fixed-size chunking</li>
-<li>Wavelet-based chunking</li>
-<li>Mutual Information-based chunking</li>
-<li>Dynamic Time Warping (DTW) based chunking</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md5"></a>
-Sub-Chunking Strategies</h2>
-<ul>
-<li>Recursive sub-chunking</li>
-<li>Hierarchical sub-chunking</li>
-<li>Conditional sub-chunking</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md6"></a>
-Data Structures</h2>
-<ul>
-<li>Circular buffer</li>
-<li>Sliding window</li>
-<li>Priority queue</li>
-<li><a class="el" href="classChunk.html" title="A template class for managing and processing data in chunks.">Chunk</a> list</li>
-<li>Skip list</li>
-<li>B+ tree</li>
-<li>ChunkDeque</li>
-<li>ChunkStack</li>
-<li>ChunkTreap</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md7"></a>
-Analysis &amp; Utilities</h2>
-<ul>
-<li>Statistical operations</li>
-<li>Random chunk generation</li>
-<li><a class="el" href="classChunk.html" title="A template class for managing and processing data in chunks.">Chunk</a> manipulation utilities</li>
-<li><a class="el" href="classChunk.html" title="A template class for managing and processing data in chunks.">Chunk</a> visualization</li>
-<li><a class="el" href="classChunk.html" title="A template class for managing and processing data in chunks.">Chunk</a> benchmarking</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md8"></a>
-Requirements</h1>
-<ul>
-<li>C++17 compatible compiler (GCC 7+, Clang 5+, MSVC 2017+)</li>
-<li>CMake 3.10 or higher</li>
+<li>C++17 compiler (g++ or clang++)</li>
+<li>Make</li>
 <li>Google Test (for testing)</li>
 <li>Doxygen (for documentation)</li>
 <li>Graphviz (for documentation graphs)</li>
-<li>Boost (for advanced structures)</li>
+<li>CMake 3.10 or higher</li>
+<li>pybind11 (for Python bindings)</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md9"></a>
-Quick Start</h1>
-<div class="fragment"><div class="line"># Clone the repository</div>
-<div class="line">git clone git@github.com:JohnnyTeutonic/chunking_cpp.git</div>
+<h1><a class="anchor" id="autotoc_md26"></a>
+Installing Dependencies</h1>
+<h2><a class="anchor" id="autotoc_md27"></a>
+Ubuntu/Debian</h2>
+<div class="fragment"><div class="line"># Install build tools</div>
+<div class="line">sudo apt-get update</div>
+<div class="line">sudo apt-get install g++ make cmake</div>
+<div class="line"> </div>
+<div class="line"># Install Google Test</div>
+<div class="line">sudo apt-get install libgtest-dev cmake</div>
+<div class="line">cd /usr/src/gtest</div>
+<div class="line">sudo cmake CMakeLists.txt</div>
+<div class="line">sudo make</div>
+<div class="line">sudo cp lib/*.a /usr/lib</div>
+<div class="line">sudo ln -s /usr/src/gtest/include/gtest /usr/include/gtest</div>
+<div class="line"> </div>
+<div class="line"># Install documentation and tools</div>
+<div class="line">sudo apt-get install doxygen gnuplot graphviz libboost-all-dev python3-pybind11</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md28"></a>
+macOS</h2>
+<div class="fragment"><div class="line"># Install build tools</div>
+<div class="line">xcode-select --install</div>
+<div class="line"> </div>
+<div class="line"># Install Google Test</div>
+<div class="line">brew install googletest</div>
+<div class="line"> </div>
+<div class="line"># Install documentation tools</div>
+<div class="line">brew install doxygen graphviz boost</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md29"></a>
+Windows</h2>
+<ol type="1">
+<li>Install MinGW or Visual Studio</li>
+<li>Install vcpkg</li>
+<li>Install Google Test through vcpkg:</li>
+</ol>
+<div class="fragment"><div class="line">vcpkg install gtest:x64-windows</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md30"></a>
+Python Bindings</h1>
+<p>To build the Python bindings, you need to have Python and pybind11 installed:</p>
+<div class="fragment"><div class="line"># Method 1: Using pip (recommended)</div>
+<div class="line">pip install pybind11[global]</div>
+<div class="line"> </div>
+<div class="line"># Method 2: Using system package manager (Ubuntu/Debian)</div>
+<div class="line">sudo apt-get install python3-dev python3-pybind11</div>
+<div class="line"> </div>
+<div class="line"># If you&#39;re using conda, ensure you have the latest libstdc++:</div>
+<div class="line">conda install -c conda-forge libstdcxx-ng</div>
+</div><!-- fragment --><p>On ubuntu/debian, you can install pybind11 using:</p>
+<div class="fragment"><div class="line">sudo apt-get install python3-pybind11</div>
+</div><!-- fragment --><p>You then can install the Python bindings using the setup.py script:</p>
+<div class="fragment"><div class="line">pip install .</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md31"></a>
+Optional Dependencies</h1>
+<ul>
+<li>PostgreSQL</li>
+<li>MongoDB</li>
+<li>Kafka</li>
+<li>RabbitMQ</li>
+<li>JSON</li>
+</ul>
+<p>These can be installed on ubuntu/debian with:</p>
+<div class="fragment"><div class="line">sudo apt-get install libpq-dev libstdc++6 libmongoc-dev \</div>
+<div class="line">-     librdkafka-dev librabbitmq-dev libjsoncpp-dev</div>
+<div class="line">+     librdkafka-dev librdkafka++1 librabbitmq-dev libjsoncpp-dev</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md32"></a>
+Configuration Options</h1>
+<p>The project uses CMake for configuration. Available options:</p>
+<div class="fragment"><div class="line">-DENABLE_COVERAGE=ON    # Enable code coverage reporting</div>
+<div class="line">-DENABLE_SANITIZERS=ON  # Enable address and undefined behavior sanitizers</div>
+<div class="line">-DBUILD_TESTING=ON      # Enable building tests</div>
+</div><!-- fragment --><p>Example configuration:</p>
+<div class="fragment"><div class="line">cmake -DENABLE_COVERAGE=ON -DENABLE_SANITIZERS=ON -DBUILD_TESTING=ON ..</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md33"></a>
+Building the Project</h1>
+<p>1.Clone the repository:</p>
+<div class="fragment"><div class="line">git clone git@github.com:JohnnyTeutonic/chunking_cpp.git</div>
 <div class="line">cd chunking_cpp</div>
-<div class="line"> </div>
-<div class="line"># Configure the project (optionally with tests, documentation, sanitizers, and coverage enabled)</div>
-<div class="line">chmod +x configure</div>
-<div class="line">./configure  --enable-tests --enable-docs --enable-sanitizers --enable-coverage</div>
-<div class="line"> </div>
-<div class="line"># Build the project</div>
+<div class="line">mkdir build &amp;&amp; cd build</div>
+</div><!-- fragment --><p>2.Configure and build:</p>
+<div class="fragment"><div class="line">cmake ..</div>
 <div class="line">make</div>
-<div class="line"> </div>
-<div class="line"># To execute the example program</div>
-<div class="line">make run</div>
-<div class="line"># Run tests</div>
-<div class="line">make test</div>
-<div class="line"># Uninstall if needed</div>
-<div class="line">make uninstall</div>
-</div><!-- fragment --><p>For detailed build instructions, dependencies, and configuration options, see BUILDING.md.</p>
-<h1><a class="anchor" id="autotoc_md10"></a>
-Usage Examples</h1>
-<h2><a class="anchor" id="autotoc_md11"></a>
-Basic Usage</h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="chunk_8hpp.html">chunk.hpp</a>&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create a chunk processor with size 2</span></div>
-<div class="line"><a class="code hl_class" href="classChunk.html">Chunk&lt;int&gt;</a> chunker(2);</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Add data</span></div>
-<div class="line">std::vector&lt;int&gt; data = {1, 2, 3, 4, 5};</div>
-<div class="line">chunker.add(data);</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Get fixed-size chunks</span></div>
-<div class="line"><span class="keyword">auto</span> chunks = chunker.get_chunks(); <span class="comment">// Returns: {{1,2}, {3,4}, {5}}</span></div>
-<div class="ttc" id="achunk_8hpp_html"><div class="ttname"><a href="chunk_8hpp.html">chunk.hpp</a></div><div class="ttdoc">Template class for chunk-based data processing.</div></div>
-<div class="ttc" id="aclassChunk_html"><div class="ttname"><a href="classChunk.html">Chunk</a></div><div class="ttdoc">A template class for managing and processing data in chunks.</div><div class="ttdef"><b>Definition</b> <a href="chunk_8hpp_source.html#l00026">chunk.hpp:26</a></div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md12"></a>
-Advanced Features</h2>
-<ul>
-<li><b>Recursive Sub-chunking</b>: Apply a strategy recursively to create hierarchical chunks</li>
-<li><b>Hierarchical Sub-chunking</b>: Apply different strategies at each level</li>
-<li><b>Conditional Sub-chunking</b>: Apply sub-chunking based on chunk properties</li>
-<li><b>Parallel Processing</b>: Process chunks in parallel using multiple threads</li>
-<li><b><a class="el" href="classChunk.html" title="A template class for managing and processing data in chunks.">Chunk</a> Compression</b>: Compress chunks using various algorithms</li>
-<li><b><a class="el" href="classChunk.html" title="A template class for managing and processing data in chunks.">Chunk</a> Manipulation</b>: Add, remove, and modify chunks</li>
-<li><b><a class="el" href="classChunk.html" title="A template class for managing and processing data in chunks.">Chunk</a> Analysis</b>: Perform statistical analysis on chunks</li>
-<li><b><a class="el" href="classChunk.html" title="A template class for managing and processing data in chunks.">Chunk</a> Randomization</b>: Randomize chunks</li>
-<li><b>Overlapping Chunks</b>: Create chunks that overlap</li>
-<li><b>Predictive Chunking</b>: Create chunks based on a predictive model</li>
-<li><b>Sum-based Chunking</b>: Create chunks based on the sum of the elements</li>
-<li><b>Equal Division Chunking</b>: Create chunks based on the equal division of the elements</li>
-<li><b>Sliding Window Chunking</b>: Create chunks based on a sliding window</li>
-<li><b>Statistical Threshold-based Chunking</b>: Create chunks based on a statistical threshold</li>
-<li><b>Similarity-based Chunking</b>: Create chunks based on similarity</li>
-<li><b>Monotonicity-based Chunking</b>: Create chunks based on monotonicity</li>
-<li><b>Padded Fixed-size Chunking</b>: Create chunks based on a padded fixed-size</li>
-<li><b>ChunkDeque</b>: A deque-based chunk structure for double-ended operations</li>
-<li><b>ChunkStack</b>: A stack-based chunk structure for LIFO operations</li>
-<li><b>ChunkTreap</b>: A treap-based chunk structure for efficient searching and manipulation</li>
-<li><b>Semantic Chunking</b>: Create chunks based on semantic/cosine similarity</li>
-<li><b>Wavelet-based Chunking</b>: Create chunks based on wavelet coefficients</li>
-<li><b>Mutual Information-based Chunking</b>: Create chunks based on mutual information</li>
-<li><b>Dynamic Time Warping (DTW) based Chunking</b>: Create chunks based on dynamic time warping</li>
-</ul>
-<h3><a class="anchor" id="autotoc_md13"></a>
-Example Usage</h3>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="chunk_8hpp.html">chunk.hpp</a>&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="chunk__strategies_8hpp.html">chunk_strategies.hpp</a>&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="sub__chunk__strategies_8hpp.html">sub_chunk_strategies.hpp</a>&quot;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="advanced__structures_8hpp.html">advanced_structures.hpp</a>&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacechunk__strategies.html">chunk_strategies</a>;</div>
-<div class="line"><span class="comment">// Sub-chunking example</span></div>
-<div class="line"><span class="keyword">auto</span> variance_strategy = std::make_shared&lt;VarianceStrategy&lt;double&gt;&gt;(5.0);</div>
-<div class="line"><a class="code hl_class" href="classchunk__strategies_1_1RecursiveSubChunkStrategy.html">RecursiveSubChunkStrategy&lt;double&gt;</a> recursive_strategy(variance_strategy, 2, 2);</div>
-<div class="line"><span class="keyword">auto</span> sub_chunks = recursive_strategy.apply(data);</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Predicate-based chunking</span></div>
-<div class="line"><span class="keyword">auto</span> even_chunks = chunker.chunk_by_predicate([](<span class="keywordtype">int</span> x) { <span class="keywordflow">return</span> x % 2 == 0; });</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Similarity-based chunking</span></div>
-<div class="line"><span class="keyword">auto</span> similar_chunks = chunker.chunk_by_similarity(3);</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Parallel processing</span></div>
-<div class="line">ParallelChunkProcessor&lt;int&gt; parallel_chunker(4); <span class="comment">// 4 threads</span></div>
-<div class="line">parallel_chunker.process_chunks(chunks, [](<span class="keywordtype">int</span> x) { <span class="keywordflow">return</span> x * 2; });</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Recursive sub-chunking</span></div>
-<div class="line"><span class="keyword">auto</span> variance_strategy = std::make_shared&lt;VarianceStrategy&lt;double&gt;&gt;(3.0);</div>
-<div class="line"><a class="code hl_class" href="classchunk__strategies_1_1RecursiveSubChunkStrategy.html">RecursiveSubChunkStrategy&lt;double&gt;</a> recursive_strategy(variance_strategy, 2, 2);</div>
-<div class="line"><span class="keyword">auto</span> recursive_result = recursive_strategy.apply(data);</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Hierarchical sub-chunking</span></div>
-<div class="line">std::vector&lt;std::shared_ptr&lt;ChunkStrategy&lt;double&gt;&gt;&gt; strategies = {</div>
-<div class="line">    std::make_shared&lt;VarianceStrategy&lt;double&gt;&gt;(5.0),</div>
-<div class="line">    std::make_shared&lt;<a class="code hl_class" href="classchunk__strategies_1_1EntropyStrategy.html">EntropyStrategy&lt;double&gt;</a>&gt;(1.0)</div>
-<div class="line">};</div>
-<div class="line"><a class="code hl_class" href="classchunk__strategies_1_1HierarchicalSubChunkStrategy.html">HierarchicalSubChunkStrategy&lt;double&gt;</a> hierarchical_strategy(strategies, 2);</div>
-<div class="line"><span class="keyword">auto</span> hierarchical_result = hierarchical_strategy.apply(data);</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Conditional sub-chunking</span></div>
-<div class="line"><span class="keyword">auto</span> condition = [](<span class="keyword">const</span> std::vector&lt;double&gt;&amp; chunk) {</div>
-<div class="line">    <span class="keywordtype">double</span> mean = std::accumulate(chunk.begin(), chunk.end(), 0.0) / chunk.size();</div>
-<div class="line">    <span class="keywordtype">double</span> variance = 0.0;</div>
-<div class="line">    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; val : chunk) {</div>
-<div class="line">        variance += (val - mean) * (val - mean);</div>
-<div class="line">    }</div>
-<div class="line">    variance /= chunk.size();</div>
-<div class="line">    <span class="keywordflow">return</span> variance &gt; 50.0;</div>
-<div class="line">  };</div>
-<div class="line"> </div>
-<div class="line"><a class="code hl_class" href="classchunk__strategies_1_1ConditionalSubChunkStrategy.html">ConditionalSubChunkStrategy&lt;double&gt;</a> conditional_strategy(variance_strategy, condition, 2);</div>
-<div class="line"><span class="keyword">auto</span> conditional_result = conditional_strategy.apply(data);</div>
-<div class="line"><span class="comment">// ChunkTreap example</span></div>
-<div class="line">ChunkTreap&lt;int&gt; chunk_treap;</div>
-<div class="line">chunk_treap.insert(5);</div>
-<div class="line">chunk_treap.insert(3);</div>
-<div class="line">chunk_treap.insert(8);</div>
-<div class="line">chunk_treap.search(5);</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// ChunkDeque example</span></div>
-<div class="line">ChunkDeque&lt;int&gt; chunk_deque;</div>
-<div class="line">chunk_deque.push_back(1);</div>
-<div class="line">chunk_deque.push_front(0);</div>
-<div class="line">chunk_deque.pop_back();</div>
-<div class="line">chunk_deque.pop_front();</div>
-<div class="ttc" id="aadvanced__structures_8hpp_html"><div class="ttname"><a href="advanced__structures_8hpp.html">advanced_structures.hpp</a></div></div>
-<div class="ttc" id="achunk__strategies_8hpp_html"><div class="ttname"><a href="chunk__strategies_8hpp.html">chunk_strategies.hpp</a></div><div class="ttdoc">Defines various strategies for chunking data based on different criteria.</div></div>
-<div class="ttc" id="aclasschunk__strategies_1_1ConditionalSubChunkStrategy_html"><div class="ttname"><a href="classchunk__strategies_1_1ConditionalSubChunkStrategy.html">chunk_strategies::ConditionalSubChunkStrategy</a></div><div class="ttdoc">Strategy for conditional sub-chunking based on chunk properties.</div><div class="ttdef"><b>Definition</b> <a href="sub__chunk__strategies_8hpp_source.html#l00182">sub_chunk_strategies.hpp:182</a></div></div>
-<div class="ttc" id="aclasschunk__strategies_1_1EntropyStrategy_html"><div class="ttname"><a href="classchunk__strategies_1_1EntropyStrategy.html">chunk_strategies::EntropyStrategy</a></div><div class="ttdoc">Strategy for chunking based on entropy thresholds.</div><div class="ttdef"><b>Definition</b> <a href="chunk__strategies_8hpp_source.html#l00131">chunk_strategies.hpp:131</a></div></div>
-<div class="ttc" id="aclasschunk__strategies_1_1HierarchicalSubChunkStrategy_html"><div class="ttname"><a href="classchunk__strategies_1_1HierarchicalSubChunkStrategy.html">chunk_strategies::HierarchicalSubChunkStrategy</a></div><div class="ttdoc">Strategy for hierarchical sub-chunking using multiple strategies.</div><div class="ttdef"><b>Definition</b> <a href="sub__chunk__strategies_8hpp_source.html#l00121">sub_chunk_strategies.hpp:121</a></div></div>
-<div class="ttc" id="aclasschunk__strategies_1_1RecursiveSubChunkStrategy_html"><div class="ttname"><a href="classchunk__strategies_1_1RecursiveSubChunkStrategy.html">chunk_strategies::RecursiveSubChunkStrategy</a></div><div class="ttdoc">Strategy for applying recursive sub-chunking.</div><div class="ttdef"><b>Definition</b> <a href="sub__chunk__strategies_8hpp_source.html#l00052">sub_chunk_strategies.hpp:52</a></div></div>
-<div class="ttc" id="anamespacechunk__strategies_html"><div class="ttname"><a href="namespacechunk__strategies.html">chunk_strategies</a></div><div class="ttdef"><b>Definition</b> <a href="chunk__strategies_8hpp_source.html#l00017">chunk_strategies.hpp:17</a></div></div>
-<div class="ttc" id="asub__chunk__strategies_8hpp_html"><div class="ttname"><a href="sub__chunk__strategies_8hpp.html">sub_chunk_strategies.hpp</a></div><div class="ttdoc">Advanced sub-chunking strategies for hierarchical data processing.</div></div>
-</div><!-- fragment --><p>See <code><a class="el" href="main_8cpp.html" title="Demonstrates various chunking strategies and operations.">src/main.cpp</a></code> for more comprehensive examples.</p>
-<h1><a class="anchor" id="autotoc_md14"></a>
-Documentation</h1>
-<p>The library is extensively documented using Doxygen. You can:</p>
-<ol type="1">
-<li>View the online documentation at <a href="https://johnnyteutonic.github.io/chunking_cpp/">GitHub Pages</a></li>
-<li>Generate documentation locally:</li>
-</ol>
+</div><!-- fragment --><p>3.Run tests:</p>
+<div class="fragment"><div class="line">make test</div>
+</div><!-- fragment --><p>4.Install:</p>
+<div class="fragment"><div class="line">sudo make install</div>
+</div><!-- fragment --><p>5.Generate documentation:</p>
 <div class="fragment"><div class="line">make docs</div>
-<div class="line">make docs-serve</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md15"></a>
-Performance Considerations</h2>
-<ul>
-<li><b><a class="el" href="classChunk.html" title="A template class for managing and processing data in chunks.">Chunk</a> Size</b>: Choose an appropriate chunk size based on your data and processing requirements. Larger chunks may reduce overhead but increase memory usage.</li>
-<li><b>Parallel Processing</b>: Utilize the <code>ParallelChunkProcessor</code> for operations that can be parallelized to improve performance on multi-core systems.</li>
-<li><b>Memory Management</b>: Be mindful of memory usage, especially when dealing with large datasets. Use efficient data structures like <code><a class="el" href="classCircularBuffer.html">CircularBuffer</a></code> to manage memory effectively.</li>
-<li><b>Algorithm Complexity</b>: Consider the complexity of the chunking strategies and operations you use. Some strategies may have higher computational costs.</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md16"></a>
-Best Practices</h2>
-<ul>
-<li><b>Use Smart Pointers</b>: Use <code>std::shared_ptr</code> and <code>std::unique_ptr</code> to manage dynamic memory and avoid memory leaks.</li>
-<li><b>Leverage STL Algorithms</b>: Utilize standard library algorithms for common operations like sorting and accumulating to improve code readability and performance.</li>
-<li><b>Modular Design</b>: Keep your code modular by separating chunking logic from data processing logic. This makes it easier to test and maintain.</li>
-<li><b>Testing</b>: Write comprehensive tests for your chunking strategies and operations to ensure correctness and reliability.</li>
-<li><b>Documentation</b>: Document your code and strategies using Doxygen-style comments to make it easier for others to understand and use your library.</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md17"></a>
-Contributing</h1>
-<p>Contributions are welcome! Please:</p>
-<ol type="1">
-<li>Fork the repository</li>
-<li>Create a feature branch</li>
-<li>Write tests for new functionality</li>
-<li>Ensure all tests pass</li>
-<li>Submit a pull request</li>
-</ol>
-<h1><a class="anchor" id="autotoc_md18"></a>
-License</h1>
-<p>This project is licensed under the GNU General Public License v2.0 - see the [LICENSE](LICENSE) file for details.</p>
-<h1><a class="anchor" id="autotoc_md19"></a>
-Citation</h1>
-<p>If you use this library in your research, please cite:</p>
-<div class="fragment"><div class="line">@software{chunking_cpp,</div>
-<div class="line">  author = {Reich, Jonathan},</div>
-<div class="line">  title = {Advanced Chunk Processing Library},</div>
-<div class="line">  year = {2024},</div>
-<div class="line">  url = {https://github.com/JohnnyTeutonic/chunking_cpp}</div>
-<div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md20"></a>
+</div><!-- fragment --><p>6.Serve documentation locally:</p>
+<div class="fragment"><div class="line">make docs-serve</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md34"></a>
 Project Structure</h1>
 <div class="fragment"><div class="line">.</div>
 <div class="line">├── .github/</div>
@@ -388,62 +233,97 @@ Project Structure</h1>
 <div class="line">├── Doxyfile</div>
 <div class="line">├── README.md</div>
 <div class="line">├── BUILDING.md</div>
-<div class="line">└── LICENSE</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md21"></a>
-Sophisticated Chunking Examples</h2>
-<p>For detailed examples of the sophisticated chunking algorithms, see <code><a class="el" href="sophisticated__chunking__demo_8cpp.html">src/sophisticated_chunking_demo.cpp</a></code>:</p>
+<div class="line">└─ LICENSE</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md35"></a>
+Make Targets</h1>
+<ul>
+<li><code>make</code>: Build the project</li>
+<li><code>make run</code>: Run the main program</li>
+<li><code>make run-sophisticated</code>: Run the sophisticated chunking demo</li>
+<li><code>make test</code>: Run all tests</li>
+<li><code>make test-&lt;name&gt;</code>: Run specific test suite</li>
+<li><code>make docs</code>: Generate documentation</li>
+<li><code>make docs-serve</code>: Serve documentation locally</li>
+<li><code>make docs-clean</code>: Clean documentation build artifacts</li>
+<li><code>make docs-stop</code>: Stop documentation server</li>
+<li><code>make clean</code>: Clean build artifacts</li>
+<li><code>make format</code>: Format source code</li>
+<li><code>make format-check</code>: Check source code formatting</li>
+<li><code>make install</code>: Install the project</li>
+<li><code>make uninstall</code>: Uninstall the project</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md36"></a>
+Advanced Features</h1>
+<h2><a class="anchor" id="autotoc_md37"></a>
+Sub-Chunking Strategies</h2>
+<p>The library provides several sub-chunking strategies:</p>
+<ul>
+<li><b>Recursive Sub-chunking</b>: Apply a strategy recursively to create hierarchical chunks</li>
+<li><b>Hierarchical Sub-chunking</b>: Apply different strategies at each level</li>
+<li><b>Conditional Sub-chunking</b>: Apply sub-chunking based on chunk properties</li>
+</ul>
+<p>Example:</p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> strategy = std::make_shared&lt;VarianceStrategy&lt;double&gt;&gt;(5.0);</div>
+<div class="line">RecursiveSubChunkStrategy&lt;double&gt; recursive(strategy, 2, 2);</div>
+<div class="line"><span class="keyword">auto</span> sub_chunks = recursive.apply(data);</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md38"></a>
+Building and Testing Sophisticated Chunking</h2>
+<p>To build and run the sophisticated chunking examples:</p>
+<div class="fragment"><div class="line"># Build the project including sophisticated chunking demo</div>
+<div class="line">make</div>
+<div class="line"> </div>
+<div class="line"># Run the sophisticated chunking demo</div>
+<div class="line">./build/bin/sophisticated_chunking_demo</div>
+</div><!-- fragment --><p>The sophisticated chunking features are implemented in:</p>
+<ul>
+<li><code><a class="el" href="sophisticated__chunking_8hpp.html">include/sophisticated_chunking.hpp</a></code>: Core implementations</li>
+<li><code><a class="el" href="sophisticated__chunking__demo_8cpp.html">src/sophisticated_chunking_demo.cpp</a></code>: Usage examples</li>
+<li><code>tests/chunking_methods_sophisticated_test.cpp</code>: Unit tests</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md39"></a>
+Running Sophisticated Chunking Tests</h2>
+<p>To run only the sophisticated chunking tests:</p>
+<div class="fragment"><div class="line">cd build</div>
+<div class="line">ctest -R sophisticated</div>
+</div><!-- fragment --><p>Or using make:</p>
+<div class="fragment"><div class="line">make test-sophisticated</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md40"></a>
+Sophisticated Chunking Integration</h2>
+<p>To use sophisticated chunking in your project:</p>
+<ol type="1">
+<li>Include the header:</li>
+</ol>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="sophisticated__chunking_8hpp.html">sophisticated_chunking.hpp</a>&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Example from sophisticated_chunking_demo.cpp</span></div>
-<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="benchmark_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>() {</div>
-<div class="line">    <span class="comment">// Wavelet-based chunking example</span></div>
-<div class="line">    std::vector&lt;double&gt; signal_data = {1.0, 1.2, 1.1, 5.0, 5.2, 5.1, 2.0, 2.1};</div>
-<div class="line">    <a class="code hl_class" href="classsophisticated__chunking_1_1WaveletChunking.html">sophisticated_chunking::WaveletChunking&lt;double&gt;</a> wavelet_chunker(8, 0.5);</div>
-<div class="line">    <span class="keyword">auto</span> wavelet_chunks = wavelet_chunker.chunk(signal_data);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// Mutual Information chunking example</span></div>
-<div class="line">    std::vector&lt;int&gt; pattern_data = {1, 2, 3, 10, 11, 12, 4, 5, 6};</div>
-<div class="line">    <a class="code hl_class" href="classsophisticated__chunking_1_1MutualInformationChunking.html">sophisticated_chunking::MutualInformationChunking&lt;int&gt;</a> mi_chunker(5, 0.3);</div>
-<div class="line">    <span class="keyword">auto</span> mi_chunks = mi_chunker.chunk(pattern_data);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// DTW chunking example</span></div>
-<div class="line">    std::vector&lt;float&gt; time_series = {1.0f, 1.1f, 1.2f, 5.0f, 5.1f, 5.2f};</div>
-<div class="line">    <a class="code hl_class" href="classsophisticated__chunking_1_1DTWChunking.html">sophisticated_chunking::DTWChunking&lt;float&gt;</a> dtw_chunker(10, 2.0);</div>
-<div class="line">    <span class="keyword">auto</span> dtw_chunks = dtw_chunker.chunk(time_series);</div>
-<div class="line"> </div>
-<div class="line">    <span class="keywordflow">return</span> 0;</div>
-<div class="line">}</div>
-<div class="ttc" id="abenchmark_8cpp_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="benchmark_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdef"><b>Definition</b> <a href="benchmark_8cpp_source.html#l00082">benchmark.cpp:82</a></div></div>
-<div class="ttc" id="aclasssophisticated__chunking_1_1DTWChunking_html"><div class="ttname"><a href="classsophisticated__chunking_1_1DTWChunking.html">sophisticated_chunking::DTWChunking</a></div><div class="ttdoc">Dynamic time warping based chunking for sequence alignment.</div><div class="ttdef"><b>Definition</b> <a href="sophisticated__chunking_8hpp_source.html#l00090">sophisticated_chunking.hpp:90</a></div></div>
-<div class="ttc" id="aclasssophisticated__chunking_1_1MutualInformationChunking_html"><div class="ttname"><a href="classsophisticated__chunking_1_1MutualInformationChunking.html">sophisticated_chunking::MutualInformationChunking</a></div><div class="ttdoc">Information theory based chunking using mutual information.</div><div class="ttdef"><b>Definition</b> <a href="sophisticated__chunking_8hpp_source.html#l00054">sophisticated_chunking.hpp:54</a></div></div>
-<div class="ttc" id="aclasssophisticated__chunking_1_1WaveletChunking_html"><div class="ttname"><a href="classsophisticated__chunking_1_1WaveletChunking.html">sophisticated_chunking::WaveletChunking</a></div><div class="ttdoc">Wavelet-based chunking strategy using signal processing principles.</div><div class="ttdef"><b>Definition</b> <a href="sophisticated__chunking_8hpp_source.html#l00020">sophisticated_chunking.hpp:20</a></div></div>
 <div class="ttc" id="asophisticated__chunking_8hpp_html"><div class="ttname"><a href="sophisticated__chunking_8hpp.html">sophisticated_chunking.hpp</a></div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md22"></a>
-Chunk Visualization</h2>
-<p>For detailed examples of the chunk visualization, see <code>src/chunk_visualization_demo.cpp</code>:</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="chunk__visualization_8hpp.html">chunk_visualization.hpp</a>&quot;</span></div>
-<div class="ttc" id="achunk__visualization_8hpp_html"><div class="ttname"><a href="chunk__visualization_8hpp.html">chunk_visualization.hpp</a></div></div>
-</div><!-- fragment --><p>To run the chunk visualization demo, use:</p>
-<div class="fragment"><div class="line">make run-visualization</div>
-</div><!-- fragment --><p>To use the visualisation as a standalone tool with gnuplot run:</p>
-<div class="fragment"><div class="line">gnuplot visualization/plot_chunks.gnu</div>
-</div><!-- fragment --><p>Or with graphviz:</p>
-<div class="fragment"><div class="line">dot -Tpng visualization/chunks.dot -o visualization/chunks.png</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md23"></a>
-Chunk Benchmarking</h2>
-<p>To compile and run the benchmark demo, use:</p>
-<div class="fragment"><div class="line">make benchmark</div>
-</div><!-- fragment --><p>Or to use it as a standalone tool:</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="chunk__benchmark_8hpp.html">chunk_benchmark.hpp</a>&quot;</span></div>
-<div class="line">...</div>
-<div class="ttc" id="achunk__benchmark_8hpp_html"><div class="ttname"><a href="chunk__benchmark_8hpp.html">chunk_benchmark.hpp</a></div></div>
+</div><!-- fragment --><ol type="1">
+<li>Link against the library in your CMakeLists.txt:</li>
+</ol>
+<div class="fragment"><div class="line">target_link_libraries(your_target PRIVATE sophisticated_chunking)</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md41"></a>
+Performance Considerations for Sophisticated Chunking</h2>
+<ul>
+<li><b>Wavelet Chunking</b>: O(n * window_size) complexity. Choose smaller window sizes for better performance.</li>
+<li><b>Mutual Information</b>: O(n * context_size) complexity. Larger context sizes impact performance significantly.</li>
+<li><b>DTW Chunking</b>: O(n * window_size²) complexity. Window size has quadratic impact on performance.</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md42"></a>
+Troubleshooting</h2>
+<p>If you encounter GLIBCXX version errors when installing the Python bindings:</p>
+<ol type="1">
+<li>Update conda's libstdc++: <code>conda install -c conda-forge libstdcxx-ng</code></li>
+<li>Or use system libraries: <code>export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH</code></li>
+</ol>
+<p>The library version can be accessed through the following macros:</p>
+<div class="fragment"><div class="line">CHUNKING_VERSION_MAJOR</div>
+<div class="line">CHUNKING_VERSION_MINOR</div>
+<div class="line">CHUNKING_VERSION_PATCH</div>
 </div><!-- fragment --> </div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Dec 23 2024 14:28:49 for Advanced Chunk Processing Library by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Mon Dec 23 2024 15:08:26 for Advanced Chunk Processing Library by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

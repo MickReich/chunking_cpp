@@ -7,6 +7,7 @@
 #include <iomanip>
 #include <iostream>
 #include <memory>
+#include <mutex>
 #include <sys/resource.h>
 #include <unordered_map>
 #include <vector>
@@ -27,6 +28,7 @@ private:
     const std::vector<T>& data;
     std::vector<std::shared_ptr<ChunkStrategy<T>>> strategies;
     std::string output_dir;
+    mutable std::mutex benchmark_mutex;
 
     // Helper to get current memory usage in bytes
     size_t get_current_memory_usage() const {
@@ -56,8 +58,14 @@ public:
     ChunkBenchmark(const std::vector<T>& input_data, const std::string& output_path = "./benchmark")
         : data(input_data), output_dir(output_path) {
         try {
-            // Remove any existing file with the same name
-            std::filesystem::remove(output_dir);
+            // Safely handle directory creation/cleanup
+            if (std::filesystem::exists(output_dir)) {
+                try {
+                    std::filesystem::remove_all(output_dir);
+                } catch (const std::filesystem::filesystem_error& e) {
+                    std::cerr << "Warning: Could not remove existing directory: " << e.what() << "\n";
+                }
+            }
 
             // Create the directory and all parent directories
             std::filesystem::path dir(output_dir);
@@ -234,6 +242,7 @@ public:
     }
 
     void compare_strategies() {
+        std::lock_guard<std::mutex> lock(benchmark_mutex);
         auto report_path = std::filesystem::path(output_dir) / "comparison_report.txt";
         std::ofstream report(report_path);
         report << "Strategy Comparison Report\n";
@@ -250,22 +259,37 @@ public:
 
         // Collect metrics for each strategy
         for (const auto& strategy : strategies) {
-            // Measure throughput
-            auto start = std::chrono::high_resolution_clock::now();
-            auto chunks = strategy->chunk(data);
-            auto end = std::chrono::high_resolution_clock::now();
-            auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
-
-            // Calculate metrics
-            double throughput = (data.size() * 1e9) / duration.count();
-            size_t memory_used = get_current_memory_usage();
-            size_t total_size = 0;
-            for (const auto& chunk : chunks) {
-                total_size += chunk.size();
+            if (!strategy) {
+                continue;  // Skip null strategies
             }
 
-            metrics[strategy->name()] = MetricData{throughput, memory_used, chunks.size(),
-                                                   static_cast<double>(total_size) / chunks.size()};
+            try {
+                // Measure throughput
+                auto start = std::chrono::high_resolution_clock::now();
+                auto chunks = strategy->chunk(data);
+                auto end = std::chrono::high_resolution_clock::now();
+                auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+
+                // Calculate metrics
+                double throughput = (data.size() * 1e9) / duration.count();
+                size_t memory_used = get_current_memory_usage();
+                size_t total_size = 0;
+                if (!chunks.empty()) {
+                    for (const auto& chunk : chunks) {
+                        total_size += chunk.size();
+                    }
+                }
+
+                metrics[strategy->name()] = MetricData{
+                    throughput,
+                    memory_used,
+                    chunks.size(),
+                    chunks.empty() ? 0.0 : static_cast<double>(total_size) / chunks.size()
+                };
+            } catch (const std::exception& e) {
+                std::cerr << "Error processing strategy " << strategy->name() 
+                          << ": " << e.what() << "\n";
+            }
         }
 
         // Find best performers
