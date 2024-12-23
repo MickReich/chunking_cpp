@@ -48,3 +48,5 @@ viz/
 **/__pycache__/
 **/htmlcov/
 **/build/
+*.egg-info/
+**/*.egg-info/

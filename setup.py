@@ -15,4 +15,7 @@ setup(
     include_package_data=True,
     description="C++ chunking library with Python bindings",
     python_requires=">=3.6",
+    install_requires=[
+    "pytest==4.0.0",
+    "pytest-cov"]
 ) 
