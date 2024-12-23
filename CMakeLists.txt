@@ -387,7 +387,7 @@ endif()
 find_package(PostgreSQL QUIET)
 find_package(libpqxx QUIET)
 find_package(mongocxx QUIET)
-find_package(cppkafka QUIET)
+find_package(RdKafka QUIET)
 find_package(RabbitMQ QUIET)
 find_package(nlohmann_json QUIET)
 
@@ -422,11 +422,13 @@ else()
     message(STATUS "MongoDB support disabled - mongocxx not found")
 endif()
 
-if(cppkafka_FOUND)
+if(RdKafka_FOUND)
     target_compile_definitions(chunking_cpp PRIVATE HAVE_KAFKA)
     target_link_libraries(chunking_cpp PRIVATE 
-        cppkafka::cppkafka
+        RdKafka::rdkafka++
     )
+else()
+    message(STATUS "Kafka support disabled - RdKafka not found")
 endif()
 
 if(RabbitMQ_FOUND)
