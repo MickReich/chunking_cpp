@@ -66,7 +66,7 @@ pip install pybind11[global]
 sudo apt-get install python3-dev python3-pybind11
 
 # If you're using conda, ensure you have the latest libstdc++:
-conda install -c conda-forge libstdcxx-ng
+conda install -c conda-forge libstdcxx-ng pybind11[global]
 ```
 
 On ubuntu/debian, you can install pybind11 using:
@@ -75,10 +75,22 @@ On ubuntu/debian, you can install pybind11 using:
 sudo apt-get install python3-pybind11
 ```
 
-You then can install the Python bindings using the setup.py script:
+You then can install the Python bindings (and pytest) using the setup.py script:
 
 ```bash
 pip install .
+```
+
+You can then mock the same functionality in python:
+
+```python
+from chunking_cpp import chunking_cpp as cc
+
+chunk = cc.Chunk(3)
+chunk.add(1)
+chunk.add(2)
+chunk.add(3)
+chunk.chunk_by_threshold(1.0)
 ```
 
 ## Optional Dependencies
@@ -110,11 +122,6 @@ The project uses CMake for configuration. Available options:
 -DBUILD_TESTING=ON      # Enable building tests
 ```
 
-Example configuration:
-
-```bash
-cmake -DENABLE_COVERAGE=ON -DENABLE_SANITIZERS=ON -DBUILD_TESTING=ON ..
-```
 
 ## Building the Project
 
@@ -126,10 +133,10 @@ cd chunking_cpp
 mkdir build && cd build
 ```
 
-2.Configure and build:
+2.Configure, build and install (with all options enabled by default):
 
 ```bash
-cmake ..
+./configure --enable-tests --enable-docs --enable-sanitizers --enable-coverage
 make
 ```
 
@@ -139,37 +146,25 @@ make
 make test
 ```
 
-4.Install:
-
-```bash
-sudo make install
-```
-
-5.Generate documentation:
+4.Generate documentation:
 
 ```bash
 make docs
 ```
 
-6.Serve documentation locally:
+5.Serve documentation locally:
 
 ```bash
 make docs-serve
 ```
 
-7.Run tests:
-
-```bash
-make test
-```
-
-8.Run tests with pytest:
+6.Run tests with pytest:
 
 ```bash
 make pytest
 ```
 
-9.Run tests with pytest and coverage:
+7.Run tests with pytest and coverage:
 
 ```bash
 make pytest-coverage
@@ -245,6 +240,8 @@ make pytest-coverage
 - `make format-check`: Check source code formatting
 - `make install`: Install the project
 - `make uninstall`: Uninstall the project
+- `make pytest`: Run tests with pytest
+- `make pytest-coverage`: Run tests with pytest and coverage
 
 ## Advanced Features
 
