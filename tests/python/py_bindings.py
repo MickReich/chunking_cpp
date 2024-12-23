@@ -89,19 +89,35 @@ def test_resilient_chunker_initialization():
     assert chunker is not None
 
 def test_process_with_recovery(sample_data):
-    chunker = ResilientChunker("test_checkpoint", 3, 2, 1)
-    chunker.save_checkpoint()
+    chunker = ResilientChunker("test_checkpoint", 1024 * 1024, 2, 1)
+    
     try:
         result = chunker.process(sample_data)
         assert result is not None
+        assert len(result) > 0
     except ChunkingError as e:
-        assert str(e) != ""
+        assert "Processing failed after" in str(e)
 
 def test_checkpoint_operations(sample_data):
-    chunker = ResilientChunker("test_checkpoint", 3, 2, 1)
-    chunker.process(sample_data)
+    # Use more realistic memory limits (e.g., 1MB)
+    chunker = ResilientChunker("test_checkpoint", 1024 * 1024, 2, 1)
+    
+    # First process should succeed
+    result = chunker.process(sample_data)
+    assert result is not None
+    assert len(result) > 0  # Verify we actually got chunks
+    
+    # Save checkpoint explicitly
     chunker.save_checkpoint()
-    assert chunker.restore_from_checkpoint() is not None
+    
+    # Restore should now work
+    restored = chunker.restore_from_checkpoint()
+    assert restored is not None
+    assert len(restored) == len(result)
+    
+    # Verify chunk contents
+    for orig, rest in zip(result, restored):
+        assert np.array_equal(orig, rest)
 
 # Parametrized Tests
 @pytest.mark.parametrize("invalid_input", [
