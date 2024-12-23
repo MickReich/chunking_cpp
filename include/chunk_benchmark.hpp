@@ -63,7 +63,8 @@ public:
                 try {
                     std::filesystem::remove_all(output_dir);
                 } catch (const std::filesystem::filesystem_error& e) {
-                    std::cerr << "Warning: Could not remove existing directory: " << e.what() << "\n";
+                    std::cerr << "Warning: Could not remove existing directory: " << e.what()
+                              << "\n";
                 }
             }
 
@@ -260,7 +261,7 @@ public:
         // Collect metrics for each strategy
         for (const auto& strategy : strategies) {
             if (!strategy) {
-                continue;  // Skip null strategies
+                continue; // Skip null strategies
             }
 
             try {
@@ -281,14 +282,11 @@ public:
                 }
 
                 metrics[strategy->name()] = MetricData{
-                    throughput,
-                    memory_used,
-                    chunks.size(),
-                    chunks.empty() ? 0.0 : static_cast<double>(total_size) / chunks.size()
-                };
+                    throughput, memory_used, chunks.size(),
+                    chunks.empty() ? 0.0 : static_cast<double>(total_size) / chunks.size()};
             } catch (const std::exception& e) {
-                std::cerr << "Error processing strategy " << strategy->name() 
-                          << ": " << e.what() << "\n";
+                std::cerr << "Error processing strategy " << strategy->name() << ": " << e.what()
+                          << "\n";
             }
         }
 
