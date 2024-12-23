@@ -116,7 +116,7 @@ def test_invalid_inputs(invalid_input):
         chunk.chunk_by_threshold(1.0)
 
 def test_error_handling():
-    with pytest.raises(ChunkingError):
+    with pytest.raises(ValueError):
         # Try to create invalid chunk size
         Chunk(0)
 
