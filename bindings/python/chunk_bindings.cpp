@@ -36,11 +36,10 @@ PYBIND11_MODULE(chunking_cpp, m) {
         .def("chunk_by_threshold",
              static_cast<std::vector<std::vector<double>> (Chunk<double>::*)(double)>(
                  &Chunk<double>::chunk_by_threshold),
-             py::return_value_policy::copy)
-        .def("chunk_by_similarity",
-             static_cast<std::vector<std::vector<double>> (Chunk<double>::*)(double)>(
-                 &Chunk<double>::chunk_by_similarity),
-             py::return_value_policy::copy);
+             py::return_value_policy::copy,
+             py::call_guard<py::gil_scoped_release>(),
+             "Create chunks based on threshold value",
+             py::arg("threshold"));
 
     // Neural Chunking
     py::class_<neural_chunking::NeuralChunking<double>>(m, "NeuralChunking")

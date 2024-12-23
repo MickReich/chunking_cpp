@@ -48,6 +48,64 @@ private:
         return result;
     }
 
+    // Helper function to calculate similarity between elements
+    static double calculate_similarity(const T& a, const T& b) {
+        if constexpr (std::is_arithmetic_v<T>) {
+            return std::abs(static_cast<double>(a - b));
+        } else {
+            throw std::runtime_error("Similarity calculation not implemented for this type");
+        }
+    }
+
+    // Helper function to safely create chunks based on similarity
+    std::vector<std::vector<T>> create_similarity_chunks(double threshold) const {
+        if (data.empty()) return {};
+        
+        std::vector<std::vector<T>> result;
+        std::vector<T> current_chunk;
+        current_chunk.push_back(data[0]);
+        
+        for (size_t i = 1; i < data.size(); ++i) {
+            double sim = calculate_similarity(data[i], data[i-1]);
+            if (sim > threshold && !current_chunk.empty()) {
+                result.push_back(current_chunk);
+                current_chunk.clear();
+            }
+            current_chunk.push_back(data[i]);
+        }
+        
+        if (!current_chunk.empty()) {
+            result.push_back(current_chunk);
+        }
+        
+        return result;
+    }
+
+    // Helper function for threshold-based chunking
+    std::vector<std::vector<T>> create_threshold_chunks(T threshold) const {
+        if (data.empty()) return {};
+        
+        std::vector<std::vector<T>> result;
+        std::vector<T> current_chunk;
+        T running_sum = T{};  // Zero-initialize
+        
+        for (const T& value : data) {
+            if (running_sum + value > threshold && !current_chunk.empty()) {
+                result.push_back(current_chunk);
+                current_chunk.clear();
+                running_sum = T{};
+            }
+            current_chunk.push_back(value);
+            running_sum += value;
+        }
+        
+        if (!current_chunk.empty()) {
+            result.push_back(current_chunk);
+        }
+        
+        return result;
+    }
+
 public:
     /**
      * @brief Constructs a Chunk with a specified size.
@@ -215,25 +273,12 @@ public:
         return result;
     }
 
-    std::vector<std::vector<T>> chunk_by_similarity(T threshold) const {
-        std::vector<std::vector<T>> result;
-        if (data.empty())
-            return result;
-        std::vector<T> current_chunk{data[0]};
-        T chunk_mean = data[0];
-        for (size_t i = 1; i < data.size(); ++i) {
-            if (std::abs(data[i] - chunk_mean) > threshold) {
-                result.push_back(current_chunk);
-                current_chunk.clear();
-                chunk_mean = data[i];
-            }
-            current_chunk.push_back(data[i]);
-            chunk_mean = std::accumulate(current_chunk.begin(), current_chunk.end(), T(0)) /
-                         static_cast<T>(current_chunk.size());
+    std::vector<std::vector<T>> chunk_by_similarity(double threshold) {
+        try {
+            return create_similarity_chunks(threshold);
+        } catch (const std::exception& e) {
+            return std::vector<std::vector<T>>{data};
         }
-        if (!current_chunk.empty())
-            result.push_back(current_chunk);
-        return result;
     }
 
     std::vector<std::vector<T>> get_padded_chunks(const T& pad_value) const {
@@ -265,11 +310,14 @@ public:
     }
 
     std::vector<std::vector<T>> chunk_by_threshold(T threshold) {
-        // Implementation
-    }
-
-    std::vector<std::vector<T>> chunk_by_similarity(double similarity_threshold) {
-        // Implementation
+        if (threshold <= T{}) {
+            throw std::invalid_argument("Threshold must be positive");
+        }
+        try {
+            return create_threshold_chunks(threshold);
+        } catch (const std::exception& e) {
+            return std::vector<std::vector<T>>{data};
+        }
     }
 
 private:

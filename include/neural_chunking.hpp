@@ -134,6 +134,10 @@ public:
      * @return Vector of chunks
      */
     std::vector<std::vector<T>> chunk(const std::vector<T>& data) const {
+        if (data.empty()) {
+            return {};
+        }
+
         if (data.size() < window_size) {
             return {data};
         }
