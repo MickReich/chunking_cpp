@@ -7,6 +7,8 @@
 - Google Test (for testing)
 - Doxygen (for documentation)
 - Graphviz (for documentation graphs)
+- CMake 3.10 or higher
+- pybind11 (for Python bindings)
 
 ## Installing Dependencies
 
@@ -15,7 +17,7 @@
 ```bash
 # Install build tools
 sudo apt-get update
-sudo apt-get install g++ make
+sudo apt-get install g++ make cmake
 
 # Install Google Test
 sudo apt-get install libgtest-dev cmake
@@ -26,7 +28,7 @@ sudo cp lib/*.a /usr/lib
 sudo ln -s /usr/src/gtest/include/gtest /usr/include/gtest
 
 # Install documentation and tools
-sudo apt-get install doxygen gnuplot graphviz libboost-all-dev
+sudo apt-get install doxygen gnuplot graphviz libboost-all-dev python3-pybind11
 ```
 
 ### macOS
@@ -87,8 +89,24 @@ These can be installed on ubuntu/debian with:
 
 ```bash
 sudo apt-get install libpq-dev libstdc++6 libmongoc-dev \
--     libkafka-dev librabbitmq-dev libjsoncpp-dev
-+     librdkafka-dev librabbitmq-dev libjsoncpp-dev
+-     librdkafka-dev librabbitmq-dev libjsoncpp-dev
++     librdkafka-dev librdkafka++1 librabbitmq-dev libjsoncpp-dev
+```
+
+## Configuration Options
+
+The project uses CMake for configuration. Available options:
+
+```bash
+-DENABLE_COVERAGE=ON    # Enable code coverage reporting
+-DENABLE_SANITIZERS=ON  # Enable address and undefined behavior sanitizers
+-DBUILD_TESTING=ON      # Enable building tests
+```
+
+Example configuration:
+
+```bash
+cmake -DENABLE_COVERAGE=ON -DENABLE_SANITIZERS=ON -DBUILD_TESTING=ON ..
 ```
 
 ## Building the Project
@@ -98,50 +116,26 @@ sudo apt-get install libpq-dev libstdc++6 libmongoc-dev \
 ```bash
 git clone git@github.com:JohnnyTeutonic/chunking_cpp.git
 cd chunking_cpp
+mkdir build && cd build
 ```
 
-2.Make configure script executable
+2.Configure and build:
 
 ```bash
-chmod +x configure
+cmake ..
+make
 ```
 
-3.Configure the build:
-
-```bash
-./configure
-```
-
-Windows Only - Conversion of the configure script to unix line endings:
-
-```bash
-
-unix2dos configure
-```
-
-Configuration options:
-
-- `--prefix=PATH`: Set installation prefix (default: /usr/local)
-- `--build-type=TYPE`: Set build type (Debug|Release)
-- `--disable-tests`: Disable building tests
-- `--disable-docs`: Disable building documentation
-
-example:
-
-```bash
-./configure --prefix=/usr/local --build-type=Debug
-```
-
-3.Build and install the project:
-
-```bash
-make install
-```
-
-4.Run the tests:
+3.Run tests:
 
 ```bash
 make test
+```
+
+4.Install:
+
+```bash
+sudo make install
 ```
 
 5.Generate documentation:
@@ -296,3 +290,11 @@ If you encounter GLIBCXX version errors when installing the Python bindings:
 
 1. Update conda's libstdc++: `conda install -c conda-forge libstdcxx-ng`
 2. Or use system libraries: `export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH`
+
+The library version can be accessed through the following macros:
+
+```cpp
+CHUNKING_VERSION_MAJOR
+CHUNKING_VERSION_MINOR
+CHUNKING_VERSION_PATCH
+```
