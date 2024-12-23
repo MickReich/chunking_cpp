@@ -1,0 +1,17 @@
+#pragma once
+
+// Database support
+#cmakedefine HAVE_POSTGRESQL
+#cmakedefine HAVE_MONGODB
+
+// Message Queue support
+#cmakedefine HAVE_KAFKA
+#cmakedefine HAVE_RABBITMQ
+
+// Serialization support
+#cmakedefine HAVE_JSON
+
+// Version information
+#define CHUNKING_VERSION_MAJOR @PROJECT_VERSION_MAJOR@
+#define CHUNKING_VERSION_MINOR @PROJECT_VERSION_MINOR@
+#define CHUNKING_VERSION_PATCH @PROJECT_VERSION_PATCH@
