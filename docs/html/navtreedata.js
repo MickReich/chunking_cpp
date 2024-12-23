@@ -49,7 +49,9 @@ var NAVTREE =
     [ "License", "index.html#autotoc_md18", null ],
     [ "Citation", "index.html#autotoc_md19", null ],
     [ "Project Structure", "index.html#autotoc_md20", [
-      [ "Sophisticated Chunking Examples", "index.html#autotoc_md21", null ]
+      [ "Sophisticated Chunking Examples", "index.html#autotoc_md21", null ],
+      [ "Chunk Visualization", "index.html#autotoc_md22", null ],
+      [ "Chunk Benchmarking", "index.html#autotoc_md23", null ]
     ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
@@ -64,7 +66,7 @@ var NAVTREE =
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", "functions_dup" ],
-        [ "Functions", "functions_func.html", null ],
+        [ "Functions", "functions_func.html", "functions_func" ],
         [ "Variables", "functions_vars.html", null ],
         [ "Typedefs", "functions_type.html", null ]
       ] ]
@@ -73,7 +75,8 @@ var NAVTREE =
       [ "File List", "files.html", "files_dup" ],
       [ "File Members", "globals.html", [
         [ "All", "globals.html", null ],
-        [ "Functions", "globals_func.html", null ]
+        [ "Functions", "globals_func.html", null ],
+        [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ]
   ] ]
@@ -81,9 +84,11 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"advanced__structures_8hpp.html",
-"classchunk__strategies_1_1AdaptiveStrategy.html#ada5ef5e36bb56ceea46b67d49080a815",
-"index.html#autotoc_md1"
+"advanced__chunk__strategies_8hpp.html",
+"classadvanced__structures_1_1FractalPatternsChunk.html#a8736011996663d025f8b4191bd2156b0",
+"classchunk__strategies_1_1ChunkStrategy.html",
+"classparallel__chunk_1_1ParallelChunkProcessor.html#a23bb62ea1badf84f9595eae0edd5dec5",
+"structchunk__resilience_1_1Checkpoint.html#a55cf1e8c1a4f028d2c521960b93137e6"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

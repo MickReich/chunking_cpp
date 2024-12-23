@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['parallel_5fchunk_2ehpp_0',['parallel_chunk.hpp',['../parallel__chunk_8hpp.html',1,'']]]
+  ['gpu_5fchunking_2ehpp_0',['gpu_chunking.hpp',['../gpu__chunking_8hpp.html',1,'']]]
 ];

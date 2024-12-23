@@ -52,6 +52,8 @@ This library offers a comprehensive suite of tools for handling data in chunks, 
 \item Statistical operations
 \item Random chunk generation
 \item \doxylink{classChunk}{Chunk} manipulation utilities
+\item \doxylink{classChunk}{Chunk} visualization
+\item \doxylink{classChunk}{Chunk} benchmarking
 \end{DoxyItemize}\hypertarget{index_autotoc_md8}{}\doxysection{\texorpdfstring{Requirements}{Requirements}}\label{index_autotoc_md8}
 
 \begin{DoxyItemize}
@@ -303,7 +305,7 @@ For detailed examples of the sophisticated chunking algorithms, see {\ttfamily \
 \DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{sophisticated__chunking_8hpp}{sophisticated\_chunking.hpp}}"{}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//\ Example\ from\ sophisticated\_chunking\_demo.cpp}}
-\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{sophisticated__chunking__demo_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()\ \{}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \mbox{\hyperlink{benchmark_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()\ \{}
 \DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Wavelet-\/based\ chunking\ example}}
 \DoxyCodeLine{\ \ \ \ std::vector<double>\ signal\_data\ =\ \{1.0,\ 1.2,\ 1.1,\ 5.0,\ 5.2,\ 5.1,\ 2.0,\ 2.1\};}
 \DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classsophisticated__chunking_1_1WaveletChunking}{sophisticated\_chunking::WaveletChunking<double>}}\ wavelet\_chunker(8,\ 0.5);}
@@ -321,6 +323,59 @@ For detailed examples of the sophisticated chunking algorithms, see {\ttfamily \
 \DoxyCodeLine{}
 \DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ 0;}
 \DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md22}{}\doxysubsection{\texorpdfstring{Chunk Visualization}{Chunk Visualization}}\label{index_autotoc_md22}
+For detailed examples of the chunk visualization, see {\ttfamily src/chunk\+\_\+visualization\+\_\+demo.\+cpp}\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{chunk__visualization_8hpp}{chunk\_visualization.hpp}}"{}}}
+
+\end{DoxyCode}
+
+
+To run the chunk visualization demo, use\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make\ run-\/visualization}
+
+\end{DoxyCode}
+
+
+To use the visualisation as a standalone tool with gnuplot run\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{gnuplot\ visualization/plot\_chunks.gnu}
+
+\end{DoxyCode}
+
+
+Or with graphviz\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{dot\ -\/Tpng\ visualization/chunks.dot\ -\/o\ visualization/chunks.png}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md23}{}\doxysubsection{\texorpdfstring{Chunk Benchmarking}{Chunk Benchmarking}}\label{index_autotoc_md23}
+To compile and run the benchmark demo, use\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make\ benchmark}
+
+\end{DoxyCode}
+
+
+Or to use it as a standalone tool\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{chunk__benchmark_8hpp}{chunk\_benchmark.hpp}}"{}}}
+\DoxyCodeLine{...}
 
 \end{DoxyCode}
  

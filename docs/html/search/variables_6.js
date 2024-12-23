@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['head_0',['head',['../classadvanced__structures_1_1ChunkSkipList.html#ab57eee3b6e3a4baf840c7a474e9d6808',1,'advanced_structures::ChunkSkipList']]],
-  ['head_5f_1',['head_',['../classCircularBuffer.html#abd7fa51c466136b2ed4a3ed40dc72201',1,'CircularBuffer::head_'],['../classChunkList.html#a49bc83f07b0d5997269e5a775a8e8540',1,'ChunkList::head_']]],
-  ['heap_5f_2',['heap_',['../classPriorityQueue.html#a2dc28580b01197178f598f15b3182370',1,'PriorityQueue']]]
+  ['gen_0',['gen',['../classadvanced__structures_1_1ChunkTreap.html#a20c39e84fd693b4c4f9eb125b09d964a',1,'advanced_structures::ChunkTreap::gen'],['../classchunk__utils_1_1ChunkGenerator.html#aa12692893370479eb6e99dc3a9c10661',1,'chunk_utils::ChunkGenerator::gen']]]
 ];

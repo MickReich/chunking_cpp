@@ -3,6 +3,7 @@ var namespaceadvanced__structures =
     [ "BloomFilterChunk", "classadvanced__structures_1_1BloomFilterChunk.html", "classadvanced__structures_1_1BloomFilterChunk" ],
     [ "ChunkBPlusTree", "classadvanced__structures_1_1ChunkBPlusTree.html", "classadvanced__structures_1_1ChunkBPlusTree" ],
     [ "ChunkDeque", "classadvanced__structures_1_1ChunkDeque.html", "classadvanced__structures_1_1ChunkDeque" ],
+    [ "ChunkLSMTree", "classadvanced__structures_1_1ChunkLSMTree.html", "classadvanced__structures_1_1ChunkLSMTree" ],
     [ "ChunkSkipList", "classadvanced__structures_1_1ChunkSkipList.html", "classadvanced__structures_1_1ChunkSkipList" ],
     [ "ChunkStack", "classadvanced__structures_1_1ChunkStack.html", "classadvanced__structures_1_1ChunkStack" ],
     [ "ChunkTreap", "classadvanced__structures_1_1ChunkTreap.html", "classadvanced__structures_1_1ChunkTreap" ],

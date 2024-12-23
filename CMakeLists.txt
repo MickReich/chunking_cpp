@@ -9,9 +9,38 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+# Try multiple methods to find pybind11
+find_package(Python COMPONENTS Interpreter Development REQUIRED)
 
+# Method 1: Try standard CMake find_package
 set(PYBIND11_FINDPYTHON ON)
-find_package(pybind11 CONFIG REQUIRED)
+find_package(pybind11 CONFIG QUIET)
+
+if(NOT pybind11_FOUND)
+    # Method 2: Try pip installed location
+    execute_process(
+        COMMAND "${Python_EXECUTABLE}"
+        -c "import pybind11; print(pybind11.get_cmake_dir())"
+        OUTPUT_VARIABLE PYBIND11_CMAKE_DIR
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+        RESULT_VARIABLE PYBIND11_FIND_RESULT
+    )
+    if(PYBIND11_FIND_RESULT EQUAL 0)
+        list(APPEND CMAKE_PREFIX_PATH "${PYBIND11_CMAKE_DIR}")
+        find_package(pybind11 CONFIG QUIET)
+    endif()
+endif()
+
+if(NOT pybind11_FOUND)
+    # Method 3: Try to fetch pybind11 using FetchContent
+    include(FetchContent)
+    FetchContent_Declare(
+        pybind11
+        GIT_REPOSITORY https://github.com/pybind/pybind11
+        GIT_TAG        v2.11.1
+    )
+    FetchContent_MakeAvailable(pybind11)
+endif()
 
 # Find Python and get site-packages directory
 execute_process(

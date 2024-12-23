@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['validate_5fsize_0',['validate_size',['../classChunk.html#af09c384809b7238eb999b1d4d8fcfdd3',1,'Chunk']]],
-  ['value_1',['value',['../structadvanced__structures_1_1ChunkSkipList_1_1Node.html#ad695ad75f0262fd7ba19fe795cbf0cc4',1,'advanced_structures::ChunkSkipList::Node::value'],['../structadvanced__structures_1_1ChunkTreap_1_1Node.html#a100c856bdfa08adafe2ce04dc80bb7a4',1,'advanced_structures::ChunkTreap::Node::value']]],
-  ['variancestrategy_2',['variancestrategy',['../classchunk__strategies_1_1VarianceStrategy.html',1,'chunk_strategies::VarianceStrategy&lt; T &gt;'],['../classchunk__strategies_1_1VarianceStrategy.html#a87c90894b351203403bd32aa4ecd07a3',1,'chunk_strategies::VarianceStrategy::VarianceStrategy()']]]
+  ['update_5fchunks_0',['update_chunks',['../classChunk.html#a82af79dbdc92786a8073a50389d75738',1,'Chunk']]],
+  ['usage_1',['usage',['../index.html#autotoc_md11',1,'Basic Usage'],['../index.html#autotoc_md13',1,'Example Usage']]],
+  ['usage_20examples_2',['Usage Examples',['../index.html#autotoc_md10',1,'']]],
+  ['utilities_3',['Analysis &amp; Utilities',['../index.html#autotoc_md7',1,'']]],
+  ['utils_2ehpp_4',['utils.hpp',['../utils_8hpp.html',1,'']]]
 ];

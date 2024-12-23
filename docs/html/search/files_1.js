@@ -1,8 +1,4 @@
 var searchData=
 [
-  ['chunk_2ehpp_0',['chunk.hpp',['../chunk_8hpp.html',1,'']]],
-  ['chunk_5fcompression_2ehpp_1',['chunk_compression.hpp',['../chunk__compression_8hpp.html',1,'']]],
-  ['chunk_5fstrategies_2ehpp_2',['chunk_strategies.hpp',['../chunk__strategies_8hpp.html',1,'']]],
-  ['chunk_5fwindows_2ehpp_3',['chunk_windows.hpp',['../chunk__windows_8hpp.html',1,'']]],
-  ['config_2ehpp_4',['config.hpp',['../config_8hpp.html',1,'']]]
+  ['benchmark_2ecpp_0',['benchmark.cpp',['../benchmark_8cpp.html',1,'']]]
 ];

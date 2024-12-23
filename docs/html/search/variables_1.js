@@ -1,11 +1,8 @@
 var searchData=
 [
-  ['capacity_5f_0',['capacity_',['../classCircularBuffer.html#ad7ae2a7aded5a1a1524e050abc88a438',1,'CircularBuffer']]],
-  ['children_1',['children',['../structadvanced__structures_1_1ChunkBPlusTree_1_1Node.html#a665314b6b31d02ee09e4bad70f055eab',1,'advanced_structures::ChunkBPlusTree::Node']]],
-  ['chunk_5fsize_2',['chunk_size',['../classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f',1,'Chunk']]],
-  ['chunks_3',['chunks',['../classChunk.html#a1574993946fe5b28c6d89ce4bf77857b',1,'Chunk']]],
-  ['comp_5f_4',['comp_',['../classPriorityQueue.html#a4fa43ad50be95b27d62d62d73a83f19c',1,'PriorityQueue']]],
-  ['condition_5f_5',['condition_',['../classchunk__strategies_1_1ConditionalSubChunkStrategy.html#abaf81b9f4fc1a975e24775f5e83b4872',1,'chunk_strategies::ConditionalSubChunkStrategy']]],
-  ['context_5fsize_5f_6',['context_size_',['../classsophisticated__chunking_1_1MutualInformationChunking.html#a70acda7d7a1260ef794bf9195483c6ac',1,'sophisticated_chunking::MutualInformationChunking']]],
-  ['current_5flevel_7',['current_level',['../classadvanced__structures_1_1ChunkSkipList.html#a642cbae0a13509a0616bcdb6112610f9',1,'advanced_structures::ChunkSkipList']]]
+  ['best_5fmemory_5fstrategy_0',['best_memory_strategy',['../classchunk__benchmark_1_1ChunkBenchmark.html#a693eeb944b4067d0340e357d5bd8ab65',1,'chunk_benchmark::ChunkBenchmark::BenchmarkResults']]],
+  ['best_5fthroughput_5fstrategy_1',['best_throughput_strategy',['../classchunk__benchmark_1_1ChunkBenchmark.html#a16c0a822331fb50846d0f0bd979bc79e',1,'chunk_benchmark::ChunkBenchmark::BenchmarkResults']]],
+  ['biases_2',['biases',['../classneural__chunking_1_1Layer.html#a06d0db868f3b14e60f877aaef70ecbb3',1,'neural_chunking::Layer']]],
+  ['boundary_5fthreshold_3',['boundary_threshold',['../classadvanced__structures_1_1SemanticBoundariesChunk.html#a59f37d922130f44da884e79729f8572b',1,'advanced_structures::SemanticBoundariesChunk']]],
+  ['buffer_5f_4',['buffer_',['../classCircularBuffer.html#a8dec6941db72a0d1111de5d261878c51',1,'CircularBuffer']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['parallel_5fchunk_0',['parallel_chunk',['../namespaceparallel__chunk.html',1,'']]]
+  ['gpu_5fchunking_0',['gpu_chunking',['../namespacegpu__chunking.html',1,'']]]
 ];

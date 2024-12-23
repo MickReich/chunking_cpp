@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['parallelchunkprocessor_0',['ParallelChunkProcessor',['../classparallel__chunk_1_1ParallelChunkProcessor.html',1,'parallel_chunk']]],
-  ['patternbasedstrategy_1',['PatternBasedStrategy',['../classchunk__strategies_1_1PatternBasedStrategy.html',1,'chunk_strategies']]],
-  ['priorityqueue_2',['PriorityQueue',['../classPriorityQueue.html',1,'']]]
+  ['messagequeueconnection_0',['MessageQueueConnection',['../classchunk__integrations_1_1MessageQueueConnection.html',1,'chunk_integrations']]],
+  ['multicriteriastrategy_1',['multicriteriastrategy',['../classchunk__strategies_1_1MultiCriteriaStrategy.html',1,'chunk_strategies::MultiCriteriaStrategy&lt; T &gt;'],['../classMultiCriteriaStrategy.html',1,'MultiCriteriaStrategy&lt; T &gt;']]],
+  ['mutualinformationchunking_2',['MutualInformationChunking',['../classsophisticated__chunking_1_1MutualInformationChunking.html',1,'sophisticated_chunking']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['keys_0',['keys',['../structadvanced__structures_1_1ChunkBPlusTree_1_1Node.html#abfcb85beab82189e87b5eb417d6fc3e5',1,'advanced_structures::ChunkBPlusTree::Node']]]
+  ['json_0',['json',['../structchunk__integrations_1_1json.html',1,'chunk_integrations::json'],['../structchunk__integrations_1_1json.html#a5b4684bc8ce36d45ef4e5be3d635e5e8',1,'chunk_integrations::json::json()']]]
 ];

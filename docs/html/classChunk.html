@@ -93,6 +93,7 @@ $(document).ready(function(){initNavTree('classChunk.html',''); initResizable();
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-static-methods">Static Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classChunk-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Chunk&lt; T &gt; Class Template Reference</div></div>
@@ -127,13 +128,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a69630b9586ba94c1df6a8c29df2aab40" id="r_a69630b9586ba94c1df6a8c29df2aab40"><td class="memTemplParams" colspan="2">template&lt;typename Pred &gt; </td></tr>
 <tr class="memitem:a69630b9586ba94c1df6a8c29df2aab40"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; T &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classChunk.html#a69630b9586ba94c1df6a8c29df2aab40">chunk_by_predicate</a> (Pred predicate) const</td></tr>
 <tr class="separator:a69630b9586ba94c1df6a8c29df2aab40"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6eb63fcaea91518ff55759a7de548b2b" id="r_a6eb63fcaea91518ff55759a7de548b2b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; T &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChunk.html#a6eb63fcaea91518ff55759a7de548b2b">chunk_by_similarity</a> (T threshold) const</td></tr>
-<tr class="separator:a6eb63fcaea91518ff55759a7de548b2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37827aa0a4e783dc456b42e8432fc8be" id="r_a37827aa0a4e783dc456b42e8432fc8be"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; T &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChunk.html#a37827aa0a4e783dc456b42e8432fc8be">chunk_by_similarity</a> (double threshold)</td></tr>
+<tr class="separator:a37827aa0a4e783dc456b42e8432fc8be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acec70aadb47378ce3cf997c273122e90" id="r_acec70aadb47378ce3cf997c273122e90"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; T &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChunk.html#acec70aadb47378ce3cf997c273122e90">chunk_by_size</a> (size_t <a class="el" href="classChunk.html#a160459077243c9e5ff642f478277e161">size</a>)</td></tr>
+<tr class="separator:acec70aadb47378ce3cf997c273122e90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe62a4d4d72e24468d53ec0f58f5a43f" id="r_abe62a4d4d72e24468d53ec0f58f5a43f"><td class="memTemplParams" colspan="2">template&lt;typename StatFunc &gt; </td></tr>
 <tr class="memitem:abe62a4d4d72e24468d53ec0f58f5a43f"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; T &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classChunk.html#abe62a4d4d72e24468d53ec0f58f5a43f">chunk_by_statistic</a> (T threshold, StatFunc stat_func) const</td></tr>
 <tr class="separator:abe62a4d4d72e24468d53ec0f58f5a43f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3533c581decb67f8f9511dc6b7c264c7" id="r_a3533c581decb67f8f9511dc6b7c264c7"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; T &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChunk.html#a3533c581decb67f8f9511dc6b7c264c7">chunk_by_sum</a> (T target_sum) const</td></tr>
 <tr class="separator:a3533c581decb67f8f9511dc6b7c264c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0402384cad119ee6b3ebea2e0751452" id="r_af0402384cad119ee6b3ebea2e0751452"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; T &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChunk.html#af0402384cad119ee6b3ebea2e0751452">chunk_by_threshold</a> (T threshold)</td></tr>
+<tr class="separator:af0402384cad119ee6b3ebea2e0751452"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addc46ee1885118a00bed3b5df55a96c5" id="r_addc46ee1885118a00bed3b5df55a96c5"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChunk.html#addc46ee1885118a00bed3b5df55a96c5">chunk_count</a> () const</td></tr>
 <tr class="separator:addc46ee1885118a00bed3b5df55a96c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8399db98c455ce9b00b45aace5919a05" id="r_a8399db98c455ce9b00b45aace5919a05"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; T &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChunk.html#a8399db98c455ce9b00b45aace5919a05">chunk_into_n</a> (size_t n) const</td></tr>
@@ -155,10 +160,21 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
+<tr class="memitem:add669d0ba2aa2cea53e5c530ea917a00" id="r_add669d0ba2aa2cea53e5c530ea917a00"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; T &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChunk.html#add669d0ba2aa2cea53e5c530ea917a00">create_similarity_chunks</a> (double threshold) const</td></tr>
+<tr class="separator:add669d0ba2aa2cea53e5c530ea917a00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae57819e89c5e08b0357d5e9979a1f988" id="r_ae57819e89c5e08b0357d5e9979a1f988"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; T &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChunk.html#ae57819e89c5e08b0357d5e9979a1f988">create_threshold_chunks</a> (T threshold) const</td></tr>
+<tr class="separator:ae57819e89c5e08b0357d5e9979a1f988"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fe346af2e780a31ad2d16466648ce8a" id="r_a5fe346af2e780a31ad2d16466648ce8a"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; T &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChunk.html#a5fe346af2e780a31ad2d16466648ce8a">make_chunks</a> (size_t <a class="el" href="classChunk.html#a160459077243c9e5ff642f478277e161">size</a>) const</td></tr>
+<tr class="separator:a5fe346af2e780a31ad2d16466648ce8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82af79dbdc92786a8073a50389d75738" id="r_a82af79dbdc92786a8073a50389d75738"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChunk.html#a82af79dbdc92786a8073a50389d75738">update_chunks</a> ()</td></tr>
 <tr class="separator:a82af79dbdc92786a8073a50389d75738"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af09c384809b7238eb999b1d4d8fcfdd3" id="r_af09c384809b7238eb999b1d4d8fcfdd3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChunk.html#af09c384809b7238eb999b1d4d8fcfdd3">validate_size</a> (size_t <a class="el" href="classChunk.html#a160459077243c9e5ff642f478277e161">size</a>, const std::string &amp;param) const</td></tr>
 <tr class="separator:af09c384809b7238eb999b1d4d8fcfdd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-methods" name="pri-static-methods"></a>
+Static Private Member Functions</h2></td></tr>
+<tr class="memitem:a307574b74c36b7c2a7f857ca3f598b49" id="r_a307574b74c36b7c2a7f857ca3f598b49"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChunk.html#a307574b74c36b7c2a7f857ca3f598b49">calculate_similarity</a> (const T &amp;a, const T &amp;b)</td></tr>
+<tr class="separator:a307574b74c36b7c2a7f857ca3f598b49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -222,16 +238,16 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00045">45</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   45</span>                                : <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a>(<a class="code hl_function" href="classChunk.html#a160459077243c9e5ff642f478277e161">size</a>) {</div>
-<div class="line"><span class="lineno">   46</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="classChunk.html#a160459077243c9e5ff642f478277e161">size</a> == 0) {</div>
-<div class="line"><span class="lineno">   47</span>            <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Chunk size must be greater than 0&quot;</span>);</div>
-<div class="line"><span class="lineno">   48</span>        }</div>
-<div class="line"><span class="lineno">   49</span>    }</div>
-<div class="ttc" id="aclassChunk_html_a160459077243c9e5ff642f478277e161"><div class="ttname"><a href="classChunk.html#a160459077243c9e5ff642f478277e161">Chunk::size</a></div><div class="ttdeci">size_t size() const</div><div class="ttdef"><b>Definition</b> <a href="chunk_8hpp_source.html#l00051">chunk.hpp:51</a></div></div>
+<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00117">117</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  117</span>                                : <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a>(<a class="code hl_function" href="classChunk.html#a160459077243c9e5ff642f478277e161">size</a>) {</div>
+<div class="line"><span class="lineno">  118</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="classChunk.html#a160459077243c9e5ff642f478277e161">size</a> == 0) {</div>
+<div class="line"><span class="lineno">  119</span>            <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Chunk size must be greater than 0&quot;</span>);</div>
+<div class="line"><span class="lineno">  120</span>        }</div>
+<div class="line"><span class="lineno">  121</span>    }</div>
+<div class="ttc" id="aclassChunk_html_a160459077243c9e5ff642f478277e161"><div class="ttname"><a href="classChunk.html#a160459077243c9e5ff642f478277e161">Chunk::size</a></div><div class="ttdeci">size_t size() const</div><div class="ttdef"><b>Definition</b> <a href="chunk_8hpp_source.html#l00123">chunk.hpp:123</a></div></div>
 <div class="ttc" id="aclassChunk_html_a3c0ec38d609ec15af0d5a7e795afb29f"><div class="ttname"><a href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">Chunk::chunk_size</a></div><div class="ttdeci">size_t chunk_size</div><div class="ttdef"><b>Definition</b> <a href="chunk_8hpp_source.html#l00028">chunk.hpp:28</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="chunk_8hpp_source.html#l00051">Chunk&lt; T &gt;::size()</a>.</p>
+<p class="reference">References <a class="el" href="chunk_8hpp_source.html#l00123">Chunk&lt; T &gt;::size()</a>.</p>
 
 </div>
 </div>
@@ -270,15 +286,15 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00072">72</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   72</span>                                           {</div>
-<div class="line"><span class="lineno">   73</span>        <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.insert(<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.end(), elements.begin(), elements.end());</div>
-<div class="line"><span class="lineno">   74</span>        <a class="code hl_function" href="classChunk.html#a82af79dbdc92786a8073a50389d75738">update_chunks</a>();</div>
-<div class="line"><span class="lineno">   75</span>    }</div>
-<div class="ttc" id="aclassChunk_html_a82af79dbdc92786a8073a50389d75738"><div class="ttname"><a href="classChunk.html#a82af79dbdc92786a8073a50389d75738">Chunk::update_chunks</a></div><div class="ttdeci">void update_chunks()</div><div class="ttdef"><b>Definition</b> <a href="chunk_8hpp_source.html#l00252">chunk.hpp:252</a></div></div>
+<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00144">144</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  144</span>                                           {</div>
+<div class="line"><span class="lineno">  145</span>        <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.insert(<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.end(), elements.begin(), elements.end());</div>
+<div class="line"><span class="lineno">  146</span>        <a class="code hl_function" href="classChunk.html#a82af79dbdc92786a8073a50389d75738">update_chunks</a>();</div>
+<div class="line"><span class="lineno">  147</span>    }</div>
+<div class="ttc" id="aclassChunk_html_a82af79dbdc92786a8073a50389d75738"><div class="ttname"><a href="classChunk.html#a82af79dbdc92786a8073a50389d75738">Chunk::update_chunks</a></div><div class="ttdeci">void update_chunks()</div><div class="ttdef"><b>Definition</b> <a href="chunk_8hpp_source.html#l00326">chunk.hpp:326</a></div></div>
 <div class="ttc" id="aclassChunk_html_aa808f6466a7244c14464b007214f6835"><div class="ttname"><a href="classChunk.html#aa808f6466a7244c14464b007214f6835">Chunk::data</a></div><div class="ttdeci">std::vector&lt; T &gt; data</div><div class="ttdef"><b>Definition</b> <a href="chunk_8hpp_source.html#l00029">chunk.hpp:29</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="chunk_8hpp_source.html#l00029">Chunk&lt; T &gt;::data</a>, and <a class="el" href="chunk_8hpp_source.html#l00252">Chunk&lt; T &gt;::update_chunks()</a>.</p>
+<p class="reference">References <a class="el" href="chunk_8hpp_source.html#l00029">Chunk&lt; T &gt;::data</a>, and <a class="el" href="chunk_8hpp_source.html#l00326">Chunk&lt; T &gt;::update_chunks()</a>.</p>
 
 </div>
 </div>
@@ -316,15 +332,64 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00063">63</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   63</span>                               {</div>
-<div class="line"><span class="lineno">   64</span>        <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.push_back(element);</div>
-<div class="line"><span class="lineno">   65</span>        <a class="code hl_function" href="classChunk.html#a82af79dbdc92786a8073a50389d75738">update_chunks</a>();</div>
-<div class="line"><span class="lineno">   66</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00135">135</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  135</span>                               {</div>
+<div class="line"><span class="lineno">  136</span>        <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.push_back(element);</div>
+<div class="line"><span class="lineno">  137</span>        <a class="code hl_function" href="classChunk.html#a82af79dbdc92786a8073a50389d75738">update_chunks</a>();</div>
+<div class="line"><span class="lineno">  138</span>    }</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="chunk_8hpp_source.html#l00029">Chunk&lt; T &gt;::data</a>, and <a class="el" href="chunk_8hpp_source.html#l00252">Chunk&lt; T &gt;::update_chunks()</a>.</p>
+<p class="reference">References <a class="el" href="chunk_8hpp_source.html#l00029">Chunk&lt; T &gt;::data</a>, and <a class="el" href="chunk_8hpp_source.html#l00326">Chunk&lt; T &gt;::update_chunks()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="chunk__strategies_8hpp_source.html#l00184">chunk_strategies::PatternBasedStrategy&lt; T &gt;::apply()</a>, <a class="el" href="chunk__strategies_8hpp_source.html#l00201">chunk_strategies::AdaptiveStrategy&lt; T &gt;::apply()</a>, <a class="el" href="chunk__strategies_8hpp_source.html#l00218">chunk_strategies::MultiCriteriaStrategy&lt; T &gt;::apply()</a>, <a class="el" href="chunk__strategies_8hpp_source.html#l00247">chunk_strategies::DynamicThresholdStrategy&lt; T &gt;::apply()</a>, and <a class="el" href="chunk__windows_8hpp_source.html#l00015">chunk_windows::SlidingWindowProcessor&lt; T &gt;::process()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="chunk__strategies_8hpp_source.html#l00184">chunk_strategies::PatternBasedStrategy&lt; T &gt;::apply()</a>, <a class="el" href="chunk__strategies_8hpp_source.html#l00201">chunk_strategies::AdaptiveStrategy&lt; T &gt;::apply()</a>, <a class="el" href="chunk__strategies_8hpp_source.html#l00218">chunk_strategies::MultiCriteriaStrategy&lt; T &gt;::apply()</a>, <a class="el" href="chunk__strategies_8hpp_source.html#l00247">chunk_strategies::DynamicThresholdStrategy&lt; T &gt;::apply()</a>, <a class="el" href="benchmark_8cpp_source.html#l00034">SimilarityChunkingStrategy&lt; T &gt;::chunk()</a>, and <a class="el" href="chunk__windows_8hpp_source.html#l00015">chunk_windows::SlidingWindowProcessor&lt; T &gt;::process()</a>.</p>
+
+</div>
+</div>
+<a id="a307574b74c36b7c2a7f857ca3f598b49" name="a307574b74c36b7c2a7f857ca3f598b49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a307574b74c36b7c2a7f857ca3f598b49">&#9670;&#160;</a></span>calculate_similarity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static double <a class="el" href="classChunk.html">Chunk</a>&lt; T &gt;::calculate_similarity </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00052">52</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   52</span>                                                               {</div>
+<div class="line"><span class="lineno">   53</span>        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::is_arithmetic_v&lt;T&gt;) {</div>
+<div class="line"><span class="lineno">   54</span>            <span class="keywordflow">return</span> std::abs(<span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(a - b));</div>
+<div class="line"><span class="lineno">   55</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">   56</span>            <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Similarity calculation not implemented for this type&quot;</span>);</div>
+<div class="line"><span class="lineno">   57</span>        }</div>
+<div class="line"><span class="lineno">   58</span>    }</div>
+</div><!-- fragment -->
+<p class="reference">Referenced by <a class="el" href="chunk_8hpp_source.html#l00061">Chunk&lt; T &gt;::create_similarity_chunks()</a>.</p>
 
 </div>
 </div>
@@ -353,26 +418,26 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00168">168</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  168</span>                                                          {</div>
-<div class="line"><span class="lineno">  169</span>        std::vector&lt;std::vector&lt;T&gt;&gt; result;</div>
-<div class="line"><span class="lineno">  170</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size() &lt; 2)</div>
-<div class="line"><span class="lineno">  171</span>            <span class="keywordflow">return</span> {<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>};</div>
-<div class="line"><span class="lineno">  172</span>        std::vector&lt;T&gt; current_chunk{<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[0]};</div>
-<div class="line"><span class="lineno">  173</span>        <span class="keywordtype">bool</span> increasing = <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[1] &gt; <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[0];</div>
-<div class="line"><span class="lineno">  174</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt; <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size(); ++i) {</div>
-<div class="line"><span class="lineno">  175</span>            <span class="keywordflow">if</span> ((<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[i] &gt; <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[i - 1]) != increasing &amp;&amp; !current_chunk.empty()) {</div>
-<div class="line"><span class="lineno">  176</span>                result.push_back(current_chunk);</div>
-<div class="line"><span class="lineno">  177</span>                current_chunk.clear();</div>
-<div class="line"><span class="lineno">  178</span>                <span class="keywordflow">if</span> (i &lt; <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size() - 1)</div>
-<div class="line"><span class="lineno">  179</span>                    increasing = <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[i + 1] &gt; <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[i];</div>
-<div class="line"><span class="lineno">  180</span>            }</div>
-<div class="line"><span class="lineno">  181</span>            current_chunk.push_back(<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[i]);</div>
-<div class="line"><span class="lineno">  182</span>        }</div>
-<div class="line"><span class="lineno">  183</span>        <span class="keywordflow">if</span> (!current_chunk.empty())</div>
-<div class="line"><span class="lineno">  184</span>            result.push_back(current_chunk);</div>
-<div class="line"><span class="lineno">  185</span>        <span class="keywordflow">return</span> result;</div>
-<div class="line"><span class="lineno">  186</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00240">240</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  240</span>                                                          {</div>
+<div class="line"><span class="lineno">  241</span>        std::vector&lt;std::vector&lt;T&gt;&gt; result;</div>
+<div class="line"><span class="lineno">  242</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size() &lt; 2)</div>
+<div class="line"><span class="lineno">  243</span>            <span class="keywordflow">return</span> {<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>};</div>
+<div class="line"><span class="lineno">  244</span>        std::vector&lt;T&gt; current_chunk{<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[0]};</div>
+<div class="line"><span class="lineno">  245</span>        <span class="keywordtype">bool</span> increasing = <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[1] &gt; <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[0];</div>
+<div class="line"><span class="lineno">  246</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt; <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size(); ++i) {</div>
+<div class="line"><span class="lineno">  247</span>            <span class="keywordflow">if</span> ((<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[i] &gt; <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[i - 1]) != increasing &amp;&amp; !current_chunk.empty()) {</div>
+<div class="line"><span class="lineno">  248</span>                result.push_back(current_chunk);</div>
+<div class="line"><span class="lineno">  249</span>                current_chunk.clear();</div>
+<div class="line"><span class="lineno">  250</span>                <span class="keywordflow">if</span> (i &lt; <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size() - 1)</div>
+<div class="line"><span class="lineno">  251</span>                    increasing = <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[i + 1] &gt; <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[i];</div>
+<div class="line"><span class="lineno">  252</span>            }</div>
+<div class="line"><span class="lineno">  253</span>            current_chunk.push_back(<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[i]);</div>
+<div class="line"><span class="lineno">  254</span>        }</div>
+<div class="line"><span class="lineno">  255</span>        <span class="keywordflow">if</span> (!current_chunk.empty())</div>
+<div class="line"><span class="lineno">  256</span>            result.push_back(current_chunk);</div>
+<div class="line"><span class="lineno">  257</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">  258</span>    }</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="chunk_8hpp_source.html#l00029">Chunk&lt; T &gt;::data</a>.</p>
 
@@ -406,24 +471,24 @@ template&lt;typename Pred &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00113">113</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  113</span>                                                                     {</div>
-<div class="line"><span class="lineno">  114</span>        std::vector&lt;std::vector&lt;T&gt;&gt; result;</div>
-<div class="line"><span class="lineno">  115</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.empty())</div>
-<div class="line"><span class="lineno">  116</span>            <span class="keywordflow">return</span> result;</div>
-<div class="line"><span class="lineno">  117</span>        std::vector&lt;T&gt; current_chunk;</div>
-<div class="line"><span class="lineno">  118</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> T&amp; item : <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>) {</div>
-<div class="line"><span class="lineno">  119</span>            <span class="keywordflow">if</span> (predicate(item) &amp;&amp; !current_chunk.empty()) {</div>
-<div class="line"><span class="lineno">  120</span>                result.push_back(current_chunk);</div>
-<div class="line"><span class="lineno">  121</span>                current_chunk.clear();</div>
-<div class="line"><span class="lineno">  122</span>            }</div>
-<div class="line"><span class="lineno">  123</span>            current_chunk.push_back(item);</div>
-<div class="line"><span class="lineno">  124</span>        }</div>
-<div class="line"><span class="lineno">  125</span>        <span class="keywordflow">if</span> (!current_chunk.empty()) {</div>
-<div class="line"><span class="lineno">  126</span>            result.push_back(current_chunk);</div>
-<div class="line"><span class="lineno">  127</span>        }</div>
-<div class="line"><span class="lineno">  128</span>        <span class="keywordflow">return</span> result;</div>
-<div class="line"><span class="lineno">  129</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00185">185</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  185</span>                                                                     {</div>
+<div class="line"><span class="lineno">  186</span>        std::vector&lt;std::vector&lt;T&gt;&gt; result;</div>
+<div class="line"><span class="lineno">  187</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.empty())</div>
+<div class="line"><span class="lineno">  188</span>            <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">  189</span>        std::vector&lt;T&gt; current_chunk;</div>
+<div class="line"><span class="lineno">  190</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> T&amp; item : <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>) {</div>
+<div class="line"><span class="lineno">  191</span>            <span class="keywordflow">if</span> (predicate(item) &amp;&amp; !current_chunk.empty()) {</div>
+<div class="line"><span class="lineno">  192</span>                result.push_back(current_chunk);</div>
+<div class="line"><span class="lineno">  193</span>                current_chunk.clear();</div>
+<div class="line"><span class="lineno">  194</span>            }</div>
+<div class="line"><span class="lineno">  195</span>            current_chunk.push_back(item);</div>
+<div class="line"><span class="lineno">  196</span>        }</div>
+<div class="line"><span class="lineno">  197</span>        <span class="keywordflow">if</span> (!current_chunk.empty()) {</div>
+<div class="line"><span class="lineno">  198</span>            result.push_back(current_chunk);</div>
+<div class="line"><span class="lineno">  199</span>        }</div>
+<div class="line"><span class="lineno">  200</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">  201</span>    }</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="chunk_8hpp_source.html#l00029">Chunk&lt; T &gt;::data</a>.</p>
 
@@ -431,8 +496,8 @@ template&lt;typename Pred &gt; </div>
 
 </div>
 </div>
-<a id="a6eb63fcaea91518ff55759a7de548b2b" name="a6eb63fcaea91518ff55759a7de548b2b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6eb63fcaea91518ff55759a7de548b2b">&#9670;&#160;</a></span>chunk_by_similarity()</h2>
+<a id="a37827aa0a4e783dc456b42e8432fc8be" name="a37827aa0a4e783dc456b42e8432fc8be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37827aa0a4e783dc456b42e8432fc8be">&#9670;&#160;</a></span>chunk_by_similarity()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -445,9 +510,9 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="memname">std::vector&lt; std::vector&lt; T &gt; &gt; <a class="el" href="classChunk.html">Chunk</a>&lt; T &gt;::chunk_by_similarity </td>
           <td>(</td>
-          <td class="paramtype">T&#160;</td>
+          <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>threshold</em></td><td>)</td>
-          <td> const</td>
+          <td></td>
         </tr>
       </table>
   </td>
@@ -457,31 +522,55 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00206">206</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  206</span>                                                                   {</div>
-<div class="line"><span class="lineno">  207</span>        std::vector&lt;std::vector&lt;T&gt;&gt; result;</div>
-<div class="line"><span class="lineno">  208</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.empty())</div>
-<div class="line"><span class="lineno">  209</span>            <span class="keywordflow">return</span> result;</div>
-<div class="line"><span class="lineno">  210</span>        std::vector&lt;T&gt; current_chunk{<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[0]};</div>
-<div class="line"><span class="lineno">  211</span>        T chunk_mean = <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[0];</div>
-<div class="line"><span class="lineno">  212</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt; <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size(); ++i) {</div>
-<div class="line"><span class="lineno">  213</span>            <span class="keywordflow">if</span> (std::abs(<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[i] - chunk_mean) &gt; threshold) {</div>
-<div class="line"><span class="lineno">  214</span>                result.push_back(current_chunk);</div>
-<div class="line"><span class="lineno">  215</span>                current_chunk.clear();</div>
-<div class="line"><span class="lineno">  216</span>                chunk_mean = <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[i];</div>
-<div class="line"><span class="lineno">  217</span>            }</div>
-<div class="line"><span class="lineno">  218</span>            current_chunk.push_back(<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[i]);</div>
-<div class="line"><span class="lineno">  219</span>            chunk_mean = std::accumulate(current_chunk.begin(), current_chunk.end(), T(0)) /</div>
-<div class="line"><span class="lineno">  220</span>                         <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(current_chunk.size());</div>
-<div class="line"><span class="lineno">  221</span>        }</div>
-<div class="line"><span class="lineno">  222</span>        <span class="keywordflow">if</span> (!current_chunk.empty())</div>
-<div class="line"><span class="lineno">  223</span>            result.push_back(current_chunk);</div>
-<div class="line"><span class="lineno">  224</span>        <span class="keywordflow">return</span> result;</div>
-<div class="line"><span class="lineno">  225</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00278">278</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  278</span>                                                                  {</div>
+<div class="line"><span class="lineno">  279</span>        <span class="keywordflow">try</span> {</div>
+<div class="line"><span class="lineno">  280</span>            <span class="keywordflow">return</span> <a class="code hl_function" href="classChunk.html#add669d0ba2aa2cea53e5c530ea917a00">create_similarity_chunks</a>(threshold);</div>
+<div class="line"><span class="lineno">  281</span>        } <span class="keywordflow">catch</span> (<span class="keyword">const</span> std::exception&amp; e) {</div>
+<div class="line"><span class="lineno">  282</span>            <span class="keywordflow">return</span> std::vector&lt;std::vector&lt;T&gt;&gt;{<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>};</div>
+<div class="line"><span class="lineno">  283</span>        }</div>
+<div class="line"><span class="lineno">  284</span>    }</div>
+<div class="ttc" id="aclassChunk_html_add669d0ba2aa2cea53e5c530ea917a00"><div class="ttname"><a href="classChunk.html#add669d0ba2aa2cea53e5c530ea917a00">Chunk::create_similarity_chunks</a></div><div class="ttdeci">std::vector&lt; std::vector&lt; T &gt; &gt; create_similarity_chunks(double threshold) const</div><div class="ttdef"><b>Definition</b> <a href="chunk_8hpp_source.html#l00061">chunk.hpp:61</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="chunk_8hpp_source.html#l00029">Chunk&lt; T &gt;::data</a>.</p>
+<p class="reference">References <a class="el" href="chunk_8hpp_source.html#l00061">Chunk&lt; T &gt;::create_similarity_chunks()</a>, and <a class="el" href="chunk_8hpp_source.html#l00029">Chunk&lt; T &gt;::data</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="chunk__strategies_8hpp_source.html#l00218">chunk_strategies::MultiCriteriaStrategy&lt; T &gt;::apply()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="chunk__strategies_8hpp_source.html#l00218">chunk_strategies::MultiCriteriaStrategy&lt; T &gt;::apply()</a>, and <a class="el" href="benchmark_8cpp_source.html#l00034">SimilarityChunkingStrategy&lt; T &gt;::chunk()</a>.</p>
+
+</div>
+</div>
+<a id="acec70aadb47378ce3cf997c273122e90" name="acec70aadb47378ce3cf997c273122e90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acec70aadb47378ce3cf997c273122e90">&#9670;&#160;</a></span>chunk_by_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::vector&lt; T &gt; &gt; <a class="el" href="classChunk.html">Chunk</a>&lt; T &gt;::chunk_by_size </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00310">310</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  310</span>                                                       {</div>
+<div class="line"><span class="lineno">  311</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classChunk.html#a5fe346af2e780a31ad2d16466648ce8a">make_chunks</a>(<a class="code hl_function" href="classChunk.html#a160459077243c9e5ff642f478277e161">size</a>);</div>
+<div class="line"><span class="lineno">  312</span>    }</div>
+<div class="ttc" id="aclassChunk_html_a5fe346af2e780a31ad2d16466648ce8a"><div class="ttname"><a href="classChunk.html#a5fe346af2e780a31ad2d16466648ce8a">Chunk::make_chunks</a></div><div class="ttdeci">std::vector&lt; std::vector&lt; T &gt; &gt; make_chunks(size_t size) const</div><div class="ttdef"><b>Definition</b> <a href="chunk_8hpp_source.html#l00040">chunk.hpp:40</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="chunk_8hpp_source.html#l00040">Chunk&lt; T &gt;::make_chunks()</a>, and <a class="el" href="chunk_8hpp_source.html#l00123">Chunk&lt; T &gt;::size()</a>.</p>
 
 </div>
 </div>
@@ -523,23 +612,23 @@ template&lt;typename StatFunc &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00189">189</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  189</span>                                                                                      {</div>
-<div class="line"><span class="lineno">  190</span>        std::vector&lt;std::vector&lt;T&gt;&gt; result;</div>
-<div class="line"><span class="lineno">  191</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.empty())</div>
-<div class="line"><span class="lineno">  192</span>            <span class="keywordflow">return</span> result;</div>
-<div class="line"><span class="lineno">  193</span>        std::vector&lt;T&gt; current_chunk{<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[0]};</div>
-<div class="line"><span class="lineno">  194</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt; <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size(); ++i) {</div>
-<div class="line"><span class="lineno">  195</span>            <span class="keywordflow">if</span> (stat_func(current_chunk) &gt; threshold) {</div>
-<div class="line"><span class="lineno">  196</span>                result.push_back(current_chunk);</div>
-<div class="line"><span class="lineno">  197</span>                current_chunk.clear();</div>
-<div class="line"><span class="lineno">  198</span>            }</div>
-<div class="line"><span class="lineno">  199</span>            current_chunk.push_back(<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[i]);</div>
-<div class="line"><span class="lineno">  200</span>        }</div>
-<div class="line"><span class="lineno">  201</span>        <span class="keywordflow">if</span> (!current_chunk.empty())</div>
-<div class="line"><span class="lineno">  202</span>            result.push_back(current_chunk);</div>
-<div class="line"><span class="lineno">  203</span>        <span class="keywordflow">return</span> result;</div>
-<div class="line"><span class="lineno">  204</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00261">261</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  261</span>                                                                                      {</div>
+<div class="line"><span class="lineno">  262</span>        std::vector&lt;std::vector&lt;T&gt;&gt; result;</div>
+<div class="line"><span class="lineno">  263</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.empty())</div>
+<div class="line"><span class="lineno">  264</span>            <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">  265</span>        std::vector&lt;T&gt; current_chunk{<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[0]};</div>
+<div class="line"><span class="lineno">  266</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt; <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size(); ++i) {</div>
+<div class="line"><span class="lineno">  267</span>            <span class="keywordflow">if</span> (stat_func(current_chunk) &gt; threshold) {</div>
+<div class="line"><span class="lineno">  268</span>                result.push_back(current_chunk);</div>
+<div class="line"><span class="lineno">  269</span>                current_chunk.clear();</div>
+<div class="line"><span class="lineno">  270</span>            }</div>
+<div class="line"><span class="lineno">  271</span>            current_chunk.push_back(<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[i]);</div>
+<div class="line"><span class="lineno">  272</span>        }</div>
+<div class="line"><span class="lineno">  273</span>        <span class="keywordflow">if</span> (!current_chunk.empty())</div>
+<div class="line"><span class="lineno">  274</span>            result.push_back(current_chunk);</div>
+<div class="line"><span class="lineno">  275</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">  276</span>    }</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="chunk_8hpp_source.html#l00029">Chunk&lt; T &gt;::data</a>.</p>
 
@@ -573,27 +662,70 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00131">131</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  131</span>                                                             {</div>
-<div class="line"><span class="lineno">  132</span>        std::vector&lt;std::vector&lt;T&gt;&gt; result;</div>
-<div class="line"><span class="lineno">  133</span>        std::vector&lt;T&gt; current_chunk;</div>
-<div class="line"><span class="lineno">  134</span>        T current_sum = T();</div>
-<div class="line"><span class="lineno">  135</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> T&amp; item : <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>) {</div>
-<div class="line"><span class="lineno">  136</span>            <span class="keywordflow">if</span> (current_sum + item &gt; target_sum &amp;&amp; !current_chunk.empty()) {</div>
-<div class="line"><span class="lineno">  137</span>                result.push_back(current_chunk);</div>
-<div class="line"><span class="lineno">  138</span>                current_chunk.clear();</div>
-<div class="line"><span class="lineno">  139</span>                current_sum = T();</div>
-<div class="line"><span class="lineno">  140</span>            }</div>
-<div class="line"><span class="lineno">  141</span>            current_chunk.push_back(item);</div>
-<div class="line"><span class="lineno">  142</span>            current_sum += item;</div>
-<div class="line"><span class="lineno">  143</span>        }</div>
-<div class="line"><span class="lineno">  144</span>        <span class="keywordflow">if</span> (!current_chunk.empty()) {</div>
-<div class="line"><span class="lineno">  145</span>            result.push_back(current_chunk);</div>
-<div class="line"><span class="lineno">  146</span>        }</div>
-<div class="line"><span class="lineno">  147</span>        <span class="keywordflow">return</span> result;</div>
-<div class="line"><span class="lineno">  148</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00203">203</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  203</span>                                                             {</div>
+<div class="line"><span class="lineno">  204</span>        std::vector&lt;std::vector&lt;T&gt;&gt; result;</div>
+<div class="line"><span class="lineno">  205</span>        std::vector&lt;T&gt; current_chunk;</div>
+<div class="line"><span class="lineno">  206</span>        T current_sum = T();</div>
+<div class="line"><span class="lineno">  207</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> T&amp; item : <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>) {</div>
+<div class="line"><span class="lineno">  208</span>            <span class="keywordflow">if</span> (current_sum + item &gt; target_sum &amp;&amp; !current_chunk.empty()) {</div>
+<div class="line"><span class="lineno">  209</span>                result.push_back(current_chunk);</div>
+<div class="line"><span class="lineno">  210</span>                current_chunk.clear();</div>
+<div class="line"><span class="lineno">  211</span>                current_sum = T();</div>
+<div class="line"><span class="lineno">  212</span>            }</div>
+<div class="line"><span class="lineno">  213</span>            current_chunk.push_back(item);</div>
+<div class="line"><span class="lineno">  214</span>            current_sum += item;</div>
+<div class="line"><span class="lineno">  215</span>        }</div>
+<div class="line"><span class="lineno">  216</span>        <span class="keywordflow">if</span> (!current_chunk.empty()) {</div>
+<div class="line"><span class="lineno">  217</span>            result.push_back(current_chunk);</div>
+<div class="line"><span class="lineno">  218</span>        }</div>
+<div class="line"><span class="lineno">  219</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">  220</span>    }</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="chunk_8hpp_source.html#l00029">Chunk&lt; T &gt;::data</a>.</p>
+
+</div>
+</div>
+<a id="af0402384cad119ee6b3ebea2e0751452" name="af0402384cad119ee6b3ebea2e0751452"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0402384cad119ee6b3ebea2e0751452">&#9670;&#160;</a></span>chunk_by_threshold()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::vector&lt; T &gt; &gt; <a class="el" href="classChunk.html">Chunk</a>&lt; T &gt;::chunk_by_threshold </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>threshold</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00314">314</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  314</span>                                                            {</div>
+<div class="line"><span class="lineno">  315</span>        <span class="keywordflow">if</span> (threshold &lt;= T{}) {</div>
+<div class="line"><span class="lineno">  316</span>            <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Threshold must be positive&quot;</span>);</div>
+<div class="line"><span class="lineno">  317</span>        }</div>
+<div class="line"><span class="lineno">  318</span>        <span class="keywordflow">try</span> {</div>
+<div class="line"><span class="lineno">  319</span>            <span class="keywordflow">return</span> <a class="code hl_function" href="classChunk.html#ae57819e89c5e08b0357d5e9979a1f988">create_threshold_chunks</a>(threshold);</div>
+<div class="line"><span class="lineno">  320</span>        } <span class="keywordflow">catch</span> (<span class="keyword">const</span> std::exception&amp; e) {</div>
+<div class="line"><span class="lineno">  321</span>            <span class="keywordflow">return</span> std::vector&lt;std::vector&lt;T&gt;&gt;{<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>};</div>
+<div class="line"><span class="lineno">  322</span>        }</div>
+<div class="line"><span class="lineno">  323</span>    }</div>
+<div class="ttc" id="aclassChunk_html_ae57819e89c5e08b0357d5e9979a1f988"><div class="ttname"><a href="classChunk.html#ae57819e89c5e08b0357d5e9979a1f988">Chunk::create_threshold_chunks</a></div><div class="ttdeci">std::vector&lt; std::vector&lt; T &gt; &gt; create_threshold_chunks(T threshold) const</div><div class="ttdef"><b>Definition</b> <a href="chunk_8hpp_source.html#l00086">chunk.hpp:86</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="chunk_8hpp_source.html#l00086">Chunk&lt; T &gt;::create_threshold_chunks()</a>, and <a class="el" href="chunk_8hpp_source.html#l00029">Chunk&lt; T &gt;::data</a>.</p>
 
 </div>
 </div>
@@ -622,10 +754,10 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00055">55</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   55</span>                               {</div>
-<div class="line"><span class="lineno">   56</span>        <span class="keywordflow">return</span> (<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size() + <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a> - 1) / <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a>;</div>
-<div class="line"><span class="lineno">   57</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00127">127</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  127</span>                               {</div>
+<div class="line"><span class="lineno">  128</span>        <span class="keywordflow">return</span> (<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size() + <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a> - 1) / <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a>;</div>
+<div class="line"><span class="lineno">  129</span>    }</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="chunk_8hpp_source.html#l00028">Chunk&lt; T &gt;::chunk_size</a>, and <a class="el" href="chunk_8hpp_source.html#l00029">Chunk&lt; T &gt;::data</a>.</p>
 
@@ -657,26 +789,142 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00150">150</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  150</span>                                                         {</div>
-<div class="line"><span class="lineno">  151</span>        <span class="keywordflow">if</span> (n == 0)</div>
-<div class="line"><span class="lineno">  152</span>            <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Number of chunks must be greater than 0&quot;</span>);</div>
-<div class="line"><span class="lineno">  153</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.empty())</div>
-<div class="line"><span class="lineno">  154</span>            <span class="keywordflow">return</span> std::vector&lt;std::vector&lt;T&gt;&gt;();</div>
-<div class="line"><span class="lineno">  155</span>        n = std::min(n, <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size());</div>
-<div class="line"><span class="lineno">  156</span>        std::vector&lt;std::vector&lt;T&gt;&gt; result(n);</div>
-<div class="line"><span class="lineno">  157</span>        <span class="keywordtype">size_t</span> base_size = <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size() / n;</div>
-<div class="line"><span class="lineno">  158</span>        <span class="keywordtype">size_t</span> remainder = <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size() % n;</div>
-<div class="line"><span class="lineno">  159</span>        <span class="keywordtype">size_t</span> pos = 0;</div>
-<div class="line"><span class="lineno">  160</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; n; ++i) {</div>
-<div class="line"><span class="lineno">  161</span>            <span class="keywordtype">size_t</span> <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a> = base_size + (i &lt; remainder ? 1 : 0);</div>
-<div class="line"><span class="lineno">  162</span>            result[i] = std::vector&lt;T&gt;(<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.begin() + pos, <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.begin() + pos + <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a>);</div>
-<div class="line"><span class="lineno">  163</span>            pos += <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a>;</div>
-<div class="line"><span class="lineno">  164</span>        }</div>
-<div class="line"><span class="lineno">  165</span>        <span class="keywordflow">return</span> result;</div>
-<div class="line"><span class="lineno">  166</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00222">222</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  222</span>                                                         {</div>
+<div class="line"><span class="lineno">  223</span>        <span class="keywordflow">if</span> (n == 0)</div>
+<div class="line"><span class="lineno">  224</span>            <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Number of chunks must be greater than 0&quot;</span>);</div>
+<div class="line"><span class="lineno">  225</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.empty())</div>
+<div class="line"><span class="lineno">  226</span>            <span class="keywordflow">return</span> std::vector&lt;std::vector&lt;T&gt;&gt;();</div>
+<div class="line"><span class="lineno">  227</span>        n = std::min(n, <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size());</div>
+<div class="line"><span class="lineno">  228</span>        std::vector&lt;std::vector&lt;T&gt;&gt; result(n);</div>
+<div class="line"><span class="lineno">  229</span>        <span class="keywordtype">size_t</span> base_size = <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size() / n;</div>
+<div class="line"><span class="lineno">  230</span>        <span class="keywordtype">size_t</span> remainder = <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size() % n;</div>
+<div class="line"><span class="lineno">  231</span>        <span class="keywordtype">size_t</span> pos = 0;</div>
+<div class="line"><span class="lineno">  232</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; n; ++i) {</div>
+<div class="line"><span class="lineno">  233</span>            <span class="keywordtype">size_t</span> <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a> = base_size + (i &lt; remainder ? 1 : 0);</div>
+<div class="line"><span class="lineno">  234</span>            result[i] = std::vector&lt;T&gt;(<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.begin() + pos, <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.begin() + pos + <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a>);</div>
+<div class="line"><span class="lineno">  235</span>            pos += <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a>;</div>
+<div class="line"><span class="lineno">  236</span>        }</div>
+<div class="line"><span class="lineno">  237</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">  238</span>    }</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="chunk_8hpp_source.html#l00028">Chunk&lt; T &gt;::chunk_size</a>, and <a class="el" href="chunk_8hpp_source.html#l00029">Chunk&lt; T &gt;::data</a>.</p>
+
+</div>
+</div>
+<a id="add669d0ba2aa2cea53e5c530ea917a00" name="add669d0ba2aa2cea53e5c530ea917a00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add669d0ba2aa2cea53e5c530ea917a00">&#9670;&#160;</a></span>create_similarity_chunks()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::vector&lt; T &gt; &gt; <a class="el" href="classChunk.html">Chunk</a>&lt; T &gt;::create_similarity_chunks </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>threshold</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00061">61</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   61</span>                                                                             {</div>
+<div class="line"><span class="lineno">   62</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.empty())</div>
+<div class="line"><span class="lineno">   63</span>            <span class="keywordflow">return</span> {};</div>
+<div class="line"><span class="lineno">   64</span> </div>
+<div class="line"><span class="lineno">   65</span>        std::vector&lt;std::vector&lt;T&gt;&gt; result;</div>
+<div class="line"><span class="lineno">   66</span>        std::vector&lt;T&gt; current_chunk;</div>
+<div class="line"><span class="lineno">   67</span>        current_chunk.push_back(<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[0]);</div>
+<div class="line"><span class="lineno">   68</span> </div>
+<div class="line"><span class="lineno">   69</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt; <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size(); ++i) {</div>
+<div class="line"><span class="lineno">   70</span>            <span class="keywordtype">double</span> sim = <a class="code hl_function" href="classChunk.html#a307574b74c36b7c2a7f857ca3f598b49">calculate_similarity</a>(<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[i], <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[i - 1]);</div>
+<div class="line"><span class="lineno">   71</span>            <span class="keywordflow">if</span> (sim &gt; threshold &amp;&amp; !current_chunk.empty()) {</div>
+<div class="line"><span class="lineno">   72</span>                result.push_back(current_chunk);</div>
+<div class="line"><span class="lineno">   73</span>                current_chunk.clear();</div>
+<div class="line"><span class="lineno">   74</span>            }</div>
+<div class="line"><span class="lineno">   75</span>            current_chunk.push_back(<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[i]);</div>
+<div class="line"><span class="lineno">   76</span>        }</div>
+<div class="line"><span class="lineno">   77</span> </div>
+<div class="line"><span class="lineno">   78</span>        <span class="keywordflow">if</span> (!current_chunk.empty()) {</div>
+<div class="line"><span class="lineno">   79</span>            result.push_back(current_chunk);</div>
+<div class="line"><span class="lineno">   80</span>        }</div>
+<div class="line"><span class="lineno">   81</span> </div>
+<div class="line"><span class="lineno">   82</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">   83</span>    }</div>
+<div class="ttc" id="aclassChunk_html_a307574b74c36b7c2a7f857ca3f598b49"><div class="ttname"><a href="classChunk.html#a307574b74c36b7c2a7f857ca3f598b49">Chunk::calculate_similarity</a></div><div class="ttdeci">static double calculate_similarity(const T &amp;a, const T &amp;b)</div><div class="ttdef"><b>Definition</b> <a href="chunk_8hpp_source.html#l00052">chunk.hpp:52</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="chunk_8hpp_source.html#l00052">Chunk&lt; T &gt;::calculate_similarity()</a>, and <a class="el" href="chunk_8hpp_source.html#l00029">Chunk&lt; T &gt;::data</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="chunk_8hpp_source.html#l00278">Chunk&lt; T &gt;::chunk_by_similarity()</a>.</p>
+
+</div>
+</div>
+<a id="ae57819e89c5e08b0357d5e9979a1f988" name="ae57819e89c5e08b0357d5e9979a1f988"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae57819e89c5e08b0357d5e9979a1f988">&#9670;&#160;</a></span>create_threshold_chunks()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::vector&lt; T &gt; &gt; <a class="el" href="classChunk.html">Chunk</a>&lt; T &gt;::create_threshold_chunks </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>threshold</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00086">86</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   86</span>                                                                       {</div>
+<div class="line"><span class="lineno">   87</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.empty())</div>
+<div class="line"><span class="lineno">   88</span>            <span class="keywordflow">return</span> {};</div>
+<div class="line"><span class="lineno">   89</span> </div>
+<div class="line"><span class="lineno">   90</span>        std::vector&lt;std::vector&lt;T&gt;&gt; result;</div>
+<div class="line"><span class="lineno">   91</span>        std::vector&lt;T&gt; current_chunk;</div>
+<div class="line"><span class="lineno">   92</span>        T running_sum = T{}; <span class="comment">// Zero-initialize</span></div>
+<div class="line"><span class="lineno">   93</span> </div>
+<div class="line"><span class="lineno">   94</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> T&amp; value : <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>) {</div>
+<div class="line"><span class="lineno">   95</span>            <span class="keywordflow">if</span> (running_sum + value &gt; threshold &amp;&amp; !current_chunk.empty()) {</div>
+<div class="line"><span class="lineno">   96</span>                result.push_back(current_chunk);</div>
+<div class="line"><span class="lineno">   97</span>                current_chunk.clear();</div>
+<div class="line"><span class="lineno">   98</span>                running_sum = T{};</div>
+<div class="line"><span class="lineno">   99</span>            }</div>
+<div class="line"><span class="lineno">  100</span>            current_chunk.push_back(value);</div>
+<div class="line"><span class="lineno">  101</span>            running_sum += value;</div>
+<div class="line"><span class="lineno">  102</span>        }</div>
+<div class="line"><span class="lineno">  103</span> </div>
+<div class="line"><span class="lineno">  104</span>        <span class="keywordflow">if</span> (!current_chunk.empty()) {</div>
+<div class="line"><span class="lineno">  105</span>            result.push_back(current_chunk);</div>
+<div class="line"><span class="lineno">  106</span>        }</div>
+<div class="line"><span class="lineno">  107</span> </div>
+<div class="line"><span class="lineno">  108</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">  109</span>    }</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="chunk_8hpp_source.html#l00029">Chunk&lt; T &gt;::data</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="chunk_8hpp_source.html#l00314">Chunk&lt; T &gt;::chunk_by_threshold()</a>.</p>
 
 </div>
 </div>
@@ -721,15 +969,15 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00091">91</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   91</span>                                               {</div>
-<div class="line"><span class="lineno">   92</span>        <span class="keywordtype">size_t</span> start = index * <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a>;</div>
-<div class="line"><span class="lineno">   93</span>        <span class="keywordflow">if</span> (start &gt;= <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size()) {</div>
-<div class="line"><span class="lineno">   94</span>            <span class="keywordflow">throw</span> std::out_of_range(<span class="stringliteral">&quot;Chunk index out of range&quot;</span>);</div>
-<div class="line"><span class="lineno">   95</span>        }</div>
-<div class="line"><span class="lineno">   96</span>        <span class="keywordtype">size_t</span> end = std::min(start + <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a>, <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size());</div>
-<div class="line"><span class="lineno">   97</span>        <span class="keywordflow">return</span> std::vector&lt;T&gt;(<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.begin() + start, <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.begin() + end);</div>
-<div class="line"><span class="lineno">   98</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00163">163</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  163</span>                                               {</div>
+<div class="line"><span class="lineno">  164</span>        <span class="keywordtype">size_t</span> start = index * <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a>;</div>
+<div class="line"><span class="lineno">  165</span>        <span class="keywordflow">if</span> (start &gt;= <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size()) {</div>
+<div class="line"><span class="lineno">  166</span>            <span class="keywordflow">throw</span> std::out_of_range(<span class="stringliteral">&quot;Chunk index out of range&quot;</span>);</div>
+<div class="line"><span class="lineno">  167</span>        }</div>
+<div class="line"><span class="lineno">  168</span>        <span class="keywordtype">size_t</span> end = std::min(start + <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a>, <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size());</div>
+<div class="line"><span class="lineno">  169</span>        <span class="keywordflow">return</span> std::vector&lt;T&gt;(<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.begin() + start, <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.begin() + end);</div>
+<div class="line"><span class="lineno">  170</span>    }</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="chunk_8hpp_source.html#l00028">Chunk&lt; T &gt;::chunk_size</a>, and <a class="el" href="chunk_8hpp_source.html#l00029">Chunk&lt; T &gt;::data</a>.</p>
 
@@ -763,10 +1011,10 @@ template&lt;typename T &gt; </div>
 <p>Retrieves all chunks. </p>
 <dl class="section return"><dt>Returns</dt><dd>A vector of vectors, where each inner vector is a chunk. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00081">81</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   81</span>                                               {</div>
-<div class="line"><span class="lineno">   82</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classChunk.html#a1574993946fe5b28c6d89ce4bf77857b">chunks</a>;</div>
-<div class="line"><span class="lineno">   83</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00153">153</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  153</span>                                               {</div>
+<div class="line"><span class="lineno">  154</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classChunk.html#a1574993946fe5b28c6d89ce4bf77857b">chunks</a>;</div>
+<div class="line"><span class="lineno">  155</span>    }</div>
 <div class="ttc" id="aclassChunk_html_a1574993946fe5b28c6d89ce4bf77857b"><div class="ttname"><a href="classChunk.html#a1574993946fe5b28c6d89ce4bf77857b">Chunk::chunks</a></div><div class="ttdeci">std::vector&lt; std::vector&lt; T &gt; &gt; chunks</div><div class="ttdef"><b>Definition</b> <a href="chunk_8hpp_source.html#l00030">chunk.hpp:30</a></div></div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="chunk_8hpp_source.html#l00030">Chunk&lt; T &gt;::chunks</a>.</p>
@@ -801,18 +1049,18 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00100">100</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  100</span>                                                                         {</div>
-<div class="line"><span class="lineno">  101</span>        <span class="keywordflow">if</span> (overlap &gt;= <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a>) {</div>
-<div class="line"><span class="lineno">  102</span>            <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Overlap must be less than chunk size&quot;</span>);</div>
-<div class="line"><span class="lineno">  103</span>        }</div>
-<div class="line"><span class="lineno">  104</span>        std::vector&lt;std::vector&lt;T&gt;&gt; result;</div>
-<div class="line"><span class="lineno">  105</span>        <span class="keywordtype">size_t</span> step = <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a> - overlap;</div>
-<div class="line"><span class="lineno">  106</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i + <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a> &lt;= <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size(); i += step) {</div>
-<div class="line"><span class="lineno">  107</span>            result.push_back(std::vector&lt;T&gt;(<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.begin() + i, <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.begin() + i + <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a>));</div>
-<div class="line"><span class="lineno">  108</span>        }</div>
-<div class="line"><span class="lineno">  109</span>        <span class="keywordflow">return</span> result;</div>
-<div class="line"><span class="lineno">  110</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00172">172</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  172</span>                                                                         {</div>
+<div class="line"><span class="lineno">  173</span>        <span class="keywordflow">if</span> (overlap &gt;= <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a>) {</div>
+<div class="line"><span class="lineno">  174</span>            <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Overlap must be less than chunk size&quot;</span>);</div>
+<div class="line"><span class="lineno">  175</span>        }</div>
+<div class="line"><span class="lineno">  176</span>        std::vector&lt;std::vector&lt;T&gt;&gt; result;</div>
+<div class="line"><span class="lineno">  177</span>        <span class="keywordtype">size_t</span> step = <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a> - overlap;</div>
+<div class="line"><span class="lineno">  178</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i + <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a> &lt;= <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size(); i += step) {</div>
+<div class="line"><span class="lineno">  179</span>            result.push_back(std::vector&lt;T&gt;(<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.begin() + i, <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.begin() + i + <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a>));</div>
+<div class="line"><span class="lineno">  180</span>        }</div>
+<div class="line"><span class="lineno">  181</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">  182</span>    }</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="chunk_8hpp_source.html#l00028">Chunk&lt; T &gt;::chunk_size</a>, and <a class="el" href="chunk_8hpp_source.html#l00029">Chunk&lt; T &gt;::data</a>.</p>
 
@@ -844,22 +1092,66 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00227">227</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  227</span>                                                                        {</div>
-<div class="line"><span class="lineno">  228</span>        std::vector&lt;std::vector&lt;T&gt;&gt; result;</div>
-<div class="line"><span class="lineno">  229</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size(); i += <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a>) {</div>
-<div class="line"><span class="lineno">  230</span>            std::vector&lt;T&gt; chunk;</div>
-<div class="line"><span class="lineno">  231</span>            <span class="keywordtype">size_t</span> remaining = std::min(<a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a>, <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size() - i);</div>
-<div class="line"><span class="lineno">  232</span>            chunk.insert(chunk.end(), <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.begin() + i, <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.begin() + i + remaining);</div>
-<div class="line"><span class="lineno">  233</span>            <span class="keywordflow">if</span> (remaining &lt; <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a>) {</div>
-<div class="line"><span class="lineno">  234</span>                chunk.insert(chunk.end(), <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a> - remaining, pad_value);</div>
-<div class="line"><span class="lineno">  235</span>            }</div>
-<div class="line"><span class="lineno">  236</span>            result.push_back(chunk);</div>
-<div class="line"><span class="lineno">  237</span>        }</div>
-<div class="line"><span class="lineno">  238</span>        <span class="keywordflow">return</span> result;</div>
-<div class="line"><span class="lineno">  239</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00286">286</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  286</span>                                                                        {</div>
+<div class="line"><span class="lineno">  287</span>        std::vector&lt;std::vector&lt;T&gt;&gt; result;</div>
+<div class="line"><span class="lineno">  288</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size(); i += <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a>) {</div>
+<div class="line"><span class="lineno">  289</span>            std::vector&lt;T&gt; chunk;</div>
+<div class="line"><span class="lineno">  290</span>            <span class="keywordtype">size_t</span> remaining = std::min(<a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a>, <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size() - i);</div>
+<div class="line"><span class="lineno">  291</span>            chunk.insert(chunk.end(), <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.begin() + i, <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.begin() + i + remaining);</div>
+<div class="line"><span class="lineno">  292</span>            <span class="keywordflow">if</span> (remaining &lt; <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a>) {</div>
+<div class="line"><span class="lineno">  293</span>                chunk.insert(chunk.end(), <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a> - remaining, pad_value);</div>
+<div class="line"><span class="lineno">  294</span>            }</div>
+<div class="line"><span class="lineno">  295</span>            result.push_back(chunk);</div>
+<div class="line"><span class="lineno">  296</span>        }</div>
+<div class="line"><span class="lineno">  297</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">  298</span>    }</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="chunk_8hpp_source.html#l00028">Chunk&lt; T &gt;::chunk_size</a>, and <a class="el" href="chunk_8hpp_source.html#l00029">Chunk&lt; T &gt;::data</a>.</p>
+
+</div>
+</div>
+<a id="a5fe346af2e780a31ad2d16466648ce8a" name="a5fe346af2e780a31ad2d16466648ce8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fe346af2e780a31ad2d16466648ce8a">&#9670;&#160;</a></span>make_chunks()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::vector&lt; T &gt; &gt; <a class="el" href="classChunk.html">Chunk</a>&lt; T &gt;::make_chunks </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00040">40</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   40</span>                                                           {</div>
+<div class="line"><span class="lineno">   41</span>        std::vector&lt;std::vector&lt;T&gt;&gt; result;</div>
+<div class="line"><span class="lineno">   42</span>        result.reserve((<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size() + <a class="code hl_function" href="classChunk.html#a160459077243c9e5ff642f478277e161">size</a> - 1) / <a class="code hl_function" href="classChunk.html#a160459077243c9e5ff642f478277e161">size</a>);</div>
+<div class="line"><span class="lineno">   43</span> </div>
+<div class="line"><span class="lineno">   44</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size(); i += <a class="code hl_function" href="classChunk.html#a160459077243c9e5ff642f478277e161">size</a>) {</div>
+<div class="line"><span class="lineno">   45</span>            <span class="keywordtype">size_t</span> chunk_end = std::min(i + <a class="code hl_function" href="classChunk.html#a160459077243c9e5ff642f478277e161">size</a>, <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size());</div>
+<div class="line"><span class="lineno">   46</span>            result.emplace_back(<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.begin() + i, <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.begin() + chunk_end);</div>
+<div class="line"><span class="lineno">   47</span>        }</div>
+<div class="line"><span class="lineno">   48</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">   49</span>    }</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="chunk_8hpp_source.html#l00029">Chunk&lt; T &gt;::data</a>, and <a class="el" href="chunk_8hpp_source.html#l00123">Chunk&lt; T &gt;::size()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="chunk_8hpp_source.html#l00310">Chunk&lt; T &gt;::chunk_by_size()</a>.</p>
 
 </div>
 </div>
@@ -888,14 +1180,14 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00051">51</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   51</span>                        {</div>
-<div class="line"><span class="lineno">   52</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size();</div>
-<div class="line"><span class="lineno">   53</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00123">123</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  123</span>                        {</div>
+<div class="line"><span class="lineno">  124</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size();</div>
+<div class="line"><span class="lineno">  125</span>    }</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="chunk_8hpp_source.html#l00029">Chunk&lt; T &gt;::data</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="chunk_8hpp_source.html#l00045">Chunk&lt; T &gt;::Chunk()</a>, and <a class="el" href="chunk_8hpp_source.html#l00033">Chunk&lt; T &gt;::validate_size()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="chunk_8hpp_source.html#l00117">Chunk&lt; T &gt;::Chunk()</a>, <a class="el" href="chunk_8hpp_source.html#l00310">Chunk&lt; T &gt;::chunk_by_size()</a>, <a class="el" href="chunk_8hpp_source.html#l00040">Chunk&lt; T &gt;::make_chunks()</a>, and <a class="el" href="chunk_8hpp_source.html#l00033">Chunk&lt; T &gt;::validate_size()</a>.</p>
 
 </div>
 </div>
@@ -935,16 +1227,16 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00241">241</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  241</span>                                                                                      {</div>
-<div class="line"><span class="lineno">  242</span>        <a class="code hl_function" href="classChunk.html#af09c384809b7238eb999b1d4d8fcfdd3">validate_size</a>(window_size, <span class="stringliteral">&quot;Window size&quot;</span>);</div>
-<div class="line"><span class="lineno">  243</span>        <a class="code hl_function" href="classChunk.html#af09c384809b7238eb999b1d4d8fcfdd3">validate_size</a>(step, <span class="stringliteral">&quot;Step size&quot;</span>);</div>
-<div class="line"><span class="lineno">  244</span>        std::vector&lt;std::vector&lt;T&gt;&gt; result;</div>
-<div class="line"><span class="lineno">  245</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i + window_size &lt;= <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size(); i += step) {</div>
-<div class="line"><span class="lineno">  246</span>            result.push_back(std::vector&lt;T&gt;(<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.begin() + i, <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.begin() + i + window_size));</div>
-<div class="line"><span class="lineno">  247</span>        }</div>
-<div class="line"><span class="lineno">  248</span>        <span class="keywordflow">return</span> result;</div>
-<div class="line"><span class="lineno">  249</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00300">300</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  300</span>                                                                                      {</div>
+<div class="line"><span class="lineno">  301</span>        <a class="code hl_function" href="classChunk.html#af09c384809b7238eb999b1d4d8fcfdd3">validate_size</a>(window_size, <span class="stringliteral">&quot;Window size&quot;</span>);</div>
+<div class="line"><span class="lineno">  302</span>        <a class="code hl_function" href="classChunk.html#af09c384809b7238eb999b1d4d8fcfdd3">validate_size</a>(step, <span class="stringliteral">&quot;Step size&quot;</span>);</div>
+<div class="line"><span class="lineno">  303</span>        std::vector&lt;std::vector&lt;T&gt;&gt; result;</div>
+<div class="line"><span class="lineno">  304</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i + window_size &lt;= <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size(); i += step) {</div>
+<div class="line"><span class="lineno">  305</span>            result.push_back(std::vector&lt;T&gt;(<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.begin() + i, <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.begin() + i + window_size));</div>
+<div class="line"><span class="lineno">  306</span>        }</div>
+<div class="line"><span class="lineno">  307</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">  308</span>    }</div>
 <div class="ttc" id="aclassChunk_html_af09c384809b7238eb999b1d4d8fcfdd3"><div class="ttname"><a href="classChunk.html#af09c384809b7238eb999b1d4d8fcfdd3">Chunk::validate_size</a></div><div class="ttdeci">void validate_size(size_t size, const std::string &amp;param) const</div><div class="ttdef"><b>Definition</b> <a href="chunk_8hpp_source.html#l00033">chunk.hpp:33</a></div></div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="chunk_8hpp_source.html#l00029">Chunk&lt; T &gt;::data</a>, and <a class="el" href="chunk_8hpp_source.html#l00033">Chunk&lt; T &gt;::validate_size()</a>.</p>
@@ -978,21 +1270,21 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00252">252</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  252</span>                         {</div>
-<div class="line"><span class="lineno">  253</span>        <a class="code hl_variable" href="classChunk.html#a1574993946fe5b28c6d89ce4bf77857b">chunks</a>.clear();</div>
-<div class="line"><span class="lineno">  254</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size(); i += <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a>) {</div>
-<div class="line"><span class="lineno">  255</span>            std::vector&lt;T&gt; chunk;</div>
-<div class="line"><span class="lineno">  256</span>            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 0; j &lt; <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a> &amp;&amp; i + j &lt; <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size(); ++j) {</div>
-<div class="line"><span class="lineno">  257</span>                chunk.push_back(<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[i + j]);</div>
-<div class="line"><span class="lineno">  258</span>            }</div>
-<div class="line"><span class="lineno">  259</span>            <a class="code hl_variable" href="classChunk.html#a1574993946fe5b28c6d89ce4bf77857b">chunks</a>.push_back(chunk);</div>
-<div class="line"><span class="lineno">  260</span>        }</div>
-<div class="line"><span class="lineno">  261</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00326">326</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  326</span>                         {</div>
+<div class="line"><span class="lineno">  327</span>        <a class="code hl_variable" href="classChunk.html#a1574993946fe5b28c6d89ce4bf77857b">chunks</a>.clear();</div>
+<div class="line"><span class="lineno">  328</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size(); i += <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a>) {</div>
+<div class="line"><span class="lineno">  329</span>            std::vector&lt;T&gt; chunk;</div>
+<div class="line"><span class="lineno">  330</span>            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 0; j &lt; <a class="code hl_variable" href="classChunk.html#a3c0ec38d609ec15af0d5a7e795afb29f">chunk_size</a> &amp;&amp; i + j &lt; <a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>.size(); ++j) {</div>
+<div class="line"><span class="lineno">  331</span>                chunk.push_back(<a class="code hl_variable" href="classChunk.html#aa808f6466a7244c14464b007214f6835">data</a>[i + j]);</div>
+<div class="line"><span class="lineno">  332</span>            }</div>
+<div class="line"><span class="lineno">  333</span>            <a class="code hl_variable" href="classChunk.html#a1574993946fe5b28c6d89ce4bf77857b">chunks</a>.push_back(chunk);</div>
+<div class="line"><span class="lineno">  334</span>        }</div>
+<div class="line"><span class="lineno">  335</span>    }</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="chunk_8hpp_source.html#l00028">Chunk&lt; T &gt;::chunk_size</a>, <a class="el" href="chunk_8hpp_source.html#l00030">Chunk&lt; T &gt;::chunks</a>, and <a class="el" href="chunk_8hpp_source.html#l00029">Chunk&lt; T &gt;::data</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="chunk_8hpp_source.html#l00072">Chunk&lt; T &gt;::add()</a>, and <a class="el" href="chunk_8hpp_source.html#l00063">Chunk&lt; T &gt;::add()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="chunk_8hpp_source.html#l00144">Chunk&lt; T &gt;::add()</a>, and <a class="el" href="chunk_8hpp_source.html#l00135">Chunk&lt; T &gt;::add()</a>.</p>
 
 </div>
 </div>
@@ -1039,9 +1331,9 @@ template&lt;typename T &gt; </div>
 <div class="line"><span class="lineno">   36</span>        }</div>
 <div class="line"><span class="lineno">   37</span>    }</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="chunk_8hpp_source.html#l00051">Chunk&lt; T &gt;::size()</a>.</p>
+<p class="reference">References <a class="el" href="chunk_8hpp_source.html#l00123">Chunk&lt; T &gt;::size()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="chunk_8hpp_source.html#l00241">Chunk&lt; T &gt;::sliding_window()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="chunk_8hpp_source.html#l00300">Chunk&lt; T &gt;::sliding_window()</a>.</p>
 
 </div>
 </div>
@@ -1070,7 +1362,7 @@ template&lt;typename T &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00028">28</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="chunk_8hpp_source.html#l00055">Chunk&lt; T &gt;::chunk_count()</a>, <a class="el" href="chunk_8hpp_source.html#l00150">Chunk&lt; T &gt;::chunk_into_n()</a>, <a class="el" href="chunk_8hpp_source.html#l00091">Chunk&lt; T &gt;::get_chunk()</a>, <a class="el" href="chunk_8hpp_source.html#l00100">Chunk&lt; T &gt;::get_overlapping_chunks()</a>, <a class="el" href="chunk_8hpp_source.html#l00227">Chunk&lt; T &gt;::get_padded_chunks()</a>, and <a class="el" href="chunk_8hpp_source.html#l00252">Chunk&lt; T &gt;::update_chunks()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="chunk_8hpp_source.html#l00127">Chunk&lt; T &gt;::chunk_count()</a>, <a class="el" href="chunk_8hpp_source.html#l00222">Chunk&lt; T &gt;::chunk_into_n()</a>, <a class="el" href="chunk_8hpp_source.html#l00163">Chunk&lt; T &gt;::get_chunk()</a>, <a class="el" href="chunk_8hpp_source.html#l00172">Chunk&lt; T &gt;::get_overlapping_chunks()</a>, <a class="el" href="chunk_8hpp_source.html#l00286">Chunk&lt; T &gt;::get_padded_chunks()</a>, and <a class="el" href="chunk_8hpp_source.html#l00326">Chunk&lt; T &gt;::update_chunks()</a>.</p>
 
 </div>
 </div>
@@ -1098,7 +1390,7 @@ template&lt;typename T &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00030">30</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="chunk_8hpp_source.html#l00081">Chunk&lt; T &gt;::get_chunks()</a>, and <a class="el" href="chunk_8hpp_source.html#l00252">Chunk&lt; T &gt;::update_chunks()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="chunk_8hpp_source.html#l00153">Chunk&lt; T &gt;::get_chunks()</a>, and <a class="el" href="chunk_8hpp_source.html#l00326">Chunk&lt; T &gt;::update_chunks()</a>.</p>
 
 </div>
 </div>
@@ -1126,7 +1418,7 @@ template&lt;typename T &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="chunk_8hpp_source.html#l00029">29</a> of file <a class="el" href="chunk_8hpp_source.html">chunk.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="chunk_8hpp_source.html#l00072">Chunk&lt; T &gt;::add()</a>, <a class="el" href="chunk_8hpp_source.html#l00063">Chunk&lt; T &gt;::add()</a>, <a class="el" href="chunk_8hpp_source.html#l00168">Chunk&lt; T &gt;::chunk_by_monotonicity()</a>, <a class="el" href="chunk_8hpp_source.html#l00113">Chunk&lt; T &gt;::chunk_by_predicate()</a>, <a class="el" href="chunk_8hpp_source.html#l00206">Chunk&lt; T &gt;::chunk_by_similarity()</a>, <a class="el" href="chunk_8hpp_source.html#l00189">Chunk&lt; T &gt;::chunk_by_statistic()</a>, <a class="el" href="chunk_8hpp_source.html#l00131">Chunk&lt; T &gt;::chunk_by_sum()</a>, <a class="el" href="chunk_8hpp_source.html#l00055">Chunk&lt; T &gt;::chunk_count()</a>, <a class="el" href="chunk_8hpp_source.html#l00150">Chunk&lt; T &gt;::chunk_into_n()</a>, <a class="el" href="chunk_8hpp_source.html#l00091">Chunk&lt; T &gt;::get_chunk()</a>, <a class="el" href="chunk_8hpp_source.html#l00100">Chunk&lt; T &gt;::get_overlapping_chunks()</a>, <a class="el" href="chunk_8hpp_source.html#l00227">Chunk&lt; T &gt;::get_padded_chunks()</a>, <a class="el" href="chunk_8hpp_source.html#l00051">Chunk&lt; T &gt;::size()</a>, <a class="el" href="chunk_8hpp_source.html#l00241">Chunk&lt; T &gt;::sliding_window()</a>, and <a class="el" href="chunk_8hpp_source.html#l00252">Chunk&lt; T &gt;::update_chunks()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="chunk_8hpp_source.html#l00144">Chunk&lt; T &gt;::add()</a>, <a class="el" href="chunk_8hpp_source.html#l00135">Chunk&lt; T &gt;::add()</a>, <a class="el" href="chunk_8hpp_source.html#l00240">Chunk&lt; T &gt;::chunk_by_monotonicity()</a>, <a class="el" href="chunk_8hpp_source.html#l00185">Chunk&lt; T &gt;::chunk_by_predicate()</a>, <a class="el" href="chunk_8hpp_source.html#l00278">Chunk&lt; T &gt;::chunk_by_similarity()</a>, <a class="el" href="chunk_8hpp_source.html#l00261">Chunk&lt; T &gt;::chunk_by_statistic()</a>, <a class="el" href="chunk_8hpp_source.html#l00203">Chunk&lt; T &gt;::chunk_by_sum()</a>, <a class="el" href="chunk_8hpp_source.html#l00314">Chunk&lt; T &gt;::chunk_by_threshold()</a>, <a class="el" href="chunk_8hpp_source.html#l00127">Chunk&lt; T &gt;::chunk_count()</a>, <a class="el" href="chunk_8hpp_source.html#l00222">Chunk&lt; T &gt;::chunk_into_n()</a>, <a class="el" href="chunk_8hpp_source.html#l00061">Chunk&lt; T &gt;::create_similarity_chunks()</a>, <a class="el" href="chunk_8hpp_source.html#l00086">Chunk&lt; T &gt;::create_threshold_chunks()</a>, <a class="el" href="chunk_8hpp_source.html#l00163">Chunk&lt; T &gt;::get_chunk()</a>, <a class="el" href="chunk_8hpp_source.html#l00172">Chunk&lt; T &gt;::get_overlapping_chunks()</a>, <a class="el" href="chunk_8hpp_source.html#l00286">Chunk&lt; T &gt;::get_padded_chunks()</a>, <a class="el" href="chunk_8hpp_source.html#l00040">Chunk&lt; T &gt;::make_chunks()</a>, <a class="el" href="chunk_8hpp_source.html#l00123">Chunk&lt; T &gt;::size()</a>, <a class="el" href="chunk_8hpp_source.html#l00300">Chunk&lt; T &gt;::sliding_window()</a>, and <a class="el" href="chunk_8hpp_source.html#l00326">Chunk&lt; T &gt;::update_chunks()</a>.</p>
 
 </div>
 </div>
@@ -1139,7 +1431,7 @@ template&lt;typename T &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classChunk.html">Chunk</a></li>
-    <li class="footer">Generated on Sun Dec 22 2024 23:52:18 for Advanced Chunk Processing Library by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Mon Dec 23 2024 14:28:48 for Advanced Chunk Processing Library by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

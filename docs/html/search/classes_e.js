@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['variancestrategy_0',['VarianceStrategy',['../classchunk__strategies_1_1VarianceStrategy.html',1,'chunk_strategies']]]
+  ['recursivesubchunkstrategy_0',['RecursiveSubChunkStrategy',['../classchunk__strategies_1_1RecursiveSubChunkStrategy.html',1,'chunk_strategies']]],
+  ['resilientchunker_1',['ResilientChunker',['../classchunk__resilience_1_1ResilientChunker.html',1,'chunk_resilience']]]
 ];

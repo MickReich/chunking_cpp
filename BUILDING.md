@@ -59,7 +59,11 @@ vcpkg install gtest:x64-windows
 To build the Python bindings, you need to have Python and pybind11 installed:
 
 ```bash
+# Method 1: Using pip (recommended)
 pip install pybind11[global]
+
+# Method 2: Using system package manager (Ubuntu/Debian)
+sudo apt-get install python3-dev python3-pybind11
 
 # If you're using conda, ensure you have the latest libstdc++:
 conda install -c conda-forge libstdcxx-ng

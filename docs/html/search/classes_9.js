@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['node_0',['node',['../structadvanced__structures_1_1ChunkBPlusTree_1_1Node.html',1,'advanced_structures::ChunkBPlusTree&lt; T &gt;::Node'],['../structadvanced__structures_1_1ChunkSkipList_1_1Node.html',1,'advanced_structures::ChunkSkipList&lt; T &gt;::Node'],['../structadvanced__structures_1_1ChunkTreap_1_1Node.html',1,'advanced_structures::ChunkTreap&lt; T &gt;::Node']]]
+  ['layer_0',['Layer',['../classneural__chunking_1_1Layer.html',1,'neural_chunking']]],
+  ['level_1',['Level',['../structadvanced__structures_1_1ChunkLSMTree_1_1Level.html',1,'advanced_structures::ChunkLSMTree']]]
 ];

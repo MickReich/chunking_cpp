@@ -1,15 +1,18 @@
 var searchData=
 [
-  ['patternbasedstrategy_0',['PatternBasedStrategy',['../classchunk__strategies_1_1PatternBasedStrategy.html#a64c4a3870afe7771e6a5976e515be070',1,'chunk_strategies::PatternBasedStrategy']]],
-  ['pop_1',['pop',['../classadvanced__structures_1_1ChunkStack.html#a7c001fa9b4648f8696f931cf1b753939',1,'advanced_structures::ChunkStack::pop()'],['../classCircularBuffer.html#a3033e4e62f336be929c776e912f3b549',1,'CircularBuffer::pop()'],['../classPriorityQueue.html#adc6b1a207f02f2bfd5fdf758a7746b0c',1,'PriorityQueue::pop()']]],
-  ['pop_5fback_2',['pop_back',['../classadvanced__structures_1_1ChunkDeque.html#ad596a92cbab68c01c9994f0ef63f4bec',1,'advanced_structures::ChunkDeque']]],
-  ['pop_5ffront_3',['pop_front',['../classadvanced__structures_1_1ChunkDeque.html#a5273be663a52d7c755f7ba8533ecfcf9',1,'advanced_structures::ChunkDeque']]],
-  ['prepend_5fchunk_4',['prepend_chunk',['../classChunkList.html#a60e42a7bdfc7edb8207b9485ebd9b42d',1,'ChunkList']]],
-  ['print_5fchunks_5',['print_chunks',['../main_8cpp.html#af4761dcd0fd187c30346163870ed9a3b',1,'main.cpp']]],
-  ['print_5fsub_5fchunks_6',['print_sub_chunks',['../main_8cpp.html#a9c55e7bd3a10f58130632b26d75dc5a8',1,'main.cpp']]],
-  ['process_7',['process',['../classchunk__windows_1_1SlidingWindowProcessor.html#a298b29012be869d63a06710036e9fdfd',1,'chunk_windows::SlidingWindowProcessor']]],
-  ['process_5fchunks_8',['process_chunks',['../classparallel__chunk_1_1ParallelChunkProcessor.html#a92eeb252a9c4d67a911d3c764802d260',1,'parallel_chunk::ParallelChunkProcessor']]],
-  ['push_9',['push',['../classadvanced__structures_1_1ChunkStack.html#a363e41b4896d02458acd92a3995164f2',1,'advanced_structures::ChunkStack::push()'],['../classCircularBuffer.html#a54c7a5a2596ab2e24661115758ba665c',1,'CircularBuffer::push()'],['../classPriorityQueue.html#a0b71ca9bf78de4cf33517c67c987f2b2',1,'PriorityQueue::push()'],['../classSlidingWindow.html#a57d04cd6d016fe2c45ed2895003c1f71',1,'SlidingWindow::push()']]],
-  ['push_5fback_10',['push_back',['../classadvanced__structures_1_1ChunkDeque.html#a1002dca753c69f20cf2b69a9b1eddcaa',1,'advanced_structures::ChunkDeque']]],
-  ['push_5ffront_11',['push_front',['../classadvanced__structures_1_1ChunkDeque.html#abdcb27d2bc3db1290f375ecfdb903be9',1,'advanced_structures::ChunkDeque']]]
+  ['main_0',['main',['../sophisticated__chunking__demo_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;sophisticated_chunking_demo.cpp'],['../main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;main.cpp'],['../demo__neural__chunking_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;demo_neural_chunking.cpp'],['../demo__gpu__chunking_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;demo_gpu_chunking.cpp'],['../benchmark_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;benchmark.cpp']]],
+  ['make_5fchunks_1',['make_chunks',['../classChunk.html#a5fe346af2e780a31ad2d16466648ce8a',1,'Chunk']]],
+  ['map_2',['map',['../classparallel__chunk_1_1ParallelChunkProcessor.html#a1a5189644af96de911c983b816fa9532',1,'parallel_chunk::ParallelChunkProcessor']]],
+  ['mean_3',['mean',['../classchunk__utils_1_1Statistics.html#ab1c472157d5bacc357dcebe0fc19cf5d',1,'chunk_utils::Statistics']]],
+  ['measure_5fmemory_5fusage_4',['measure_memory_usage',['../classchunk__benchmark_1_1ChunkBenchmark.html#a7be5011a42a2a3c91db0c098b3b93ca5',1,'chunk_benchmark::ChunkBenchmark']]],
+  ['measure_5fthroughput_5',['measure_throughput',['../classchunk__benchmark_1_1ChunkBenchmark.html#ade7e70f86a0abda21ae18afe408d9be8',1,'chunk_benchmark::ChunkBenchmark']]],
+  ['median_6',['median',['../classchunk__utils_1_1Statistics.html#a2de339505cc415f0a10975bdf388ad7d',1,'chunk_utils::Statistics']]],
+  ['merge_5fchunks_7',['merge_chunks',['../classchunk__utils_1_1ChunkManipulator.html#aad43e878aa138c2a57312f13e56cacc8',1,'chunk_utils::ChunkManipulator']]],
+  ['mode_8',['mode',['../classchunk__utils_1_1Statistics.html#aaaf244247e7f592fcd650f9e514b7a6d',1,'chunk_utils::Statistics']]],
+  ['moving_5faverage_9',['moving_average',['../classchunk__windows_1_1WindowOperations.html#a929defeedb1b555fd782041e68927098',1,'chunk_windows::WindowOperations']]],
+  ['moving_5fmax_10',['moving_max',['../classchunk__windows_1_1WindowOperations.html#ac8191b96fc02bd1c9ff22be4ffd6123c',1,'chunk_windows::WindowOperations']]],
+  ['moving_5fmedian_11',['moving_median',['../classchunk__windows_1_1WindowOperations.html#a4dbe569c80436ddd61ee3a72a229d64a',1,'chunk_windows::WindowOperations']]],
+  ['moving_5fmin_12',['moving_min',['../classchunk__windows_1_1WindowOperations.html#af8b096abbcd32e1d5bbf50a0e5db6825',1,'chunk_windows::WindowOperations']]],
+  ['multicriteriastrategy_13',['multicriteriastrategy',['../classMultiCriteriaStrategy.html#a1dbd13b149111826b2005aeae017ec5f',1,'MultiCriteriaStrategy::MultiCriteriaStrategy()'],['../classchunk__strategies_1_1MultiCriteriaStrategy.html#ac687cdaa7dfb1a90090de3eda9e322b8',1,'chunk_strategies::MultiCriteriaStrategy::MultiCriteriaStrategy()']]],
+  ['mutualinformationchunking_14',['MutualInformationChunking',['../classsophisticated__chunking_1_1MutualInformationChunking.html#a81ceffc95d9913a666069e3093661914',1,'sophisticated_chunking::MutualInformationChunking']]]
 ];

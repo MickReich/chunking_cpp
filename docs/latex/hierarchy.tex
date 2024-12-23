@@ -1,19 +1,29 @@
 \doxysection{Class Hierarchy}
 This inheritance list is sorted roughly, but not completely, alphabetically\+:\begin{DoxyCompactList}
 \item \contentsline{section}{chunk\+\_\+strategies\+::Adaptive\+Strategy\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classchunk__strategies_1_1AdaptiveStrategy}}{}
+\item \contentsline{section}{chunk\+\_\+benchmark\+::Chunk\+Benchmark\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+::Benchmark\+Results}{\pageref{classchunk__benchmark_1_1ChunkBenchmark}}{}
 \item \contentsline{section}{advanced\+\_\+structures\+::Bloom\+Filter\+Chunk\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classadvanced__structures_1_1BloomFilterChunk}}{}
-\item \contentsline{section}{chunk\+\_\+config\+::Buffer\+Settings}{\pageref{structchunk__config_1_1BufferSettings}}{}
+\item \contentsline{section}{chunk\+\_\+resilience\+::Checkpoint\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{structchunk__resilience_1_1Checkpoint}}{}
 \item \contentsline{section}{Chunk\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classChunk}}{}
+\item \contentsline{section}{chunk\+\_\+benchmark\+::Chunk\+Benchmark\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classchunk__benchmark_1_1ChunkBenchmark}}{}
 \item \contentsline{section}{advanced\+\_\+structures\+::Chunk\+BPlus\+Tree\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classadvanced__structures_1_1ChunkBPlusTree}}{}
 \item \contentsline{section}{chunk\+\_\+compression\+::Chunk\+Compressor\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classchunk__compression_1_1ChunkCompressor}}{}
 \item \contentsline{section}{advanced\+\_\+structures\+::Chunk\+Deque\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classadvanced__structures_1_1ChunkDeque}}{}
 \item \contentsline{section}{chunk\+\_\+utils\+::Chunk\+Generator\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classchunk__utils_1_1ChunkGenerator}}{}
 \item \contentsline{section}{Chunk\+List\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classChunkList}}{}
+\item \contentsline{section}{advanced\+\_\+structures\+::Chunk\+LSMTree\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classadvanced__structures_1_1ChunkLSMTree}}{}
 \item \contentsline{section}{chunk\+\_\+utils\+::Chunk\+Manipulator\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classchunk__utils_1_1ChunkManipulator}}{}
+\item \contentsline{section}{chunk\+\_\+integrations\+::Chunk\+Message\+Queue}{\pageref{classchunk__integrations_1_1ChunkMessageQueue}}{}
 \item \contentsline{section}{Chunk\+Node\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{structChunkNode}}{}
-\item \contentsline{section}{chunk\+\_\+config\+::Chunk\+Settings}{\pageref{structchunk__config_1_1ChunkSettings}}{}
+\item \contentsline{section}{chunk\+\_\+metrics\+::Chunk\+Quality\+Analyzer\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classchunk__metrics_1_1ChunkQualityAnalyzer}}{}
+\item \contentsline{section}{chunk\+\_\+serialization\+::Chunk\+Serializer\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classchunk__serialization_1_1ChunkSerializer}}{}
 \item \contentsline{section}{advanced\+\_\+structures\+::Chunk\+Skip\+List\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classadvanced__structures_1_1ChunkSkipList}}{}
 \item \contentsline{section}{advanced\+\_\+structures\+::Chunk\+Stack\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classadvanced__structures_1_1ChunkStack}}{}
+\item \contentsline{section}{chunk\+\_\+benchmark\+::Chunk\+Strategy\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classchunk__benchmark_1_1ChunkStrategy}}{}
+\begin{DoxyCompactList}
+\item \contentsline{section}{Neural\+Chunking\+Strategy\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classNeuralChunkingStrategy}}{}
+\item \contentsline{section}{Similarity\+Chunking\+Strategy\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classSimilarityChunkingStrategy}}{}
+\end{DoxyCompactList}
 \item \contentsline{section}{chunk\+\_\+strategies\+::Chunk\+Strategy\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classchunk__strategies_1_1ChunkStrategy}}{}
 \begin{DoxyCompactList}
 \item \contentsline{section}{chunk\+\_\+strategies\+::Entropy\+Strategy\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classchunk__strategies_1_1EntropyStrategy}}{}
@@ -25,23 +35,40 @@ This inheritance list is sorted roughly, but not completely, alphabetically\+:\b
 \item \contentsline{section}{chunk\+\_\+strategies\+::Entropy\+Strategy\texorpdfstring{$<$}{<} std\+::string \texorpdfstring{$>$}{>}}{\pageref{classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4}}{}
 \end{DoxyCompactList}
 \item \contentsline{section}{advanced\+\_\+structures\+::Chunk\+Treap\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classadvanced__structures_1_1ChunkTreap}}{}
+\item \contentsline{section}{chunk\+\_\+viz\+::Chunk\+Visualizer\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classchunk__viz_1_1ChunkVisualizer}}{}
 \item \contentsline{section}{Circular\+Buffer\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classCircularBuffer}}{}
+\item \contentsline{section}{chunk\+\_\+integrations\+::Database\+Chunk\+Store}{\pageref{classchunk__integrations_1_1DatabaseChunkStore}}{}
+\item \contentsline{section}{chunk\+\_\+integrations\+::Database\+Connection}{\pageref{classchunk__integrations_1_1DatabaseConnection}}{}
 \item \contentsline{section}{advanced\+\_\+structures\+::Default\+NLPModel}{\pageref{structadvanced__structures_1_1DefaultNLPModel}}{}
 \item \contentsline{section}{sophisticated\+\_\+chunking\+::DTWChunking\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classsophisticated__chunking_1_1DTWChunking}}{}
 \item \contentsline{section}{chunk\+\_\+strategies\+::Dynamic\+Threshold\+Strategy\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classchunk__strategies_1_1DynamicThresholdStrategy}}{}
+\item std\+::exception\begin{DoxyCompactList}
+\item std\+::runtime\+\_\+error\begin{DoxyCompactList}
+\item \contentsline{section}{chunk\+\_\+resilience\+::Chunking\+Error}{\pageref{classchunk__resilience_1_1ChunkingError}}{}
+\end{DoxyCompactList}
+\end{DoxyCompactList}
 \item \contentsline{section}{advanced\+\_\+structures\+::Fractal\+Patterns\+Chunk\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classadvanced__structures_1_1FractalPatternsChunk}}{}
+\item \contentsline{section}{gpu\+\_\+chunking\+::GPUChunking\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classgpu__chunking_1_1GPUChunking}}{}
 \item \contentsline{section}{advanced\+\_\+structures\+::Graph\+Based\+Chunk\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classadvanced__structures_1_1GraphBasedChunk}}{}
+\item \contentsline{section}{chunk\+\_\+integrations\+::json}{\pageref{structchunk__integrations_1_1json}}{}
+\item \contentsline{section}{neural\+\_\+chunking\+::Layer}{\pageref{classneural__chunking_1_1Layer}}{}
+\item \contentsline{section}{advanced\+\_\+structures\+::Chunk\+LSMTree\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+::Level}{\pageref{structadvanced__structures_1_1ChunkLSMTree_1_1Level}}{}
+\item \contentsline{section}{chunk\+\_\+integrations\+::Message\+Queue\+Connection}{\pageref{classchunk__integrations_1_1MessageQueueConnection}}{}
 \item \contentsline{section}{chunk\+\_\+strategies\+::Multi\+Criteria\+Strategy\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classchunk__strategies_1_1MultiCriteriaStrategy}}{}
+\item \contentsline{section}{Multi\+Criteria\+Strategy\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classMultiCriteriaStrategy}}{}
 \item \contentsline{section}{sophisticated\+\_\+chunking\+::Mutual\+Information\+Chunking\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classsophisticated__chunking_1_1MutualInformationChunking}}{}
+\item \contentsline{section}{neural\+\_\+chunking\+::Neural\+Chunking\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classneural__chunking_1_1NeuralChunking}}{}
 \item \contentsline{section}{advanced\+\_\+structures\+::Chunk\+BPlus\+Tree\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+::Node}{\pageref{structadvanced__structures_1_1ChunkBPlusTree_1_1Node}}{}
 \item \contentsline{section}{advanced\+\_\+structures\+::Chunk\+Skip\+List\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+::Node}{\pageref{structadvanced__structures_1_1ChunkSkipList_1_1Node}}{}
 \item \contentsline{section}{advanced\+\_\+structures\+::Chunk\+Treap\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+::Node}{\pageref{structadvanced__structures_1_1ChunkTreap_1_1Node}}{}
 \item \contentsline{section}{parallel\+\_\+chunk\+::Parallel\+Chunk\+Processor\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classparallel__chunk_1_1ParallelChunkProcessor}}{}
 \item \contentsline{section}{chunk\+\_\+strategies\+::Pattern\+Based\+Strategy\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classchunk__strategies_1_1PatternBasedStrategy}}{}
 \item \contentsline{section}{Priority\+Queue\texorpdfstring{$<$}{<} T, Compare \texorpdfstring{$>$}{>}}{\pageref{classPriorityQueue}}{}
+\item \contentsline{section}{chunk\+\_\+resilience\+::Resilient\+Chunker\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classchunk__resilience_1_1ResilientChunker}}{}
 \item \contentsline{section}{advanced\+\_\+structures\+::Semantic\+Boundaries\+Chunk\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classadvanced__structures_1_1SemanticBoundariesChunk}}{}
 \item \contentsline{section}{advanced\+\_\+structures\+::Semantic\+Chunker\texorpdfstring{$<$}{<} Content\+Type, Model\+Type \texorpdfstring{$>$}{>}}{\pageref{classadvanced__structures_1_1SemanticChunker}}{}
 \item \contentsline{section}{advanced\+\_\+structures\+::Semantic\+Chunker\texorpdfstring{$<$}{<} std\+::string, Model\+Type \texorpdfstring{$>$}{>}}{\pageref{classadvanced__structures_1_1SemanticChunker_3_01std_1_1string_00_01ModelType_01_4}}{}
+\item \contentsline{section}{chunk\+\_\+metrics\+::Chunk\+Quality\+Analyzer\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+::Size\+Metrics}{\pageref{classchunk__metrics_1_1ChunkQualityAnalyzer}}{}
 \item \contentsline{section}{Sliding\+Window\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classSlidingWindow}}{}
 \item \contentsline{section}{chunk\+\_\+windows\+::Sliding\+Window\+Processor\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classchunk__windows_1_1SlidingWindowProcessor}}{}
 \item \contentsline{section}{chunk\+\_\+utils\+::Statistics\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}{\pageref{classchunk__utils_1_1Statistics}}{}
