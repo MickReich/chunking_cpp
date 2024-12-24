@@ -11,6 +11,7 @@
 #include <memory>
 #include <stdexcept> // for std::runtime_error
 #include <vector>
+#include "chunk_common.hpp"
 
 namespace neural_chunking {
 
@@ -19,7 +20,7 @@ namespace neural_chunking {
  * @tparam T Data type for layer computations
  */
 template <typename T>
-class Layer {
+class CHUNK_EXPORT Layer {
 public:
     Layer(size_t input_size, size_t output_size)
         : input_size_(input_size), output_size_(output_size) {
@@ -64,7 +65,7 @@ private:
 /**
  * @brief Configuration for neural network chunking
  */
-struct NeuralChunkConfig {
+struct CHUNK_EXPORT NeuralChunkConfig {
     size_t input_size;    ///< Size of input layer
     size_t hidden_size;   ///< Size of hidden layer
     double learning_rate; ///< Learning rate for training
@@ -77,7 +78,7 @@ struct NeuralChunkConfig {
  * @tparam T Data type of elements to chunk
  */
 template <typename T>
-class NeuralChunking {
+class CHUNK_EXPORT NeuralChunking {
 public:
     /**
      * @brief Constructor

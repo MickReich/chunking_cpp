@@ -12,6 +12,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include "chunk_common.hpp"
 
 #ifdef __linux__
 #include <unistd.h> // For getpagesize()
@@ -24,7 +25,7 @@ namespace chunk_benchmark {
  * @tparam T The data type of the chunks
  */
 template <typename T>
-class ChunkStrategy {
+class CHUNK_EXPORT ChunkStrategy {
 public:
     virtual ~ChunkStrategy() = default;
 
@@ -47,7 +48,7 @@ public:
  * @tparam T The data type of the chunks
  */
 template <typename T>
-class ChunkBenchmark {
+class CHUNK_EXPORT ChunkBenchmark {
 public:
     /**
      * @brief Constructor

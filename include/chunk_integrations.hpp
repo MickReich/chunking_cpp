@@ -9,13 +9,14 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include "chunk_common.hpp"
 
 namespace chunk_integrations {
 
 /**
  * @brief Abstract base class for database connections
  */
-class DatabaseConnection {
+class CHUNK_EXPORT DatabaseConnection {
 public:
     virtual ~DatabaseConnection() = default;
 
@@ -35,7 +36,7 @@ public:
 /**
  * @brief Class for storing chunks in various databases
  */
-class DatabaseChunkStore {
+class CHUNK_EXPORT DatabaseChunkStore {
 public:
     /**
      * @brief Constructor
@@ -71,7 +72,7 @@ private:
 /**
  * @brief Abstract base class for message queue connections
  */
-class MessageQueueConnection {
+class CHUNK_EXPORT MessageQueueConnection {
 public:
     virtual ~MessageQueueConnection() = default;
 
@@ -90,7 +91,7 @@ public:
 /**
  * @brief Class for publishing chunks to message queues
  */
-class ChunkMessageQueue {
+class CHUNK_EXPORT ChunkMessageQueue {
 public:
     /**
      * @brief Constructor

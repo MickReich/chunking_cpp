@@ -12,6 +12,7 @@
 #include <string>
 #include <type_traits>
 #include <vector>
+#include "chunk_common.hpp"
 
 namespace chunk_viz {
 
@@ -20,7 +21,7 @@ namespace chunk_viz {
  * @tparam T The data type of the chunks (must be arithmetic)
  */
 template <typename T>
-class ChunkVisualizer {
+class CHUNK_EXPORT ChunkVisualizer {
 private:
     std::vector<T>& chunks; ///< Reference to the chunks to visualize
     std::string output_dir; ///< Directory for output files
@@ -32,7 +33,8 @@ private:
      */
     std::string format_chunk(const T& chunk) {
         if constexpr (std::is_same_v<T, std::vector<int>> ||
-                      std::is_same_v<T, std::vector<double>>) {
+                      std::is_same_v<T, std::vector<double>> ||
+                      std::is_same_v<T, std::vector<float>>) {
             std::stringstream ss;
             ss << "[";
             for (size_t i = 0; i < chunk.size(); ++i) {
@@ -42,8 +44,10 @@ private:
             }
             ss << "]";
             return ss.str();
-        } else {
+        } else if constexpr (std::is_arithmetic_v<T>) {
             return std::to_string(chunk);
+        } else {
+            throw std::invalid_argument("Unsupported type for chunk visualization");
         }
     }
 

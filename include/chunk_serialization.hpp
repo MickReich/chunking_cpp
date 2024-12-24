@@ -9,6 +9,7 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include "chunk_common.hpp"
 
 namespace chunk_serialization {
 
@@ -17,7 +18,7 @@ namespace chunk_serialization {
  * @tparam T The data type of the chunks
  */
 template <typename T>
-class ChunkSerializer {
+class CHUNK_EXPORT ChunkSerializer {
 public:
     /**
      * @brief Serialize chunks to JSON format
