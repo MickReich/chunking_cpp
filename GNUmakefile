@@ -167,8 +167,8 @@ visualization:
 	@./chunk_visualization_demo
 
 pytest:
-	@pytest tests/python/py_bindings.py
+	@pytest tests/python/test_py_bindings.py
 
 pytest-coverage:
-	@pytest --cov=chunking_cpp --cov-report=html --cov-report=term tests/python/py_bindings.py
+	@pytest --cov=chunking_cpp --cov-report=html --cov-report=term tests/python/test_py_bindings.py
 	@echo "Coverage report generated in htmlcov/index.html"
