@@ -43,19 +43,31 @@ template <typename T>
 class WindowOperations {
 public:
     static T moving_average(const std::vector<T>& window) {
+        if (window.empty()) {
+            return T{}; // Return default value for empty input
+        }
         return std::accumulate(window.begin(), window.end(), T{}) / static_cast<T>(window.size());
     }
 
     static T moving_median(std::vector<T> window) {
+        if (window.empty()) {
+            throw std::invalid_argument("Cannot compute median of empty window");
+        }
         std::sort(window.begin(), window.end());
         return window[window.size() / 2];
     }
 
     static T moving_max(const std::vector<T>& window) {
+        if (window.empty()) {
+            throw std::invalid_argument("Cannot compute max of empty window");
+        }
         return *std::max_element(window.begin(), window.end());
     }
 
     static T moving_min(const std::vector<T>& window) {
+        if (window.empty()) {
+            throw std::invalid_argument("Cannot compute min of empty window");
+        }
         return *std::min_element(window.begin(), window.end());
     }
 };

@@ -98,36 +98,46 @@ private:
 
 template <typename T>
 std::vector<std::vector<T>> NeuralChunking<T>::chunk(const std::vector<T>& data) const {
+    // Handle empty input
+    if (data.empty()) {
+        return {};
+    }
+
+    // Handle input smaller than window size
     if (data.size() < window_size_) {
-        return {data}; // Return single chunk if data is too small
+        return {data};
     }
 
     std::vector<std::vector<T>> result;
     std::vector<T> current_chunk;
+    current_chunk.reserve(data.size());  // Optimize memory allocation
 
-    for (size_t i = 0; i <= data.size() - window_size_; ++i) {
-        // Add current element to chunk
-        current_chunk.push_back(data[i]);
+    // Add first element to start the first chunk
+    current_chunk.push_back(data[0]);
 
-        // Check if we should create a new chunk
-        if (i + window_size_ <= data.size()) {
-            // Calculate difference between current and next window
-            T diff = std::abs(data[i + window_size_ - 1] - data[i]);
-            if (diff > threshold_ && !current_chunk.empty()) {
-                result.push_back(current_chunk);
-                current_chunk.clear();
+    // Process the data
+    for (size_t i = 1; i < data.size(); ++i) {
+        // If we have enough elements to check window
+        if (i >= window_size_) {
+            T diff = std::abs(data[i] - data[i - window_size_]);
+            if (diff > threshold_) {
+                if (!current_chunk.empty()) {
+                    result.push_back(current_chunk);
+                    current_chunk.clear();
+                }
             }
         }
-    }
-
-    // Add remaining elements
-    for (size_t i = data.size() - window_size_ + 1; i < data.size(); ++i) {
         current_chunk.push_back(data[i]);
     }
 
-    // Add final chunk if not empty
+    // Add the last chunk if not empty
     if (!current_chunk.empty()) {
         result.push_back(current_chunk);
+    }
+
+    // If no chunks were created, return the entire data as one chunk
+    if (result.empty() && !data.empty()) {
+        return {data};
     }
 
     return result;
