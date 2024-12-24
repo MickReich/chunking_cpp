@@ -161,6 +161,34 @@ private:
     size_t window_size_;
     double dtw_threshold_;
 
+    template<typename U>
+    static bool is_multidimensional_v = is_vector<typename U::value_type>::value;
+
+    double compute_dtw_distance(const T& seq1, const T& seq2) const {
+        if constexpr (is_multidimensional_v<T>) {
+            // Handle multi-dimensional DTW
+            std::vector<double> features1 = flatten_features(seq1);
+            std::vector<double> features2 = flatten_features(seq2);
+            return compute_dtw_distance_1d(features1, features2);
+        } else {
+            return std::abs(static_cast<double>(seq1 - seq2));
+        }
+    }
+
+    template<typename U>
+    std::vector<double> flatten_features(const U& arr) const {
+        std::vector<double> result;
+        if constexpr (is_multidimensional_v<U>) {
+            for (const auto& inner : arr) {
+                auto inner_flat = flatten_features(inner);
+                result.insert(result.end(), inner_flat.begin(), inner_flat.end());
+            }
+        } else {
+            result.insert(result.end(), std::begin(arr), std::end(arr));
+        }
+        return result;
+    }
+
     /**
      * @brief Compute DTW distance between sequences
      * @param seq1 First sequence

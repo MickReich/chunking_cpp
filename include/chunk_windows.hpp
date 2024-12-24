@@ -14,11 +14,40 @@ private:
     size_t window_size_;
     size_t step_size_;
 
-    std::vector<T> process_chunks(const std::vector<std::vector<T>>& chunks,
-                                  std::function<T(const std::vector<T>&)> window_func) {
+    template<typename U>
+    static bool is_multidimensional_v = is_vector<typename U::value_type>::value;
+
+    template<typename U>
+    static double compute_window_feature(const U& window) {
+        if constexpr (is_multidimensional_v<U>) {
+            double sum = 0.0;
+            for (const auto& inner : window) {
+                sum += compute_window_feature(inner);
+            }
+            return sum / std::size(window);
+        } else {
+            return std::accumulate(std::begin(window), std::end(window), 0.0) / 
+                   std::size(window);
+        }
+    }
+
+    std::vector<T> process_multidimensional(
+        const std::vector<T>& data,
+        std::function<T(const std::vector<T>&)> window_func) {
+        // Implementation for multi-dimensional data
         std::vector<T> results;
-        for (size_t i = 0; i < chunks.size(); i += step_size_) {
-            const auto& chunk = chunks[i];
+        for (size_t i = 0; i <= data.size() - window_size_; i += step_size_) {
+            std::vector<T> window(data.begin() + i, data.begin() + i + window_size_);
+            results.push_back(window_func(window));
+        }
+        return results;
+    }
+
+    std::vector<T> process_single_dimensional(const std::vector<T>& data,
+                                               std::function<T(const std::vector<T>&)> window_func) {
+        std::vector<T> results;
+        for (size_t i = 0; i < data.size(); i += step_size_) {
+            const auto& chunk = data[i];
             if (chunk.size() >= window_size_) {
                 results.push_back(window_func(chunk));
             }
@@ -31,10 +60,12 @@ public:
         : window_size_(window_size), step_size_(step_size) {}
 
     std::vector<T> process(const std::vector<T>& data,
-                           std::function<T(const std::vector<T>&)> window_func) {
-        chunk_processing::Chunk<T> chunker(window_size_);
-        chunker.add(data);
-        return process_chunks(chunker.get_chunks(), window_func);
+                          std::function<T(const std::vector<T>&)> window_func) {
+        if constexpr (is_multidimensional_v<T>) {
+            return process_multidimensional(data, window_func);
+        } else {
+            return process_single_dimensional(data, window_func);
+        }
     }
 
     // Add getters
