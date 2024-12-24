@@ -187,9 +187,11 @@ public:
         : pattern_size_(0), predicate_(predicate) {}
 
     std::vector<std::vector<T>> apply(const std::vector<T>& data) const override {
-        chunk_processing::Chunk<T> chunker(1);
-        chunker.add(data);
-        
+        // Handle empty input first
+        if (data.empty()) {
+            return {};
+        }
+
         if (predicate_) {
             // Use predicate-based chunking
             std::vector<std::vector<T>> result;
@@ -209,8 +211,22 @@ public:
             
             return result;
         } else {
-            // Use size-based chunking
-            return chunker.chunk_by_size(pattern_size_);
+            // Size-based chunking
+            if (pattern_size_ == 0) {
+                return {data};  // Return single chunk if pattern size is 0
+            }
+            
+            // Handle empty input and small inputs
+            if (data.size() < pattern_size_) {
+                return data.empty() ? std::vector<std::vector<T>>{} : std::vector<std::vector<T>>{data};
+            }
+            
+            std::vector<std::vector<T>> result;
+            for (size_t i = 0; i < data.size(); i += pattern_size_) {
+                size_t end = std::min(i + pattern_size_, data.size());
+                result.emplace_back(data.begin() + i, data.begin() + end);
+            }
+            return result;
         }
     }
 
