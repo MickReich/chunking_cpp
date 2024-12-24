@@ -6,6 +6,7 @@
 #include <numeric>
 #include <random>
 #include <set>
+#include <stdexcept>
 #include <string>
 #include <type_traits>
 #include <vector>
@@ -44,6 +45,40 @@ public:
      * @return Vector of chunks
      */
     std::vector<std::vector<T>> chunk(const std::vector<T>& data) const;
+
+    /**
+     * @brief Get the size of the sliding window
+     * @return Size of the sliding window
+     */
+    size_t get_window_size() const {
+        return window_size_;
+    }
+
+    /**
+     * @brief Get the coefficient threshold for chunk boundaries
+     * @return Coefficient threshold for chunk boundaries
+     */
+    double get_threshold() const {
+        return threshold_;
+    }
+
+    /**
+     * @brief Set the size of the sliding window
+     * @param size Size of the sliding window
+     */
+    void set_window_size(size_t size) {
+        if (size == 0)
+            throw std::invalid_argument("Window size cannot be zero");
+        window_size_ = size;
+    }
+
+    /**
+     * @brief Set the coefficient threshold for chunk boundaries
+     * @param threshold Coefficient threshold for chunk boundaries
+     */
+    void set_threshold(double threshold) {
+        threshold_ = threshold;
+    }
 };
 
 /**
@@ -80,6 +115,40 @@ public:
      * @return Vector of chunks
      */
     std::vector<std::vector<T>> chunk(const std::vector<T>& data) const;
+
+    /**
+     * @brief Get the size of context window
+     * @return Size of context window
+     */
+    size_t get_context_size() const {
+        return context_size_;
+    }
+
+    /**
+     * @brief Get the threshold for mutual information
+     * @return Threshold for mutual information
+     */
+    double get_mi_threshold() const {
+        return mi_threshold_;
+    }
+
+    /**
+     * @brief Set the size of context window
+     * @param size Size of context window
+     */
+    void set_context_size(size_t size) {
+        if (size == 0)
+            throw std::invalid_argument("Context size cannot be zero");
+        context_size_ = size;
+    }
+
+    /**
+     * @brief Set the threshold for mutual information
+     * @param threshold Threshold for mutual information
+     */
+    void set_mi_threshold(double threshold) {
+        mi_threshold_ = threshold;
+    }
 };
 
 /**
@@ -106,7 +175,7 @@ public:
      * @param window_size Size of the warping window
      * @param dtw_threshold Threshold for chunk boundaries
      */
-    DTWChunking(size_t window_size = 10, double dtw_threshold = 2.0)
+    DTWChunking(size_t window_size = 10, double dtw_threshold = 1.0)
         : window_size_(window_size), dtw_threshold_(dtw_threshold) {}
 
     /**
@@ -115,6 +184,40 @@ public:
      * @return Vector of chunks
      */
     std::vector<std::vector<T>> chunk(const std::vector<T>& data) const;
+
+    /**
+     * @brief Get the size of the warping window
+     * @return Size of the warping window
+     */
+    size_t get_window_size() const {
+        return window_size_;
+    }
+
+    /**
+     * @brief Get the threshold for chunk boundaries
+     * @return Threshold for chunk boundaries
+     */
+    double get_dtw_threshold() const {
+        return dtw_threshold_;
+    }
+
+    /**
+     * @brief Set the size of the warping window
+     * @param size Size of the warping window
+     */
+    void set_window_size(size_t size) {
+        if (size == 0)
+            throw std::invalid_argument("Window size cannot be zero");
+        window_size_ = size;
+    }
+
+    /**
+     * @brief Set the threshold for chunk boundaries
+     * @param threshold Threshold for chunk boundaries
+     */
+    void set_dtw_threshold(double threshold) {
+        dtw_threshold_ = threshold;
+    }
 };
 
 template <typename T>

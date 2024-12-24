@@ -91,7 +91,11 @@ PYBIND11_MODULE(chunking_cpp, m) {
 
     py::class_<sophisticated_chunking::DTWChunking<double>>(m, "DTWChunking")
         .def(py::init<size_t, double>())
-        .def("chunk", &sophisticated_chunking::DTWChunking<double>::chunk);
+        .def("chunk", &sophisticated_chunking::DTWChunking<double>::chunk)
+        .def("set_window_size", &sophisticated_chunking::DTWChunking<double>::set_window_size)
+        .def("get_window_size", &sophisticated_chunking::DTWChunking<double>::get_window_size)
+        .def("set_dtw_threshold", &sophisticated_chunking::DTWChunking<double>::set_dtw_threshold)
+        .def("get_dtw_threshold", &sophisticated_chunking::DTWChunking<double>::get_dtw_threshold);
 
     // Chunk Metrics
     py::class_<chunk_metrics::ChunkQualityAnalyzer<double>>(m, "ChunkQualityAnalyzer")

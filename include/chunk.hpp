@@ -78,6 +78,9 @@ public:
         if (data_.empty()) {
             throw std::invalid_argument("Cannot chunk empty data");
         }
+        if (data_.size() < chunk_size_) {
+            throw std::invalid_argument("Input size must be at least chunk size");
+        }
         if (threshold <= T{}) {
             throw std::invalid_argument("Threshold must be positive");
         }
@@ -113,6 +116,19 @@ public:
 
     size_t chunk_count() const {
         return (data_.size() + chunk_size_ - 1) / chunk_size_;
+    }
+
+    size_t get_chunk_size() const {
+        return chunk_size_;
+    }
+    const std::vector<T>& get_data() const {
+        return data_;
+    }
+
+    void set_chunk_size(size_t new_size) {
+        validate_size(new_size, "Chunk size");
+        chunk_size_ = new_size;
+        update_chunks();
     }
 };
 

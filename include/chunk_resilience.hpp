@@ -308,6 +308,34 @@ public:
         }
         current_sequence.store(max_seq);
     }
+
+    // Add getters
+    size_t get_max_memory_usage() const {
+        return max_memory_usage;
+    }
+    size_t get_checkpoint_interval() const {
+        return checkpoint_interval;
+    }
+    size_t get_max_history_size() const {
+        return max_history_size;
+    }
+    size_t get_current_sequence() const {
+        return current_sequence.load();
+    }
+    const std::string& get_checkpoint_dir() const {
+        return checkpoint_dir;
+    }
+
+    // Add setters
+    void set_max_memory_usage(size_t usage) {
+        max_memory_usage = usage;
+    }
+    void set_checkpoint_interval(size_t interval) {
+        checkpoint_interval = interval;
+    }
+    void set_max_history_size(size_t size) {
+        max_history_size = size;
+    }
 };
 
 } // namespace chunk_resilience

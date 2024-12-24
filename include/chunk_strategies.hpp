@@ -122,6 +122,16 @@ public:
 
         return chunks;
     }
+
+    // Add getter
+    double get_threshold() const {
+        return threshold_;
+    }
+
+    // Add setter
+    void set_threshold(double threshold) {
+        threshold_ = threshold;
+    }
 };
 
 /**
@@ -231,6 +241,22 @@ public:
         }
     }
 
+    // Add getters
+    size_t get_pattern_size() const {
+        return pattern_size_;
+    }
+    const std::function<bool(T)>& get_predicate() const {
+        return predicate_;
+    }
+
+    // Add setters
+    void set_pattern_size(size_t size) {
+        pattern_size_ = size;
+    }
+    void set_predicate(std::function<bool(T)> pred) {
+        predicate_ = std::move(pred);
+    }
+
 private:
     size_t pattern_size_;
     std::function<bool(T)> predicate_;
@@ -247,6 +273,22 @@ public:
         chunk_processing::Chunk<T> chunker(1);
         chunker.add(data);
         return chunker.chunk_by_threshold(threshold_);
+    }
+
+    // Add getters
+    T get_threshold() const {
+        return threshold_;
+    }
+    const std::function<T(const std::vector<T>&)>& get_metric_calculator() const {
+        return metric_calculator_;
+    }
+
+    // Add setter
+    void set_threshold(T threshold) {
+        threshold_ = threshold;
+    }
+    void set_metric_calculator(std::function<T(const std::vector<T>&)> calculator) {
+        metric_calculator_ = std::move(calculator);
     }
 
 private:
@@ -277,6 +319,22 @@ public:
         return result;
     }
 
+    // Add getters
+    T get_similarity_threshold() const {
+        return similarity_threshold_;
+    }
+    size_t get_size_threshold() const {
+        return size_threshold_;
+    }
+
+    // Add setters
+    void set_similarity_threshold(T threshold) {
+        similarity_threshold_ = threshold;
+    }
+    void set_size_threshold(size_t size) {
+        size_threshold_ = size;
+    }
+
 private:
     T similarity_threshold_;
     size_t size_threshold_;
@@ -293,6 +351,28 @@ public:
         chunk_processing::Chunk<T> chunker(1);
         chunker.add(data);
         return chunker.chunk_by_threshold(initial_threshold_);
+    }
+
+    // Add getters
+    T get_initial_threshold() const {
+        return initial_threshold_;
+    }
+    T get_min_threshold() const {
+        return min_threshold_;
+    }
+    double get_decay_rate() const {
+        return decay_rate_;
+    }
+
+    // Add setters
+    void set_initial_threshold(T threshold) {
+        initial_threshold_ = threshold;
+    }
+    void set_min_threshold(T threshold) {
+        min_threshold_ = threshold;
+    }
+    void set_decay_rate(double rate) {
+        decay_rate_ = rate;
     }
 
 private:

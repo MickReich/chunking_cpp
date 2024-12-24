@@ -36,6 +36,26 @@ public:
         chunker.add(data);
         return process_chunks(chunker.get_chunks(), window_func);
     }
+
+    // Add getters
+    size_t get_window_size() const {
+        return window_size_;
+    }
+    size_t get_step_size() const {
+        return step_size_;
+    }
+
+    // Add setters
+    void set_window_size(size_t size) {
+        if (size == 0)
+            throw std::invalid_argument("Window size cannot be zero");
+        window_size_ = size;
+    }
+    void set_step_size(size_t size) {
+        if (size == 0)
+            throw std::invalid_argument("Step size cannot be zero");
+        step_size_ = size;
+    }
 };
 
 // Common window operations

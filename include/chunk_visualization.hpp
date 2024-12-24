@@ -132,5 +132,12 @@ public:
             << "     '" << output_dir
             << "/boundaries.dat' using 1:($3 * $2) with points pt 7 title 'Boundaries'\n";
     }
+
+    const std::vector<T>& get_data() const {
+        return data;
+    }
+    const std::string& get_output_dir() const {
+        return output_dir;
+    }
 };
 } // namespace chunk_viz
