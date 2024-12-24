@@ -113,7 +113,7 @@ Static Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
 class chunk_windows::WindowOperations&lt; T &gt;</div>
-<p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00035">35</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00063">63</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a929defeedb1b555fd782041e68927098" name="a929defeedb1b555fd782041e68927098"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a929defeedb1b555fd782041e68927098">&#9670;&#160;</a></span>moving_average()</h2>
@@ -141,10 +141,13 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00037">37</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   37</span>                                                        {</div>
-<div class="line"><span class="lineno">   38</span>        <span class="keywordflow">return</span> std::accumulate(window.begin(), window.end(), T{}) / <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(window.size());</div>
-<div class="line"><span class="lineno">   39</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00065">65</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   65</span>                                                        {</div>
+<div class="line"><span class="lineno">   66</span>        <span class="keywordflow">if</span> (window.empty()) {</div>
+<div class="line"><span class="lineno">   67</span>            <span class="keywordflow">return</span> T{}; <span class="comment">// Return default value for empty input</span></div>
+<div class="line"><span class="lineno">   68</span>        }</div>
+<div class="line"><span class="lineno">   69</span>        <span class="keywordflow">return</span> std::accumulate(window.begin(), window.end(), T{}) / <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(window.size());</div>
+<div class="line"><span class="lineno">   70</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -174,10 +177,13 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00046">46</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   46</span>                                                    {</div>
-<div class="line"><span class="lineno">   47</span>        <span class="keywordflow">return</span> *std::max_element(window.begin(), window.end());</div>
-<div class="line"><span class="lineno">   48</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00080">80</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   80</span>                                                    {</div>
+<div class="line"><span class="lineno">   81</span>        <span class="keywordflow">if</span> (window.empty()) {</div>
+<div class="line"><span class="lineno">   82</span>            <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Cannot compute max of empty window&quot;</span>);</div>
+<div class="line"><span class="lineno">   83</span>        }</div>
+<div class="line"><span class="lineno">   84</span>        <span class="keywordflow">return</span> *std::max_element(window.begin(), window.end());</div>
+<div class="line"><span class="lineno">   85</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -207,11 +213,14 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00041">41</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   41</span>                                                {</div>
-<div class="line"><span class="lineno">   42</span>        std::sort(window.begin(), window.end());</div>
-<div class="line"><span class="lineno">   43</span>        <span class="keywordflow">return</span> window[window.size() / 2];</div>
-<div class="line"><span class="lineno">   44</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00072">72</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   72</span>                                                {</div>
+<div class="line"><span class="lineno">   73</span>        <span class="keywordflow">if</span> (window.empty()) {</div>
+<div class="line"><span class="lineno">   74</span>            <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Cannot compute median of empty window&quot;</span>);</div>
+<div class="line"><span class="lineno">   75</span>        }</div>
+<div class="line"><span class="lineno">   76</span>        std::sort(window.begin(), window.end());</div>
+<div class="line"><span class="lineno">   77</span>        <span class="keywordflow">return</span> window[window.size() / 2];</div>
+<div class="line"><span class="lineno">   78</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -241,10 +250,13 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00050">50</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   50</span>                                                    {</div>
-<div class="line"><span class="lineno">   51</span>        <span class="keywordflow">return</span> *std::min_element(window.begin(), window.end());</div>
-<div class="line"><span class="lineno">   52</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00087">87</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   87</span>                                                    {</div>
+<div class="line"><span class="lineno">   88</span>        <span class="keywordflow">if</span> (window.empty()) {</div>
+<div class="line"><span class="lineno">   89</span>            <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Cannot compute min of empty window&quot;</span>);</div>
+<div class="line"><span class="lineno">   90</span>        }</div>
+<div class="line"><span class="lineno">   91</span>        <span class="keywordflow">return</span> *std::min_element(window.begin(), window.end());</div>
+<div class="line"><span class="lineno">   92</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -257,7 +269,7 @@ template&lt;typename T &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacechunk__windows.html">chunk_windows</a></li><li class="navelem"><a class="el" href="classchunk__windows_1_1WindowOperations.html">WindowOperations</a></li>
-    <li class="footer">Generated on Tue Dec 24 2024 10:05:58 for Advanced Chunk Processing Library by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Tue Dec 24 2024 23:08:35 for Advanced Chunk Processing Library by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

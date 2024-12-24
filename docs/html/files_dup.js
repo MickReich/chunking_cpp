@@ -5,12 +5,15 @@ var files_dup =
     [ "advanced_structures.hpp", "advanced__structures_8hpp.html", "advanced__structures_8hpp" ],
     [ "chunk.hpp", "chunk_8hpp.html", "chunk_8hpp" ],
     [ "chunk_benchmark.hpp", "chunk__benchmark_8hpp.html", "chunk__benchmark_8hpp" ],
+    [ "chunk_common.hpp", "chunk__common_8hpp.html", "chunk__common_8hpp" ],
     [ "chunk_compression.hpp", "chunk__compression_8hpp.html", "chunk__compression_8hpp" ],
+    [ "chunk_errors.hpp", "chunk__errors_8hpp.html", "chunk__errors_8hpp" ],
     [ "chunk_integrations.hpp", "chunk__integrations_8hpp.html", "chunk__integrations_8hpp" ],
     [ "chunk_metrics.hpp", "chunk__metrics_8hpp.html", "chunk__metrics_8hpp" ],
     [ "chunk_resilience.hpp", "chunk__resilience_8hpp.html", "chunk__resilience_8hpp" ],
     [ "chunk_serialization.hpp", "chunk__serialization_8hpp.html", "chunk__serialization_8hpp" ],
     [ "chunk_strategies.hpp", "chunk__strategies_8hpp.html", "chunk__strategies_8hpp" ],
+    [ "chunk_strategy_implementations.hpp", "chunk__strategy__implementations_8hpp.html", "chunk__strategy__implementations_8hpp" ],
     [ "chunk_visualization.hpp", "chunk__visualization_8hpp.html", "chunk__visualization_8hpp" ],
     [ "chunk_windows.hpp", "chunk__windows_8hpp.html", "chunk__windows_8hpp" ],
     [ "config.hpp", "config_8hpp.html", null ],
@@ -20,5 +23,6 @@ var files_dup =
     [ "parallel_chunk.hpp", "parallel__chunk_8hpp.html", "parallel__chunk_8hpp" ],
     [ "sophisticated_chunking.hpp", "sophisticated__chunking_8hpp.html", "sophisticated__chunking_8hpp" ],
     [ "sub_chunk_strategies.hpp", "sub__chunk__strategies_8hpp.html", "sub__chunk__strategies_8hpp" ],
-    [ "utils.hpp", "utils_8hpp.html", "utils_8hpp" ]
+    [ "utils.hpp", "utils_8hpp.html", "utils_8hpp" ],
+    [ "wavelet_chunking.hpp", "wavelet__chunking_8hpp.html", "wavelet__chunking_8hpp" ]
 ];

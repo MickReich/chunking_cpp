@@ -4,12 +4,42 @@
 
 {\ttfamily \#include $<$chunk\+\_\+strategies.\+hpp$>$}
 
+
+
+Inheritance diagram for chunk\+\_\+strategies\+::Dynamic\+Threshold\+Strategy\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{classchunk__strategies_1_1DynamicThresholdStrategy__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for chunk\+\_\+strategies\+::Dynamic\+Threshold\+Strategy\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{classchunk__strategies_1_1DynamicThresholdStrategy__coll__graph}
+\end{center}
+\end{figure}
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_a85fd9149cd16f1704b17455d1b8b185e}{Dynamic\+Threshold\+Strategy}} (T initial\+\_\+threshold, T min\+\_\+threshold, double decay\+\_\+rate)
 \item 
-std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_a63091382e9074ef041cb4d5f4b1d07fe}{apply}} (const std\+::vector$<$ T $>$ \&data)
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_a30706c78700c94e07dbf0a3cf1acda36}{apply}} (const std\+::vector$<$ T $>$ \&data) const override
+\begin{DoxyCompactList}\small\item\em Applies the chunking strategy to the data. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_ac877ceb3ab7ee41ccd9d23334c8e0c46}{get\+\_\+decay\+\_\+rate}} () const
+\item 
+T \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_a33dd5996dcc887d229015da75a0035d8}{get\+\_\+initial\+\_\+threshold}} () const
+\item 
+T \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_a6c45def3dba4850538995c34d06cab70}{get\+\_\+min\+\_\+threshold}} () const
+\item 
+void \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_a2f6ca1ed0b503a59ea6f2a4906e37ef6}{set\+\_\+decay\+\_\+rate}} (double rate)
+\item 
+void \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_aee899be6b6ce7e70998cd50ad6c95232}{set\+\_\+initial\+\_\+threshold}} (T threshold)
+\item 
+void \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_aede227a6f6ae38395496a7d5ec85e550}{set\+\_\+min\+\_\+threshold}} (T threshold)
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -27,7 +57,7 @@ T \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_ab7356983f
 class chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy$<$ T $>$}
 
 
-Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00241}{241}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00344}{344}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
 
 
 
@@ -41,49 +71,188 @@ Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00241}{241}} 
 
 
 
-Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00243}{243}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00346}{346}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_a65205da0285271fc7f1220f13ccf91e7}{initial\_threshold\_}}(initial\_threshold),\ \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_ab7356983f39465ce95a1af3563c10dd6}{min\_threshold\_}}(min\_threshold),}
-\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_a5aa3d0f901a01c0abc35e1b816a4bd58}{decay\_rate\_}}(decay\_rate)\ \{\}}
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_a65205da0285271fc7f1220f13ccf91e7}{initial\_threshold\_}}(initial\_threshold),\ \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_ab7356983f39465ce95a1af3563c10dd6}{min\_threshold\_}}(min\_threshold),}
+\DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_a5aa3d0f901a01c0abc35e1b816a4bd58}{decay\_rate\_}}(decay\_rate)\ \{\}}
 
 \end{DoxyCode}
 
 
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classchunk__strategies_1_1DynamicThresholdStrategy_a63091382e9074ef041cb4d5f4b1d07fe}\label{classchunk__strategies_1_1DynamicThresholdStrategy_a63091382e9074ef041cb4d5f4b1d07fe} 
+\Hypertarget{classchunk__strategies_1_1DynamicThresholdStrategy_a30706c78700c94e07dbf0a3cf1acda36}\label{classchunk__strategies_1_1DynamicThresholdStrategy_a30706c78700c94e07dbf0a3cf1acda36} 
 \index{chunk\_strategies::DynamicThresholdStrategy$<$ T $>$@{chunk\_strategies::DynamicThresholdStrategy$<$ T $>$}!apply@{apply}}
 \index{apply@{apply}!chunk\_strategies::DynamicThresholdStrategy$<$ T $>$@{chunk\_strategies::DynamicThresholdStrategy$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{apply()}{apply()}}
 {\footnotesize\ttfamily template$<$typename T $>$ \\
-std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy}{chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy}}$<$ T $>$\+::apply (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ T $>$ \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy}{chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy}}$<$ T $>$\+::apply (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ T $>$ \&}]{data }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
-Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00247}{247}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+Applies the chunking strategy to the data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data to chunk \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector of chunks 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classchunk__strategies_1_1ChunkStrategy_a403010d65da39c1a873874582760bfce}{chunk\+\_\+strategies\+::\+Chunk\+Strategy$<$ T $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00350}{350}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classChunk}{Chunk<T>}}\ chunker(1);}
-\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ chunker.add(data);}
-\DoxyCodeLine{00250\ }
-\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ T\ current\_threshold\ =\ \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_a65205da0285271fc7f1220f13ccf91e7}{initial\_threshold\_}};}
-\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ chunker.chunk\_by\_predicate([\textcolor{keyword}{this},\ \&current\_threshold](T\ x)\ \{}
-\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ T\ last\ =\ x;}
-\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ start\_new\ =\ std::abs(x\ -\/\ last)\ >\ current\_threshold;}
-\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \ \ \ \ current\_threshold\ =}
-\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::max(\mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_ab7356983f39465ce95a1af3563c10dd6}{min\_threshold\_}},\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(current\_threshold\ *\ \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_a5aa3d0f901a01c0abc35e1b816a4bd58}{decay\_rate\_}}));}
-\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \ \ \ \ last\ =\ x;}
-\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ start\_new;}
-\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \});}
-\DoxyCodeLine{00260\ \ \ \ \ \}}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classchunk__processing_1_1Chunk}{chunk\_processing::Chunk<T>}}\ chunker(1);}
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ chunker.add(data);}
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ chunker.chunk\_by\_threshold(\mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_a65205da0285271fc7f1220f13ccf91e7}{initial\_threshold\_}});}
+\DoxyCodeLine{00354\ \ \ \ \ \}}
 
 \end{DoxyCode}
 
 
-References \mbox{\hyperlink{chunk_8hpp_source_l00144}{Chunk$<$ T $>$\+::add()}}, \mbox{\hyperlink{chunk_8hpp_source_l00194}{Chunk$<$ T $>$\+::chunk\+\_\+by\+\_\+predicate()}}, \mbox{\hyperlink{chunk__strategies_8hpp_source_l00265}{chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy$<$ T $>$\+::decay\+\_\+rate\+\_\+}}, \mbox{\hyperlink{chunk__strategies_8hpp_source_l00263}{chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy$<$ T $>$\+::initial\+\_\+threshold\+\_\+}}, and \mbox{\hyperlink{chunk__strategies_8hpp_source_l00264}{chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy$<$ T $>$\+::min\+\_\+threshold\+\_\+}}.
+References \mbox{\hyperlink{chunk_8hpp_source_l00057}{chunk\+\_\+processing\+::\+Chunk$<$ T $>$\+::add()}}, \mbox{\hyperlink{chunk_8hpp_source_l00077}{chunk\+\_\+processing\+::\+Chunk$<$ T $>$\+::chunk\+\_\+by\+\_\+threshold()}}, and \mbox{\hyperlink{chunk__strategies_8hpp_source_l00379}{chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy$<$ T $>$\+::initial\+\_\+threshold\+\_\+}}.
+
+\Hypertarget{classchunk__strategies_1_1DynamicThresholdStrategy_ac877ceb3ab7ee41ccd9d23334c8e0c46}\label{classchunk__strategies_1_1DynamicThresholdStrategy_ac877ceb3ab7ee41ccd9d23334c8e0c46} 
+\index{chunk\_strategies::DynamicThresholdStrategy$<$ T $>$@{chunk\_strategies::DynamicThresholdStrategy$<$ T $>$}!get\_decay\_rate@{get\_decay\_rate}}
+\index{get\_decay\_rate@{get\_decay\_rate}!chunk\_strategies::DynamicThresholdStrategy$<$ T $>$@{chunk\_strategies::DynamicThresholdStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{get\_decay\_rate()}{get\_decay\_rate()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+double \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy}{chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy}}$<$ T $>$\+::get\+\_\+decay\+\_\+rate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00363}{363}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00363\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00364\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_a5aa3d0f901a01c0abc35e1b816a4bd58}{decay\_rate\_}};}
+\DoxyCodeLine{00365\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk__strategies_8hpp_source_l00381}{chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy$<$ T $>$\+::decay\+\_\+rate\+\_\+}}.
+
+\Hypertarget{classchunk__strategies_1_1DynamicThresholdStrategy_a33dd5996dcc887d229015da75a0035d8}\label{classchunk__strategies_1_1DynamicThresholdStrategy_a33dd5996dcc887d229015da75a0035d8} 
+\index{chunk\_strategies::DynamicThresholdStrategy$<$ T $>$@{chunk\_strategies::DynamicThresholdStrategy$<$ T $>$}!get\_initial\_threshold@{get\_initial\_threshold}}
+\index{get\_initial\_threshold@{get\_initial\_threshold}!chunk\_strategies::DynamicThresholdStrategy$<$ T $>$@{chunk\_strategies::DynamicThresholdStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{get\_initial\_threshold()}{get\_initial\_threshold()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy}{chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy}}$<$ T $>$\+::get\+\_\+initial\+\_\+threshold (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00357}{357}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_a65205da0285271fc7f1220f13ccf91e7}{initial\_threshold\_}};}
+\DoxyCodeLine{00359\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk__strategies_8hpp_source_l00379}{chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy$<$ T $>$\+::initial\+\_\+threshold\+\_\+}}.
+
+\Hypertarget{classchunk__strategies_1_1DynamicThresholdStrategy_a6c45def3dba4850538995c34d06cab70}\label{classchunk__strategies_1_1DynamicThresholdStrategy_a6c45def3dba4850538995c34d06cab70} 
+\index{chunk\_strategies::DynamicThresholdStrategy$<$ T $>$@{chunk\_strategies::DynamicThresholdStrategy$<$ T $>$}!get\_min\_threshold@{get\_min\_threshold}}
+\index{get\_min\_threshold@{get\_min\_threshold}!chunk\_strategies::DynamicThresholdStrategy$<$ T $>$@{chunk\_strategies::DynamicThresholdStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{get\_min\_threshold()}{get\_min\_threshold()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy}{chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy}}$<$ T $>$\+::get\+\_\+min\+\_\+threshold (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00360}{360}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00361\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_ab7356983f39465ce95a1af3563c10dd6}{min\_threshold\_}};}
+\DoxyCodeLine{00362\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk__strategies_8hpp_source_l00380}{chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy$<$ T $>$\+::min\+\_\+threshold\+\_\+}}.
+
+\Hypertarget{classchunk__strategies_1_1DynamicThresholdStrategy_a2f6ca1ed0b503a59ea6f2a4906e37ef6}\label{classchunk__strategies_1_1DynamicThresholdStrategy_a2f6ca1ed0b503a59ea6f2a4906e37ef6} 
+\index{chunk\_strategies::DynamicThresholdStrategy$<$ T $>$@{chunk\_strategies::DynamicThresholdStrategy$<$ T $>$}!set\_decay\_rate@{set\_decay\_rate}}
+\index{set\_decay\_rate@{set\_decay\_rate}!chunk\_strategies::DynamicThresholdStrategy$<$ T $>$@{chunk\_strategies::DynamicThresholdStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{set\_decay\_rate()}{set\_decay\_rate()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy}{chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy}}$<$ T $>$\+::set\+\_\+decay\+\_\+rate (\begin{DoxyParamCaption}\item[{double}]{rate }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00374}{374}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00375\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_a5aa3d0f901a01c0abc35e1b816a4bd58}{decay\_rate\_}}\ =\ rate;}
+\DoxyCodeLine{00376\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk__strategies_8hpp_source_l00381}{chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy$<$ T $>$\+::decay\+\_\+rate\+\_\+}}.
+
+\Hypertarget{classchunk__strategies_1_1DynamicThresholdStrategy_aee899be6b6ce7e70998cd50ad6c95232}\label{classchunk__strategies_1_1DynamicThresholdStrategy_aee899be6b6ce7e70998cd50ad6c95232} 
+\index{chunk\_strategies::DynamicThresholdStrategy$<$ T $>$@{chunk\_strategies::DynamicThresholdStrategy$<$ T $>$}!set\_initial\_threshold@{set\_initial\_threshold}}
+\index{set\_initial\_threshold@{set\_initial\_threshold}!chunk\_strategies::DynamicThresholdStrategy$<$ T $>$@{chunk\_strategies::DynamicThresholdStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{set\_initial\_threshold()}{set\_initial\_threshold()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy}{chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy}}$<$ T $>$\+::set\+\_\+initial\+\_\+threshold (\begin{DoxyParamCaption}\item[{T}]{threshold }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00368}{368}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00369\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_a65205da0285271fc7f1220f13ccf91e7}{initial\_threshold\_}}\ =\ threshold;}
+\DoxyCodeLine{00370\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk__strategies_8hpp_source_l00379}{chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy$<$ T $>$\+::initial\+\_\+threshold\+\_\+}}.
+
+\Hypertarget{classchunk__strategies_1_1DynamicThresholdStrategy_aede227a6f6ae38395496a7d5ec85e550}\label{classchunk__strategies_1_1DynamicThresholdStrategy_aede227a6f6ae38395496a7d5ec85e550} 
+\index{chunk\_strategies::DynamicThresholdStrategy$<$ T $>$@{chunk\_strategies::DynamicThresholdStrategy$<$ T $>$}!set\_min\_threshold@{set\_min\_threshold}}
+\index{set\_min\_threshold@{set\_min\_threshold}!chunk\_strategies::DynamicThresholdStrategy$<$ T $>$@{chunk\_strategies::DynamicThresholdStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{set\_min\_threshold()}{set\_min\_threshold()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy}{chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy}}$<$ T $>$\+::set\+\_\+min\+\_\+threshold (\begin{DoxyParamCaption}\item[{T}]{threshold }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00371}{371}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy_ab7356983f39465ce95a1af3563c10dd6}{min\_threshold\_}}\ =\ threshold;}
+\DoxyCodeLine{00373\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk__strategies_8hpp_source_l00380}{chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy$<$ T $>$\+::min\+\_\+threshold\+\_\+}}.
 
 
 
@@ -97,11 +266,11 @@ double \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy}{chun
 
 
 
-Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00265}{265}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00381}{381}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
 
 
 
-Referenced by \mbox{\hyperlink{chunk__strategies_8hpp_source_l00247}{chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy$<$ T $>$\+::apply()}}.
+Referenced by \mbox{\hyperlink{chunk__strategies_8hpp_source_l00363}{chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy$<$ T $>$\+::get\+\_\+decay\+\_\+rate()}}, and \mbox{\hyperlink{chunk__strategies_8hpp_source_l00374}{chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy$<$ T $>$\+::set\+\_\+decay\+\_\+rate()}}.
 
 \Hypertarget{classchunk__strategies_1_1DynamicThresholdStrategy_a65205da0285271fc7f1220f13ccf91e7}\label{classchunk__strategies_1_1DynamicThresholdStrategy_a65205da0285271fc7f1220f13ccf91e7} 
 \index{chunk\_strategies::DynamicThresholdStrategy$<$ T $>$@{chunk\_strategies::DynamicThresholdStrategy$<$ T $>$}!initial\_threshold\_@{initial\_threshold\_}}
@@ -112,11 +281,11 @@ T \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy}{chunk\+\_
 
 
 
-Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00263}{263}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00379}{379}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
 
 
 
-Referenced by \mbox{\hyperlink{chunk__strategies_8hpp_source_l00247}{chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy$<$ T $>$\+::apply()}}.
+Referenced by \mbox{\hyperlink{chunk__strategies_8hpp_source_l00350}{chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy$<$ T $>$\+::apply()}}, \mbox{\hyperlink{chunk__strategies_8hpp_source_l00357}{chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy$<$ T $>$\+::get\+\_\+initial\+\_\+threshold()}}, and \mbox{\hyperlink{chunk__strategies_8hpp_source_l00368}{chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy$<$ T $>$\+::set\+\_\+initial\+\_\+threshold()}}.
 
 \Hypertarget{classchunk__strategies_1_1DynamicThresholdStrategy_ab7356983f39465ce95a1af3563c10dd6}\label{classchunk__strategies_1_1DynamicThresholdStrategy_ab7356983f39465ce95a1af3563c10dd6} 
 \index{chunk\_strategies::DynamicThresholdStrategy$<$ T $>$@{chunk\_strategies::DynamicThresholdStrategy$<$ T $>$}!min\_threshold\_@{min\_threshold\_}}
@@ -127,11 +296,11 @@ T \mbox{\hyperlink{classchunk__strategies_1_1DynamicThresholdStrategy}{chunk\+\_
 
 
 
-Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00264}{264}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00380}{380}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
 
 
 
-Referenced by \mbox{\hyperlink{chunk__strategies_8hpp_source_l00247}{chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy$<$ T $>$\+::apply()}}.
+Referenced by \mbox{\hyperlink{chunk__strategies_8hpp_source_l00360}{chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy$<$ T $>$\+::get\+\_\+min\+\_\+threshold()}}, and \mbox{\hyperlink{chunk__strategies_8hpp_source_l00371}{chunk\+\_\+strategies\+::\+Dynamic\+Threshold\+Strategy$<$ T $>$\+::set\+\_\+min\+\_\+threshold()}}.
 
 
 

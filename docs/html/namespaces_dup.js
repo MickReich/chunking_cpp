@@ -5,6 +5,7 @@ var namespaces_dup =
     [ "chunk_compression", "namespacechunk__compression.html", "namespacechunk__compression" ],
     [ "chunk_integrations", "namespacechunk__integrations.html", "namespacechunk__integrations" ],
     [ "chunk_metrics", "namespacechunk__metrics.html", "namespacechunk__metrics" ],
+    [ "chunk_processing", "namespacechunk__processing.html", "namespacechunk__processing" ],
     [ "chunk_resilience", "namespacechunk__resilience.html", "namespacechunk__resilience" ],
     [ "chunk_serialization", "namespacechunk__serialization.html", "namespacechunk__serialization" ],
     [ "chunk_strategies", "namespacechunk__strategies.html", "namespacechunk__strategies" ],

@@ -4,12 +4,38 @@
 
 {\ttfamily \#include $<$chunk\+\_\+strategies.\+hpp$>$}
 
+
+
+Inheritance diagram for chunk\+\_\+strategies\+::Multi\+Criteria\+Strategy\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{classchunk__strategies_1_1MultiCriteriaStrategy__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for chunk\+\_\+strategies\+::Multi\+Criteria\+Strategy\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{classchunk__strategies_1_1MultiCriteriaStrategy__coll__graph}
+\end{center}
+\end{figure}
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_ac687cdaa7dfb1a90090de3eda9e322b8}{Multi\+Criteria\+Strategy}} (T similarity\+\_\+threshold, size\+\_\+t size\+\_\+threshold)
 \item 
-std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_a8a85a1b358887a7cac4885b432e8c967}{apply}} (const std\+::vector$<$ T $>$ \&data)
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_a515f6797c6085b0458c78be4b7d131b4}{apply}} (const std\+::vector$<$ T $>$ \&data) const override
+\begin{DoxyCompactList}\small\item\em Applies the chunking strategy to the data. \end{DoxyCompactList}\item 
+T \mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_aab1c31b52abcb805e88dfc7d1b39dbed}{get\+\_\+similarity\+\_\+threshold}} () const
+\item 
+size\+\_\+t \mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_a5264c173140a7cb559d9c531870282db}{get\+\_\+size\+\_\+threshold}} () const
+\item 
+void \mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_ac251bc208020ac1b9b6e13dec734ad62}{set\+\_\+similarity\+\_\+threshold}} (T threshold)
+\item 
+void \mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_af86fff7fd38f502f1f44bc88db36e235}{set\+\_\+size\+\_\+threshold}} (size\+\_\+t size)
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -25,7 +51,7 @@ size\+\_\+t \mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_acd
 class chunk\+\_\+strategies\+::\+Multi\+Criteria\+Strategy$<$ T $>$}
 
 
-Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00213}{213}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00300}{300}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
 
 
 
@@ -39,50 +65,154 @@ Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00213}{213}} 
 
 
 
-Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00215}{215}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00302}{302}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_a73310ee374122d57e5dfcdeaee0d05f8}{similarity\_threshold\_}}(similarity\_threshold),\ \mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_acddcbcfb32bc36ed74ec0664c906c175}{size\_threshold\_}}(size\_threshold)\ \{\}}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_a73310ee374122d57e5dfcdeaee0d05f8}{similarity\_threshold\_}}(similarity\_threshold),\ \mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_acddcbcfb32bc36ed74ec0664c906c175}{size\_threshold\_}}(size\_threshold)\ \{\}}
 
 \end{DoxyCode}
 
 
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classchunk__strategies_1_1MultiCriteriaStrategy_a8a85a1b358887a7cac4885b432e8c967}\label{classchunk__strategies_1_1MultiCriteriaStrategy_a8a85a1b358887a7cac4885b432e8c967} 
+\Hypertarget{classchunk__strategies_1_1MultiCriteriaStrategy_a515f6797c6085b0458c78be4b7d131b4}\label{classchunk__strategies_1_1MultiCriteriaStrategy_a515f6797c6085b0458c78be4b7d131b4} 
 \index{chunk\_strategies::MultiCriteriaStrategy$<$ T $>$@{chunk\_strategies::MultiCriteriaStrategy$<$ T $>$}!apply@{apply}}
 \index{apply@{apply}!chunk\_strategies::MultiCriteriaStrategy$<$ T $>$@{chunk\_strategies::MultiCriteriaStrategy$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{apply()}{apply()}}
 {\footnotesize\ttfamily template$<$typename T $>$ \\
-std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy}{chunk\+\_\+strategies\+::\+Multi\+Criteria\+Strategy}}$<$ T $>$\+::apply (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ T $>$ \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy}{chunk\+\_\+strategies\+::\+Multi\+Criteria\+Strategy}}$<$ T $>$\+::apply (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ T $>$ \&}]{data }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
-Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00218}{218}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+Applies the chunking strategy to the data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data to chunk \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector of chunks 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classchunk__strategies_1_1ChunkStrategy_a403010d65da39c1a873874582760bfce}{chunk\+\_\+strategies\+::\+Chunk\+Strategy$<$ T $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00305}{305}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Step\ 1:\ Similarity-\/based\ chunking}}
-\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classChunk}{Chunk<T>}}\ initial\_chunker(1);}
-\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ initial\_chunker.add(data);}
-\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ similarity\_chunks\ =\ initial\_chunker.chunk\_by\_similarity(\mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_a73310ee374122d57e5dfcdeaee0d05f8}{similarity\_threshold\_}});}
-\DoxyCodeLine{00223\ }
-\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Step\ 2:\ Size-\/based\ chunking}}
-\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
-\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ chunk\ :\ similarity\_chunks)\ \{}
-\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classChunk}{Chunk<T>}}\ size\_chunker(\mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_acddcbcfb32bc36ed74ec0664c906c175}{size\_threshold\_}});}
-\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \ \ \ \ size\_chunker.add(chunk);}
-\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ sized\_chunks\ =\ size\_chunker.get\_chunks();}
-\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ \ \ result.insert(result.end(),\ sized\_chunks.begin(),\ sized\_chunks.end());}
-\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
-\DoxyCodeLine{00233\ \ \ \ \ \}}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Step\ 1:\ Similarity-\/based\ chunking}}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classchunk__processing_1_1Chunk}{chunk\_processing::Chunk<T>}}\ initial\_chunker(1);}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ initial\_chunker.add(data);}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ similarity\_chunks\ =\ initial\_chunker.chunk\_by\_threshold(\mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_a73310ee374122d57e5dfcdeaee0d05f8}{similarity\_threshold\_}});}
+\DoxyCodeLine{00310\ }
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Step\ 2:\ Size-\/based\ chunking}}
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ chunk\ :\ similarity\_chunks)\ \{}
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classchunk__processing_1_1Chunk}{chunk\_processing::Chunk<T>}}\ size\_chunker(\mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_acddcbcfb32bc36ed74ec0664c906c175}{size\_threshold\_}});}
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \ \ \ \ size\_chunker.add(chunk);}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ sized\_chunks\ =\ size\_chunker.get\_chunks();}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \ \ \ \ result.insert(result.end(),\ sized\_chunks.begin(),\ sized\_chunks.end());}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00320\ \ \ \ \ \}}
 
 \end{DoxyCode}
 
 
-References \mbox{\hyperlink{chunk_8hpp_source_l00144}{Chunk$<$ T $>$\+::add()}}, \mbox{\hyperlink{chunk_8hpp_source_l00287}{Chunk$<$ T $>$\+::chunk\+\_\+by\+\_\+similarity()}}, \mbox{\hyperlink{chunk_8hpp_source_l00162}{Chunk$<$ T $>$\+::get\+\_\+chunks()}}, \mbox{\hyperlink{chunk__strategies_8hpp_source_l00236}{chunk\+\_\+strategies\+::\+Multi\+Criteria\+Strategy$<$ T $>$\+::similarity\+\_\+threshold\+\_\+}}, and \mbox{\hyperlink{chunk__strategies_8hpp_source_l00237}{chunk\+\_\+strategies\+::\+Multi\+Criteria\+Strategy$<$ T $>$\+::size\+\_\+threshold\+\_\+}}.
+References \mbox{\hyperlink{chunk_8hpp_source_l00057}{chunk\+\_\+processing\+::\+Chunk$<$ T $>$\+::add()}}, \mbox{\hyperlink{chunk_8hpp_source_l00077}{chunk\+\_\+processing\+::\+Chunk$<$ T $>$\+::chunk\+\_\+by\+\_\+threshold()}}, \mbox{\hyperlink{chunk_8hpp_source_l00109}{chunk\+\_\+processing\+::\+Chunk$<$ T $>$\+::get\+\_\+chunks()}}, \mbox{\hyperlink{chunk__strategies_8hpp_source_l00339}{chunk\+\_\+strategies\+::\+Multi\+Criteria\+Strategy$<$ T $>$\+::similarity\+\_\+threshold\+\_\+}}, and \mbox{\hyperlink{chunk__strategies_8hpp_source_l00340}{chunk\+\_\+strategies\+::\+Multi\+Criteria\+Strategy$<$ T $>$\+::size\+\_\+threshold\+\_\+}}.
+
+\Hypertarget{classchunk__strategies_1_1MultiCriteriaStrategy_aab1c31b52abcb805e88dfc7d1b39dbed}\label{classchunk__strategies_1_1MultiCriteriaStrategy_aab1c31b52abcb805e88dfc7d1b39dbed} 
+\index{chunk\_strategies::MultiCriteriaStrategy$<$ T $>$@{chunk\_strategies::MultiCriteriaStrategy$<$ T $>$}!get\_similarity\_threshold@{get\_similarity\_threshold}}
+\index{get\_similarity\_threshold@{get\_similarity\_threshold}!chunk\_strategies::MultiCriteriaStrategy$<$ T $>$@{chunk\_strategies::MultiCriteriaStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{get\_similarity\_threshold()}{get\_similarity\_threshold()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T \mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy}{chunk\+\_\+strategies\+::\+Multi\+Criteria\+Strategy}}$<$ T $>$\+::get\+\_\+similarity\+\_\+threshold (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00323}{323}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_a73310ee374122d57e5dfcdeaee0d05f8}{similarity\_threshold\_}};}
+\DoxyCodeLine{00325\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk__strategies_8hpp_source_l00339}{chunk\+\_\+strategies\+::\+Multi\+Criteria\+Strategy$<$ T $>$\+::similarity\+\_\+threshold\+\_\+}}.
+
+\Hypertarget{classchunk__strategies_1_1MultiCriteriaStrategy_a5264c173140a7cb559d9c531870282db}\label{classchunk__strategies_1_1MultiCriteriaStrategy_a5264c173140a7cb559d9c531870282db} 
+\index{chunk\_strategies::MultiCriteriaStrategy$<$ T $>$@{chunk\_strategies::MultiCriteriaStrategy$<$ T $>$}!get\_size\_threshold@{get\_size\_threshold}}
+\index{get\_size\_threshold@{get\_size\_threshold}!chunk\_strategies::MultiCriteriaStrategy$<$ T $>$@{chunk\_strategies::MultiCriteriaStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{get\_size\_threshold()}{get\_size\_threshold()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+size\+\_\+t \mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy}{chunk\+\_\+strategies\+::\+Multi\+Criteria\+Strategy}}$<$ T $>$\+::get\+\_\+size\+\_\+threshold (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00326}{326}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_acddcbcfb32bc36ed74ec0664c906c175}{size\_threshold\_}};}
+\DoxyCodeLine{00328\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk__strategies_8hpp_source_l00340}{chunk\+\_\+strategies\+::\+Multi\+Criteria\+Strategy$<$ T $>$\+::size\+\_\+threshold\+\_\+}}.
+
+\Hypertarget{classchunk__strategies_1_1MultiCriteriaStrategy_ac251bc208020ac1b9b6e13dec734ad62}\label{classchunk__strategies_1_1MultiCriteriaStrategy_ac251bc208020ac1b9b6e13dec734ad62} 
+\index{chunk\_strategies::MultiCriteriaStrategy$<$ T $>$@{chunk\_strategies::MultiCriteriaStrategy$<$ T $>$}!set\_similarity\_threshold@{set\_similarity\_threshold}}
+\index{set\_similarity\_threshold@{set\_similarity\_threshold}!chunk\_strategies::MultiCriteriaStrategy$<$ T $>$@{chunk\_strategies::MultiCriteriaStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{set\_similarity\_threshold()}{set\_similarity\_threshold()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy}{chunk\+\_\+strategies\+::\+Multi\+Criteria\+Strategy}}$<$ T $>$\+::set\+\_\+similarity\+\_\+threshold (\begin{DoxyParamCaption}\item[{T}]{threshold }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00331}{331}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_a73310ee374122d57e5dfcdeaee0d05f8}{similarity\_threshold\_}}\ =\ threshold;}
+\DoxyCodeLine{00333\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk__strategies_8hpp_source_l00339}{chunk\+\_\+strategies\+::\+Multi\+Criteria\+Strategy$<$ T $>$\+::similarity\+\_\+threshold\+\_\+}}.
+
+\Hypertarget{classchunk__strategies_1_1MultiCriteriaStrategy_af86fff7fd38f502f1f44bc88db36e235}\label{classchunk__strategies_1_1MultiCriteriaStrategy_af86fff7fd38f502f1f44bc88db36e235} 
+\index{chunk\_strategies::MultiCriteriaStrategy$<$ T $>$@{chunk\_strategies::MultiCriteriaStrategy$<$ T $>$}!set\_size\_threshold@{set\_size\_threshold}}
+\index{set\_size\_threshold@{set\_size\_threshold}!chunk\_strategies::MultiCriteriaStrategy$<$ T $>$@{chunk\_strategies::MultiCriteriaStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{set\_size\_threshold()}{set\_size\_threshold()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy}{chunk\+\_\+strategies\+::\+Multi\+Criteria\+Strategy}}$<$ T $>$\+::set\+\_\+size\+\_\+threshold (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00334}{334}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy_acddcbcfb32bc36ed74ec0664c906c175}{size\_threshold\_}}\ =\ size;}
+\DoxyCodeLine{00336\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk__strategies_8hpp_source_l00340}{chunk\+\_\+strategies\+::\+Multi\+Criteria\+Strategy$<$ T $>$\+::size\+\_\+threshold\+\_\+}}.
 
 
 
@@ -96,11 +226,11 @@ T \mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy}{chunk\+\_\+s
 
 
 
-Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00236}{236}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00339}{339}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
 
 
 
-Referenced by \mbox{\hyperlink{chunk__strategies_8hpp_source_l00218}{chunk\+\_\+strategies\+::\+Multi\+Criteria\+Strategy$<$ T $>$\+::apply()}}.
+Referenced by \mbox{\hyperlink{chunk__strategies_8hpp_source_l00305}{chunk\+\_\+strategies\+::\+Multi\+Criteria\+Strategy$<$ T $>$\+::apply()}}, \mbox{\hyperlink{chunk__strategies_8hpp_source_l00323}{chunk\+\_\+strategies\+::\+Multi\+Criteria\+Strategy$<$ T $>$\+::get\+\_\+similarity\+\_\+threshold()}}, and \mbox{\hyperlink{chunk__strategies_8hpp_source_l00331}{chunk\+\_\+strategies\+::\+Multi\+Criteria\+Strategy$<$ T $>$\+::set\+\_\+similarity\+\_\+threshold()}}.
 
 \Hypertarget{classchunk__strategies_1_1MultiCriteriaStrategy_acddcbcfb32bc36ed74ec0664c906c175}\label{classchunk__strategies_1_1MultiCriteriaStrategy_acddcbcfb32bc36ed74ec0664c906c175} 
 \index{chunk\_strategies::MultiCriteriaStrategy$<$ T $>$@{chunk\_strategies::MultiCriteriaStrategy$<$ T $>$}!size\_threshold\_@{size\_threshold\_}}
@@ -111,11 +241,11 @@ size\+\_\+t \mbox{\hyperlink{classchunk__strategies_1_1MultiCriteriaStrategy}{ch
 
 
 
-Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00237}{237}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00340}{340}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
 
 
 
-Referenced by \mbox{\hyperlink{chunk__strategies_8hpp_source_l00218}{chunk\+\_\+strategies\+::\+Multi\+Criteria\+Strategy$<$ T $>$\+::apply()}}.
+Referenced by \mbox{\hyperlink{chunk__strategies_8hpp_source_l00305}{chunk\+\_\+strategies\+::\+Multi\+Criteria\+Strategy$<$ T $>$\+::apply()}}, \mbox{\hyperlink{chunk__strategies_8hpp_source_l00326}{chunk\+\_\+strategies\+::\+Multi\+Criteria\+Strategy$<$ T $>$\+::get\+\_\+size\+\_\+threshold()}}, and \mbox{\hyperlink{chunk__strategies_8hpp_source_l00334}{chunk\+\_\+strategies\+::\+Multi\+Criteria\+Strategy$<$ T $>$\+::set\+\_\+size\+\_\+threshold()}}.
 
 
 

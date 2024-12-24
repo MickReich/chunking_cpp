@@ -125,6 +125,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4398d1a575689801304c0a6e2b51ce60" id="r_a4398d1a575689801304c0a6e2b51ce60"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; T &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classchunk__strategies_1_1VarianceStrategy.html#a4398d1a575689801304c0a6e2b51ce60">apply</a> (const std::vector&lt; T &gt; &amp;data) const override</td></tr>
 <tr class="memdesc:a4398d1a575689801304c0a6e2b51ce60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the chunking strategy to the data.  <br /></td></tr>
 <tr class="separator:a4398d1a575689801304c0a6e2b51ce60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d34f2529c820b68a0fa259d6100d139" id="r_a4d34f2529c820b68a0fa259d6100d139"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classchunk__strategies_1_1VarianceStrategy.html#a4d34f2529c820b68a0fa259d6100d139">get_threshold</a> () const</td></tr>
+<tr class="separator:a4d34f2529c820b68a0fa259d6100d139"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31af76691387d55d54583952814fcde5" id="r_a31af76691387d55d54583952814fcde5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classchunk__strategies_1_1VarianceStrategy.html#a31af76691387d55d54583952814fcde5">set_threshold</a> (double threshold)</td></tr>
+<tr class="separator:a31af76691387d55d54583952814fcde5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -283,6 +287,75 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="a4d34f2529c820b68a0fa259d6100d139" name="a4d34f2529c820b68a0fa259d6100d139"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d34f2529c820b68a0fa259d6100d139">&#9670;&#160;</a></span>get_threshold()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classchunk__strategies_1_1VarianceStrategy.html">chunk_strategies::VarianceStrategy</a>&lt; T &gt;::get_threshold </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="chunk__strategies_8hpp_source.html#l00127">127</a> of file <a class="el" href="chunk__strategies_8hpp_source.html">chunk_strategies.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  127</span>                                 {</div>
+<div class="line"><span class="lineno">  128</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classchunk__strategies_1_1VarianceStrategy.html#a57923fa38b90022ba7786ef882b137f1">threshold_</a>;</div>
+<div class="line"><span class="lineno">  129</span>    }</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="chunk__strategies_8hpp_source.html#l00087">chunk_strategies::VarianceStrategy&lt; T &gt;::threshold_</a>.</p>
+
+</div>
+</div>
+<a id="a31af76691387d55d54583952814fcde5" name="a31af76691387d55d54583952814fcde5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31af76691387d55d54583952814fcde5">&#9670;&#160;</a></span>set_threshold()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classchunk__strategies_1_1VarianceStrategy.html">chunk_strategies::VarianceStrategy</a>&lt; T &gt;::set_threshold </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>threshold</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="chunk__strategies_8hpp_source.html#l00132">132</a> of file <a class="el" href="chunk__strategies_8hpp_source.html">chunk_strategies.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  132</span>                                         {</div>
+<div class="line"><span class="lineno">  133</span>        <a class="code hl_variable" href="classchunk__strategies_1_1VarianceStrategy.html#a57923fa38b90022ba7786ef882b137f1">threshold_</a> = threshold;</div>
+<div class="line"><span class="lineno">  134</span>    }</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="chunk__strategies_8hpp_source.html#l00087">chunk_strategies::VarianceStrategy&lt; T &gt;::threshold_</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="a57923fa38b90022ba7786ef882b137f1" name="a57923fa38b90022ba7786ef882b137f1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a57923fa38b90022ba7786ef882b137f1">&#9670;&#160;</a></span>threshold_</h2>
@@ -308,7 +381,7 @@ template&lt;typename T &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="chunk__strategies_8hpp_source.html#l00087">87</a> of file <a class="el" href="chunk__strategies_8hpp_source.html">chunk_strategies.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="chunk__strategies_8hpp_source.html#l00104">chunk_strategies::VarianceStrategy&lt; T &gt;::apply()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="chunk__strategies_8hpp_source.html#l00104">chunk_strategies::VarianceStrategy&lt; T &gt;::apply()</a>, <a class="el" href="chunk__strategies_8hpp_source.html#l00127">chunk_strategies::VarianceStrategy&lt; T &gt;::get_threshold()</a>, and <a class="el" href="chunk__strategies_8hpp_source.html#l00132">chunk_strategies::VarianceStrategy&lt; T &gt;::set_threshold()</a>.</p>
 
 </div>
 </div>
@@ -321,7 +394,7 @@ template&lt;typename T &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacechunk__strategies.html">chunk_strategies</a></li><li class="navelem"><a class="el" href="classchunk__strategies_1_1VarianceStrategy.html">VarianceStrategy</a></li>
-    <li class="footer">Generated on Tue Dec 24 2024 10:05:58 for Advanced Chunk Processing Library by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Tue Dec 24 2024 23:08:35 for Advanced Chunk Processing Library by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

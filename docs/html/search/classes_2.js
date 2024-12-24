@@ -1,13 +1,13 @@
 var searchData=
 [
   ['checkpoint_0',['Checkpoint',['../structchunk__resilience_1_1Checkpoint.html',1,'chunk_resilience']]],
-  ['chunk_1',['Chunk',['../classChunk.html',1,'']]],
+  ['chunk_1',['Chunk',['../classchunk__processing_1_1Chunk.html',1,'chunk_processing']]],
   ['chunkbenchmark_2',['ChunkBenchmark',['../classchunk__benchmark_1_1ChunkBenchmark.html',1,'chunk_benchmark']]],
   ['chunkbplustree_3',['ChunkBPlusTree',['../classadvanced__structures_1_1ChunkBPlusTree.html',1,'advanced_structures']]],
   ['chunkcompressor_4',['ChunkCompressor',['../classchunk__compression_1_1ChunkCompressor.html',1,'chunk_compression']]],
   ['chunkdeque_5',['ChunkDeque',['../classadvanced__structures_1_1ChunkDeque.html',1,'advanced_structures']]],
   ['chunkgenerator_6',['ChunkGenerator',['../classchunk__utils_1_1ChunkGenerator.html',1,'chunk_utils']]],
-  ['chunkingerror_7',['ChunkingError',['../classchunk__resilience_1_1ChunkingError.html',1,'chunk_resilience']]],
+  ['chunkingerror_7',['ChunkingError',['../classchunk__processing_1_1ChunkingError.html',1,'chunk_processing']]],
   ['chunklist_8',['ChunkList',['../classChunkList.html',1,'']]],
   ['chunklsmtree_9',['ChunkLSMTree',['../classadvanced__structures_1_1ChunkLSMTree.html',1,'advanced_structures']]],
   ['chunkmanipulator_10',['ChunkManipulator',['../classchunk__utils_1_1ChunkManipulator.html',1,'chunk_utils']]],

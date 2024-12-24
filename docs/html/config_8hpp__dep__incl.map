@@ -1,22 +1,5 @@
 <map id="config.hpp" name="config.hpp">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,95,31"/>
-<area shape="rect" id="Node000002" href="$main_8cpp.html" title="Demonstrates various chunking strategies and operations." alt="" coords="69,343,252,412"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="43,44,33,79,23,123,17,172,21,221,29,260,48,293,73,319,101,340,98,345,69,323,44,296,24,261,15,222,12,172,17,122,28,77,38,43"/>
-<area shape="rect" id="Node000003" href="$chunk_8hpp.html" title="Template class for chunk&#45;based data processing." alt="" coords="193,79,283,104"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="94,33,208,76,206,81,92,38"/>
-<area shape="poly" id="edge4_Node000003_Node000002" title=" " alt="" coords="180,95,143,99,104,109,68,127,39,154,27,177,25,202,31,227,43,252,79,301,120,340,116,344,75,304,38,255,26,229,20,202,22,176,35,150,65,122,102,104,142,94,179,90"/>
-<area shape="rect" id="Node000004" href="$benchmark_8cpp.html" title="Implementation of benchmarking utilities." alt="" coords="49,152,232,221"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="218,115,178,154,174,150,214,112"/>
-<area shape="rect" id="Node000005" href="$chunk__strategies_8hpp.html" title="Defines various strategies for chunking data based on different criteria." alt="" coords="256,174,417,199"/>
-<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="262,112,326,172,323,176,258,115"/>
-<area shape="rect" id="Node000007" href="$chunk__windows_8hpp.html" title=" " alt="" coords="347,269,500,295"/>
-<area shape="poly" id="edge9_Node000003_Node000007" title=" " alt="" coords="297,91,332,96,369,107,403,124,431,150,444,181,444,215,438,246,431,270,426,268,433,245,439,214,438,182,426,154,400,128,367,111,331,101,296,96"/>
-<area shape="rect" id="Node000008" href="$parallel__chunk_8hpp.html" title=" " alt="" coords="524,269,669,295"/>
-<area shape="poly" id="edge11_Node000003_Node000008" title=" " alt="" coords="297,98,375,117,417,131,457,150,499,178,537,211,589,267,585,271,533,215,496,182,454,154,415,136,373,122,296,103"/>
-<area shape="poly" id="edge6_Node000005_Node000002" title=" " alt="" coords="293,207,121,271,115,287,117,305,124,324,134,341,130,344,119,326,111,306,110,287,117,267,291,202"/>
-<area shape="rect" id="Node000006" href="$sub__chunk__strategies_8hpp.html" title="Advanced sub&#45;chunking strategies for hierarchical data processing." alt="" coords="132,269,323,295"/>
-<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="314,210,243,271,239,267,311,206"/>
-<area shape="poly" id="edge8_Node000006_Node000002" title=" " alt="" coords="214,307,187,344,183,341,209,304"/>
-<area shape="poly" id="edge10_Node000007_Node000002" title=" " alt="" coords="379,302,253,346,252,341,377,297"/>
-<area shape="poly" id="edge12_Node000008_Node000002" title=" " alt="" coords="530,300,253,359,252,354,529,295"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="52,5,141,31"/>
+<area shape="rect" id="Node000002" href="$main_8cpp.html" title="Demonstrates various chunking strategies and operations." alt="" coords="5,79,188,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,44,99,79,94,79,94,44"/>
 </map>

@@ -135,7 +135,7 @@ Private Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="chunk__strategies_8hpp_source.html#l00269">269</a> of file <a class="el" href="chunk__strategies_8hpp_source.html">chunk_strategies.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="chunk__strategies_8hpp_source.html#l00385">385</a> of file <a class="el" href="chunk__strategies_8hpp_source.html">chunk_strategies.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="abc8a7bcb710fd2d18c9b2170d376a9b0" name="abc8a7bcb710fd2d18c9b2170d376a9b0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abc8a7bcb710fd2d18c9b2170d376a9b0">&#9670;&#160;</a></span>EntropyStrategy()</h2>
@@ -161,9 +161,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="chunk__strategies_8hpp_source.html#l00291">291</a> of file <a class="el" href="chunk__strategies_8hpp_source.html">chunk_strategies.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  291</span>: <a class="code hl_variable" href="classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4.html#ab76d84aa029eb8a5691aaf4b1e662531">threshold_</a>(threshold) {}</div>
-<div class="ttc" id="aclasschunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4_html_ab76d84aa029eb8a5691aaf4b1e662531"><div class="ttname"><a href="classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4.html#ab76d84aa029eb8a5691aaf4b1e662531">chunk_strategies::EntropyStrategy&lt; std::string &gt;::threshold_</a></div><div class="ttdeci">double threshold_</div><div class="ttdef"><b>Definition</b> <a href="chunk__strategies_8hpp_source.html#l00270">chunk_strategies.hpp:270</a></div></div>
+<p class="definition">Definition at line <a class="el" href="chunk__strategies_8hpp_source.html#l00407">407</a> of file <a class="el" href="chunk__strategies_8hpp_source.html">chunk_strategies.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  407</span>: <a class="code hl_variable" href="classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4.html#ab76d84aa029eb8a5691aaf4b1e662531">threshold_</a>(threshold) {}</div>
+<div class="ttc" id="aclasschunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4_html_ab76d84aa029eb8a5691aaf4b1e662531"><div class="ttname"><a href="classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4.html#ab76d84aa029eb8a5691aaf4b1e662531">chunk_strategies::EntropyStrategy&lt; std::string &gt;::threshold_</a></div><div class="ttdeci">double threshold_</div><div class="ttdef"><b>Definition</b> <a href="chunk__strategies_8hpp_source.html#l00386">chunk_strategies.hpp:386</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -203,31 +203,31 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classchunk__strategies_1_1ChunkStrategy.html#a403010d65da39c1a873874582760bfce">chunk_strategies::ChunkStrategy&lt; std::string &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="chunk__strategies_8hpp_source.html#l00294">294</a> of file <a class="el" href="chunk__strategies_8hpp_source.html">chunk_strategies.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  294</span>                                                           {</div>
-<div class="line"><span class="lineno">  295</span>        std::vector&lt;std::vector&lt;std::string&gt;&gt; chunks;</div>
-<div class="line"><span class="lineno">  296</span>        std::vector&lt;std::string&gt; current_chunk;</div>
-<div class="line"><span class="lineno">  297</span> </div>
-<div class="line"><span class="lineno">  298</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; value : data) {</div>
-<div class="line"><span class="lineno">  299</span>            current_chunk.push_back(value);</div>
-<div class="line"><span class="lineno">  300</span>            <span class="keywordflow">if</span> (<a class="code hl_function" href="classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4.html#acf313613a958786314458ad73859e063">calculate_entropy</a>(current_chunk) &gt; <a class="code hl_variable" href="classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4.html#ab76d84aa029eb8a5691aaf4b1e662531">threshold_</a>) {</div>
-<div class="line"><span class="lineno">  301</span>                <span class="keywordflow">if</span> (current_chunk.size() &gt; 1) {</div>
-<div class="line"><span class="lineno">  302</span>                    current_chunk.pop_back();</div>
-<div class="line"><span class="lineno">  303</span>                    chunks.push_back(current_chunk);</div>
-<div class="line"><span class="lineno">  304</span>                    current_chunk = {value};</div>
-<div class="line"><span class="lineno">  305</span>                }</div>
-<div class="line"><span class="lineno">  306</span>            }</div>
-<div class="line"><span class="lineno">  307</span>        }</div>
-<div class="line"><span class="lineno">  308</span> </div>
-<div class="line"><span class="lineno">  309</span>        <span class="keywordflow">if</span> (!current_chunk.empty()) {</div>
-<div class="line"><span class="lineno">  310</span>            chunks.push_back(current_chunk);</div>
-<div class="line"><span class="lineno">  311</span>        }</div>
-<div class="line"><span class="lineno">  312</span> </div>
-<div class="line"><span class="lineno">  313</span>        <span class="keywordflow">return</span> chunks;</div>
-<div class="line"><span class="lineno">  314</span>    }</div>
-<div class="ttc" id="aclasschunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4_html_acf313613a958786314458ad73859e063"><div class="ttname"><a href="classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4.html#acf313613a958786314458ad73859e063">chunk_strategies::EntropyStrategy&lt; std::string &gt;::calculate_entropy</a></div><div class="ttdeci">double calculate_entropy(const std::vector&lt; std::string &gt; &amp;values) const</div><div class="ttdef"><b>Definition</b> <a href="chunk__strategies_8hpp_source.html#l00272">chunk_strategies.hpp:272</a></div></div>
+<p class="definition">Definition at line <a class="el" href="chunk__strategies_8hpp_source.html#l00410">410</a> of file <a class="el" href="chunk__strategies_8hpp_source.html">chunk_strategies.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  410</span>                                                           {</div>
+<div class="line"><span class="lineno">  411</span>        std::vector&lt;std::vector&lt;std::string&gt;&gt; chunks;</div>
+<div class="line"><span class="lineno">  412</span>        std::vector&lt;std::string&gt; current_chunk;</div>
+<div class="line"><span class="lineno">  413</span> </div>
+<div class="line"><span class="lineno">  414</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; value : data) {</div>
+<div class="line"><span class="lineno">  415</span>            current_chunk.push_back(value);</div>
+<div class="line"><span class="lineno">  416</span>            <span class="keywordflow">if</span> (<a class="code hl_function" href="classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4.html#acf313613a958786314458ad73859e063">calculate_entropy</a>(current_chunk) &gt; <a class="code hl_variable" href="classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4.html#ab76d84aa029eb8a5691aaf4b1e662531">threshold_</a>) {</div>
+<div class="line"><span class="lineno">  417</span>                <span class="keywordflow">if</span> (current_chunk.size() &gt; 1) {</div>
+<div class="line"><span class="lineno">  418</span>                    current_chunk.pop_back();</div>
+<div class="line"><span class="lineno">  419</span>                    chunks.push_back(current_chunk);</div>
+<div class="line"><span class="lineno">  420</span>                    current_chunk = {value};</div>
+<div class="line"><span class="lineno">  421</span>                }</div>
+<div class="line"><span class="lineno">  422</span>            }</div>
+<div class="line"><span class="lineno">  423</span>        }</div>
+<div class="line"><span class="lineno">  424</span> </div>
+<div class="line"><span class="lineno">  425</span>        <span class="keywordflow">if</span> (!current_chunk.empty()) {</div>
+<div class="line"><span class="lineno">  426</span>            chunks.push_back(current_chunk);</div>
+<div class="line"><span class="lineno">  427</span>        }</div>
+<div class="line"><span class="lineno">  428</span> </div>
+<div class="line"><span class="lineno">  429</span>        <span class="keywordflow">return</span> chunks;</div>
+<div class="line"><span class="lineno">  430</span>    }</div>
+<div class="ttc" id="aclasschunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4_html_acf313613a958786314458ad73859e063"><div class="ttname"><a href="classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4.html#acf313613a958786314458ad73859e063">chunk_strategies::EntropyStrategy&lt; std::string &gt;::calculate_entropy</a></div><div class="ttdeci">double calculate_entropy(const std::vector&lt; std::string &gt; &amp;values) const</div><div class="ttdef"><b>Definition</b> <a href="chunk__strategies_8hpp_source.html#l00388">chunk_strategies.hpp:388</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="chunk__strategies_8hpp_source.html#l00134">chunk_strategies::EntropyStrategy&lt; T &gt;::calculate_entropy()</a>, and <a class="el" href="chunk__strategies_8hpp_source.html#l00132">chunk_strategies::EntropyStrategy&lt; T &gt;::threshold_</a>.</p>
+<p class="reference">References <a class="el" href="chunk__strategies_8hpp_source.html#l00144">chunk_strategies::EntropyStrategy&lt; T &gt;::calculate_entropy()</a>, and <a class="el" href="chunk__strategies_8hpp_source.html#l00142">chunk_strategies::EntropyStrategy&lt; T &gt;::threshold_</a>.</p>
 
 </div>
 </div>
@@ -255,24 +255,24 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="chunk__strategies_8hpp_source.html#l00272">272</a> of file <a class="el" href="chunk__strategies_8hpp_source.html">chunk_strategies.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  272</span>                                                                       {</div>
-<div class="line"><span class="lineno">  273</span>        <span class="keywordflow">if</span> (values.empty())</div>
-<div class="line"><span class="lineno">  274</span>            <span class="keywordflow">return</span> 0.0;</div>
-<div class="line"><span class="lineno">  275</span> </div>
-<div class="line"><span class="lineno">  276</span>        std::map&lt;std::string, int&gt; freq;</div>
-<div class="line"><span class="lineno">  277</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; val : values) {</div>
-<div class="line"><span class="lineno">  278</span>            freq[val]++;</div>
-<div class="line"><span class="lineno">  279</span>        }</div>
-<div class="line"><span class="lineno">  280</span> </div>
-<div class="line"><span class="lineno">  281</span>        <span class="keywordtype">double</span> entropy = 0.0;</div>
-<div class="line"><span class="lineno">  282</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; [_, count] : freq) {</div>
-<div class="line"><span class="lineno">  283</span>            <span class="keywordtype">double</span> p = <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(count) / values.size();</div>
-<div class="line"><span class="lineno">  284</span>            entropy -= p * std::log2(p);</div>
-<div class="line"><span class="lineno">  285</span>        }</div>
-<div class="line"><span class="lineno">  286</span> </div>
-<div class="line"><span class="lineno">  287</span>        <span class="keywordflow">return</span> entropy;</div>
-<div class="line"><span class="lineno">  288</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="chunk__strategies_8hpp_source.html#l00388">388</a> of file <a class="el" href="chunk__strategies_8hpp_source.html">chunk_strategies.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  388</span>                                                                       {</div>
+<div class="line"><span class="lineno">  389</span>        <span class="keywordflow">if</span> (values.empty())</div>
+<div class="line"><span class="lineno">  390</span>            <span class="keywordflow">return</span> 0.0;</div>
+<div class="line"><span class="lineno">  391</span> </div>
+<div class="line"><span class="lineno">  392</span>        std::map&lt;std::string, int&gt; freq;</div>
+<div class="line"><span class="lineno">  393</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; val : values) {</div>
+<div class="line"><span class="lineno">  394</span>            freq[val]++;</div>
+<div class="line"><span class="lineno">  395</span>        }</div>
+<div class="line"><span class="lineno">  396</span> </div>
+<div class="line"><span class="lineno">  397</span>        <span class="keywordtype">double</span> entropy = 0.0;</div>
+<div class="line"><span class="lineno">  398</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; [_, count] : freq) {</div>
+<div class="line"><span class="lineno">  399</span>            <span class="keywordtype">double</span> p = <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(count) / values.size();</div>
+<div class="line"><span class="lineno">  400</span>            entropy -= p * std::log2(p);</div>
+<div class="line"><span class="lineno">  401</span>        }</div>
+<div class="line"><span class="lineno">  402</span> </div>
+<div class="line"><span class="lineno">  403</span>        <span class="keywordflow">return</span> entropy;</div>
+<div class="line"><span class="lineno">  404</span>    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -297,7 +297,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="chunk__strategies_8hpp_source.html#l00270">270</a> of file <a class="el" href="chunk__strategies_8hpp_source.html">chunk_strategies.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="chunk__strategies_8hpp_source.html#l00386">386</a> of file <a class="el" href="chunk__strategies_8hpp_source.html">chunk_strategies.hpp</a>.</p>
 
 </div>
 </div>
@@ -310,7 +310,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacechunk__strategies.html">chunk_strategies</a></li><li class="navelem"><a class="el" href="classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4.html">EntropyStrategy&lt; std::string &gt;</a></li>
-    <li class="footer">Generated on Tue Dec 24 2024 10:05:58 for Advanced Chunk Processing Library by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Tue Dec 24 2024 23:08:34 for Advanced Chunk Processing Library by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

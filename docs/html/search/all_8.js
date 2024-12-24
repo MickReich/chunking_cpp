@@ -1,7 +1,7 @@
 var searchData=
 [
   ['initial_5fthreshold_5f_0',['initial_threshold_',['../classchunk__strategies_1_1DynamicThresholdStrategy.html#a65205da0285271fc7f1220f13ccf91e7',1,'chunk_strategies::DynamicThresholdStrategy']]],
-  ['initialize_5fmodel_1',['initialize_model',['../classneural__chunking_1_1NeuralChunking.html#a05f42b798735a6e790c4f7be2577ea3d',1,'neural_chunking::NeuralChunking']]],
+  ['initialize_5fcheckpoint_5fdir_1',['initialize_checkpoint_dir',['../classchunk__resilience_1_1ResilientChunker.html#af5af4328859afde0b4e1a8bcac872ab5',1,'chunk_resilience::ResilientChunker']]],
   ['initialize_5fweights_2',['initialize_weights',['../classneural__chunking_1_1Layer.html#a46a79397b8b98cf78567df453d9f523f',1,'neural_chunking::Layer']]],
   ['input_5fsize_3',['input_size',['../namespaceneural__chunking.html#a462b23d2ce0b2d92148cea20e5bb680f',1,'neural_chunking::NeuralChunkConfig']]],
   ['input_5fsize_5f_4',['input_size_',['../classneural__chunking_1_1Layer.html#af34860e556d7038bdbcaacd26208504d',1,'neural_chunking::Layer']]],
