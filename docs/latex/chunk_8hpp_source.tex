@@ -3,349 +3,138 @@
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
 \DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00002}00002\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <numeric>}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <string>}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <vector>}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00007}00007\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00008}00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{config_8hpp}{config.hpp}}"{}}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00009}00009\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00010}00010\ \textcolor{comment}{/**}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00011}00011\ \textcolor{comment}{\ *\ @file\ chunk.hpp}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00012}00012\ \textcolor{comment}{\ *@brief\ Template\ class\ for\ chunk-\/based\ data\ processing}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00013}00013\ \textcolor{comment}{\ *\ @author\ Jonathan\ Reich}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00014}00014\ \textcolor{comment}{\ *\ @date\ 2024-\/12-\/19}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00015}00015\ \textcolor{comment}{\ */}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00016}00016\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00017}00017\ \textcolor{comment}{/**}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00018}00018\ \textcolor{comment}{\ *\ @brief\ A\ template\ class\ for\ managing\ and\ processing\ data\ in\ chunks}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00019}00019\ \textcolor{comment}{\ *}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00020}00020\ \textcolor{comment}{\ *\ This\ class\ provides\ various\ methods\ for\ splitting\ data\ into\ chunks,}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00021}00021\ \textcolor{comment}{\ *\ including\ fixed-\/size\ chunks,\ overlapping\ chunks,\ and\ predicate-\/based\ chunking.}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00022}00022\ \textcolor{comment}{\ *}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00023}00023\ \textcolor{comment}{\ *\ @tparam\ T\ The\ type\ of\ elements\ stored\ in\ the\ chunk.}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00024}00024\ \textcolor{comment}{\ */}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00025}00025\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00026}\mbox{\hyperlink{classChunk}{00026}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classChunk}{Chunk}}\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00027}00027\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00028}\mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{00028}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}};}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00029}\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{00029}}\ \ \ \ \ std::vector<T>\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}};}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00030}\mbox{\hyperlink{classChunk_a1574993946fe5b28c6d89ce4bf77857b}{00030}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classChunk_a1574993946fe5b28c6d89ce4bf77857b}{chunks}};}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00031}00031\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00032}00032\ \ \ \ \ \textcolor{comment}{//\ Helper\ function\ for\ validation}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00033}\mbox{\hyperlink{classChunk_af09c384809b7238eb999b1d4d8fcfdd3}{00033}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classChunk_af09c384809b7238eb999b1d4d8fcfdd3}{validate\_size}}(\textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classChunk_a160459077243c9e5ff642f478277e161}{size}},\ \textcolor{keyword}{const}\ std::string\&\ param)\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00034}00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classChunk_a160459077243c9e5ff642f478277e161}{size}}\ ==\ 0)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(param\ +\ \textcolor{stringliteral}{"{}\ must\ be\ greater\ than\ 0"{}});}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00036}00036\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00037}00037\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00038}00038\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00039}00039\ \ \ \ \ \textcolor{comment}{//\ Ensure\ data\ is\ properly\ copied}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00040}\mbox{\hyperlink{classChunk_a5fe346af2e780a31ad2d16466648ce8a}{00040}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classChunk_a5fe346af2e780a31ad2d16466648ce8a}{make\_chunks}}(\textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classChunk_a160459077243c9e5ff642f478277e161}{size}})\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00041}00041\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00042}00042\ \ \ \ \ \ \ \ \ result.reserve((\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size()\ +\ \mbox{\hyperlink{classChunk_a160459077243c9e5ff642f478277e161}{size}}\ -\/\ 1)\ /\ \mbox{\hyperlink{classChunk_a160459077243c9e5ff642f478277e161}{size}});}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00043}00043\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size();\ i\ +=\ \mbox{\hyperlink{classChunk_a160459077243c9e5ff642f478277e161}{size}})\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ chunk\_end\ =\ std::min(i\ +\ \mbox{\hyperlink{classChunk_a160459077243c9e5ff642f478277e161}{size}},\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size());}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ result.emplace\_back(\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.begin()\ +\ i,\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.begin()\ +\ chunk\_end);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00047}00047\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00049}00049\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00050}00050\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00051}00051\ \ \ \ \ \textcolor{comment}{//\ Helper\ function\ to\ calculate\ similarity\ between\ elements}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00052}\mbox{\hyperlink{classChunk_a307574b74c36b7c2a7f857ca3f598b49}{00052}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classChunk_a307574b74c36b7c2a7f857ca3f598b49}{calculate\_similarity}}(\textcolor{keyword}{const}\ T\&\ a,\ \textcolor{keyword}{const}\ T\&\ b)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_arithmetic\_v<T>)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::abs(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(a\ -\/\ b));}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Similarity\ calculation\ not\ implemented\ for\ this\ type"{}});}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00057}00057\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00058}00058\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00059}00059\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00060}00060\ \ \ \ \ \textcolor{comment}{//\ Helper\ function\ to\ safely\ create\ chunks\ based\ on\ similarity}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00061}\mbox{\hyperlink{classChunk_add669d0ba2aa2cea53e5c530ea917a00}{00061}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classChunk_add669d0ba2aa2cea53e5c530ea917a00}{create\_similarity\_chunks}}(\textcolor{keywordtype}{double}\ threshold)\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.empty())}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\};}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00064}00064\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00065}00065\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00066}00066\ \ \ \ \ \ \ \ \ std::vector<T>\ current\_chunk;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00067}00067\ \ \ \ \ \ \ \ \ current\_chunk.push\_back(\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[0]);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00068}00068\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00069}00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 1;\ i\ <\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size();\ ++i)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ sim\ =\ \mbox{\hyperlink{classChunk_a307574b74c36b7c2a7f857ca3f598b49}{calculate\_similarity}}(\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[i],\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[i\ -\/\ 1]);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (sim\ >\ threshold\ \&\&\ !current\_chunk.empty())\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.clear();}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.push\_back(\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[i]);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00076}00076\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00077}00077\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00078}00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!current\_chunk.empty())\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{chunk__common_8hpp}{chunk\_common.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <numeric>}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00009}\mbox{\hyperlink{namespacechunk__processing}{00009}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacechunk__processing}{chunk\_processing}}\ \{}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00010}00010\ \textcolor{comment}{}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00011}00011\ \textcolor{comment}{/**}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00012}00012\ \textcolor{comment}{\ *\ @brief\ A\ template\ class\ for\ managing\ and\ processing\ data\ in\ chunks}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00013}00013\ \textcolor{comment}{\ *\ @tparam\ T\ The\ type\ of\ elements\ stored\ in\ the\ chunk}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00014}00014\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00015}00015\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00016}\mbox{\hyperlink{classchunk__processing_1_1Chunk}{00016}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{chunk__common_8hpp_ae9bc93c3f7afe0862a17c95f971d15d1}{CHUNK\_EXPORT}}\ \mbox{\hyperlink{classchunk__processing_1_1Chunk}{Chunk}}\ \{}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00017}00017\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00018}\mbox{\hyperlink{classchunk__processing_1_1Chunk_a8ff288af141f90a6451ff6279fe2321c}{00018}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classchunk__processing_1_1Chunk_a8ff288af141f90a6451ff6279fe2321c}{chunk\_size\_}};}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00019}\mbox{\hyperlink{classchunk__processing_1_1Chunk_acd7d701a514bdaf75ed1d073111942a6}{00019}}\ \ \ \ \ std::vector<T>\ \mbox{\hyperlink{classchunk__processing_1_1Chunk_acd7d701a514bdaf75ed1d073111942a6}{data\_}};}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00020}\mbox{\hyperlink{classchunk__processing_1_1Chunk_af499df1dd9ce6bfabe896ac9c7883b10}{00020}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classchunk__processing_1_1Chunk_af499df1dd9ce6bfabe896ac9c7883b10}{chunks\_}};}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00022}00022\ \ \ \ \ \textcolor{comment}{//\ Helper\ function\ for\ validation}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00023}\mbox{\hyperlink{classchunk__processing_1_1Chunk_ab4e209e1d7e6ee6fc440d8fb0f6baf0e}{00023}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classchunk__processing_1_1Chunk_ab4e209e1d7e6ee6fc440d8fb0f6baf0e}{validate\_size}}(\textcolor{keywordtype}{size\_t}\ size,\ \textcolor{keyword}{const}\ std::string\&\ param)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00024}00024\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (size\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(param\ +\ \textcolor{stringliteral}{"{}\ must\ be\ greater\ than\ 0"{}});}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00026}00026\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00027}00027\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00029}00029\ \ \ \ \ \textcolor{comment}{//\ Ensure\ data\ is\ properly\ copied}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00030}\mbox{\hyperlink{classchunk__processing_1_1Chunk_a377ae1e72b7b9ded8b467bedf1d7c187}{00030}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classchunk__processing_1_1Chunk_a377ae1e72b7b9ded8b467bedf1d7c187}{make\_chunks}}(\textcolor{keywordtype}{size\_t}\ size)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00031}00031\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00032}00032\ \ \ \ \ \ \ \ \ result.reserve((data\_.size()\ +\ size\ -\/\ 1)\ /\ size);}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00034}00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ data\_.size();\ i\ +=\ size)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ chunk\_end\ =\ std::min(i\ +\ size,\ data\_.size());}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ result.emplace\_back(data\_.begin()\ +\ i,\ data\_.begin()\ +\ chunk\_end);}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00037}00037\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00039}00039\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00041}\mbox{\hyperlink{classchunk__processing_1_1Chunk_a934b6b6620713e18501218135cc26e4b}{00041}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classchunk__processing_1_1Chunk_a934b6b6620713e18501218135cc26e4b}{update\_chunks}}()\ \{}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00042}00042\ \ \ \ \ \ \ \ \ chunks\_.clear();}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00043}00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ data\_.size();\ i\ +=\ chunk\_size\_)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<T>\ chunk;}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ 0;\ j\ <\ chunk\_size\_\ \&\&\ i\ +\ j\ <\ data\_.size();\ ++j)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ chunk.push\_back(data\_[i\ +\ j]);}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ chunks\_.push\_back(chunk);}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00049}00049\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00050}00050\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00052}00052\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00053}\mbox{\hyperlink{classchunk__processing_1_1Chunk_a39e5460813896ca6dd263af5eb8d3a60}{00053}}\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classchunk__processing_1_1Chunk_a39e5460813896ca6dd263af5eb8d3a60}{Chunk}}(\textcolor{keywordtype}{size\_t}\ chunk\_size\ =\ 1)\ :\ chunk\_size\_(chunk\_size)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00054}00054\ \ \ \ \ \ \ \ \ validate\_size(chunk\_size,\ \textcolor{stringliteral}{"{}Chunk\ size"{}});}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00055}00055\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00057}\mbox{\hyperlink{classchunk__processing_1_1Chunk_aa80770794a72963fa0e5844f61e1ec4f}{00057}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classchunk__processing_1_1Chunk_aa80770794a72963fa0e5844f61e1ec4f}{add}}(\textcolor{keyword}{const}\ T\&\ element)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00058}00058\ \ \ \ \ \ \ \ \ data\_.push\_back(element);}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00059}00059\ \ \ \ \ \ \ \ \ update\_chunks();}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00060}00060\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00062}\mbox{\hyperlink{classchunk__processing_1_1Chunk_aedf30782208aed23471ef6f2c3dcc0b1}{00062}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classchunk__processing_1_1Chunk_aedf30782208aed23471ef6f2c3dcc0b1}{add}}(\textcolor{keyword}{const}\ std::vector<T>\&\ elements)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00063}00063\ \ \ \ \ \ \ \ \ data\_.insert(data\_.end(),\ elements.begin(),\ elements.end());}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00064}00064\ \ \ \ \ \ \ \ \ update\_chunks();}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00065}00065\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00067}\mbox{\hyperlink{classchunk__processing_1_1Chunk_ac3345a1a7da1bd852c8669802fb0b49e}{00067}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classchunk__processing_1_1Chunk_ac3345a1a7da1bd852c8669802fb0b49e}{chunk\_by\_size}}(\textcolor{keywordtype}{size\_t}\ size)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data\_.empty())\ \{}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Cannot\ chunk\ empty\ data"{}});}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00070}00070\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (size\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Chunk\ size\ cannot\ be\ zero"{}});}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00073}00073\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00074}00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ make\_chunks(size);}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00075}00075\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00077}\mbox{\hyperlink{classchunk__processing_1_1Chunk_ac40845f3eb8227dad91bca2e20fe0866}{00077}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classchunk__processing_1_1Chunk_ac40845f3eb8227dad91bca2e20fe0866}{chunk\_by\_threshold}}(T\ threshold)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00078}00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data\_.empty())\ \{}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Cannot\ chunk\ empty\ data"{}});}
 \DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00080}00080\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00081}00081\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00082}00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00083}00083\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00084}00084\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00085}00085\ \ \ \ \ \textcolor{comment}{//\ Helper\ function\ for\ threshold-\/based\ chunking}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00086}\mbox{\hyperlink{classChunk_ae57819e89c5e08b0357d5e9979a1f988}{00086}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classChunk_ae57819e89c5e08b0357d5e9979a1f988}{create\_threshold\_chunks}}(T\ threshold)\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00087}00087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.empty())}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\};}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00089}00089\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00090}00090\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00091}00091\ \ \ \ \ \ \ \ \ std::vector<T>\ current\_chunk;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00092}00092\ \ \ \ \ \ \ \ \ T\ running\_sum\ =\ T\{\};\ \textcolor{comment}{//\ Zero-\/initialize}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00093}00093\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00094}00094\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ T\&\ value\ :\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}})\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (running\_sum\ +\ value\ >\ threshold\ \&\&\ !current\_chunk.empty())\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.clear();}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ running\_sum\ =\ T\{\};}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.push\_back(value);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ running\_sum\ +=\ value;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00102}00102\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00103}00103\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00104}00104\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!current\_chunk.empty())\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00106}00106\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00107}00107\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00108}00108\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00109}00109\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00110}00110\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00111}\mbox{\hyperlink{classChunk_a3a557ba7a07db5363d92edfe5a6fa5c4}{00111}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classChunk_a3a557ba7a07db5363d92edfe5a6fa5c4}{validate\_input}}()\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00112}00112\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.empty())\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Empty\ input:\ Cannot\ chunk\ empty\ data"{}});}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00114}00114\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00115}00115\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size()\ <\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}})\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Input\ too\ small:\ Data\ size\ must\ be\ >=\ chunk\ size"{}});}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00117}00117\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00118}00118\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00119}00119\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00120}00120\ \textcolor{keyword}{public}:\textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00121}00121\ \textcolor{comment}{\ \ \ \ /**}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00122}00122\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Constructs\ a\ Chunk\ with\ a\ specified\ size.}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00123}00123\ \textcolor{comment}{\ \ \ \ \ *\ @param\ size\ The\ size\ of\ each\ chunk.}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00124}00124\ \textcolor{comment}{\ \ \ \ \ *\ @throws\ std::invalid\_argument\ if\ size\ is\ zero.}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00125}00125\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00126}\mbox{\hyperlink{classChunk_ae7a6f9e3ad1cd778aa340bb71ab923c4}{00126}}\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classChunk_ae7a6f9e3ad1cd778aa340bb71ab923c4}{Chunk}}(\textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classChunk_a160459077243c9e5ff642f478277e161}{size}})\ :\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}}(\mbox{\hyperlink{classChunk_a160459077243c9e5ff642f478277e161}{size}})\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00127}00127\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classChunk_a160459077243c9e5ff642f478277e161}{size}}\ ==\ 0)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Chunk\ size\ must\ be\ greater\ than\ 0"{}});}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00129}00129\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00130}00130\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00131}00131\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00132}\mbox{\hyperlink{classChunk_a160459077243c9e5ff642f478277e161}{00132}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classChunk_a160459077243c9e5ff642f478277e161}{size}}()\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00133}00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size();}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00134}00134\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00135}00135\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00136}\mbox{\hyperlink{classChunk_addc46ee1885118a00bed3b5df55a96c5}{00136}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classChunk_addc46ee1885118a00bed3b5df55a96c5}{chunk\_count}}()\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00137}00137\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size()\ +\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}}\ -\/\ 1)\ /\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}};}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00138}00138\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00139}00139\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00140}00140\ \textcolor{comment}{\ \ \ \ /**}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00141}00141\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Adds\ a\ single\ element\ to\ the\ chunk.}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00142}00142\ \textcolor{comment}{\ \ \ \ \ *\ @param\ element\ The\ element\ to\ add.}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00143}00143\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00144}\mbox{\hyperlink{classChunk_aaa08401de48a718d93d3c25f4a9155cf}{00144}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classChunk_aaa08401de48a718d93d3c25f4a9155cf}{add}}(\textcolor{keyword}{const}\ T\&\ element)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00145}00145\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.push\_back(element);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00146}00146\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classChunk_a82af79dbdc92786a8073a50389d75738}{update\_chunks}}();}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00147}00147\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00148}00148\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00149}00149\ \textcolor{comment}{\ \ \ \ /**}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00150}00150\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Adds\ a\ vector\ of\ elements\ to\ the\ chunk.}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00151}00151\ \textcolor{comment}{\ \ \ \ \ *\ @param\ elements\ The\ elements\ to\ add.}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00152}00152\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00153}\mbox{\hyperlink{classChunk_acfcab88bdc71650a777dc96572a3dd20}{00153}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classChunk_acfcab88bdc71650a777dc96572a3dd20}{add}}(\textcolor{keyword}{const}\ std::vector<T>\&\ elements)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00154}00154\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.insert(\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.end(),\ elements.begin(),\ elements.end());}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00155}00155\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classChunk_a82af79dbdc92786a8073a50389d75738}{update\_chunks}}();}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00156}00156\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00157}00157\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00158}00158\ \textcolor{comment}{\ \ \ \ /**}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00159}00159\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Retrieves\ all\ chunks.}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00160}00160\ \textcolor{comment}{\ \ \ \ \ *\ @return\ A\ vector\ of\ vectors,\ where\ each\ inner\ vector\ is\ a\ chunk.}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00161}00161\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00162}\mbox{\hyperlink{classChunk_adbff639ac17c8d894373b0f67fa08658}{00162}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classChunk_adbff639ac17c8d894373b0f67fa08658}{get\_chunks}}()\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00163}00163\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classChunk_a1574993946fe5b28c6d89ce4bf77857b}{chunks}};}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00164}00164\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00165}00165\ \textcolor{comment}{}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00166}00166\ \textcolor{comment}{\ \ \ \ /**}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00167}00167\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Retrieves\ a\ specific\ chunk\ by\ index.}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00168}00168\ \textcolor{comment}{\ \ \ \ \ *\ @param\ index\ The\ index\ of\ the\ chunk\ to\ retrieve.}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00169}00169\ \textcolor{comment}{\ \ \ \ \ *\ @return\ The\ chunk\ at\ the\ specified\ index.}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00170}00170\ \textcolor{comment}{\ \ \ \ \ *\ @throws\ std::out\_of\_range\ if\ index\ is\ invalid.}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00171}00171\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00172}\mbox{\hyperlink{classChunk_a2c1f2fb7b5a0d3eb875311362cb27580}{00172}}\ \ \ \ \ std::vector<T>\ \mbox{\hyperlink{classChunk_a2c1f2fb7b5a0d3eb875311362cb27580}{get\_chunk}}(\textcolor{keywordtype}{size\_t}\ index)\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00173}00173\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ start\ =\ index\ *\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}};}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00174}00174\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (start\ >=\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size())\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::out\_of\_range(\textcolor{stringliteral}{"{}Chunk\ index\ out\ of\ range"{}});}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00176}00176\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00177}00177\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ end\ =\ std::min(start\ +\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}},\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size());}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00178}00178\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::vector<T>(\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.begin()\ +\ start,\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.begin()\ +\ end);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00179}00179\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00180}00180\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00181}\mbox{\hyperlink{classChunk_ab833db41bbf73b77ce520712ed7c7239}{00181}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classChunk_ab833db41bbf73b77ce520712ed7c7239}{get\_overlapping\_chunks}}(\textcolor{keywordtype}{size\_t}\ overlap)\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00182}00182\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (overlap\ >=\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}})\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Overlap\ must\ be\ less\ than\ chunk\ size"{}});}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00184}00184\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00185}00185\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00186}00186\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ step\ =\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}}\ -\/\ overlap;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00187}00187\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ +\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}}\ <=\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size();\ i\ +=\ step)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(std::vector<T>(\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.begin()\ +\ i,\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.begin()\ +\ i\ +\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}}));}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00189}00189\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00190}00190\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00191}00191\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00192}00192\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00193}00193\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Pred>}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00194}\mbox{\hyperlink{classChunk_a69630b9586ba94c1df6a8c29df2aab40}{00194}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classChunk_a69630b9586ba94c1df6a8c29df2aab40}{chunk\_by\_predicate}}(Pred\ predicate)\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00195}00195\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00196}00196\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.empty())}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00198}00198\ \ \ \ \ \ \ \ \ std::vector<T>\ current\_chunk;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00199}00199\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ T\&\ item\ :\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}})\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (predicate(item)\ \&\&\ !current\_chunk.empty())\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00201}00201\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.clear();}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.push\_back(item);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00205}00205\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00206}00206\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!current\_chunk.empty())\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00208}00208\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00209}00209\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00210}00210\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00211}00211\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00212}\mbox{\hyperlink{classChunk_a3533c581decb67f8f9511dc6b7c264c7}{00212}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classChunk_a3533c581decb67f8f9511dc6b7c264c7}{chunk\_by\_sum}}(T\ target\_sum)\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00213}00213\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00214}00214\ \ \ \ \ \ \ \ \ std::vector<T>\ current\_chunk;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00215}00215\ \ \ \ \ \ \ \ \ T\ current\_sum\ =\ T();}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00216}00216\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ T\&\ item\ :\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}})\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_sum\ +\ item\ >\ target\_sum\ \&\&\ !current\_chunk.empty())\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.clear();}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_sum\ =\ T();}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00221}00221\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00222}00222\ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.push\_back(item);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00223}00223\ \ \ \ \ \ \ \ \ \ \ \ \ current\_sum\ +=\ item;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00224}00224\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00225}00225\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!current\_chunk.empty())\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00226}00226\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00227}00227\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00228}00228\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00229}00229\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00230}00230\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00231}\mbox{\hyperlink{classChunk_a8399db98c455ce9b00b45aace5919a05}{00231}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classChunk_a8399db98c455ce9b00b45aace5919a05}{chunk\_into\_n}}(\textcolor{keywordtype}{size\_t}\ n)\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00232}00232\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (n\ ==\ 0)}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Number\ of\ chunks\ must\ be\ greater\ than\ 0"{}});}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00234}00234\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.empty())}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00235}00235\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::vector<std::vector<T>>();}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00236}00236\ \ \ \ \ \ \ \ \ n\ =\ std::min(n,\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size());}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00237}00237\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result(n);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00238}00238\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ base\_size\ =\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size()\ /\ n;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00239}00239\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ remainder\ =\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size()\ \%\ n;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00240}00240\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ pos\ =\ 0;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00241}00241\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00242}00242\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}}\ =\ base\_size\ +\ (i\ <\ remainder\ ?\ 1\ :\ 0);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00243}00243\ \ \ \ \ \ \ \ \ \ \ \ \ result[i]\ =\ std::vector<T>(\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.begin()\ +\ pos,\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.begin()\ +\ pos\ +\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}});}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00244}00244\ \ \ \ \ \ \ \ \ \ \ \ \ pos\ +=\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}};}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00245}00245\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00246}00246\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00247}00247\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00248}00248\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00249}\mbox{\hyperlink{classChunk_a3dc937cbb4ca8da19ad8dfe6bde7807f}{00249}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classChunk_a3dc937cbb4ca8da19ad8dfe6bde7807f}{chunk\_by\_monotonicity}}()\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00250}00250\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00251}00251\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size()\ <\ 2)}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00252}00252\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}\};}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00253}00253\ \ \ \ \ \ \ \ \ std::vector<T>\ current\_chunk\{\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[0]\};}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00254}00254\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ increasing\ =\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[1]\ >\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[0];}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00255}00255\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 1;\ i\ <\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size();\ ++i)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00256}00256\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[i]\ >\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[i\ -\/\ 1])\ !=\ increasing\ \&\&\ !current\_chunk.empty())\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00257}00257\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.clear();}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00259}00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ <\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size()\ -\/\ 1)}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ increasing\ =\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[i\ +\ 1]\ >\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[i];}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00261}00261\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00262}00262\ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.push\_back(\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[i]);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00263}00263\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00264}00264\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!current\_chunk.empty())}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00265}00265\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00266}00266\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00267}00267\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00268}00268\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00269}00269\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ StatFunc>}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00270}\mbox{\hyperlink{classChunk_abe62a4d4d72e24468d53ec0f58f5a43f}{00270}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classChunk_abe62a4d4d72e24468d53ec0f58f5a43f}{chunk\_by\_statistic}}(T\ threshold,\ StatFunc\ stat\_func)\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00271}00271\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00272}00272\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.empty())}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00273}00273\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00274}00274\ \ \ \ \ \ \ \ \ std::vector<T>\ current\_chunk\{\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[0]\};}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00275}00275\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 1;\ i\ <\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size();\ ++i)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00276}00276\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stat\_func(current\_chunk)\ >\ threshold)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00277}00277\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00278}00278\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.clear();}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00279}00279\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00280}00280\ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.push\_back(\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[i]);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00281}00281\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00282}00282\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!current\_chunk.empty())}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00283}00283\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00284}00284\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00285}00285\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00286}00286\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00287}\mbox{\hyperlink{classChunk_a37827aa0a4e783dc456b42e8432fc8be}{00287}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classChunk_a37827aa0a4e783dc456b42e8432fc8be}{chunk\_by\_similarity}}(\textcolor{keywordtype}{double}\ threshold)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00288}00288\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00289}00289\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classChunk_add669d0ba2aa2cea53e5c530ea917a00}{create\_similarity\_chunks}}(threshold);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00290}00290\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::exception\&\ e)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00291}00291\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::vector<std::vector<T>>\{\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}\};}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00292}00292\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00293}00293\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00294}00294\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00295}\mbox{\hyperlink{classChunk_a016606afd5f7ea84a27020ddb02e5624}{00295}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classChunk_a016606afd5f7ea84a27020ddb02e5624}{get\_padded\_chunks}}(\textcolor{keyword}{const}\ T\&\ pad\_value)\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00296}00296\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00297}00297\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size();\ i\ +=\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}})\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00298}00298\ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<T>\ chunk;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00299}00299\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ remaining\ =\ std::min(\mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}},\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size()\ -\/\ i);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00300}00300\ \ \ \ \ \ \ \ \ \ \ \ \ chunk.insert(chunk.end(),\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.begin()\ +\ i,\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.begin()\ +\ i\ +\ remaining);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00301}00301\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (remaining\ <\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}})\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00302}00302\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ chunk.insert(chunk.end(),\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}}\ -\/\ remaining,\ pad\_value);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00303}00303\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00304}00304\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(chunk);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00305}00305\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00306}00306\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00307}00307\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00308}00308\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00309}\mbox{\hyperlink{classChunk_aadb0e77dfcd8b7ab108b1556fdae21b2}{00309}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classChunk_aadb0e77dfcd8b7ab108b1556fdae21b2}{sliding\_window}}(\textcolor{keywordtype}{size\_t}\ window\_size,\ \textcolor{keywordtype}{size\_t}\ step\ =\ 1)\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00310}00310\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classChunk_af09c384809b7238eb999b1d4d8fcfdd3}{validate\_size}}(window\_size,\ \textcolor{stringliteral}{"{}Window\ size"{}});}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00311}00311\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classChunk_af09c384809b7238eb999b1d4d8fcfdd3}{validate\_size}}(step,\ \textcolor{stringliteral}{"{}Step\ size"{}});}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00312}00312\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00313}00313\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ +\ window\_size\ <=\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size();\ i\ +=\ step)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00314}00314\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(std::vector<T>(\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.begin()\ +\ i,\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.begin()\ +\ i\ +\ window\_size));}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00315}00315\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00316}00316\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00317}00317\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00318}00318\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00319}\mbox{\hyperlink{classChunk_acec70aadb47378ce3cf997c273122e90}{00319}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classChunk_acec70aadb47378ce3cf997c273122e90}{chunk\_by\_size}}(\textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classChunk_a160459077243c9e5ff642f478277e161}{size}})\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00320}00320\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classChunk_a5fe346af2e780a31ad2d16466648ce8a}{make\_chunks}}(\mbox{\hyperlink{classChunk_a160459077243c9e5ff642f478277e161}{size}});}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00321}00321\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00322}00322\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00323}\mbox{\hyperlink{classChunk_af0402384cad119ee6b3ebea2e0751452}{00323}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classChunk_af0402384cad119ee6b3ebea2e0751452}{chunk\_by\_threshold}}(T\ threshold)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00324}00324\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classChunk_a3a557ba7a07db5363d92edfe5a6fa5c4}{validate\_input}}();}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00325}00325\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (threshold\ <=\ T\{\})\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00326}00326\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Threshold\ must\ be\ positive"{}});}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00327}00327\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00328}00328\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00329}00329\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classChunk_ae57819e89c5e08b0357d5e9979a1f988}{create\_threshold\_chunks}}(threshold);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00330}00330\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::exception\&\ e)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00331}00331\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw};}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00332}00332\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00333}00333\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00334}00334\ }
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00335}00335\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00336}\mbox{\hyperlink{classChunk_a82af79dbdc92786a8073a50389d75738}{00336}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classChunk_a82af79dbdc92786a8073a50389d75738}{update\_chunks}}()\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00337}00337\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classChunk_a1574993946fe5b28c6d89ce4bf77857b}{chunks}}.clear();}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00338}00338\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size();\ i\ +=\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}})\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00339}00339\ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<T>\ chunk;}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00340}00340\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ 0;\ j\ <\ \mbox{\hyperlink{classChunk_a3c0ec38d609ec15af0d5a7e795afb29f}{chunk\_size}}\ \&\&\ i\ +\ j\ <\ \mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}.size();\ ++j)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00341}00341\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ chunk.push\_back(\mbox{\hyperlink{classChunk_aa808f6466a7244c14464b007214f6835}{data}}[i\ +\ j]);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00342}00342\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00343}00343\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classChunk_a1574993946fe5b28c6d89ce4bf77857b}{chunks}}.push\_back(chunk);}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00344}00344\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00345}00345\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00346}00346\ \};}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00081}00081\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data\_.size()\ <\ chunk\_size\_)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Input\ size\ must\ be\ at\ least\ chunk\ size"{}});}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00083}00083\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00084}00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (threshold\ <=\ T\{\})\ \{}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Threshold\ must\ be\ positive"{}});}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00086}00086\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00088}00088\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00089}00089\ \ \ \ \ \ \ \ \ std::vector<T>\ current\_chunk;}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00090}00090\ \ \ \ \ \ \ \ \ T\ running\_sum\ =\ T\{\};}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00092}00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ T\&\ value\ :\ data\_)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (running\_sum\ +\ value\ >\ threshold\ \&\&\ !current\_chunk.empty())\ \{}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.clear();}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ running\_sum\ =\ T\{\};}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.push\_back(value);}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ running\_sum\ +=\ value;}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00100}00100\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00102}00102\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!current\_chunk.empty())\ \{}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00104}00104\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00106}00106\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00107}00107\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00109}\mbox{\hyperlink{classchunk__processing_1_1Chunk_aa223d0167f73070955588d6e667307de}{00109}}\ \ \ \ \ std::vector<std::vector<T>>\ \mbox{\hyperlink{classchunk__processing_1_1Chunk_aa223d0167f73070955588d6e667307de}{get\_chunks}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00110}00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ chunks\_;}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00111}00111\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00113}\mbox{\hyperlink{classchunk__processing_1_1Chunk_a7062402eefc47cfd8366651699cac592}{00113}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classchunk__processing_1_1Chunk_a7062402eefc47cfd8366651699cac592}{size}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00114}00114\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data\_.size();}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00115}00115\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00117}\mbox{\hyperlink{classchunk__processing_1_1Chunk_a59ac318c35c609ed5673e942216adc2a}{00117}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classchunk__processing_1_1Chunk_a59ac318c35c609ed5673e942216adc2a}{chunk\_count}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00118}00118\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (data\_.size()\ +\ chunk\_size\_\ -\/\ 1)\ /\ chunk\_size\_;}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00119}00119\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00121}\mbox{\hyperlink{classchunk__processing_1_1Chunk_aaed449fca1ca4d9f4600d205dd309fd3}{00121}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classchunk__processing_1_1Chunk_aaed449fca1ca4d9f4600d205dd309fd3}{get\_chunk\_size}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00122}00122\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ chunk\_size\_;}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00123}00123\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00124}\mbox{\hyperlink{classchunk__processing_1_1Chunk_ac1046d6e131f3c303cf47742d1ac84f3}{00124}}\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<T>\&\ \mbox{\hyperlink{classchunk__processing_1_1Chunk_ac1046d6e131f3c303cf47742d1ac84f3}{get\_data}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00125}00125\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data\_;}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00126}00126\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00128}\mbox{\hyperlink{classchunk__processing_1_1Chunk_aee7715b129cbdbc25a6e9bc0769f9474}{00128}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classchunk__processing_1_1Chunk_aee7715b129cbdbc25a6e9bc0769f9474}{set\_chunk\_size}}(\textcolor{keywordtype}{size\_t}\ new\_size)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00129}00129\ \ \ \ \ \ \ \ \ validate\_size(new\_size,\ \textcolor{stringliteral}{"{}Chunk\ size"{}});}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00130}00130\ \ \ \ \ \ \ \ \ chunk\_size\_\ =\ new\_size;}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00131}00131\ \ \ \ \ \ \ \ \ update\_chunks();}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00132}00132\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00133}00133\ \};}
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{chunk_8hpp_source_l00135}00135\ \}\ \textcolor{comment}{//\ namespace\ chunk\_processing}}
 
 \end{DoxyCode}

@@ -172,7 +172,7 @@ def test_visualize_boundaries(sample_data, temp_viz_dir):
 
 def test_export_to_graphviz(sample_data, temp_viz_dir):
     visualizer = ChunkVisualizer(sample_data, temp_viz_dir)
-    visualizer.export_to_graphviz()
+    visualizer.export_to_graphviz("chunk_graph.dot")
     assert os.path.exists(os.path.join(temp_viz_dir, "chunks.dot"))
 
 def test_neural_chunking_advanced():

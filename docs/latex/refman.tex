@@ -99,11 +99,11 @@
     \fancyhead[LE, RO]{\bfseries\thepage}
     \fancyhead[LO]{\bfseries\rightmark}
     \fancyhead[RE]{\bfseries\leftmark}
-    \fancyfoot[LO, RE]{\bfseries\scriptsize Generated on Tue Dec 24 2024 10\+:05\+:58 for Advanced Chunk Processing Library by Doxygen }
+    \fancyfoot[LO, RE]{\bfseries\scriptsize Generated on Tue Dec 24 2024 23\+:08\+:35 for Advanced Chunk Processing Library by Doxygen }
   }
   \fancypagestyle{plain}{
     \fancyhf{}
-    \fancyfoot[LO, RE]{\bfseries\scriptsize Generated on Tue Dec 24 2024 10\+:05\+:58 for Advanced Chunk Processing Library by Doxygen }
+    \fancyfoot[LO, RE]{\bfseries\scriptsize Generated on Tue Dec 24 2024 23\+:08\+:35 for Advanced Chunk Processing Library by Doxygen }
     \renewcommand{\headrulewidth}{0pt}
   }
   \pagestyle{fancyplain}
@@ -196,9 +196,9 @@
   {\Large Advanced Chunk Processing Library}\\
   [1ex]\large 0.\+2.\+0 \\
   \vspace*{1cm}
-  {\large Generated on Tue Dec 24 2024 10\+:05\+:58 for Advanced Chunk Processing Library by Doxygen 1.9.8}\\
+  {\large Generated on Tue Dec 24 2024 23\+:08\+:35 for Advanced Chunk Processing Library by Doxygen 1.9.8}\\
     \vspace*{0.5cm}
-    {\small Tue Dec 24 2024 10:05:58}
+    {\small Tue Dec 24 2024 23:08:35}
   \end{center}
   \end{titlepage}
   \clearemptydoublepage
@@ -224,6 +224,7 @@
 \input{namespacechunk__compression}
 \input{namespacechunk__integrations}
 \input{namespacechunk__metrics}
+\input{namespacechunk__processing}
 \input{namespacechunk__resilience}
 \input{namespacechunk__serialization}
 \input{namespacechunk__strategies}
@@ -238,13 +239,13 @@
 \input{classchunk__strategies_1_1AdaptiveStrategy}
 \input{classadvanced__structures_1_1BloomFilterChunk}
 \input{structchunk__resilience_1_1Checkpoint}
-\input{classChunk}
+\input{classchunk__processing_1_1Chunk}
 \input{classchunk__benchmark_1_1ChunkBenchmark}
 \input{classadvanced__structures_1_1ChunkBPlusTree}
 \input{classchunk__compression_1_1ChunkCompressor}
 \input{classadvanced__structures_1_1ChunkDeque}
 \input{classchunk__utils_1_1ChunkGenerator}
-\input{classchunk__resilience_1_1ChunkingError}
+\input{classchunk__processing_1_1ChunkingError}
 \input{classChunkList}
 \input{classadvanced__structures_1_1ChunkLSMTree}
 \input{classchunk__utils_1_1ChunkManipulator}
@@ -287,17 +288,21 @@
 \input{classPriorityQueue}
 \input{classchunk__strategies_1_1QuantileStrategy}
 \input{classchunk__strategies_1_1RecursiveSubChunkStrategy}
+\input{classchunk__processing_1_1ResilienceError}
 \input{classchunk__resilience_1_1ResilientChunker}
 \input{classadvanced__structures_1_1SemanticBoundariesChunk}
 \input{classadvanced__structures_1_1SemanticChunker}
 \input{classadvanced__structures_1_1SemanticChunker_3_01std_1_1string_00_01ModelType_01_4}
+\input{classchunk__processing_1_1SerializationError}
 \input{classSimilarityChunkingStrategy}
 \input{classSlidingWindow}
 \input{classchunk__windows_1_1SlidingWindowProcessor}
 \input{classchunk__utils_1_1Statistics}
 \input{classchunk__strategies_1_1SubChunkStrategy}
 \input{classchunk__strategies_1_1VarianceStrategy}
+\input{classchunk__processing_1_1VisualizationError}
 \input{classsophisticated__chunking_1_1WaveletChunking}
+\input{classWaveletChunking}
 \input{classchunk__windows_1_1WindowOperations}
 \chapter{File Documentation}
 \input{BUILDING_8md}
@@ -309,8 +314,12 @@
 \input{chunk_8hpp_source}
 \input{chunk__benchmark_8hpp}
 \input{chunk__benchmark_8hpp_source}
+\input{chunk__common_8hpp}
+\input{chunk__common_8hpp_source}
 \input{chunk__compression_8hpp}
 \input{chunk__compression_8hpp_source}
+\input{chunk__errors_8hpp}
+\input{chunk__errors_8hpp_source}
 \input{chunk__integrations_8hpp}
 \input{chunk__integrations_8hpp_source}
 \input{chunk__metrics_8hpp}
@@ -321,6 +330,8 @@
 \input{chunk__serialization_8hpp_source}
 \input{chunk__strategies_8hpp}
 \input{chunk__strategies_8hpp_source}
+\input{chunk__strategy__implementations_8hpp}
+\input{chunk__strategy__implementations_8hpp_source}
 \input{chunk__visualization_8hpp}
 \input{chunk__visualization_8hpp_source}
 \input{chunk__windows_8hpp}
@@ -341,8 +352,18 @@
 \input{sub__chunk__strategies_8hpp_source}
 \input{utils_8hpp}
 \input{utils_8hpp_source}
+\input{wavelet__chunking_8hpp}
+\input{wavelet__chunking_8hpp_source}
 \input{benchmark_8cpp}
 \input{benchmark_8cpp_source}
+\input{chunk__metrics_8cpp}
+\input{chunk__metrics_8cpp_source}
+\input{chunk__resilience_8cpp}
+\input{chunk__resilience_8cpp_source}
+\input{chunk__serialization_8cpp}
+\input{chunk__serialization_8cpp_source}
+\input{chunk__visualization_8cpp}
+\input{chunk__visualization_8cpp_source}
 \input{chunk__visualization__demo_8cpp}
 \input{chunk__visualization__demo_8cpp_source}
 \input{demo__gpu__chunking_8cpp}
@@ -351,6 +372,8 @@
 \input{demo__neural__chunking_8cpp_source}
 \input{main_8cpp}
 \input{main_8cpp_source}
+\input{neural__chunking_8cpp}
+\input{neural__chunking_8cpp_source}
 \input{sophisticated__chunking__demo_8cpp}
 \input{sophisticated__chunking__demo_8cpp_source}
 %--- End generated contents ---

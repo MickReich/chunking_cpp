@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['data_0',['data',['../structadvanced__structures_1_1ChunkLSMTree_1_1Level.html#ab6238e606340079c8878ed68415a05c5',1,'advanced_structures::ChunkLSMTree::Level::data'],['../classChunk.html#aa808f6466a7244c14464b007214f6835',1,'Chunk::data'],['../structChunkNode.html#a9a1f67d6d1a991179835d2b7d568e3fe',1,'ChunkNode::data']]],
-  ['data_5f_1',['data_',['../classadvanced__structures_1_1ChunkDeque.html#ad47f9ecfc53465142080151c38accce7',1,'advanced_structures::ChunkDeque::data_'],['../classadvanced__structures_1_1ChunkStack.html#a447b8132bb9a86a2d57b1a6d8b834953',1,'advanced_structures::ChunkStack::data_']]],
+  ['data_0',['data',['../structadvanced__structures_1_1ChunkLSMTree_1_1Level.html#ab6238e606340079c8878ed68415a05c5',1,'advanced_structures::ChunkLSMTree::Level::data'],['../classchunk__viz_1_1ChunkVisualizer.html#afcd850d347342d32fe88fa47b1886d54',1,'chunk_viz::ChunkVisualizer::data'],['../structChunkNode.html#a9a1f67d6d1a991179835d2b7d568e3fe',1,'ChunkNode::data']]],
+  ['data_5f_1',['data_',['../classadvanced__structures_1_1ChunkDeque.html#ad47f9ecfc53465142080151c38accce7',1,'advanced_structures::ChunkDeque::data_'],['../classadvanced__structures_1_1ChunkStack.html#a447b8132bb9a86a2d57b1a6d8b834953',1,'advanced_structures::ChunkStack::data_'],['../classchunk__processing_1_1Chunk.html#acd7d701a514bdaf75ed1d073111942a6',1,'chunk_processing::Chunk::data_']]],
   ['data_5fstructures_2ehpp_2',['data_structures.hpp',['../data__structures_8hpp.html',1,'']]],
   ['databasechunkstore_3',['databasechunkstore',['../classchunk__integrations_1_1DatabaseChunkStore.html',1,'chunk_integrations::DatabaseChunkStore'],['../classchunk__integrations_1_1DatabaseChunkStore.html#a45283d4d1e5094c73f58eb105140617f',1,'chunk_integrations::DatabaseChunkStore::DatabaseChunkStore()']]],
   ['databaseconnection_4',['DatabaseConnection',['../classchunk__integrations_1_1DatabaseConnection.html',1,'chunk_integrations']]],
@@ -21,9 +21,9 @@ var searchData=
   ['demonstrate_5fwavelet_5fchunking_18',['demonstrate_wavelet_chunking',['../sophisticated__chunking__demo_8cpp.html#a1aa2a7faea16bce4dc195885df6b549e',1,'sophisticated_chunking_demo.cpp']]],
   ['dependencies_19',['dependencies',['../index.html#installing-dependencies',1,'Installing Dependencies'],['../index.html#optional-dependencies',1,'Optional Dependencies']]],
   ['deserialize_20',['deserialize',['../structchunk__resilience_1_1Checkpoint.html#a91e73b732d8dd5c61dc54ffb43d6efd2',1,'chunk_resilience::Checkpoint']]],
-  ['detect_5fboundary_21',['detect_boundary',['../classneural__chunking_1_1NeuralChunking.html#a65a5a1f69d94664c56be34d11d16b9ae',1,'neural_chunking::NeuralChunking']]],
+  ['detect_5fboundary_21',['detect_boundary',['../classWaveletChunking.html#a31817aeefb22fec8e762e36267919f85',1,'WaveletChunking']]],
   ['disconnect_22',['disconnect',['../classchunk__integrations_1_1MessageQueueConnection.html#a34b4800a5a552c8de5355ab5079bf4c0',1,'chunk_integrations::MessageQueueConnection::disconnect()'],['../classchunk__integrations_1_1DatabaseConnection.html#ad998ee7861a8c0a07a0797ceee17009d',1,'chunk_integrations::DatabaseConnection::disconnect()']]],
   ['dtw_5fthreshold_5f_23',['dtw_threshold_',['../classsophisticated__chunking_1_1DTWChunking.html#a99a54325eae9c2d31d487b4f941674b6',1,'sophisticated_chunking::DTWChunking']]],
-  ['dtwchunking_24',['dtwchunking',['../classsophisticated__chunking_1_1DTWChunking.html#ace84620cd341ab63015b4e94770e1422',1,'sophisticated_chunking::DTWChunking::DTWChunking()'],['../classsophisticated__chunking_1_1DTWChunking.html',1,'sophisticated_chunking::DTWChunking&lt; T &gt;']]],
+  ['dtwchunking_24',['dtwchunking',['../classsophisticated__chunking_1_1DTWChunking.html#a10584b7dace05f58246d0faa6b03007f',1,'sophisticated_chunking::DTWChunking::DTWChunking()'],['../classsophisticated__chunking_1_1DTWChunking.html',1,'sophisticated_chunking::DTWChunking&lt; T &gt;']]],
   ['dynamicthresholdstrategy_25',['dynamicthresholdstrategy',['../classchunk__strategies_1_1DynamicThresholdStrategy.html#a85fd9149cd16f1704b17455d1b8b185e',1,'chunk_strategies::DynamicThresholdStrategy::DynamicThresholdStrategy()'],['../classchunk__strategies_1_1DynamicThresholdStrategy.html',1,'chunk_strategies::DynamicThresholdStrategy&lt; T &gt;']]]
 ];

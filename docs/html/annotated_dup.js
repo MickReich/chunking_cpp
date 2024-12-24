@@ -16,6 +16,7 @@ var annotated_dup =
       [ "SemanticChunker< std::string, ModelType >", "classadvanced__structures_1_1SemanticChunker_3_01std_1_1string_00_01ModelType_01_4.html", "classadvanced__structures_1_1SemanticChunker_3_01std_1_1string_00_01ModelType_01_4" ]
     ] ],
     [ "chunk_benchmark", "namespacechunk__benchmark.html", [
+      [ "BenchmarkResult", "namespacechunk__benchmark.html#structchunk__benchmark_1_1BenchmarkResult", "namespacechunk__benchmark_structchunk__benchmark_1_1BenchmarkResult_dup" ],
       [ "ChunkBenchmark", "classchunk__benchmark_1_1ChunkBenchmark.html", "classchunk__benchmark_1_1ChunkBenchmark" ],
       [ "ChunkStrategy", "classchunk__benchmark_1_1ChunkStrategy.html", "classchunk__benchmark_1_1ChunkStrategy" ]
     ] ],
@@ -31,9 +32,15 @@ var annotated_dup =
     [ "chunk_metrics", "namespacechunk__metrics.html", [
       [ "ChunkQualityAnalyzer", "classchunk__metrics_1_1ChunkQualityAnalyzer.html", "classchunk__metrics_1_1ChunkQualityAnalyzer" ]
     ] ],
+    [ "chunk_processing", "namespacechunk__processing.html", [
+      [ "Chunk", "classchunk__processing_1_1Chunk.html", "classchunk__processing_1_1Chunk" ],
+      [ "ChunkingError", "classchunk__processing_1_1ChunkingError.html", "classchunk__processing_1_1ChunkingError" ],
+      [ "ResilienceError", "classchunk__processing_1_1ResilienceError.html", "classchunk__processing_1_1ResilienceError" ],
+      [ "SerializationError", "classchunk__processing_1_1SerializationError.html", "classchunk__processing_1_1SerializationError" ],
+      [ "VisualizationError", "classchunk__processing_1_1VisualizationError.html", "classchunk__processing_1_1VisualizationError" ]
+    ] ],
     [ "chunk_resilience", "namespacechunk__resilience.html", [
       [ "Checkpoint", "structchunk__resilience_1_1Checkpoint.html", "structchunk__resilience_1_1Checkpoint" ],
-      [ "ChunkingError", "classchunk__resilience_1_1ChunkingError.html", "classchunk__resilience_1_1ChunkingError" ],
       [ "ResilientChunker", "classchunk__resilience_1_1ResilientChunker.html", "classchunk__resilience_1_1ResilientChunker" ]
     ] ],
     [ "chunk_serialization", "namespacechunk__serialization.html", [
@@ -82,7 +89,6 @@ var annotated_dup =
       [ "MutualInformationChunking", "classsophisticated__chunking_1_1MutualInformationChunking.html", "classsophisticated__chunking_1_1MutualInformationChunking" ],
       [ "WaveletChunking", "classsophisticated__chunking_1_1WaveletChunking.html", "classsophisticated__chunking_1_1WaveletChunking" ]
     ] ],
-    [ "Chunk", "classChunk.html", "classChunk" ],
     [ "ChunkList", "classChunkList.html", "classChunkList" ],
     [ "ChunkNode", "structChunkNode.html", "structChunkNode" ],
     [ "CircularBuffer", "classCircularBuffer.html", "classCircularBuffer" ],
@@ -90,5 +96,6 @@ var annotated_dup =
     [ "NeuralChunkingStrategy", "classNeuralChunkingStrategy.html", "classNeuralChunkingStrategy" ],
     [ "PriorityQueue", "classPriorityQueue.html", "classPriorityQueue" ],
     [ "SimilarityChunkingStrategy", "classSimilarityChunkingStrategy.html", "classSimilarityChunkingStrategy" ],
-    [ "SlidingWindow", "classSlidingWindow.html", "classSlidingWindow" ]
+    [ "SlidingWindow", "classSlidingWindow.html", "classSlidingWindow" ],
+    [ "WaveletChunking", "classWaveletChunking.html", "classWaveletChunking" ]
 ];

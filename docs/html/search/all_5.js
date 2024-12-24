@@ -8,7 +8,7 @@ var searchData=
   ['flush_5fmemtable_5',['flush_memtable',['../classadvanced__structures_1_1ChunkLSMTree.html#aff118f8c3e0e204a868a78c4ebcac295',1,'advanced_structures::ChunkLSMTree']]],
   ['for_20sophisticated_20chunking_6',['Performance Considerations for Sophisticated Chunking',['../index.html#performance-considerations-for-sophisticated-chunking',1,'']]],
   ['force_5fflush_7',['force_flush',['../classadvanced__structures_1_1ChunkLSMTree.html#abf45293ca0d1e7b982d5f7161f96dc93',1,'advanced_structures::ChunkLSMTree']]],
-  ['format_5fchunk_8',['format_chunk',['../classchunk__viz_1_1ChunkVisualizer.html#a88e8f7db55c0fc257118df9ec99e0a37',1,'chunk_viz::ChunkVisualizer']]],
+  ['format_5fvalue_8',['format_value',['../classchunk__viz_1_1ChunkVisualizer.html#a5c239e10ceff9a1e592098f9a3b4d2be',1,'chunk_viz::ChunkVisualizer']]],
   ['forward_9',['forward',['../structadvanced__structures_1_1ChunkSkipList_1_1Node.html#aec5507e413075c1d8390cbe5aaed06f1',1,'advanced_structures::ChunkSkipList::Node::forward'],['../classneural__chunking_1_1Layer.html#a5c4e81fee5f521cc3abf7f9012ead31e',1,'neural_chunking::Layer::forward()']]],
   ['fractalpatternschunk_10',['fractalpatternschunk',['../classadvanced__structures_1_1FractalPatternsChunk.html',1,'advanced_structures::FractalPatternsChunk&lt; T &gt;'],['../classadvanced__structures_1_1FractalPatternsChunk.html#a6171e243d7fe094bea4aeeaa2ae06adc',1,'advanced_structures::FractalPatternsChunk::FractalPatternsChunk()']]],
   ['full_11',['full',['../classCircularBuffer.html#a2a2f13f00dca028142c250b5f2183097',1,'CircularBuffer']]]

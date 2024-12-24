@@ -6,40 +6,40 @@
  */
 
 #pragma once
+
 #include <chrono>
 #include <filesystem>
 #include <fstream>
+#include <iostream>
 #include <memory>
 #include <string>
+#include <typeinfo>
 #include <vector>
-
 #ifdef __linux__
 #include <unistd.h> // For getpagesize()
 #endif
+#include "chunk.hpp"
+#include "chunk_common.hpp"
+#include "chunk_strategies.hpp"
 
 namespace chunk_benchmark {
+
+struct BenchmarkResult {
+    double execution_time_ms;
+    size_t memory_usage_bytes;
+    size_t num_chunks;
+    std::string strategy_name;
+};
 
 /**
  * @brief Abstract base class for chunking strategies
  * @tparam T The data type of the chunks
  */
 template <typename T>
-class ChunkStrategy {
+class CHUNK_EXPORT ChunkStrategy {
 public:
     virtual ~ChunkStrategy() = default;
-
-    /**
-     * @brief Process data into chunks
-     * @param data Input data to chunk
-     * @return Vector of chunks
-     */
-    virtual std::vector<std::vector<T>> chunk(const std::vector<T>& data) = 0;
-
-    /**
-     * @brief Get strategy name
-     * @return String identifier for the strategy
-     */
-    virtual std::string name() const = 0;
+    virtual std::vector<std::vector<T>> apply(const std::vector<T>& data) const = 0;
 };
 
 /**
@@ -47,7 +47,7 @@ public:
  * @tparam T The data type of the chunks
  */
 template <typename T>
-class ChunkBenchmark {
+class CHUNK_EXPORT ChunkBenchmark {
 public:
     /**
      * @brief Constructor
@@ -64,7 +64,7 @@ public:
      * @brief Add a chunking strategy to benchmark
      * @param strategy Strategy to test
      */
-    void add_strategy(std::shared_ptr<ChunkStrategy<T>> strategy) {
+    void add_strategy(std::shared_ptr<chunk_strategies::ChunkStrategy<T>> strategy) {
         strategies.push_back(strategy);
     }
 
@@ -76,13 +76,10 @@ public:
         results.clear();
         for (const auto& strategy : strategies) {
             auto start = std::chrono::high_resolution_clock::now();
-
-            strategy->chunk(test_data);
-
+            strategy->apply(test_data);
             auto end = std::chrono::high_resolution_clock::now();
             auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-
-            results.emplace_back(strategy->name(), duration.count());
+            results.emplace_back(typeid(*strategy).name(), duration.count());
         }
         return results;
     }
@@ -96,7 +93,7 @@ public:
             return 0.0;
 
         auto start = std::chrono::high_resolution_clock::now();
-        strategies[0]->chunk(test_data);
+        strategies[0]->apply(test_data);
         auto end = std::chrono::high_resolution_clock::now();
 
         auto duration = std::chrono::duration_cast<std::chrono::seconds>(end - start);
@@ -108,13 +105,12 @@ public:
      * @return Peak memory usage in bytes
      */
     size_t measure_memory_usage() {
-// Implementation depends on platform
 #ifdef __linux__
         std::ifstream stat("/proc/self/statm");
         size_t resident;
         stat >> resident; // Skip first value
         stat >> resident; // Read resident set size
-        return resident * getpagesize();
+        return resident * static_cast<size_t>(sysconf(_SC_PAGESIZE));
 #else
         return 0; // Placeholder for other platforms
 #endif
@@ -139,11 +135,28 @@ public:
         }
     }
 
+    BenchmarkResult benchmark_chunking(const std::vector<T>& data, size_t chunk_size) {
+        auto start = std::chrono::high_resolution_clock::now();
+
+        chunk_processing::Chunk<T> chunker(chunk_size);
+        chunker.add(data);
+        auto chunks = chunker.get_chunks();
+
+        auto end = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+
+        return BenchmarkResult{.execution_time_ms = static_cast<double>(duration.count()),
+                               .memory_usage_bytes = measure_memory_usage(),
+                               .num_chunks = chunks.size(),
+                               .strategy_name = "basic_chunking"};
+    }
+
 private:
-    const std::vector<T>& test_data;                           ///< Reference to test data
-    std::string results_dir;                                   ///< Directory for storing results
-    std::vector<std::shared_ptr<ChunkStrategy<T>>> strategies; ///< Registered strategies
-    std::vector<std::pair<std::string, double>> results;       ///< Benchmark results
+    const std::vector<T>& test_data; ///< Reference to test data
+    std::string results_dir;         ///< Directory for storing results
+    std::vector<std::shared_ptr<chunk_strategies::ChunkStrategy<T>>>
+        strategies;                                      ///< Registered strategies
+    std::vector<std::pair<std::string, double>> results; ///< Benchmark results
 };
 
 } // namespace chunk_benchmark

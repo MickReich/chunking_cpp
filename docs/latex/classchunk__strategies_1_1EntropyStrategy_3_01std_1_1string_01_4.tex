@@ -44,7 +44,7 @@ double \mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_3_01std_1_1str
 \doxysubsection{Detailed Description}
 
 
-Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00269}{269}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00385}{385}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
 
 
 
@@ -57,11 +57,11 @@ Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00269}{269}} 
 
 
 
-Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00291}{291}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00407}{407}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00291\ :\ \mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4_ab76d84aa029eb8a5691aaf4b1e662531}{threshold\_}}(threshold)\ \{\}}
+\DoxyCodeLine{00407\ :\ \mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4_ab76d84aa029eb8a5691aaf4b1e662531}{threshold\_}}(threshold)\ \{\}}
 
 \end{DoxyCode}
 
@@ -91,36 +91,36 @@ Implements \mbox{\hyperlink{classchunk__strategies_1_1ChunkStrategy_a403010d65da
 
 
 
-Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00294}{294}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00410}{410}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ std::vector<std::vector<std::string>>\ chunks;}
-\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ std::vector<std::string>\ current\_chunk;}
-\DoxyCodeLine{00297\ }
-\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ value\ :\ data)\ \{}
-\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.push\_back(value);}
-\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4_acf313613a958786314458ad73859e063}{calculate\_entropy}}(current\_chunk)\ >\ \mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4_ab76d84aa029eb8a5691aaf4b1e662531}{threshold\_}})\ \{}
-\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_chunk.size()\ >\ 1)\ \{}
-\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.pop\_back();}
-\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ chunks.push\_back(current\_chunk);}
-\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk\ =\ \{value\};}
-\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00308\ }
-\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!current\_chunk.empty())\ \{}
-\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \ \ \ \ chunks.push\_back(current\_chunk);}
-\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00312\ }
-\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ chunks;}
-\DoxyCodeLine{00314\ \ \ \ \ \}}
+\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00411\ \ \ \ \ \ \ \ \ std::vector<std::vector<std::string>>\ chunks;}
+\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ std::vector<std::string>\ current\_chunk;}
+\DoxyCodeLine{00413\ }
+\DoxyCodeLine{00414\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ value\ :\ data)\ \{}
+\DoxyCodeLine{00415\ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.push\_back(value);}
+\DoxyCodeLine{00416\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4_acf313613a958786314458ad73859e063}{calculate\_entropy}}(current\_chunk)\ >\ \mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4_ab76d84aa029eb8a5691aaf4b1e662531}{threshold\_}})\ \{}
+\DoxyCodeLine{00417\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_chunk.size()\ >\ 1)\ \{}
+\DoxyCodeLine{00418\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.pop\_back();}
+\DoxyCodeLine{00419\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ chunks.push\_back(current\_chunk);}
+\DoxyCodeLine{00420\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk\ =\ \{value\};}
+\DoxyCodeLine{00421\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00422\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00423\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00424\ }
+\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!current\_chunk.empty())\ \{}
+\DoxyCodeLine{00426\ \ \ \ \ \ \ \ \ \ \ \ \ chunks.push\_back(current\_chunk);}
+\DoxyCodeLine{00427\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00428\ }
+\DoxyCodeLine{00429\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ chunks;}
+\DoxyCodeLine{00430\ \ \ \ \ \}}
 
 \end{DoxyCode}
 
 
-References \mbox{\hyperlink{chunk__strategies_8hpp_source_l00134}{chunk\+\_\+strategies\+::\+Entropy\+Strategy$<$ T $>$\+::calculate\+\_\+entropy()}}, and \mbox{\hyperlink{chunk__strategies_8hpp_source_l00132}{chunk\+\_\+strategies\+::\+Entropy\+Strategy$<$ T $>$\+::threshold\+\_\+}}.
+References \mbox{\hyperlink{chunk__strategies_8hpp_source_l00144}{chunk\+\_\+strategies\+::\+Entropy\+Strategy$<$ T $>$\+::calculate\+\_\+entropy()}}, and \mbox{\hyperlink{chunk__strategies_8hpp_source_l00142}{chunk\+\_\+strategies\+::\+Entropy\+Strategy$<$ T $>$\+::threshold\+\_\+}}.
 
 \Hypertarget{classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4_acf313613a958786314458ad73859e063}\label{classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4_acf313613a958786314458ad73859e063} 
 \index{chunk\_strategies::EntropyStrategy$<$ std::string $>$@{chunk\_strategies::EntropyStrategy$<$ std::string $>$}!calculate\_entropy@{calculate\_entropy}}
@@ -130,27 +130,27 @@ References \mbox{\hyperlink{chunk__strategies_8hpp_source_l00134}{chunk\+\_\+str
 
 
 
-Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00272}{272}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00388}{388}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (values.empty())}
-\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0.0;}
-\DoxyCodeLine{00275\ }
-\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ std::map<std::string,\ int>\ freq;}
-\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ val\ :\ values)\ \{}
-\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \ \ \ \ freq[val]++;}
-\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00280\ }
-\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ entropy\ =\ 0.0;}
-\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ [\_,\ count]\ :\ freq)\ \{}
-\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ p\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(count)\ /\ values.size();}
-\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \ \ \ \ entropy\ -\/=\ p\ *\ std::log2(p);}
-\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00286\ }
-\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ entropy;}
-\DoxyCodeLine{00288\ \ \ \ \ \}}
+\DoxyCodeLine{00388\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (values.empty())}
+\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0.0;}
+\DoxyCodeLine{00391\ }
+\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ std::map<std::string,\ int>\ freq;}
+\DoxyCodeLine{00393\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ val\ :\ values)\ \{}
+\DoxyCodeLine{00394\ \ \ \ \ \ \ \ \ \ \ \ \ freq[val]++;}
+\DoxyCodeLine{00395\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00396\ }
+\DoxyCodeLine{00397\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ entropy\ =\ 0.0;}
+\DoxyCodeLine{00398\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ [\_,\ count]\ :\ freq)\ \{}
+\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ p\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(count)\ /\ values.size();}
+\DoxyCodeLine{00400\ \ \ \ \ \ \ \ \ \ \ \ \ entropy\ -\/=\ p\ *\ std::log2(p);}
+\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00402\ }
+\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ entropy;}
+\DoxyCodeLine{00404\ \ \ \ \ \}}
 
 \end{DoxyCode}
 
@@ -164,7 +164,7 @@ Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00272}{272}} 
 
 
 
-Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00270}{270}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00386}{386}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
 
 
 

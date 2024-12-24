@@ -4,17 +4,47 @@
 
 {\ttfamily \#include $<$chunk\+\_\+strategies.\+hpp$>$}
 
+
+
+Inheritance diagram for chunk\+\_\+strategies\+::Pattern\+Based\+Strategy\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{classchunk__strategies_1_1PatternBasedStrategy__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for chunk\+\_\+strategies\+::Pattern\+Based\+Strategy\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{classchunk__strategies_1_1PatternBasedStrategy__coll__graph}
+\end{center}
+\end{figure}
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_a64c4a3870afe7771e6a5976e515be070}{Pattern\+Based\+Strategy}} (std\+::function$<$ bool(T)$>$ pattern\+\_\+detector)
+\mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_a82be6975192f07e420d9f08de8e5a54d}{Pattern\+Based\+Strategy}} (size\+\_\+t pattern\+\_\+size)
 \item 
-std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_acc28f3ed8e292fd6bbf3f3705b56f40f}{apply}} (const std\+::vector$<$ T $>$ \&data)
+\mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_a44ee1fa5604411f7d9c1243af226fa5f}{Pattern\+Based\+Strategy}} (std\+::function$<$ bool(T)$>$ predicate)
+\item 
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_a07a6360a8d55cd64ab7b2e4c30cfc384}{apply}} (const std\+::vector$<$ T $>$ \&data) const override
+\begin{DoxyCompactList}\small\item\em Applies the chunking strategy to the data. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_ae9bba4ce8a0427558a8b8ee7ed5db72d}{get\+\_\+pattern\+\_\+size}} () const
+\item 
+const std\+::function$<$ bool(T)$>$ \& \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_a4f180e20c5562933bb56b82c6bcd192f}{get\+\_\+predicate}} () const
+\item 
+void \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_aa2744238d9ce735260d0e3e1d0a447d3}{set\+\_\+pattern\+\_\+size}} (size\+\_\+t size)
+\item 
+void \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_a14112801cbd8cf8607ef4f5db7cc9002}{set\+\_\+predicate}} (std\+::function$<$ bool(T)$>$ pred)
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\+::function$<$ bool(T)$>$ \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_af0e374df9e8183e17f23f3416762084f}{pattern\+\_\+detector\+\_\+}}
+size\+\_\+t \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_a423446643a8cf12d68b067e6f35e5c98}{pattern\+\_\+size\+\_\+}}
+\item 
+std\+::function$<$ bool(T)$>$ \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_a16d5682909414676190bca547e57ba2b}{predicate\+\_\+}}
 \end{DoxyCompactItemize}
 
 
@@ -23,71 +53,245 @@ std\+::function$<$ bool(T)$>$ \mbox{\hyperlink{classchunk__strategies_1_1Pattern
 class chunk\+\_\+strategies\+::\+Pattern\+Based\+Strategy$<$ T $>$}
 
 
-Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00179}{179}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00189}{189}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\Hypertarget{classchunk__strategies_1_1PatternBasedStrategy_a64c4a3870afe7771e6a5976e515be070}\label{classchunk__strategies_1_1PatternBasedStrategy_a64c4a3870afe7771e6a5976e515be070} 
+\Hypertarget{classchunk__strategies_1_1PatternBasedStrategy_a82be6975192f07e420d9f08de8e5a54d}\label{classchunk__strategies_1_1PatternBasedStrategy_a82be6975192f07e420d9f08de8e5a54d} 
 \index{chunk\_strategies::PatternBasedStrategy$<$ T $>$@{chunk\_strategies::PatternBasedStrategy$<$ T $>$}!PatternBasedStrategy@{PatternBasedStrategy}}
 \index{PatternBasedStrategy@{PatternBasedStrategy}!chunk\_strategies::PatternBasedStrategy$<$ T $>$@{chunk\_strategies::PatternBasedStrategy$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{PatternBasedStrategy()}{PatternBasedStrategy()}}
+\doxysubsubsection{\texorpdfstring{PatternBasedStrategy()}{PatternBasedStrategy()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$typename T $>$ \\
-\mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy}{chunk\+\_\+strategies\+::\+Pattern\+Based\+Strategy}}$<$ T $>$\+::\+Pattern\+Based\+Strategy (\begin{DoxyParamCaption}\item[{std\+::function$<$ bool(T)$>$}]{pattern\+\_\+detector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+\mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy}{chunk\+\_\+strategies\+::\+Pattern\+Based\+Strategy}}$<$ T $>$\+::\+Pattern\+Based\+Strategy (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{pattern\+\_\+size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
 
 
 
-Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00181}{181}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00192}{192}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_af0e374df9e8183e17f23f3416762084f}{pattern\_detector\_}}(pattern\_detector)\ \{\}}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_a423446643a8cf12d68b067e6f35e5c98}{pattern\_size\_}}(pattern\_size),\ \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_a16d5682909414676190bca547e57ba2b}{predicate\_}}(\textcolor{keyword}{nullptr})\ \{\}}
+
+\end{DoxyCode}
+\Hypertarget{classchunk__strategies_1_1PatternBasedStrategy_a44ee1fa5604411f7d9c1243af226fa5f}\label{classchunk__strategies_1_1PatternBasedStrategy_a44ee1fa5604411f7d9c1243af226fa5f} 
+\index{chunk\_strategies::PatternBasedStrategy$<$ T $>$@{chunk\_strategies::PatternBasedStrategy$<$ T $>$}!PatternBasedStrategy@{PatternBasedStrategy}}
+\index{PatternBasedStrategy@{PatternBasedStrategy}!chunk\_strategies::PatternBasedStrategy$<$ T $>$@{chunk\_strategies::PatternBasedStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{PatternBasedStrategy()}{PatternBasedStrategy()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy}{chunk\+\_\+strategies\+::\+Pattern\+Based\+Strategy}}$<$ T $>$\+::\+Pattern\+Based\+Strategy (\begin{DoxyParamCaption}\item[{std\+::function$<$ bool(T)$>$}]{predicate }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00196}{196}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_a423446643a8cf12d68b067e6f35e5c98}{pattern\_size\_}}(0),\ \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_a16d5682909414676190bca547e57ba2b}{predicate\_}}(predicate)\ \{\}}
 
 \end{DoxyCode}
 
 
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classchunk__strategies_1_1PatternBasedStrategy_acc28f3ed8e292fd6bbf3f3705b56f40f}\label{classchunk__strategies_1_1PatternBasedStrategy_acc28f3ed8e292fd6bbf3f3705b56f40f} 
+\Hypertarget{classchunk__strategies_1_1PatternBasedStrategy_a07a6360a8d55cd64ab7b2e4c30cfc384}\label{classchunk__strategies_1_1PatternBasedStrategy_a07a6360a8d55cd64ab7b2e4c30cfc384} 
 \index{chunk\_strategies::PatternBasedStrategy$<$ T $>$@{chunk\_strategies::PatternBasedStrategy$<$ T $>$}!apply@{apply}}
 \index{apply@{apply}!chunk\_strategies::PatternBasedStrategy$<$ T $>$@{chunk\_strategies::PatternBasedStrategy$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{apply()}{apply()}}
 {\footnotesize\ttfamily template$<$typename T $>$ \\
-std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy}{chunk\+\_\+strategies\+::\+Pattern\+Based\+Strategy}}$<$ T $>$\+::apply (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ T $>$ \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy}{chunk\+\_\+strategies\+::\+Pattern\+Based\+Strategy}}$<$ T $>$\+::apply (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ T $>$ \&}]{data }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
-Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00184}{184}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+Applies the chunking strategy to the data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data to chunk \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector of chunks 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classchunk__strategies_1_1ChunkStrategy_a403010d65da39c1a873874582760bfce}{chunk\+\_\+strategies\+::\+Chunk\+Strategy$<$ T $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00199}{199}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classChunk}{Chunk<T>}}\ chunker(1);}
-\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ chunker.add(data);}
-\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ chunker.chunk\_by\_predicate(\mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_af0e374df9e8183e17f23f3416762084f}{pattern\_detector\_}});}
-\DoxyCodeLine{00188\ \ \ \ \ \}}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ empty\ input\ first}}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.empty())\ \{}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\};}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_a16d5682909414676190bca547e57ba2b}{predicate\_}})\ \{}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Use\ predicate-\/based\ chunking}}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<T>\ current\_chunk;}
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ value\ :\ data)\ \{}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.push\_back(value);}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_a16d5682909414676190bca547e57ba2b}{predicate\_}}(value)\ \&\&\ current\_chunk.size()\ >\ 1)\ \{}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.clear();}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00217\ }
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!current\_chunk.empty())\ \{}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(current\_chunk);}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00221\ }
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Size-\/based\ chunking}}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_a423446643a8cf12d68b067e6f35e5c98}{pattern\_size\_}}\ ==\ 0)\ \{}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{data\};\ \textcolor{comment}{//\ Return\ single\ chunk\ if\ pattern\ size\ is\ 0}}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00228\ }
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ empty\ input\ and\ small\ inputs}}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.size()\ <\ \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_a423446643a8cf12d68b067e6f35e5c98}{pattern\_size\_}})\ \{}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data.empty()\ ?\ std::vector<std::vector<T>>\{\}}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ std::vector<std::vector<T>>\{data\};}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00234\ }
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ result;}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ data.size();\ i\ +=\ \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_a423446643a8cf12d68b067e6f35e5c98}{pattern\_size\_}})\ \{}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ end\ =\ std::min(i\ +\ \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_a423446643a8cf12d68b067e6f35e5c98}{pattern\_size\_}},\ data.size());}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.emplace\_back(data.begin()\ +\ i,\ data.begin()\ +\ end);}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00242\ \ \ \ \ \}}
 
 \end{DoxyCode}
 
 
-References \mbox{\hyperlink{chunk_8hpp_source_l00144}{Chunk$<$ T $>$\+::add()}}, \mbox{\hyperlink{chunk_8hpp_source_l00194}{Chunk$<$ T $>$\+::chunk\+\_\+by\+\_\+predicate()}}, and \mbox{\hyperlink{chunk__strategies_8hpp_source_l00191}{chunk\+\_\+strategies\+::\+Pattern\+Based\+Strategy$<$ T $>$\+::pattern\+\_\+detector\+\_\+}}.
+References \mbox{\hyperlink{chunk__strategies_8hpp_source_l00261}{chunk\+\_\+strategies\+::\+Pattern\+Based\+Strategy$<$ T $>$\+::pattern\+\_\+size\+\_\+}}, and \mbox{\hyperlink{chunk__strategies_8hpp_source_l00262}{chunk\+\_\+strategies\+::\+Pattern\+Based\+Strategy$<$ T $>$\+::predicate\+\_\+}}.
+
+\Hypertarget{classchunk__strategies_1_1PatternBasedStrategy_ae9bba4ce8a0427558a8b8ee7ed5db72d}\label{classchunk__strategies_1_1PatternBasedStrategy_ae9bba4ce8a0427558a8b8ee7ed5db72d} 
+\index{chunk\_strategies::PatternBasedStrategy$<$ T $>$@{chunk\_strategies::PatternBasedStrategy$<$ T $>$}!get\_pattern\_size@{get\_pattern\_size}}
+\index{get\_pattern\_size@{get\_pattern\_size}!chunk\_strategies::PatternBasedStrategy$<$ T $>$@{chunk\_strategies::PatternBasedStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{get\_pattern\_size()}{get\_pattern\_size()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+size\+\_\+t \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy}{chunk\+\_\+strategies\+::\+Pattern\+Based\+Strategy}}$<$ T $>$\+::get\+\_\+pattern\+\_\+size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00245}{245}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_a423446643a8cf12d68b067e6f35e5c98}{pattern\_size\_}};}
+\DoxyCodeLine{00247\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk__strategies_8hpp_source_l00261}{chunk\+\_\+strategies\+::\+Pattern\+Based\+Strategy$<$ T $>$\+::pattern\+\_\+size\+\_\+}}.
+
+\Hypertarget{classchunk__strategies_1_1PatternBasedStrategy_a4f180e20c5562933bb56b82c6bcd192f}\label{classchunk__strategies_1_1PatternBasedStrategy_a4f180e20c5562933bb56b82c6bcd192f} 
+\index{chunk\_strategies::PatternBasedStrategy$<$ T $>$@{chunk\_strategies::PatternBasedStrategy$<$ T $>$}!get\_predicate@{get\_predicate}}
+\index{get\_predicate@{get\_predicate}!chunk\_strategies::PatternBasedStrategy$<$ T $>$@{chunk\_strategies::PatternBasedStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{get\_predicate()}{get\_predicate()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+const std\+::function$<$ bool(T)$>$ \& \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy}{chunk\+\_\+strategies\+::\+Pattern\+Based\+Strategy}}$<$ T $>$\+::get\+\_\+predicate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00248}{248}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_a16d5682909414676190bca547e57ba2b}{predicate\_}};}
+\DoxyCodeLine{00250\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk__strategies_8hpp_source_l00262}{chunk\+\_\+strategies\+::\+Pattern\+Based\+Strategy$<$ T $>$\+::predicate\+\_\+}}.
+
+\Hypertarget{classchunk__strategies_1_1PatternBasedStrategy_aa2744238d9ce735260d0e3e1d0a447d3}\label{classchunk__strategies_1_1PatternBasedStrategy_aa2744238d9ce735260d0e3e1d0a447d3} 
+\index{chunk\_strategies::PatternBasedStrategy$<$ T $>$@{chunk\_strategies::PatternBasedStrategy$<$ T $>$}!set\_pattern\_size@{set\_pattern\_size}}
+\index{set\_pattern\_size@{set\_pattern\_size}!chunk\_strategies::PatternBasedStrategy$<$ T $>$@{chunk\_strategies::PatternBasedStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{set\_pattern\_size()}{set\_pattern\_size()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy}{chunk\+\_\+strategies\+::\+Pattern\+Based\+Strategy}}$<$ T $>$\+::set\+\_\+pattern\+\_\+size (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00253}{253}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_a423446643a8cf12d68b067e6f35e5c98}{pattern\_size\_}}\ =\ size;}
+\DoxyCodeLine{00255\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk__strategies_8hpp_source_l00261}{chunk\+\_\+strategies\+::\+Pattern\+Based\+Strategy$<$ T $>$\+::pattern\+\_\+size\+\_\+}}.
+
+\Hypertarget{classchunk__strategies_1_1PatternBasedStrategy_a14112801cbd8cf8607ef4f5db7cc9002}\label{classchunk__strategies_1_1PatternBasedStrategy_a14112801cbd8cf8607ef4f5db7cc9002} 
+\index{chunk\_strategies::PatternBasedStrategy$<$ T $>$@{chunk\_strategies::PatternBasedStrategy$<$ T $>$}!set\_predicate@{set\_predicate}}
+\index{set\_predicate@{set\_predicate}!chunk\_strategies::PatternBasedStrategy$<$ T $>$@{chunk\_strategies::PatternBasedStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{set\_predicate()}{set\_predicate()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy}{chunk\+\_\+strategies\+::\+Pattern\+Based\+Strategy}}$<$ T $>$\+::set\+\_\+predicate (\begin{DoxyParamCaption}\item[{std\+::function$<$ bool(T)$>$}]{pred }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00256}{256}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy_a16d5682909414676190bca547e57ba2b}{predicate\_}}\ =\ std::move(pred);}
+\DoxyCodeLine{00258\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk__strategies_8hpp_source_l00262}{chunk\+\_\+strategies\+::\+Pattern\+Based\+Strategy$<$ T $>$\+::predicate\+\_\+}}.
 
 
 
 \doxysubsection{Member Data Documentation}
-\Hypertarget{classchunk__strategies_1_1PatternBasedStrategy_af0e374df9e8183e17f23f3416762084f}\label{classchunk__strategies_1_1PatternBasedStrategy_af0e374df9e8183e17f23f3416762084f} 
-\index{chunk\_strategies::PatternBasedStrategy$<$ T $>$@{chunk\_strategies::PatternBasedStrategy$<$ T $>$}!pattern\_detector\_@{pattern\_detector\_}}
-\index{pattern\_detector\_@{pattern\_detector\_}!chunk\_strategies::PatternBasedStrategy$<$ T $>$@{chunk\_strategies::PatternBasedStrategy$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{pattern\_detector\_}{pattern\_detector\_}}
+\Hypertarget{classchunk__strategies_1_1PatternBasedStrategy_a423446643a8cf12d68b067e6f35e5c98}\label{classchunk__strategies_1_1PatternBasedStrategy_a423446643a8cf12d68b067e6f35e5c98} 
+\index{chunk\_strategies::PatternBasedStrategy$<$ T $>$@{chunk\_strategies::PatternBasedStrategy$<$ T $>$}!pattern\_size\_@{pattern\_size\_}}
+\index{pattern\_size\_@{pattern\_size\_}!chunk\_strategies::PatternBasedStrategy$<$ T $>$@{chunk\_strategies::PatternBasedStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{pattern\_size\_}{pattern\_size\_}}
 {\footnotesize\ttfamily template$<$typename T $>$ \\
-std\+::function$<$bool(T)$>$ \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy}{chunk\+\_\+strategies\+::\+Pattern\+Based\+Strategy}}$<$ T $>$\+::pattern\+\_\+detector\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+size\+\_\+t \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy}{chunk\+\_\+strategies\+::\+Pattern\+Based\+Strategy}}$<$ T $>$\+::pattern\+\_\+size\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00191}{191}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00261}{261}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
 
 
 
-Referenced by \mbox{\hyperlink{chunk__strategies_8hpp_source_l00184}{chunk\+\_\+strategies\+::\+Pattern\+Based\+Strategy$<$ T $>$\+::apply()}}.
+Referenced by \mbox{\hyperlink{chunk__strategies_8hpp_source_l00199}{chunk\+\_\+strategies\+::\+Pattern\+Based\+Strategy$<$ T $>$\+::apply()}}, \mbox{\hyperlink{chunk__strategies_8hpp_source_l00245}{chunk\+\_\+strategies\+::\+Pattern\+Based\+Strategy$<$ T $>$\+::get\+\_\+pattern\+\_\+size()}}, and \mbox{\hyperlink{chunk__strategies_8hpp_source_l00253}{chunk\+\_\+strategies\+::\+Pattern\+Based\+Strategy$<$ T $>$\+::set\+\_\+pattern\+\_\+size()}}.
+
+\Hypertarget{classchunk__strategies_1_1PatternBasedStrategy_a16d5682909414676190bca547e57ba2b}\label{classchunk__strategies_1_1PatternBasedStrategy_a16d5682909414676190bca547e57ba2b} 
+\index{chunk\_strategies::PatternBasedStrategy$<$ T $>$@{chunk\_strategies::PatternBasedStrategy$<$ T $>$}!predicate\_@{predicate\_}}
+\index{predicate\_@{predicate\_}!chunk\_strategies::PatternBasedStrategy$<$ T $>$@{chunk\_strategies::PatternBasedStrategy$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{predicate\_}{predicate\_}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::function$<$bool(T)$>$ \mbox{\hyperlink{classchunk__strategies_1_1PatternBasedStrategy}{chunk\+\_\+strategies\+::\+Pattern\+Based\+Strategy}}$<$ T $>$\+::predicate\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00262}{262}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+
+
+
+Referenced by \mbox{\hyperlink{chunk__strategies_8hpp_source_l00199}{chunk\+\_\+strategies\+::\+Pattern\+Based\+Strategy$<$ T $>$\+::apply()}}, \mbox{\hyperlink{chunk__strategies_8hpp_source_l00248}{chunk\+\_\+strategies\+::\+Pattern\+Based\+Strategy$<$ T $>$\+::get\+\_\+predicate()}}, and \mbox{\hyperlink{chunk__strategies_8hpp_source_l00256}{chunk\+\_\+strategies\+::\+Pattern\+Based\+Strategy$<$ T $>$\+::set\+\_\+predicate()}}.
 
 
 

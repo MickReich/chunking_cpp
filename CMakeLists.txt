@@ -391,6 +391,10 @@ target_link_libraries(chunking_cpp PRIVATE
     sophisticated_chunking
     neural_chunking
     chunk_benchmark
+    chunk_metrics_impl
+    chunk_serialization_impl
+    chunk_visualization_impl
+    chunk_resilience_impl
     $<$<BOOL:${nlohmann_json_FOUND}>:nlohmann_json::nlohmann_json>
 )
 
@@ -515,4 +519,63 @@ endif()
 # Add rpath settings for better library resolution
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 list(APPEND CMAKE_INSTALL_RPATH "/usr/lib/x86_64-linux-gnu")
+
+# Add the template instantiation libraries
+add_library(chunk_metrics_impl
+    src/chunk_metrics.cpp
+)
+
+add_library(chunk_serialization_impl
+    src/chunk_serialization.cpp
+)
+
+add_library(chunk_visualization_impl
+    src/chunk_visualization.cpp
+)
+
+add_library(chunk_resilience_impl
+    src/chunk_resilience.cpp
+)
+
+# Set include directories for implementation libraries
+foreach(lib 
+    chunk_metrics_impl 
+    chunk_serialization_impl 
+    chunk_visualization_impl 
+    chunk_resilience_impl
+)
+    target_include_directories(${lib} PUBLIC
+        ${PROJECT_SOURCE_DIR}/include
+    )
+    set_target_properties(${lib} PROPERTIES
+        POSITION_INDEPENDENT_CODE ON
+    )
+endforeach()
+
+# Add visibility flags
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -fvisibility-inlines-hidden")
+    target_compile_options(chunking_cpp PRIVATE -fvisibility=hidden -fvisibility-inlines-hidden)
+endif()
+
+# Ensure all implementation libraries are built with PIC
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
+target_sources(chunk_processor
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/chunk_resilience.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/chunk_visualization.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/chunk_serialization.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/neural_chunking.cpp
+    PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/chunk.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/chunk_strategies.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/chunk_strategy_implementations.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/chunk_resilience.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/chunk_visualization.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/chunk_serialization.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/chunk_benchmark.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/neural_chunking.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/chunk_errors.hpp
+)
   

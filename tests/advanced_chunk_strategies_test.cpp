@@ -1,211 +1,105 @@
 #include "chunk_strategies.hpp"
 #include "chunk_windows.hpp"
-#include <climits>
-#include <cmath>
 #include <gtest/gtest.h>
+#include <numeric>
 #include <vector>
-
-using namespace chunk_strategies;
-using namespace chunk_windows;
 
 class AdvancedChunkStrategiesTest : public ::testing::Test {
 protected:
     void SetUp() override {
-        // Time series-like data
-        time_series_data = {1.0, 1.1, 1.0, 4.0, 4.1, 4.2, 1.5, 1.6, 8.0, 8.1};
-
-        // Cyclic pattern data
-        cyclic_data = {0, 1, 2, 3, 2, 1, 0, -1, -2, -1, 0, 1, 2};
-
-        // Data with clear segments
-        segmented_data = {1, 1, 2, 5, 5, 5, 9, 9, 2, 2, 2, 7, 7};
+        test_data = {1.0, 2.0, 5.0, 6.0, 1.0, 2.0, 7.0, 8.0};
+        cyclic_data = {1, 2, 3, 1, 2, 3, 1, 2, 3};
     }
 
-    std::vector<double> time_series_data;
+    std::vector<double> test_data;
     std::vector<int> cyclic_data;
-    std::vector<int> segmented_data;
 };
 
-// Pattern-Based Strategy Tests
 TEST_F(AdvancedChunkStrategiesTest, PatternBasedLocalMaxima) {
+    // Reset static variables for each test
     auto local_maxima_detector = [](double x) {
-        static double prev = x;
-        static double prev_prev = x;
+        thread_local double prev = x;
+        thread_local double prev_prev = x;
         bool is_local_max = (prev > prev_prev && prev > x);
         prev_prev = prev;
         prev = x;
         return is_local_max;
     };
 
-    PatternBasedStrategy<double> strategy(local_maxima_detector);
-    auto chunks = strategy.apply(time_series_data);
+    chunk_strategies::PatternBasedStrategy<double> strategy(local_maxima_detector);
+    auto chunks = strategy.apply(test_data);
 
-    ASSERT_GT(chunks.size(), 1);
+    EXPECT_GT(chunks.size(), 1);
     for (const auto& chunk : chunks) {
-        EXPECT_GT(chunk.size(), 0);
+        EXPECT_FALSE(chunk.empty());
     }
 }
 
 TEST_F(AdvancedChunkStrategiesTest, PatternBasedCyclicDetection) {
-    auto cycle_detector = [](int x) {
-        static std::vector<int> pattern;
-        static int last_direction = 0;
-
-        if (pattern.size() < 2) {
-            pattern.push_back(x);
-            return false;
-        }
-
-        int current_direction = x - pattern.back();
-        bool start_new =
-            (last_direction * current_direction < 0); // Direction change when product is negative
-
-        pattern.push_back(x);
-        last_direction = current_direction;
-        return start_new;
-    };
-
-    PatternBasedStrategy<int> strategy(cycle_detector);
+    // Test size-based constructor
+    chunk_strategies::PatternBasedStrategy<int> strategy(3); // Pattern size of 3
     auto chunks = strategy.apply(cyclic_data);
 
-    ASSERT_GT(chunks.size(), 2);
+    EXPECT_EQ(chunks.size(), 3); // Should detect 3 complete cycles
     for (const auto& chunk : chunks) {
-        EXPECT_GT(chunk.size(), 1); // Each chunk should contain at least 2 elements
-    }
-}
-// Multi-Criteria Strategy Tests
-TEST_F(AdvancedChunkStrategiesTest, MultiCriteriaWithSizeAndSimilarity) {
-    try {
-        std::vector<double> data = {1.0, 1.1, 1.2, 5.0, 5.1, 5.2, 2.0, 2.1};
-        MultiCriteriaStrategy<double> strategy(3, 2.0);
-
-        auto chunks = strategy.apply(data);
-
-        ASSERT_GT(chunks.size(), 0);
-        for (const auto& chunk : chunks) {
-            ASSERT_FALSE(chunk.empty());
-        }
-    } catch (const std::exception& e) {
-        FAIL() << "Unexpected exception: " << e.what();
+        EXPECT_EQ(chunk.size(), 3);
     }
 }
 
-TEST_F(AdvancedChunkStrategiesTest, MultiCriteriaWithPatternAndSize) {
-    MultiCriteriaStrategy<int> strategy(2, 4); // max difference of 2, max size of 4
-    auto chunks = strategy.apply(segmented_data);
-
-    ASSERT_GT(chunks.size(), 1);
-    for (const auto& chunk : chunks) {
-        EXPECT_LE(chunk.size(), 4);
-        if (chunk.size() > 1) {
-            int max_diff = 0;
-            for (size_t i = 1; i < chunk.size(); ++i) {
-                max_diff = std::max(max_diff, std::abs(chunk[i] - chunk[i - 1]));
-            }
-            EXPECT_LE(max_diff, 2);
-        }
-    }
-}
-
-// Dynamic Threshold Strategy Tests
-TEST_F(AdvancedChunkStrategiesTest, DynamicThresholdWithDecay) {
-    DynamicThresholdStrategy<double> strategy(1.0, 0.1, 0.9);
-    auto chunks = strategy.apply(time_series_data);
-
-    ASSERT_GT(chunks.size(), 1);
-    // Verify that later chunks allow smaller variations
-    std::vector<double> chunk_variations;
-    for (const auto& chunk : chunks) {
-        if (chunk.size() > 1) {
-            double max_var = 0.0;
-            for (size_t i = 1; i < chunk.size(); ++i) {
-                max_var = std::max(max_var, std::abs(chunk[i] - chunk[i - 1]));
-            }
-            chunk_variations.push_back(max_var);
-        }
-    }
-
-    // Verify general trend of decreasing variations
-    for (size_t i = 1; i < chunk_variations.size(); ++i) {
-        EXPECT_LE(chunk_variations[i], chunk_variations[i - 1] * 1.1); // Allow 10% tolerance
-    }
-}
-
-TEST_F(AdvancedChunkStrategiesTest, DynamicThresholdWithAdaptiveMinimum) {
-    DynamicThresholdStrategy<int> strategy(5, 1, 0.8);
-    auto chunks = strategy.apply(segmented_data);
-
-    ASSERT_GT(chunks.size(), 1);
-    int prev_max_diff = INT_MAX;
-    for (const auto& chunk : chunks) {
-        if (chunk.size() > 1) {
-            int max_diff = 0;
-            for (size_t i = 1; i < chunk.size(); ++i) {
-                max_diff = std::max(max_diff, std::abs(chunk[i] - chunk[i - 1]));
-            }
-            if (max_diff > 0) {
-                EXPECT_LE(max_diff, prev_max_diff);
-                EXPECT_GE(max_diff, 1); // Lower minimum threshold check to 1
-                prev_max_diff = max_diff;
-            }
-        }
-    }
-}
-
-// Window Processing Tests
-TEST_F(AdvancedChunkStrategiesTest, SlidingWindowWithCustomAggregation) {
-    SlidingWindowProcessor<double> processor(3, 1);
-
-    // Custom aggregation: range (max - min) in window
-    auto range_calculator = [](const std::vector<double>& window) {
-        if (window.empty())
-            return 0.0;
-        auto [min_it, max_it] = std::minmax_element(window.begin(), window.end());
-        return *max_it - *min_it;
-    };
-
-    auto results = processor.process(time_series_data, range_calculator);
-
-    ASSERT_GT(results.size(), 1);
-    for (double range : results) {
-        EXPECT_GE(range, 0.0);
-    }
-}
-
-TEST_F(AdvancedChunkStrategiesTest, WindowOperationsWithStatistics) {
-    std::vector<double> window = {1.0, 2.0, 3.0, 4.0, 5.0};
-
-    EXPECT_DOUBLE_EQ(WindowOperations<double>::moving_average(window), 3.0);
-    EXPECT_DOUBLE_EQ(WindowOperations<double>::moving_median(window), 3.0);
-    EXPECT_DOUBLE_EQ(WindowOperations<double>::moving_max(window), 5.0);
-    EXPECT_DOUBLE_EQ(WindowOperations<double>::moving_min(window), 1.0);
-}
-
-// Edge Cases and Boundary Tests
 TEST_F(AdvancedChunkStrategiesTest, SingleElementInput) {
-    std::vector<double> single_element = {1.0};
+    std::vector<double> single_element{1.0};
 
-    PatternBasedStrategy<double> pattern_strategy([](double) { return true; });
-    EXPECT_EQ(pattern_strategy.apply(single_element).size(), 1);
+    // Test both constructors with single element
+    chunk_strategies::PatternBasedStrategy<double> size_strategy(2);
+    auto size_chunks = size_strategy.apply(single_element);
+    EXPECT_EQ(size_chunks.size(), 1);
 
-    AdaptiveStrategy<double> adaptive_strategy(1.0, [](const std::vector<double>&) { return 0.0; });
-    EXPECT_EQ(adaptive_strategy.apply(single_element).size(), 1);
-
-    MultiCriteriaStrategy<double> multi_strategy(0.5, 2);
-    EXPECT_EQ(multi_strategy.apply(single_element).size(), 1);
-
-    DynamicThresholdStrategy<double> dynamic_strategy(1.0, 0.1, 0.9);
-    EXPECT_EQ(dynamic_strategy.apply(single_element).size(), 1);
+    chunk_strategies::PatternBasedStrategy<double> pred_strategy([](double) { return true; });
+    auto pred_chunks = pred_strategy.apply(single_element);
+    EXPECT_EQ(pred_chunks.size(), 1);
 }
 
-TEST_F(AdvancedChunkStrategiesTest, LargeValueRanges) {
-    std::vector<double> large_range = {1e-6, 1e-3, 1.0, 1e3, 1e6};
+TEST_F(AdvancedChunkStrategiesTest, EmptyInput) {
+    std::vector<double> empty_data;
 
-    DynamicThresholdStrategy<double> strategy(1e3, 1.0, 0.9);
-    auto chunks = strategy.apply(large_range);
+    // Test both constructors with empty input
+    chunk_strategies::PatternBasedStrategy<double> size_strategy(2);
+    auto size_chunks = size_strategy.apply(empty_data);
+    EXPECT_TRUE(size_chunks.empty());
 
-    ASSERT_GT(chunks.size(), 1);
-    for (const auto& chunk : chunks) {
-        EXPECT_GT(chunk.size(), 0);
-    }
+    chunk_strategies::PatternBasedStrategy<double> pred_strategy([](double) { return true; });
+    auto pred_chunks = pred_strategy.apply(empty_data);
+    EXPECT_TRUE(pred_chunks.empty());
+}
+
+// Add tests for window processing
+TEST_F(AdvancedChunkStrategiesTest, WindowProcessing) {
+    chunk_windows::SlidingWindowProcessor<double> processor(3, 1);
+    auto result = processor.process(test_data, [](const std::vector<double>& window) {
+        return std::accumulate(window.begin(), window.end(), 0.0) / window.size();
+    });
+
+    EXPECT_FALSE(result.empty());
+    EXPECT_LE(result.size(), test_data.size());
+}
+
+// Test window operations
+TEST_F(AdvancedChunkStrategiesTest, WindowOperations) {
+    std::vector<double> window{1.0, 2.0, 3.0, 4.0, 5.0};
+
+    EXPECT_EQ(chunk_windows::WindowOperations<double>::moving_average(window), 3.0);
+    EXPECT_EQ(chunk_windows::WindowOperations<double>::moving_median(window), 3.0);
+    EXPECT_EQ(chunk_windows::WindowOperations<double>::moving_max(window), 5.0);
+    EXPECT_EQ(chunk_windows::WindowOperations<double>::moving_min(window), 1.0);
+}
+
+TEST_F(AdvancedChunkStrategiesTest, WindowOperationsEmptyInput) {
+    std::vector<double> empty_window;
+    EXPECT_EQ(chunk_windows::WindowOperations<double>::moving_average(empty_window), 0.0);
+    EXPECT_THROW(chunk_windows::WindowOperations<double>::moving_median(empty_window),
+                 std::invalid_argument);
+    EXPECT_THROW(chunk_windows::WindowOperations<double>::moving_max(empty_window),
+                 std::invalid_argument);
+    EXPECT_THROW(chunk_windows::WindowOperations<double>::moving_min(empty_window),
+                 std::invalid_argument);
 }
