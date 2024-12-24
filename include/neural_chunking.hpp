@@ -6,12 +6,12 @@
  */
 
 #pragma once
+#include "chunk_common.hpp"
 #include <cmath>   // for std::abs
 #include <cstdlib> // for malloc, free
 #include <memory>
 #include <stdexcept> // for std::runtime_error
 #include <vector>
-#include "chunk_common.hpp"
 
 namespace neural_chunking {
 
@@ -83,12 +83,20 @@ public:
     NeuralChunking(size_t window_size = 8, double threshold = 0.5)
         : window_size_(window_size), threshold_(threshold) {}
 
-    void set_window_size(size_t size) { window_size_ = size; }
-    void set_threshold(double threshold) { threshold_ = threshold; }
-    
-    size_t get_window_size() const { return window_size_; }
-    double get_threshold() const { return threshold_; }
-    
+    void set_window_size(size_t size) {
+        window_size_ = size;
+    }
+    void set_threshold(double threshold) {
+        threshold_ = threshold;
+    }
+
+    size_t get_window_size() const {
+        return window_size_;
+    }
+    double get_threshold() const {
+        return threshold_;
+    }
+
     std::vector<std::vector<T>> chunk(const std::vector<T>& data) const;
 
 private:
@@ -110,7 +118,7 @@ std::vector<std::vector<T>> NeuralChunking<T>::chunk(const std::vector<T>& data)
 
     std::vector<std::vector<T>> result;
     std::vector<T> current_chunk;
-    current_chunk.reserve(data.size());  // Optimize memory allocation
+    current_chunk.reserve(data.size()); // Optimize memory allocation
 
     // Add first element to start the first chunk
     current_chunk.push_back(data[0]);

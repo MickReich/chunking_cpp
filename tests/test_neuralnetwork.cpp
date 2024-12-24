@@ -1,5 +1,5 @@
-#include <gtest/gtest.h>
 #include "neural_chunking.hpp"
+#include <gtest/gtest.h>
 
 class NeuralNetworkTest : public ::testing::Test {
 protected:
@@ -22,7 +22,7 @@ TEST_F(NeuralNetworkTest, EmptyInput) {
 }
 
 TEST_F(NeuralNetworkTest, SmallInput) {
-    std::vector<double> small_data{1.0, 2.0};  // Smaller than window size
+    std::vector<double> small_data{1.0, 2.0}; // Smaller than window size
     auto chunks = chunker.chunk(small_data);
     EXPECT_EQ(chunks.size(), 1);
     EXPECT_EQ(chunks[0], small_data);
@@ -42,5 +42,5 @@ TEST_F(NeuralNetworkTest, Configuration) {
 TEST_F(NeuralNetworkTest, ChunkBoundaries) {
     std::vector<double> data{1.0, 1.0, 1.0, 5.0, 5.0, 5.0};
     auto chunks = chunker.chunk(data);
-    EXPECT_GT(chunks.size(), 1);  // Should detect the boundary between 1s and 5s
+    EXPECT_GT(chunks.size(), 1); // Should detect the boundary between 1s and 5s
 }

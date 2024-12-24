@@ -7,4 +7,4 @@ template class NeuralChunking<int>;
 template class NeuralChunking<float>;
 template class NeuralChunking<double>;
 
-} // namespace neural_chunking 
+} // namespace neural_chunking

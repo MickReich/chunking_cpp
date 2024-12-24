@@ -6,10 +6,10 @@
  * including adding elements, retrieving chunks, and handling edge cases.
  */
 
-#include <gtest/gtest.h>
-#include <vector>
-#include <string>
 #include "chunk.hpp"
+#include <gtest/gtest.h>
+#include <string>
+#include <vector>
 
 class ChunkTest : public ::testing::Test {
 protected:
@@ -52,8 +52,8 @@ TEST_F(ChunkTest, BasicOperations) {
 }
 
 TEST_F(ChunkTest, ChunkProcessing) {
-    chunk_processing::Chunk<int> chunk(2);  // Create chunk with size 2
-    chunk.add(test_data); // Add data from fixture
+    chunk_processing::Chunk<int> chunk(2); // Create chunk with size 2
+    chunk.add(test_data);                  // Add data from fixture
     auto chunks = chunk.get_chunks();
     EXPECT_FALSE(chunks.empty());
 }

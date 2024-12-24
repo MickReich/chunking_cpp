@@ -6,11 +6,11 @@
  */
 
 #pragma once
+#include "chunk_common.hpp"
 #include <cmath>
 #include <stdexcept>
 #include <unordered_map>
 #include <vector>
-#include "chunk_common.hpp"
 
 namespace chunk_metrics {
 
@@ -34,15 +34,16 @@ public:
 
         double total_cohesion = 0.0;
         for (const auto& chunk : chunks) {
-            if (chunk.empty()) continue;
-            
+            if (chunk.empty())
+                continue;
+
             T mean = calculate_mean(chunk);
             T variance = calculate_variance(chunk, mean);
-            
+
             // Normalize variance to [0,1] range
             total_cohesion += 1.0 / (1.0 + std::sqrt(variance));
         }
-        
+
         return total_cohesion / chunks.size();
     }
 
@@ -64,14 +65,14 @@ public:
             for (size_t j = i + 1; j < chunks.size(); ++j) {
                 T mean_i = calculate_mean(chunks[i]);
                 T mean_j = calculate_mean(chunks[j]);
-                
+
                 // Calculate distance between means
                 double separation = std::abs(mean_i - mean_j);
                 total_separation += separation;
                 ++comparisons;
             }
         }
-        
+
         return total_separation / comparisons;
     }
 
@@ -138,7 +139,7 @@ public:
 
         double cohesion = compute_cohesion(chunks);
         double separation = chunks.size() > 1 ? compute_separation(chunks) : 1.0;
-        
+
         return (cohesion + separation) / 2.0;
     }
 

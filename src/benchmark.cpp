@@ -5,13 +5,13 @@
  * @date 2024-12-07
  */
 
-#include <iostream>
-#include <memory>
-#include <random>
 #include "chunk.hpp"
 #include "chunk_benchmark.hpp"
 #include "chunk_strategies.hpp"
 #include "neural_chunking.hpp"
+#include <iostream>
+#include <memory>
+#include <random>
 
 // Strategy wrapper for neural chunking
 template <typename T>
@@ -34,7 +34,7 @@ public:
     explicit SimilarityChunkingStrategy(double threshold) : threshold(threshold) {}
 
     std::vector<std::vector<T>> apply(const std::vector<T>& data) const override {
-        chunk_processing::Chunk<T> chunker(1);  // Start with smallest chunk size
+        chunk_processing::Chunk<T> chunker(1); // Start with smallest chunk size
         for (const auto& item : data) {
             chunker.add(item);
         }

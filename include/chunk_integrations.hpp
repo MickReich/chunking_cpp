@@ -6,10 +6,10 @@
  */
 
 #pragma once
+#include "chunk_common.hpp"
 #include <memory>
 #include <string>
 #include <vector>
-#include "chunk_common.hpp"
 
 namespace chunk_integrations {
 

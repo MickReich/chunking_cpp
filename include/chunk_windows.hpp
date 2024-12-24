@@ -1,10 +1,10 @@
 #pragma once
 
 #include "chunk.hpp"
-#include <functional>
-#include <vector>
-#include <numeric>
 #include <algorithm>
+#include <functional>
+#include <numeric>
+#include <vector>
 
 namespace chunk_windows {
 
@@ -15,7 +15,7 @@ private:
     size_t step_size_;
 
     std::vector<T> process_chunks(const std::vector<std::vector<T>>& chunks,
-                                std::function<T(const std::vector<T>&)> window_func) {
+                                  std::function<T(const std::vector<T>&)> window_func) {
         std::vector<T> results;
         for (size_t i = 0; i < chunks.size(); i += step_size_) {
             const auto& chunk = chunks[i];
@@ -31,7 +31,7 @@ public:
         : window_size_(window_size), step_size_(step_size) {}
 
     std::vector<T> process(const std::vector<T>& data,
-                          std::function<T(const std::vector<T>&)> window_func) {
+                           std::function<T(const std::vector<T>&)> window_func) {
         chunk_processing::Chunk<T> chunker(window_size_);
         chunker.add(data);
         return process_chunks(chunker.get_chunks(), window_func);

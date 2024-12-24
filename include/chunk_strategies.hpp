@@ -179,7 +179,7 @@ template <typename T>
 class PatternBasedStrategy : public ChunkStrategy<T> {
 public:
     // Constructor for size-based patterns
-    explicit PatternBasedStrategy(size_t pattern_size) 
+    explicit PatternBasedStrategy(size_t pattern_size)
         : pattern_size_(pattern_size), predicate_(nullptr) {}
 
     // Constructor for predicate-based patterns
@@ -196,7 +196,7 @@ public:
             // Use predicate-based chunking
             std::vector<std::vector<T>> result;
             std::vector<T> current_chunk;
-            
+
             for (const auto& value : data) {
                 current_chunk.push_back(value);
                 if (predicate_(value) && current_chunk.size() > 1) {
@@ -204,23 +204,24 @@ public:
                     current_chunk.clear();
                 }
             }
-            
+
             if (!current_chunk.empty()) {
                 result.push_back(current_chunk);
             }
-            
+
             return result;
         } else {
             // Size-based chunking
             if (pattern_size_ == 0) {
-                return {data};  // Return single chunk if pattern size is 0
+                return {data}; // Return single chunk if pattern size is 0
             }
-            
+
             // Handle empty input and small inputs
             if (data.size() < pattern_size_) {
-                return data.empty() ? std::vector<std::vector<T>>{} : std::vector<std::vector<T>>{data};
+                return data.empty() ? std::vector<std::vector<T>>{}
+                                    : std::vector<std::vector<T>>{data};
             }
-            
+
             std::vector<std::vector<T>> result;
             for (size_t i = 0; i < data.size(); i += pattern_size_) {
                 size_t end = std::min(i + pattern_size_, data.size());
@@ -239,7 +240,7 @@ template <typename T>
 class AdaptiveStrategy : public ChunkStrategy<T> {
 public:
     explicit AdaptiveStrategy(T initial_threshold,
-                            std::function<T(const std::vector<T>&)> metric_calculator)
+                              std::function<T(const std::vector<T>&)> metric_calculator)
         : threshold_(initial_threshold), metric_calculator_(metric_calculator) {}
 
     std::vector<std::vector<T>> apply(const std::vector<T>& data) const override {

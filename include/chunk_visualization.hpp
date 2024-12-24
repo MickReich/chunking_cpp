@@ -6,6 +6,8 @@
  */
 
 #pragma once
+#include "chunk_common.hpp"
+#include "chunk_errors.hpp"
 #include <algorithm> // for std::abs
 #include <filesystem>
 #include <fstream>
@@ -13,8 +15,6 @@
 #include <string>
 #include <type_traits>
 #include <vector>
-#include "chunk_common.hpp"
-#include "chunk_errors.hpp"
 
 namespace chunk_viz {
 
@@ -84,7 +84,7 @@ public:
         for (size_t i = 0; i < data.size(); ++i) {
             file << "  chunk" << i << " [label=\"Value: " << format_value(data[i]) << "\"];\n";
             if (i > 0) {
-                file << "  chunk" << (i-1) << " -> chunk" << i << ";\n";
+                file << "  chunk" << (i - 1) << " -> chunk" << i << ";\n";
             }
         }
         file << "}\n";
@@ -105,24 +105,32 @@ public:
         // Write data points and mark boundaries
         for (size_t i = 0; i < data.size(); ++i) {
             if constexpr (std::is_arithmetic_v<T>) {
-                boundary_data << i << " " << data[i] << " " 
-                            << (i > 0 && std::abs(data[i] - data[i-1]) > 1.0 ? "1" : "0") << "\n";
+                boundary_data << i << " " << data[i] << " "
+                              << (i > 0 && std::abs(data[i] - data[i - 1]) > 1.0 ? "1" : "0")
+                              << "\n";
             } else {
                 // For vector types, use the first element or size as indicator
                 double value = data[i].empty() ? 0.0 : data[i][0];
                 boundary_data << i << " " << value << " "
-                            << (i > 0 && std::abs(value - (data[i-1].empty() ? 0.0 : data[i-1][0])) > 1.0 ? "1" : "0") << "\n";
+                              << (i > 0 && std::abs(value -
+                                                    (data[i - 1].empty() ? 0.0 : data[i - 1][0])) >
+                                               1.0
+                                      ? "1"
+                                      : "0")
+                              << "\n";
             }
         }
 
         // Write gnuplot script
-        gnuplot_script << "set terminal png\n"
-                      << "set output '" << output_dir << "/boundaries.png'\n"
-                      << "set title 'Chunk Boundaries'\n"
-                      << "set xlabel 'Index'\n"
-                      << "set ylabel 'Value'\n"
-                      << "plot '" << output_dir << "/boundaries.dat' using 1:2 with lines title 'Data', "
-                      << "     '" << output_dir << "/boundaries.dat' using 1:($3 * $2) with points pt 7 title 'Boundaries'\n";
+        gnuplot_script
+            << "set terminal png\n"
+            << "set output '" << output_dir << "/boundaries.png'\n"
+            << "set title 'Chunk Boundaries'\n"
+            << "set xlabel 'Index'\n"
+            << "set ylabel 'Value'\n"
+            << "plot '" << output_dir << "/boundaries.dat' using 1:2 with lines title 'Data', "
+            << "     '" << output_dir
+            << "/boundaries.dat' using 1:($3 * $2) with points pt 7 title 'Boundaries'\n";
     }
 };
 } // namespace chunk_viz

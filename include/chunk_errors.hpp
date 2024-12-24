@@ -10,7 +10,7 @@ namespace chunk_processing {
 class ChunkingError : public std::runtime_error {
 public:
     explicit ChunkingError(const std::string& message) : std::runtime_error(message) {}
-    
+
     explicit ChunkingError(const char* message) : std::runtime_error(message) {}
 };
 
@@ -38,4 +38,4 @@ public:
     explicit ResilienceError(const std::string& message) : ChunkingError(message) {}
 };
 
-} // namespace chunk_processing 
+} // namespace chunk_processing

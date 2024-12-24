@@ -4,4 +4,4 @@ TEST_CASE("Basic chunking operations") {
     chunker.add(data);
     auto chunks = chunker.get_chunks();
     REQUIRE(chunks.size() == 3);
-} 
+}

@@ -12,4 +12,4 @@ template class ResilientChunker<double>;
 template class ResilientChunker<float>;
 template class ResilientChunker<int>;
 
-} // namespace chunk_resilience 
+} // namespace chunk_resilience

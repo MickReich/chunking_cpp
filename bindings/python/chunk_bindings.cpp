@@ -10,9 +10,9 @@
 #include "chunk_resilience.hpp"
 #include "chunk_serialization.hpp"
 #include "chunk_strategies.hpp"
+#include "chunk_strategy_implementations.hpp"
 #include "chunk_visualization.hpp"
 #include "neural_chunking.hpp"
-#include "chunk_strategy_implementations.hpp"
 #ifdef HAVE_CUDA
 #include "gpu_chunking.hpp"
 #endif
@@ -40,14 +40,17 @@ PYBIND11_MODULE(chunking_cpp, m) {
     // Basic Chunking
     py::class_<chunk_processing::Chunk<double>>(m, "Chunk")
         .def(py::init<size_t>())
-        .def("add", py::overload_cast<const double&>(&chunk_processing::Chunk<double>::add), 
+        .def("add", py::overload_cast<const double&>(&chunk_processing::Chunk<double>::add),
              "Add a single element")
-        .def("add", [](chunk_processing::Chunk<double>& self, const std::vector<double>& data) {
-            if (data.empty()) {
-                throw std::invalid_argument("Cannot add empty vector");
-            }
-            self.add(data);
-        }, "Add multiple elements")
+        .def(
+            "add",
+            [](chunk_processing::Chunk<double>& self, const std::vector<double>& data) {
+                if (data.empty()) {
+                    throw std::invalid_argument("Cannot add empty vector");
+                }
+                self.add(data);
+            },
+            "Add multiple elements")
         .def("chunk_by_size", &chunk_processing::Chunk<double>::chunk_by_size)
         .def("chunk_by_threshold", &chunk_processing::Chunk<double>::chunk_by_threshold)
         .def("get_chunks", &chunk_processing::Chunk<double>::get_chunks);
@@ -55,15 +58,15 @@ PYBIND11_MODULE(chunking_cpp, m) {
     // Neural Chunking
     py::class_<neural_chunking::NeuralChunking<double>>(m, "NeuralChunking")
         .def(py::init<size_t, double>())
-        .def("chunk", [](neural_chunking::NeuralChunking<double>& self, 
-                         const std::vector<double>& data) {
-            auto chunks = self.chunk(data);
-            py::list result;
-            for (const auto& chunk : chunks) {
-                result.append(py::array_t<double>(chunk.size(), chunk.data()));
-            }
-            return result;
-        })
+        .def("chunk",
+             [](neural_chunking::NeuralChunking<double>& self, const std::vector<double>& data) {
+                 auto chunks = self.chunk(data);
+                 py::list result;
+                 for (const auto& chunk : chunks) {
+                     result.append(py::array_t<double>(chunk.size(), chunk.data()));
+                 }
+                 return result;
+             })
         .def("set_window_size", &neural_chunking::NeuralChunking<double>::set_window_size)
         .def("set_threshold", &neural_chunking::NeuralChunking<double>::set_threshold);
 
@@ -171,18 +174,16 @@ PYBIND11_MODULE(chunking_cpp, m) {
     py::register_exception<chunk_processing::ChunkingError>(m, "ChunkingError");
 
     // Strategy bindings
-    py::class_<chunk_strategies::ChunkStrategy<double>, 
+    py::class_<chunk_strategies::ChunkStrategy<double>,
                std::shared_ptr<chunk_strategies::ChunkStrategy<double>>>(m, "ChunkStrategy")
         .def("apply", &chunk_strategies::ChunkStrategy<double>::apply);
 
-    py::class_<NeuralChunkingStrategy<double>, 
-               chunk_strategies::ChunkStrategy<double>, 
+    py::class_<NeuralChunkingStrategy<double>, chunk_strategies::ChunkStrategy<double>,
                std::shared_ptr<NeuralChunkingStrategy<double>>>(m, "NeuralChunkingStrategy")
         .def(py::init<>())
         .def("apply", &NeuralChunkingStrategy<double>::apply);
 
-    py::class_<SimilarityChunkingStrategy<double>, 
-               chunk_strategies::ChunkStrategy<double>,
+    py::class_<SimilarityChunkingStrategy<double>, chunk_strategies::ChunkStrategy<double>,
                std::shared_ptr<SimilarityChunkingStrategy<double>>>(m, "SimilarityChunkingStrategy")
         .def(py::init<double>())
         .def("apply", &SimilarityChunkingStrategy<double>::apply);

@@ -1,23 +1,23 @@
 #pragma once
 
-#include <algorithm>  // for std::min_element, std::max_element, std::sort, std::find_if
+#include "chunk_common.hpp"
+#include "chunk_errors.hpp"
+#include <algorithm> // for std::min_element, std::max_element, std::sort, std::find_if
 #include <atomic>
 #include <chrono>
 #include <condition_variable>
 #include <filesystem>
 #include <fstream>
-#include <functional>  // for std::greater
+#include <functional> // for std::greater
 #include <iostream>
 #include <memory>
 #include <mutex>
 #include <stdexcept>
 #include <string>
 #include <thread>
-#include <unistd.h>   // for getpagesize()
+#include <unistd.h> // for getpagesize()
 #include <unordered_map>
 #include <vector>
-#include "chunk_common.hpp"
-#include "chunk_errors.hpp"
 
 namespace chunk_resilience {
 
@@ -88,7 +88,8 @@ struct CHUNK_EXPORT Checkpoint {
 
         } catch (const std::exception& e) {
             checkpoint.is_corrupted = true;
-            throw chunk_processing::ChunkingError("Checkpoint corruption detected: " + std::string(e.what()));
+            throw chunk_processing::ChunkingError("Checkpoint corruption detected: " +
+                                                  std::string(e.what()));
         }
 
         return checkpoint;
@@ -131,16 +132,14 @@ private:
 
         // Maintain history size
         if (checkpoint_history.size() > max_history_size) {
-            auto oldest = std::min_element(
-                checkpoint_history.begin(), 
-                checkpoint_history.end(),
-                [](const auto& a, const auto& b) {
-                    return a.second.sequence_number < b.second.sequence_number;
-                }
-            );
+            auto oldest =
+                std::min_element(checkpoint_history.begin(), checkpoint_history.end(),
+                                 [](const auto& a, const auto& b) {
+                                     return a.second.sequence_number < b.second.sequence_number;
+                                 });
 
             std::filesystem::remove(checkpoint_dir + "/checkpoint_" +
-                                  std::to_string(oldest->first) + ".bin");
+                                    std::to_string(oldest->first) + ".bin");
             checkpoint_history.erase(oldest);
         }
     }
@@ -149,19 +148,19 @@ private:
      * @brief Get current memory usage
      */
     size_t get_memory_usage() const {
-        #ifdef __linux__
-            std::ifstream stat("/proc/self/statm");
-            size_t resident;
-            stat >> resident; // Skip first value
-            stat >> resident; // Read resident set size
-            #ifdef _SC_PAGESIZE
-                return resident * sysconf(_SC_PAGESIZE);
-            #else
-                return resident * 4096; // Default page size
-            #endif
-        #else
-            return 0; // Placeholder for non-Linux systems
-        #endif
+#ifdef __linux__
+        std::ifstream stat("/proc/self/statm");
+        size_t resident;
+        stat >> resident; // Skip first value
+        stat >> resident; // Read resident set size
+#ifdef _SC_PAGESIZE
+        return resident * sysconf(_SC_PAGESIZE);
+#else
+        return resident * 4096; // Default page size
+#endif
+#else
+        return 0; // Placeholder for non-Linux systems
+#endif
     }
 
     /**
@@ -175,7 +174,8 @@ private:
         try {
             std::filesystem::create_directories(checkpoint_dir);
         } catch (const std::exception& e) {
-            throw chunk_processing::ResilienceError("Failed to create checkpoint directory: " + std::string(e.what()));
+            throw chunk_processing::ResilienceError("Failed to create checkpoint directory: " +
+                                                    std::string(e.what()));
         }
     }
 
@@ -237,13 +237,11 @@ public:
      */
     void save_checkpoint() {
         if (!checkpoint_history.empty()) {
-            auto latest = std::max_element(
-                checkpoint_history.begin(), 
-                checkpoint_history.end(),
-                [](const auto& a, const auto& b) {
-                    return a.second.sequence_number < b.second.sequence_number;
-                }
-            );
+            auto latest =
+                std::max_element(checkpoint_history.begin(), checkpoint_history.end(),
+                                 [](const auto& a, const auto& b) {
+                                     return a.second.sequence_number < b.second.sequence_number;
+                                 });
             latest->second.serialize(checkpoint_dir + "/latest_checkpoint.bin");
         }
     }
@@ -261,13 +259,9 @@ public:
         }
         std::sort(keys.begin(), keys.end(), std::greater<size_t>());
 
-        auto latest_valid = std::find_if(
-            keys.begin(), 
-            keys.end(), 
-            [this](const auto& checkpoint) {
-                return verify_checkpoint(checkpoint_history[checkpoint]);
-            }
-        );
+        auto latest_valid = std::find_if(keys.begin(), keys.end(), [this](const auto& checkpoint) {
+            return verify_checkpoint(checkpoint_history[checkpoint]);
+        });
 
         if (latest_valid == keys.end()) {
             throw chunk_processing::ChunkingError("No valid checkpoint found for recovery");

@@ -1,8 +1,8 @@
 #pragma once
 
+#include "chunk.hpp"
 #include "chunk_strategies.hpp"
 #include "neural_chunking.hpp"
-#include "chunk.hpp"
 
 // Strategy wrapper for neural chunking
 template <typename T>

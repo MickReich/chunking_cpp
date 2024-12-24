@@ -6,10 +6,10 @@
  */
 
 #pragma once
+#include "chunk_common.hpp"
 #include <stdexcept>
 #include <string>
 #include <vector>
-#include "chunk_common.hpp"
 
 namespace chunk_serialization {
 
@@ -28,7 +28,7 @@ public:
      */
     std::string to_json(const std::vector<std::vector<T>>& chunks) {
         validate_chunks(chunks);
-        
+
         // Basic JSON array serialization
         std::string result = "[";
         for (size_t i = 0; i < chunks.size(); ++i) {
@@ -67,7 +67,7 @@ public:
      */
     std::string to_msgpack(const std::vector<std::vector<T>>& chunks) {
         validate_chunks(chunks);
-        
+
         // Basic implementation without MessagePack dependency
         std::string result = "[";
         for (size_t i = 0; i < chunks.size(); ++i) {
@@ -97,7 +97,7 @@ private:
         if (chunks.empty()) {
             throw std::invalid_argument("Cannot serialize empty chunks");
         }
-        
+
         for (const auto& chunk : chunks) {
             if (chunk.empty()) {
                 throw std::invalid_argument("Cannot serialize chunks containing empty vectors");

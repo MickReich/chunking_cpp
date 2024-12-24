@@ -1,10 +1,10 @@
 #pragma once
 
+#include "chunk_common.hpp"
 #include <numeric>
 #include <stdexcept>
 #include <string>
 #include <vector>
-#include "chunk_common.hpp"
 
 namespace chunk_processing {
 
