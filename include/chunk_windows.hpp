@@ -3,31 +3,39 @@
 #include "chunk.hpp"
 #include <functional>
 #include <vector>
+#include <numeric>
+#include <algorithm>
 
 namespace chunk_windows {
 
 template <typename T>
 class SlidingWindowProcessor {
+private:
+    size_t window_size_;
+    size_t step_size_;
+
+    std::vector<T> process_chunks(const std::vector<std::vector<T>>& chunks,
+                                std::function<T(const std::vector<T>&)> window_func) {
+        std::vector<T> results;
+        for (size_t i = 0; i < chunks.size(); i += step_size_) {
+            const auto& chunk = chunks[i];
+            if (chunk.size() >= window_size_) {
+                results.push_back(window_func(chunk));
+            }
+        }
+        return results;
+    }
+
 public:
     SlidingWindowProcessor(size_t window_size, size_t step_size)
         : window_size_(window_size), step_size_(step_size) {}
 
     std::vector<T> process(const std::vector<T>& data,
-                           std::function<T(const std::vector<T>&)> aggregator) {
-        Chunk<T> chunker(window_size_);
+                          std::function<T(const std::vector<T>&)> window_func) {
+        chunk_processing::Chunk<T> chunker(window_size_);
         chunker.add(data);
-        auto windows = chunker.sliding_window(window_size_, step_size_);
-
-        std::vector<T> results;
-        for (const auto& window : windows) {
-            results.push_back(aggregator(window));
-        }
-        return results;
+        return process_chunks(chunker.get_chunks(), window_func);
     }
-
-private:
-    size_t window_size_;
-    size_t step_size_;
 };
 
 // Common window operations

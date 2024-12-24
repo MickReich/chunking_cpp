@@ -12,6 +12,7 @@
 #include "chunk_strategies.hpp"
 #include "chunk_visualization.hpp"
 #include "neural_chunking.hpp"
+#include "chunk_strategy_implementations.hpp"
 #ifdef HAVE_CUDA
 #include "gpu_chunking.hpp"
 #endif
@@ -37,34 +38,34 @@ PYBIND11_MODULE(chunking_cpp, m) {
     });
 
     // Basic Chunking
-    py::class_<Chunk<double>>(m, "Chunk")
+    py::class_<chunk_processing::Chunk<double>>(m, "Chunk")
         .def(py::init<size_t>())
-        .def("add", py::overload_cast<const double&>(&Chunk<double>::add), "Add a single element")
-        .def(
-            "add",
-            [](Chunk<double>& self, const std::vector<double>& data) {
-                if (data.empty()) {
-                    throw std::invalid_argument("Cannot add empty vector");
-                }
-                self.add(data);
-            },
-            "Add multiple elements")
-        .def("chunk_by_size",
-             static_cast<std::vector<std::vector<double>> (Chunk<double>::*)(size_t)>(
-                 &Chunk<double>::chunk_by_size),
-             py::return_value_policy::copy)
-        .def("chunk_by_threshold",
-             static_cast<std::vector<std::vector<double>> (Chunk<double>::*)(double)>(
-                 &Chunk<double>::chunk_by_threshold),
-             py::return_value_policy::copy, py::call_guard<py::gil_scoped_release>(),
-             "Create chunks based on threshold value", py::arg("threshold"));
+        .def("add", py::overload_cast<const double&>(&chunk_processing::Chunk<double>::add), 
+             "Add a single element")
+        .def("add", [](chunk_processing::Chunk<double>& self, const std::vector<double>& data) {
+            if (data.empty()) {
+                throw std::invalid_argument("Cannot add empty vector");
+            }
+            self.add(data);
+        }, "Add multiple elements")
+        .def("chunk_by_size", &chunk_processing::Chunk<double>::chunk_by_size)
+        .def("chunk_by_threshold", &chunk_processing::Chunk<double>::chunk_by_threshold)
+        .def("get_chunks", &chunk_processing::Chunk<double>::get_chunks);
 
     // Neural Chunking
     py::class_<neural_chunking::NeuralChunking<double>>(m, "NeuralChunking")
         .def(py::init<size_t, double>())
-        .def("chunk", &neural_chunking::NeuralChunking<double>::chunk)
-        .def("set_threshold", &neural_chunking::NeuralChunking<double>::set_threshold)
-        .def("get_window_size", &neural_chunking::NeuralChunking<double>::get_window_size);
+        .def("chunk", [](neural_chunking::NeuralChunking<double>& self, 
+                         const std::vector<double>& data) {
+            auto chunks = self.chunk(data);
+            py::list result;
+            for (const auto& chunk : chunks) {
+                result.append(py::array_t<double>(chunk.size(), chunk.data()));
+            }
+            return result;
+        })
+        .def("set_window_size", &neural_chunking::NeuralChunking<double>::set_window_size)
+        .def("set_threshold", &neural_chunking::NeuralChunking<double>::set_threshold);
 
     // GPU Chunking
 #ifdef HAVE_CUDA
@@ -152,15 +153,37 @@ PYBIND11_MODULE(chunking_cpp, m) {
         ;
 #endif
 
-    // Chunk Benchmark
+    // Benchmark bindings
+    py::class_<chunk_benchmark::BenchmarkResult>(m, "BenchmarkResult")
+        .def_readwrite("execution_time_ms", &chunk_benchmark::BenchmarkResult::execution_time_ms)
+        .def_readwrite("memory_usage_bytes", &chunk_benchmark::BenchmarkResult::memory_usage_bytes)
+        .def_readwrite("num_chunks", &chunk_benchmark::BenchmarkResult::num_chunks)
+        .def_readwrite("strategy_name", &chunk_benchmark::BenchmarkResult::strategy_name);
+
     py::class_<chunk_benchmark::ChunkBenchmark<double>>(m, "ChunkBenchmark")
-        .def(py::init<std::vector<double>&, const std::string&>())
+        .def(py::init<const std::vector<double>&, const std::string&>())
+        .def("add_strategy", &chunk_benchmark::ChunkBenchmark<double>::add_strategy)
         .def("run_benchmark", &chunk_benchmark::ChunkBenchmark<double>::run_benchmark)
-        .def("save_results", &chunk_benchmark::ChunkBenchmark<double>::save_results)
-        .def("measure_throughput", &chunk_benchmark::ChunkBenchmark<double>::measure_throughput)
-        .def("measure_memory_usage", &chunk_benchmark::ChunkBenchmark<double>::measure_memory_usage)
-        .def("compare_strategies", &chunk_benchmark::ChunkBenchmark<double>::compare_strategies);
+        .def("benchmark_chunking", &chunk_benchmark::ChunkBenchmark<double>::benchmark_chunking)
+        .def("save_results", &chunk_benchmark::ChunkBenchmark<double>::save_results);
 
     // Add exception translations
-    py::register_exception<chunk_resilience::ChunkingError>(m, "ChunkingError");
+    py::register_exception<chunk_processing::ChunkingError>(m, "ChunkingError");
+
+    // Strategy bindings
+    py::class_<chunk_strategies::ChunkStrategy<double>, 
+               std::shared_ptr<chunk_strategies::ChunkStrategy<double>>>(m, "ChunkStrategy")
+        .def("apply", &chunk_strategies::ChunkStrategy<double>::apply);
+
+    py::class_<NeuralChunkingStrategy<double>, 
+               chunk_strategies::ChunkStrategy<double>, 
+               std::shared_ptr<NeuralChunkingStrategy<double>>>(m, "NeuralChunkingStrategy")
+        .def(py::init<>())
+        .def("apply", &NeuralChunkingStrategy<double>::apply);
+
+    py::class_<SimilarityChunkingStrategy<double>, 
+               chunk_strategies::ChunkStrategy<double>,
+               std::shared_ptr<SimilarityChunkingStrategy<double>>>(m, "SimilarityChunkingStrategy")
+        .def(py::init<double>())
+        .def("apply", &SimilarityChunkingStrategy<double>::apply);
 }

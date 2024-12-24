@@ -80,120 +80,52 @@ struct CHUNK_EXPORT NeuralChunkConfig {
 template <typename T>
 class CHUNK_EXPORT NeuralChunking {
 public:
-    /**
-     * @brief Constructor
-     * @param window_size Size of sliding window
-     * @param threshold Threshold for chunk boundary detection
-     */
-    NeuralChunking(size_t window_size, double threshold);
+    NeuralChunking(size_t window_size = 8, double threshold = 0.5)
+        : window_size_(window_size), threshold_(threshold) {}
 
-    /**
-     * @brief Process data and create chunks using neural network
-     * @param data Input data to chunk
-     * @return Vector of chunks
-     */
-    std::vector<std::vector<T>> chunk(const std::vector<T>& data);
-
-    /**
-     * @brief Set threshold for chunk boundary detection
-     * @param new_threshold New threshold value
-     */
-    void set_threshold(double new_threshold) {
-        config.threshold = new_threshold;
-    }
-
-    /**
-     * @brief Get current window size
-     * @return Window size used for chunking
-     */
-    size_t get_window_size() const {
-        return config.input_size;
-    }
+    void set_window_size(size_t size) { window_size_ = size; }
+    void set_threshold(double threshold) { threshold_ = threshold; }
+    
+    size_t get_window_size() const { return window_size_; }
+    double get_threshold() const { return threshold_; }
+    
+    std::vector<std::vector<T>> chunk(const std::vector<T>& data) const;
 
 private:
-    NeuralChunkConfig config;                     ///< Neural network configuration
-    std::unique_ptr<void, void (*)(void*)> model; ///< Neural network model (opaque pointer)
-
-    /**
-     * @brief Initialize neural network model
-     */
-    void initialize_model();
-
-    /**
-     * @brief Detect chunk boundary using neural network
-     * @param window Current window of data
-     * @return true if boundary detected, false otherwise
-     */
-    bool detect_boundary(const std::vector<T>& window);
-
-    /**
-     * @brief Deleter function for neural network model
-     */
-    static void model_deleter(void* ptr) {
-        if (ptr) {
-            // Add proper cleanup code here if needed
-            free(ptr);
-        }
-    }
+    size_t window_size_;
+    double threshold_;
 };
 
 template <typename T>
-NeuralChunking<T>::NeuralChunking(size_t window_size, double threshold)
-    : model(nullptr, model_deleter) { // Initialize with nullptr and deleter
-    config.input_size = window_size;
-    config.hidden_size = window_size * 2;
-    config.learning_rate = 0.01;
-    config.batch_size = 32;
-    config.threshold = threshold;
-    initialize_model();
-}
-
-template <typename T>
-void NeuralChunking<T>::initialize_model() {
-    // Allocate memory for the model
-    void* raw_ptr = malloc(sizeof(T) * config.input_size * config.hidden_size);
-    if (!raw_ptr) {
-        throw std::runtime_error("Failed to allocate memory for neural network model");
-    }
-    model.reset(raw_ptr); // Transfer ownership to unique_ptr
-}
-
-template <typename T>
-bool NeuralChunking<T>::detect_boundary(const std::vector<T>& window) {
-    // Simple boundary detection logic for demonstration
-    // In a real implementation, this would use the neural network model
-    if (window.size() < 2)
-        return false;
-
-    T diff = std::abs(window.back() - window.front());
-    return diff > config.threshold;
-}
-
-template <typename T>
-std::vector<std::vector<T>> NeuralChunking<T>::chunk(const std::vector<T>& data) {
-    if (data.size() < config.input_size) {
+std::vector<std::vector<T>> NeuralChunking<T>::chunk(const std::vector<T>& data) const {
+    if (data.size() < window_size_) {
         return {data}; // Return single chunk if data is too small
     }
 
     std::vector<std::vector<T>> result;
     std::vector<T> current_chunk;
 
-    for (size_t i = 0; i <= data.size() - config.input_size; ++i) {
-        std::vector<T> window(data.begin() + i, data.begin() + i + config.input_size);
-        if (detect_boundary(window) || i == data.size() - config.input_size) {
-            if (!current_chunk.empty()) {
+    for (size_t i = 0; i <= data.size() - window_size_; ++i) {
+        // Add current element to chunk
+        current_chunk.push_back(data[i]);
+
+        // Check if we should create a new chunk
+        if (i + window_size_ <= data.size()) {
+            // Calculate difference between current and next window
+            T diff = std::abs(data[i + window_size_ - 1] - data[i]);
+            if (diff > threshold_ && !current_chunk.empty()) {
                 result.push_back(current_chunk);
                 current_chunk.clear();
             }
         }
-        current_chunk.push_back(data[i]);
     }
 
     // Add remaining elements
-    for (size_t i = data.size() - config.input_size + 1; i < data.size(); ++i) {
+    for (size_t i = data.size() - window_size_ + 1; i < data.size(); ++i) {
         current_chunk.push_back(data[i]);
     }
 
+    // Add final chunk if not empty
     if (!current_chunk.empty()) {
         result.push_back(current_chunk);
     }

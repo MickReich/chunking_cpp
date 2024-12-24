@@ -560,4 +560,22 @@ endif()
 
 # Ensure all implementation libraries are built with PIC
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
+target_sources(chunk_processor
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/chunk_resilience.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/chunk_visualization.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/chunk_serialization.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/neural_chunking.cpp
+    PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/chunk.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/chunk_strategies.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/chunk_strategy_implementations.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/chunk_resilience.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/chunk_visualization.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/chunk_serialization.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/chunk_benchmark.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/neural_chunking.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/chunk_errors.hpp
+)
   

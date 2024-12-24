@@ -5,50 +5,44 @@
  * @date 2024-12-07
  */
 
-#include "../include/chunk.hpp"
-#include "../include/chunk_benchmark.hpp"
-#include "../include/neural_chunking.hpp"
+#include <iostream>
 #include <memory>
 #include <random>
+#include "chunk.hpp"
+#include "chunk_benchmark.hpp"
+#include "chunk_strategies.hpp"
+#include "neural_chunking.hpp"
 
 // Strategy wrapper for neural chunking
 template <typename T>
-class NeuralChunkingStrategy : public chunk_benchmark::ChunkStrategy<T> {
+class NeuralChunkingStrategy : public chunk_strategies::ChunkStrategy<T> {
 private:
-    neural_chunking::NeuralChunking<T> neural_chunker;
+    mutable neural_chunking::NeuralChunking<T> neural_chunker;
 
 public:
     NeuralChunkingStrategy() : neural_chunker(8, 0.5) {}
 
-    std::vector<std::vector<T>> chunk(const std::vector<T>& data) override {
+    std::vector<std::vector<T>> apply(const std::vector<T>& data) const override {
         return neural_chunker.chunk(data);
-    }
-
-    std::string name() const override {
-        return "Neural Chunking";
     }
 };
 
 // Strategy wrapper for similarity-based chunking
 template <typename T>
-class SimilarityChunkingStrategy : public chunk_benchmark::ChunkStrategy<T> {
-private:
-    double threshold;
-
+class SimilarityChunkingStrategy : public chunk_strategies::ChunkStrategy<T> {
 public:
-    explicit SimilarityChunkingStrategy(double t) : threshold(t) {}
+    explicit SimilarityChunkingStrategy(double threshold) : threshold(threshold) {}
 
-    std::vector<std::vector<T>> chunk(const std::vector<T>& data) override {
-        Chunk<T> chunker(data.size());
+    std::vector<std::vector<T>> apply(const std::vector<T>& data) const override {
+        chunk_processing::Chunk<T> chunker(1);  // Start with smallest chunk size
         for (const auto& item : data) {
             chunker.add(item);
         }
-        return chunker.chunk_by_similarity(threshold);
+        return chunker.chunk_by_threshold(threshold);
     }
 
-    std::string name() const override {
-        return "Similarity Chunking";
-    }
+private:
+    double threshold;
 };
 
 // Generate sample data with patterns
@@ -79,11 +73,21 @@ template <typename T>
 void run_benchmark(const std::vector<T>& data) {
     chunk_benchmark::ChunkBenchmark<T> benchmark(data, "./benchmark_results");
 
-    benchmark.add_strategy(std::make_shared<NeuralChunkingStrategy<T>>());
-    benchmark.add_strategy(std::make_shared<SimilarityChunkingStrategy<T>>(0.5));
+    // Add strategies
+    auto neural_strategy = std::make_shared<NeuralChunkingStrategy<T>>();
+    auto similarity_strategy = std::make_shared<SimilarityChunkingStrategy<T>>(0.5);
 
+    benchmark.add_strategy(neural_strategy);
+    benchmark.add_strategy(similarity_strategy);
+
+    // Run benchmarks
     auto results = benchmark.run_benchmark();
     benchmark.save_results();
+
+    // Test specific chunking operation
+    auto chunk_result = benchmark.benchmark_chunking(data, 64);
+    std::cout << "Chunking time: " << chunk_result.execution_time_ms << "ms\n";
+    std::cout << "Memory usage: " << chunk_result.memory_usage_bytes << " bytes\n";
 }
 
 int main() {

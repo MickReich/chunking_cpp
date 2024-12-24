@@ -6,6 +6,7 @@
  */
 
 #pragma once
+#include <algorithm> // for std::abs
 #include <filesystem>
 #include <fstream>
 #include <sstream>
@@ -13,6 +14,7 @@
 #include <type_traits>
 #include <vector>
 #include "chunk_common.hpp"
+#include "chunk_errors.hpp"
 
 namespace chunk_viz {
 
@@ -23,146 +25,104 @@ namespace chunk_viz {
 template <typename T>
 class CHUNK_EXPORT ChunkVisualizer {
 private:
-    std::vector<T>& chunks; ///< Reference to the chunks to visualize
-    std::string output_dir; ///< Directory for output files
+    const std::vector<T>& data;
+    std::string output_dir;
 
-    /**
-     * @brief Helper function to format chunk contents for visualization
-     * @param chunk The chunk to format
-     * @return Formatted string representation of the chunk
-     */
-    std::string format_chunk(const T& chunk) {
-        if constexpr (std::is_same_v<T, std::vector<int>> ||
-                      std::is_same_v<T, std::vector<double>> ||
-                      std::is_same_v<T, std::vector<float>>) {
+    std::string format_value(const T& value) {
+        if constexpr (std::is_arithmetic_v<T>) {
+            return std::to_string(value);
+        } else if constexpr (std::is_same_v<T, std::vector<int>> ||
+                             std::is_same_v<T, std::vector<double>> ||
+                             std::is_same_v<T, std::vector<float>>) {
             std::stringstream ss;
             ss << "[";
-            for (size_t i = 0; i < chunk.size(); ++i) {
-                ss << chunk[i];
-                if (i < chunk.size() - 1)
+            for (size_t i = 0; i < value.size(); ++i) {
+                ss << value[i];
+                if (i < value.size() - 1) {
                     ss << ",";
+                }
             }
             ss << "]";
             return ss.str();
-        } else if constexpr (std::is_arithmetic_v<T>) {
-            return std::to_string(chunk);
         } else {
-            throw std::invalid_argument("Unsupported type for chunk visualization");
+            throw chunk_processing::VisualizationError("Unsupported type for visualization");
         }
     }
 
 public:
-    /**
-     * @brief Constructor
-     * @param chunks_ Reference to the chunks to visualize
-     * @param output_dir_ Directory for output files (default: "./viz")
-     */
-    explicit ChunkVisualizer(std::vector<T>& chunks_, const std::string& output_dir_ = "./viz")
-        : chunks(chunks_), output_dir(output_dir_) {
-        // Validate input parameters
-        if (chunks_.empty()) {
-            throw std::invalid_argument("Cannot visualize empty chunks");
+    explicit ChunkVisualizer(const std::vector<T>& data_, const std::string& output_dir_ = "./viz")
+        : data(data_), output_dir(output_dir_) {
+        if (data_.empty()) {
+            throw chunk_processing::VisualizationError("Cannot visualize empty data");
         }
-
-        // Create output directory, throwing if it fails
-        std::error_code ec;
-        if (!std::filesystem::create_directories(output_dir, ec) && ec) {
-            throw std::runtime_error("Failed to create output directory: " + output_dir);
-        }
-
-        // Validate chunk data types
-        if constexpr (!std::is_arithmetic_v<T> && 
-                      !std::is_same_v<T, std::vector<int>> &&
-                      !std::is_same_v<T, std::vector<double>> &&
-                      !std::is_same_v<T, std::vector<float>>) {
-            throw std::invalid_argument("Unsupported chunk data type for visualization");
-        }
-    }
-
-    /**
-     * @brief Generate plot of chunk sizes
-     * @throws std::runtime_error if file operations fail
-     */
-    void plot_chunk_sizes() {
-        // Create output directory if it doesn't exist
         std::filesystem::create_directories(output_dir);
-
-        { // Use RAII scope blocks for file handles
-            std::ofstream plot_data(output_dir + "/chunk_sizes.dat");
-            if (!plot_data.is_open()) {
-                throw std::runtime_error("Failed to create chunk_sizes.dat");
-            }
-
-            // Write chunk sizes
-            for (size_t i = 0; i < chunks.size(); ++i) {
-                if constexpr (std::is_same_v<T, std::vector<int>> ||
-                              std::is_same_v<T, std::vector<double>>) {
-                    plot_data << i << " " << chunks[i].size() << "\n";
-                } else {
-                    plot_data << i << " " << 1 << "\n"; // Single value counts as size 1
-                }
-            }
-            plot_data.close(); // Explicitly close the file
-        }
-
-        { // Separate scope for gnuplot script
-            std::ofstream gnuplot_script(output_dir + "/plot_chunks.gnu");
-            if (!gnuplot_script.is_open()) {
-                throw std::runtime_error("Failed to create plot_chunks.gnu");
-            }
-
-            gnuplot_script << "set terminal png\n"
-                           << "set output '" << output_dir << "/chunk_sizes.png'\n"
-                           << "set title 'Chunk Size Distribution'\n"
-                           << "set xlabel 'Chunk Index'\n"
-                           << "set ylabel 'Size'\n"
-                           << "plot '" << output_dir
-                           << "/chunk_sizes.dat' with lines title 'Chunk Sizes'\n";
-            gnuplot_script.close(); // Explicitly close the file
-        }
     }
 
-    /**
-     * @brief Visualize chunk boundaries in text format
-     * @throws std::runtime_error if file operations fail
-     */
-    void visualize_boundaries() {
-        std::ofstream viz_file(output_dir + "/boundaries.txt");
+    void plot_chunk_sizes() {
+        std::ofstream plot_data(output_dir + "/chunk_sizes.dat");
+        if (!plot_data) {
+            throw chunk_processing::VisualizationError("Failed to create chunk_sizes.dat");
+        }
 
-        size_t total_size = 0;
-        for (const auto& chunk : chunks) {
-            size_t chunk_size;
-            if constexpr (std::is_same_v<T, std::vector<int>> ||
-                          std::is_same_v<T, std::vector<double>>) {
-                chunk_size = chunk.size();
+        for (size_t i = 0; i < data.size(); ++i) {
+            if constexpr (std::is_arithmetic_v<T>) {
+                plot_data << i << " " << std::abs(data[i]) << "\n";
             } else {
-                chunk_size = 1; // Single value counts as size 1
+                plot_data << i << " " << data[i].size() << "\n";
             }
-            // Draw boundary marker
-            viz_file << "=== Chunk Boundary (size: " << chunk_size << ") ===\n";
-            total_size += chunk_size;
         }
-
-        viz_file << "\nTotal size: " << total_size << " elements\n";
     }
 
-    /**
-     * @brief Export chunk structure to GraphViz format
-     * @param filename Optional custom filename for the output
-     * @throws std::runtime_error if file operations fail
-     */
-    void export_to_graphviz(const std::string& filename = "") {
-        std::string actual_filename = filename.empty() ? output_dir + "/chunks.dot" : filename;
-
+    void export_to_graphviz(const std::string& filename = "chunks.dot") {
+        std::string actual_filename = output_dir + "/" + filename;
         std::ofstream file(actual_filename);
-        file << "digraph chunks {\n";
-
-        for (size_t i = 0; i < chunks.size(); ++i) {
-            file << "  chunk" << i << " [label=\"Chunk " << i
-                 << "\\nValues: " << format_chunk(chunks[i]) << "\"];\n";
+        if (!file) {
+            throw chunk_processing::VisualizationError("Failed to create GraphViz file");
         }
 
+        file << "digraph chunks {\n";
+        for (size_t i = 0; i < data.size(); ++i) {
+            file << "  chunk" << i << " [label=\"Value: " << format_value(data[i]) << "\"];\n";
+            if (i > 0) {
+                file << "  chunk" << (i-1) << " -> chunk" << i << ";\n";
+            }
+        }
         file << "}\n";
+    }
+
+    void visualize_boundaries() {
+        std::ofstream boundary_data(output_dir + "/boundaries.dat");
+        if (!boundary_data) {
+            throw chunk_processing::VisualizationError("Failed to create boundaries.dat");
+        }
+
+        // Create gnuplot script for boundary visualization
+        std::ofstream gnuplot_script(output_dir + "/plot_boundaries.gnu");
+        if (!gnuplot_script) {
+            throw chunk_processing::VisualizationError("Failed to create gnuplot script");
+        }
+
+        // Write data points and mark boundaries
+        for (size_t i = 0; i < data.size(); ++i) {
+            if constexpr (std::is_arithmetic_v<T>) {
+                boundary_data << i << " " << data[i] << " " 
+                            << (i > 0 && std::abs(data[i] - data[i-1]) > 1.0 ? "1" : "0") << "\n";
+            } else {
+                // For vector types, use the first element or size as indicator
+                double value = data[i].empty() ? 0.0 : data[i][0];
+                boundary_data << i << " " << value << " "
+                            << (i > 0 && std::abs(value - (data[i-1].empty() ? 0.0 : data[i-1][0])) > 1.0 ? "1" : "0") << "\n";
+            }
+        }
+
+        // Write gnuplot script
+        gnuplot_script << "set terminal png\n"
+                      << "set output '" << output_dir << "/boundaries.png'\n"
+                      << "set title 'Chunk Boundaries'\n"
+                      << "set xlabel 'Index'\n"
+                      << "set ylabel 'Value'\n"
+                      << "plot '" << output_dir << "/boundaries.dat' using 1:2 with lines title 'Data', "
+                      << "     '" << output_dir << "/boundaries.dat' using 1:($3 * $2) with points pt 7 title 'Boundaries'\n";
     }
 };
 } // namespace chunk_viz

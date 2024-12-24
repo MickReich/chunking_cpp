@@ -17,16 +17,9 @@
 #include <unordered_map>
 #include <vector>
 #include "chunk_common.hpp"
+#include "chunk_errors.hpp"
 
 namespace chunk_resilience {
-
-/**
- * @brief Exception class for resilient chunking errors
- */
-class ChunkingError : public std::runtime_error {
-public:
-    explicit ChunkingError(const std::string& message) : std::runtime_error(message) {}
-};
 
 /**
  * @brief Checkpoint data structure
@@ -43,7 +36,7 @@ struct CHUNK_EXPORT Checkpoint {
     void serialize(const std::string& filename) const {
         std::ofstream file(filename, std::ios::binary);
         if (!file) {
-            throw ChunkingError("Failed to create checkpoint file: " + filename);
+            throw chunk_processing::ChunkingError("Failed to create checkpoint file: " + filename);
         }
 
         // Write metadata
@@ -65,7 +58,7 @@ struct CHUNK_EXPORT Checkpoint {
     static Checkpoint<T> deserialize(const std::string& filename) {
         std::ifstream file(filename, std::ios::binary);
         if (!file) {
-            throw ChunkingError("Failed to open checkpoint file: " + filename);
+            throw chunk_processing::ChunkingError("Failed to open checkpoint file: " + filename);
         }
 
         Checkpoint<T> checkpoint;
@@ -95,7 +88,7 @@ struct CHUNK_EXPORT Checkpoint {
 
         } catch (const std::exception& e) {
             checkpoint.is_corrupted = true;
-            throw ChunkingError("Checkpoint corruption detected: " + std::string(e.what()));
+            throw chunk_processing::ChunkingError("Checkpoint corruption detected: " + std::string(e.what()));
         }
 
         return checkpoint;
@@ -178,6 +171,14 @@ private:
         return !checkpoint.is_corrupted && checkpoint.memory_usage <= max_memory_usage;
     }
 
+    void initialize_checkpoint_dir() {
+        try {
+            std::filesystem::create_directories(checkpoint_dir);
+        } catch (const std::exception& e) {
+            throw chunk_processing::ResilienceError("Failed to create checkpoint directory: " + std::string(e.what()));
+        }
+    }
+
 public:
     ResilientChunker(const std::string& checkpoint_directory = "./checkpoints",
                      size_t max_mem_usage = 1024 * 1024 * 1024, // 1GB
@@ -194,10 +195,18 @@ public:
      * @brief Process data with checkpointing and error recovery
      */
     std::vector<std::vector<T>> process(const std::vector<T>& data) {
-        std::vector<std::vector<T>> result;
-        size_t processed = 0;
+        if (data.empty()) {
+            throw chunk_processing::ResilienceError("Cannot process empty data");
+        }
 
         try {
+            initialize_checkpoint_dir();
+            std::vector<std::vector<T>> result;
+            size_t processed = 0;
+
+            // Create initial checkpoint
+            create_checkpoint(result);
+
             while (processed < data.size()) {
                 // Check memory usage
                 if (get_memory_usage() > max_memory_usage) {
@@ -217,13 +226,10 @@ public:
                 }
             }
 
+            return result;
         } catch (const std::exception& e) {
-            // Handle error and attempt recovery
-            handle_corruption();
-            result = restore_from_checkpoint();
+            throw chunk_processing::ResilienceError("Processing failed: " + std::string(e.what()));
         }
-
-        return result;
     }
 
     /**
@@ -264,7 +270,7 @@ public:
         );
 
         if (latest_valid == keys.end()) {
-            throw ChunkingError("No valid checkpoint found for recovery");
+            throw chunk_processing::ChunkingError("No valid checkpoint found for recovery");
         }
 
         return checkpoint_history[*latest_valid].chunks;
@@ -284,7 +290,7 @@ public:
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
         if (get_memory_usage() > max_memory_usage) {
-            throw ChunkingError("Memory exhaustion: Unable to recover");
+            throw chunk_processing::ChunkingError("Memory exhaustion: Unable to recover");
         }
     }
 

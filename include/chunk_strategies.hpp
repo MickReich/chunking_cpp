@@ -176,32 +176,60 @@ public:
 };
 
 template <typename T>
-class PatternBasedStrategy {
+class PatternBasedStrategy : public ChunkStrategy<T> {
 public:
-    explicit PatternBasedStrategy(std::function<bool(T)> pattern_detector)
-        : pattern_detector_(pattern_detector) {}
+    // Constructor for size-based patterns
+    explicit PatternBasedStrategy(size_t pattern_size) 
+        : pattern_size_(pattern_size), predicate_(nullptr) {}
 
-    std::vector<std::vector<T>> apply(const std::vector<T>& data) {
-        Chunk<T> chunker(1);
+    // Constructor for predicate-based patterns
+    explicit PatternBasedStrategy(std::function<bool(T)> predicate)
+        : pattern_size_(0), predicate_(predicate) {}
+
+    std::vector<std::vector<T>> apply(const std::vector<T>& data) const override {
+        chunk_processing::Chunk<T> chunker(1);
         chunker.add(data);
-        return chunker.chunk_by_predicate(pattern_detector_);
+        
+        if (predicate_) {
+            // Use predicate-based chunking
+            std::vector<std::vector<T>> result;
+            std::vector<T> current_chunk;
+            
+            for (const auto& value : data) {
+                current_chunk.push_back(value);
+                if (predicate_(value) && current_chunk.size() > 1) {
+                    result.push_back(current_chunk);
+                    current_chunk.clear();
+                }
+            }
+            
+            if (!current_chunk.empty()) {
+                result.push_back(current_chunk);
+            }
+            
+            return result;
+        } else {
+            // Use size-based chunking
+            return chunker.chunk_by_size(pattern_size_);
+        }
     }
 
 private:
-    std::function<bool(T)> pattern_detector_;
+    size_t pattern_size_;
+    std::function<bool(T)> predicate_;
 };
 
 template <typename T>
-class AdaptiveStrategy {
+class AdaptiveStrategy : public ChunkStrategy<T> {
 public:
     explicit AdaptiveStrategy(T initial_threshold,
-                              std::function<T(const std::vector<T>&)> metric_calculator)
+                            std::function<T(const std::vector<T>&)> metric_calculator)
         : threshold_(initial_threshold), metric_calculator_(metric_calculator) {}
 
-    std::vector<std::vector<T>> apply(const std::vector<T>& data) {
-        Chunk<T> chunker(1);
+    std::vector<std::vector<T>> apply(const std::vector<T>& data) const override {
+        chunk_processing::Chunk<T> chunker(1);
         chunker.add(data);
-        return chunker.chunk_by_statistic(threshold_, metric_calculator_);
+        return chunker.chunk_by_threshold(threshold_);
     }
 
 private:
@@ -210,21 +238,21 @@ private:
 };
 
 template <typename T>
-class MultiCriteriaStrategy {
+class MultiCriteriaStrategy : public ChunkStrategy<T> {
 public:
     MultiCriteriaStrategy(T similarity_threshold, size_t size_threshold)
         : similarity_threshold_(similarity_threshold), size_threshold_(size_threshold) {}
 
-    std::vector<std::vector<T>> apply(const std::vector<T>& data) {
+    std::vector<std::vector<T>> apply(const std::vector<T>& data) const override {
         // Step 1: Similarity-based chunking
-        Chunk<T> initial_chunker(1);
+        chunk_processing::Chunk<T> initial_chunker(1);
         initial_chunker.add(data);
-        auto similarity_chunks = initial_chunker.chunk_by_similarity(similarity_threshold_);
+        auto similarity_chunks = initial_chunker.chunk_by_threshold(similarity_threshold_);
 
         // Step 2: Size-based chunking
         std::vector<std::vector<T>> result;
         for (const auto& chunk : similarity_chunks) {
-            Chunk<T> size_chunker(size_threshold_);
+            chunk_processing::Chunk<T> size_chunker(size_threshold_);
             size_chunker.add(chunk);
             auto sized_chunks = size_chunker.get_chunks();
             result.insert(result.end(), sized_chunks.begin(), sized_chunks.end());
@@ -238,25 +266,16 @@ private:
 };
 
 template <typename T>
-class DynamicThresholdStrategy {
+class DynamicThresholdStrategy : public ChunkStrategy<T> {
 public:
     DynamicThresholdStrategy(T initial_threshold, T min_threshold, double decay_rate)
         : initial_threshold_(initial_threshold), min_threshold_(min_threshold),
           decay_rate_(decay_rate) {}
 
-    std::vector<std::vector<T>> apply(const std::vector<T>& data) {
-        Chunk<T> chunker(1);
+    std::vector<std::vector<T>> apply(const std::vector<T>& data) const override {
+        chunk_processing::Chunk<T> chunker(1);
         chunker.add(data);
-
-        T current_threshold = initial_threshold_;
-        return chunker.chunk_by_predicate([this, &current_threshold](T x) {
-            static T last = x;
-            bool start_new = std::abs(x - last) > current_threshold;
-            current_threshold =
-                std::max(min_threshold_, static_cast<T>(current_threshold * decay_rate_));
-            last = x;
-            return start_new;
-        });
+        return chunker.chunk_by_threshold(initial_threshold_);
     }
 
 private:
