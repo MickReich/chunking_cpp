@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ main, test ]
+    branches: [ main, test, pytest ]
   pull_request:
-    branches: [ main, test ]
+    branches: [ main, test, pytest ]
 
 permissions:
   contents: write
