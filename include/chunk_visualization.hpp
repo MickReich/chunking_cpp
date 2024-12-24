@@ -59,7 +59,24 @@ public:
      */
     explicit ChunkVisualizer(std::vector<T>& chunks_, const std::string& output_dir_ = "./viz")
         : chunks(chunks_), output_dir(output_dir_) {
-        std::filesystem::create_directories(output_dir);
+        // Validate input parameters
+        if (chunks_.empty()) {
+            throw std::invalid_argument("Cannot visualize empty chunks");
+        }
+
+        // Create output directory, throwing if it fails
+        std::error_code ec;
+        if (!std::filesystem::create_directories(output_dir, ec) && ec) {
+            throw std::runtime_error("Failed to create output directory: " + output_dir);
+        }
+
+        // Validate chunk data types
+        if constexpr (!std::is_arithmetic_v<T> && 
+                      !std::is_same_v<T, std::vector<int>> &&
+                      !std::is_same_v<T, std::vector<double>> &&
+                      !std::is_same_v<T, std::vector<float>>) {
+            throw std::invalid_argument("Unsupported chunk data type for visualization");
+        }
     }
 
     /**
