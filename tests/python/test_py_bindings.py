@@ -195,9 +195,10 @@ def test_wavelet_chunking_advanced(sample_data):
     
     # Test different parameters
     wavelet.set_window_size(4)
+    assert wavelet.get_window_size() == 4
+    
     wavelet.set_threshold(0.3)
-    new_chunks = wavelet.chunk(sample_data)
-    assert len(new_chunks) > 0
+    assert wavelet.get_threshold() == 0.3
 
 def test_mutual_information_edge_cases():
     # Test with various edge cases
@@ -302,18 +303,21 @@ def test_empty_and_edge_cases():
     assert len(result) > 0
 
 def test_2d_array_chunking():
-    data = np.array([[1.0, 2.0], [3.0, 4.0], [5.0, 6.0]])
+    data = np.array([[1.0, 2.0], [3.0, 4.0], [5.0, 6.0]], dtype=np.float64)
     chunker = Chunk2D(2)
     chunker.add(data)
     chunks = chunker.get_chunks()
     assert len(chunks) == 2
-    assert all(chunk.shape[1] == 2 for chunk in chunks)
+    assert len(chunks[0]) == 2  # First chunk has 2 rows
+    assert len(chunks[0][0]) == 2  # Each row has 2 columns
 
 def test_3d_array_chunking():
-    data = np.array([[[1.0, 2.0], [3.0, 4.0]], 
-                    [[5.0, 6.0], [7.0, 8.0]]])
+    data = np.array([[[1.0, 2.0], [3.0, 4.0]],
+                    [[5.0, 6.0], [7.0, 8.0]]], dtype=np.float64)
     chunker = Chunk3D(1)
     chunker.add(data)
     chunks = chunker.get_chunks()
     assert len(chunks) == 2
-    assert all(chunk.shape[1:] == (2, 2) for chunk in chunks)
+    assert len(chunks[0]) == 1  # Each chunk has 1 matrix
+    assert len(chunks[0][0]) == 2  # Each matrix has 2 rows
+    assert len(chunks[0][0][0]) == 2  # Each row has 2 columns

@@ -62,33 +62,54 @@ PYBIND11_MODULE(chunking_cpp, m) {
         .def("add", [](chunk_processing::Chunk<std::vector<double>>& self,
                        const py::array_t<double, py::array::c_style>& data) {
             auto buf = data.request();
-            if (buf.ndim != 2)
+            if (buf.ndim != 2) {
                 throw std::invalid_argument("Expected 2D array");
+            }
 
             std::vector<std::vector<double>> nested_data;
+            nested_data.reserve(buf.shape[0]);
             auto ptr = static_cast<double*>(buf.ptr);
 
             for (py::ssize_t i = 0; i < buf.shape[0]; i++) {
-                std::vector<double> row;
-                for (py::ssize_t j = 0; j < buf.shape[1]; j++) {
-                    row.push_back(ptr[i * buf.shape[1] + j]);
-                }
-                nested_data.push_back(row);
+                std::vector<double> row(ptr + i * buf.shape[1], 
+                                      ptr + (i + 1) * buf.shape[1]);
+                nested_data.push_back(std::move(row));
             }
             self.add(nested_data);
-        });
+        })
+        .def("get_chunks", &chunk_processing::Chunk<std::vector<double>>::get_chunks)
+        .def("chunk_by_size", &chunk_processing::Chunk<std::vector<double>>::chunk_by_size);
 
     py::class_<chunk_processing::Chunk<std::vector<std::vector<double>>>>(m, "Chunk3D")
         .def(py::init<size_t>())
         .def("add", [](chunk_processing::Chunk<std::vector<std::vector<double>>>& self,
                        const py::array_t<double, py::array::c_style>& data) {
             auto buf = data.request();
-            if (buf.ndim != 3)
+            if (buf.ndim != 3) {
                 throw std::invalid_argument("Expected 3D array");
+            }
 
-            // Convert 3D numpy array to nested vectors
-            // Implementation here
-        });
+            std::vector<std::vector<std::vector<double>>> nested_data;
+            nested_data.reserve(buf.shape[0]);
+            auto ptr = static_cast<double*>(buf.ptr);
+
+            for (py::ssize_t i = 0; i < buf.shape[0]; i++) {
+                std::vector<std::vector<double>> matrix;
+                matrix.reserve(buf.shape[1]);
+                
+                for (py::ssize_t j = 0; j < buf.shape[1]; j++) {
+                    std::vector<double> row(
+                        ptr + (i * buf.shape[1] * buf.shape[2]) + (j * buf.shape[2]),
+                        ptr + (i * buf.shape[1] * buf.shape[2]) + ((j + 1) * buf.shape[2])
+                    );
+                    matrix.push_back(std::move(row));
+                }
+                nested_data.push_back(std::move(matrix));
+            }
+            self.add(nested_data);
+        })
+        .def("get_chunks", &chunk_processing::Chunk<std::vector<std::vector<double>>>::get_chunks)
+        .def("chunk_by_size", &chunk_processing::Chunk<std::vector<std::vector<double>>>::chunk_by_size);
 
     // Neural Chunking
     py::class_<neural_chunking::NeuralChunking<double>>(m, "NeuralChunking")
@@ -117,7 +138,11 @@ PYBIND11_MODULE(chunking_cpp, m) {
     // Sophisticated Chunking
     py::class_<sophisticated_chunking::WaveletChunking<double>>(m, "WaveletChunking")
         .def(py::init<size_t, double>())
-        .def("chunk", &sophisticated_chunking::WaveletChunking<double>::chunk);
+        .def("chunk", &sophisticated_chunking::WaveletChunking<double>::chunk)
+        .def("set_window_size", &sophisticated_chunking::WaveletChunking<double>::set_window_size)
+        .def("get_window_size", &sophisticated_chunking::WaveletChunking<double>::get_window_size)
+        .def("set_threshold", &sophisticated_chunking::WaveletChunking<double>::set_threshold)
+        .def("get_threshold", &sophisticated_chunking::WaveletChunking<double>::get_threshold);
 
     py::class_<sophisticated_chunking::MutualInformationChunking<double>>(
         m, "MutualInformationChunking")
