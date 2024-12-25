@@ -242,8 +242,11 @@ public:
                 return chunk_by_size(data);
             }
         } else {
-            // Existing single-dimension logic
-            // ...
+            if (predicate_) {
+                return chunk_by_predicate(data);
+            } else {
+                return chunk_by_size(data);
+            }
         }
     }
 

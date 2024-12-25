@@ -227,10 +227,11 @@ PYBIND11_MODULE(chunking_cpp, m) {
 
     // Chunk Visualization
     py::class_<chunk_viz::ChunkVisualizer<double>>(m, "ChunkVisualizer")
-        .def(py::init<std::vector<double>&, const std::string&>())
+        .def(py::init<const std::vector<double>&, const std::string&>())
         .def("plot_chunk_sizes", &chunk_viz::ChunkVisualizer<double>::plot_chunk_sizes)
         .def("visualize_boundaries", &chunk_viz::ChunkVisualizer<double>::visualize_boundaries)
-        .def("export_to_graphviz", &chunk_viz::ChunkVisualizer<double>::export_to_graphviz);
+        .def("export_to_graphviz", &chunk_viz::ChunkVisualizer<double>::export_to_graphviz)
+        .def("get_output_dir", &chunk_viz::ChunkVisualizer<double>::get_output_dir);
 
     // Chunk Serialization
     py::class_<chunk_serialization::ChunkSerializer<double>>(m, "ChunkSerializer")
