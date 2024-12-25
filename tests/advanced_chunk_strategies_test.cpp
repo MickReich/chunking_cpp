@@ -1,5 +1,6 @@
 #include "chunk_strategies.hpp"
 #include "chunk_windows.hpp"
+#include <functional>
 #include <gtest/gtest.h>
 #include <numeric>
 #include <vector>
@@ -16,17 +17,24 @@ protected:
 };
 
 TEST_F(AdvancedChunkStrategiesTest, PatternBasedLocalMaxima) {
-    // Reset static variables for each test
-    auto local_maxima_detector = [](double x) {
-        thread_local double prev = x;
-        thread_local double prev_prev = x;
-        bool is_local_max = (prev > prev_prev && prev > x);
-        prev_prev = prev;
-        prev = x;
-        return is_local_max;
+    class LocalMaximaDetector {
+    private:
+        mutable double prev_prev = std::numeric_limits<double>::lowest();
+        mutable double prev = std::numeric_limits<double>::lowest();
+
+    public:
+        bool operator()(double x) const {
+            bool is_local_max = (prev > prev_prev && prev > x);
+            prev_prev = prev;
+            prev = x;
+            return is_local_max;
+        }
     };
 
-    chunk_strategies::PatternBasedStrategy<double> strategy(local_maxima_detector);
+    LocalMaximaDetector detector;
+    std::function<bool(double)> predicate = detector;
+    chunk_strategies::PatternBasedStrategy<double> strategy(predicate);
+
     auto chunks = strategy.apply(test_data);
 
     EXPECT_GT(chunks.size(), 1);
@@ -102,4 +110,54 @@ TEST_F(AdvancedChunkStrategiesTest, WindowOperationsEmptyInput) {
                  std::invalid_argument);
     EXPECT_THROW(chunk_windows::WindowOperations<double>::moving_min(empty_window),
                  std::invalid_argument);
+}
+
+TEST_F(AdvancedChunkStrategiesTest, MultiDimensionalArrays) {
+    // 2D array test
+    std::vector<std::vector<double>> data_2d = {{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
+
+    chunk_processing::Chunk<std::vector<double>> chunker_2d(2);
+    chunker_2d.add(data_2d);
+    auto chunks_2d = chunker_2d.get_chunks();
+    EXPECT_EQ(chunks_2d.size(), 2);
+    EXPECT_EQ(chunks_2d[0].size(), 2);    // First chunk has 2 rows
+    EXPECT_EQ(chunks_2d[0][0].size(), 3); // Each row has 3 columns
+
+    // 3D array test
+    std::vector<std::vector<std::vector<double>>> data_3d = {
+        {{1.0, 2.0}, {3.0, 4.0}}, {{5.0, 6.0}, {7.0, 8.0}}, {{9.0, 10.0}, {11.0, 12.0}}};
+
+    chunk_processing::Chunk<std::vector<std::vector<double>>> chunker_3d(2);
+    chunker_3d.add(data_3d);
+    auto chunks_3d = chunker_3d.get_chunks();
+    EXPECT_EQ(chunks_3d.size(), 2);
+    EXPECT_EQ(chunks_3d[0].size(), 2);       // First chunk has 2 3D arrays
+    EXPECT_EQ(chunks_3d[0][0].size(), 2);    // Each 3D array has 2 rows
+    EXPECT_EQ(chunks_3d[0][0][0].size(), 2); // Each row has 2 columns
+}
+
+TEST_F(AdvancedChunkStrategiesTest, MultiDimensionalThresholds) {
+    // Test threshold-based chunking with 2D arrays
+    std::vector<std::vector<double>> data_2d = {
+        {1.0, 1.1}, {1.2, 1.3}, // Similar values
+        {5.0, 5.1}, {5.2, 5.3}, // Different group
+        {1.0, 1.1}, {1.2, 1.3}  // Similar to first group
+    };
+
+    chunk_strategies::PatternBasedStrategy<std::vector<double>> strategy(
+        [](const std::vector<double>& row) {
+            return std::accumulate(row.begin(), row.end(), 0.0) > 8.0;
+        });
+
+    auto chunks = strategy.apply(data_2d);
+    EXPECT_GT(chunks.size(), 1); // Should split on high-sum rows
+}
+
+TEST_F(AdvancedChunkStrategiesTest, DimensionalityValidation) {
+    std::vector<std::vector<double>> inconsistent_2d = {{1.0, 2.0, 3.0},
+                                                        {4.0, 5.0}, // Different size
+                                                        {7.0, 8.0, 9.0}};
+
+    chunk_processing::Chunk<std::vector<double>> chunker(2);
+    EXPECT_THROW(chunker.add(inconsistent_2d), std::invalid_argument);
 }

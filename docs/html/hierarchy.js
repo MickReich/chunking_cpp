@@ -51,6 +51,10 @@ var hierarchy =
         ] ]
       ] ]
     ] ],
+    [ "std::false_type", null, [
+      [ "chunk_processing::is_multidimensional< T, typename >", "structchunk__processing_1_1is__multidimensional.html", null ],
+      [ "chunk_processing::is_vector< T >", "structchunk__processing_1_1is__vector.html", null ]
+    ] ],
     [ "advanced_structures::FractalPatternsChunk< T >", "classadvanced__structures_1_1FractalPatternsChunk.html", null ],
     [ "gpu_chunking::GPUChunking< T >", "classgpu__chunking_1_1GPUChunking.html", null ],
     [ "advanced_structures::GraphBasedChunk< T >", "classadvanced__structures_1_1GraphBasedChunk.html", null ],
@@ -77,6 +81,10 @@ var hierarchy =
       [ "chunk_strategies::ConditionalSubChunkStrategy< T >", "classchunk__strategies_1_1ConditionalSubChunkStrategy.html", null ],
       [ "chunk_strategies::HierarchicalSubChunkStrategy< T >", "classchunk__strategies_1_1HierarchicalSubChunkStrategy.html", null ],
       [ "chunk_strategies::RecursiveSubChunkStrategy< T >", "classchunk__strategies_1_1RecursiveSubChunkStrategy.html", null ]
+    ] ],
+    [ "std::true_type", null, [
+      [ "chunk_processing::is_multidimensional< T, std::enable_if_t< is_vector< T >::value &&is_vector< typename T::value_type >::value > >", "structchunk__processing_1_1is__multidimensional_3_01T_00_01std_1_1enable__if__t_3_01is__vector_30d3c23284315d038cde1088ba5c61ea2.html", null ],
+      [ "chunk_processing::is_vector< std::vector< T, A > >", "structchunk__processing_1_1is__vector_3_01std_1_1vector_3_01T_00_01A_01_4_01_4.html", null ]
     ] ],
     [ "sophisticated_chunking::WaveletChunking< T >", "classsophisticated__chunking_1_1WaveletChunking.html", null ],
     [ "WaveletChunking< T >", "classWaveletChunking.html", null ],

@@ -55,7 +55,7 @@ double \mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy_a57923fa38b90
 class chunk\+\_\+strategies\+::\+Variance\+Strategy$<$ T $>$}
 Strategy for chunking based on variance thresholds. 
 
-Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00086}{86}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00087}{87}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
 
 
 
@@ -69,11 +69,11 @@ Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00086}{86}} o
 
 
 
-Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00102}{102}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00109}{109}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00102\ :\ \mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy_a57923fa38b90022ba7786ef882b137f1}{threshold\_}}(threshold)\ \{\}}
+\DoxyCodeLine{00109\ :\ \mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy_a57923fa38b90022ba7786ef882b137f1}{threshold\_}}(threshold)\ \{\}}
 
 \end{DoxyCode}
 
@@ -104,36 +104,36 @@ Implements \mbox{\hyperlink{classchunk__strategies_1_1ChunkStrategy_a403010d65da
 
 
 
-Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00104}{104}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00111}{111}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ chunks;}
-\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ std::vector<T>\ current\_chunk;}
-\DoxyCodeLine{00107\ }
-\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ value\ :\ data)\ \{}
-\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.push\_back(value);}
-\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy_a24c8c0a7f512c23a4b7baa60eb5c4d5c}{calculate\_variance}}(current\_chunk)\ >\ \mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy_a57923fa38b90022ba7786ef882b137f1}{threshold\_}})\ \{}
-\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_chunk.size()\ >\ 1)\ \{}
-\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.pop\_back();}
-\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ chunks.push\_back(current\_chunk);}
-\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk\ =\ \{value\};}
-\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00118\ }
-\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!current\_chunk.empty())\ \{}
-\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ chunks.push\_back(current\_chunk);}
-\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00122\ }
-\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ chunks;}
-\DoxyCodeLine{00124\ \ \ \ \ \}}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ std::vector<std::vector<T>>\ chunks;}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ std::vector<T>\ current\_chunk;}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ value\ :\ data)\ \{}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.push\_back(value);}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy_a24c8c0a7f512c23a4b7baa60eb5c4d5c}{calculate\_variance}}(current\_chunk)\ >\ \mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy_a57923fa38b90022ba7786ef882b137f1}{threshold\_}})\ \{}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (current\_chunk.size()\ >\ 1)\ \{}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk.pop\_back();}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ chunks.push\_back(current\_chunk);}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_chunk\ =\ \{value\};}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!current\_chunk.empty())\ \{}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ chunks.push\_back(current\_chunk);}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ chunks;}
+\DoxyCodeLine{00131\ \ \ \ \ \}}
 
 \end{DoxyCode}
 
 
-References \mbox{\hyperlink{chunk__strategies_8hpp_source_l00089}{chunk\+\_\+strategies\+::\+Variance\+Strategy$<$ T $>$\+::calculate\+\_\+variance()}}, and \mbox{\hyperlink{chunk__strategies_8hpp_source_l00087}{chunk\+\_\+strategies\+::\+Variance\+Strategy$<$ T $>$\+::threshold\+\_\+}}.
+References \mbox{\hyperlink{chunk__strategies_8hpp_source_l00090}{chunk\+\_\+strategies\+::\+Variance\+Strategy$<$ T $>$\+::calculate\+\_\+variance()}}, and \mbox{\hyperlink{chunk__strategies_8hpp_source_l00088}{chunk\+\_\+strategies\+::\+Variance\+Strategy$<$ T $>$\+::threshold\+\_\+}}.
 
 \Hypertarget{classchunk__strategies_1_1VarianceStrategy_a24c8c0a7f512c23a4b7baa60eb5c4d5c}\label{classchunk__strategies_1_1VarianceStrategy_a24c8c0a7f512c23a4b7baa60eb5c4d5c} 
 \index{chunk\_strategies::VarianceStrategy$<$ T $>$@{chunk\_strategies::VarianceStrategy$<$ T $>$}!calculate\_variance@{calculate\_variance}}
@@ -144,26 +144,33 @@ double \mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy}{chunk\+\_\+s
 
 
 
-Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00089}{89}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00090}{90}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (chunk.size()\ <\ 2)}
-\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0.0;}
-\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ mean\ =\ std::accumulate(chunk.begin(),\ chunk.end(),\ 0.0)\ /\ chunk.size();}
-\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ sq\_sum\ =\ 0.0;}
-\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ T\&\ val\ :\ chunk)\ \{}
-\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ diff\ =\ val\ -\/\ mean;}
-\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ sq\_sum\ +=\ diff\ *\ diff;}
-\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ sq\_sum\ /\ chunk.size();}
-\DoxyCodeLine{00099\ \ \ \ \ \}}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (chunk.size()\ <\ 2)}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0.0;}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{double}\ mean\ =\ 0.0;}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{double}\ M2\ =\ 0.0;}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ count\ =\ 0;}
+\DoxyCodeLine{00097\ \ \ \ \ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ T\&\ value\ :\ chunk)\ \{}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ count++;}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ delta\ =\ value\ -\/\ mean;}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ mean\ +=\ delta\ /\ count;}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ delta2\ =\ value\ -\/\ mean;}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ M2\ +=\ delta\ *\ delta2;}
+\DoxyCodeLine{00104\ \ \ \ \ \}}
+\DoxyCodeLine{00105\ \ \ \ \ }
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordflow}{return}\ M2\ /\ count;}
+\DoxyCodeLine{00107\ \}}
 
 \end{DoxyCode}
 
 
-Referenced by \mbox{\hyperlink{chunk__strategies_8hpp_source_l00104}{chunk\+\_\+strategies\+::\+Variance\+Strategy$<$ T $>$\+::apply()}}.
+Referenced by \mbox{\hyperlink{chunk__strategies_8hpp_source_l00111}{chunk\+\_\+strategies\+::\+Variance\+Strategy$<$ T $>$\+::apply()}}.
 
 \Hypertarget{classchunk__strategies_1_1VarianceStrategy_a4d34f2529c820b68a0fa259d6100d139}\label{classchunk__strategies_1_1VarianceStrategy_a4d34f2529c820b68a0fa259d6100d139} 
 \index{chunk\_strategies::VarianceStrategy$<$ T $>$@{chunk\_strategies::VarianceStrategy$<$ T $>$}!get\_threshold@{get\_threshold}}
@@ -174,18 +181,18 @@ double \mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy}{chunk\+\_\+s
 
 
 
-Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00127}{127}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00134}{134}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy_a57923fa38b90022ba7786ef882b137f1}{threshold\_}};}
-\DoxyCodeLine{00129\ \ \ \ \ \}}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy_a57923fa38b90022ba7786ef882b137f1}{threshold\_}};}
+\DoxyCodeLine{00136\ \ \ \ \ \}}
 
 \end{DoxyCode}
 
 
-References \mbox{\hyperlink{chunk__strategies_8hpp_source_l00087}{chunk\+\_\+strategies\+::\+Variance\+Strategy$<$ T $>$\+::threshold\+\_\+}}.
+References \mbox{\hyperlink{chunk__strategies_8hpp_source_l00088}{chunk\+\_\+strategies\+::\+Variance\+Strategy$<$ T $>$\+::threshold\+\_\+}}.
 
 \Hypertarget{classchunk__strategies_1_1VarianceStrategy_a31af76691387d55d54583952814fcde5}\label{classchunk__strategies_1_1VarianceStrategy_a31af76691387d55d54583952814fcde5} 
 \index{chunk\_strategies::VarianceStrategy$<$ T $>$@{chunk\_strategies::VarianceStrategy$<$ T $>$}!set\_threshold@{set\_threshold}}
@@ -196,18 +203,18 @@ void \mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy}{chunk\+\_\+str
 
 
 
-Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00132}{132}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00139}{139}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy_a57923fa38b90022ba7786ef882b137f1}{threshold\_}}\ =\ threshold;}
-\DoxyCodeLine{00134\ \ \ \ \ \}}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy_a57923fa38b90022ba7786ef882b137f1}{threshold\_}}\ =\ threshold;}
+\DoxyCodeLine{00141\ \ \ \ \ \}}
 
 \end{DoxyCode}
 
 
-References \mbox{\hyperlink{chunk__strategies_8hpp_source_l00087}{chunk\+\_\+strategies\+::\+Variance\+Strategy$<$ T $>$\+::threshold\+\_\+}}.
+References \mbox{\hyperlink{chunk__strategies_8hpp_source_l00088}{chunk\+\_\+strategies\+::\+Variance\+Strategy$<$ T $>$\+::threshold\+\_\+}}.
 
 
 
@@ -221,11 +228,11 @@ double \mbox{\hyperlink{classchunk__strategies_1_1VarianceStrategy}{chunk\+\_\+s
 
 
 
-Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00087}{87}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__strategies_8hpp_source_l00088}{88}} of file \mbox{\hyperlink{chunk__strategies_8hpp_source}{chunk\+\_\+strategies.\+hpp}}.
 
 
 
-Referenced by \mbox{\hyperlink{chunk__strategies_8hpp_source_l00104}{chunk\+\_\+strategies\+::\+Variance\+Strategy$<$ T $>$\+::apply()}}, \mbox{\hyperlink{chunk__strategies_8hpp_source_l00127}{chunk\+\_\+strategies\+::\+Variance\+Strategy$<$ T $>$\+::get\+\_\+threshold()}}, and \mbox{\hyperlink{chunk__strategies_8hpp_source_l00132}{chunk\+\_\+strategies\+::\+Variance\+Strategy$<$ T $>$\+::set\+\_\+threshold()}}.
+Referenced by \mbox{\hyperlink{chunk__strategies_8hpp_source_l00111}{chunk\+\_\+strategies\+::\+Variance\+Strategy$<$ T $>$\+::apply()}}, \mbox{\hyperlink{chunk__strategies_8hpp_source_l00134}{chunk\+\_\+strategies\+::\+Variance\+Strategy$<$ T $>$\+::get\+\_\+threshold()}}, and \mbox{\hyperlink{chunk__strategies_8hpp_source_l00139}{chunk\+\_\+strategies\+::\+Variance\+Strategy$<$ T $>$\+::set\+\_\+threshold()}}.
 
 
 

@@ -22,7 +22,14 @@ void \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a64b075f48d0
 \doxysubsubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-std\+::vector$<$ T $>$ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a142dc987f6d853653ec3d0e9383c90da}{process\+\_\+chunks}} (const std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \&chunks, std\+::function$<$ T(const std\+::vector$<$ T $>$ \&)$>$ window\+\_\+func)
+std\+::vector$<$ T $>$ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a8352f79a4ebe8906d535475e0eee03ff}{process\+\_\+multidimensional}} (const std\+::vector$<$ T $>$ \&data, std\+::function$<$ T(const std\+::vector$<$ T $>$ \&)$>$ window\+\_\+func)
+\item 
+std\+::vector$<$ T $>$ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a78e25363c53c64b2575ce946a6c11164}{process\+\_\+single\+\_\+dimensional}} (const std\+::vector$<$ T $>$ \&data, std\+::function$<$ T(const std\+::vector$<$ T $>$ \&)$>$ window\+\_\+func)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename U $>$ }\\static double \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a9a6d8499ece4aed25f94ab44ba3d6d5a}{compute\+\_\+window\+\_\+feature}} (const U \&window)
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -31,6 +38,11 @@ size\+\_\+t \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a8063
 \item 
 size\+\_\+t \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}{window\+\_\+size\+\_\+}}
 \end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename U $>$ }\\static constexpr bool \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a1ecb591686d8a03ba1648db03a0ac774}{is\+\_\+multidimensional\+\_\+v}} = chunk\+\_\+processing\+::is\+\_\+multidimensional\+\_\+v$<$U$>$
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -38,7 +50,7 @@ size\+\_\+t \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f6
 class chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$}
 
 
-Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00012}{12}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00013}{13}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
 
 
 
@@ -52,16 +64,58 @@ Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00012}{12}} of f
 
 
 
-Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00030}{30}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00059}{59}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}{window\_size\_}}(window\_size),\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a80636bc832fe7bb5f4b48fdb070742d6}{step\_size\_}}(step\_size)\ \{\}}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}{window\_size\_}}(window\_size),\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a80636bc832fe7bb5f4b48fdb070742d6}{step\_size\_}}(step\_size)\ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (window\_size\ ==\ 0)}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Window\ size\ cannot\ be\ zero"{}});}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (step\_size\ ==\ 0)}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Step\ size\ cannot\ be\ zero"{}});}
+\DoxyCodeLine{00065\ \ \ \ \ \}}
 
 \end{DoxyCode}
 
 
 \doxysubsection{Member Function Documentation}
+\Hypertarget{classchunk__windows_1_1SlidingWindowProcessor_a9a6d8499ece4aed25f94ab44ba3d6d5a}\label{classchunk__windows_1_1SlidingWindowProcessor_a9a6d8499ece4aed25f94ab44ba3d6d5a} 
+\index{chunk\_windows::SlidingWindowProcessor$<$ T $>$@{chunk\_windows::SlidingWindowProcessor$<$ T $>$}!compute\_window\_feature@{compute\_window\_feature}}
+\index{compute\_window\_feature@{compute\_window\_feature}!chunk\_windows::SlidingWindowProcessor$<$ T $>$@{chunk\_windows::SlidingWindowProcessor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{compute\_window\_feature()}{compute\_window\_feature()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+template$<$typename U $>$ \\
+static double \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor}}$<$ T $>$\+::compute\+\_\+window\+\_\+feature (\begin{DoxyParamCaption}\item[{const U \&}]{window }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00022}{22}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (chunk\_processing::is\_multidimensional\_v<U>)\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ sum\ =\ 0.0;}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ inner\ :\ window)\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sum\ +=\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a9a6d8499ece4aed25f94ab44ba3d6d5a}{compute\_window\_feature}}(inner);}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ sum\ /\ std::size(window);}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (\mbox{\hyperlink{structchunk__processing_1_1is__vector}{chunk\_processing::is\_vector<U>::value}})\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::accumulate(std::begin(window),\ std::end(window),\ 0.0)\ /\ std::size(window);}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(window);}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00034\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk__windows_8hpp_source_l00022}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::compute\+\_\+window\+\_\+feature()}}.
+
+
+
+Referenced by \mbox{\hyperlink{chunk__windows_8hpp_source_l00022}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::compute\+\_\+window\+\_\+feature()}}.
+
 \Hypertarget{classchunk__windows_1_1SlidingWindowProcessor_af48a8a4d3dbc36304d91e57c4bc4ac1a}\label{classchunk__windows_1_1SlidingWindowProcessor_af48a8a4d3dbc36304d91e57c4bc4ac1a} 
 \index{chunk\_windows::SlidingWindowProcessor$<$ T $>$@{chunk\_windows::SlidingWindowProcessor$<$ T $>$}!get\_step\_size@{get\_step\_size}}
 \index{get\_step\_size@{get\_step\_size}!chunk\_windows::SlidingWindowProcessor$<$ T $>$@{chunk\_windows::SlidingWindowProcessor$<$ T $>$}}
@@ -71,18 +125,18 @@ size\+\_\+t \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor}{chun
 
 
 
-Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00044}{44}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00084}{84}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a80636bc832fe7bb5f4b48fdb070742d6}{step\_size\_}};}
-\DoxyCodeLine{00046\ \ \ \ \ \}}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a80636bc832fe7bb5f4b48fdb070742d6}{step\_size\_}};}
+\DoxyCodeLine{00086\ \ \ \ \ \}}
 
 \end{DoxyCode}
 
 
-References \mbox{\hyperlink{chunk__windows_8hpp_source_l00015}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::step\+\_\+size\+\_\+}}.
+References \mbox{\hyperlink{chunk__windows_8hpp_source_l00016}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::step\+\_\+size\+\_\+}}.
 
 \Hypertarget{classchunk__windows_1_1SlidingWindowProcessor_ad5763d13fe58162c0ac82f7040c41ca5}\label{classchunk__windows_1_1SlidingWindowProcessor_ad5763d13fe58162c0ac82f7040c41ca5} 
 \index{chunk\_windows::SlidingWindowProcessor$<$ T $>$@{chunk\_windows::SlidingWindowProcessor$<$ T $>$}!get\_window\_size@{get\_window\_size}}
@@ -93,18 +147,18 @@ size\+\_\+t \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor}{chun
 
 
 
-Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00041}{41}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00081}{81}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}{window\_size\_}};}
-\DoxyCodeLine{00043\ \ \ \ \ \}}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}{window\_size\_}};}
+\DoxyCodeLine{00083\ \ \ \ \ \}}
 
 \end{DoxyCode}
 
 
-References \mbox{\hyperlink{chunk__windows_8hpp_source_l00014}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::window\+\_\+size\+\_\+}}.
+References \mbox{\hyperlink{chunk__windows_8hpp_source_l00015}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::window\+\_\+size\+\_\+}}.
 
 \Hypertarget{classchunk__windows_1_1SlidingWindowProcessor_a4a80bf019ed526f0ef88ed053d654c82}\label{classchunk__windows_1_1SlidingWindowProcessor_a4a80bf019ed526f0ef88ed053d654c82} 
 \index{chunk\_windows::SlidingWindowProcessor$<$ T $>$@{chunk\_windows::SlidingWindowProcessor$<$ T $>$}!process@{process}}
@@ -115,53 +169,90 @@ std\+::vector$<$ T $>$ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProc
 
 
 
-Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00033}{33}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00067}{67}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classchunk__processing_1_1Chunk}{chunk\_processing::Chunk<T>}}\ chunker(\mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}{window\_size\_}});}
-\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ chunker.add(data);}
-\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a142dc987f6d853653ec3d0e9383c90da}{process\_chunks}}(chunker.get\_chunks(),\ window\_func);}
-\DoxyCodeLine{00038\ \ \ \ \ \}}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.size()\ <\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}{window\_size\_}})\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\};\ \textcolor{comment}{//\ Return\ empty\ if\ data\ is\ smaller\ than\ window}}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (chunk\_processing::is\_multidimensional\_v<T>)\ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a8352f79a4ebe8906d535475e0eee03ff}{process\_multidimensional}}(data,\ window\_func);}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a78e25363c53c64b2575ce946a6c11164}{process\_single\_dimensional}}(data,\ window\_func);}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00078\ \ \ \ \ \}}
 
 \end{DoxyCode}
 
 
-References \mbox{\hyperlink{chunk_8hpp_source_l00057}{chunk\+\_\+processing\+::\+Chunk$<$ T $>$\+::add()}}, \mbox{\hyperlink{chunk_8hpp_source_l00109}{chunk\+\_\+processing\+::\+Chunk$<$ T $>$\+::get\+\_\+chunks()}}, \mbox{\hyperlink{chunk__windows_8hpp_source_l00017}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::process\+\_\+chunks()}}, and \mbox{\hyperlink{chunk__windows_8hpp_source_l00014}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::window\+\_\+size\+\_\+}}.
+References \mbox{\hyperlink{chunk__windows_8hpp_source_l00036}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::process\+\_\+multidimensional()}}, \mbox{\hyperlink{chunk__windows_8hpp_source_l00047}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::process\+\_\+single\+\_\+dimensional()}}, and \mbox{\hyperlink{chunk__windows_8hpp_source_l00015}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::window\+\_\+size\+\_\+}}.
 
-\Hypertarget{classchunk__windows_1_1SlidingWindowProcessor_a142dc987f6d853653ec3d0e9383c90da}\label{classchunk__windows_1_1SlidingWindowProcessor_a142dc987f6d853653ec3d0e9383c90da} 
-\index{chunk\_windows::SlidingWindowProcessor$<$ T $>$@{chunk\_windows::SlidingWindowProcessor$<$ T $>$}!process\_chunks@{process\_chunks}}
-\index{process\_chunks@{process\_chunks}!chunk\_windows::SlidingWindowProcessor$<$ T $>$@{chunk\_windows::SlidingWindowProcessor$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{process\_chunks()}{process\_chunks()}}
+\Hypertarget{classchunk__windows_1_1SlidingWindowProcessor_a8352f79a4ebe8906d535475e0eee03ff}\label{classchunk__windows_1_1SlidingWindowProcessor_a8352f79a4ebe8906d535475e0eee03ff} 
+\index{chunk\_windows::SlidingWindowProcessor$<$ T $>$@{chunk\_windows::SlidingWindowProcessor$<$ T $>$}!process\_multidimensional@{process\_multidimensional}}
+\index{process\_multidimensional@{process\_multidimensional}!chunk\_windows::SlidingWindowProcessor$<$ T $>$@{chunk\_windows::SlidingWindowProcessor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{process\_multidimensional()}{process\_multidimensional()}}
 {\footnotesize\ttfamily template$<$typename T $>$ \\
-std\+::vector$<$ T $>$ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor}}$<$ T $>$\+::process\+\_\+chunks (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::vector$<$ T $>$ $>$ \&}]{chunks,  }\item[{std\+::function$<$ T(const std\+::vector$<$ T $>$ \&)$>$}]{window\+\_\+func }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+std\+::vector$<$ T $>$ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor}}$<$ T $>$\+::process\+\_\+multidimensional (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ T $>$ \&}]{data,  }\item[{std\+::function$<$ T(const std\+::vector$<$ T $>$ \&)$>$}]{window\+\_\+func }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
-Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00017}{17}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00036}{36}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ std::vector<T>\ results;}
-\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ chunks.size();\ i\ +=\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a80636bc832fe7bb5f4b48fdb070742d6}{step\_size\_}})\ \{}
-\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ chunk\ =\ chunks[i];}
-\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (chunk.size()\ >=\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}{window\_size\_}})\ \{}
-\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ results.push\_back(window\_func(chunk));}
-\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ results;}
-\DoxyCodeLine{00027\ \ \ \ \ \}}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Implementation\ for\ multi-\/dimensional\ data}}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ std::vector<T>\ results;}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <=\ data.size()\ -\/\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}{window\_size\_}};\ i\ +=\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a80636bc832fe7bb5f4b48fdb070742d6}{step\_size\_}})\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<T>\ window(data.begin()\ +\ i,\ data.begin()\ +\ i\ +\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}{window\_size\_}});}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ results.push\_back(window\_func(window));}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ results;}
+\DoxyCodeLine{00045\ \ \ \ \ \}}
 
 \end{DoxyCode}
 
 
-References \mbox{\hyperlink{chunk__windows_8hpp_source_l00015}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::step\+\_\+size\+\_\+}}, and \mbox{\hyperlink{chunk__windows_8hpp_source_l00014}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::window\+\_\+size\+\_\+}}.
+References \mbox{\hyperlink{chunk__windows_8hpp_source_l00016}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::step\+\_\+size\+\_\+}}, and \mbox{\hyperlink{chunk__windows_8hpp_source_l00015}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::window\+\_\+size\+\_\+}}.
 
 
 
-Referenced by \mbox{\hyperlink{chunk__windows_8hpp_source_l00033}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::process()}}.
+Referenced by \mbox{\hyperlink{chunk__windows_8hpp_source_l00067}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::process()}}.
+
+\Hypertarget{classchunk__windows_1_1SlidingWindowProcessor_a78e25363c53c64b2575ce946a6c11164}\label{classchunk__windows_1_1SlidingWindowProcessor_a78e25363c53c64b2575ce946a6c11164} 
+\index{chunk\_windows::SlidingWindowProcessor$<$ T $>$@{chunk\_windows::SlidingWindowProcessor$<$ T $>$}!process\_single\_dimensional@{process\_single\_dimensional}}
+\index{process\_single\_dimensional@{process\_single\_dimensional}!chunk\_windows::SlidingWindowProcessor$<$ T $>$@{chunk\_windows::SlidingWindowProcessor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{process\_single\_dimensional()}{process\_single\_dimensional()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$ T $>$ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor}}$<$ T $>$\+::process\+\_\+single\+\_\+dimensional (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ T $>$ \&}]{data,  }\item[{std\+::function$<$ T(const std\+::vector$<$ T $>$ \&)$>$}]{window\+\_\+func }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00047}{47}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ std::vector<T>\ results;}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ sliding\ windows\ of\ the\ specified\ size}}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <=\ data.size()\ -\/\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}{window\_size\_}};\ i\ +=\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a80636bc832fe7bb5f4b48fdb070742d6}{step\_size\_}})\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<T>\ window(data.begin()\ +\ i,\ data.begin()\ +\ i\ +\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}{window\_size\_}});}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ results.push\_back(window\_func(window));}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ results;}
+\DoxyCodeLine{00056\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{chunk__windows_8hpp_source_l00016}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::step\+\_\+size\+\_\+}}, and \mbox{\hyperlink{chunk__windows_8hpp_source_l00015}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::window\+\_\+size\+\_\+}}.
+
+
+
+Referenced by \mbox{\hyperlink{chunk__windows_8hpp_source_l00067}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::process()}}.
 
 \Hypertarget{classchunk__windows_1_1SlidingWindowProcessor_afa2f4f0664eed05c3fd66e5f4d6bf203}\label{classchunk__windows_1_1SlidingWindowProcessor_afa2f4f0664eed05c3fd66e5f4d6bf203} 
 \index{chunk\_windows::SlidingWindowProcessor$<$ T $>$@{chunk\_windows::SlidingWindowProcessor$<$ T $>$}!set\_step\_size@{set\_step\_size}}
@@ -172,20 +263,20 @@ void \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor}{chunk\+\_\+
 
 
 
-Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00054}{54}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00094}{94}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (size\ ==\ 0)}
-\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Step\ size\ cannot\ be\ zero"{}});}
-\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a80636bc832fe7bb5f4b48fdb070742d6}{step\_size\_}}\ =\ size;}
-\DoxyCodeLine{00058\ \ \ \ \ \}}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (size\ ==\ 0)}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Step\ size\ cannot\ be\ zero"{}});}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a80636bc832fe7bb5f4b48fdb070742d6}{step\_size\_}}\ =\ size;}
+\DoxyCodeLine{00098\ \ \ \ \ \}}
 
 \end{DoxyCode}
 
 
-References \mbox{\hyperlink{chunk__windows_8hpp_source_l00015}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::step\+\_\+size\+\_\+}}.
+References \mbox{\hyperlink{chunk__windows_8hpp_source_l00016}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::step\+\_\+size\+\_\+}}.
 
 \Hypertarget{classchunk__windows_1_1SlidingWindowProcessor_a64b075f48d088ac5241411557d697d2c}\label{classchunk__windows_1_1SlidingWindowProcessor_a64b075f48d088ac5241411557d697d2c} 
 \index{chunk\_windows::SlidingWindowProcessor$<$ T $>$@{chunk\_windows::SlidingWindowProcessor$<$ T $>$}!set\_window\_size@{set\_window\_size}}
@@ -196,24 +287,36 @@ void \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor}{chunk\+\_\+
 
 
 
-Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00049}{49}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00089}{89}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (size\ ==\ 0)}
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Window\ size\ cannot\ be\ zero"{}});}
-\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}{window\_size\_}}\ =\ size;}
-\DoxyCodeLine{00053\ \ \ \ \ \}}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (size\ ==\ 0)}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Window\ size\ cannot\ be\ zero"{}});}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}{window\_size\_}}\ =\ size;}
+\DoxyCodeLine{00093\ \ \ \ \ \}}
 
 \end{DoxyCode}
 
 
-References \mbox{\hyperlink{chunk__windows_8hpp_source_l00014}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::window\+\_\+size\+\_\+}}.
+References \mbox{\hyperlink{chunk__windows_8hpp_source_l00015}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::window\+\_\+size\+\_\+}}.
 
 
 
 \doxysubsection{Member Data Documentation}
+\Hypertarget{classchunk__windows_1_1SlidingWindowProcessor_a1ecb591686d8a03ba1648db03a0ac774}\label{classchunk__windows_1_1SlidingWindowProcessor_a1ecb591686d8a03ba1648db03a0ac774} 
+\index{chunk\_windows::SlidingWindowProcessor$<$ T $>$@{chunk\_windows::SlidingWindowProcessor$<$ T $>$}!is\_multidimensional\_v@{is\_multidimensional\_v}}
+\index{is\_multidimensional\_v@{is\_multidimensional\_v}!chunk\_windows::SlidingWindowProcessor$<$ T $>$@{chunk\_windows::SlidingWindowProcessor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{is\_multidimensional\_v}{is\_multidimensional\_v}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+template$<$typename U $>$ \\
+constexpr bool \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor}}$<$ T $>$\+::is\+\_\+multidimensional\+\_\+v = chunk\+\_\+processing\+::is\+\_\+multidimensional\+\_\+v$<$U$>$\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+
+
+Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00019}{19}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
+
 \Hypertarget{classchunk__windows_1_1SlidingWindowProcessor_a80636bc832fe7bb5f4b48fdb070742d6}\label{classchunk__windows_1_1SlidingWindowProcessor_a80636bc832fe7bb5f4b48fdb070742d6} 
 \index{chunk\_windows::SlidingWindowProcessor$<$ T $>$@{chunk\_windows::SlidingWindowProcessor$<$ T $>$}!step\_size\_@{step\_size\_}}
 \index{step\_size\_@{step\_size\_}!chunk\_windows::SlidingWindowProcessor$<$ T $>$@{chunk\_windows::SlidingWindowProcessor$<$ T $>$}}
@@ -223,11 +326,11 @@ size\+\_\+t \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor}{chun
 
 
 
-Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00015}{15}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00016}{16}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
 
 
 
-Referenced by \mbox{\hyperlink{chunk__windows_8hpp_source_l00044}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::get\+\_\+step\+\_\+size()}}, \mbox{\hyperlink{chunk__windows_8hpp_source_l00017}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::process\+\_\+chunks()}}, and \mbox{\hyperlink{chunk__windows_8hpp_source_l00054}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::set\+\_\+step\+\_\+size()}}.
+Referenced by \mbox{\hyperlink{chunk__windows_8hpp_source_l00084}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::get\+\_\+step\+\_\+size()}}, \mbox{\hyperlink{chunk__windows_8hpp_source_l00036}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::process\+\_\+multidimensional()}}, \mbox{\hyperlink{chunk__windows_8hpp_source_l00047}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::process\+\_\+single\+\_\+dimensional()}}, and \mbox{\hyperlink{chunk__windows_8hpp_source_l00094}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::set\+\_\+step\+\_\+size()}}.
 
 \Hypertarget{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}\label{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289} 
 \index{chunk\_windows::SlidingWindowProcessor$<$ T $>$@{chunk\_windows::SlidingWindowProcessor$<$ T $>$}!window\_size\_@{window\_size\_}}
@@ -238,11 +341,11 @@ size\+\_\+t \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor}{chun
 
 
 
-Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00014}{14}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00015}{15}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
 
 
 
-Referenced by \mbox{\hyperlink{chunk__windows_8hpp_source_l00041}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::get\+\_\+window\+\_\+size()}}, \mbox{\hyperlink{chunk__windows_8hpp_source_l00033}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::process()}}, \mbox{\hyperlink{chunk__windows_8hpp_source_l00017}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::process\+\_\+chunks()}}, and \mbox{\hyperlink{chunk__windows_8hpp_source_l00049}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::set\+\_\+window\+\_\+size()}}.
+Referenced by \mbox{\hyperlink{chunk__windows_8hpp_source_l00081}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::get\+\_\+window\+\_\+size()}}, \mbox{\hyperlink{chunk__windows_8hpp_source_l00067}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::process()}}, \mbox{\hyperlink{chunk__windows_8hpp_source_l00036}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::process\+\_\+multidimensional()}}, \mbox{\hyperlink{chunk__windows_8hpp_source_l00047}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::process\+\_\+single\+\_\+dimensional()}}, and \mbox{\hyperlink{chunk__windows_8hpp_source_l00089}{chunk\+\_\+windows\+::\+Sliding\+Window\+Processor$<$ T $>$\+::set\+\_\+window\+\_\+size()}}.
 
 
 

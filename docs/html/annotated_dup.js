@@ -35,6 +35,10 @@ var annotated_dup =
     [ "chunk_processing", "namespacechunk__processing.html", [
       [ "Chunk", "classchunk__processing_1_1Chunk.html", "classchunk__processing_1_1Chunk" ],
       [ "ChunkingError", "classchunk__processing_1_1ChunkingError.html", "classchunk__processing_1_1ChunkingError" ],
+      [ "is_multidimensional", "structchunk__processing_1_1is__multidimensional.html", null ],
+      [ "is_multidimensional< T, std::enable_if_t< is_vector< T >::value &&is_vector< typename T::value_type >::value > >", "structchunk__processing_1_1is__multidimensional_3_01T_00_01std_1_1enable__if__t_3_01is__vector_30d3c23284315d038cde1088ba5c61ea2.html", null ],
+      [ "is_vector", "structchunk__processing_1_1is__vector.html", null ],
+      [ "is_vector< std::vector< T, A > >", "structchunk__processing_1_1is__vector_3_01std_1_1vector_3_01T_00_01A_01_4_01_4.html", null ],
       [ "ResilienceError", "classchunk__processing_1_1ResilienceError.html", "classchunk__processing_1_1ResilienceError" ],
       [ "SerializationError", "classchunk__processing_1_1SerializationError.html", "classchunk__processing_1_1SerializationError" ],
       [ "VisualizationError", "classchunk__processing_1_1VisualizationError.html", "classchunk__processing_1_1VisualizationError" ]
