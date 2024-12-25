@@ -3,6 +3,7 @@
 #include <gtest/gtest.h>
 #include <numeric>
 #include <vector>
+#include <functional>
 
 class AdvancedChunkStrategiesTest : public ::testing::Test {
 protected:
@@ -16,17 +17,24 @@ protected:
 };
 
 TEST_F(AdvancedChunkStrategiesTest, PatternBasedLocalMaxima) {
-    // Reset static variables for each test
-    auto local_maxima_detector = [](double x) {
-        thread_local double prev = x;
-        thread_local double prev_prev = x;
-        bool is_local_max = (prev > prev_prev && prev > x);
-        prev_prev = prev;
-        prev = x;
-        return is_local_max;
+    class LocalMaximaDetector {
+    private:
+        mutable double prev_prev = std::numeric_limits<double>::lowest();
+        mutable double prev = std::numeric_limits<double>::lowest();
+        
+    public:
+        bool operator()(double x) const {
+            bool is_local_max = (prev > prev_prev && prev > x);
+            prev_prev = prev;
+            prev = x;
+            return is_local_max;
+        }
     };
 
-    chunk_strategies::PatternBasedStrategy<double> strategy(local_maxima_detector);
+    LocalMaximaDetector detector;
+    std::function<bool(double)> predicate = detector;
+    chunk_strategies::PatternBasedStrategy<double> strategy(predicate);
+    
     auto chunks = strategy.apply(test_data);
 
     EXPECT_GT(chunks.size(), 1);

@@ -90,15 +90,21 @@ class VarianceStrategy : public ChunkStrategy<T> {
     double calculate_variance(const std::vector<T>& chunk) const {
         if (chunk.size() < 2)
             return 0.0;
-        double mean = std::accumulate(chunk.begin(), chunk.end(), 0.0) / chunk.size();
-        double sq_sum = 0.0;
-        for (const T& val : chunk) {
-            double diff = val - mean;
-            sq_sum += diff * diff;
-        }
-        return sq_sum / chunk.size();
+            
+    double mean = 0.0;
+    double M2 = 0.0;
+    size_t count = 0;
+    
+    for (const T& value : chunk) {
+        count++;
+        double delta = value - mean;
+        mean += delta / count;
+        double delta2 = value - mean;
+        M2 += delta * delta2;
     }
-
+    
+    return M2 / count;
+}
 public:
     explicit VarianceStrategy(double threshold) : threshold_(threshold) {}
 
@@ -196,7 +202,13 @@ private:
     double compute_array_sum(const U& arr) const {
         if constexpr (chunk_processing::is_multidimensional_v<U>) {
             double sum = 0.0;
+            size_t depth = 0;
+            constexpr size_t MAX_DEPTH = 1000;  // Prevent stack overflow
+            
             for (const auto& inner : arr) {
+                if (depth++ > MAX_DEPTH) {
+                    throw std::runtime_error("Maximum recursion depth exceeded");
+                }
                 sum += compute_array_sum(inner);
             }
             return sum;
