@@ -1,9 +1,9 @@
 #include "chunk_strategies.hpp"
 #include "chunk_windows.hpp"
+#include <functional>
 #include <gtest/gtest.h>
 #include <numeric>
 #include <vector>
-#include <functional>
 
 class AdvancedChunkStrategiesTest : public ::testing::Test {
 protected:
@@ -21,7 +21,7 @@ TEST_F(AdvancedChunkStrategiesTest, PatternBasedLocalMaxima) {
     private:
         mutable double prev_prev = std::numeric_limits<double>::lowest();
         mutable double prev = std::numeric_limits<double>::lowest();
-        
+
     public:
         bool operator()(double x) const {
             bool is_local_max = (prev > prev_prev && prev > x);
@@ -34,7 +34,7 @@ TEST_F(AdvancedChunkStrategiesTest, PatternBasedLocalMaxima) {
     LocalMaximaDetector detector;
     std::function<bool(double)> predicate = detector;
     chunk_strategies::PatternBasedStrategy<double> strategy(predicate);
-    
+
     auto chunks = strategy.apply(test_data);
 
     EXPECT_GT(chunks.size(), 1);
