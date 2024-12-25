@@ -110,6 +110,67 @@ chunker.add(data);
 auto chunks = chunker.get_chunks(); // Returns: {{1,2}, {3,4}, {5}}
 ```
 
+### Multi-dimensional Vector Support
+
+The library provides comprehensive support for processing multi-dimensional vectors:
+
+```cpp
+#include "chunk.hpp"
+#include "chunk_strategies.hpp"
+
+// Working with 2D vectors
+std::vector<std::vector<double>> data_2d = {
+    {1.0, 2.0, 3.0},
+    {4.0, 5.0, 6.0},
+    {7.0, 8.0, 9.0}
+};
+
+// Create a chunker for 2D data with chunk size 2
+chunk_processing::Chunk<std::vector<double>> chunker_2d(2);
+chunker_2d.add(data_2d);
+
+// Get chunks - each chunk contains 2 rows
+auto chunks_2d = chunker_2d.get_chunks();
+
+// Pattern-based chunking with sum threshold
+chunk_strategies::PatternBasedStrategy<std::vector<double>> strategy(
+    [](const std::vector<double>& row) {
+        return std::accumulate(row.begin(), row.end(), 0.0) > 10.0;
+    }
+);
+
+// Split into chunks when row sum exceeds threshold
+auto threshold_chunks = strategy.apply(data_2d);
+
+// Working with 3D vectors
+std::vector<std::vector<std::vector<double>>> data_3d = {
+    {{1.0, 2.0}, {3.0, 4.0}},
+    {{5.0, 6.0}, {7.0, 8.0}},
+    {{9.0, 10.0}, {11.0, 12.0}}
+};
+
+// Create a chunker for 3D data
+chunk_processing::Chunk<std::vector<std::vector<double>>> chunker_3d(2);
+chunker_3d.add(data_3d);
+
+// Automatic dimensionality validation
+std::vector<std::vector<double>> inconsistent_2d = {
+    {1.0, 2.0, 3.0},
+    {4.0, 5.0},  // Different size - will throw std::invalid_argument
+    {7.0, 8.0, 9.0}
+};
+```
+
+Key features for multi-dimensional data:
+
+- Automatic dimensionality validation
+- Support for arbitrary nesting depth
+- Specialized chunking strategies for multi-dimensional data
+- Efficient processing of nested structures
+- Type-safe operations across all dimensions
+
+The library automatically detects the dimensionality of your data and applies appropriate processing strategies. All chunking operations maintain the structural integrity of your multi-dimensional data while providing efficient processing capabilities.
+
 ### Advanced Features
 
 - **Recursive Sub-chunking**: Apply a strategy recursively to create hierarchical chunks
@@ -278,7 +339,7 @@ If you use this library in your research, please cite:
 │   ├── config.hpp
 │   ├── chunk_strategies.hpp
 │   ├── chunk_compression.hpp
-│   ├── sub_chunk_strategies.hpp
+��   ├── sub_chunk_strategies.hpp
 │   ├── parallel_chunk.hpp
 │   ├── advanced_structures.hpp
 │   ├── sophisticated_chunking.hpp

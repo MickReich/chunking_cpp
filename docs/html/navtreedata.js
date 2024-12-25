@@ -30,7 +30,8 @@ var NAVTREE =
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
         [ "All", "namespacemembers.html", null ],
-        [ "Functions", "namespacemembers_func.html", null ]
+        [ "Functions", "namespacemembers_func.html", null ],
+        [ "Variables", "namespacemembers_vars.html", null ]
       ] ]
     ] ],
     [ "Classes", "annotated.html", [
@@ -58,10 +59,10 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "advanced__chunk__strategies_8hpp.html",
-"classadvanced__structures_1_1FractalPatternsChunk.html#a8736011996663d025f8b4191bd2156b0",
-"classchunk__resilience_1_1ResilientChunker.html#aef889060ebbaf39b323d1397bb4170ed",
-"classchunk__windows_1_1SlidingWindowProcessor.html#ad5763d13fe58162c0ac82f7040c41ca5",
-"namespaceadvanced__structures.html"
+"classadvanced__structures_1_1FractalPatternsChunk.html#a82a2732ff021e61db4b5419f5ded766c",
+"classchunk__resilience_1_1ResilientChunker.html#ab36142ea4284db4fc6eb44691ea46fae",
+"classchunk__viz_1_1ChunkVisualizer.html#af2c26dfb5e1c689b0b691d57d8d9f6d4",
+"gpu__chunking_8hpp.html#aeaf2b8792be9f99ad11147059ef5079d"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

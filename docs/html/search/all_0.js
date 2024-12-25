@@ -1,7 +1,7 @@
 var searchData=
 [
   ['adaptivestrategy_0',['adaptivestrategy',['../classchunk__strategies_1_1AdaptiveStrategy.html#a2df4576ec8ea496324042c1d4d53b60c',1,'chunk_strategies::AdaptiveStrategy::AdaptiveStrategy()'],['../classchunk__strategies_1_1AdaptiveStrategy.html',1,'chunk_strategies::AdaptiveStrategy&lt; T &gt;']]],
-  ['add_1',['add',['../classchunk__processing_1_1Chunk.html#aa80770794a72963fa0e5844f61e1ec4f',1,'chunk_processing::Chunk::add(const T &amp;element)'],['../classchunk__processing_1_1Chunk.html#aedf30782208aed23471ef6f2c3dcc0b1',1,'chunk_processing::Chunk::add(const std::vector&lt; T &gt; &amp;elements)']]],
+  ['add_1',['add',['../classchunk__processing_1_1Chunk.html#aa80770794a72963fa0e5844f61e1ec4f',1,'chunk_processing::Chunk::add(const T &amp;element)'],['../classchunk__processing_1_1Chunk.html#aedf30782208aed23471ef6f2c3dcc0b1',1,'chunk_processing::Chunk::add(const std::vector&lt; T &gt; &amp;elements)'],['../classchunk__processing_1_1Chunk.html#a18633a34c8158912204fd6f21090debc',1,'chunk_processing::Chunk::add(const U &amp;nested_data)']]],
   ['add_5fstrategy_2',['add_strategy',['../classchunk__benchmark_1_1ChunkBenchmark.html#ab3db0038a902b86b04d5445e677a1800',1,'chunk_benchmark::ChunkBenchmark']]],
   ['advanced_20features_3',['Advanced Features',['../index.html#advanced-features',1,'']]],
   ['advanced_5fchunk_5fstrategies_2ehpp_4',['advanced_chunk_strategies.hpp',['../advanced__chunk__strategies_8hpp.html',1,'']]],
