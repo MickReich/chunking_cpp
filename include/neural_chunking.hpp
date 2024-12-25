@@ -122,8 +122,14 @@ private:
 
 template <typename T>
 std::vector<std::vector<T>> NeuralChunking<T>::chunk(const std::vector<T>& data) const {
-    if (data.empty())
+    if (data.empty()) {
         return {};
+    }
+
+    // Handle case where data is smaller than window size
+    if (data.size() <= window_size_) {
+        return {data};  // Return entire data as single chunk
+    }
 
     std::vector<std::vector<T>> result;
     std::vector<T> current_chunk;
