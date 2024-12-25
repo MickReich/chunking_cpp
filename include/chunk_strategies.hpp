@@ -83,6 +83,16 @@ class VarianceStrategy : public ChunkStrategy<T> {
 private:
     double threshold_;
 
+    double calculate_rolling_variance(const T& new_value, double prev_mean, double& mean,
+                                      size_t n) const {
+        mean = prev_mean + (static_cast<double>(new_value) - prev_mean) / n;
+        double variance = 0.0;
+        if (n > 1) {
+            variance = std::pow(static_cast<double>(new_value) - mean, 2.0) / (n - 1);
+        }
+        return variance;
+    }
+
 public:
     explicit VarianceStrategy(double threshold) : threshold_(threshold) {}
 
@@ -92,28 +102,30 @@ public:
             return result;
 
         std::vector<T> current_chunk;
-        double sum = 0.0;
-        double sum_sq = 0.0;
+        double mean = 0.0;
         size_t count = 0;
 
         for (const auto& value : data) {
-            if (!current_chunk.empty()) {
-                sum += static_cast<double>(value);
-                sum_sq += static_cast<double>(value) * static_cast<double>(value);
-                count++;
+            count++;
+            current_chunk.push_back(value);
 
-                double mean = sum / count;
-                double variance = (sum_sq / count) - (mean * mean);
+            if (count > 1) {
+                double new_mean = 0.0;
+                double variance = calculate_rolling_variance(value, mean, new_mean, count);
+                mean = new_mean;
 
                 if (variance > threshold_) {
-                    result.push_back(current_chunk);
-                    current_chunk.clear();
-                    sum = 0.0;
-                    sum_sq = 0.0;
-                    count = 0;
+                    if (current_chunk.size() > 1) {
+                        result.push_back(current_chunk);
+                        current_chunk.clear();
+                        current_chunk.push_back(value);
+                        count = 1;
+                        mean = static_cast<double>(value);
+                    }
                 }
+            } else {
+                mean = static_cast<double>(value);
             }
-            current_chunk.push_back(value);
         }
 
         if (!current_chunk.empty()) {

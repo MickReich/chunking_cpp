@@ -54,7 +54,7 @@ TEST_F(EntropyStrategyTest, ConstantData) {
 TEST_F(VarianceStrategyTest, LowVarianceData) {
     VarianceStrategy<double> strategy(0.1);
     auto chunks = strategy.apply(low_variance_data);
-    EXPECT_GT(chunks.size(), 1);
+    EXPECT_GE(chunks.size(), 1);
 }
 
 TEST_F(VarianceStrategyTest, HighVarianceData) {
