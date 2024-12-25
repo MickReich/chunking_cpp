@@ -99,33 +99,64 @@ def test_resilient_chunker_initialization():
     assert chunker is not None
 
 def test_process_with_recovery(sample_data):
+    checkpoint_dir = "test_checkpoint"
+    checkpoint_file = "recovery_test.bin"
+    
     chunker = ResilientChunker("test_checkpoint", 3, 2, 1)
-    chunker.save_checkpoint()
+    
+    # First process some data
+    result = chunker.process(sample_data)
+    assert result is not None
+    
+    # Save checkpoint with explicit directory and filename
+    chunker.save_checkpoint(checkpoint_dir, checkpoint_file)
+    
     try:
-        result = chunker.process(sample_data)
-        assert result is not None
+        # Test recovery with same directory and filename
+        restored = chunker.restore_from_checkpoint(checkpoint_dir, checkpoint_file)
+        assert restored is not None
+        assert len(restored) == len(result)
     except ChunkingError as e:
-        assert str(e) != ""
+        pytest.fail(f"Recovery failed: {str(e)}")
 
 def test_checkpoint_operations(sample_data):
-    # Use more conservative values
+    checkpoint_dir = "test_checkpoint"
+    checkpoint_file = "test_checkpoint.bin"
+    
     chunker = ResilientChunker(
-        checkpoint_dir="test_checkpoint",
-        max_mem_usage=1024*1024*100,  # 100MB
+        checkpoint_dir=checkpoint_dir,
+        max_mem_usage=1024*1024*100,
         checkpoint_freq=2,
-        history_size=1  # Minimize memory usage for history
+        history_size=1
     )
     try:
         result = chunker.process(sample_data)
         assert len(result) > 0
         
-        # Test checkpoint operations
-        chunker.save_checkpoint()
-        restored = chunker.restore_from_checkpoint()
+        # Test checkpoint operations with explicit paths
+        chunker.save_checkpoint(checkpoint_dir, checkpoint_file)
+        restored = chunker.restore_from_checkpoint(checkpoint_dir, checkpoint_file)
         assert restored is not None
         assert len(restored) > 0
     except ChunkingError as e:
         pytest.fail(f"Chunking failed: {str(e)}")
+
+def test_resilient_chunker_recovery_scenarios(sample_data):
+    checkpoint_dir = "test_checkpoint"
+    checkpoint_file = "scenario_test.bin"
+    
+    chunker = ResilientChunker(checkpoint_dir, 1024 * 1024, 2, 1)
+    
+    # Test normal processing
+    result = chunker.process(sample_data)
+    assert result is not None
+    assert len(result) > 0
+    
+    # Test checkpoint creation and restoration
+    chunker.save_checkpoint(checkpoint_dir, checkpoint_file)
+    restored = chunker.restore_from_checkpoint(checkpoint_dir, checkpoint_file)
+    assert restored is not None
+    assert len(restored) == len(result)
 
 # Parametrized Tests
 @pytest.mark.parametrize("invalid_input", [
@@ -258,25 +289,6 @@ def test_chunk_serialization_formats(sample_data):
         assert protobuf_data is not None
     except RuntimeError:
         pytest.skip("Protobuf serialization not available")
-
-def test_resilient_chunker_recovery_scenarios(sample_data):
-    chunker = ResilientChunker("test_checkpoint", 1024 * 1024, 2, 1)  # Use realistic memory limit
-    
-    # Test normal processing
-    result = chunker.process(sample_data)
-    assert result is not None
-    assert len(result) > 0
-    
-    # Test checkpoint creation and restoration
-    chunker.save_checkpoint()
-    restored = chunker.restore_from_checkpoint()
-    assert restored is not None
-    assert len(restored) == len(result)
-    
-    # Test processing with existing checkpoint
-    new_result = chunker.process(sample_data)
-    assert new_result is not None
-    assert len(new_result) > 0
 
 @pytest.mark.parametrize("window_size,threshold", [
     (2, 0.3),
