@@ -113,9 +113,70 @@ private:
     std::unordered_map<size_t, Checkpoint<T>> checkpoint_history;
     size_t max_history_size;
 
-    // Add memory pool
-    std::unique_ptr<std::vector<std::vector<T>>> active_chunks;
-    static constexpr size_t CHUNK_BUFFER_SIZE = 1000; // Adjustable
+    // Add memory tracking
+    struct MemoryTracker {
+        size_t current_usage = 0;
+        std::mutex mutex;
+
+        void add(size_t bytes) {
+            std::lock_guard<std::mutex> lock(mutex);
+            current_usage += bytes;
+        }
+
+        void subtract(size_t bytes) {
+            std::lock_guard<std::mutex> lock(mutex);
+            current_usage = (current_usage > bytes) ? current_usage - bytes : 0;
+        }
+
+        size_t get() const {
+            return current_usage;
+        }
+
+        void reset() {
+            std::lock_guard<std::mutex> lock(mutex);
+            current_usage = 0;
+        }
+    };
+
+    MemoryTracker memory_tracker;
+    static constexpr size_t CHUNK_BUFFER_SIZE = 1000;
+    static constexpr double MEMORY_THRESHOLD = 0.8; // 80% threshold
+
+    // Smart chunk buffer with automatic memory tracking
+    class ChunkBuffer {
+        std::vector<std::vector<T>> chunks;
+        MemoryTracker& tracker;
+        const size_t max_size;
+
+    public:
+        ChunkBuffer(MemoryTracker& t, size_t max_sz) : tracker(t), max_size(max_sz) {
+            chunks.reserve(max_sz);
+        }
+
+        void add_chunk(std::vector<T>&& chunk) {
+            size_t chunk_memory = chunk.capacity() * sizeof(T);
+            if (chunks.size() >= max_size ||
+                (tracker.get() + chunk_memory) > max_size * sizeof(T)) {
+                flush();
+            }
+            tracker.add(chunk_memory);
+            chunks.push_back(std::move(chunk));
+        }
+
+        std::vector<std::vector<T>> flush() {
+            std::vector<std::vector<T>> result;
+            result.swap(chunks);
+            tracker.reset();
+            chunks.reserve(max_size);
+            return result;
+        }
+
+        ~ChunkBuffer() {
+            tracker.subtract(chunks.capacity() * sizeof(T));
+        }
+    };
+
+    std::unique_ptr<ChunkBuffer> chunk_buffer;
 
     /**
      * @brief Create a checkpoint of current state
@@ -183,16 +244,6 @@ private:
         }
     }
 
-    void flush_chunks(std::vector<std::vector<T>>& result) {
-        std::lock_guard<std::mutex> lock(mutex);
-        if (active_chunks && !active_chunks->empty()) {
-            result.insert(result.end(), std::make_move_iterator(active_chunks->begin()),
-                          std::make_move_iterator(active_chunks->end()));
-            active_chunks->clear();
-            active_chunks->reserve(CHUNK_BUFFER_SIZE);
-        }
-    }
-
 public:
     ResilientChunker(const std::string& checkpoint_directory = "./checkpoints",
                      size_t max_mem_usage = 1024 * 1024 * 1024, // 1GB
@@ -218,49 +269,42 @@ public:
             std::vector<std::vector<T>> result;
             size_t processed = 0;
 
-            // Initialize memory pool
-            active_chunks = std::make_unique<std::vector<std::vector<T>>>();
-            active_chunks->reserve(CHUNK_BUFFER_SIZE);
-
-            // Create initial checkpoint
-            create_checkpoint(result);
+            // Initialize chunk buffer
+            chunk_buffer = std::make_unique<ChunkBuffer>(memory_tracker, CHUNK_BUFFER_SIZE);
 
             while (processed < data.size()) {
-                if (get_memory_usage() > max_memory_usage * 0.9) { // 90% threshold
-                    flush_chunks(result);
+                // Check memory usage and flush if needed
+                if (get_memory_usage() > max_memory_usage * MEMORY_THRESHOLD) {
+                    auto flushed = chunk_buffer->flush();
+                    result.insert(result.end(), std::make_move_iterator(flushed.begin()),
+                                  std::make_move_iterator(flushed.end()));
                     create_checkpoint(result);
-
-                    if (get_memory_usage() > max_memory_usage) {
-                        try {
-                            handle_memory_exhaustion();
-                        } catch (const std::exception& e) {
-                            // Try one last recovery
-                            active_chunks->clear();
-                            checkpoint_history.clear();
-                            if (get_memory_usage() > max_memory_usage) {
-                                throw;
-                            }
-                        }
-                    }
                 }
 
                 size_t chunk_size = std::min(checkpoint_interval, data.size() - processed);
-                active_chunks->emplace_back(data.begin() + processed,
-                                            data.begin() + processed + chunk_size);
-                processed += chunk_size;
+                std::vector<T> current_chunk(data.begin() + processed,
+                                             data.begin() + processed + chunk_size);
 
-                if (active_chunks->size() >= CHUNK_BUFFER_SIZE) {
-                    flush_chunks(result);
-                    create_checkpoint(result);
-                }
+                chunk_buffer->add_chunk(std::move(current_chunk));
+                processed += chunk_size;
             }
 
-            // Final flush and checkpoint
-            flush_chunks(result);
-            create_checkpoint(result);
+            // Final flush
+            auto final_chunks = chunk_buffer->flush();
+            result.insert(result.end(), std::make_move_iterator(final_chunks.begin()),
+                          std::make_move_iterator(final_chunks.end()));
 
+            create_checkpoint(result);
             return result;
+
         } catch (const std::exception& e) {
+            // Emergency cleanup
+            if (chunk_buffer) {
+                chunk_buffer->flush();
+            }
+            memory_tracker.reset();
+            checkpoint_history.clear();
+
             throw chunk_processing::ResilienceError("Processing failed: " + std::string(e.what()));
         }
     }
@@ -307,17 +351,31 @@ public:
      * @brief Handle memory exhaustion
      */
     void handle_memory_exhaustion() {
-        // Free up memory by clearing old checkpoints
+        // Clear all buffers
+        if (chunk_buffer) {
+            chunk_buffer->flush();
+        }
+
+        // Clear checkpoint history
         checkpoint_history.clear();
 
-        // Force garbage collection
+        // Reset memory tracking
+        memory_tracker.reset();
+
+        // Force cleanup
         std::vector<std::vector<T>>().swap(checkpoint_history[current_sequence].chunks);
 
         // Wait for memory to be freed
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
         if (get_memory_usage() > max_memory_usage) {
-            throw chunk_processing::ChunkingError("Memory exhaustion: Unable to recover");
+            // Last resort: clear everything
+            checkpoint_history.clear();
+            current_sequence.store(0);
+
+            if (get_memory_usage() > max_memory_usage) {
+                throw chunk_processing::ChunkingError("Memory exhaustion: Unable to recover");
+            }
         }
     }
 

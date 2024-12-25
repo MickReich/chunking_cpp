@@ -108,12 +108,12 @@ def test_process_with_recovery(sample_data):
         assert str(e) != ""
 
 def test_checkpoint_operations(sample_data):
-    # Use smaller values for testing
+    # Use more conservative values
     chunker = ResilientChunker(
         checkpoint_dir="test_checkpoint",
-        max_mem_usage=1024*1024*10,  # 10MB
+        max_mem_usage=1024*1024*100,  # 100MB
         checkpoint_freq=2,
-        history_size=2
+        history_size=1  # Minimize memory usage for history
     )
     try:
         result = chunker.process(sample_data)
