@@ -158,6 +158,11 @@ public:
         if (data.empty())
             return result;
 
+        // If threshold is 0, return the entire data as a single chunk
+        if (threshold_ <= 0.0) {
+            return {data};
+        }
+
         std::vector<T> current_chunk;
         for (const auto& value : data) {
             current_chunk.push_back(value);
