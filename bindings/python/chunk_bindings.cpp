@@ -59,57 +59,112 @@ PYBIND11_MODULE(chunking_cpp, m) {
 
     py::class_<chunk_processing::Chunk<std::vector<double>>>(m, "Chunk2D")
         .def(py::init<size_t>())
-        .def("add", [](chunk_processing::Chunk<std::vector<double>>& self,
-                       const py::array_t<double, py::array::c_style>& data) {
-            auto buf = data.request();
-            if (buf.ndim != 2) {
-                throw std::invalid_argument("Expected 2D array");
-            }
+        .def("add",
+             [](chunk_processing::Chunk<std::vector<double>>& self,
+                py::array_t<double, py::array::c_style>& data) {
+                 auto buf = data.request();
+                 if (buf.ndim != 2) {
+                     throw std::invalid_argument("Expected 2D array");
+                 }
 
-            std::vector<std::vector<double>> nested_data;
-            nested_data.reserve(buf.shape[0]);
-            auto ptr = static_cast<double*>(buf.ptr);
+                 std::vector<std::vector<double>> nested_data;
+                 nested_data.reserve(buf.shape[0]);
+                 auto ptr = static_cast<double*>(buf.ptr);
 
-            for (py::ssize_t i = 0; i < buf.shape[0]; i++) {
-                std::vector<double> row(ptr + i * buf.shape[1], 
-                                      ptr + (i + 1) * buf.shape[1]);
-                nested_data.push_back(std::move(row));
+                 for (py::ssize_t i = 0; i < buf.shape[0]; i++) {
+                     std::vector<double> row(ptr + i * buf.shape[1], ptr + (i + 1) * buf.shape[1]);
+                     nested_data.push_back(std::move(row));
+                 }
+                 self.add(nested_data);
+             })
+        .def("get_chunks",
+             [](chunk_processing::Chunk<std::vector<double>>& self) {
+                 auto chunks = self.get_chunks();
+                 py::list result;
+                 for (const auto& chunk : chunks) {
+                     py::list chunk_list;
+                     for (const auto& row : chunk) {
+                         chunk_list.append(py::array_t<double>(row.size(), row.data()));
+                     }
+                     result.append(chunk_list);
+                 }
+                 return result;
+             })
+        .def("chunk_by_size", [](chunk_processing::Chunk<std::vector<double>>& self, size_t size) {
+            auto chunks = self.chunk_by_size(size);
+            py::list result;
+            for (const auto& chunk : chunks) {
+                py::list chunk_list;
+                for (const auto& row : chunk) {
+                    chunk_list.append(py::array_t<double>(row.size(), row.data()));
+                }
+                result.append(chunk_list);
             }
-            self.add(nested_data);
-        })
-        .def("get_chunks", &chunk_processing::Chunk<std::vector<double>>::get_chunks)
-        .def("chunk_by_size", &chunk_processing::Chunk<std::vector<double>>::chunk_by_size);
+            return result;
+        });
 
     py::class_<chunk_processing::Chunk<std::vector<std::vector<double>>>>(m, "Chunk3D")
         .def(py::init<size_t>())
-        .def("add", [](chunk_processing::Chunk<std::vector<std::vector<double>>>& self,
-                       const py::array_t<double, py::array::c_style>& data) {
-            auto buf = data.request();
-            if (buf.ndim != 3) {
-                throw std::invalid_argument("Expected 3D array");
-            }
+        .def("add",
+             [](chunk_processing::Chunk<std::vector<std::vector<double>>>& self,
+                py::array_t<double, py::array::c_style>& data) {
+                 auto buf = data.request();
+                 if (buf.ndim != 3) {
+                     throw std::invalid_argument("Expected 3D array");
+                 }
 
-            std::vector<std::vector<std::vector<double>>> nested_data;
-            nested_data.reserve(buf.shape[0]);
-            auto ptr = static_cast<double*>(buf.ptr);
+                 std::vector<std::vector<std::vector<double>>> nested_data;
+                 nested_data.reserve(buf.shape[0]);
+                 auto ptr = static_cast<double*>(buf.ptr);
 
-            for (py::ssize_t i = 0; i < buf.shape[0]; i++) {
-                std::vector<std::vector<double>> matrix;
-                matrix.reserve(buf.shape[1]);
-                
-                for (py::ssize_t j = 0; j < buf.shape[1]; j++) {
-                    std::vector<double> row(
-                        ptr + (i * buf.shape[1] * buf.shape[2]) + (j * buf.shape[2]),
-                        ptr + (i * buf.shape[1] * buf.shape[2]) + ((j + 1) * buf.shape[2])
-                    );
-                    matrix.push_back(std::move(row));
-                }
-                nested_data.push_back(std::move(matrix));
-            }
-            self.add(nested_data);
-        })
-        .def("get_chunks", &chunk_processing::Chunk<std::vector<std::vector<double>>>::get_chunks)
-        .def("chunk_by_size", &chunk_processing::Chunk<std::vector<std::vector<double>>>::chunk_by_size);
+                 for (py::ssize_t i = 0; i < buf.shape[0]; i++) {
+                     std::vector<std::vector<double>> matrix;
+                     matrix.reserve(buf.shape[1]);
+
+                     for (py::ssize_t j = 0; j < buf.shape[1]; j++) {
+                         std::vector<double> row(
+                             ptr + (i * buf.shape[1] * buf.shape[2]) + (j * buf.shape[2]),
+                             ptr + (i * buf.shape[1] * buf.shape[2]) + ((j + 1) * buf.shape[2]));
+                         matrix.push_back(std::move(row));
+                     }
+                     nested_data.push_back(std::move(matrix));
+                 }
+                 self.add(nested_data);
+             })
+        .def("get_chunks",
+             [](chunk_processing::Chunk<std::vector<std::vector<double>>>& self) {
+                 auto chunks = self.get_chunks();
+                 py::list result;
+                 for (const auto& chunk : chunks) {
+                     py::list chunk_matrices;
+                     for (const auto& matrix : chunk) {
+                         py::list matrix_rows;
+                         for (const auto& row : matrix) {
+                             matrix_rows.append(py::array_t<double>(row.size(), row.data()));
+                         }
+                         chunk_matrices.append(matrix_rows);
+                     }
+                     result.append(chunk_matrices);
+                 }
+                 return result;
+             })
+        .def("chunk_by_size",
+             [](chunk_processing::Chunk<std::vector<std::vector<double>>>& self, size_t size) {
+                 auto chunks = self.chunk_by_size(size);
+                 py::list result;
+                 for (const auto& chunk : chunks) {
+                     py::list chunk_matrices;
+                     for (const auto& matrix : chunk) {
+                         py::list matrix_rows;
+                         for (const auto& row : matrix) {
+                             matrix_rows.append(py::array_t<double>(row.size(), row.data()));
+                         }
+                         chunk_matrices.append(matrix_rows);
+                     }
+                     result.append(chunk_matrices);
+                 }
+                 return result;
+             });
 
     // Neural Chunking
     py::class_<neural_chunking::NeuralChunking<double>>(m, "NeuralChunking")

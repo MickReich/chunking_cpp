@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
 from chunking_cpp.chunking_cpp import (
-    Chunk, ChunkBenchmark, NeuralChunking, WaveletChunking,
+    Chunk, Chunk2D, Chunk3D, ChunkBenchmark, NeuralChunking, WaveletChunking,
     MutualInformationChunking, DTWChunking, ChunkVisualizer,
     ChunkSerializer, ResilientChunker, ChunkingError
 )
