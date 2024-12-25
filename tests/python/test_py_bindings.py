@@ -108,10 +108,24 @@ def test_process_with_recovery(sample_data):
         assert str(e) != ""
 
 def test_checkpoint_operations(sample_data):
-    chunker = ResilientChunker("test_checkpoint", 3, 2, 1)
-    chunker.process(sample_data)
-    chunker.save_checkpoint()
-    assert chunker.restore_from_checkpoint() is not None
+    # Use smaller values for testing
+    chunker = ResilientChunker(
+        checkpoint_dir="test_checkpoint",
+        max_mem_usage=1024*1024*10,  # 10MB
+        checkpoint_freq=2,
+        history_size=2
+    )
+    try:
+        result = chunker.process(sample_data)
+        assert len(result) > 0
+        
+        # Test checkpoint operations
+        chunker.save_checkpoint()
+        restored = chunker.restore_from_checkpoint()
+        assert restored is not None
+        assert len(restored) > 0
+    except ChunkingError as e:
+        pytest.fail(f"Chunking failed: {str(e)}")
 
 # Parametrized Tests
 @pytest.mark.parametrize("invalid_input", [

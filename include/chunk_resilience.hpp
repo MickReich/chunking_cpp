@@ -113,6 +113,10 @@ private:
     std::unordered_map<size_t, Checkpoint<T>> checkpoint_history;
     size_t max_history_size;
 
+    // Add memory pool
+    std::unique_ptr<std::vector<std::vector<T>>> active_chunks;
+    static constexpr size_t CHUNK_BUFFER_SIZE = 1000; // Adjustable
+
     /**
      * @brief Create a checkpoint of current state
      */
@@ -179,6 +183,16 @@ private:
         }
     }
 
+    void flush_chunks(std::vector<std::vector<T>>& result) {
+        std::lock_guard<std::mutex> lock(mutex);
+        if (active_chunks && !active_chunks->empty()) {
+            result.insert(result.end(), std::make_move_iterator(active_chunks->begin()),
+                          std::make_move_iterator(active_chunks->end()));
+            active_chunks->clear();
+            active_chunks->reserve(CHUNK_BUFFER_SIZE);
+        }
+    }
+
 public:
     ResilientChunker(const std::string& checkpoint_directory = "./checkpoints",
                      size_t max_mem_usage = 1024 * 1024 * 1024, // 1GB
@@ -204,27 +218,46 @@ public:
             std::vector<std::vector<T>> result;
             size_t processed = 0;
 
+            // Initialize memory pool
+            active_chunks = std::make_unique<std::vector<std::vector<T>>>();
+            active_chunks->reserve(CHUNK_BUFFER_SIZE);
+
             // Create initial checkpoint
             create_checkpoint(result);
 
             while (processed < data.size()) {
-                // Check memory usage
-                if (get_memory_usage() > max_memory_usage) {
-                    handle_memory_exhaustion();
+                if (get_memory_usage() > max_memory_usage * 0.9) { // 90% threshold
+                    flush_chunks(result);
+                    create_checkpoint(result);
+
+                    if (get_memory_usage() > max_memory_usage) {
+                        try {
+                            handle_memory_exhaustion();
+                        } catch (const std::exception& e) {
+                            // Try one last recovery
+                            active_chunks->clear();
+                            checkpoint_history.clear();
+                            if (get_memory_usage() > max_memory_usage) {
+                                throw;
+                            }
+                        }
+                    }
                 }
 
-                // Process next chunk
                 size_t chunk_size = std::min(checkpoint_interval, data.size() - processed);
-                std::vector<T> current_chunk(data.begin() + processed,
-                                             data.begin() + processed + chunk_size);
-                result.push_back(current_chunk);
+                active_chunks->emplace_back(data.begin() + processed,
+                                            data.begin() + processed + chunk_size);
                 processed += chunk_size;
 
-                // Create checkpoint if needed
-                if (processed % checkpoint_interval == 0) {
+                if (active_chunks->size() >= CHUNK_BUFFER_SIZE) {
+                    flush_chunks(result);
                     create_checkpoint(result);
                 }
             }
+
+            // Final flush and checkpoint
+            flush_chunks(result);
+            create_checkpoint(result);
 
             return result;
         } catch (const std::exception& e) {

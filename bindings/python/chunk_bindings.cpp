@@ -241,7 +241,19 @@ PYBIND11_MODULE(chunking_cpp, m) {
 
     // Chunk Resilience
     py::class_<chunk_resilience::ResilientChunker<double>>(m, "ResilientChunker")
-        .def(py::init<const std::string&, size_t, size_t, size_t>())
+        .def(py::init([](const std::string& checkpoint_dir, size_t max_mem_usage,
+                         size_t checkpoint_freq, size_t history_size) {
+                 return std::make_unique<chunk_resilience::ResilientChunker<double>>(
+                     checkpoint_dir, max_mem_usage, checkpoint_freq, history_size);
+             }),
+             py::arg("checkpoint_dir") = "./checkpoints",
+             py::arg("max_mem_usage") = 1024 * 1024 * 1024, py::arg("checkpoint_freq") = 1000,
+             py::arg("history_size") = 5,
+             "Initialize ResilientChunker with parameters:\n"
+             "checkpoint_dir: Directory for checkpoints\n"
+             "max_mem_usage: Maximum memory usage in bytes\n"
+             "checkpoint_freq: Checkpoint frequency\n"
+             "history_size: Number of checkpoints to keep")
         .def("process", &chunk_resilience::ResilientChunker<double>::process)
         .def("save_checkpoint", &chunk_resilience::ResilientChunker<double>::save_checkpoint)
         .def("restore_from_checkpoint",
