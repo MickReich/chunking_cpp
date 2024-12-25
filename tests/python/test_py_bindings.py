@@ -100,12 +100,21 @@ def test_resilient_chunker_initialization():
 
 def test_process_with_recovery(sample_data):
     chunker = ResilientChunker("test_checkpoint", 3, 2, 1)
+    
+    # First process some data
+    result = chunker.process(sample_data)
+    assert result is not None
+    
+    # Then save checkpoint
     chunker.save_checkpoint()
+    
     try:
-        result = chunker.process(sample_data)
-        assert result is not None
+        # Test recovery
+        restored = chunker.restore_from_checkpoint()
+        assert restored is not None
+        assert len(restored) == len(result)
     except ChunkingError as e:
-        assert str(e) != ""
+        pytest.fail(f"Recovery failed: {str(e)}")
 
 def test_checkpoint_operations(sample_data):
     # Use more conservative values
@@ -113,19 +122,41 @@ def test_checkpoint_operations(sample_data):
         checkpoint_dir="test_checkpoint",
         max_mem_usage=1024*1024*100,  # 100MB
         checkpoint_freq=2,
-        history_size=1  # Minimize memory usage for history
+        history_size=1
     )
+    
+    # Process data first
     try:
         result = chunker.process(sample_data)
         assert len(result) > 0
+    except ChunkingError as e:
+        pytest.fail(f"Processing failed: {str(e)}")
+
+    # Test checkpoint operations with timeout
+    try:
+        import threading
+        checkpoint_event = threading.Event()
         
-        # Test checkpoint operations
-        chunker.save_checkpoint()
+        def save_checkpoint_with_timeout():
+            try:
+                chunker.save_checkpoint()
+                checkpoint_event.set()
+            except ChunkingError as e:
+                print(f"Checkpoint save failed: {str(e)}")
+        
+        save_thread = threading.Thread(target=save_checkpoint_with_timeout)
+        save_thread.start()
+        save_thread.join(timeout=5)  # 5 second timeout
+        
+        if not checkpoint_event.is_set():
+            pytest.fail("Checkpoint save operation timed out")
+        
         restored = chunker.restore_from_checkpoint()
         assert restored is not None
         assert len(restored) > 0
+        assert len(restored) == len(result)
     except ChunkingError as e:
-        pytest.fail(f"Chunking failed: {str(e)}")
+        pytest.fail(f"Checkpoint operations failed: {str(e)}")
 
 # Parametrized Tests
 @pytest.mark.parametrize("invalid_input", [
