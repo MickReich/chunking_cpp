@@ -10,9 +10,9 @@
 #include <cmath>   // for std::abs
 #include <cstdlib> // for malloc, free
 #include <memory>
+#include <numeric>
 #include <stdexcept> // for std::runtime_error
 #include <vector>
-#include <numeric>
 
 namespace neural_chunking {
 
@@ -104,42 +104,45 @@ private:
     size_t window_size_;
     double threshold_;
 
-    // Add helper for multi-dimensional arrays
-    template<typename U>
-    static bool is_multidimensional_v = is_vector<typename U::value_type>::value;
-
-    template<typename U>
+    template <typename U>
     double compute_feature(const U& arr) const {
-        if constexpr (is_multidimensional_v<U>) {
+        if constexpr (chunk_processing::is_multidimensional_v<U>) {
             double sum = 0.0;
             for (const auto& inner : arr) {
                 sum += compute_feature(inner);
             }
             return sum / std::size(arr);
+        } else if constexpr (chunk_processing::is_vector<U>::value) {
+            return std::accumulate(std::begin(arr), std::end(arr), 0.0) / std::size(arr);
         } else {
-            return std::accumulate(std::begin(arr), std::end(arr), 0.0) / 
-                   std::size(arr);
+            return static_cast<double>(arr);
         }
     }
 };
 
 template <typename T>
 std::vector<std::vector<T>> NeuralChunking<T>::chunk(const std::vector<T>& data) const {
-    if (data.empty()) return {};
+    if (data.empty())
+        return {};
 
     std::vector<std::vector<T>> result;
     std::vector<T> current_chunk;
 
     for (const auto& value : data) {
-        if constexpr (is_multidimensional_v<T>) {
+        if constexpr (chunk_processing::is_multidimensional_v<T>) {
             double feature = compute_feature(value);
-            if (!current_chunk.empty() && 
+            if (!current_chunk.empty() &&
                 std::abs(feature - compute_feature(current_chunk.back())) > threshold_) {
                 result.push_back(current_chunk);
                 current_chunk.clear();
             }
         } else {
-            // Existing single-dimension logic...
+            // Single-dimension logic
+            if (!current_chunk.empty() &&
+                std::abs(static_cast<double>(value - current_chunk.back())) > threshold_) {
+                result.push_back(current_chunk);
+                current_chunk.clear();
+            }
         }
         current_chunk.push_back(value);
     }

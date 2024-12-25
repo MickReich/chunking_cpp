@@ -1,4 +1,5 @@
 #pragma once
+#include "chunk_common.hpp"
 #include <algorithm>
 #include <cmath>
 #include <map>
@@ -161,12 +162,32 @@ private:
     size_t window_size_;
     double dtw_threshold_;
 
-    template<typename U>
-    static bool is_multidimensional_v = is_vector<typename U::value_type>::value;
+    double compute_dtw_distance_1d(const std::vector<double>& seq1,
+                                   const std::vector<double>& seq2) const {
+        const size_t n = seq1.size();
+        const size_t m = seq2.size();
+        std::vector<std::vector<double>> dp(
+            n + 1, std::vector<double>(m + 1, std::numeric_limits<double>::infinity()));
+
+        dp[0][0] = 0.0;
+
+        for (size_t i = 1; i <= n; ++i) {
+            for (size_t j = std::max(1ul, i - window_size_); j <= std::min(m, i + window_size_);
+                 ++j) {
+                double cost = std::abs(seq1[i - 1] - seq2[j - 1]);
+                dp[i][j] = cost + std::min({
+                                      dp[i - 1][j],    // insertion
+                                      dp[i][j - 1],    // deletion
+                                      dp[i - 1][j - 1] // match
+                                  });
+            }
+        }
+
+        return dp[n][m];
+    }
 
     double compute_dtw_distance(const T& seq1, const T& seq2) const {
-        if constexpr (is_multidimensional_v<T>) {
-            // Handle multi-dimensional DTW
+        if constexpr (chunk_processing::is_multidimensional_v<T>) {
             std::vector<double> features1 = flatten_features(seq1);
             std::vector<double> features2 = flatten_features(seq2);
             return compute_dtw_distance_1d(features1, features2);
@@ -175,10 +196,10 @@ private:
         }
     }
 
-    template<typename U>
+    template <typename U>
     std::vector<double> flatten_features(const U& arr) const {
         std::vector<double> result;
-        if constexpr (is_multidimensional_v<U>) {
+        if constexpr (chunk_processing::is_multidimensional_v<U>) {
             for (const auto& inner : arr) {
                 auto inner_flat = flatten_features(inner);
                 result.insert(result.end(), inner_flat.begin(), inner_flat.end());

@@ -6,6 +6,7 @@
 #pragma once
 
 #include "chunk.hpp"
+#include "chunk_common.hpp"
 #include <algorithm>
 #include <cmath>
 #include <functional>
@@ -188,20 +189,21 @@ public:
 template <typename T>
 class PatternBasedStrategy : public ChunkStrategy<T> {
 private:
-    // Add helper for multi-dimensional arrays
-    template<typename U>
-    static bool is_multidimensional_v = is_vector<typename U::value_type>::value;
+    template <typename U>
+    static constexpr bool is_multidimensional_v = chunk_processing::is_multidimensional_v<U>;
 
-    template<typename U>
+    template <typename U>
     double compute_array_sum(const U& arr) const {
-        if constexpr (is_multidimensional_v<U>) {
+        if constexpr (chunk_processing::is_multidimensional_v<U>) {
             double sum = 0.0;
             for (const auto& inner : arr) {
                 sum += compute_array_sum(inner);
             }
             return sum;
-        } else {
+        } else if constexpr (chunk_processing::is_vector<U>::value) {
             return std::accumulate(arr.begin(), arr.end(), 0.0);
+        } else {
+            return static_cast<double>(arr);
         }
     }
 
@@ -269,8 +271,7 @@ private:
         }
 
         if (data.size() < pattern_size_) {
-            return data.empty() ? std::vector<std::vector<T>>{}
-                                : std::vector<std::vector<T>>{data};
+            return data.empty() ? std::vector<std::vector<T>>{} : std::vector<std::vector<T>>{data};
         }
 
         std::vector<std::vector<T>> result;

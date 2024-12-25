@@ -40,7 +40,9 @@ PYBIND11_MODULE(chunking_cpp, m) {
     // Basic Chunking
     py::class_<chunk_processing::Chunk<double>>(m, "Chunk")
         .def(py::init<size_t>())
-        .def("add", py::overload_cast<const double&>(&chunk_processing::Chunk<double>::add),
+        .def("add",
+             static_cast<void (chunk_processing::Chunk<double>::*)(const double&)>(
+                 &chunk_processing::Chunk<double>::add),
              "Add a single element")
         .def(
             "add",
@@ -57,15 +59,15 @@ PYBIND11_MODULE(chunking_cpp, m) {
 
     py::class_<chunk_processing::Chunk<std::vector<double>>>(m, "Chunk2D")
         .def(py::init<size_t>())
-        .def("add", [](chunk_processing::Chunk<std::vector<double>>& self, 
+        .def("add", [](chunk_processing::Chunk<std::vector<double>>& self,
                        const py::array_t<double, py::array::c_style>& data) {
             auto buf = data.request();
-            if (buf.ndim != 2) 
+            if (buf.ndim != 2)
                 throw std::invalid_argument("Expected 2D array");
-            
+
             std::vector<std::vector<double>> nested_data;
             auto ptr = static_cast<double*>(buf.ptr);
-            
+
             for (py::ssize_t i = 0; i < buf.shape[0]; i++) {
                 std::vector<double> row;
                 for (py::ssize_t j = 0; j < buf.shape[1]; j++) {
@@ -83,7 +85,7 @@ PYBIND11_MODULE(chunking_cpp, m) {
             auto buf = data.request();
             if (buf.ndim != 3)
                 throw std::invalid_argument("Expected 3D array");
-            
+
             // Convert 3D numpy array to nested vectors
             // Implementation here
         });
