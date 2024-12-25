@@ -38,7 +38,7 @@ with this program; if not, see <https://www.gnu.org/licenses/>.
 using namespace advanced_structures; // For ChunkSkipList and ChunkBPlusTree
 using namespace parallel_chunk;      // For ParallelChunkProcessor
 using namespace chunk_compression;   // For ChunkCompressor
-using namespace chunk_strategies;    // For QuantileStrategy, VarianceStrategy, etc.
+using namespace chunk_processing;    // For all chunking strategies
 using namespace chunk_windows;
 
 /**
@@ -91,17 +91,14 @@ void print_sub_chunks(const std::vector<std::vector<std::vector<T>>>& sub_chunks
 void demonstrate_complex_recursive_subchunking() {
     std::cout << "\n=== Complex Recursive Sub-chunking ===" << std::endl;
 
-    // Example data
-    std::vector<std::vector<double>> data = {{1.0, 1.1, 1.2, 5.0, 5.1, 5.2},
-                                             {2.0, 2.1, 2.2, 10.0, 10.1, 10.2},
-                                             {3.0, 3.1, 3.2, 15.0, 15.1, 15.2}};
+    // Example data - now using 1D vector
+    std::vector<double> data = {1.0, 1.1, 1.2, 5.0, 5.1, 5.2, 2.0, 2.1, 2.2, 10.0, 10.1, 10.2};
 
-    // Recursive sub-chunking
-    auto variance_strategy = std::make_shared<VarianceStrategy<double>>(3.0);
-    RecursiveSubChunkStrategy<double> recursive_strategy(variance_strategy, 3, 2);
-    auto recursive_result = recursive_strategy.apply(data);
+    auto variance_strategy = std::make_shared<chunk_processing::VarianceStrategy<double>>(3.0);
+    chunk_processing::RecursiveSubChunkStrategy<double> recursive_chunker(variance_strategy, 3, 2);
+    auto recursive_result = recursive_chunker.apply(data);
 
-    print_sub_chunks(recursive_result, "Recursive Sub-chunking");
+    print_chunks(recursive_result);
 }
 
 /**
@@ -113,19 +110,17 @@ void demonstrate_complex_recursive_subchunking() {
 void demonstrate_multi_strategy_subchunking() {
     std::cout << "\n=== Multi-Strategy Sub-chunking ===" << std::endl;
 
-    // Example data
-    std::vector<std::vector<double>> data = {{1.0, 1.1, 1.2, 5.0, 5.1, 5.2},
-                                             {2.0, 2.1, 2.2, 10.0, 10.1, 10.2},
-                                             {3.0, 3.1, 3.2, 15.0, 15.1, 15.2}};
+    // Example data - now using 1D vector
+    std::vector<double> data = {1.0, 1.1, 1.2, 5.0, 5.1, 5.2, 2.0, 2.1, 2.2, 10.0, 10.1, 10.2};
 
-    // Hierarchical sub-chunking
-    std::vector<std::shared_ptr<ChunkStrategy<double>>> strategies = {
-        std::make_shared<VarianceStrategy<double>>(5.0),
-        std::make_shared<EntropyStrategy<double>>(1.0)};
-    HierarchicalSubChunkStrategy<double> hierarchical_strategy(strategies, 2);
-    auto hierarchical_result = hierarchical_strategy.apply(data);
+    std::vector<std::shared_ptr<chunk_processing::ChunkStrategy<double>>> strategies = {
+        std::make_shared<chunk_processing::VarianceStrategy<double>>(5.0),
+        std::make_shared<chunk_processing::EntropyStrategy<double>>(1.0)};
 
-    print_sub_chunks(hierarchical_result, "Hierarchical Sub-chunking");
+    chunk_processing::HierarchicalSubChunkStrategy<double> hierarchical_chunker(strategies, 2);
+    auto hierarchical_result = hierarchical_chunker.apply(data);
+
+    print_chunks(hierarchical_result);
 }
 
 /**
@@ -137,27 +132,19 @@ void demonstrate_multi_strategy_subchunking() {
 void demonstrate_adaptive_conditional_subchunking() {
     std::cout << "\n=== Adaptive Conditional Sub-chunking ===" << std::endl;
 
-    // Example data
-    std::vector<std::vector<double>> data = {{1.0, 1.1, 1.2, 5.0, 5.1, 5.2},
-                                             {2.0, 2.1, 2.2, 10.0, 10.1, 10.2},
-                                             {3.0, 3.1, 3.2, 15.0, 15.1, 15.2}};
+    // Example data - now using 1D vector
+    std::vector<double> data = {1.0, 1.1, 1.2, 5.0, 5.1, 5.2, 2.0, 2.1, 2.2, 10.0, 10.1, 10.2};
 
-    // Conditional sub-chunking
+    auto variance_strategy = std::make_shared<chunk_processing::VarianceStrategy<double>>(5.0);
     auto condition = [](const std::vector<double>& chunk) {
-        double mean = std::accumulate(chunk.begin(), chunk.end(), 0.0) / chunk.size();
-        double variance = 0.0;
-        for (const auto& val : chunk) {
-            variance += (val - mean) * (val - mean);
-        }
-        variance /= chunk.size();
-        return variance > 50.0;
+        return chunk.size() > 5; // Only sub-chunk large chunks
     };
 
-    auto variance_strategy = std::make_shared<VarianceStrategy<double>>(5.0);
-    ConditionalSubChunkStrategy<double> conditional_strategy(variance_strategy, condition, 2);
-    auto conditional_result = conditional_strategy.apply(data);
+    chunk_processing::ConditionalSubChunkStrategy<double> conditional_chunker(variance_strategy,
+                                                                              condition, 2);
+    auto conditional_result = conditional_chunker.apply(data);
 
-    print_sub_chunks(conditional_result, "Conditional Sub-chunking");
+    print_chunks(conditional_result);
 }
 
 /**

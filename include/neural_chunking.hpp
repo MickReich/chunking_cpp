@@ -7,11 +7,10 @@
 
 #pragma once
 #include "chunk_common.hpp"
-#include <cmath>   // for std::abs
-#include <cstdlib> // for malloc, free
+#include <cmath>
 #include <memory>
-#include <numeric>
-#include <stdexcept> // for std::runtime_error
+#include <numeric> // for std::accumulate
+#include <stdexcept>
 #include <vector>
 
 namespace neural_chunking {
@@ -80,6 +79,30 @@ struct CHUNK_EXPORT NeuralChunkConfig {
  */
 template <typename T>
 class CHUNK_EXPORT NeuralChunking {
+private:
+    size_t window_size_;
+    double threshold_;
+
+    template <typename U>
+    double compute_feature(const U& arr) const {
+        if constexpr (chunk_processing::is_vector<U>::value) {
+            if constexpr (chunk_processing::is_vector<typename U::value_type>::value) {
+                // Handle 2D arrays
+                double sum = 0.0;
+                for (const auto& inner : arr) {
+                    sum += compute_feature(inner);
+                }
+                return sum / arr.size();
+            } else {
+                // Handle 1D arrays
+                return std::accumulate(arr.begin(), arr.end(), 0.0) / arr.size();
+            }
+        } else {
+            // Handle scalar values
+            return static_cast<double>(arr);
+        }
+    }
+
 public:
     NeuralChunking(size_t window_size = 8, double threshold = 0.5)
         : window_size_(window_size), threshold_(threshold) {}
@@ -98,66 +121,44 @@ public:
         return threshold_;
     }
 
-    std::vector<std::vector<T>> chunk(const std::vector<T>& data) const;
-
-private:
-    size_t window_size_;
-    double threshold_;
-
-    template <typename U>
-    double compute_feature(const U& arr) const {
-        if constexpr (chunk_processing::is_multidimensional_v<U>) {
-            double sum = 0.0;
-            for (const auto& inner : arr) {
-                sum += compute_feature(inner);
-            }
-            return sum / std::size(arr);
-        } else if constexpr (chunk_processing::is_vector<U>::value) {
-            return std::accumulate(std::begin(arr), std::end(arr), 0.0) / std::size(arr);
-        } else {
-            return static_cast<double>(arr);
+    std::vector<std::vector<T>> chunk(const std::vector<T>& data) const {
+        if (data.empty()) {
+            return {};
         }
+
+        // Handle case where data is smaller than window size
+        if (data.size() <= window_size_) {
+            return {data};
+        }
+
+        std::vector<std::vector<T>> result;
+        std::vector<T> current_chunk;
+
+        for (const auto& value : data) {
+            if constexpr (chunk_processing::is_vector<T>::value) {
+                double feature = compute_feature(value);
+                if (!current_chunk.empty() &&
+                    std::abs(feature - compute_feature(current_chunk.back())) > threshold_) {
+                    result.push_back(current_chunk);
+                    current_chunk.clear();
+                }
+            } else {
+                // Single-dimension logic
+                if (!current_chunk.empty() &&
+                    std::abs(static_cast<double>(value - current_chunk.back())) > threshold_) {
+                    result.push_back(current_chunk);
+                    current_chunk.clear();
+                }
+            }
+            current_chunk.push_back(value);
+        }
+
+        if (!current_chunk.empty()) {
+            result.push_back(current_chunk);
+        }
+
+        return result;
     }
 };
-
-template <typename T>
-std::vector<std::vector<T>> NeuralChunking<T>::chunk(const std::vector<T>& data) const {
-    if (data.empty()) {
-        return {};
-    }
-
-    // Handle case where data is smaller than window size
-    if (data.size() <= window_size_) {
-        return {data};  // Return entire data as single chunk
-    }
-
-    std::vector<std::vector<T>> result;
-    std::vector<T> current_chunk;
-
-    for (const auto& value : data) {
-        if constexpr (chunk_processing::is_multidimensional_v<T>) {
-            double feature = compute_feature(value);
-            if (!current_chunk.empty() &&
-                std::abs(feature - compute_feature(current_chunk.back())) > threshold_) {
-                result.push_back(current_chunk);
-                current_chunk.clear();
-            }
-        } else {
-            // Single-dimension logic
-            if (!current_chunk.empty() &&
-                std::abs(static_cast<double>(value - current_chunk.back())) > threshold_) {
-                result.push_back(current_chunk);
-                current_chunk.clear();
-            }
-        }
-        current_chunk.push_back(value);
-    }
-
-    if (!current_chunk.empty()) {
-        result.push_back(current_chunk);
-    }
-
-    return result;
-}
 
 } // namespace neural_chunking

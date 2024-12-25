@@ -298,9 +298,8 @@ PYBIND11_MODULE(chunking_cpp, m) {
         .def_readwrite("strategy_name", &chunk_benchmark::BenchmarkResult::strategy_name);
 
     py::class_<chunk_benchmark::ChunkBenchmark<double>>(m, "ChunkBenchmark")
-        .def(py::init<const std::vector<double>&, const std::string&>())
+        .def(py::init<const std::vector<double>&, size_t>())
         .def("add_strategy", &chunk_benchmark::ChunkBenchmark<double>::add_strategy)
-        .def("run_benchmark", &chunk_benchmark::ChunkBenchmark<double>::run_benchmark)
         .def("benchmark_chunking", &chunk_benchmark::ChunkBenchmark<double>::benchmark_chunking)
         .def("save_results", &chunk_benchmark::ChunkBenchmark<double>::save_results);
 
@@ -308,17 +307,21 @@ PYBIND11_MODULE(chunking_cpp, m) {
     py::register_exception<chunk_processing::ChunkingError>(m, "ChunkingError");
 
     // Strategy bindings
-    py::class_<chunk_strategies::ChunkStrategy<double>,
-               std::shared_ptr<chunk_strategies::ChunkStrategy<double>>>(m, "ChunkStrategy")
-        .def("apply", &chunk_strategies::ChunkStrategy<double>::apply);
+    py::class_<chunk_processing::ChunkStrategy<double>,
+               std::shared_ptr<chunk_processing::ChunkStrategy<double>>>(m, "ChunkStrategy")
+        .def("apply", &chunk_processing::ChunkStrategy<double>::apply);
 
-    py::class_<NeuralChunkingStrategy<double>, chunk_strategies::ChunkStrategy<double>,
-               std::shared_ptr<NeuralChunkingStrategy<double>>>(m, "NeuralChunkingStrategy")
+    py::class_<chunk_processing::NeuralChunkingStrategy<double>,
+               chunk_processing::ChunkStrategy<double>,
+               std::shared_ptr<chunk_processing::NeuralChunkingStrategy<double>>>(
+        m, "NeuralChunkingStrategy")
         .def(py::init<>())
-        .def("apply", &NeuralChunkingStrategy<double>::apply);
+        .def("apply", &chunk_processing::NeuralChunkingStrategy<double>::apply);
 
-    py::class_<SimilarityChunkingStrategy<double>, chunk_strategies::ChunkStrategy<double>,
-               std::shared_ptr<SimilarityChunkingStrategy<double>>>(m, "SimilarityChunkingStrategy")
+    py::class_<chunk_processing::SimilarityChunkingStrategy<double>,
+               chunk_processing::ChunkStrategy<double>,
+               std::shared_ptr<chunk_processing::SimilarityChunkingStrategy<double>>>(
+        m, "SimilarityChunkingStrategy")
         .def(py::init<double>())
-        .def("apply", &SimilarityChunkingStrategy<double>::apply);
+        .def("apply", &chunk_processing::SimilarityChunkingStrategy<double>::apply);
 }

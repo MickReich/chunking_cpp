@@ -186,28 +186,66 @@ private:
         return dp[n][m];
     }
 
-    double compute_dtw_distance(const T& seq1, const T& seq2) const {
-        if constexpr (chunk_processing::is_multidimensional_v<T>) {
-            std::vector<double> features1 = flatten_features(seq1);
-            std::vector<double> features2 = flatten_features(seq2);
-            return compute_dtw_distance_1d(features1, features2);
+    template <typename U>
+    std::vector<double> flatten_features(const U& data) const {
+        if constexpr (chunk_processing::is_vector<U>::value) {
+            if constexpr (chunk_processing::is_vector<typename U::value_type>::value) {
+                // Handle 2D arrays
+                std::vector<double> flattened;
+                for (const auto& inner : data) {
+                    auto inner_features = flatten_features(inner);
+                    flattened.insert(flattened.end(), inner_features.begin(), inner_features.end());
+                }
+                return flattened;
+            } else {
+                // Handle 1D arrays
+                return std::vector<double>(data.begin(), data.end());
+            }
         } else {
-            return std::abs(static_cast<double>(seq1 - seq2));
+            // Handle scalar values
+            return {static_cast<double>(data)};
         }
     }
 
-    template <typename U>
-    std::vector<double> flatten_features(const U& arr) const {
-        std::vector<double> result;
-        if constexpr (chunk_processing::is_multidimensional_v<U>) {
-            for (const auto& inner : arr) {
-                auto inner_flat = flatten_features(inner);
-                result.insert(result.end(), inner_flat.begin(), inner_flat.end());
+    double compute_dtw_distance(const std::vector<T>& seq1, const std::vector<T>& seq2) const {
+        if constexpr (chunk_processing::is_vector<T>::value) {
+            if constexpr (chunk_processing::is_vector<typename T::value_type>::value) {
+                // For multi-dimensional data, flatten and compare features
+                auto features1 = flatten_features(seq1);
+                auto features2 = flatten_features(seq2);
+                return compute_dtw_core(features1, features2);
+            } else {
+                // For 1D vector data
+                return compute_dtw_core(seq1, seq2);
             }
         } else {
-            result.insert(result.end(), std::begin(arr), std::end(arr));
+            // For scalar data
+            return std::abs(static_cast<double>(seq1[0] - seq2[0]));
         }
-        return result;
+    }
+
+    double compute_dtw_core(const std::vector<double>& seq1,
+                            const std::vector<double>& seq2) const {
+        const size_t n = seq1.size();
+        const size_t m = seq2.size();
+        std::vector<std::vector<double>> dp(
+            n + 1, std::vector<double>(m + 1, std::numeric_limits<double>::infinity()));
+
+        dp[0][0] = 0.0;
+
+        for (size_t i = 1; i <= n; ++i) {
+            for (size_t j = std::max(1ul, i - window_size_); j <= std::min(m, i + window_size_);
+                 ++j) {
+                double cost = std::abs(seq1[i - 1] - seq2[j - 1]);
+                dp[i][j] = cost + std::min({
+                                      dp[i - 1][j],    // insertion
+                                      dp[i][j - 1],    // deletion
+                                      dp[i - 1][j - 1] // match
+                                  });
+            }
+        }
+
+        return dp[n][m];
     }
 
     /**
@@ -232,7 +270,40 @@ public:
      * @param data Input data to be chunked
      * @return Vector of chunks
      */
-    std::vector<std::vector<T>> chunk(const std::vector<T>& data) const;
+    std::vector<std::vector<T>> chunk(const std::vector<T>& data) const {
+        if (data.empty()) {
+            return {};
+        }
+
+        std::vector<std::vector<T>> result;
+        std::vector<T> current_chunk;
+
+        for (const auto& value : data) {
+            if constexpr (chunk_processing::is_vector<T>::value) {
+                if (!current_chunk.empty()) {
+                    double distance = compute_dtw_distance(value, current_chunk.back());
+                    if (distance > dtw_threshold_) {
+                        result.push_back(current_chunk);
+                        current_chunk.clear();
+                    }
+                }
+            } else {
+                // Single-dimension logic
+                if (!current_chunk.empty() &&
+                    std::abs(static_cast<double>(value - current_chunk.back())) > dtw_threshold_) {
+                    result.push_back(current_chunk);
+                    current_chunk.clear();
+                }
+            }
+            current_chunk.push_back(value);
+        }
+
+        if (!current_chunk.empty()) {
+            result.push_back(current_chunk);
+        }
+
+        return result;
+    }
 
     /**
      * @brief Get the size of the warping window
@@ -423,39 +494,6 @@ double DTWChunking<T>::computeDTWDistance(const std::vector<T>& seq1,
     }
 
     return dtw[seq1.size()][seq2.size()];
-}
-
-template <typename T>
-std::vector<std::vector<T>> DTWChunking<T>::chunk(const std::vector<T>& data) const {
-    if (data.size() < 2 * window_size_) {
-        return {data};
-    }
-
-    std::vector<std::vector<T>> chunks;
-    std::vector<T> current_chunk;
-
-    for (size_t i = 0; i < data.size(); ++i) {
-        current_chunk.push_back(data[i]);
-
-        if (current_chunk.size() >= window_size_ && i + window_size_ < data.size()) {
-            std::vector<T> next_window(data.begin() + i + 1, data.begin() + i + 1 + window_size_);
-
-            double distance = computeDTWDistance(
-                std::vector<T>(current_chunk.end() - window_size_, current_chunk.end()),
-                next_window);
-
-            if (distance > dtw_threshold_) {
-                chunks.push_back(current_chunk);
-                current_chunk.clear();
-            }
-        }
-    }
-
-    if (!current_chunk.empty()) {
-        chunks.push_back(current_chunk);
-    }
-
-    return chunks;
 }
 
 } // namespace sophisticated_chunking

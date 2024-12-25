@@ -26,6 +26,11 @@ private:
         }
     }
 
+    void validate_jagged(const std::vector<std::vector<T>>& data) const {
+        if (is_jagged(data)) {
+            throw std::invalid_argument("Data is jagged");
+        }
+    }
     // Ensure data is properly copied
     std::vector<std::vector<T>> make_chunks(size_t size) const {
         std::vector<std::vector<T>> result;
@@ -60,14 +65,98 @@ private:
     // Helper to validate nested vectors have consistent dimensions
     template <typename U>
     void validate_dimensions(const std::vector<U>& data, size_t expected_size = 0) {
-        for (const auto& inner : data) {
-            if constexpr (is_vector<U>::value) {
-                if (expected_size > 0 && inner.size() != expected_size)
-                    throw std::invalid_argument("Inconsistent dimensions in nested array");
-                validate_dimensions(inner, expected_size);
+        if constexpr (chunk_processing::is_vector<U>::value) {
+            // Check for jagged arrays
+            if (chunk_processing::is_jagged(data)) {
+                throw std::invalid_argument("Jagged arrays are not supported");
+            }
+
+            // For 3D arrays
+            if constexpr (chunk_processing::is_vector<typename U::value_type>::value) {
+                if (chunk_processing::is_jagged_3d(
+                        reinterpret_cast<const std::vector<
+                            std::vector<std::vector<typename U::value_type::value_type>>>&>(
+                            data))) {
+                    throw std::invalid_argument("Jagged 3D arrays are not supported");
+                }
+            }
+
+            // Check size consistency
+            if (expected_size > 0 && data.size() != expected_size) {
+                throw std::invalid_argument("Inconsistent dimensions in nested array");
+            }
+
+            // Recursively validate inner dimensions
+            if (!data.empty()) {
+                validate_dimensions(data[0], data[0].size());
             }
         }
     }
+
+    template <typename U>
+    class JaggedVectorHandler {
+    public:
+        static std::vector<std::vector<U>> normalize(const std::vector<std::vector<U>>& jagged) {
+            if (jagged.empty())
+                return {};
+
+            // Find maximum size
+            size_t max_size = 0;
+            for (const auto& row : jagged) {
+                max_size = std::max(max_size, row.size());
+            }
+
+            // Normalize by padding with default values
+            std::vector<std::vector<U>> normalized;
+            normalized.reserve(jagged.size());
+
+            for (const auto& row : jagged) {
+                std::vector<U> normalized_row = row;
+                normalized_row.resize(max_size, U{}); // Pad with default values
+                normalized.push_back(std::move(normalized_row));
+            }
+
+            return normalized;
+        }
+
+        static std::vector<std::vector<std::vector<U>>>
+        normalize_3d(const std::vector<std::vector<std::vector<U>>>& jagged_3d) {
+            if (jagged_3d.empty())
+                return {};
+
+            // Find maximum sizes
+            size_t max_rows = 0, max_cols = 0;
+            for (const auto& matrix : jagged_3d) {
+                max_rows = std::max(max_rows, matrix.size());
+                for (const auto& row : matrix) {
+                    max_cols = std::max(max_cols, row.size());
+                }
+            }
+
+            // Normalize by padding
+            std::vector<std::vector<std::vector<U>>> normalized;
+            normalized.reserve(jagged_3d.size());
+
+            for (const auto& matrix : jagged_3d) {
+                std::vector<std::vector<U>> norm_matrix;
+                norm_matrix.reserve(max_rows);
+
+                for (const auto& row : matrix) {
+                    std::vector<U> norm_row = row;
+                    norm_row.resize(max_cols, U{});
+                    norm_matrix.push_back(std::move(norm_row));
+                }
+
+                while (norm_matrix.size() < max_rows) {
+                    norm_matrix.push_back(std::vector<U>(max_cols));
+                }
+
+                normalized.push_back(std::move(norm_matrix));
+            }
+
+            return normalized;
+        }
+    };
 
 public:
     explicit Chunk(size_t chunk_size = 1) : chunk_size_(chunk_size) {
@@ -154,7 +243,21 @@ public:
     // Add methods to handle multi-dimensional data
     template <typename U = T>
     std::enable_if_t<is_vector<U>::value> add(const U& nested_data) {
-        validate_dimensions(nested_data);
+        // First validate dimensions
+        if (chunk_processing::is_jagged(nested_data)) {
+            throw std::invalid_argument("Jagged arrays are not supported");
+        }
+
+        // For 3D arrays, check additional level
+        if constexpr (chunk_processing::is_vector<typename U::value_type::value_type>::value) {
+            if (chunk_processing::is_jagged_3d(
+                    reinterpret_cast<const std::vector<
+                        std::vector<std::vector<typename U::value_type::value_type>>>&>(
+                        nested_data))) {
+                throw std::invalid_argument("Jagged 3D arrays are not supported");
+            }
+        }
+
         data_.push_back(nested_data);
         update_chunks();
     }
@@ -162,6 +265,24 @@ public:
     // Get the dimensionality of the data
     static constexpr size_t dimensions() {
         return get_depth<T>();
+    }
+
+    // Add methods to handle jagged arrays
+    template <typename U = T>
+    std::vector<std::vector<U>> handle_jagged_2d(const std::vector<std::vector<U>>& data) {
+        if (!chunk_processing::is_jagged(data)) {
+            return data; // Already uniform
+        }
+        return JaggedVectorHandler<U>::normalize(data);
+    }
+
+    template <typename U = T>
+    std::vector<std::vector<std::vector<U>>>
+    handle_jagged_3d(const std::vector<std::vector<std::vector<U>>>& data) {
+        if (!chunk_processing::is_jagged_3d(data)) {
+            return data; // Already uniform
+        }
+        return JaggedVectorHandler<U>::normalize_3d(data);
     }
 };
 

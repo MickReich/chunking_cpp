@@ -8,90 +8,39 @@
 #include "chunk.hpp"
 #include "chunk_benchmark.hpp"
 #include "chunk_strategies.hpp"
-#include "neural_chunking.hpp"
+#include "chunk_strategy_implementations.hpp"
+#include <chrono>
 #include <iostream>
 #include <memory>
-#include <random>
+#include <vector>
 
-// Strategy wrapper for neural chunking
-template <typename T>
-class NeuralChunkingStrategy : public chunk_strategies::ChunkStrategy<T> {
-private:
-    mutable neural_chunking::NeuralChunking<T> neural_chunker;
-
-public:
-    NeuralChunkingStrategy() : neural_chunker(8, 0.5) {}
-
-    std::vector<std::vector<T>> apply(const std::vector<T>& data) const override {
-        return neural_chunker.chunk(data);
-    }
-};
-
-// Strategy wrapper for similarity-based chunking
-template <typename T>
-class SimilarityChunkingStrategy : public chunk_strategies::ChunkStrategy<T> {
-public:
-    explicit SimilarityChunkingStrategy(double threshold) : threshold(threshold) {}
-
-    std::vector<std::vector<T>> apply(const std::vector<T>& data) const override {
-        chunk_processing::Chunk<T> chunker(1); // Start with smallest chunk size
-        for (const auto& item : data) {
-            chunker.add(item);
-        }
-        return chunker.chunk_by_threshold(threshold);
-    }
-
-private:
-    double threshold;
-};
-
-// Generate sample data with patterns
-std::vector<int> generate_test_data(size_t size) {
-    std::vector<int> data;
-    data.reserve(size);
-
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::normal_distribution<> d(50, 15); // mean of 50, std dev of 15
-
-    // Generate data with some patterns and noise
-    for (size_t i = 0; i < size; ++i) {
-        if (i % 20 < 10) {
-            // Create a pattern
-            data.push_back(static_cast<int>(i % 10));
-        } else {
-            // Add some noise
-            data.push_back(static_cast<int>(d(gen)));
-        }
-    }
-
-    return data;
-}
-
-// Update the benchmark function to use templated strategies
 template <typename T>
 void run_benchmark(const std::vector<T>& data) {
-    chunk_benchmark::ChunkBenchmark<T> benchmark(data, "./benchmark_results");
+    chunk_benchmark::ChunkBenchmark<T> benchmark(data);
 
-    // Add strategies
-    auto neural_strategy = std::make_shared<NeuralChunkingStrategy<T>>();
-    auto similarity_strategy = std::make_shared<SimilarityChunkingStrategy<T>>(0.5);
+    // Add different chunking strategies
+    benchmark.add_strategy(std::make_shared<chunk_processing::NeuralChunkingStrategy<T>>());
+    benchmark.add_strategy(std::make_shared<chunk_processing::SimilarityChunkingStrategy<T>>(0.5));
 
-    benchmark.add_strategy(neural_strategy);
-    benchmark.add_strategy(similarity_strategy);
-
-    // Run benchmarks
-    auto results = benchmark.run_benchmark();
-    benchmark.save_results();
-
-    // Test specific chunking operation
-    auto chunk_result = benchmark.benchmark_chunking(data, 64);
-    std::cout << "Chunking time: " << chunk_result.execution_time_ms << "ms\n";
-    std::cout << "Memory usage: " << chunk_result.memory_usage_bytes << " bytes\n";
+    // Run benchmark and print results
+    auto results = benchmark.benchmark_chunking();
+    for (const auto& result : results) {
+        std::cout << "Strategy: " << result.strategy_name << "\n"
+                  << "  Execution time: " << result.execution_time_ms << " ms\n"
+                  << "  Memory usage: " << result.memory_usage_bytes << " bytes\n"
+                  << "  Average chunks: " << result.num_chunks << "\n\n";
+    }
 }
 
 int main() {
-    std::vector<int> data = generate_test_data(1000);
-    run_benchmark<int>(data);
+    // Example data for benchmarking
+    std::vector<int> data(1000);
+    for (size_t i = 0; i < data.size(); ++i) {
+        data[i] = static_cast<int>(i % 10);
+    }
+
+    std::cout << "Running benchmark with integer data...\n";
+    run_benchmark(data);
+
     return 0;
 }
