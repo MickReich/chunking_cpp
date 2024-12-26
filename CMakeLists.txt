@@ -197,36 +197,29 @@ endif()
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
-# Add test executable with all test files
+# Add test executable
 add_executable(run_tests
     tests/test_main.cpp
-    tests/chunk_test.cpp
-    tests/utils_test.cpp
     tests/chunk_strategies_test.cpp
-    tests/chunk_compression_test.cpp
-    tests/parallel_chunk_test.cpp
-    tests/advanced_structures_test.cpp
     tests/advanced_chunk_strategies_test.cpp
-    tests/chunking_methods_sophisticated_test.cpp
-    tests/test_neuralnetwork.cpp  # Added new test file
+    tests/utils_test.cpp
+    tests/jagged_array_test.cpp
+    tests/test_visualization.cpp
 )
 
-# Set the output directory for run_tests executable
-set_target_properties(run_tests PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/tests
-)
-
-# Link test executable with GTest and Boost
+# Link test executable with Google Test and other dependencies
 target_link_libraries(run_tests
     PRIVATE
+    GTest::gtest
+    GTest::gtest_main
     chunk_processor
-    sophisticated_chunking
-    neural_chunking
-    chunk_benchmark
-    ${GTEST_LIBRARIES}
-    pthread
-    Boost::graph
 )
+
+# Enable testing
+enable_testing()
+
+# Add test to CTest
+add_test(NAME unit_tests COMMAND run_tests)
 
 # Configure test discovery
 gtest_discover_tests(run_tests

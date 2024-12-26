@@ -19,80 +19,7 @@ private:
     std::vector<T> data_;
     std::vector<std::vector<T>> chunks_;
 
-    // Helper function for validation
-    void validate_size(size_t size, const std::string& param) const {
-        if (size == 0) {
-            throw std::invalid_argument(param + " must be greater than 0");
-        }
-    }
-
-    void validate_jagged(const std::vector<std::vector<T>>& data) const {
-        if (is_jagged(data)) {
-            throw std::invalid_argument("Data is jagged");
-        }
-    }
-    // Ensure data is properly copied
-    std::vector<std::vector<T>> make_chunks(size_t size) const {
-        std::vector<std::vector<T>> result;
-        result.reserve((data_.size() + size - 1) / size);
-
-        for (size_t i = 0; i < data_.size(); i += size) {
-            size_t chunk_end = std::min(i + size, data_.size());
-            result.emplace_back(data_.begin() + i, data_.begin() + chunk_end);
-        }
-        return result;
-    }
-
-    void update_chunks() {
-        chunks_.clear();
-        for (size_t i = 0; i < data_.size(); i += chunk_size_) {
-            std::vector<T> chunk;
-            for (size_t j = 0; j < chunk_size_ && i + j < data_.size(); ++j) {
-                chunk.push_back(data_[i + j]);
-            }
-            chunks_.push_back(chunk);
-        }
-    }
-
-    // Add support for checking dimensionality
-    template <typename U>
-    static constexpr size_t get_depth() {
-        if constexpr (is_vector<U>::value)
-            return 1 + get_depth<typename U::value_type>();
-        return 0;
-    }
-
-    // Helper to validate nested vectors have consistent dimensions
-    template <typename U>
-    void validate_dimensions(const std::vector<U>& data, size_t expected_size = 0) {
-        if constexpr (chunk_processing::is_vector<U>::value) {
-            // Check for jagged arrays
-            if (chunk_processing::is_jagged(data)) {
-                throw std::invalid_argument("Jagged arrays are not supported");
-            }
-
-            // For 3D arrays
-            if constexpr (chunk_processing::is_vector<typename U::value_type>::value) {
-                if (chunk_processing::is_jagged_3d(
-                        reinterpret_cast<const std::vector<
-                            std::vector<std::vector<typename U::value_type::value_type>>>&>(
-                            data))) {
-                    throw std::invalid_argument("Jagged 3D arrays are not supported");
-                }
-            }
-
-            // Check size consistency
-            if (expected_size > 0 && data.size() != expected_size) {
-                throw std::invalid_argument("Inconsistent dimensions in nested array");
-            }
-
-            // Recursively validate inner dimensions
-            if (!data.empty()) {
-                validate_dimensions(data[0], data[0].size());
-            }
-        }
-    }
-
+    // Helper class for handling jagged arrays
     template <typename U>
     class JaggedVectorHandler {
     public:
@@ -157,6 +84,43 @@ private:
             return normalized;
         }
     };
+
+    // Helper function for validation
+    void validate_size(size_t size, const std::string& param) const {
+        if (size == 0) {
+            throw std::invalid_argument(param + " must be greater than 0");
+        }
+    }
+    // Ensure data is properly copied
+    std::vector<std::vector<T>> make_chunks(size_t size) const {
+        std::vector<std::vector<T>> result;
+        result.reserve((data_.size() + size - 1) / size);
+
+        for (size_t i = 0; i < data_.size(); i += size) {
+            size_t chunk_end = std::min(i + size, data_.size());
+            result.emplace_back(data_.begin() + i, data_.begin() + chunk_end);
+        }
+        return result;
+    }
+
+    void update_chunks() {
+        chunks_.clear();
+        for (size_t i = 0; i < data_.size(); i += chunk_size_) {
+            std::vector<T> chunk;
+            for (size_t j = 0; j < chunk_size_ && i + j < data_.size(); ++j) {
+                chunk.push_back(data_[i + j]);
+            }
+            chunks_.push_back(chunk);
+        }
+    }
+
+    // Add support for checking dimensionality
+    template <typename U>
+    static constexpr size_t get_depth() {
+        if constexpr (is_vector<U>::value)
+            return 1 + get_depth<typename U::value_type>();
+        return 0;
+    }
 
 public:
     explicit Chunk(size_t chunk_size = 1) : chunk_size_(chunk_size) {
@@ -268,7 +232,7 @@ public:
     }
 
     // Add methods to handle jagged arrays
-    template <typename U = T>
+    template <typename U>
     std::vector<std::vector<U>> handle_jagged_2d(const std::vector<std::vector<U>>& data) {
         if (!chunk_processing::is_jagged(data)) {
             return data; // Already uniform
@@ -276,13 +240,51 @@ public:
         return JaggedVectorHandler<U>::normalize(data);
     }
 
-    template <typename U = T>
+    template <typename U>
     std::vector<std::vector<std::vector<U>>>
     handle_jagged_3d(const std::vector<std::vector<std::vector<U>>>& data) {
         if (!chunk_processing::is_jagged_3d(data)) {
             return data; // Already uniform
         }
         return JaggedVectorHandler<U>::normalize_3d(data);
+    }
+
+    template <typename U>
+    void validate_dimensions(const std::vector<U>& data, size_t expected_size = 0) {
+        if constexpr (chunk_processing::is_vector<U>::value) {
+            // For jagged arrays, normalize instead of throwing error
+            if (chunk_processing::is_jagged(data)) {
+                auto normalized = handle_jagged_2d(data);
+                if (expected_size > 0 && normalized.size() != expected_size) {
+                    throw std::invalid_argument("Inconsistent dimensions after normalization");
+                }
+                return;
+            }
+
+            // For 3D arrays, handle jagged data similarly
+            if constexpr (chunk_processing::is_vector<typename U::value_type>::value) {
+                if (chunk_processing::is_jagged_3d(
+                        reinterpret_cast<const std::vector<
+                            std::vector<std::vector<typename U::value_type::value_type>>>&>(
+                            data))) {
+                    auto normalized = handle_jagged_3d(data);
+                    if (expected_size > 0 && normalized.size() != expected_size) {
+                        throw std::invalid_argument("Inconsistent dimensions after 3D normalization");
+                    }
+                    return;
+                }
+            }
+
+            // Check size consistency for non-jagged arrays
+            if (expected_size > 0 && data.size() != expected_size) {
+                throw std::invalid_argument("Inconsistent dimensions in nested array");
+            }
+
+            // Recursively validate inner dimensions
+            if (!data.empty()) {
+                validate_dimensions(data[0], data[0].size());
+            }
+        }
     }
 };
 

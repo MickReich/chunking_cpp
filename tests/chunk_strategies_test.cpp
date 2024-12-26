@@ -1,3 +1,6 @@
+#ifndef CHUNK_PROCESSING_CHUNK_STRATEGIES_TEST_HPP
+#define CHUNK_PROCESSING_CHUNK_STRATEGIES_TEST_HPP
+
 #include "chunk_strategies.hpp"
 #include <gtest/gtest.h>
 #include <vector>
@@ -98,3 +101,5 @@ TEST_F(EntropyStrategyTest, ZeroThreshold) {
     auto chunks = strategy.apply(test_data);
     EXPECT_EQ(chunks.size(), 1);
 }
+
+#endif // CHUNK_PROCESSING_CHUNK_STRATEGIES_TEST_HPP
