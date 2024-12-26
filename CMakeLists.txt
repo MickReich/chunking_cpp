@@ -145,57 +145,15 @@ target_link_libraries(sophisticated_chunking_demo
 # Enable testing
 enable_testing()
 
-# Configure test output
-set(GTEST_OUTPUT_DIR ${CMAKE_BINARY_DIR}/tests)
-file(MAKE_DIRECTORY ${GTEST_OUTPUT_DIR})
-
-# Ensure test results directory exists
-file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/tests/results)
-
-# Configure GTest
-include(GoogleTest)
-enable_testing()
-
-# Add options for coverage and sanitizers
-option(ENABLE_COVERAGE "Enable coverage reporting" OFF)
-option(ENABLE_SANITIZERS "Enable sanitizers" OFF)
-
-if(ENABLE_COVERAGE)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -g -fprofile-arcs -ftest-coverage --coverage -fexceptions")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0 -g -fprofile-arcs -ftest-coverage")
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fprofile-arcs -ftest-coverage --coverage")
-    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -fprofile-arcs -ftest-coverage")
-    
-    find_program(LCOV lcov REQUIRED)
-    find_program(GENHTML genhtml REQUIRED)
-    
-    set(COVERAGE_EXCLUDES
-        '/usr/*'
-        '${PROJECT_SOURCE_DIR}/tests/*'
-    )
-    
-    add_custom_target(coverage
-        DEPENDS run_tests
-        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/coverage
-        COMMAND ${LCOV} --directory . --zerocounters
-        COMMAND ${CMAKE_COMMAND} -E env LLVM_PROFILE_FILE=${CMAKE_BINARY_DIR}/coverage/coverage-%p.profraw
-        COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target run_tests
-        COMMAND ${LCOV} --directory . --capture --output-file coverage.info --ignore-errors empty,mismatch,range,unused
-        COMMAND ${LCOV} --remove coverage.info ${COVERAGE_EXCLUDES} --output-file filtered.info --ignore-errors unused
-        COMMAND ${GENHTML} filtered.info --output-directory ${CMAKE_BINARY_DIR}/coverage
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMENT "Generating coverage report"
-    )
-endif()
-
-if(ENABLE_SANITIZERS)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address,undefined -fno-omit-frame-pointer")
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fsanitize=address,undefined")
-endif()
-
 # Find GTest
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
+
+# Set runtime output directory
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+
+# Create tests directory
+file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/tests)
 
 # Add test executable
 add_executable(run_tests
@@ -213,7 +171,7 @@ add_executable(run_tests
     tests/test_neuralnetwork.cpp
 )
 
-# Link test executable with Google Test and other dependencies
+# Link test executable
 target_link_libraries(run_tests
     PRIVATE
     GTest::gtest
@@ -223,23 +181,6 @@ target_link_libraries(run_tests
     neural_chunking
     chunk_benchmark
 )
-
-# Enable testing
-enable_testing()
-
-# Add test to CTest
-add_test(NAME unit_tests COMMAND run_tests)
-
-# Configure test discovery
-gtest_discover_tests(run_tests
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/tests
-    PROPERTIES
-        ENVIRONMENT "GTEST_COLOR=1"
-        FAIL_REGULAR_EXPRESSION ".*[Ff]ail.*"
-)
-
-# Create tests directory
-file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/tests)
 
 # Generate test runner script
 configure_file(
@@ -252,7 +193,7 @@ configure_file(
         WORLD_READ WORLD_EXECUTE
 )
 
-# Add test to CTest
+# Add single test to CTest
 add_test(
     NAME AllTests
     COMMAND bash ${CMAKE_BINARY_DIR}/tests/run_tests.sh
@@ -263,7 +204,6 @@ add_test(
 set_tests_properties(AllTests PROPERTIES
     ENVIRONMENT "GTEST_COLOR=1"
     FAIL_REGULAR_EXPRESSION ".*[Ff]ail.*"
-    FIXTURES_REQUIRED test_output
 )
 
 # Add fixture to ensure test output directory exists
@@ -556,4 +496,3 @@ target_sources(chunk_processor
         ${CMAKE_CURRENT_SOURCE_DIR}/include/neural_chunking.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/chunk_errors.hpp
 )
-  

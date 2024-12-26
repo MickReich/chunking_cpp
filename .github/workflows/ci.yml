@@ -41,25 +41,36 @@ jobs:
 
     - name: Run tests
       run: |
-        # Ensure build directory exists
+        # Verify test script template exists
+        if [ ! -f "tests/run_tests.sh.in" ]; then
+          echo "Creating run_tests.sh.in"
+          mkdir -p tests
+          cat > tests/run_tests.sh.in << 'EOL'
+#!/bin/bash
+mkdir -p results
+"@CMAKE_RUNTIME_OUTPUT_DIRECTORY@/run_tests" --gtest_output=xml:test_results.xml --gtest_break_on_failure
+if [ $? -eq 0 ]; then
+    echo 'All tests passed!'
+    exit 0
+else
+    echo 'Some tests failed!'
+    if [ -f test_results.xml ]; then
+        cat test_results.xml
+    else
+        echo "Error: test_results.xml not found"
+    fi
+    exit 1
+fi
+EOL
+        fi
+
+        # Build and run tests
         mkdir -p build
         cd build
-        
-        # Configure and build
         cmake -DCMAKE_BUILD_TYPE=Debug ..
         cmake --build .
-        
-        # Verify test script exists and is executable
-        ls -la tests/run_tests.sh || echo "Test script not found!"
-        
-        # Run tests from the correct directory
         cd tests
-        if [ -f "run_tests.sh" ]; then
-          bash ./run_tests.sh
-        else
-          echo "run_tests.sh not found in $(pwd)"
-          exit 1
-        fi
+        bash ./run_tests.sh
 
     - name: Generate documentation
       run: |
