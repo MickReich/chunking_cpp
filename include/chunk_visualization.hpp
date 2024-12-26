@@ -27,7 +27,7 @@ namespace chunk_viz {
 template <typename T>
 class CHUNK_EXPORT ChunkVisualizer {
 private:
-    const std::vector<T>& data;
+    std::vector<T> data;
     std::string output_dir;
     static constexpr double threshold = 1.0; // Default threshold for chunk detection
 
