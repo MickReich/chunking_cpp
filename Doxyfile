@@ -42,7 +42,7 @@ INPUT                = include/ \
                         tests/ \
                         README.md \
                         BUILDING.md
-USE_MDFILE_AS_MAINPAGE = ${PROJECT_SOURCE_DIR}/BUILDING.md
+USE_MDFILE_AS_MAINPAGE = README.md
 FILE_PATTERNS        = *.cpp \
                         *.hpp \
                         *.h \
