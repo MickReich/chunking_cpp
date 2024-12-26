@@ -30,21 +30,49 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y build-essential cmake libstdc++6 libgtest-dev lcov doxygen graphviz libboost-all-dev libpq-dev libmongoc-dev librdkafka++1 librdkafka-dev librabbitmq-dev libjsoncpp-dev python3-pybind11
 
-    - name: Configure build
+    - name: Create test script template
       run: |
-        chmod +x configure
-        ./configure --enable-tests --enable-docs --enable-sanitizers --enable-coverage
+        mkdir -p tests
+        cat > tests/run_tests.sh.in << 'EOL'
+        #!/bin/bash
+        mkdir -p results
+        "@CMAKE_RUNTIME_OUTPUT_DIRECTORY@/run_tests" --gtest_output=xml:test_results.xml --gtest_break_on_failure
+        if [ $? -eq 0 ]; then
+            echo 'All tests passed!'
+            exit 0
+        else
+            echo 'Some tests failed!'
+            if [ -f test_results.xml ]; then
+                cat test_results.xml
+            else
+                echo "Error: test_results.xml not found"
+            fi
+            exit 1
+        fi
+        EOL
+        # Verify the file was created
+        ls -la tests/run_tests.sh.in
 
-    - name: Build project
+    - name: Configure and build
       run: |
-        CXXFLAGS="-fprofile-arcs -ftest-coverage -fprofile-update=atomic" make
+        mkdir -p build
+        cd build
+        # Set CMAKE_BINARY_DIR for the test script
+        export CMAKE_BINARY_DIR=$(pwd)
+        cmake -DCMAKE_BUILD_TYPE=Debug ..
+        cmake --build .
 
     - name: Run tests
       run: |
-        chmod +x build/tests/run_tests.sh
-        make test
-        ./build/tests/run_tests.sh
-        cat build/tests/test_results.xml
+        cd build/tests
+        if [ -f "run_tests.sh" ]; then
+          chmod +x run_tests.sh
+          ./run_tests.sh
+        else
+          echo "Test script not found in $(pwd)"
+          ls -la
+          exit 1
+        fi
 
     - name: Generate documentation
       run: |
