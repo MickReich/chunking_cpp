@@ -269,7 +269,8 @@ public:
                             data))) {
                     auto normalized = handle_jagged_3d(data);
                     if (expected_size > 0 && normalized.size() != expected_size) {
-                        throw std::invalid_argument("Inconsistent dimensions after 3D normalization");
+                        throw std::invalid_argument(
+                            "Inconsistent dimensions after 3D normalization");
                     }
                     return;
                 }
