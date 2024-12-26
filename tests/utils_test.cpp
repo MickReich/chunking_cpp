@@ -20,7 +20,7 @@ TEST_F(StatisticsTest, MeanCalculation) {
 TEST_F(StatisticsTest, MedianCalculation) {
     EXPECT_DOUBLE_EQ(Statistics<double>::median(test_data), 3.0);
     EXPECT_DOUBLE_EQ(Statistics<double>::median(empty_data), 0.0);
-    
+
     // Even number of elements
     std::vector<double> even_data = {1.0, 2.0, 3.0, 4.0};
     EXPECT_DOUBLE_EQ(Statistics<double>::median(even_data), 2.5);
@@ -30,7 +30,7 @@ TEST_F(StatisticsTest, ModeCalculation) {
     auto mode_result = Statistics<double>::mode(duplicate_data);
     EXPECT_DOUBLE_EQ(mode_result.first, 2.0);
     EXPECT_EQ(mode_result.second, 2);
-    
+
     auto empty_mode = Statistics<double>::mode(empty_data);
     EXPECT_DOUBLE_EQ(empty_mode.first, 0.0);
     EXPECT_EQ(empty_mode.second, 0);
@@ -59,10 +59,11 @@ TEST_F(ChunkManipulatorTest, FilterChunks) {
 }
 
 TEST_F(ChunkManipulatorTest, TransformChunks) {
-    auto transformed = ChunkManipulator<double>::transform_chunks(
-        chunks1, [](const std::vector<double>& chunk) {
+    auto transformed =
+        ChunkManipulator<double>::transform_chunks(chunks1, [](const std::vector<double>& chunk) {
             std::vector<double> result = chunk;
-            for (auto& val : result) val *= 2;
+            for (auto& val : result)
+                val *= 2;
             return result;
         });
     EXPECT_EQ(transformed.size(), 2);
@@ -80,7 +81,7 @@ protected:
 TEST_F(ChunkGeneratorTest, GenerateRandomData) {
     auto data = ChunkGenerator<double>::generate_random_data(test_size, min_val, max_val);
     EXPECT_EQ(data.size(), test_size);
-    
+
     // Check bounds
     for (const auto& val : data) {
         EXPECT_GE(val, min_val);
@@ -91,10 +92,11 @@ TEST_F(ChunkGeneratorTest, GenerateRandomData) {
 TEST_F(ChunkGeneratorTest, GenerateRandomChunks) {
     const size_t num_chunks = 5;
     const size_t chunk_size = 10;
-    
-    auto chunks = ChunkGenerator<double>::generate_random_chunks(num_chunks, chunk_size, min_val, max_val);
+
+    auto chunks =
+        ChunkGenerator<double>::generate_random_chunks(num_chunks, chunk_size, min_val, max_val);
     EXPECT_EQ(chunks.size(), num_chunks);
-    
+
     for (const auto& chunk : chunks) {
         EXPECT_EQ(chunk.size(), chunk_size);
         for (const auto& val : chunk) {
@@ -106,12 +108,10 @@ TEST_F(ChunkGeneratorTest, GenerateRandomChunks) {
 
 // Edge Cases and Special Values
 TEST_F(StatisticsTest, HandleSpecialValues) {
-    std::vector<double> special_values = {
-        std::numeric_limits<double>::infinity(),
-        -std::numeric_limits<double>::infinity(),
-        std::numeric_limits<double>::quiet_NaN()
-    };
-    
+    std::vector<double> special_values = {std::numeric_limits<double>::infinity(),
+                                          -std::numeric_limits<double>::infinity(),
+                                          std::numeric_limits<double>::quiet_NaN()};
+
     // Mean should handle special values
     EXPECT_FALSE(std::isfinite(Statistics<double>::mean(special_values)));
 }
@@ -120,12 +120,12 @@ TEST_F(ChunkManipulatorTest, EmptyChunkOperations) {
     // Merge with empty chunks
     auto merged_empty = ChunkManipulator<double>::merge_chunks(chunks1, empty_chunks);
     EXPECT_EQ(merged_empty.size(), chunks1.size());
-    
+
     // Filter empty chunks
     auto filtered_empty = ChunkManipulator<double>::filter_chunks(
         empty_chunks, [](const std::vector<double>&) { return true; });
     EXPECT_TRUE(filtered_empty.empty());
-    
+
     // Transform empty chunks
     auto transformed_empty = ChunkManipulator<double>::transform_chunks(
         empty_chunks, [](const std::vector<double>& chunk) { return chunk; });
@@ -135,7 +135,7 @@ TEST_F(ChunkManipulatorTest, EmptyChunkOperations) {
 TEST_F(ChunkGeneratorTest, ZeroSizeGeneration) {
     auto empty_data = ChunkGenerator<double>::generate_random_data(0, min_val, max_val);
     EXPECT_TRUE(empty_data.empty());
-    
+
     auto empty_chunks = ChunkGenerator<double>::generate_random_chunks(0, 5, min_val, max_val);
     EXPECT_TRUE(empty_chunks.empty());
 }

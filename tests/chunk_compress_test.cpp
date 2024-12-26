@@ -54,11 +54,11 @@ TEST_F(ChunkCompressorTest, BasicDeltaEncode) {
     std::vector<int> sequence = {10, 13, 15, 16, 20};
     auto encoded = ChunkCompressor<int>::delta_encode(sequence);
     EXPECT_EQ(encoded.size(), sequence.size());
-    EXPECT_EQ(encoded[0], 10);  // First value unchanged
-    EXPECT_EQ(encoded[1], 3);   // 13 - 10
-    EXPECT_EQ(encoded[2], 2);   // 15 - 13
-    EXPECT_EQ(encoded[3], 1);   // 16 - 15
-    EXPECT_EQ(encoded[4], 4);   // 20 - 16
+    EXPECT_EQ(encoded[0], 10); // First value unchanged
+    EXPECT_EQ(encoded[1], 3);  // 13 - 10
+    EXPECT_EQ(encoded[2], 2);  // 15 - 13
+    EXPECT_EQ(encoded[3], 1);  // 16 - 15
+    EXPECT_EQ(encoded[4], 4);  // 20 - 16
 }
 
 TEST_F(ChunkCompressorTest, DeltaEncodeConstantSequence) {
@@ -101,11 +101,9 @@ TEST_F(ChunkCompressorTest, DeltaDecodeSingle) {
 
 // Edge Cases and Special Values
 TEST_F(ChunkCompressorTest, LargeDeltas) {
-    std::vector<int> large_values = {
-        std::numeric_limits<int>::max() - 2,
-        std::numeric_limits<int>::max() - 1,
-        std::numeric_limits<int>::max()
-    };
+    std::vector<int> large_values = {std::numeric_limits<int>::max() - 2,
+                                     std::numeric_limits<int>::max() - 1,
+                                     std::numeric_limits<int>::max()};
     auto encoded = ChunkCompressor<int>::delta_encode(large_values);
     auto decoded = ChunkCompressor<int>::delta_decode(encoded);
     EXPECT_EQ(decoded, large_values);
@@ -122,7 +120,7 @@ TEST_F(ChunkCompressorTest, FloatingPointDelta) {
     std::vector<double> float_sequence = {1.5, 2.5, 2.0, 3.5};
     auto encoded = ChunkCompressor<double>::delta_encode(float_sequence);
     auto decoded = ChunkCompressor<double>::delta_decode(encoded);
-    
+
     for (size_t i = 0; i < float_sequence.size(); ++i) {
         EXPECT_DOUBLE_EQ(decoded[i], float_sequence[i]);
     }
@@ -130,7 +128,7 @@ TEST_F(ChunkCompressorTest, FloatingPointDelta) {
 
 // Performance Tests
 TEST_F(ChunkCompressorTest, LargeSequenceCompression) {
-    std::vector<int> large_sequence(10000, 42);  // Long sequence of same value
+    std::vector<int> large_sequence(10000, 42); // Long sequence of same value
     auto encoded = ChunkCompressor<int>::run_length_encode(large_sequence);
     EXPECT_EQ(encoded.size(), 1);
     EXPECT_EQ(encoded[0], std::make_pair(42, 10000u));
@@ -138,8 +136,8 @@ TEST_F(ChunkCompressorTest, LargeSequenceCompression) {
 
 TEST_F(ChunkCompressorTest, LongDeltaSequence) {
     std::vector<int> long_sequence(10000);
-    std::iota(long_sequence.begin(), long_sequence.end(), 0);  // 0,1,2,3,...
+    std::iota(long_sequence.begin(), long_sequence.end(), 0); // 0,1,2,3,...
     auto encoded = ChunkCompressor<int>::delta_encode(long_sequence);
     auto decoded = ChunkCompressor<int>::delta_decode(encoded);
     EXPECT_EQ(decoded, long_sequence);
-} 
+}
