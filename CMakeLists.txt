@@ -205,6 +205,12 @@ add_executable(run_tests
     tests/utils_test.cpp
     tests/jagged_array_test.cpp
     tests/test_visualization.cpp
+    tests/chunk_test.cpp
+    tests/chunk_compression_test.cpp
+    tests/parallel_chunk_test.cpp
+    tests/advanced_structures_test.cpp
+    tests/chunking_methods_sophisticated_test.cpp
+    tests/test_neuralnetwork.cpp
 )
 
 # Link test executable with Google Test and other dependencies
@@ -213,6 +219,9 @@ target_link_libraries(run_tests
     GTest::gtest
     GTest::gtest_main
     chunk_processor
+    sophisticated_chunking
+    neural_chunking
+    chunk_benchmark
 )
 
 # Enable testing
