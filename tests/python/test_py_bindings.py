@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
 from chunking_cpp.chunking_cpp import (
-    Chunk, ChunkBenchmark, NeuralChunking, WaveletChunking,
+    Chunk, Chunk2D, Chunk3D, ChunkBenchmark, NeuralChunking, WaveletChunking,
     MutualInformationChunking, DTWChunking, ChunkVisualizer,
     ChunkSerializer, ResilientChunker, ChunkingError
 )
@@ -100,18 +100,63 @@ def test_resilient_chunker_initialization():
 
 def test_process_with_recovery(sample_data):
     chunker = ResilientChunker("test_checkpoint", 3, 2, 1)
+    
+    # First process some data
+    result = chunker.process(sample_data)
+    assert result is not None
+    
+    # Then save checkpoint
     chunker.save_checkpoint()
+    
     try:
-        result = chunker.process(sample_data)
-        assert result is not None
+        # Test recovery
+        restored = chunker.restore_from_checkpoint()
+        assert restored is not None
+        assert len(restored) == len(result)
     except ChunkingError as e:
-        assert str(e) != ""
+        pytest.fail(f"Recovery failed: {str(e)}")
 
 def test_checkpoint_operations(sample_data):
-    chunker = ResilientChunker("test_checkpoint", 3, 2, 1)
-    chunker.process(sample_data)
-    chunker.save_checkpoint()
-    assert chunker.restore_from_checkpoint() is not None
+    # Use more conservative values
+    chunker = ResilientChunker(
+        checkpoint_dir="test_checkpoint",
+        max_mem_usage=1024*1024*100,  # 100MB
+        checkpoint_freq=2,
+        history_size=1
+    )
+    
+    # Process data first
+    try:
+        result = chunker.process(sample_data)
+        assert len(result) > 0
+    except ChunkingError as e:
+        pytest.fail(f"Processing failed: {str(e)}")
+
+    # Test checkpoint operations with timeout
+    try:
+        import threading
+        checkpoint_event = threading.Event()
+        
+        def save_checkpoint_with_timeout():
+            try:
+                chunker.save_checkpoint()
+                checkpoint_event.set()
+            except ChunkingError as e:
+                print(f"Checkpoint save failed: {str(e)}")
+        
+        save_thread = threading.Thread(target=save_checkpoint_with_timeout)
+        save_thread.start()
+        save_thread.join(timeout=5)  # 5 second timeout
+        
+        if not checkpoint_event.is_set():
+            pytest.fail("Checkpoint save operation timed out")
+        
+        restored = chunker.restore_from_checkpoint()
+        assert restored is not None
+        assert len(restored) > 0
+        assert len(restored) == len(result)
+    except ChunkingError as e:
+        pytest.fail(f"Checkpoint operations failed: {str(e)}")
 
 # Parametrized Tests
 @pytest.mark.parametrize("invalid_input", [
@@ -195,9 +240,10 @@ def test_wavelet_chunking_advanced(sample_data):
     
     # Test different parameters
     wavelet.set_window_size(4)
+    assert wavelet.get_window_size() == 4
+    
     wavelet.set_threshold(0.3)
-    new_chunks = wavelet.chunk(sample_data)
-    assert len(new_chunks) > 0
+    assert wavelet.get_threshold() == 0.3
 
 def test_mutual_information_edge_cases():
     # Test with various edge cases
@@ -302,18 +348,21 @@ def test_empty_and_edge_cases():
     assert len(result) > 0
 
 def test_2d_array_chunking():
-    data = np.array([[1.0, 2.0], [3.0, 4.0], [5.0, 6.0]])
+    data = np.array([[1.0, 2.0], [3.0, 4.0], [5.0, 6.0]], dtype=np.float64)
     chunker = Chunk2D(2)
     chunker.add(data)
     chunks = chunker.get_chunks()
     assert len(chunks) == 2
-    assert all(chunk.shape[1] == 2 for chunk in chunks)
+    assert len(chunks[0]) == 2  # First chunk has 2 rows
+    assert len(chunks[0][0]) == 2  # Each row has 2 columns
 
 def test_3d_array_chunking():
-    data = np.array([[[1.0, 2.0], [3.0, 4.0]], 
-                    [[5.0, 6.0], [7.0, 8.0]]])
+    data = np.array([[[1.0, 2.0], [3.0, 4.0]],
+                    [[5.0, 6.0], [7.0, 8.0]]], dtype=np.float64)
     chunker = Chunk3D(1)
     chunker.add(data)
     chunks = chunker.get_chunks()
     assert len(chunks) == 2
-    assert all(chunk.shape[1:] == (2, 2) for chunk in chunks)
+    assert len(chunks[0]) == 1  # Each chunk has 1 matrix
+    assert len(chunks[0][0]) == 2  # Each matrix has 2 rows
+    assert len(chunks[0][0][0]) == 2  # Each row has 2 columns

@@ -16,19 +16,21 @@ private:
     size_t step_size_;
 
     template <typename U>
-    static constexpr bool is_multidimensional_v = chunk_processing::is_multidimensional_v<U>;
-
-    template <typename U>
     static double compute_window_feature(const U& window) {
-        if constexpr (chunk_processing::is_multidimensional_v<U>) {
-            double sum = 0.0;
-            for (const auto& inner : window) {
-                sum += compute_window_feature(inner);
+        if constexpr (chunk_processing::is_vector<U>::value) {
+            if constexpr (chunk_processing::is_vector<typename U::value_type>::value) {
+                // Handle 2D arrays
+                double sum = 0.0;
+                for (const auto& inner : window) {
+                    sum += compute_window_feature(inner);
+                }
+                return sum / window.size();
+            } else {
+                // Handle 1D arrays
+                return std::accumulate(window.begin(), window.end(), 0.0) / window.size();
             }
-            return sum / std::size(window);
-        } else if constexpr (chunk_processing::is_vector<U>::value) {
-            return std::accumulate(std::begin(window), std::end(window), 0.0) / std::size(window);
         } else {
+            // Handle scalar values
             return static_cast<double>(window);
         }
     }
@@ -55,6 +57,22 @@ private:
         return results;
     }
 
+    std::vector<T> process_window(const std::vector<T>& data,
+                                  std::function<T(const std::vector<T>&)> window_func) {
+        if constexpr (chunk_processing::is_vector<T>::value) {
+            if constexpr (chunk_processing::is_vector<typename T::value_type>::value) {
+                // Handle 2D arrays
+                return process_multidimensional(data, window_func);
+            } else {
+                // Handle 1D arrays
+                return process_single_dimensional(data, window_func);
+            }
+        } else {
+            // Handle scalar values
+            return process_single_dimensional(data, window_func);
+        }
+    }
+
 public:
     SlidingWindowProcessor(size_t window_size, size_t step_size)
         : window_size_(window_size), step_size_(step_size) {
@@ -70,11 +88,7 @@ public:
             return {}; // Return empty if data is smaller than window
         }
 
-        if constexpr (chunk_processing::is_multidimensional_v<T>) {
-            return process_multidimensional(data, window_func);
-        } else {
-            return process_single_dimensional(data, window_func);
-        }
+        return process_window(data, window_func);
     }
 
     // Add getters

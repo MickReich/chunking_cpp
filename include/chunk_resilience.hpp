@@ -113,34 +113,136 @@ private:
     std::unordered_map<size_t, Checkpoint<T>> checkpoint_history;
     size_t max_history_size;
 
+    // Add memory tracking
+    struct MemoryTracker {
+        size_t current_usage = 0;
+        std::mutex mutex;
+
+        void add(size_t bytes) {
+            std::lock_guard<std::mutex> lock(mutex);
+            current_usage += bytes;
+        }
+
+        void subtract(size_t bytes) {
+            std::lock_guard<std::mutex> lock(mutex);
+            current_usage = (current_usage > bytes) ? current_usage - bytes : 0;
+        }
+
+        size_t get() const {
+            return current_usage;
+        }
+
+        void reset() {
+            std::lock_guard<std::mutex> lock(mutex);
+            current_usage = 0;
+        }
+    };
+
+    MemoryTracker memory_tracker;
+    static constexpr size_t CHUNK_BUFFER_SIZE = 1000;
+    static constexpr double MEMORY_THRESHOLD = 0.8; // 80% threshold
+
+    // Smart chunk buffer with automatic memory tracking
+    class ChunkBuffer {
+        std::vector<std::vector<T>> chunks;
+        MemoryTracker& tracker;
+        const size_t max_size;
+
+    public:
+        ChunkBuffer(MemoryTracker& t, size_t max_sz) : tracker(t), max_size(max_sz) {
+            chunks.reserve(max_sz);
+        }
+
+        void add_chunk(std::vector<T>&& chunk) {
+            size_t chunk_memory = chunk.capacity() * sizeof(T);
+            if (chunks.size() >= max_size ||
+                (tracker.get() + chunk_memory) > max_size * sizeof(T)) {
+                flush();
+            }
+            tracker.add(chunk_memory);
+            chunks.push_back(std::move(chunk));
+        }
+
+        std::vector<std::vector<T>> flush() {
+            std::vector<std::vector<T>> result;
+            result.swap(chunks);
+            tracker.reset();
+            chunks.reserve(max_size);
+            return result;
+        }
+
+        ~ChunkBuffer() {
+            tracker.subtract(chunks.capacity() * sizeof(T));
+        }
+    };
+
+    std::unique_ptr<ChunkBuffer> chunk_buffer;
+
+    // Add current data storage
+    std::vector<std::vector<T>> current_data;
+
+    // Use RAII for mutex locking
+    class ScopedLock {
+        std::mutex& mutex_;
+        bool locked_ = false;
+
+    public:
+        explicit ScopedLock(std::mutex& mutex, bool try_lock = false) : mutex_(mutex) {
+            if (try_lock) {
+                locked_ = mutex_.try_lock();
+            } else {
+                mutex_.lock();
+                locked_ = true;
+            }
+        }
+        ~ScopedLock() {
+            if (locked_)
+                mutex_.unlock();
+        }
+        bool locked() const {
+            return locked_;
+        }
+    };
+
     /**
      * @brief Create a checkpoint of current state
      */
     void create_checkpoint(const std::vector<std::vector<T>>& chunks) {
-        std::lock_guard<std::mutex> lock(mutex);
+        std::unique_lock<std::mutex> lock(mutex);
+        if (chunks.empty())
+            return;
 
-        Checkpoint<T> checkpoint{current_sequence++, chunks, std::chrono::system_clock::now(),
-                                 get_memory_usage(), false};
+        current_data = chunks; // Store current data
+        size_t seq_num = current_sequence++;
 
-        // Save checkpoint to file
-        std::string filename =
-            checkpoint_dir + "/checkpoint_" + std::to_string(checkpoint.sequence_number) + ".bin";
-        checkpoint.serialize(filename);
+        try {
+            Checkpoint<T> checkpoint{seq_num, chunks, std::chrono::system_clock::now(),
+                                     get_memory_usage(), false};
 
-        // Add to history
-        checkpoint_history[checkpoint.sequence_number] = checkpoint;
+            std::string filename = checkpoint_dir + "/checkpoint_" +
+                                   std::to_string(checkpoint.sequence_number) + ".bin";
 
-        // Maintain history size
-        if (checkpoint_history.size() > max_history_size) {
-            auto oldest =
-                std::min_element(checkpoint_history.begin(), checkpoint_history.end(),
-                                 [](const auto& a, const auto& b) {
-                                     return a.second.sequence_number < b.second.sequence_number;
-                                 });
+            // Unlock while writing to file
+            lock.unlock();
+            checkpoint.serialize(filename);
 
-            std::filesystem::remove(checkpoint_dir + "/checkpoint_" +
-                                    std::to_string(oldest->first) + ".bin");
-            checkpoint_history.erase(oldest);
+            // Relock for history update
+            lock.lock();
+            checkpoint_history[checkpoint.sequence_number] = checkpoint;
+
+            if (checkpoint_history.size() > max_history_size) {
+                auto oldest =
+                    std::min_element(checkpoint_history.begin(), checkpoint_history.end(),
+                                     [](const auto& a, const auto& b) {
+                                         return a.second.sequence_number < b.second.sequence_number;
+                                     });
+                std::filesystem::remove(checkpoint_dir + "/checkpoint_" +
+                                        std::to_string(oldest->first) + ".bin");
+                checkpoint_history.erase(oldest);
+            }
+        } catch (const std::exception& e) {
+            throw chunk_processing::ChunkingError("Failed to create checkpoint: " +
+                                                  std::string(e.what()));
         }
     }
 
@@ -167,7 +269,27 @@ private:
      * @brief Verify checkpoint integrity
      */
     bool verify_checkpoint(const Checkpoint<T>& checkpoint) {
-        return !checkpoint.is_corrupted && checkpoint.memory_usage <= max_memory_usage;
+        if (checkpoint.is_corrupted) {
+            return false;
+        }
+
+        if (checkpoint.memory_usage > max_memory_usage) {
+            return false;
+        }
+
+        // Additional validation
+        if (checkpoint.chunks.empty()) {
+            return false;
+        }
+
+        // Verify each chunk
+        for (const auto& chunk : checkpoint.chunks) {
+            if (chunk.empty()) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     void initialize_checkpoint_dir() {
@@ -201,33 +323,50 @@ public:
 
         try {
             initialize_checkpoint_dir();
-            std::vector<std::vector<T>> result;
+            current_data.clear(); // Clear any old data
+
+            // Create initial empty checkpoint
+            std::vector<std::vector<T>> initial_chunk;
+            initial_chunk.push_back(std::vector<T>{data[0]}); // Start with first element
+            create_checkpoint(initial_chunk);
+
             size_t processed = 0;
 
-            // Create initial checkpoint
-            create_checkpoint(result);
+            chunk_buffer = std::make_unique<ChunkBuffer>(memory_tracker, CHUNK_BUFFER_SIZE);
 
             while (processed < data.size()) {
-                // Check memory usage
-                if (get_memory_usage() > max_memory_usage) {
-                    handle_memory_exhaustion();
+                if (get_memory_usage() > max_memory_usage * MEMORY_THRESHOLD) {
+                    auto flushed = chunk_buffer->flush();
+                    current_data.insert(current_data.end(),
+                                        std::make_move_iterator(flushed.begin()),
+                                        std::make_move_iterator(flushed.end()));
+                    create_checkpoint(current_data);
                 }
 
-                // Process next chunk
                 size_t chunk_size = std::min(checkpoint_interval, data.size() - processed);
                 std::vector<T> current_chunk(data.begin() + processed,
                                              data.begin() + processed + chunk_size);
-                result.push_back(current_chunk);
-                processed += chunk_size;
 
-                // Create checkpoint if needed
-                if (processed % checkpoint_interval == 0) {
-                    create_checkpoint(result);
-                }
+                chunk_buffer->add_chunk(std::move(current_chunk));
+                processed += chunk_size;
             }
 
-            return result;
+            // Final flush
+            auto final_chunks = chunk_buffer->flush();
+            current_data.insert(current_data.end(), std::make_move_iterator(final_chunks.begin()),
+                                std::make_move_iterator(final_chunks.end()));
+
+            create_checkpoint(current_data);
+            return current_data;
+
         } catch (const std::exception& e) {
+            if (chunk_buffer) {
+                chunk_buffer->flush();
+            }
+            memory_tracker.reset();
+            checkpoint_history.clear();
+            current_data.clear();
+
             throw chunk_processing::ResilienceError("Processing failed: " + std::string(e.what()));
         }
     }
@@ -236,55 +375,96 @@ public:
      * @brief Save current state
      */
     void save_checkpoint() {
+        std::unique_lock<std::mutex> lock(mutex);
+
+        // First check current data
+        if (!current_data.empty()) {
+            auto data_copy = current_data; // Make a copy while locked
+            lock.unlock();
+            create_checkpoint(data_copy);
+            return;
+        }
+
+        // Then check checkpoint history
         if (!checkpoint_history.empty()) {
             auto latest =
                 std::max_element(checkpoint_history.begin(), checkpoint_history.end(),
                                  [](const auto& a, const auto& b) {
                                      return a.second.sequence_number < b.second.sequence_number;
                                  });
-            latest->second.serialize(checkpoint_dir + "/latest_checkpoint.bin");
+
+            if (verify_checkpoint(latest->second)) {
+                std::string filename = checkpoint_dir + "/latest_checkpoint.bin";
+                auto checkpoint_copy = latest->second; // Make a copy while locked
+                lock.unlock();
+                checkpoint_copy.serialize(filename);
+                return;
+            }
         }
+
+        // If we get here, we have no valid data to checkpoint
+        throw chunk_processing::ChunkingError(
+            "No data available for checkpoint creation. Process some data first.");
     }
 
     /**
      * @brief Restore from latest valid checkpoint
      */
     std::vector<std::vector<T>> restore_from_checkpoint() {
-        std::lock_guard<std::mutex> lock(mutex);
+        ScopedLock lock(mutex, true); // Try lock to avoid deadlock
+        if (!lock.locked()) {
+            throw chunk_processing::ChunkingError("Failed to acquire lock for restore");
+        }
 
-        // Find latest valid checkpoint
+        if (checkpoint_history.empty()) {
+            throw chunk_processing::ChunkingError("No checkpoints available");
+        }
+
         std::vector<size_t> keys;
+        keys.reserve(checkpoint_history.size());
         for (const auto& pair : checkpoint_history) {
             keys.push_back(pair.first);
         }
         std::sort(keys.begin(), keys.end(), std::greater<size_t>());
 
-        auto latest_valid = std::find_if(keys.begin(), keys.end(), [this](const auto& checkpoint) {
-            return verify_checkpoint(checkpoint_history[checkpoint]);
-        });
-
-        if (latest_valid == keys.end()) {
-            throw chunk_processing::ChunkingError("No valid checkpoint found for recovery");
+        for (auto key : keys) {
+            if (verify_checkpoint(checkpoint_history[key])) {
+                return checkpoint_history[key].chunks;
+            }
         }
 
-        return checkpoint_history[*latest_valid].chunks;
+        throw chunk_processing::ChunkingError("No valid checkpoint found for recovery");
     }
 
     /**
      * @brief Handle memory exhaustion
      */
     void handle_memory_exhaustion() {
-        // Free up memory by clearing old checkpoints
+        // Clear all buffers
+        if (chunk_buffer) {
+            chunk_buffer->flush();
+        }
+
+        // Clear checkpoint history
         checkpoint_history.clear();
 
-        // Force garbage collection
+        // Reset memory tracking
+        memory_tracker.reset();
+
+        // Force cleanup
         std::vector<std::vector<T>>().swap(checkpoint_history[current_sequence].chunks);
 
         // Wait for memory to be freed
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
         if (get_memory_usage() > max_memory_usage) {
-            throw chunk_processing::ChunkingError("Memory exhaustion: Unable to recover");
+            // Last resort: clear everything
+            checkpoint_history.clear();
+            current_sequence.store(0);
+
+            if (get_memory_usage() > max_memory_usage) {
+                throw chunk_processing::ChunkingError("Memory exhaustion: Unable to recover");
+            }
         }
     }
 

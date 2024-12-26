@@ -52,3 +52,4 @@ viz/
 **/*.egg-info/*.dot
 *.dot
 chunk_visualization_demo
+*checkpoint

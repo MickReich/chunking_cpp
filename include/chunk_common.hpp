@@ -6,30 +6,48 @@
 #define CHUNK_EXPORT __attribute__((visibility("default")))
 #endif
 
+#include <algorithm>
 #include <type_traits>
 #include <vector>
 
 namespace chunk_processing {
 
-// Type trait to check if T is a std::vector
+// Type traits
 template <typename T>
 struct is_vector : std::false_type {};
 
 template <typename T, typename A>
 struct is_vector<std::vector<T, A>> : std::true_type {};
 
-// Type trait to check if T is a multi-dimensional vector
-template <typename T, typename = void>
-struct is_multidimensional : std::false_type {};
-
-// Specialization for types that have value_type and are vectors
+// Helper function to check if a vector is jagged
 template <typename T>
-struct is_multidimensional<
-    T, std::enable_if_t<is_vector<T>::value && is_vector<typename T::value_type>::value>>
-    : std::true_type {};
+bool is_jagged(const std::vector<std::vector<T>>& data) {
+    if (data.empty())
+        return false;
+    const size_t expected_size = data[0].size();
+    return std::any_of(data.begin(), data.end(),
+                       [expected_size](const auto& row) { return row.size() != expected_size; });
+}
 
-// Helper variable template
+// Helper function for 3D jagged detection
 template <typename T>
-inline constexpr bool is_multidimensional_v = is_multidimensional<T>::value;
+bool is_jagged_3d(const std::vector<std::vector<std::vector<T>>>& data) {
+    if (data.empty())
+        return false;
+
+    // Check first level consistency
+    const size_t first_size = data[0].size();
+    if (std::any_of(data.begin(), data.end(),
+                    [first_size](const auto& matrix) { return matrix.size() != first_size; })) {
+        return true;
+    }
+
+    // Check second level consistency
+    const size_t second_size = data[0][0].size();
+    return std::any_of(data.begin(), data.end(), [second_size](const auto& matrix) {
+        return std::any_of(matrix.begin(), matrix.end(),
+                           [second_size](const auto& row) { return row.size() != second_size; });
+    });
+}
 
 } // namespace chunk_processing

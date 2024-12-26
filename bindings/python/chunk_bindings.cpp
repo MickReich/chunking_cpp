@@ -59,36 +59,112 @@ PYBIND11_MODULE(chunking_cpp, m) {
 
     py::class_<chunk_processing::Chunk<std::vector<double>>>(m, "Chunk2D")
         .def(py::init<size_t>())
-        .def("add", [](chunk_processing::Chunk<std::vector<double>>& self,
-                       const py::array_t<double, py::array::c_style>& data) {
-            auto buf = data.request();
-            if (buf.ndim != 2)
-                throw std::invalid_argument("Expected 2D array");
+        .def("add",
+             [](chunk_processing::Chunk<std::vector<double>>& self,
+                py::array_t<double, py::array::c_style>& data) {
+                 auto buf = data.request();
+                 if (buf.ndim != 2) {
+                     throw std::invalid_argument("Expected 2D array");
+                 }
 
-            std::vector<std::vector<double>> nested_data;
-            auto ptr = static_cast<double*>(buf.ptr);
+                 std::vector<std::vector<double>> nested_data;
+                 nested_data.reserve(buf.shape[0]);
+                 auto ptr = static_cast<double*>(buf.ptr);
 
-            for (py::ssize_t i = 0; i < buf.shape[0]; i++) {
-                std::vector<double> row;
-                for (py::ssize_t j = 0; j < buf.shape[1]; j++) {
-                    row.push_back(ptr[i * buf.shape[1] + j]);
+                 for (py::ssize_t i = 0; i < buf.shape[0]; i++) {
+                     std::vector<double> row(ptr + i * buf.shape[1], ptr + (i + 1) * buf.shape[1]);
+                     nested_data.push_back(std::move(row));
+                 }
+                 self.add(nested_data);
+             })
+        .def("get_chunks",
+             [](chunk_processing::Chunk<std::vector<double>>& self) {
+                 auto chunks = self.get_chunks();
+                 py::list result;
+                 for (const auto& chunk : chunks) {
+                     py::list chunk_list;
+                     for (const auto& row : chunk) {
+                         chunk_list.append(py::array_t<double>(row.size(), row.data()));
+                     }
+                     result.append(chunk_list);
+                 }
+                 return result;
+             })
+        .def("chunk_by_size", [](chunk_processing::Chunk<std::vector<double>>& self, size_t size) {
+            auto chunks = self.chunk_by_size(size);
+            py::list result;
+            for (const auto& chunk : chunks) {
+                py::list chunk_list;
+                for (const auto& row : chunk) {
+                    chunk_list.append(py::array_t<double>(row.size(), row.data()));
                 }
-                nested_data.push_back(row);
+                result.append(chunk_list);
             }
-            self.add(nested_data);
+            return result;
         });
 
     py::class_<chunk_processing::Chunk<std::vector<std::vector<double>>>>(m, "Chunk3D")
         .def(py::init<size_t>())
-        .def("add", [](chunk_processing::Chunk<std::vector<std::vector<double>>>& self,
-                       const py::array_t<double, py::array::c_style>& data) {
-            auto buf = data.request();
-            if (buf.ndim != 3)
-                throw std::invalid_argument("Expected 3D array");
+        .def("add",
+             [](chunk_processing::Chunk<std::vector<std::vector<double>>>& self,
+                py::array_t<double, py::array::c_style>& data) {
+                 auto buf = data.request();
+                 if (buf.ndim != 3) {
+                     throw std::invalid_argument("Expected 3D array");
+                 }
 
-            // Convert 3D numpy array to nested vectors
-            // Implementation here
-        });
+                 std::vector<std::vector<std::vector<double>>> nested_data;
+                 nested_data.reserve(buf.shape[0]);
+                 auto ptr = static_cast<double*>(buf.ptr);
+
+                 for (py::ssize_t i = 0; i < buf.shape[0]; i++) {
+                     std::vector<std::vector<double>> matrix;
+                     matrix.reserve(buf.shape[1]);
+
+                     for (py::ssize_t j = 0; j < buf.shape[1]; j++) {
+                         std::vector<double> row(
+                             ptr + (i * buf.shape[1] * buf.shape[2]) + (j * buf.shape[2]),
+                             ptr + (i * buf.shape[1] * buf.shape[2]) + ((j + 1) * buf.shape[2]));
+                         matrix.push_back(std::move(row));
+                     }
+                     nested_data.push_back(std::move(matrix));
+                 }
+                 self.add(nested_data);
+             })
+        .def("get_chunks",
+             [](chunk_processing::Chunk<std::vector<std::vector<double>>>& self) {
+                 auto chunks = self.get_chunks();
+                 py::list result;
+                 for (const auto& chunk : chunks) {
+                     py::list chunk_matrices;
+                     for (const auto& matrix : chunk) {
+                         py::list matrix_rows;
+                         for (const auto& row : matrix) {
+                             matrix_rows.append(py::array_t<double>(row.size(), row.data()));
+                         }
+                         chunk_matrices.append(matrix_rows);
+                     }
+                     result.append(chunk_matrices);
+                 }
+                 return result;
+             })
+        .def("chunk_by_size",
+             [](chunk_processing::Chunk<std::vector<std::vector<double>>>& self, size_t size) {
+                 auto chunks = self.chunk_by_size(size);
+                 py::list result;
+                 for (const auto& chunk : chunks) {
+                     py::list chunk_matrices;
+                     for (const auto& matrix : chunk) {
+                         py::list matrix_rows;
+                         for (const auto& row : matrix) {
+                             matrix_rows.append(py::array_t<double>(row.size(), row.data()));
+                         }
+                         chunk_matrices.append(matrix_rows);
+                     }
+                     result.append(chunk_matrices);
+                 }
+                 return result;
+             });
 
     // Neural Chunking
     py::class_<neural_chunking::NeuralChunking<double>>(m, "NeuralChunking")
@@ -117,7 +193,11 @@ PYBIND11_MODULE(chunking_cpp, m) {
     // Sophisticated Chunking
     py::class_<sophisticated_chunking::WaveletChunking<double>>(m, "WaveletChunking")
         .def(py::init<size_t, double>())
-        .def("chunk", &sophisticated_chunking::WaveletChunking<double>::chunk);
+        .def("chunk", &sophisticated_chunking::WaveletChunking<double>::chunk)
+        .def("set_window_size", &sophisticated_chunking::WaveletChunking<double>::set_window_size)
+        .def("get_window_size", &sophisticated_chunking::WaveletChunking<double>::get_window_size)
+        .def("set_threshold", &sophisticated_chunking::WaveletChunking<double>::set_threshold)
+        .def("get_threshold", &sophisticated_chunking::WaveletChunking<double>::get_threshold);
 
     py::class_<sophisticated_chunking::MutualInformationChunking<double>>(
         m, "MutualInformationChunking")
@@ -147,10 +227,11 @@ PYBIND11_MODULE(chunking_cpp, m) {
 
     // Chunk Visualization
     py::class_<chunk_viz::ChunkVisualizer<double>>(m, "ChunkVisualizer")
-        .def(py::init<std::vector<double>&, const std::string&>())
+        .def(py::init<const std::vector<double>&, const std::string&>())
         .def("plot_chunk_sizes", &chunk_viz::ChunkVisualizer<double>::plot_chunk_sizes)
         .def("visualize_boundaries", &chunk_viz::ChunkVisualizer<double>::visualize_boundaries)
-        .def("export_to_graphviz", &chunk_viz::ChunkVisualizer<double>::export_to_graphviz);
+        .def("export_to_graphviz", &chunk_viz::ChunkVisualizer<double>::export_to_graphviz)
+        .def("get_output_dir", &chunk_viz::ChunkVisualizer<double>::get_output_dir);
 
     // Chunk Serialization
     py::class_<chunk_serialization::ChunkSerializer<double>>(m, "ChunkSerializer")
@@ -161,7 +242,19 @@ PYBIND11_MODULE(chunking_cpp, m) {
 
     // Chunk Resilience
     py::class_<chunk_resilience::ResilientChunker<double>>(m, "ResilientChunker")
-        .def(py::init<const std::string&, size_t, size_t, size_t>())
+        .def(py::init([](const std::string& checkpoint_dir, size_t max_mem_usage,
+                         size_t checkpoint_freq, size_t history_size) {
+                 return std::make_unique<chunk_resilience::ResilientChunker<double>>(
+                     checkpoint_dir, max_mem_usage, checkpoint_freq, history_size);
+             }),
+             py::arg("checkpoint_dir") = "./checkpoints",
+             py::arg("max_mem_usage") = 1024 * 1024 * 1024, py::arg("checkpoint_freq") = 1000,
+             py::arg("history_size") = 5,
+             "Initialize ResilientChunker with parameters:\n"
+             "checkpoint_dir: Directory for checkpoints\n"
+             "max_mem_usage: Maximum memory usage in bytes\n"
+             "checkpoint_freq: Checkpoint frequency\n"
+             "history_size: Number of checkpoints to keep")
         .def("process", &chunk_resilience::ResilientChunker<double>::process)
         .def("save_checkpoint", &chunk_resilience::ResilientChunker<double>::save_checkpoint)
         .def("restore_from_checkpoint",
@@ -205,9 +298,8 @@ PYBIND11_MODULE(chunking_cpp, m) {
         .def_readwrite("strategy_name", &chunk_benchmark::BenchmarkResult::strategy_name);
 
     py::class_<chunk_benchmark::ChunkBenchmark<double>>(m, "ChunkBenchmark")
-        .def(py::init<const std::vector<double>&, const std::string&>())
+        .def(py::init<const std::vector<double>&, size_t>())
         .def("add_strategy", &chunk_benchmark::ChunkBenchmark<double>::add_strategy)
-        .def("run_benchmark", &chunk_benchmark::ChunkBenchmark<double>::run_benchmark)
         .def("benchmark_chunking", &chunk_benchmark::ChunkBenchmark<double>::benchmark_chunking)
         .def("save_results", &chunk_benchmark::ChunkBenchmark<double>::save_results);
 
@@ -215,17 +307,21 @@ PYBIND11_MODULE(chunking_cpp, m) {
     py::register_exception<chunk_processing::ChunkingError>(m, "ChunkingError");
 
     // Strategy bindings
-    py::class_<chunk_strategies::ChunkStrategy<double>,
-               std::shared_ptr<chunk_strategies::ChunkStrategy<double>>>(m, "ChunkStrategy")
-        .def("apply", &chunk_strategies::ChunkStrategy<double>::apply);
+    py::class_<chunk_processing::ChunkStrategy<double>,
+               std::shared_ptr<chunk_processing::ChunkStrategy<double>>>(m, "ChunkStrategy")
+        .def("apply", &chunk_processing::ChunkStrategy<double>::apply);
 
-    py::class_<NeuralChunkingStrategy<double>, chunk_strategies::ChunkStrategy<double>,
-               std::shared_ptr<NeuralChunkingStrategy<double>>>(m, "NeuralChunkingStrategy")
+    py::class_<chunk_processing::NeuralChunkingStrategy<double>,
+               chunk_processing::ChunkStrategy<double>,
+               std::shared_ptr<chunk_processing::NeuralChunkingStrategy<double>>>(
+        m, "NeuralChunkingStrategy")
         .def(py::init<>())
-        .def("apply", &NeuralChunkingStrategy<double>::apply);
+        .def("apply", &chunk_processing::NeuralChunkingStrategy<double>::apply);
 
-    py::class_<SimilarityChunkingStrategy<double>, chunk_strategies::ChunkStrategy<double>,
-               std::shared_ptr<SimilarityChunkingStrategy<double>>>(m, "SimilarityChunkingStrategy")
+    py::class_<chunk_processing::SimilarityChunkingStrategy<double>,
+               chunk_processing::ChunkStrategy<double>,
+               std::shared_ptr<chunk_processing::SimilarityChunkingStrategy<double>>>(
+        m, "SimilarityChunkingStrategy")
         .def(py::init<double>())
-        .def("apply", &SimilarityChunkingStrategy<double>::apply);
+        .def("apply", &chunk_processing::SimilarityChunkingStrategy<double>::apply);
 }

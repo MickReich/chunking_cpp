@@ -51,7 +51,7 @@ int main() {
         print_chunks(chunks);
 
         // Use chunk visualizer
-        chunk_viz::ChunkVisualizer<std::vector<int>> visualizer(chunks);
+        chunk_viz::ChunkVisualizer<std::vector<int>> visualizer(chunks, "./viz");
         visualizer.plot_chunk_sizes();
         visualizer.visualize_boundaries();
         visualizer.export_to_graphviz("neural_chunks.dot");

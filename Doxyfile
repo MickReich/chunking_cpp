@@ -37,19 +37,22 @@ WARN_IF_DOC_ERROR    = YES
 WARN_NO_PARAMDOC     = YES
 
 # Input files
-INPUT                = ./include \
-                        ./src \
-                        ./BUILDING.md
+INPUT                = include/ \
+                        src/ \
+                        tests/ \
+                        README.md
 USE_MDFILE_AS_MAINPAGE = ./BUILDING.md
-FILE_PATTERNS        = *.hpp \
-                        *.cpp
+FILE_PATTERNS        = *.cpp \
+                        *.hpp \
+                        *.h \
+                        *.md
 RECURSIVE            = YES
-EXCLUDE_PATTERNS     = */tests/* \
-                        */build/* \
+EXCLUDE_PATTERNS     = */build/* \
                         */bindings/*
 EXCLUDE              = build \
                       tests
-INCLUDE_PATH         = include
+INCLUDE_PATH         = include/ \
+                       tests/
 
 # Additional paths
 STRIP_FROM_PATH      = include
@@ -155,3 +158,20 @@ WARN_AS_ERROR        = NO
 
 # Enable full markdown features
 MARKDOWN_ID_STYLE   = GITHUB
+
+# Test files to document
+TEST_FILE_PATTERNS    = *_test.cpp \
+                        test_*.cpp
+
+# Specific test files to include
+INPUT_FILTER         = "sed -e 's|tests/jagged_array_test.cpp|Jagged Array Tests|g' \
+                             -e 's|tests/test_visualization.cpp|Visualization Tests|g' \
+                             -e 's|tests/chunk_strategies_test.cpp|Chunk Strategies Tests|g' \
+                             -e 's|tests/advanced_chunk_strategies_test.cpp|Advanced Chunk Strategies Tests|g' \
+                             -e 's|tests/utils_test.cpp|Utility Tests|g' \
+                             -e 's|tests/chunk_test.cpp|Chunk Tests|g' \
+                             -e 's|tests/chunk_compression_test.cpp|Compression Tests|g' \
+                             -e 's|tests/parallel_chunk_test.cpp|Parallel Processing Tests|g' \
+                             -e 's|tests/advanced_structures_test.cpp|Advanced Structures Tests|g' \
+                             -e 's|tests/chunking_methods_sophisticated_test.cpp|Sophisticated Chunking Tests|g' \
+                             -e 's|tests/test_neuralnetwork.cpp|Neural Network Tests|g'"

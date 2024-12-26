@@ -79,7 +79,16 @@
         "ranges": "cpp",
         "span": "cpp",
         "stack": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "chrono": "cpp",
+        "complex": "cpp",
+        "filesystem": "cpp",
+        "forward_list": "cpp",
+        "fstream": "cpp",
+        "set": "cpp",
+        "typeindex": "cpp",
+        "unordered_set": "cpp",
+        "variant": "cpp"
     },
     "cmake.configureSettings": { "gtest_build_samples": "ON" },
     "C_Cpp.default.includePath": [
