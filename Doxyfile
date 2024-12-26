@@ -50,8 +50,7 @@ FILE_PATTERNS        = *.cpp \
                         *.h \
                         *.md
 RECURSIVE            = YES
-EXCLUDE_PATTERNS     = */build/* #\/3
-                       # */bindings/*
+EXCLUDE_PATTERNS     = */build/*
 
 # Additional paths
 STRIP_FROM_PATH      = include
