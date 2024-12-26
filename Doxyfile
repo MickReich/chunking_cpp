@@ -40,6 +40,8 @@ WARN_NO_PARAMDOC     = YES
 INPUT                = include/ \
                         src/ \
                         tests/ \
+                        scripts/ \
+                        bindings/ \
                         README.md \
                         BUILDING.md
 USE_MDFILE_AS_MAINPAGE = README.md
@@ -48,8 +50,8 @@ FILE_PATTERNS        = *.cpp \
                         *.h \
                         *.md
 RECURSIVE            = YES
-EXCLUDE_PATTERNS     = */build/* \
-                        */bindings/*
+EXCLUDE_PATTERNS     = */build/* #\/3
+                       # */bindings/*
 
 # Additional paths
 STRIP_FROM_PATH      = include
