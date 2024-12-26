@@ -24,7 +24,7 @@ def main():
 
     # Sophisticated chunking
     wavelet_chunker = cc.WaveletChunking(8, 0.5)
-    wavelet_chunks = wavelet_chunker.chunk()                                               ata)
+    wavelet_chunks = wavelet_chunker.chunk(data)
     print("Wavelet chunks:", wavelet_chunks)
     
     # Metrics
@@ -42,9 +42,9 @@ def main():
     print("DTW chunks:", dtw_chunks)
     
     # Benchmarking  
-    benchmark = cc.ChunkBenchmark(data, "./benchmark_results")
-    benchmark.run_benchmark()
-    benchmark.save_results()
+    benchmark = cc.ChunkBenchmark(data, 100)
+    results = benchmark.benchmark_chunking()
+    benchmark.save_results("./benchmark_results")
 
 if __name__ == "__main__":
     main()
