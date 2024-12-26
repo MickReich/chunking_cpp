@@ -30,12 +30,4 @@ public:
     explicit VisualizationError(const std::string& message) : ChunkingError(message) {}
 };
 
-/**
- * @brief Exception for resilience/recovery errors
- */
-class ResilienceError : public ChunkingError {
-public:
-    explicit ResilienceError(const std::string& message) : ChunkingError(message) {}
-};
-
 } // namespace chunk_processing

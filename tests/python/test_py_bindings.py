@@ -3,7 +3,7 @@ import numpy as np
 from chunking_cpp.chunking_cpp import (
     Chunk, Chunk2D, Chunk3D, ChunkBenchmark, NeuralChunking, WaveletChunking,
     MutualInformationChunking, DTWChunking, ChunkVisualizer,
-    ChunkSerializer, ResilientChunker, ChunkingError
+    ChunkSerializer, ChunkingError
 )
 import os
 import tempfile
@@ -92,71 +92,6 @@ def test_json_serialization(sample_data):
         assert json_data is not None
     except RuntimeError:
         pytest.skip("JSON serialization not available")
-
-# Resilience Tests
-def test_resilient_chunker_initialization():
-    chunker = ResilientChunker("test_checkpoint", 3, 2, 1)
-    assert chunker is not None
-
-def test_process_with_recovery(sample_data):
-    chunker = ResilientChunker("test_checkpoint", 3, 2, 1)
-    
-    # First process some data
-    result = chunker.process(sample_data)
-    assert result is not None
-    
-    # Then save checkpoint
-    chunker.save_checkpoint()
-    
-    try:
-        # Test recovery
-        restored = chunker.restore_from_checkpoint()
-        assert restored is not None
-        assert len(restored) == len(result)
-    except ChunkingError as e:
-        pytest.fail(f"Recovery failed: {str(e)}")
-
-def test_checkpoint_operations(sample_data):
-    # Use more conservative values
-    chunker = ResilientChunker(
-        checkpoint_dir="test_checkpoint",
-        max_mem_usage=1024*1024*100,  # 100MB
-        checkpoint_freq=2,
-        history_size=1
-    )
-    
-    # Process data first
-    try:
-        result = chunker.process(sample_data)
-        assert len(result) > 0
-    except ChunkingError as e:
-        pytest.fail(f"Processing failed: {str(e)}")
-
-    # Test checkpoint operations with timeout
-    try:
-        import threading
-        checkpoint_event = threading.Event()
-        
-        def save_checkpoint_with_timeout():
-            try:
-                chunker.save_checkpoint()
-                checkpoint_event.set()
-            except ChunkingError as e:
-                print(f"Checkpoint save failed: {str(e)}")
-        
-        save_thread = threading.Thread(target=save_checkpoint_with_timeout)
-        save_thread.start()
-        save_thread.join(timeout=5)  # 5 second timeout
-        
-        if not checkpoint_event.is_set():
-            pytest.fail("Checkpoint save operation timed out")
-        
-        restored = chunker.restore_from_checkpoint()
-        assert restored is not None
-        assert len(restored) > 0
-        assert len(restored) == len(result)
-    except ChunkingError as e:
-        pytest.fail(f"Checkpoint operations failed: {str(e)}")
 
 # Parametrized Tests
 @pytest.mark.parametrize("invalid_input", [
@@ -289,25 +224,6 @@ def test_chunk_serialization_formats(sample_data):
         assert protobuf_data is not None
     except RuntimeError:
         pytest.skip("Protobuf serialization not available")
-
-def test_resilient_chunker_recovery_scenarios(sample_data):
-    chunker = ResilientChunker("test_checkpoint", 1024 * 1024, 2, 1)  # Use realistic memory limit
-    
-    # Test normal processing
-    result = chunker.process(sample_data)
-    assert result is not None
-    assert len(result) > 0
-    
-    # Test checkpoint creation and restoration
-    chunker.save_checkpoint()
-    restored = chunker.restore_from_checkpoint()
-    assert restored is not None
-    assert len(restored) == len(result)
-    
-    # Test processing with existing checkpoint
-    new_result = chunker.process(sample_data)
-    assert new_result is not None
-    assert len(new_result) > 0
 
 @pytest.mark.parametrize("window_size,threshold", [
     (2, 0.3),

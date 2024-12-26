@@ -7,7 +7,6 @@
 #include "chunk_compression.hpp"
 #include "chunk_integrations.hpp"
 #include "chunk_metrics.hpp"
-#include "chunk_resilience.hpp"
 #include "chunk_serialization.hpp"
 #include "chunk_strategies.hpp"
 #include "chunk_strategy_implementations.hpp"
@@ -240,27 +239,7 @@ PYBIND11_MODULE(chunking_cpp, m) {
         .def("to_protobuf", &chunk_serialization::ChunkSerializer<double>::to_protobuf)
         .def("to_msgpack", &chunk_serialization::ChunkSerializer<double>::to_msgpack);
 
-    // Chunk Resilience
-    py::class_<chunk_resilience::ResilientChunker<double>>(m, "ResilientChunker")
-        .def(py::init([](const std::string& checkpoint_dir, size_t max_mem_usage,
-                         size_t checkpoint_freq, size_t history_size) {
-                 return std::make_unique<chunk_resilience::ResilientChunker<double>>(
-                     checkpoint_dir, max_mem_usage, checkpoint_freq, history_size);
-             }),
-             py::arg("checkpoint_dir") = "./checkpoints",
-             py::arg("max_mem_usage") = 1024 * 1024 * 1024, py::arg("checkpoint_freq") = 1000,
-             py::arg("history_size") = 5,
-             "Initialize ResilientChunker with parameters:\n"
-             "checkpoint_dir: Directory for checkpoints\n"
-             "max_mem_usage: Maximum memory usage in bytes\n"
-             "checkpoint_freq: Checkpoint frequency\n"
-             "history_size: Number of checkpoints to keep")
-        .def("process", &chunk_resilience::ResilientChunker<double>::process)
-        .def("save_checkpoint", &chunk_resilience::ResilientChunker<double>::save_checkpoint)
-        .def("restore_from_checkpoint",
-             &chunk_resilience::ResilientChunker<double>::restore_from_checkpoint);
-
-// Database Integration
+    // Database Integration
 #ifdef HAVE_POSTGRESQL
     py::class_<chunk_integrations::DatabaseChunkStore>(m, "DatabaseChunkStore")
         .def(
@@ -274,7 +253,7 @@ PYBIND11_MODULE(chunking_cpp, m) {
         ;
 #endif
 
-// Message Queue Integration
+    // Message Queue Integration
 #if defined(HAVE_KAFKA) || defined(HAVE_RABBITMQ)
     py::class_<chunk_integrations::ChunkMessageQueue>(m, "ChunkMessageQueue")
         .def(py::init<std::unique_ptr<chunk_integrations::MessageQueueConnection>,
