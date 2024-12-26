@@ -135,6 +135,6 @@ jobs:
         # Replace the absolute path with /github/workspace/
         sed -i "s|$ESCAPED_PATH/|/github/workspace/|g" filtered.info
 
-    #- name: Debug coverage files
-    #  run: |
-     #   find build -name "*.gcda" -o -name "*.gcno"
+    - name: Debug coverage files
+      run: |
+        find build -name "*.gcda" -o -name "*.gcno"
