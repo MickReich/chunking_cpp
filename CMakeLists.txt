@@ -241,23 +241,21 @@ gtest_discover_tests(run_tests
 # Create tests directory
 file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/tests)
 
-# Generate test runner script with absolute paths
+# Generate test runner script
 configure_file(
     "${CMAKE_SOURCE_DIR}/tests/run_tests.sh.in"
     "${CMAKE_BINARY_DIR}/tests/run_tests.sh"
     @ONLY
-)
-
-# Set permissions after generation
-execute_process(
-    COMMAND chmod +x "${CMAKE_BINARY_DIR}/tests/run_tests.sh"
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    FILE_PERMISSIONS
+        OWNER_READ OWNER_WRITE OWNER_EXECUTE
+        GROUP_READ GROUP_EXECUTE
+        WORLD_READ WORLD_EXECUTE
 )
 
 # Add test to CTest
 add_test(
     NAME AllTests
-    COMMAND ${CMAKE_BINARY_DIR}/tests/run_tests.sh
+    COMMAND bash ${CMAKE_BINARY_DIR}/tests/run_tests.sh
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/tests
 )
 

@@ -41,17 +41,23 @@ jobs:
 
     - name: Run tests
       run: |
-        mkdir -p build/tests
+        # Ensure build directory exists
+        mkdir -p build
         cd build
-        cmake ..
-        make
-        chmod +x tests/run_tests.sh
+        
+        # Configure and build
+        cmake -DCMAKE_BUILD_TYPE=Debug ..
+        cmake --build .
+        
+        # Verify test script exists and is executable
+        ls -la tests/run_tests.sh || echo "Test script not found!"
+        
+        # Run tests from the correct directory
         cd tests
-        ./run_tests.sh
-        if [ -f "test_results.xml" ]; then
-          cat test_results.xml
+        if [ -f "run_tests.sh" ]; then
+          bash ./run_tests.sh
         else
-          echo "test_results.xml not found"
+          echo "run_tests.sh not found in $(pwd)"
           exit 1
         fi
 
