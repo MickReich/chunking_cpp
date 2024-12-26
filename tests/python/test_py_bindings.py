@@ -31,6 +31,9 @@ def chunker_setup():
     data = [1.0, 2.0, 3.0, 4.0, 5.0]
     return data
 
+def create_and_test_chunker(chunker, data):
+    """Helper function to test chunking algorithms"""
+    return chunker.chunk(data)
 # Basic Tests
 def test_chunk_initialization():
     chunk = Chunk(3)
@@ -58,8 +61,7 @@ def test_neural_chunking_initialization():
     assert neural is not None
 
 def test_neural_chunking_process(sample_data):
-    neural = NeuralChunking(4, 0.5)
-    chunks = neural.chunk(sample_data)
+    chunks = create_and_test_chunker(NeuralChunking(4, 0.5), sample_data)
     assert len(chunks) > 0
 
 def test_set_threshold():
@@ -73,8 +75,7 @@ def test_wavelet_chunking(chunker_setup):
     assert len(chunks) > 0
 
 def test_mutual_information_chunking(sample_data):
-    mi = MutualInformationChunking(5, 0.3)
-    chunks = mi.chunk(sample_data)
+    chunks = create_and_test_chunker(MutualInformationChunking(5, 0.3), sample_data)
     assert len(chunks) > 0
 
 def test_dtw_chunking(chunker_setup):
@@ -128,8 +129,6 @@ def cleanup():
         shutil.rmtree("./test_checkpoint")
     if os.path.exists("./test_viz"):
         shutil.rmtree("./test_viz")
-
-# Add these new test functions
 
 def test_visualizer_initialization(sample_data, temp_viz_dir):
     visualizer = ChunkVisualizer(sample_data, temp_viz_dir)
@@ -194,7 +193,7 @@ def test_mutual_information_edge_cases():
     
     mi = MutualInformationChunking(3, 0.3)
     for case in test_cases:
-        chunks = mi.chunk(case)
+        chunks = create_and_test_chunker(mi, case)
         assert len(chunks) > 0
 
 def test_dtw_chunking_parameters():
@@ -286,7 +285,3 @@ def test_3d_array_chunking():
     assert len(chunks[0]) == 1  # Each chunk has 1 matrix
     assert len(chunks[0][0]) == 2  # Each matrix has 2 rows
     assert len(chunks[0][0][0]) == 2  # Each row has 2 columns
-
-def create_and_test_chunker(chunker, data):
-    """Helper function to test chunking algorithms"""
-    return chunker.chunk(data)
