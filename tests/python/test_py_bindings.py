@@ -25,6 +25,12 @@ def temp_viz_dir():
     yield temp_dir
     shutil.rmtree(temp_dir)
 
+@pytest.fixture
+def chunker_setup():
+    """Common setup for chunking tests"""
+    data = [1.0, 2.0, 3.0, 4.0, 5.0]
+    return data
+
 # Basic Tests
 def test_chunk_initialization():
     chunk = Chunk(3)
@@ -62,9 +68,8 @@ def test_set_threshold():
     assert neural.get_window_size() == 8
 
 # Sophisticated Chunking Tests
-def test_wavelet_chunking(sample_data):
-    wavelet = WaveletChunking(8, 0.5)
-    chunks = wavelet.chunk(sample_data)
+def test_wavelet_chunking(chunker_setup):
+    chunks = create_and_test_chunker(WaveletChunking(8, 0.5), chunker_setup)
     assert len(chunks) > 0
 
 def test_mutual_information_chunking(sample_data):
@@ -72,9 +77,8 @@ def test_mutual_information_chunking(sample_data):
     chunks = mi.chunk(sample_data)
     assert len(chunks) > 0
 
-def test_dtw_chunking(sample_data):
-    dtw = DTWChunking(4, 2.0)
-    chunks = dtw.chunk(sample_data)
+def test_dtw_chunking(chunker_setup):
+    chunks = create_and_test_chunker(DTWChunking(4, 2.0), chunker_setup)
     assert len(chunks) > 0
 
 # Serialization Tests
@@ -282,3 +286,7 @@ def test_3d_array_chunking():
     assert len(chunks[0]) == 1  # Each chunk has 1 matrix
     assert len(chunks[0][0]) == 2  # Each matrix has 2 rows
     assert len(chunks[0][0][0]) == 2  # Each row has 2 columns
+
+def create_and_test_chunker(chunker, data):
+    """Helper function to test chunking algorithms"""
+    return chunker.chunk(data)
