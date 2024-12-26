@@ -148,12 +148,12 @@ def test_plot_chunk_sizes(sample_data, temp_viz_dir):
 def test_visualize_boundaries(sample_data, temp_viz_dir):
     visualizer = ChunkVisualizer(sample_data, temp_viz_dir)
     visualizer.visualize_boundaries()
-    assert os.path.exists(os.path.join(temp_viz_dir, "boundaries.txt"))
+    assert os.path.exists(os.path.join(temp_viz_dir, "boundaries.dat"))
 
 def test_export_to_graphviz(sample_data, temp_viz_dir):
     visualizer = ChunkVisualizer(sample_data, temp_viz_dir)
     visualizer.export_to_graphviz("chunk_graph.dot")
-    assert os.path.exists(os.path.join(temp_viz_dir, "chunks.dot"))
+    assert os.path.exists(os.path.join(temp_viz_dir, "chunk_graph.dot"))
 
 def test_neural_chunking_advanced():
     # Test with various window sizes and thresholds
