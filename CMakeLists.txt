@@ -241,45 +241,23 @@ gtest_discover_tests(run_tests
 # Create tests directory
 file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/tests)
 
-# Generate test runner script
-file(WRITE ${CMAKE_BINARY_DIR}/tests/run_tests.sh
-"#!/bin/bash
-
-# Create directory for test results if it doesn't exist
-mkdir -p \"\${0%/*}\"
-mkdir -p \"\${0%/*}/results\"
-
-# Run the tests and generate XML report
-cd \"\${0%/*}\" && ./run_tests --gtest_output=xml:test_results.xml --gtest_break_on_failure
-
-# Check if tests passed
-if [ $? -eq 0 ]; then
-    echo 'All tests passed!'
-    exit 0
-else
-    echo 'Some tests failed!'
-    if [ -f test_results.xml ]; then
-        cat test_results.xml
-    else
-        echo "Error: test_results.xml not found"
-    fi
-    exit 1
-fi
-")
-
-# Make the test runner script executable
-file(COPY ${CMAKE_BINARY_DIR}/tests/run_tests.sh
-    DESTINATION ${CMAKE_BINARY_DIR}/tests
-    FILE_PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE OWNER_EXECUTE
+# Generate test runner script with absolute paths
+configure_file(
+    "${CMAKE_SOURCE_DIR}/tests/run_tests.sh.in"
+    "${CMAKE_BINARY_DIR}/tests/run_tests.sh"
+    @ONLY
 )
 
-# Ensure test output directory exists
-file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/tests)
+# Set permissions after generation
+execute_process(
+    COMMAND chmod +x "${CMAKE_BINARY_DIR}/tests/run_tests.sh"
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+)
 
 # Add test to CTest
 add_test(
     NAME AllTests
-    COMMAND ${CMAKE_BINARY_DIR}/tests/run_tests --gtest_output=xml:${CMAKE_BINARY_DIR}/tests/test_results.xml
+    COMMAND ${CMAKE_BINARY_DIR}/tests/run_tests.sh
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/tests
 )
 

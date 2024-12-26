@@ -41,10 +41,19 @@ jobs:
 
     - name: Run tests
       run: |
-        chmod +x build/tests/run_tests.sh
-        make test
-        ./build/tests/run_tests.sh
-        cat build/tests/test_results.xml
+        mkdir -p build/tests
+        cd build
+        cmake ..
+        make
+        chmod +x tests/run_tests.sh
+        cd tests
+        ./run_tests.sh
+        if [ -f "test_results.xml" ]; then
+          cat test_results.xml
+        else
+          echo "test_results.xml not found"
+          exit 1
+        fi
 
     - name: Generate documentation
       run: |
