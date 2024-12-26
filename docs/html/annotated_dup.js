@@ -17,8 +17,7 @@ var annotated_dup =
     ] ],
     [ "chunk_benchmark", "namespacechunk__benchmark.html", [
       [ "BenchmarkResult", "namespacechunk__benchmark.html#structchunk__benchmark_1_1BenchmarkResult", "namespacechunk__benchmark_structchunk__benchmark_1_1BenchmarkResult_dup" ],
-      [ "ChunkBenchmark", "classchunk__benchmark_1_1ChunkBenchmark.html", "classchunk__benchmark_1_1ChunkBenchmark" ],
-      [ "ChunkStrategy", "classchunk__benchmark_1_1ChunkStrategy.html", "classchunk__benchmark_1_1ChunkStrategy" ]
+      [ "ChunkBenchmark", "classchunk__benchmark_1_1ChunkBenchmark.html", "classchunk__benchmark_1_1ChunkBenchmark" ]
     ] ],
     [ "chunk_compression", "namespacechunk__compression.html", [
       [ "ChunkCompressor", "classchunk__compression_1_1ChunkCompressor.html", "classchunk__compression_1_1ChunkCompressor" ]
@@ -35,12 +34,19 @@ var annotated_dup =
     [ "chunk_processing", "namespacechunk__processing.html", [
       [ "Chunk", "classchunk__processing_1_1Chunk.html", "classchunk__processing_1_1Chunk" ],
       [ "ChunkingError", "classchunk__processing_1_1ChunkingError.html", "classchunk__processing_1_1ChunkingError" ],
-      [ "is_multidimensional", "structchunk__processing_1_1is__multidimensional.html", null ],
-      [ "is_multidimensional< T, std::enable_if_t< is_vector< T >::value &&is_vector< typename T::value_type >::value > >", "structchunk__processing_1_1is__multidimensional_3_01T_00_01std_1_1enable__if__t_3_01is__vector_30d3c23284315d038cde1088ba5c61ea2.html", null ],
+      [ "ChunkStrategy", "classchunk__processing_1_1ChunkStrategy.html", "classchunk__processing_1_1ChunkStrategy" ],
+      [ "ConditionalSubChunkStrategy", "classchunk__processing_1_1ConditionalSubChunkStrategy.html", "classchunk__processing_1_1ConditionalSubChunkStrategy" ],
+      [ "EntropyStrategy", "classchunk__processing_1_1EntropyStrategy.html", "classchunk__processing_1_1EntropyStrategy" ],
+      [ "HierarchicalSubChunkStrategy", "classchunk__processing_1_1HierarchicalSubChunkStrategy.html", "classchunk__processing_1_1HierarchicalSubChunkStrategy" ],
       [ "is_vector", "structchunk__processing_1_1is__vector.html", null ],
       [ "is_vector< std::vector< T, A > >", "structchunk__processing_1_1is__vector_3_01std_1_1vector_3_01T_00_01A_01_4_01_4.html", null ],
+      [ "NeuralChunkingStrategy", "classchunk__processing_1_1NeuralChunkingStrategy.html", "classchunk__processing_1_1NeuralChunkingStrategy" ],
+      [ "PatternBasedStrategy", "classchunk__processing_1_1PatternBasedStrategy.html", "classchunk__processing_1_1PatternBasedStrategy" ],
+      [ "RecursiveSubChunkStrategy", "classchunk__processing_1_1RecursiveSubChunkStrategy.html", "classchunk__processing_1_1RecursiveSubChunkStrategy" ],
       [ "ResilienceError", "classchunk__processing_1_1ResilienceError.html", "classchunk__processing_1_1ResilienceError" ],
       [ "SerializationError", "classchunk__processing_1_1SerializationError.html", "classchunk__processing_1_1SerializationError" ],
+      [ "SimilarityChunkingStrategy", "classchunk__processing_1_1SimilarityChunkingStrategy.html", "classchunk__processing_1_1SimilarityChunkingStrategy" ],
+      [ "VarianceStrategy", "classchunk__processing_1_1VarianceStrategy.html", "classchunk__processing_1_1VarianceStrategy" ],
       [ "VisualizationError", "classchunk__processing_1_1VisualizationError.html", "classchunk__processing_1_1VisualizationError" ]
     ] ],
     [ "chunk_resilience", "namespacechunk__resilience.html", [
@@ -49,21 +55,6 @@ var annotated_dup =
     ] ],
     [ "chunk_serialization", "namespacechunk__serialization.html", [
       [ "ChunkSerializer", "classchunk__serialization_1_1ChunkSerializer.html", "classchunk__serialization_1_1ChunkSerializer" ]
-    ] ],
-    [ "chunk_strategies", "namespacechunk__strategies.html", [
-      [ "AdaptiveStrategy", "classchunk__strategies_1_1AdaptiveStrategy.html", "classchunk__strategies_1_1AdaptiveStrategy" ],
-      [ "ChunkStrategy", "classchunk__strategies_1_1ChunkStrategy.html", "classchunk__strategies_1_1ChunkStrategy" ],
-      [ "ConditionalSubChunkStrategy", "classchunk__strategies_1_1ConditionalSubChunkStrategy.html", "classchunk__strategies_1_1ConditionalSubChunkStrategy" ],
-      [ "DynamicThresholdStrategy", "classchunk__strategies_1_1DynamicThresholdStrategy.html", "classchunk__strategies_1_1DynamicThresholdStrategy" ],
-      [ "EntropyStrategy", "classchunk__strategies_1_1EntropyStrategy.html", "classchunk__strategies_1_1EntropyStrategy" ],
-      [ "EntropyStrategy< std::string >", "classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4.html", "classchunk__strategies_1_1EntropyStrategy_3_01std_1_1string_01_4" ],
-      [ "HierarchicalSubChunkStrategy", "classchunk__strategies_1_1HierarchicalSubChunkStrategy.html", "classchunk__strategies_1_1HierarchicalSubChunkStrategy" ],
-      [ "MultiCriteriaStrategy", "classchunk__strategies_1_1MultiCriteriaStrategy.html", "classchunk__strategies_1_1MultiCriteriaStrategy" ],
-      [ "PatternBasedStrategy", "classchunk__strategies_1_1PatternBasedStrategy.html", "classchunk__strategies_1_1PatternBasedStrategy" ],
-      [ "QuantileStrategy", "classchunk__strategies_1_1QuantileStrategy.html", "classchunk__strategies_1_1QuantileStrategy" ],
-      [ "RecursiveSubChunkStrategy", "classchunk__strategies_1_1RecursiveSubChunkStrategy.html", "classchunk__strategies_1_1RecursiveSubChunkStrategy" ],
-      [ "SubChunkStrategy", "classchunk__strategies_1_1SubChunkStrategy.html", "classchunk__strategies_1_1SubChunkStrategy" ],
-      [ "VarianceStrategy", "classchunk__strategies_1_1VarianceStrategy.html", "classchunk__strategies_1_1VarianceStrategy" ]
     ] ],
     [ "chunk_utils", "namespacechunk__utils.html", [
       [ "ChunkGenerator", "classchunk__utils_1_1ChunkGenerator.html", "classchunk__utils_1_1ChunkGenerator" ],
@@ -93,13 +84,30 @@ var annotated_dup =
       [ "MutualInformationChunking", "classsophisticated__chunking_1_1MutualInformationChunking.html", "classsophisticated__chunking_1_1MutualInformationChunking" ],
       [ "WaveletChunking", "classsophisticated__chunking_1_1WaveletChunking.html", "classsophisticated__chunking_1_1WaveletChunking" ]
     ] ],
+    [ "AdvancedChunkStrategiesTest", "classAdvancedChunkStrategiesTest.html", "classAdvancedChunkStrategiesTest" ],
+    [ "ChunkBPlusTreeTest", "classChunkBPlusTreeTest.html", "classChunkBPlusTreeTest" ],
+    [ "ChunkCompressorTest", "classChunkCompressorTest.html", "classChunkCompressorTest" ],
     [ "ChunkList", "classChunkList.html", "classChunkList" ],
+    [ "ChunkMetricsTest", "classChunkMetricsTest.html", "classChunkMetricsTest" ],
     [ "ChunkNode", "structChunkNode.html", "structChunkNode" ],
+    [ "ChunkSerializerTest", "classChunkSerializerTest.html", "classChunkSerializerTest" ],
+    [ "ChunkSkipListTest", "classChunkSkipListTest.html", "classChunkSkipListTest" ],
+    [ "ChunkTest", "classChunkTest.html", "classChunkTest" ],
+    [ "ChunkVisualizerTest", "classChunkVisualizerTest.html", "classChunkVisualizerTest" ],
     [ "CircularBuffer", "classCircularBuffer.html", "classCircularBuffer" ],
+    [ "DTWChunkingTest", "classDTWChunkingTest.html", "classDTWChunkingTest" ],
+    [ "EntropyStrategyTest", "classEntropyStrategyTest.html", "classEntropyStrategyTest" ],
+    [ "JaggedArrayTest", "classJaggedArrayTest.html", "classJaggedArrayTest" ],
     [ "MultiCriteriaStrategy", "classMultiCriteriaStrategy.html", "classMultiCriteriaStrategy" ],
-    [ "NeuralChunkingStrategy", "classNeuralChunkingStrategy.html", "classNeuralChunkingStrategy" ],
+    [ "MutualInformationChunkingTest", "classMutualInformationChunkingTest.html", "classMutualInformationChunkingTest" ],
+    [ "NeuralNetworkTest", "classNeuralNetworkTest.html", "classNeuralNetworkTest" ],
+    [ "ParallelChunkProcessorTest", "classParallelChunkProcessorTest.html", "classParallelChunkProcessorTest" ],
     [ "PriorityQueue", "classPriorityQueue.html", "classPriorityQueue" ],
-    [ "SimilarityChunkingStrategy", "classSimilarityChunkingStrategy.html", "classSimilarityChunkingStrategy" ],
+    [ "QuantileStrategyTest", "classQuantileStrategyTest.html", "classQuantileStrategyTest" ],
+    [ "ResilientChunkerTest", "classResilientChunkerTest.html", "classResilientChunkerTest" ],
     [ "SlidingWindow", "classSlidingWindow.html", "classSlidingWindow" ],
-    [ "WaveletChunking", "classWaveletChunking.html", "classWaveletChunking" ]
+    [ "SubChunkStrategiesTest", "classSubChunkStrategiesTest.html", "classSubChunkStrategiesTest" ],
+    [ "VarianceStrategyTest", "classVarianceStrategyTest.html", "classVarianceStrategyTest" ],
+    [ "WaveletChunking", "classWaveletChunking.html", "classWaveletChunking" ],
+    [ "WaveletChunkingTest", "classWaveletChunkingTest.html", "classWaveletChunkingTest" ]
 ];

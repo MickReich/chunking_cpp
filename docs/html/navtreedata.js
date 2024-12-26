@@ -25,13 +25,65 @@
 var NAVTREE =
 [
   [ "Advanced Chunk Processing Library", "index.html", [
-    [ "Building Instructions", "index.html", "index" ],
+    [ "Advanced Chunk Processing Library", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html", [
+      [ "Overview", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#overview", null ],
+      [ "Features", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#features", [
+        [ "Core Functionality", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#core-functionality", null ],
+        [ "Advanced Chunking Strategies", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#advanced-chunking-strategies", null ],
+        [ "Sub-Chunking Strategies", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#sub-chunking-strategies", null ],
+        [ "Data Structures", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#data-structures", null ],
+        [ "Analysis & Utilities", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#analysis--utilities", null ]
+      ] ],
+      [ "Requirements", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#requirements", null ],
+      [ "Quick Start", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#quick-start", null ],
+      [ "Usage Examples", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#usage-examples", [
+        [ "Basic Usage", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#basic-usage", null ],
+        [ "Multi-dimensional Vector Support", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#multi-dimensional-vector-support", null ],
+        [ "Advanced Features", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#advanced-features", [
+          [ "Example Usage", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#example-usage", null ]
+        ] ]
+      ] ],
+      [ "Documentation", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#documentation", [
+        [ "Performance Considerations", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#performance-considerations", null ],
+        [ "Best Practices", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#best-practices", null ]
+      ] ],
+      [ "Contributing", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#contributing", null ],
+      [ "License", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#license", null ],
+      [ "Citation", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#citation", null ],
+      [ "Project Structure", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#project-structure", [
+        [ "Sophisticated Chunking Examples", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#sophisticated-chunking-examples", null ],
+        [ "Chunk Visualization", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#chunk-visualization", null ],
+        [ "Chunk Benchmarking", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2README.html#chunk-benchmarking", null ]
+      ] ]
+    ] ],
+    [ "Building Instructions", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2BUILDING.html", [
+      [ "Prerequisites", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2BUILDING.html#prerequisites", null ],
+      [ "Installing Dependencies", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2BUILDING.html#installing-dependencies", [
+        [ "Ubuntu/Debian", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2BUILDING.html#ubuntudebian", null ],
+        [ "macOS", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2BUILDING.html#macos", null ],
+        [ "Windows", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2BUILDING.html#windows", null ]
+      ] ],
+      [ "Python Bindings", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2BUILDING.html#python-bindings", null ],
+      [ "Optional Dependencies", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2BUILDING.html#optional-dependencies", null ],
+      [ "Configuration Options", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2BUILDING.html#configuration-options", null ],
+      [ "Building the Project", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2BUILDING.html#building-the-project", null ],
+      [ "Project Structure", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2BUILDING.html#project-structure-1", null ],
+      [ "Make Targets", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2BUILDING.html#make-targets", null ],
+      [ "Advanced Features", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2BUILDING.html#advanced-features-1", [
+        [ "Sub-Chunking Strategies", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2BUILDING.html#sub-chunking-strategies-1", null ],
+        [ "Building and Testing Sophisticated Chunking", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2BUILDING.html#building-and-testing-sophisticated-chunking", null ],
+        [ "Running Sophisticated Chunking Tests", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2BUILDING.html#running-sophisticated-chunking-tests", null ],
+        [ "Sophisticated Chunking Integration", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2BUILDING.html#sophisticated-chunking-integration", null ],
+        [ "Performance Considerations for Sophisticated Chunking", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2BUILDING.html#performance-considerations-for-sophisticated-chunking", null ],
+        [ "Troubleshooting", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2BUILDING.html#troubleshooting", null ]
+      ] ],
+      [ "ADDITIONAL INFORMATION", "md__2mnt_2c_2Users_2jonat_2OneDrive_2Documents_2Python_01Scripts_2chunking__cpp_2BUILDING.html#additional-information", null ]
+    ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
         [ "All", "namespacemembers.html", null ],
-        [ "Functions", "namespacemembers_func.html", null ],
-        [ "Variables", "namespacemembers_vars.html", null ]
+        [ "Functions", "namespacemembers_func.html", null ]
       ] ]
     ] ],
     [ "Classes", "annotated.html", [
@@ -59,10 +111,11 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "advanced__chunk__strategies_8hpp.html",
-"classadvanced__structures_1_1FractalPatternsChunk.html#a82a2732ff021e61db4b5419f5ded766c",
-"classchunk__resilience_1_1ResilientChunker.html#ab36142ea4284db4fc6eb44691ea46fae",
-"classchunk__viz_1_1ChunkVisualizer.html#af2c26dfb5e1c689b0b691d57d8d9f6d4",
-"gpu__chunking_8hpp.html#aeaf2b8792be9f99ad11147059ef5079d"
+"classWaveletChunking.html#a5d53d1afa0c5f9f378abd9c0876bf2a2",
+"classchunk__integrations_1_1MessageQueueConnection.html#ad35665e9cc924e568347441470a26354",
+"classchunk__resilience_1_1ResilientChunker.html#af4af96031aa05d86fe9c967cbbdd811a",
+"classsophisticated__chunking_1_1MutualInformationChunking.html#ac6cfbe17f1595b565fba0ea1d2897aaa",
+"structadvanced__structures_1_1ChunkLSMTree_1_1Level.html#a48747184c0a26833bf3a162e42f58781"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

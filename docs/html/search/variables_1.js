@@ -1,19 +1,9 @@
 var searchData=
 [
-  ['cached_5fcohesion_0',['cached_cohesion',['../classchunk__metrics_1_1ChunkQualityAnalyzer.html#a5b17bbfb357af4c2dd959694ff418445',1,'chunk_metrics::ChunkQualityAnalyzer']]],
-  ['cached_5fseparation_1',['cached_separation',['../classchunk__metrics_1_1ChunkQualityAnalyzer.html#ab8fa679923ff7b550952ee02e6f1f6e4',1,'chunk_metrics::ChunkQualityAnalyzer']]],
-  ['capacity_5f_2',['capacity_',['../classCircularBuffer.html#ad7ae2a7aded5a1a1524e050abc88a438',1,'CircularBuffer']]],
-  ['checkpoint_5fdir_3',['checkpoint_dir',['../classchunk__resilience_1_1ResilientChunker.html#ab36142ea4284db4fc6eb44691ea46fae',1,'chunk_resilience::ResilientChunker']]],
-  ['checkpoint_5fhistory_4',['checkpoint_history',['../classchunk__resilience_1_1ResilientChunker.html#ac1dbcc039b4b4569997d897e708169d1',1,'chunk_resilience::ResilientChunker']]],
-  ['checkpoint_5finterval_5',['checkpoint_interval',['../classchunk__resilience_1_1ResilientChunker.html#aad4536856d71e4966455fb3154fe9202',1,'chunk_resilience::ResilientChunker']]],
-  ['children_6',['children',['../structadvanced__structures_1_1ChunkBPlusTree_1_1Node.html#a665314b6b31d02ee09e4bad70f055eab',1,'advanced_structures::ChunkBPlusTree::Node']]],
-  ['chunk_5fsize_5f_7',['chunk_size_',['../classchunk__processing_1_1Chunk.html#a8ff288af141f90a6451ff6279fe2321c',1,'chunk_processing::Chunk']]],
-  ['chunks_8',['chunks',['../structchunk__resilience_1_1Checkpoint.html#a1021b42214667b3f3748b46145960418',1,'chunk_resilience::Checkpoint']]],
-  ['chunks_5f_9',['chunks_',['../classchunk__processing_1_1Chunk.html#af499df1dd9ce6bfabe896ac9c7883b10',1,'chunk_processing::Chunk']]],
-  ['comp_5f_10',['comp_',['../classPriorityQueue.html#a4fa43ad50be95b27d62d62d73a83f19c',1,'PriorityQueue']]],
-  ['condition_5f_11',['condition_',['../classchunk__strategies_1_1ConditionalSubChunkStrategy.html#abaf81b9f4fc1a975e24775f5e83b4872',1,'chunk_strategies::ConditionalSubChunkStrategy']]],
-  ['context_5fsize_5f_12',['context_size_',['../classsophisticated__chunking_1_1MutualInformationChunking.html#a70acda7d7a1260ef794bf9195483c6ac',1,'sophisticated_chunking::MutualInformationChunking']]],
-  ['current_5flevel_13',['current_level',['../classadvanced__structures_1_1ChunkSkipList.html#a642cbae0a13509a0616bcdb6112610f9',1,'advanced_structures::ChunkSkipList']]],
-  ['current_5fsequence_14',['current_sequence',['../classchunk__resilience_1_1ResilientChunker.html#a12030c277ed6b1145be01e85e6c87c58',1,'chunk_resilience::ResilientChunker']]],
-  ['cv_15',['cv',['../classchunk__resilience_1_1ResilientChunker.html#a84d0c703db0fef2aa79e3d37708abbe2',1,'chunk_resilience::ResilientChunker']]]
+  ['basic_5fchunker_0',['basic_chunker',['../classChunkTest.html#a54b9c8774097310c4668c7d6e01a16f8',1,'ChunkTest']]],
+  ['batch_5fsize_1',['batch_size',['../namespaceneural__chunking.html#ac7660a248d600e838bf24c4a3349203c',1,'neural_chunking::NeuralChunkConfig']]],
+  ['biases_5f_2',['biases_',['../classneural__chunking_1_1Layer.html#af7ae214d8d8fd7d7f456216c10cadfc6',1,'neural_chunking::Layer']]],
+  ['binary_5fdata_3',['binary_data',['../classMutualInformationChunkingTest.html#a9d0735a71c43ef109d5023a8ef463bbd',1,'MutualInformationChunkingTest']]],
+  ['boundary_5fthreshold_4',['boundary_threshold',['../classadvanced__structures_1_1SemanticBoundariesChunk.html#a59f37d922130f44da884e79729f8572b',1,'advanced_structures::SemanticBoundariesChunk']]],
+  ['buffer_5f_5',['buffer_',['../classCircularBuffer.html#a8dec6941db72a0d1111de5d261878c51',1,'CircularBuffer']]]
 ];

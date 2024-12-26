@@ -13,6 +13,5 @@ var searchData=
   ['detect_5fboundary_10',['detect_boundary',['../classWaveletChunking.html#a31817aeefb22fec8e762e36267919f85',1,'WaveletChunking']]],
   ['dimensions_11',['dimensions',['../classchunk__processing_1_1Chunk.html#afb877e8768fca0a43e3bdd5017df0add',1,'chunk_processing::Chunk']]],
   ['disconnect_12',['disconnect',['../classchunk__integrations_1_1DatabaseConnection.html#ad998ee7861a8c0a07a0797ceee17009d',1,'chunk_integrations::DatabaseConnection::disconnect()'],['../classchunk__integrations_1_1MessageQueueConnection.html#a34b4800a5a552c8de5355ab5079bf4c0',1,'chunk_integrations::MessageQueueConnection::disconnect()']]],
-  ['dtwchunking_13',['DTWChunking',['../classsophisticated__chunking_1_1DTWChunking.html#a10584b7dace05f58246d0faa6b03007f',1,'sophisticated_chunking::DTWChunking']]],
-  ['dynamicthresholdstrategy_14',['DynamicThresholdStrategy',['../classchunk__strategies_1_1DynamicThresholdStrategy.html#a85fd9149cd16f1704b17455d1b8b185e',1,'chunk_strategies::DynamicThresholdStrategy']]]
+  ['dtwchunking_13',['DTWChunking',['../classsophisticated__chunking_1_1DTWChunking.html#a10584b7dace05f58246d0faa6b03007f',1,'sophisticated_chunking::DTWChunking']]]
 ];

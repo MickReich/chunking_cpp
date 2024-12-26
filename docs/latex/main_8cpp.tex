@@ -66,44 +66,36 @@ Demonstrates adaptive conditional sub-\/chunking.
 
 This function shows how to use conditional sub-\/chunking with adaptive thresholds based on chunk properties. 
 
-Definition at line \mbox{\hyperlink{main_8cpp_source_l00137}{137}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00132}{132}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00138\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n===\ Adaptive\ Conditional\ Sub-\/chunking\ ==="{}}\ <<\ std::endl;}
-\DoxyCodeLine{00139\ }
-\DoxyCodeLine{00140\ \ \ \ \ \textcolor{comment}{//\ Example\ data}}
-\DoxyCodeLine{00141\ \ \ \ \ std::vector<std::vector<double>>\ data\ =\ \{\{1.0,\ 1.1,\ 1.2,\ 5.0,\ 5.1,\ 5.2\},}
-\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2.0,\ 2.1,\ 2.2,\ 10.0,\ 10.1,\ 10.2\},}
-\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{3.0,\ 3.1,\ 3.2,\ 15.0,\ 15.1,\ 15.2\}\};}
-\DoxyCodeLine{00144\ }
-\DoxyCodeLine{00145\ \ \ \ \ \textcolor{comment}{//\ Conditional\ sub-\/chunking}}
-\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keyword}{auto}\ condition\ =\ [](\textcolor{keyword}{const}\ std::vector<double>\&\ chunk)\ \{}
-\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ mean\ =\ std::accumulate(chunk.begin(),\ chunk.end(),\ 0.0)\ /\ chunk.size();}
-\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ variance\ =\ 0.0;}
-\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ val\ :\ chunk)\ \{}
-\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ variance\ +=\ (val\ -\/\ mean)\ *\ (val\ -\/\ mean);}
-\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ variance\ /=\ chunk.size();}
-\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ variance\ >\ 50.0;}
-\DoxyCodeLine{00154\ \ \ \ \ \};}
-\DoxyCodeLine{00155\ }
-\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keyword}{auto}\ variance\_strategy\ =\ std::make\_shared<VarianceStrategy<double>>(5.0);}
-\DoxyCodeLine{00157\ \ \ \ \ \mbox{\hyperlink{classchunk__strategies_1_1ConditionalSubChunkStrategy}{ConditionalSubChunkStrategy<double>}}\ conditional\_strategy(variance\_strategy,\ condition,\ 2);}
-\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keyword}{auto}\ conditional\_result\ =\ conditional\_strategy.apply(data);}
-\DoxyCodeLine{00159\ }
-\DoxyCodeLine{00160\ \ \ \ \ \mbox{\hyperlink{main_8cpp_a9c55e7bd3a10f58130632b26d75dc5a8}{print\_sub\_chunks}}(conditional\_result,\ \textcolor{stringliteral}{"{}Conditional\ Sub-\/chunking"{}});}
-\DoxyCodeLine{00161\ \}}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00133\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n===\ Adaptive\ Conditional\ Sub-\/chunking\ ==="{}}\ <<\ std::endl;}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{comment}{//\ Example\ data\ -\/\ now\ using\ 1D\ vector}}
+\DoxyCodeLine{00136\ \ \ \ \ std::vector<double>\ data\ =\ \{1.0,\ 1.1,\ 1.2,\ 5.0,\ 5.1,\ 5.2,\ 2.0,\ 2.1,\ 2.2,\ 10.0,\ 10.1,\ 10.2\};}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keyword}{auto}\ variance\_strategy\ =\ std::make\_shared<chunk\_processing::VarianceStrategy<double>>(5.0);}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keyword}{auto}\ condition\ =\ [](\textcolor{keyword}{const}\ std::vector<double>\&\ chunk)\ \{}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ chunk.size()\ >\ 5;\ \textcolor{comment}{//\ Only\ sub-\/chunk\ large\ chunks}}
+\DoxyCodeLine{00141\ \ \ \ \ \};}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \ \ \ \ \mbox{\hyperlink{classchunk__processing_1_1ConditionalSubChunkStrategy}{chunk\_processing::ConditionalSubChunkStrategy<double>}}\ conditional\_chunker(variance\_strategy,}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ condition,\ 2);}
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keyword}{auto}\ conditional\_result\ =\ conditional\_chunker.apply(data);}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \ \ \ \ \mbox{\hyperlink{main_8cpp_af4761dcd0fd187c30346163870ed9a3b}{print\_chunks}}(conditional\_result);}
+\DoxyCodeLine{00148\ \}}
 
 \end{DoxyCode}
 
 
-References \mbox{\hyperlink{main_8cpp_source_l00070}{print\+\_\+sub\+\_\+chunks()}}.
+References \mbox{\hyperlink{sub__chunk__strategies_8hpp_source_l00087}{chunk\+\_\+processing\+::\+Conditional\+Sub\+Chunk\+Strategy$<$ T $>$\+::apply()}}, and \mbox{\hyperlink{main_8cpp_source_l00050}{print\+\_\+chunks()}}.
 
 
 
-Referenced by \mbox{\hyperlink{main_8cpp_source_l00167}{main()}}.
+Referenced by \mbox{\hyperlink{main_8cpp_source_l00154}{main()}}.
 
 \Hypertarget{main_8cpp_a8e0e686ad74549b9321d9933a712aa74}\label{main_8cpp_a8e0e686ad74549b9321d9933a712aa74} 
 \index{main.cpp@{main.cpp}!demonstrate\_complex\_recursive\_subchunking@{demonstrate\_complex\_recursive\_subchunking}}
@@ -124,27 +116,24 @@ Definition at line \mbox{\hyperlink{main_8cpp_source_l00091}{91}} of file \mbox{
 \DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
 \DoxyCodeLine{00092\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n===\ Complex\ Recursive\ Sub-\/chunking\ ==="{}}\ <<\ std::endl;}
 \DoxyCodeLine{00093\ }
-\DoxyCodeLine{00094\ \ \ \ \ \textcolor{comment}{//\ Example\ data}}
-\DoxyCodeLine{00095\ \ \ \ \ std::vector<std::vector<double>>\ data\ =\ \{\{1.0,\ 1.1,\ 1.2,\ 5.0,\ 5.1,\ 5.2\},}
-\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2.0,\ 2.1,\ 2.2,\ 10.0,\ 10.1,\ 10.2\},}
-\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{3.0,\ 3.1,\ 3.2,\ 15.0,\ 15.1,\ 15.2\}\};}
-\DoxyCodeLine{00098\ }
-\DoxyCodeLine{00099\ \ \ \ \ \textcolor{comment}{//\ Recursive\ sub-\/chunking}}
-\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keyword}{auto}\ variance\_strategy\ =\ std::make\_shared<VarianceStrategy<double>>(3.0);}
-\DoxyCodeLine{00101\ \ \ \ \ \mbox{\hyperlink{classchunk__strategies_1_1RecursiveSubChunkStrategy}{RecursiveSubChunkStrategy<double>}}\ recursive\_strategy(variance\_strategy,\ 3,\ 2);}
-\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keyword}{auto}\ recursive\_result\ =\ recursive\_strategy.apply(data);}
-\DoxyCodeLine{00103\ }
-\DoxyCodeLine{00104\ \ \ \ \ \mbox{\hyperlink{main_8cpp_a9c55e7bd3a10f58130632b26d75dc5a8}{print\_sub\_chunks}}(recursive\_result,\ \textcolor{stringliteral}{"{}Recursive\ Sub-\/chunking"{}});}
-\DoxyCodeLine{00105\ \}}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{comment}{//\ Example\ data\ -\/\ now\ using\ 1D\ vector}}
+\DoxyCodeLine{00095\ \ \ \ \ std::vector<double>\ data\ =\ \{1.0,\ 1.1,\ 1.2,\ 5.0,\ 5.1,\ 5.2,\ 2.0,\ 2.1,\ 2.2,\ 10.0,\ 10.1,\ 10.2\};}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keyword}{auto}\ variance\_strategy\ =\ std::make\_shared<chunk\_processing::VarianceStrategy<double>>(3.0);}
+\DoxyCodeLine{00098\ \ \ \ \ \mbox{\hyperlink{classchunk__processing_1_1RecursiveSubChunkStrategy}{chunk\_processing::RecursiveSubChunkStrategy<double>}}\ recursive\_chunker(variance\_strategy,\ 3,\ 2);}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keyword}{auto}\ recursive\_result\ =\ recursive\_chunker.apply(data);}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \mbox{\hyperlink{main_8cpp_af4761dcd0fd187c30346163870ed9a3b}{print\_chunks}}(recursive\_result);}
+\DoxyCodeLine{00102\ \}}
 
 \end{DoxyCode}
 
 
-References \mbox{\hyperlink{main_8cpp_source_l00070}{print\+\_\+sub\+\_\+chunks()}}.
+References \mbox{\hyperlink{main_8cpp_source_l00050}{print\+\_\+chunks()}}.
 
 
 
-Referenced by \mbox{\hyperlink{main_8cpp_source_l00167}{main()}}.
+Referenced by \mbox{\hyperlink{main_8cpp_source_l00154}{main()}}.
 
 \Hypertarget{main_8cpp_a81068034d44b99c1f2dfcac57ddcddf3}\label{main_8cpp_a81068034d44b99c1f2dfcac57ddcddf3} 
 \index{main.cpp@{main.cpp}!demonstrate\_multi\_strategy\_subchunking@{demonstrate\_multi\_strategy\_subchunking}}
@@ -158,36 +147,34 @@ Demonstrates hierarchical sub-\/chunking using multiple strategies.
 
 This function shows how to apply different chunking strategies in a hierarchical manner, combining variance, similarity, and entropy-\/based approaches. 
 
-Definition at line \mbox{\hyperlink{main_8cpp_source_l00113}{113}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00110}{110}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00114\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n===\ Multi-\/Strategy\ Sub-\/chunking\ ==="{}}\ <<\ std::endl;}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00111\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n===\ Multi-\/Strategy\ Sub-\/chunking\ ==="{}}\ <<\ std::endl;}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{comment}{//\ Example\ data\ -\/\ now\ using\ 1D\ vector}}
+\DoxyCodeLine{00114\ \ \ \ \ std::vector<double>\ data\ =\ \{1.0,\ 1.1,\ 1.2,\ 5.0,\ 5.1,\ 5.2,\ 2.0,\ 2.1,\ 2.2,\ 10.0,\ 10.1,\ 10.2\};}
 \DoxyCodeLine{00115\ }
-\DoxyCodeLine{00116\ \ \ \ \ \textcolor{comment}{//\ Example\ data}}
-\DoxyCodeLine{00117\ \ \ \ \ std::vector<std::vector<double>>\ data\ =\ \{\{1.0,\ 1.1,\ 1.2,\ 5.0,\ 5.1,\ 5.2\},}
-\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{2.0,\ 2.1,\ 2.2,\ 10.0,\ 10.1,\ 10.2\},}
-\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{3.0,\ 3.1,\ 3.2,\ 15.0,\ 15.1,\ 15.2\}\};}
-\DoxyCodeLine{00120\ }
-\DoxyCodeLine{00121\ \ \ \ \ \textcolor{comment}{//\ Hierarchical\ sub-\/chunking}}
-\DoxyCodeLine{00122\ \ \ \ \ std::vector<std::shared\_ptr<ChunkStrategy<double>>>\ strategies\ =\ \{}
-\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ std::make\_shared<VarianceStrategy<double>>(5.0),}
-\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ std::make\_shared<\mbox{\hyperlink{classchunk__strategies_1_1EntropyStrategy}{EntropyStrategy<double>}}>(1.0)\};}
-\DoxyCodeLine{00125\ \ \ \ \ \mbox{\hyperlink{classchunk__strategies_1_1HierarchicalSubChunkStrategy}{HierarchicalSubChunkStrategy<double>}}\ hierarchical\_strategy(strategies,\ 2);}
-\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keyword}{auto}\ hierarchical\_result\ =\ hierarchical\_strategy.apply(data);}
-\DoxyCodeLine{00127\ }
-\DoxyCodeLine{00128\ \ \ \ \ \mbox{\hyperlink{main_8cpp_a9c55e7bd3a10f58130632b26d75dc5a8}{print\_sub\_chunks}}(hierarchical\_result,\ \textcolor{stringliteral}{"{}Hierarchical\ Sub-\/chunking"{}});}
-\DoxyCodeLine{00129\ \}}
+\DoxyCodeLine{00116\ \ \ \ \ std::vector<std::shared\_ptr<chunk\_processing::ChunkStrategy<double>>>\ strategies\ =\ \{}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ std::make\_shared<chunk\_processing::VarianceStrategy<double>>(5.0),}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ std::make\_shared<\mbox{\hyperlink{classchunk__processing_1_1EntropyStrategy}{chunk\_processing::EntropyStrategy<double>}}>(1.0)\};}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \ \mbox{\hyperlink{classchunk__processing_1_1HierarchicalSubChunkStrategy}{chunk\_processing::HierarchicalSubChunkStrategy<double>}}\ hierarchical\_chunker(strategies,\ 2);}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keyword}{auto}\ hierarchical\_result\ =\ hierarchical\_chunker.apply(data);}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \ \ \ \ \mbox{\hyperlink{main_8cpp_af4761dcd0fd187c30346163870ed9a3b}{print\_chunks}}(hierarchical\_result);}
+\DoxyCodeLine{00124\ \}}
 
 \end{DoxyCode}
 
 
-References \mbox{\hyperlink{sub__chunk__strategies_8hpp_source_l00142}{chunk\+\_\+strategies\+::\+Hierarchical\+Sub\+Chunk\+Strategy$<$ T $>$\+::apply()}}, and \mbox{\hyperlink{main_8cpp_source_l00070}{print\+\_\+sub\+\_\+chunks()}}.
+References \mbox{\hyperlink{sub__chunk__strategies_8hpp_source_l00058}{chunk\+\_\+processing\+::\+Hierarchical\+Sub\+Chunk\+Strategy$<$ T $>$\+::apply()}}, and \mbox{\hyperlink{main_8cpp_source_l00050}{print\+\_\+chunks()}}.
 
 
 
-Referenced by \mbox{\hyperlink{main_8cpp_source_l00167}{main()}}.
+Referenced by \mbox{\hyperlink{main_8cpp_source_l00154}{main()}}.
 
 \Hypertarget{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}\label{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97} 
 \index{main.cpp@{main.cpp}!main@{main}}
@@ -204,46 +191,46 @@ Main function demonstrating various chunking strategies.
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{main_8cpp_source_l00167}{167}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
+Definition at line \mbox{\hyperlink{main_8cpp_source_l00154}{154}} of file \mbox{\hyperlink{main_8cpp_source}{main.\+cpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00168\ \ \ \ \ \mbox{\hyperlink{main_8cpp_a8e0e686ad74549b9321d9933a712aa74}{demonstrate\_complex\_recursive\_subchunking}}();}
-\DoxyCodeLine{00169\ \ \ \ \ \mbox{\hyperlink{main_8cpp_a81068034d44b99c1f2dfcac57ddcddf3}{demonstrate\_multi\_strategy\_subchunking}}();}
-\DoxyCodeLine{00170\ \ \ \ \ \mbox{\hyperlink{main_8cpp_a8836fbb61c7f60a2aa5ea974eaab9fca}{demonstrate\_adaptive\_conditional\_subchunking}}();}
-\DoxyCodeLine{00171\ }
-\DoxyCodeLine{00172\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n===\ Demonstrating\ Advanced\ Chunking\ Structures\ ===\(\backslash\)n"{}};}
-\DoxyCodeLine{00173\ }
-\DoxyCodeLine{00174\ \ \ \ \ \textcolor{comment}{//\ Example:\ SemanticChunker\ usage}}
-\DoxyCodeLine{00175\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n===\ SemanticChunker\ Example\ ==="{}}\ <<\ std::endl;}
-\DoxyCodeLine{00176\ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker}{SemanticChunker<std::string>}}\ text\_chunker;}
-\DoxyCodeLine{00177\ \ \ \ \ std::string\ text\ =\ \textcolor{stringliteral}{"{}This\ is\ the\ first\ sentence.\ This\ is\ the\ second\ one.\ And\ here's\ a\ third!"{}};}
-\DoxyCodeLine{00178\ \ \ \ \ \textcolor{keyword}{auto}\ text\_chunks\ =\ text\_chunker.\mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_a2b30319a99b4480cff75f118d6233f39}{chunk}}(text);}
-\DoxyCodeLine{00179\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Text\ chunks\ created:\ "{}}\ <<\ text\_chunks.size()\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
-\DoxyCodeLine{00180\ }
-\DoxyCodeLine{00181\ \ \ \ \ \textcolor{comment}{//\ Custom\ NLP\ model\ example}}
-\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keyword}{class\ }CustomNLPModel\ \{}
-\DoxyCodeLine{00183\ \ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ calculateSimilarity(\textcolor{keyword}{const}\ std::string\&\ s1,\ \textcolor{keyword}{const}\ std::string\&\ s2)\ \{}
-\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Simple\ example:\ compare\ lengths\ as\ a\ similarity\ metric}}
-\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::abs(1.0\ -\/\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(std::abs(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(s1.length())\ -\/}
-\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(s2.length())))\ /}
-\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::max(s1.length(),\ s2.length()));}
-\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00190\ \ \ \ \ \};}
-\DoxyCodeLine{00191\ }
-\DoxyCodeLine{00192\ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker}{SemanticChunker<std::string,\ CustomNLPModel>}}\ custom\_chunker;}
-\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keyword}{auto}\ custom\_chunks\ =\ custom\_chunker.\mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_a2b30319a99b4480cff75f118d6233f39}{chunk}}(text);}
-\DoxyCodeLine{00194\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Custom\ model\ chunks\ created:\ "{}}\ <<\ custom\_chunks.size()\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n"{}};}
-\DoxyCodeLine{00195\ }
-\DoxyCodeLine{00196\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
-\DoxyCodeLine{00197\ \}}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00155\ \ \ \ \ \mbox{\hyperlink{main_8cpp_a8e0e686ad74549b9321d9933a712aa74}{demonstrate\_complex\_recursive\_subchunking}}();}
+\DoxyCodeLine{00156\ \ \ \ \ \mbox{\hyperlink{main_8cpp_a81068034d44b99c1f2dfcac57ddcddf3}{demonstrate\_multi\_strategy\_subchunking}}();}
+\DoxyCodeLine{00157\ \ \ \ \ \mbox{\hyperlink{main_8cpp_a8836fbb61c7f60a2aa5ea974eaab9fca}{demonstrate\_adaptive\_conditional\_subchunking}}();}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n===\ Demonstrating\ Advanced\ Chunking\ Structures\ ===\(\backslash\)n"{}};}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{comment}{//\ Example:\ SemanticChunker\ usage}}
+\DoxyCodeLine{00162\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n===\ SemanticChunker\ Example\ ==="{}}\ <<\ std::endl;}
+\DoxyCodeLine{00163\ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker}{SemanticChunker<std::string>}}\ text\_chunker;}
+\DoxyCodeLine{00164\ \ \ \ \ std::string\ text\ =\ \textcolor{stringliteral}{"{}This\ is\ the\ first\ sentence.\ This\ is\ the\ second\ one.\ And\ here's\ a\ third!"{}};}
+\DoxyCodeLine{00165\ \ \ \ \ \textcolor{keyword}{auto}\ text\_chunks\ =\ text\_chunker.\mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_a2b30319a99b4480cff75f118d6233f39}{chunk}}(text);}
+\DoxyCodeLine{00166\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Text\ chunks\ created:\ "{}}\ <<\ text\_chunks.size()\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{comment}{//\ Custom\ NLP\ model\ example}}
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keyword}{class\ }CustomNLPModel\ \{}
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ calculateSimilarity(\textcolor{keyword}{const}\ std::string\&\ s1,\ \textcolor{keyword}{const}\ std::string\&\ s2)\ \{}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Simple\ example:\ compare\ lengths\ as\ a\ similarity\ metric}}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::abs(1.0\ -\/\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(std::abs(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(s1.length())\ -\/}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(s2.length())))\ /}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::max(s1.length(),\ s2.length()));}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00177\ \ \ \ \ \};}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00179\ \ \ \ \ \mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker}{SemanticChunker<std::string,\ CustomNLPModel>}}\ custom\_chunker;}
+\DoxyCodeLine{00180\ \ \ \ \ \textcolor{keyword}{auto}\ custom\_chunks\ =\ custom\_chunker.\mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_a2b30319a99b4480cff75f118d6233f39}{chunk}}(text);}
+\DoxyCodeLine{00181\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Custom\ model\ chunks\ created:\ "{}}\ <<\ custom\_chunks.size()\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n"{}};}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00184\ \}}
 
 \end{DoxyCode}
 
 
-References \mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_a2b30319a99b4480cff75f118d6233f39}{advanced\+\_\+structures\+::\+Semantic\+Chunker$<$ Content\+Type, Model\+Type $>$\+::chunk()}}, \mbox{\hyperlink{main_8cpp_source_l00137}{demonstrate\+\_\+adaptive\+\_\+conditional\+\_\+subchunking()}}, \mbox{\hyperlink{main_8cpp_source_l00091}{demonstrate\+\_\+complex\+\_\+recursive\+\_\+subchunking()}}, and \mbox{\hyperlink{main_8cpp_source_l00113}{demonstrate\+\_\+multi\+\_\+strategy\+\_\+subchunking()}}.
+References \mbox{\hyperlink{classadvanced__structures_1_1SemanticChunker_a2b30319a99b4480cff75f118d6233f39}{advanced\+\_\+structures\+::\+Semantic\+Chunker$<$ Content\+Type, Model\+Type $>$\+::chunk()}}, \mbox{\hyperlink{main_8cpp_source_l00132}{demonstrate\+\_\+adaptive\+\_\+conditional\+\_\+subchunking()}}, \mbox{\hyperlink{main_8cpp_source_l00091}{demonstrate\+\_\+complex\+\_\+recursive\+\_\+subchunking()}}, and \mbox{\hyperlink{main_8cpp_source_l00110}{demonstrate\+\_\+multi\+\_\+strategy\+\_\+subchunking()}}.
 
 \Hypertarget{main_8cpp_af4761dcd0fd187c30346163870ed9a3b}\label{main_8cpp_af4761dcd0fd187c30346163870ed9a3b} 
 \index{main.cpp@{main.cpp}!print\_chunks@{print\_chunks}}
@@ -285,6 +272,10 @@ Definition at line \mbox{\hyperlink{main_8cpp_source_l00050}{50}} of file \mbox{
 \DoxyCodeLine{00060\ \}}
 
 \end{DoxyCode}
+
+
+Referenced by \mbox{\hyperlink{main_8cpp_source_l00132}{demonstrate\+\_\+adaptive\+\_\+conditional\+\_\+subchunking()}}, \mbox{\hyperlink{main_8cpp_source_l00091}{demonstrate\+\_\+complex\+\_\+recursive\+\_\+subchunking()}}, and \mbox{\hyperlink{main_8cpp_source_l00110}{demonstrate\+\_\+multi\+\_\+strategy\+\_\+subchunking()}}.
+
 \Hypertarget{main_8cpp_a9c55e7bd3a10f58130632b26d75dc5a8}\label{main_8cpp_a9c55e7bd3a10f58130632b26d75dc5a8} 
 \index{main.cpp@{main.cpp}!print\_sub\_chunks@{print\_sub\_chunks}}
 \index{print\_sub\_chunks@{print\_sub\_chunks}!main.cpp@{main.cpp}}
@@ -331,7 +322,3 @@ Definition at line \mbox{\hyperlink{main_8cpp_source_l00070}{70}} of file \mbox{
 \DoxyCodeLine{00083\ \}}
 
 \end{DoxyCode}
-
-
-Referenced by \mbox{\hyperlink{main_8cpp_source_l00137}{demonstrate\+\_\+adaptive\+\_\+conditional\+\_\+subchunking()}}, \mbox{\hyperlink{main_8cpp_source_l00091}{demonstrate\+\_\+complex\+\_\+recursive\+\_\+subchunking()}}, and \mbox{\hyperlink{main_8cpp_source_l00113}{demonstrate\+\_\+multi\+\_\+strategy\+\_\+subchunking()}}.
-

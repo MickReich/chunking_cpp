@@ -1,5 +1,7 @@
 <map id="chunk_compression.hpp" name="chunk_compression.hpp">
-<area shape="rect" id="Node000001" title=" " alt="" coords="7,5,186,31"/>
-<area shape="rect" id="Node000002" href="$main_8cpp.html" title="Demonstrates various chunking strategies and operations." alt="" coords="5,79,188,148"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,44,99,79,94,79,94,44"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="121,5,299,31"/>
+<area shape="rect" id="Node000002" href="$main_8cpp.html" title="Demonstrates various chunking strategies and operations." alt="" coords="5,86,188,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="188,42,136,88,133,84,185,38"/>
+<area shape="rect" id="Node000003" href="$chunk__compression__test_8cpp.html" title=" " alt="" coords="213,79,434,163"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="235,38,279,77,275,81,231,42"/>
 </map>

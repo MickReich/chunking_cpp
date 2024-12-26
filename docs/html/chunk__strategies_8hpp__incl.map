@@ -1,30 +1,28 @@
 <map id="chunk_strategies.hpp" name="chunk_strategies.hpp">
-<area shape="rect" id="Node000001" title="Defines various strategies for chunking data based on different criteria." alt="" coords="452,5,613,31"/>
-<area shape="rect" id="Node000002" href="$chunk_8hpp.html" title=" " alt="" coords="223,79,312,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="491,33,324,78,323,72,489,28"/>
-<area shape="rect" id="Node000003" href="$chunk__common_8hpp.html" title=" " alt="" coords="5,152,159,177"/>
-<area shape="poly" id="edge9_Node000001_Node000003" title=" " alt="" coords="452,28,336,45,272,60,211,81,154,112,107,145,104,141,151,107,209,76,271,55,335,40,452,23"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="165,225,228,251"/>
-<area shape="poly" id="edge16_Node000001_Node000005" title=" " alt="" coords="538,30,543,60,545,99,538,142,530,162,517,179,498,193,469,205,395,222,313,232,242,237,242,232,312,227,394,216,468,200,495,189,513,175,525,159,533,140,540,99,538,60,533,31"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="317,152,391,177"/>
-<area shape="poly" id="edge14_Node000001_Node000006" title=" " alt="" coords="520,33,381,145,377,141,516,29"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="416,152,503,177"/>
-<area shape="poly" id="edge15_Node000001_Node000007" title=" " alt="" coords="529,32,474,141,469,138,524,30"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="570,79,655,104"/>
-<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="547,29,591,68,588,72,544,33"/>
-<area shape="rect" id="Node000010" title=" " alt="" coords="680,79,743,104"/>
-<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="562,28,671,71,669,76,560,33"/>
-<area shape="rect" id="Node000011" title=" " alt="" coords="767,79,853,104"/>
-<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="578,28,754,73,752,78,577,33"/>
-<area shape="rect" id="Node000012" title=" " alt="" coords="878,79,929,104"/>
-<area shape="poly" id="edge13_Node000001_Node000012" title=" " alt="" coords="612,28,728,47,865,76,864,81,727,53,611,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="239,107,126,149,124,145,237,102"/>
-<area shape="poly" id="edge8_Node000002_Node000005" title=" " alt="" coords="259,106,241,127,224,153,212,183,204,212,199,211,207,182,220,151,237,124,255,102"/>
-<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="283,102,331,141,328,145,280,106"/>
-<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="299,102,416,144,414,149,297,107"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="234,152,293,177"/>
-<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="269,104,267,139,262,138,264,104"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="36,225,128,251"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="85,178,85,212,79,212,79,178"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="102,175,168,216,165,220,99,180"/>
+<area shape="rect" id="Node000001" title="Defines various strategies for chunking data based on different criteria." alt="" coords="457,5,619,31"/>
+<area shape="rect" id="Node000002" href="$chunk__common_8hpp.html" title=" " alt="" coords="80,152,233,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="457,28,357,45,304,60,254,81,211,111,177,143,173,140,207,107,251,76,302,55,356,40,456,22"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="240,225,303,251"/>
+<area shape="poly" id="edge10_Node000001_Node000005" title=" " alt="" coords="457,32,363,51,323,65,299,81,280,111,271,146,269,181,270,211,265,212,263,181,266,145,275,109,295,77,321,60,361,46,456,27"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="576,79,639,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="551,29,589,67,585,71,548,33"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="663,79,749,104"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="566,28,667,71,665,76,564,33"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="774,79,825,104"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="583,28,761,76,760,81,582,33"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="433,152,510,177"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="538,31,530,65,515,105,492,142,487,140,510,103,525,63,533,30"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="849,79,923,104"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="599,28,836,76,835,81,598,33"/>
+<area shape="rect" id="Node000011" href="$sub__chunk__strategies_8hpp.html" title="Advanced sub&#45;chunking strategies for hierarchical data processing." alt="" coords="309,79,500,104"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="511,33,432,74,430,69,509,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="122,225,207,251"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="161,177,165,212,159,212,155,178"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,225,97,251"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="141,180,81,220,78,215,138,175"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="176,175,242,216,240,220,174,180"/>
+<area shape="poly" id="edge13_Node000011_Node000001" title=" " alt="" coords="432,76,510,35,513,40,435,81"/>
+<area shape="poly" id="edge12_Node000011_Node000002" title=" " alt="" coords="366,107,211,151,209,146,364,101"/>
+<area shape="poly" id="edge15_Node000011_Node000005" title=" " alt="" coords="396,106,293,217,289,213,392,103"/>
+<area shape="poly" id="edge14_Node000011_Node000009" title=" " alt="" coords="418,103,453,140,449,144,414,106"/>
 </map>

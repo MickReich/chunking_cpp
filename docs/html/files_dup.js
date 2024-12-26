@@ -1,6 +1,7 @@
 var files_dup =
 [
     [ "src", "dir_68267d1309a1af8e8297ef4c3efbcdba.html", "dir_68267d1309a1af8e8297ef4c3efbcdba" ],
+    [ "tests", "dir_59425e443f801f1f2fd8bbe4959a3ccf.html", "dir_59425e443f801f1f2fd8bbe4959a3ccf" ],
     [ "advanced_chunk_strategies.hpp", "advanced__chunk__strategies_8hpp.html", "advanced__chunk__strategies_8hpp" ],
     [ "advanced_structures.hpp", "advanced__structures_8hpp.html", "advanced__structures_8hpp" ],
     [ "chunk.hpp", "chunk_8hpp.html", "chunk_8hpp" ],

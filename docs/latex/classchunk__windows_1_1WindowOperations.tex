@@ -22,7 +22,7 @@ static T \mbox{\hyperlink{classchunk__windows_1_1WindowOperations_af8b096abbcd32
 class chunk\+\_\+windows\+::\+Window\+Operations$<$ T $>$}
 
 
-Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00103}{103}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00117}{117}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
 
 
 
@@ -36,16 +36,16 @@ static T \mbox{\hyperlink{classchunk__windows_1_1WindowOperations}{chunk\+\_\+wi
 
 
 
-Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00105}{105}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00119}{119}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (window.empty())\ \{}
-\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ T\{\};\ \textcolor{comment}{//\ Return\ default\ value\ for\ empty\ input}}
-\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::accumulate(window.begin(),\ window.end(),\ T\{\})\ /\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(window.size());}
-\DoxyCodeLine{00110\ \ \ \ \ \}}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (window.empty())\ \{}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ T\{\};\ \textcolor{comment}{//\ Return\ default\ value\ for\ empty\ input}}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::accumulate(window.begin(),\ window.end(),\ T\{\})\ /\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(window.size());}
+\DoxyCodeLine{00124\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \Hypertarget{classchunk__windows_1_1WindowOperations_ac8191b96fc02bd1c9ff22be4ffd6123c}\label{classchunk__windows_1_1WindowOperations_ac8191b96fc02bd1c9ff22be4ffd6123c} 
@@ -57,16 +57,16 @@ static T \mbox{\hyperlink{classchunk__windows_1_1WindowOperations}{chunk\+\_\+wi
 
 
 
-Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00120}{120}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00134}{134}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (window.empty())\ \{}
-\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Cannot\ compute\ max\ of\ empty\ window"{}});}
-\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *std::max\_element(window.begin(),\ window.end());}
-\DoxyCodeLine{00125\ \ \ \ \ \}}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (window.empty())\ \{}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Cannot\ compute\ max\ of\ empty\ window"{}});}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *std::max\_element(window.begin(),\ window.end());}
+\DoxyCodeLine{00139\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \Hypertarget{classchunk__windows_1_1WindowOperations_a4dbe569c80436ddd61ee3a72a229d64a}\label{classchunk__windows_1_1WindowOperations_a4dbe569c80436ddd61ee3a72a229d64a} 
@@ -78,17 +78,17 @@ static T \mbox{\hyperlink{classchunk__windows_1_1WindowOperations}{chunk\+\_\+wi
 
 
 
-Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00112}{112}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00126}{126}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (window.empty())\ \{}
-\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Cannot\ compute\ median\ of\ empty\ window"{}});}
-\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ std::sort(window.begin(),\ window.end());}
-\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ window[window.size()\ /\ 2];}
-\DoxyCodeLine{00118\ \ \ \ \ \}}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (window.empty())\ \{}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Cannot\ compute\ median\ of\ empty\ window"{}});}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ std::sort(window.begin(),\ window.end());}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ window[window.size()\ /\ 2];}
+\DoxyCodeLine{00132\ \ \ \ \ \}}
 
 \end{DoxyCode}
 \Hypertarget{classchunk__windows_1_1WindowOperations_af8b096abbcd32e1d5bbf50a0e5db6825}\label{classchunk__windows_1_1WindowOperations_af8b096abbcd32e1d5bbf50a0e5db6825} 
@@ -100,16 +100,16 @@ static T \mbox{\hyperlink{classchunk__windows_1_1WindowOperations}{chunk\+\_\+wi
 
 
 
-Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00127}{127}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
+Definition at line \mbox{\hyperlink{chunk__windows_8hpp_source_l00141}{141}} of file \mbox{\hyperlink{chunk__windows_8hpp_source}{chunk\+\_\+windows.\+hpp}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (window.empty())\ \{}
-\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Cannot\ compute\ min\ of\ empty\ window"{}});}
-\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *std::min\_element(window.begin(),\ window.end());}
-\DoxyCodeLine{00132\ \ \ \ \ \}}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (window.empty())\ \{}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Cannot\ compute\ min\ of\ empty\ window"{}});}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *std::min\_element(window.begin(),\ window.end());}
+\DoxyCodeLine{00146\ \ \ \ \ \}}
 
 \end{DoxyCode}
 

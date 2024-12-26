@@ -90,7 +90,7 @@ make test
 make uninstall
 ```
 
-For detailed build instructions, dependencies, and configuration options, see [BUILDING.md](BUILDING.md).
+For detailed build instructions, dependencies, and configuration options, see [BUILDING](BUILDING.md).
 
 ## Usage Examples
 

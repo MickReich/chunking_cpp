@@ -1,5 +1,0 @@
-<map id="chunk_strategies::ConditionalSubChunkStrategy&lt; T &gt;" name="chunk_strategies::ConditionalSubChunkStrategy&lt; T &gt;">
-<area shape="rect" id="Node000001" title="Strategy for conditional sub&#45;chunking based on chunk properties." alt="" coords="5,93,220,133"/>
-<area shape="rect" id="Node000002" href="$classchunk__strategies_1_1SubChunkStrategy.html" title="Base class for sub&#45;chunking strategies." alt="" coords="9,5,216,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="115,59,115,93,110,93,110,59"/>
-</map>

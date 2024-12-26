@@ -331,3 +331,9 @@ CHUNKING_VERSION_MAJOR
 CHUNKING_VERSION_MINOR
 CHUNKING_VERSION_PATCH
 ```
+
+## ADDITIONAL INFORMATION
+
+- [README](README.md)
+- [Python Bindings](bindings/python/chunking_cpp)
+- [Documentation](docs/html/index.html)

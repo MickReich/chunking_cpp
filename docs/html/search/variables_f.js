@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['rd_0',['rd',['../classchunk__utils_1_1ChunkGenerator.html#a76e8487f13a2c6ea1a6a9d4f132251f0',1,'chunk_utils::ChunkGenerator']]],
-  ['results_1',['results',['../classchunk__benchmark_1_1ChunkBenchmark.html#a391af32dee3cc2a82908d6d6c621cdbf',1,'chunk_benchmark::ChunkBenchmark']]],
-  ['results_5fdir_2',['results_dir',['../classchunk__benchmark_1_1ChunkBenchmark.html#a2306854908053c8a7d298846b444ef16',1,'chunk_benchmark::ChunkBenchmark']]],
-  ['right_3',['right',['../structadvanced__structures_1_1ChunkTreap_1_1Node.html#aae8a457ee310d0125afcf389021279b8',1,'advanced_structures::ChunkTreap::Node']]],
-  ['root_4',['root',['../classadvanced__structures_1_1ChunkBPlusTree.html#a461b6e266ecdc394626e9307c8134f92',1,'advanced_structures::ChunkBPlusTree::root'],['../classadvanced__structures_1_1ChunkTreap.html#a2d4ed70e327a49308295746e6caabf70',1,'advanced_structures::ChunkTreap::root']]]
+  ['p_0',['p',['../classadvanced__structures_1_1ChunkSkipList.html#a55850229a7163c185f510621cdbd360b',1,'advanced_structures::ChunkSkipList']]],
+  ['pattern_5fsize_1',['pattern_size',['../classadvanced__structures_1_1FractalPatternsChunk.html#a8736011996663d025f8b4191bd2156b0',1,'advanced_structures::FractalPatternsChunk']]],
+  ['pattern_5fsize_5f_2',['pattern_size_',['../classchunk__processing_1_1PatternBasedStrategy.html#a0dd8f790ad201b23e850afddb2ca4395',1,'chunk_processing::PatternBasedStrategy']]],
+  ['predicate_5f_3',['predicate_',['../classchunk__processing_1_1PatternBasedStrategy.html#a1d00e17511689b38e7728bfcb3003c7d',1,'chunk_processing::PatternBasedStrategy']]],
+  ['prev_4',['prev',['../structChunkNode.html#ad74c57e4ad48c23f8148e481e59d85f1',1,'ChunkNode']]],
+  ['priority_5',['priority',['../structadvanced__structures_1_1ChunkTreap_1_1Node.html#a568c50d851230db5746c43c85e50e098',1,'advanced_structures::ChunkTreap::Node']]]
 ];

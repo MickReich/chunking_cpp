@@ -40,8 +40,9 @@ WARN_NO_PARAMDOC     = YES
 INPUT                = include/ \
                         src/ \
                         tests/ \
-                        README.md
-USE_MDFILE_AS_MAINPAGE = ./BUILDING.md
+                        README.md \
+                        BUILDING.md
+USE_MDFILE_AS_MAINPAGE = ${PROJECT_SOURCE_DIR}/BUILDING.md
 FILE_PATTERNS        = *.cpp \
                         *.hpp \
                         *.h \
@@ -49,10 +50,6 @@ FILE_PATTERNS        = *.cpp \
 RECURSIVE            = YES
 EXCLUDE_PATTERNS     = */build/* \
                         */bindings/*
-EXCLUDE              = build \
-                      tests
-INCLUDE_PATH         = include/ \
-                       tests/
 
 # Additional paths
 STRIP_FROM_PATH      = include
@@ -175,3 +172,37 @@ INPUT_FILTER         = "sed -e 's|tests/jagged_array_test.cpp|Jagged Array Tests
                              -e 's|tests/advanced_structures_test.cpp|Advanced Structures Tests|g' \
                              -e 's|tests/chunking_methods_sophisticated_test.cpp|Sophisticated Chunking Tests|g' \
                              -e 's|tests/test_neuralnetwork.cpp|Neural Network Tests|g'"
+
+# Documentation settings
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+EXTRACT_LOCAL_CLASSES  = YES
+EXTRACT_LOCAL_METHODS  = YES
+EXTRACT_NAMESPACE     = YES
+EXTRACT_PACKAGE        = YES
+SHOW_NAMESPACES       = YES
+INLINE_INFO           = YES
+
+# Ensure all namespaces are documented
+HIDE_SCOPE_NAMES     = NO
+SHOW_NAMESPACE_DOCS  = YES
+SHOW_USED_FILES      = YES
+SHOW_FILES           = YES
+SHOW_GROUPED_MEMB_INC = YES
+SORT_BY_SCOPE_NAME   = YES
+
+# Input settings
+RECURSIVE            = YES
+ENABLE_PREPROCESSING = YES
+MACRO_EXPANSION      = YES
+EXPAND_ONLY_PREDEF   = NO
+SKIP_FUNCTION_MACROS = NO
+PREDEFINED           = CHUNK_EXPORT=
+
+# File patterns
+FILE_PATTERNS         = *.cpp \
+                       *.hpp \
+                       *.h \
+                       *.inl \
+                       *.tpp

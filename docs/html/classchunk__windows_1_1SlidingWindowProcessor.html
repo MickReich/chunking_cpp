@@ -95,7 +95,6 @@ $(document).ready(function(){initNavTree('classchunk__windows_1_1SlidingWindowPr
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-static-methods">Static Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
-<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="classchunk__windows_1_1SlidingWindowProcessor-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">chunk_windows::SlidingWindowProcessor&lt; T &gt; Class Template Reference</div></div>
 </div><!--header-->
@@ -124,6 +123,8 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:a8352f79a4ebe8906d535475e0eee03ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78e25363c53c64b2575ce946a6c11164" id="r_a78e25363c53c64b2575ce946a6c11164"><td class="memItemLeft" align="right" valign="top">std::vector&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classchunk__windows_1_1SlidingWindowProcessor.html#a78e25363c53c64b2575ce946a6c11164">process_single_dimensional</a> (const std::vector&lt; T &gt; &amp;data, std::function&lt; T(const std::vector&lt; T &gt; &amp;)&gt; window_func)</td></tr>
 <tr class="separator:a78e25363c53c64b2575ce946a6c11164"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada52ea51722fbf1377a164d76445d8a1" id="r_ada52ea51722fbf1377a164d76445d8a1"><td class="memItemLeft" align="right" valign="top">std::vector&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classchunk__windows_1_1SlidingWindowProcessor.html#ada52ea51722fbf1377a164d76445d8a1">process_window</a> (const std::vector&lt; T &gt; &amp;data, std::function&lt; T(const std::vector&lt; T &gt; &amp;)&gt; window_func)</td></tr>
+<tr class="separator:ada52ea51722fbf1377a164d76445d8a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-methods" name="pri-static-methods"></a>
 Static Private Member Functions</h2></td></tr>
@@ -137,12 +138,6 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a80636bc832fe7bb5f4b48fdb070742d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1f68ca74895994142bd3b3ddf96d289" id="r_ad1f68ca74895994142bd3b3ddf96d289"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classchunk__windows_1_1SlidingWindowProcessor.html#ad1f68ca74895994142bd3b3ddf96d289">window_size_</a></td></tr>
 <tr class="separator:ad1f68ca74895994142bd3b3ddf96d289"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-attribs" name="pri-static-attribs"></a>
-Static Private Attributes</h2></td></tr>
-<tr class="memitem:a1ecb591686d8a03ba1648db03a0ac774" id="r_a1ecb591686d8a03ba1648db03a0ac774"><td class="memTemplParams" colspan="2">template&lt;typename U &gt; </td></tr>
-<tr class="memitem:a1ecb591686d8a03ba1648db03a0ac774"><td class="memTemplItemLeft" align="right" valign="top">static constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classchunk__windows_1_1SlidingWindowProcessor.html#a1ecb591686d8a03ba1648db03a0ac774">is_multidimensional_v</a> = chunk_processing::is_multidimensional_v&lt;U&gt;</td></tr>
-<tr class="separator:a1ecb591686d8a03ba1648db03a0ac774"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
@@ -185,13 +180,13 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00059">59</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   60</span>        : <a class="code hl_variable" href="classchunk__windows_1_1SlidingWindowProcessor.html#ad1f68ca74895994142bd3b3ddf96d289">window_size_</a>(window_size), <a class="code hl_variable" href="classchunk__windows_1_1SlidingWindowProcessor.html#a80636bc832fe7bb5f4b48fdb070742d6">step_size_</a>(step_size) {</div>
-<div class="line"><span class="lineno">   61</span>        <span class="keywordflow">if</span> (window_size == 0)</div>
-<div class="line"><span class="lineno">   62</span>            <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Window size cannot be zero&quot;</span>);</div>
-<div class="line"><span class="lineno">   63</span>        <span class="keywordflow">if</span> (step_size == 0)</div>
-<div class="line"><span class="lineno">   64</span>            <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Step size cannot be zero&quot;</span>);</div>
-<div class="line"><span class="lineno">   65</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00077">77</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   78</span>        : <a class="code hl_variable" href="classchunk__windows_1_1SlidingWindowProcessor.html#ad1f68ca74895994142bd3b3ddf96d289">window_size_</a>(window_size), <a class="code hl_variable" href="classchunk__windows_1_1SlidingWindowProcessor.html#a80636bc832fe7bb5f4b48fdb070742d6">step_size_</a>(step_size) {</div>
+<div class="line"><span class="lineno">   79</span>        <span class="keywordflow">if</span> (window_size == 0)</div>
+<div class="line"><span class="lineno">   80</span>            <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Window size cannot be zero&quot;</span>);</div>
+<div class="line"><span class="lineno">   81</span>        <span class="keywordflow">if</span> (step_size == 0)</div>
+<div class="line"><span class="lineno">   82</span>            <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Step size cannot be zero&quot;</span>);</div>
+<div class="line"><span class="lineno">   83</span>    }</div>
 <div class="ttc" id="aclasschunk__windows_1_1SlidingWindowProcessor_html_a80636bc832fe7bb5f4b48fdb070742d6"><div class="ttname"><a href="classchunk__windows_1_1SlidingWindowProcessor.html#a80636bc832fe7bb5f4b48fdb070742d6">chunk_windows::SlidingWindowProcessor::step_size_</a></div><div class="ttdeci">size_t step_size_</div><div class="ttdef"><b>Definition</b> <a href="chunk__windows_8hpp_source.html#l00016">chunk_windows.hpp:16</a></div></div>
 <div class="ttc" id="aclasschunk__windows_1_1SlidingWindowProcessor_html_ad1f68ca74895994142bd3b3ddf96d289"><div class="ttname"><a href="classchunk__windows_1_1SlidingWindowProcessor.html#ad1f68ca74895994142bd3b3ddf96d289">chunk_windows::SlidingWindowProcessor::window_size_</a></div><div class="ttdeci">size_t window_size_</div><div class="ttdef"><b>Definition</b> <a href="chunk__windows_8hpp_source.html#l00015">chunk_windows.hpp:15</a></div></div>
 </div><!-- fragment -->
@@ -226,26 +221,31 @@ template&lt;typename U &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00022">22</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   22</span>                                                          {</div>
-<div class="line"><span class="lineno">   23</span>        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (chunk_processing::is_multidimensional_v&lt;U&gt;) {</div>
-<div class="line"><span class="lineno">   24</span>            <span class="keywordtype">double</span> sum = 0.0;</div>
-<div class="line"><span class="lineno">   25</span>            <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; inner : window) {</div>
-<div class="line"><span class="lineno">   26</span>                sum += <a class="code hl_function" href="classchunk__windows_1_1SlidingWindowProcessor.html#a9a6d8499ece4aed25f94ab44ba3d6d5a">compute_window_feature</a>(inner);</div>
-<div class="line"><span class="lineno">   27</span>            }</div>
-<div class="line"><span class="lineno">   28</span>            <span class="keywordflow">return</span> sum / std::size(window);</div>
-<div class="line"><span class="lineno">   29</span>        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_struct" href="structchunk__processing_1_1is__vector.html">chunk_processing::is_vector&lt;U&gt;::value</a>) {</div>
-<div class="line"><span class="lineno">   30</span>            <span class="keywordflow">return</span> std::accumulate(std::begin(window), std::end(window), 0.0) / std::size(window);</div>
-<div class="line"><span class="lineno">   31</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">   32</span>            <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(window);</div>
-<div class="line"><span class="lineno">   33</span>        }</div>
-<div class="line"><span class="lineno">   34</span>    }</div>
-<div class="ttc" id="aclasschunk__windows_1_1SlidingWindowProcessor_html_a9a6d8499ece4aed25f94ab44ba3d6d5a"><div class="ttname"><a href="classchunk__windows_1_1SlidingWindowProcessor.html#a9a6d8499ece4aed25f94ab44ba3d6d5a">chunk_windows::SlidingWindowProcessor::compute_window_feature</a></div><div class="ttdeci">static double compute_window_feature(const U &amp;window)</div><div class="ttdef"><b>Definition</b> <a href="chunk__windows_8hpp_source.html#l00022">chunk_windows.hpp:22</a></div></div>
-<div class="ttc" id="astructchunk__processing_1_1is__vector_html"><div class="ttname"><a href="structchunk__processing_1_1is__vector.html">chunk_processing::is_vector</a></div><div class="ttdef"><b>Definition</b> <a href="chunk__common_8hpp_source.html#l00016">chunk_common.hpp:16</a></div></div>
+<p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00019">19</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   19</span>                                                          {</div>
+<div class="line"><span class="lineno">   20</span>        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_struct" href="structchunk__processing_1_1is__vector.html">chunk_processing::is_vector&lt;U&gt;::value</a>) {</div>
+<div class="line"><span class="lineno">   21</span>            <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_struct" href="structchunk__processing_1_1is__vector.html">chunk_processing::is_vector&lt;typename U::value_type&gt;::value</a>) {</div>
+<div class="line"><span class="lineno">   22</span>                <span class="comment">// Handle 2D arrays</span></div>
+<div class="line"><span class="lineno">   23</span>                <span class="keywordtype">double</span> sum = 0.0;</div>
+<div class="line"><span class="lineno">   24</span>                <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; inner : window) {</div>
+<div class="line"><span class="lineno">   25</span>                    sum += <a class="code hl_function" href="classchunk__windows_1_1SlidingWindowProcessor.html#a9a6d8499ece4aed25f94ab44ba3d6d5a">compute_window_feature</a>(inner);</div>
+<div class="line"><span class="lineno">   26</span>                }</div>
+<div class="line"><span class="lineno">   27</span>                <span class="keywordflow">return</span> sum / window.size();</div>
+<div class="line"><span class="lineno">   28</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">   29</span>                <span class="comment">// Handle 1D arrays</span></div>
+<div class="line"><span class="lineno">   30</span>                <span class="keywordflow">return</span> std::accumulate(window.begin(), window.end(), 0.0) / window.size();</div>
+<div class="line"><span class="lineno">   31</span>            }</div>
+<div class="line"><span class="lineno">   32</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">   33</span>            <span class="comment">// Handle scalar values</span></div>
+<div class="line"><span class="lineno">   34</span>            <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(window);</div>
+<div class="line"><span class="lineno">   35</span>        }</div>
+<div class="line"><span class="lineno">   36</span>    }</div>
+<div class="ttc" id="aclasschunk__windows_1_1SlidingWindowProcessor_html_a9a6d8499ece4aed25f94ab44ba3d6d5a"><div class="ttname"><a href="classchunk__windows_1_1SlidingWindowProcessor.html#a9a6d8499ece4aed25f94ab44ba3d6d5a">chunk_windows::SlidingWindowProcessor::compute_window_feature</a></div><div class="ttdeci">static double compute_window_feature(const U &amp;window)</div><div class="ttdef"><b>Definition</b> <a href="chunk__windows_8hpp_source.html#l00019">chunk_windows.hpp:19</a></div></div>
+<div class="ttc" id="astructchunk__processing_1_1is__vector_html"><div class="ttname"><a href="structchunk__processing_1_1is__vector.html">chunk_processing::is_vector</a></div><div class="ttdef"><b>Definition</b> <a href="chunk__common_8hpp_source.html#l00017">chunk_common.hpp:17</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="chunk__windows_8hpp_source.html#l00022">chunk_windows::SlidingWindowProcessor&lt; T &gt;::compute_window_feature()</a>.</p>
+<p class="reference">References <a class="el" href="chunk__windows_8hpp_source.html#l00019">chunk_windows::SlidingWindowProcessor&lt; T &gt;::compute_window_feature()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="chunk__windows_8hpp_source.html#l00022">chunk_windows::SlidingWindowProcessor&lt; T &gt;::compute_window_feature()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="chunk__windows_8hpp_source.html#l00019">chunk_windows::SlidingWindowProcessor&lt; T &gt;::compute_window_feature()</a>.</p>
 
 </div>
 </div>
@@ -274,10 +274,10 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00084">84</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   84</span>                                 {</div>
-<div class="line"><span class="lineno">   85</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classchunk__windows_1_1SlidingWindowProcessor.html#a80636bc832fe7bb5f4b48fdb070742d6">step_size_</a>;</div>
-<div class="line"><span class="lineno">   86</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00098">98</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   98</span>                                 {</div>
+<div class="line"><span class="lineno">   99</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classchunk__windows_1_1SlidingWindowProcessor.html#a80636bc832fe7bb5f4b48fdb070742d6">step_size_</a>;</div>
+<div class="line"><span class="lineno">  100</span>    }</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="chunk__windows_8hpp_source.html#l00016">chunk_windows::SlidingWindowProcessor&lt; T &gt;::step_size_</a>.</p>
 
@@ -308,10 +308,10 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00081">81</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   81</span>                                   {</div>
-<div class="line"><span class="lineno">   82</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classchunk__windows_1_1SlidingWindowProcessor.html#ad1f68ca74895994142bd3b3ddf96d289">window_size_</a>;</div>
-<div class="line"><span class="lineno">   83</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00095">95</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   95</span>                                   {</div>
+<div class="line"><span class="lineno">   96</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classchunk__windows_1_1SlidingWindowProcessor.html#ad1f68ca74895994142bd3b3ddf96d289">window_size_</a>;</div>
+<div class="line"><span class="lineno">   97</span>    }</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="chunk__windows_8hpp_source.html#l00015">chunk_windows::SlidingWindowProcessor&lt; T &gt;::window_size_</a>.</p>
 
@@ -353,22 +353,17 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00067">67</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   68</span>                                                                            {</div>
-<div class="line"><span class="lineno">   69</span>        <span class="keywordflow">if</span> (data.size() &lt; <a class="code hl_variable" href="classchunk__windows_1_1SlidingWindowProcessor.html#ad1f68ca74895994142bd3b3ddf96d289">window_size_</a>) {</div>
-<div class="line"><span class="lineno">   70</span>            <span class="keywordflow">return</span> {}; <span class="comment">// Return empty if data is smaller than window</span></div>
-<div class="line"><span class="lineno">   71</span>        }</div>
-<div class="line"><span class="lineno">   72</span> </div>
-<div class="line"><span class="lineno">   73</span>        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (chunk_processing::is_multidimensional_v&lt;T&gt;) {</div>
-<div class="line"><span class="lineno">   74</span>            <span class="keywordflow">return</span> <a class="code hl_function" href="classchunk__windows_1_1SlidingWindowProcessor.html#a8352f79a4ebe8906d535475e0eee03ff">process_multidimensional</a>(data, window_func);</div>
-<div class="line"><span class="lineno">   75</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">   76</span>            <span class="keywordflow">return</span> <a class="code hl_function" href="classchunk__windows_1_1SlidingWindowProcessor.html#a78e25363c53c64b2575ce946a6c11164">process_single_dimensional</a>(data, window_func);</div>
-<div class="line"><span class="lineno">   77</span>        }</div>
-<div class="line"><span class="lineno">   78</span>    }</div>
-<div class="ttc" id="aclasschunk__windows_1_1SlidingWindowProcessor_html_a78e25363c53c64b2575ce946a6c11164"><div class="ttname"><a href="classchunk__windows_1_1SlidingWindowProcessor.html#a78e25363c53c64b2575ce946a6c11164">chunk_windows::SlidingWindowProcessor::process_single_dimensional</a></div><div class="ttdeci">std::vector&lt; T &gt; process_single_dimensional(const std::vector&lt; T &gt; &amp;data, std::function&lt; T(const std::vector&lt; T &gt; &amp;)&gt; window_func)</div><div class="ttdef"><b>Definition</b> <a href="chunk__windows_8hpp_source.html#l00047">chunk_windows.hpp:47</a></div></div>
-<div class="ttc" id="aclasschunk__windows_1_1SlidingWindowProcessor_html_a8352f79a4ebe8906d535475e0eee03ff"><div class="ttname"><a href="classchunk__windows_1_1SlidingWindowProcessor.html#a8352f79a4ebe8906d535475e0eee03ff">chunk_windows::SlidingWindowProcessor::process_multidimensional</a></div><div class="ttdeci">std::vector&lt; T &gt; process_multidimensional(const std::vector&lt; T &gt; &amp;data, std::function&lt; T(const std::vector&lt; T &gt; &amp;)&gt; window_func)</div><div class="ttdef"><b>Definition</b> <a href="chunk__windows_8hpp_source.html#l00036">chunk_windows.hpp:36</a></div></div>
+<p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00085">85</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   86</span>                                                                            {</div>
+<div class="line"><span class="lineno">   87</span>        <span class="keywordflow">if</span> (data.size() &lt; <a class="code hl_variable" href="classchunk__windows_1_1SlidingWindowProcessor.html#ad1f68ca74895994142bd3b3ddf96d289">window_size_</a>) {</div>
+<div class="line"><span class="lineno">   88</span>            <span class="keywordflow">return</span> {}; <span class="comment">// Return empty if data is smaller than window</span></div>
+<div class="line"><span class="lineno">   89</span>        }</div>
+<div class="line"><span class="lineno">   90</span> </div>
+<div class="line"><span class="lineno">   91</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="classchunk__windows_1_1SlidingWindowProcessor.html#ada52ea51722fbf1377a164d76445d8a1">process_window</a>(data, window_func);</div>
+<div class="line"><span class="lineno">   92</span>    }</div>
+<div class="ttc" id="aclasschunk__windows_1_1SlidingWindowProcessor_html_ada52ea51722fbf1377a164d76445d8a1"><div class="ttname"><a href="classchunk__windows_1_1SlidingWindowProcessor.html#ada52ea51722fbf1377a164d76445d8a1">chunk_windows::SlidingWindowProcessor::process_window</a></div><div class="ttdeci">std::vector&lt; T &gt; process_window(const std::vector&lt; T &gt; &amp;data, std::function&lt; T(const std::vector&lt; T &gt; &amp;)&gt; window_func)</div><div class="ttdef"><b>Definition</b> <a href="chunk__windows_8hpp_source.html#l00060">chunk_windows.hpp:60</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="chunk__windows_8hpp_source.html#l00036">chunk_windows::SlidingWindowProcessor&lt; T &gt;::process_multidimensional()</a>, <a class="el" href="chunk__windows_8hpp_source.html#l00047">chunk_windows::SlidingWindowProcessor&lt; T &gt;::process_single_dimensional()</a>, and <a class="el" href="chunk__windows_8hpp_source.html#l00015">chunk_windows::SlidingWindowProcessor&lt; T &gt;::window_size_</a>.</p>
+<p class="reference">References <a class="el" href="chunk__windows_8hpp_source.html#l00060">chunk_windows::SlidingWindowProcessor&lt; T &gt;::process_window()</a>, and <a class="el" href="chunk__windows_8hpp_source.html#l00015">chunk_windows::SlidingWindowProcessor&lt; T &gt;::window_size_</a>.</p>
 
 </div>
 </div>
@@ -408,20 +403,20 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00036">36</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   37</span>                                                                                             {</div>
-<div class="line"><span class="lineno">   38</span>        <span class="comment">// Implementation for multi-dimensional data</span></div>
-<div class="line"><span class="lineno">   39</span>        std::vector&lt;T&gt; results;</div>
-<div class="line"><span class="lineno">   40</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt;= data.size() - <a class="code hl_variable" href="classchunk__windows_1_1SlidingWindowProcessor.html#ad1f68ca74895994142bd3b3ddf96d289">window_size_</a>; i += <a class="code hl_variable" href="classchunk__windows_1_1SlidingWindowProcessor.html#a80636bc832fe7bb5f4b48fdb070742d6">step_size_</a>) {</div>
-<div class="line"><span class="lineno">   41</span>            std::vector&lt;T&gt; window(data.begin() + i, data.begin() + i + <a class="code hl_variable" href="classchunk__windows_1_1SlidingWindowProcessor.html#ad1f68ca74895994142bd3b3ddf96d289">window_size_</a>);</div>
-<div class="line"><span class="lineno">   42</span>            results.push_back(window_func(window));</div>
-<div class="line"><span class="lineno">   43</span>        }</div>
-<div class="line"><span class="lineno">   44</span>        <span class="keywordflow">return</span> results;</div>
-<div class="line"><span class="lineno">   45</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00038">38</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   39</span>                                                                                             {</div>
+<div class="line"><span class="lineno">   40</span>        <span class="comment">// Implementation for multi-dimensional data</span></div>
+<div class="line"><span class="lineno">   41</span>        std::vector&lt;T&gt; results;</div>
+<div class="line"><span class="lineno">   42</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt;= data.size() - <a class="code hl_variable" href="classchunk__windows_1_1SlidingWindowProcessor.html#ad1f68ca74895994142bd3b3ddf96d289">window_size_</a>; i += <a class="code hl_variable" href="classchunk__windows_1_1SlidingWindowProcessor.html#a80636bc832fe7bb5f4b48fdb070742d6">step_size_</a>) {</div>
+<div class="line"><span class="lineno">   43</span>            std::vector&lt;T&gt; window(data.begin() + i, data.begin() + i + <a class="code hl_variable" href="classchunk__windows_1_1SlidingWindowProcessor.html#ad1f68ca74895994142bd3b3ddf96d289">window_size_</a>);</div>
+<div class="line"><span class="lineno">   44</span>            results.push_back(window_func(window));</div>
+<div class="line"><span class="lineno">   45</span>        }</div>
+<div class="line"><span class="lineno">   46</span>        <span class="keywordflow">return</span> results;</div>
+<div class="line"><span class="lineno">   47</span>    }</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="chunk__windows_8hpp_source.html#l00016">chunk_windows::SlidingWindowProcessor&lt; T &gt;::step_size_</a>, and <a class="el" href="chunk__windows_8hpp_source.html#l00015">chunk_windows::SlidingWindowProcessor&lt; T &gt;::window_size_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="chunk__windows_8hpp_source.html#l00067">chunk_windows::SlidingWindowProcessor&lt; T &gt;::process()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="chunk__windows_8hpp_source.html#l00060">chunk_windows::SlidingWindowProcessor&lt; T &gt;::process_window()</a>.</p>
 
 </div>
 </div>
@@ -461,20 +456,80 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00047">47</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   48</span>                                                                                               {</div>
-<div class="line"><span class="lineno">   49</span>        std::vector&lt;T&gt; results;</div>
-<div class="line"><span class="lineno">   50</span>        <span class="comment">// Create sliding windows of the specified size</span></div>
-<div class="line"><span class="lineno">   51</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt;= data.size() - <a class="code hl_variable" href="classchunk__windows_1_1SlidingWindowProcessor.html#ad1f68ca74895994142bd3b3ddf96d289">window_size_</a>; i += <a class="code hl_variable" href="classchunk__windows_1_1SlidingWindowProcessor.html#a80636bc832fe7bb5f4b48fdb070742d6">step_size_</a>) {</div>
-<div class="line"><span class="lineno">   52</span>            std::vector&lt;T&gt; window(data.begin() + i, data.begin() + i + <a class="code hl_variable" href="classchunk__windows_1_1SlidingWindowProcessor.html#ad1f68ca74895994142bd3b3ddf96d289">window_size_</a>);</div>
-<div class="line"><span class="lineno">   53</span>            results.push_back(window_func(window));</div>
-<div class="line"><span class="lineno">   54</span>        }</div>
-<div class="line"><span class="lineno">   55</span>        <span class="keywordflow">return</span> results;</div>
-<div class="line"><span class="lineno">   56</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00049">49</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   50</span>                                                                                               {</div>
+<div class="line"><span class="lineno">   51</span>        std::vector&lt;T&gt; results;</div>
+<div class="line"><span class="lineno">   52</span>        <span class="comment">// Create sliding windows of the specified size</span></div>
+<div class="line"><span class="lineno">   53</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt;= data.size() - <a class="code hl_variable" href="classchunk__windows_1_1SlidingWindowProcessor.html#ad1f68ca74895994142bd3b3ddf96d289">window_size_</a>; i += <a class="code hl_variable" href="classchunk__windows_1_1SlidingWindowProcessor.html#a80636bc832fe7bb5f4b48fdb070742d6">step_size_</a>) {</div>
+<div class="line"><span class="lineno">   54</span>            std::vector&lt;T&gt; window(data.begin() + i, data.begin() + i + <a class="code hl_variable" href="classchunk__windows_1_1SlidingWindowProcessor.html#ad1f68ca74895994142bd3b3ddf96d289">window_size_</a>);</div>
+<div class="line"><span class="lineno">   55</span>            results.push_back(window_func(window));</div>
+<div class="line"><span class="lineno">   56</span>        }</div>
+<div class="line"><span class="lineno">   57</span>        <span class="keywordflow">return</span> results;</div>
+<div class="line"><span class="lineno">   58</span>    }</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="chunk__windows_8hpp_source.html#l00016">chunk_windows::SlidingWindowProcessor&lt; T &gt;::step_size_</a>, and <a class="el" href="chunk__windows_8hpp_source.html#l00015">chunk_windows::SlidingWindowProcessor&lt; T &gt;::window_size_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="chunk__windows_8hpp_source.html#l00067">chunk_windows::SlidingWindowProcessor&lt; T &gt;::process()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="chunk__windows_8hpp_source.html#l00060">chunk_windows::SlidingWindowProcessor&lt; T &gt;::process_window()</a>.</p>
+
+</div>
+</div>
+<a id="ada52ea51722fbf1377a164d76445d8a1" name="ada52ea51722fbf1377a164d76445d8a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada52ea51722fbf1377a164d76445d8a1">&#9670;&#160;</a></span>process_window()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; T &gt; <a class="el" href="classchunk__windows_1_1SlidingWindowProcessor.html">chunk_windows::SlidingWindowProcessor</a>&lt; T &gt;::process_window </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; T(const std::vector&lt; T &gt; &amp;)&gt;&#160;</td>
+          <td class="paramname"><em>window_func</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00060">60</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   61</span>                                                                                   {</div>
+<div class="line"><span class="lineno">   62</span>        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_struct" href="structchunk__processing_1_1is__vector.html">chunk_processing::is_vector&lt;T&gt;::value</a>) {</div>
+<div class="line"><span class="lineno">   63</span>            <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_struct" href="structchunk__processing_1_1is__vector.html">chunk_processing::is_vector&lt;typename T::value_type&gt;::value</a>) {</div>
+<div class="line"><span class="lineno">   64</span>                <span class="comment">// Handle 2D arrays</span></div>
+<div class="line"><span class="lineno">   65</span>                <span class="keywordflow">return</span> <a class="code hl_function" href="classchunk__windows_1_1SlidingWindowProcessor.html#a8352f79a4ebe8906d535475e0eee03ff">process_multidimensional</a>(data, window_func);</div>
+<div class="line"><span class="lineno">   66</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">   67</span>                <span class="comment">// Handle 1D arrays</span></div>
+<div class="line"><span class="lineno">   68</span>                <span class="keywordflow">return</span> <a class="code hl_function" href="classchunk__windows_1_1SlidingWindowProcessor.html#a78e25363c53c64b2575ce946a6c11164">process_single_dimensional</a>(data, window_func);</div>
+<div class="line"><span class="lineno">   69</span>            }</div>
+<div class="line"><span class="lineno">   70</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">   71</span>            <span class="comment">// Handle scalar values</span></div>
+<div class="line"><span class="lineno">   72</span>            <span class="keywordflow">return</span> <a class="code hl_function" href="classchunk__windows_1_1SlidingWindowProcessor.html#a78e25363c53c64b2575ce946a6c11164">process_single_dimensional</a>(data, window_func);</div>
+<div class="line"><span class="lineno">   73</span>        }</div>
+<div class="line"><span class="lineno">   74</span>    }</div>
+<div class="ttc" id="aclasschunk__windows_1_1SlidingWindowProcessor_html_a78e25363c53c64b2575ce946a6c11164"><div class="ttname"><a href="classchunk__windows_1_1SlidingWindowProcessor.html#a78e25363c53c64b2575ce946a6c11164">chunk_windows::SlidingWindowProcessor::process_single_dimensional</a></div><div class="ttdeci">std::vector&lt; T &gt; process_single_dimensional(const std::vector&lt; T &gt; &amp;data, std::function&lt; T(const std::vector&lt; T &gt; &amp;)&gt; window_func)</div><div class="ttdef"><b>Definition</b> <a href="chunk__windows_8hpp_source.html#l00049">chunk_windows.hpp:49</a></div></div>
+<div class="ttc" id="aclasschunk__windows_1_1SlidingWindowProcessor_html_a8352f79a4ebe8906d535475e0eee03ff"><div class="ttname"><a href="classchunk__windows_1_1SlidingWindowProcessor.html#a8352f79a4ebe8906d535475e0eee03ff">chunk_windows::SlidingWindowProcessor::process_multidimensional</a></div><div class="ttdeci">std::vector&lt; T &gt; process_multidimensional(const std::vector&lt; T &gt; &amp;data, std::function&lt; T(const std::vector&lt; T &gt; &amp;)&gt; window_func)</div><div class="ttdef"><b>Definition</b> <a href="chunk__windows_8hpp_source.html#l00038">chunk_windows.hpp:38</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="chunk__windows_8hpp_source.html#l00038">chunk_windows::SlidingWindowProcessor&lt; T &gt;::process_multidimensional()</a>, and <a class="el" href="chunk__windows_8hpp_source.html#l00049">chunk_windows::SlidingWindowProcessor&lt; T &gt;::process_single_dimensional()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="chunk__windows_8hpp_source.html#l00085">chunk_windows::SlidingWindowProcessor&lt; T &gt;::process()</a>.</p>
 
 </div>
 </div>
@@ -504,12 +559,12 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00094">94</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   94</span>                                    {</div>
-<div class="line"><span class="lineno">   95</span>        <span class="keywordflow">if</span> (size == 0)</div>
-<div class="line"><span class="lineno">   96</span>            <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Step size cannot be zero&quot;</span>);</div>
-<div class="line"><span class="lineno">   97</span>        <a class="code hl_variable" href="classchunk__windows_1_1SlidingWindowProcessor.html#a80636bc832fe7bb5f4b48fdb070742d6">step_size_</a> = size;</div>
-<div class="line"><span class="lineno">   98</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00108">108</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  108</span>                                    {</div>
+<div class="line"><span class="lineno">  109</span>        <span class="keywordflow">if</span> (size == 0)</div>
+<div class="line"><span class="lineno">  110</span>            <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Step size cannot be zero&quot;</span>);</div>
+<div class="line"><span class="lineno">  111</span>        <a class="code hl_variable" href="classchunk__windows_1_1SlidingWindowProcessor.html#a80636bc832fe7bb5f4b48fdb070742d6">step_size_</a> = size;</div>
+<div class="line"><span class="lineno">  112</span>    }</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="chunk__windows_8hpp_source.html#l00016">chunk_windows::SlidingWindowProcessor&lt; T &gt;::step_size_</a>.</p>
 
@@ -541,46 +596,18 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00089">89</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   89</span>                                      {</div>
-<div class="line"><span class="lineno">   90</span>        <span class="keywordflow">if</span> (size == 0)</div>
-<div class="line"><span class="lineno">   91</span>            <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Window size cannot be zero&quot;</span>);</div>
-<div class="line"><span class="lineno">   92</span>        <a class="code hl_variable" href="classchunk__windows_1_1SlidingWindowProcessor.html#ad1f68ca74895994142bd3b3ddf96d289">window_size_</a> = size;</div>
-<div class="line"><span class="lineno">   93</span>    }</div>
+<p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00103">103</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  103</span>                                      {</div>
+<div class="line"><span class="lineno">  104</span>        <span class="keywordflow">if</span> (size == 0)</div>
+<div class="line"><span class="lineno">  105</span>            <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Window size cannot be zero&quot;</span>);</div>
+<div class="line"><span class="lineno">  106</span>        <a class="code hl_variable" href="classchunk__windows_1_1SlidingWindowProcessor.html#ad1f68ca74895994142bd3b3ddf96d289">window_size_</a> = size;</div>
+<div class="line"><span class="lineno">  107</span>    }</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="chunk__windows_8hpp_source.html#l00015">chunk_windows::SlidingWindowProcessor&lt; T &gt;::window_size_</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a1ecb591686d8a03ba1648db03a0ac774" name="a1ecb591686d8a03ba1648db03a0ac774"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1ecb591686d8a03ba1648db03a0ac774">&#9670;&#160;</a></span>is_multidimensional_v</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<div class="memtemplate">
-template&lt;typename U &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr bool <a class="el" href="classchunk__windows_1_1SlidingWindowProcessor.html">chunk_windows::SlidingWindowProcessor</a>&lt; T &gt;::is_multidimensional_v = chunk_processing::is_multidimensional_v&lt;U&gt;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00019">19</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
-
-</div>
-</div>
 <a id="a80636bc832fe7bb5f4b48fdb070742d6" name="a80636bc832fe7bb5f4b48fdb070742d6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a80636bc832fe7bb5f4b48fdb070742d6">&#9670;&#160;</a></span>step_size_</h2>
 
@@ -605,7 +632,7 @@ template&lt;typename T &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00016">16</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="chunk__windows_8hpp_source.html#l00084">chunk_windows::SlidingWindowProcessor&lt; T &gt;::get_step_size()</a>, <a class="el" href="chunk__windows_8hpp_source.html#l00036">chunk_windows::SlidingWindowProcessor&lt; T &gt;::process_multidimensional()</a>, <a class="el" href="chunk__windows_8hpp_source.html#l00047">chunk_windows::SlidingWindowProcessor&lt; T &gt;::process_single_dimensional()</a>, and <a class="el" href="chunk__windows_8hpp_source.html#l00094">chunk_windows::SlidingWindowProcessor&lt; T &gt;::set_step_size()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="chunk__windows_8hpp_source.html#l00098">chunk_windows::SlidingWindowProcessor&lt; T &gt;::get_step_size()</a>, <a class="el" href="chunk__windows_8hpp_source.html#l00038">chunk_windows::SlidingWindowProcessor&lt; T &gt;::process_multidimensional()</a>, <a class="el" href="chunk__windows_8hpp_source.html#l00049">chunk_windows::SlidingWindowProcessor&lt; T &gt;::process_single_dimensional()</a>, and <a class="el" href="chunk__windows_8hpp_source.html#l00108">chunk_windows::SlidingWindowProcessor&lt; T &gt;::set_step_size()</a>.</p>
 
 </div>
 </div>
@@ -633,7 +660,7 @@ template&lt;typename T &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="chunk__windows_8hpp_source.html#l00015">15</a> of file <a class="el" href="chunk__windows_8hpp_source.html">chunk_windows.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="chunk__windows_8hpp_source.html#l00081">chunk_windows::SlidingWindowProcessor&lt; T &gt;::get_window_size()</a>, <a class="el" href="chunk__windows_8hpp_source.html#l00067">chunk_windows::SlidingWindowProcessor&lt; T &gt;::process()</a>, <a class="el" href="chunk__windows_8hpp_source.html#l00036">chunk_windows::SlidingWindowProcessor&lt; T &gt;::process_multidimensional()</a>, <a class="el" href="chunk__windows_8hpp_source.html#l00047">chunk_windows::SlidingWindowProcessor&lt; T &gt;::process_single_dimensional()</a>, and <a class="el" href="chunk__windows_8hpp_source.html#l00089">chunk_windows::SlidingWindowProcessor&lt; T &gt;::set_window_size()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="chunk__windows_8hpp_source.html#l00095">chunk_windows::SlidingWindowProcessor&lt; T &gt;::get_window_size()</a>, <a class="el" href="chunk__windows_8hpp_source.html#l00085">chunk_windows::SlidingWindowProcessor&lt; T &gt;::process()</a>, <a class="el" href="chunk__windows_8hpp_source.html#l00038">chunk_windows::SlidingWindowProcessor&lt; T &gt;::process_multidimensional()</a>, <a class="el" href="chunk__windows_8hpp_source.html#l00049">chunk_windows::SlidingWindowProcessor&lt; T &gt;::process_single_dimensional()</a>, and <a class="el" href="chunk__windows_8hpp_source.html#l00103">chunk_windows::SlidingWindowProcessor&lt; T &gt;::set_window_size()</a>.</p>
 
 </div>
 </div>
@@ -646,7 +673,7 @@ template&lt;typename T &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacechunk__windows.html">chunk_windows</a></li><li class="navelem"><a class="el" href="classchunk__windows_1_1SlidingWindowProcessor.html">SlidingWindowProcessor</a></li>
-    <li class="footer">Generated on Wed Dec 25 2024 13:23:27 for Advanced Chunk Processing Library by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Thu Dec 26 2024 14:47:23 for Advanced Chunk Processing Library by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

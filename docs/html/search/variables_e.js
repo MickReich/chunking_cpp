@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['quantile_5f_0',['quantile_',['../classchunk__strategies_1_1QuantileStrategy.html#ace6f35eded09dd3a9d1ba78723a09644',1,'chunk_strategies::QuantileStrategy']]],
-  ['queue_1',['queue',['../classchunk__integrations_1_1ChunkMessageQueue.html#ae2de9c2a4bdcbaa7a076e9c8aa546421',1,'chunk_integrations::ChunkMessageQueue']]]
+  ['order_0',['ORDER',['../classadvanced__structures_1_1ChunkBPlusTree.html#aeb6e577f38b6d398c0836917692d9126',1,'advanced_structures::ChunkBPlusTree']]],
+  ['output_5fdir_1',['output_dir',['../classchunk__viz_1_1ChunkVisualizer.html#a3b4df998e0548b8e680b3fb4db594f9e',1,'chunk_viz::ChunkVisualizer']]],
+  ['output_5fsize_5f_2',['output_size_',['../classneural__chunking_1_1Layer.html#af7ce933348fee2b6082ba2ebc513cf6f',1,'neural_chunking::Layer']]]
 ];

@@ -1,9 +1,0 @@
-<map id="chunk_strategies::HierarchicalSubChunkStrategy&lt; T &gt;" name="chunk_strategies::HierarchicalSubChunkStrategy&lt; T &gt;">
-<area shape="rect" id="Node000001" title="Strategy for hierarchical sub&#45;chunking using multiple strategies." alt="" coords="649,41,868,81"/>
-<area shape="rect" id="Node000002" href="$classchunk__strategies_1_1SubChunkStrategy.html" title="Base class for sub&#45;chunking strategies." alt="" coords="317,5,524,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="538,35,649,47,649,52,538,40"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="323,70,518,125"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="531,83,649,70,649,76,532,88"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="5,70,204,125"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="218,95,323,95,323,100,218,100"/>
-</map>

@@ -6,5 +6,7 @@ var searchData=
   ['insert_5fnon_5ffull_3',['insert_non_full',['../classadvanced__structures_1_1ChunkBPlusTree.html#a895a38fcff176405e85aae33a68ecdab',1,'advanced_structures::ChunkBPlusTree']]],
   ['is_5ffull_4',['is_full',['../structadvanced__structures_1_1ChunkLSMTree_1_1Level.html#a14966a8687afe46801d9962602479007',1,'advanced_structures::ChunkLSMTree::Level']]],
   ['is_5fgpu_5favailable_5',['is_gpu_available',['../classgpu__chunking_1_1GPUChunking.html#a21f8e6cf990e115c704ba15daa5b9c6b',1,'gpu_chunking::GPUChunking']]],
-  ['isboundary_6',['isBoundary',['../classadvanced__structures_1_1SemanticBoundariesChunk.html#ae896186812a0424ef9a315dcf287ada8',1,'advanced_structures::SemanticBoundariesChunk']]]
+  ['is_5fjagged_6',['is_jagged',['../namespacechunk__processing.html#a3132f4f41fdc8780dc968bdd710c251f',1,'chunk_processing']]],
+  ['is_5fjagged_5f3d_7',['is_jagged_3d',['../namespacechunk__processing.html#aa1bf82d377dae1d03ab2477bec74ce65',1,'chunk_processing']]],
+  ['isboundary_8',['isBoundary',['../classadvanced__structures_1_1SemanticBoundariesChunk.html#ae896186812a0424ef9a315dcf287ada8',1,'advanced_structures::SemanticBoundariesChunk']]]
 ];

@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['gen_0',['gen',['../classadvanced__structures_1_1ChunkTreap.html#a20c39e84fd693b4c4f9eb125b09d964a',1,'advanced_structures::ChunkTreap::gen'],['../classchunk__utils_1_1ChunkGenerator.html#aa12692893370479eb6e99dc3a9c10661',1,'chunk_utils::ChunkGenerator::gen']]]
+  ['filter_0',['filter',['../classadvanced__structures_1_1BloomFilterChunk.html#acca6758d2c97bf203269c7a74295bcaa',1,'advanced_structures::BloomFilterChunk']]],
+  ['filter_5fsize_1',['filter_size',['../classadvanced__structures_1_1BloomFilterChunk.html#aa3fc3b02a0e5148ffb2fc52f965db677',1,'advanced_structures::BloomFilterChunk']]],
+  ['forward_2',['forward',['../structadvanced__structures_1_1ChunkSkipList_1_1Node.html#aec5507e413075c1d8390cbe5aaed06f1',1,'advanced_structures::ChunkSkipList::Node']]]
 ];

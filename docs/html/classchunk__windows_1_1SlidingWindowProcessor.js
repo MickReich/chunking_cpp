@@ -7,9 +7,9 @@ var classchunk__windows_1_1SlidingWindowProcessor =
     [ "process", "classchunk__windows_1_1SlidingWindowProcessor.html#a4a80bf019ed526f0ef88ed053d654c82", null ],
     [ "process_multidimensional", "classchunk__windows_1_1SlidingWindowProcessor.html#a8352f79a4ebe8906d535475e0eee03ff", null ],
     [ "process_single_dimensional", "classchunk__windows_1_1SlidingWindowProcessor.html#a78e25363c53c64b2575ce946a6c11164", null ],
+    [ "process_window", "classchunk__windows_1_1SlidingWindowProcessor.html#ada52ea51722fbf1377a164d76445d8a1", null ],
     [ "set_step_size", "classchunk__windows_1_1SlidingWindowProcessor.html#afa2f4f0664eed05c3fd66e5f4d6bf203", null ],
     [ "set_window_size", "classchunk__windows_1_1SlidingWindowProcessor.html#a64b075f48d088ac5241411557d697d2c", null ],
-    [ "is_multidimensional_v", "classchunk__windows_1_1SlidingWindowProcessor.html#a1ecb591686d8a03ba1648db03a0ac774", null ],
     [ "step_size_", "classchunk__windows_1_1SlidingWindowProcessor.html#a80636bc832fe7bb5f4b48fdb070742d6", null ],
     [ "window_size_", "classchunk__windows_1_1SlidingWindowProcessor.html#ad1f68ca74895994142bd3b3ddf96d289", null ]
 ];

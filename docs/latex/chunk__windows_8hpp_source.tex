@@ -19,122 +19,136 @@
 \DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00016}\mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a80636bc832fe7bb5f4b48fdb070742d6}{00016}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a80636bc832fe7bb5f4b48fdb070742d6}{step\_size\_}};}
 \DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00017}00017\ }
 \DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00018}00018\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00019}\mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a1ecb591686d8a03ba1648db03a0ac774}{00019}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a1ecb591686d8a03ba1648db03a0ac774}{is\_multidimensional\_v}}\ =\ chunk\_processing::is\_multidimensional\_v<U>;}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00020}00020\ }
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00021}00021\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00022}\mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a9a6d8499ece4aed25f94ab44ba3d6d5a}{00022}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a9a6d8499ece4aed25f94ab44ba3d6d5a}{compute\_window\_feature}}(\textcolor{keyword}{const}\ U\&\ window)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00023}00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (chunk\_processing::is\_multidimensional\_v<U>)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ sum\ =\ 0.0;}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ inner\ :\ window)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sum\ +=\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a9a6d8499ece4aed25f94ab44ba3d6d5a}{compute\_window\_feature}}(inner);}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ sum\ /\ std::size(window);}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00029}00029\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (\mbox{\hyperlink{structchunk__processing_1_1is__vector}{chunk\_processing::is\_vector<U>::value}})\ \{}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::accumulate(std::begin(window),\ std::end(window),\ 0.0)\ /\ std::size(window);}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00031}00031\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(window);}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00033}00033\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00034}00034\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00035}00035\ }
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00036}\mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a8352f79a4ebe8906d535475e0eee03ff}{00036}}\ \ \ \ \ std::vector<T>\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a8352f79a4ebe8906d535475e0eee03ff}{process\_multidimensional}}(\textcolor{keyword}{const}\ std::vector<T>\&\ data,}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<T(\textcolor{keyword}{const}\ std::vector<T>\&)>\ window\_func)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Implementation\ for\ multi-\/dimensional\ data}}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00039}00039\ \ \ \ \ \ \ \ \ std::vector<T>\ results;}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00040}00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <=\ data.size()\ -\/\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}{window\_size\_}};\ i\ +=\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a80636bc832fe7bb5f4b48fdb070742d6}{step\_size\_}})\ \{}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<T>\ window(data.begin()\ +\ i,\ data.begin()\ +\ i\ +\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}{window\_size\_}});}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ results.push\_back(window\_func(window));}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00043}00043\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ results;}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00045}00045\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00046}00046\ }
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00047}\mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a78e25363c53c64b2575ce946a6c11164}{00047}}\ \ \ \ \ std::vector<T>\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a78e25363c53c64b2575ce946a6c11164}{process\_single\_dimensional}}(\textcolor{keyword}{const}\ std::vector<T>\&\ data,}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<T(\textcolor{keyword}{const}\ std::vector<T>\&)>\ window\_func)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00049}00049\ \ \ \ \ \ \ \ \ std::vector<T>\ results;}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00050}00050\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ sliding\ windows\ of\ the\ specified\ size}}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00051}00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <=\ data.size()\ -\/\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}{window\_size\_}};\ i\ +=\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a80636bc832fe7bb5f4b48fdb070742d6}{step\_size\_}})\ \{}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<T>\ window(data.begin()\ +\ i,\ data.begin()\ +\ i\ +\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}{window\_size\_}});}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ results.push\_back(window\_func(window));}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00054}00054\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ results;}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00056}00056\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00057}00057\ }
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00058}00058\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00059}\mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a644b24ff507873d40761e4a2767779d1}{00059}}\ \ \ \ \ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a644b24ff507873d40761e4a2767779d1}{SlidingWindowProcessor}}(\textcolor{keywordtype}{size\_t}\ window\_size,\ \textcolor{keywordtype}{size\_t}\ step\_size)}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00060}00060\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}{window\_size\_}}(window\_size),\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a80636bc832fe7bb5f4b48fdb070742d6}{step\_size\_}}(step\_size)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00061}00061\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (window\_size\ ==\ 0)}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Window\ size\ cannot\ be\ zero"{}});}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00063}00063\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (step\_size\ ==\ 0)}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Step\ size\ cannot\ be\ zero"{}});}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00065}00065\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00066}00066\ }
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00067}\mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a4a80bf019ed526f0ef88ed053d654c82}{00067}}\ \ \ \ \ std::vector<T>\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a4a80bf019ed526f0ef88ed053d654c82}{process}}(\textcolor{keyword}{const}\ std::vector<T>\&\ data,}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<T(\textcolor{keyword}{const}\ std::vector<T>\&)>\ window\_func)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00069}00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.size()\ <\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}{window\_size\_}})\ \{}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\};\ \textcolor{comment}{//\ Return\ empty\ if\ data\ is\ smaller\ than\ window}}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00072}00072\ }
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00073}00073\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (chunk\_processing::is\_multidimensional\_v<T>)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a8352f79a4ebe8906d535475e0eee03ff}{process\_multidimensional}}(data,\ window\_func);}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00075}00075\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a78e25363c53c64b2575ce946a6c11164}{process\_single\_dimensional}}(data,\ window\_func);}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00077}00077\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00078}00078\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00079}00079\ }
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00080}00080\ \ \ \ \ \textcolor{comment}{//\ Add\ getters}}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00081}\mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad5763d13fe58162c0ac82f7040c41ca5}{00081}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad5763d13fe58162c0ac82f7040c41ca5}{get\_window\_size}}()\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00082}00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}{window\_size\_}};}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00019}\mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a9a6d8499ece4aed25f94ab44ba3d6d5a}{00019}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a9a6d8499ece4aed25f94ab44ba3d6d5a}{compute\_window\_feature}}(\textcolor{keyword}{const}\ U\&\ window)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00020}00020\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (\mbox{\hyperlink{structchunk__processing_1_1is__vector}{chunk\_processing::is\_vector<U>::value}})\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00021}00021\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (\mbox{\hyperlink{structchunk__processing_1_1is__vector}{chunk\_processing::is\_vector<typename\ U::value\_type>::value}})\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00022}00022\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ 2D\ arrays}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ sum\ =\ 0.0;}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ inner\ :\ window)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sum\ +=\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a9a6d8499ece4aed25f94ab44ba3d6d5a}{compute\_window\_feature}}(inner);}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ sum\ /\ window.size();}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ 1D\ arrays}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::accumulate(window.begin(),\ window.end(),\ 0.0)\ /\ window.size();}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00032}00032\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ scalar\ values}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(window);}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00035}00035\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00036}00036\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00038}\mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a8352f79a4ebe8906d535475e0eee03ff}{00038}}\ \ \ \ \ std::vector<T>\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a8352f79a4ebe8906d535475e0eee03ff}{process\_multidimensional}}(\textcolor{keyword}{const}\ std::vector<T>\&\ data,}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<T(\textcolor{keyword}{const}\ std::vector<T>\&)>\ window\_func)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00040}00040\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Implementation\ for\ multi-\/dimensional\ data}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00041}00041\ \ \ \ \ \ \ \ \ std::vector<T>\ results;}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <=\ data.size()\ -\/\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}{window\_size\_}};\ i\ +=\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a80636bc832fe7bb5f4b48fdb070742d6}{step\_size\_}})\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<T>\ window(data.begin()\ +\ i,\ data.begin()\ +\ i\ +\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}{window\_size\_}});}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ results.push\_back(window\_func(window));}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00045}00045\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ results;}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00047}00047\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00049}\mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a78e25363c53c64b2575ce946a6c11164}{00049}}\ \ \ \ \ std::vector<T>\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a78e25363c53c64b2575ce946a6c11164}{process\_single\_dimensional}}(\textcolor{keyword}{const}\ std::vector<T>\&\ data,}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<T(\textcolor{keyword}{const}\ std::vector<T>\&)>\ window\_func)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00051}00051\ \ \ \ \ \ \ \ \ std::vector<T>\ results;}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ sliding\ windows\ of\ the\ specified\ size}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <=\ data.size()\ -\/\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}{window\_size\_}};\ i\ +=\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a80636bc832fe7bb5f4b48fdb070742d6}{step\_size\_}})\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<T>\ window(data.begin()\ +\ i,\ data.begin()\ +\ i\ +\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}{window\_size\_}});}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ results.push\_back(window\_func(window));}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00056}00056\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00057}00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ results;}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00058}00058\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00060}\mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ada52ea51722fbf1377a164d76445d8a1}{00060}}\ \ \ \ \ std::vector<T>\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ada52ea51722fbf1377a164d76445d8a1}{process\_window}}(\textcolor{keyword}{const}\ std::vector<T>\&\ data,}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<T(\textcolor{keyword}{const}\ std::vector<T>\&)>\ window\_func)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (\mbox{\hyperlink{structchunk__processing_1_1is__vector}{chunk\_processing::is\_vector<T>::value}})\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (\mbox{\hyperlink{structchunk__processing_1_1is__vector}{chunk\_processing::is\_vector<typename\ T::value\_type>::value}})\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ 2D\ arrays}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a8352f79a4ebe8906d535475e0eee03ff}{process\_multidimensional}}(data,\ window\_func);}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ 1D\ arrays}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a78e25363c53c64b2575ce946a6c11164}{process\_single\_dimensional}}(data,\ window\_func);}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00070}00070\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ scalar\ values}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a78e25363c53c64b2575ce946a6c11164}{process\_single\_dimensional}}(data,\ window\_func);}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00073}00073\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00074}00074\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00076}00076\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00077}\mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a644b24ff507873d40761e4a2767779d1}{00077}}\ \ \ \ \ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a644b24ff507873d40761e4a2767779d1}{SlidingWindowProcessor}}(\textcolor{keywordtype}{size\_t}\ window\_size,\ \textcolor{keywordtype}{size\_t}\ step\_size)}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00078}00078\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}{window\_size\_}}(window\_size),\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a80636bc832fe7bb5f4b48fdb070742d6}{step\_size\_}}(step\_size)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (window\_size\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Window\ size\ cannot\ be\ zero"{}});}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00081}00081\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (step\_size\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Step\ size\ cannot\ be\ zero"{}});}
 \DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00083}00083\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00084}\mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_af48a8a4d3dbc36304d91e57c4bc4ac1a}{00084}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_af48a8a4d3dbc36304d91e57c4bc4ac1a}{get\_step\_size}}()\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00085}00085\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a80636bc832fe7bb5f4b48fdb070742d6}{step\_size\_}};}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00086}00086\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00087}00087\ }
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00088}00088\ \ \ \ \ \textcolor{comment}{//\ Add\ setters}}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00089}\mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a64b075f48d088ac5241411557d697d2c}{00089}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a64b075f48d088ac5241411557d697d2c}{set\_window\_size}}(\textcolor{keywordtype}{size\_t}\ size)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00090}00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (size\ ==\ 0)}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Window\ size\ cannot\ be\ zero"{}});}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00092}00092\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}{window\_size\_}}\ =\ size;}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00093}00093\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00094}\mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_afa2f4f0664eed05c3fd66e5f4d6bf203}{00094}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_afa2f4f0664eed05c3fd66e5f4d6bf203}{set\_step\_size}}(\textcolor{keywordtype}{size\_t}\ size)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00095}00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (size\ ==\ 0)}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Step\ size\ cannot\ be\ zero"{}});}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00097}00097\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a80636bc832fe7bb5f4b48fdb070742d6}{step\_size\_}}\ =\ size;}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00098}00098\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00099}00099\ \};}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00100}00100\ }
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00101}00101\ \textcolor{comment}{//\ Common\ window\ operations}}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00102}00102\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00103}\mbox{\hyperlink{classchunk__windows_1_1WindowOperations}{00103}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classchunk__windows_1_1WindowOperations}{WindowOperations}}\ \{}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00104}00104\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00105}\mbox{\hyperlink{classchunk__windows_1_1WindowOperations_a929defeedb1b555fd782041e68927098}{00105}}\ \ \ \ \ \textcolor{keyword}{static}\ T\ \mbox{\hyperlink{classchunk__windows_1_1WindowOperations_a929defeedb1b555fd782041e68927098}{moving\_average}}(\textcolor{keyword}{const}\ std::vector<T>\&\ window)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00106}00106\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (window.empty())\ \{}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ T\{\};\ \textcolor{comment}{//\ Return\ default\ value\ for\ empty\ input}}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00108}00108\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00109}00109\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::accumulate(window.begin(),\ window.end(),\ T\{\})\ /\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(window.size());}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00110}00110\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00111}00111\ }
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00112}\mbox{\hyperlink{classchunk__windows_1_1WindowOperations_a4dbe569c80436ddd61ee3a72a229d64a}{00112}}\ \ \ \ \ \textcolor{keyword}{static}\ T\ \mbox{\hyperlink{classchunk__windows_1_1WindowOperations_a4dbe569c80436ddd61ee3a72a229d64a}{moving\_median}}(std::vector<T>\ window)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00113}00113\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (window.empty())\ \{}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Cannot\ compute\ median\ of\ empty\ window"{}});}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00115}00115\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00116}00116\ \ \ \ \ \ \ \ \ std::sort(window.begin(),\ window.end());}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00117}00117\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ window[window.size()\ /\ 2];}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00118}00118\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00119}00119\ }
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00120}\mbox{\hyperlink{classchunk__windows_1_1WindowOperations_ac8191b96fc02bd1c9ff22be4ffd6123c}{00120}}\ \ \ \ \ \textcolor{keyword}{static}\ T\ \mbox{\hyperlink{classchunk__windows_1_1WindowOperations_ac8191b96fc02bd1c9ff22be4ffd6123c}{moving\_max}}(\textcolor{keyword}{const}\ std::vector<T>\&\ window)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00121}00121\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (window.empty())\ \{}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Cannot\ compute\ max\ of\ empty\ window"{}});}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00123}00123\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00124}00124\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *std::max\_element(window.begin(),\ window.end());}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00125}00125\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00126}00126\ }
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00127}\mbox{\hyperlink{classchunk__windows_1_1WindowOperations_af8b096abbcd32e1d5bbf50a0e5db6825}{00127}}\ \ \ \ \ \textcolor{keyword}{static}\ T\ \mbox{\hyperlink{classchunk__windows_1_1WindowOperations_af8b096abbcd32e1d5bbf50a0e5db6825}{moving\_min}}(\textcolor{keyword}{const}\ std::vector<T>\&\ window)\ \{}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00128}00128\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (window.empty())\ \{}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Cannot\ compute\ min\ of\ empty\ window"{}});}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00130}00130\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00131}00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *std::min\_element(window.begin(),\ window.end());}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00085}\mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a4a80bf019ed526f0ef88ed053d654c82}{00085}}\ \ \ \ \ std::vector<T>\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a4a80bf019ed526f0ef88ed053d654c82}{process}}(\textcolor{keyword}{const}\ std::vector<T>\&\ data,}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<T(\textcolor{keyword}{const}\ std::vector<T>\&)>\ window\_func)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00087}00087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data.size()\ <\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}{window\_size\_}})\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\};\ \textcolor{comment}{//\ Return\ empty\ if\ data\ is\ smaller\ than\ window}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00089}00089\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00091}00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ada52ea51722fbf1377a164d76445d8a1}{process\_window}}(data,\ window\_func);}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00092}00092\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00094}00094\ \ \ \ \ \textcolor{comment}{//\ Add\ getters}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00095}\mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad5763d13fe58162c0ac82f7040c41ca5}{00095}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad5763d13fe58162c0ac82f7040c41ca5}{get\_window\_size}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00096}00096\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}{window\_size\_}};}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00097}00097\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00098}\mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_af48a8a4d3dbc36304d91e57c4bc4ac1a}{00098}}\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_af48a8a4d3dbc36304d91e57c4bc4ac1a}{get\_step\_size}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00099}00099\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a80636bc832fe7bb5f4b48fdb070742d6}{step\_size\_}};}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00100}00100\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00102}00102\ \ \ \ \ \textcolor{comment}{//\ Add\ setters}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00103}\mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a64b075f48d088ac5241411557d697d2c}{00103}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a64b075f48d088ac5241411557d697d2c}{set\_window\_size}}(\textcolor{keywordtype}{size\_t}\ size)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00104}00104\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (size\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Window\ size\ cannot\ be\ zero"{}});}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00106}00106\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_ad1f68ca74895994142bd3b3ddf96d289}{window\_size\_}}\ =\ size;}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00107}00107\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00108}\mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_afa2f4f0664eed05c3fd66e5f4d6bf203}{00108}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_afa2f4f0664eed05c3fd66e5f4d6bf203}{set\_step\_size}}(\textcolor{keywordtype}{size\_t}\ size)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00109}00109\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (size\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Step\ size\ cannot\ be\ zero"{}});}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00111}00111\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classchunk__windows_1_1SlidingWindowProcessor_a80636bc832fe7bb5f4b48fdb070742d6}{step\_size\_}}\ =\ size;}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00112}00112\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00113}00113\ \};}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00115}00115\ \textcolor{comment}{//\ Common\ window\ operations}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00116}00116\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00117}\mbox{\hyperlink{classchunk__windows_1_1WindowOperations}{00117}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classchunk__windows_1_1WindowOperations}{WindowOperations}}\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00118}00118\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00119}\mbox{\hyperlink{classchunk__windows_1_1WindowOperations_a929defeedb1b555fd782041e68927098}{00119}}\ \ \ \ \ \textcolor{keyword}{static}\ T\ \mbox{\hyperlink{classchunk__windows_1_1WindowOperations_a929defeedb1b555fd782041e68927098}{moving\_average}}(\textcolor{keyword}{const}\ std::vector<T>\&\ window)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00120}00120\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (window.empty())\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ T\{\};\ \textcolor{comment}{//\ Return\ default\ value\ for\ empty\ input}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00122}00122\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00123}00123\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::accumulate(window.begin(),\ window.end(),\ T\{\})\ /\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(window.size());}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00124}00124\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00126}\mbox{\hyperlink{classchunk__windows_1_1WindowOperations_a4dbe569c80436ddd61ee3a72a229d64a}{00126}}\ \ \ \ \ \textcolor{keyword}{static}\ T\ \mbox{\hyperlink{classchunk__windows_1_1WindowOperations_a4dbe569c80436ddd61ee3a72a229d64a}{moving\_median}}(std::vector<T>\ window)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00127}00127\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (window.empty())\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Cannot\ compute\ median\ of\ empty\ window"{}});}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00129}00129\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00130}00130\ \ \ \ \ \ \ \ \ std::sort(window.begin(),\ window.end());}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00131}00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ window[window.size()\ /\ 2];}
 \DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00132}00132\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00133}00133\ \};}
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00134}00134\ }
-\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00135}00135\ \}\ \textcolor{comment}{//\ namespace\ chunk\_windows}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00134}\mbox{\hyperlink{classchunk__windows_1_1WindowOperations_ac8191b96fc02bd1c9ff22be4ffd6123c}{00134}}\ \ \ \ \ \textcolor{keyword}{static}\ T\ \mbox{\hyperlink{classchunk__windows_1_1WindowOperations_ac8191b96fc02bd1c9ff22be4ffd6123c}{moving\_max}}(\textcolor{keyword}{const}\ std::vector<T>\&\ window)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00135}00135\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (window.empty())\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Cannot\ compute\ max\ of\ empty\ window"{}});}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00137}00137\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00138}00138\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *std::max\_element(window.begin(),\ window.end());}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00139}00139\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00141}\mbox{\hyperlink{classchunk__windows_1_1WindowOperations_af8b096abbcd32e1d5bbf50a0e5db6825}{00141}}\ \ \ \ \ \textcolor{keyword}{static}\ T\ \mbox{\hyperlink{classchunk__windows_1_1WindowOperations_af8b096abbcd32e1d5bbf50a0e5db6825}{moving\_min}}(\textcolor{keyword}{const}\ std::vector<T>\&\ window)\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00142}00142\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (window.empty())\ \{}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Cannot\ compute\ min\ of\ empty\ window"{}});}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00144}00144\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00145}00145\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *std::min\_element(window.begin(),\ window.end());}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00146}00146\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00147}00147\ \};}
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{chunk__windows_8hpp_source_l00149}00149\ \}\ \textcolor{comment}{//\ namespace\ chunk\_windows}}
 
 \end{DoxyCode}

@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['neuralchunkconfig_0',['NeuralChunkConfig',['../namespaceneural__chunking.html#structneural__chunking_1_1NeuralChunkConfig',1,'neural_chunking']]],
-  ['neuralchunking_1',['NeuralChunking',['../classneural__chunking_1_1NeuralChunking.html',1,'neural_chunking']]],
-  ['neuralchunkingstrategy_2',['NeuralChunkingStrategy',['../classNeuralChunkingStrategy.html',1,'']]],
-  ['node_3',['node',['../structadvanced__structures_1_1ChunkBPlusTree_1_1Node.html',1,'advanced_structures::ChunkBPlusTree&lt; T &gt;::Node'],['../structadvanced__structures_1_1ChunkSkipList_1_1Node.html',1,'advanced_structures::ChunkSkipList&lt; T &gt;::Node'],['../structadvanced__structures_1_1ChunkTreap_1_1Node.html',1,'advanced_structures::ChunkTreap&lt; T &gt;::Node']]]
+  ['memorytracker_0',['MemoryTracker',['../structchunk__resilience_1_1ResilientChunker_1_1MemoryTracker.html',1,'chunk_resilience::ResilientChunker']]],
+  ['messagequeueconnection_1',['MessageQueueConnection',['../classchunk__integrations_1_1MessageQueueConnection.html',1,'chunk_integrations']]],
+  ['multicriteriastrategy_2',['MultiCriteriaStrategy',['../classMultiCriteriaStrategy.html',1,'']]],
+  ['mutualinformationchunking_3',['MutualInformationChunking',['../classsophisticated__chunking_1_1MutualInformationChunking.html',1,'sophisticated_chunking']]],
+  ['mutualinformationchunkingtest_4',['MutualInformationChunkingTest',['../classMutualInformationChunkingTest.html',1,'']]]
 ];

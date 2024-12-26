@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['neural_5fchunker_0',['neural_chunker',['../classNeuralChunkingStrategy.html#a4d7233e4e59bdce1edae11b8f91226f6',1,'NeuralChunkingStrategy']]],
-  ['next_1',['next',['../structadvanced__structures_1_1ChunkBPlusTree_1_1Node.html#a01d6e9020063c3c5f311c09ed82dda5a',1,'advanced_structures::ChunkBPlusTree::Node::next'],['../structChunkNode.html#a9ed2c0bfaa2987be7534020dd1aab66a',1,'ChunkNode::next']]],
-  ['num_5fchunks_2',['num_chunks',['../namespacechunk__benchmark.html#a999dae5778114a0c47e6ad1db32ae75c',1,'chunk_benchmark::BenchmarkResult']]],
-  ['num_5fhash_5ffunctions_3',['num_hash_functions',['../classadvanced__structures_1_1BloomFilterChunk.html#a0971ed7fde596ec76a46169c9c4be523',1,'advanced_structures::BloomFilterChunk']]]
+  ['learning_5frate_0',['learning_rate',['../namespaceneural__chunking.html#adc64ce6d28f532e15a88d867b80ae737',1,'neural_chunking::NeuralChunkConfig']]],
+  ['left_1',['left',['../structadvanced__structures_1_1ChunkTreap_1_1Node.html#ade60be809534ea9c19ea27b44e225784',1,'advanced_structures::ChunkTreap::Node']]],
+  ['levels_2',['levels',['../classadvanced__structures_1_1ChunkLSMTree.html#a461366d532e4f2040c66d7a46a850086',1,'advanced_structures::ChunkLSMTree']]],
+  ['locked_5f_3',['locked_',['../classchunk__resilience_1_1ResilientChunker_1_1ScopedLock.html#acb97beafd5116636997407dbab8ff034',1,'chunk_resilience::ResilientChunker::ScopedLock']]],
+  ['low_5fentropy_5fdata_4',['low_entropy_data',['../classEntropyStrategyTest.html#abeea883d94bd79f62ac94f8c01234995',1,'EntropyStrategyTest']]],
+  ['low_5fvariance_5fdata_5',['low_variance_data',['../classVarianceStrategyTest.html#aec580586c2caf61b7ec5161071ea03ed',1,'VarianceStrategyTest']]]
 ];
