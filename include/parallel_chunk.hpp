@@ -8,6 +8,7 @@
 #include <mutex>
 #include <thread>
 #include <vector>
+#include <numeric>
 
 namespace parallel_chunk {
 
@@ -28,27 +29,42 @@ public:
      */
     static void process_chunks(std::vector<std::vector<T>>& chunks,
                                const std::function<void(std::vector<T>&)>& operation) {
+        if (chunks.empty()) return;
+
         std::mutex exception_mutex;
         std::exception_ptr exception_ptr = nullptr;
         std::vector<std::thread> threads;
+        threads.reserve(chunks.size());  // Prevent reallocation
 
-        for (auto& chunk : chunks) {
-            threads.emplace_back([&chunk, &operation, &exception_mutex, &exception_ptr]() {
-                try {
-                    operation(chunk);
-                } catch (...) {
-                    std::lock_guard<std::mutex> lock(exception_mutex);
-                    if (!exception_ptr) {
-                        exception_ptr = std::current_exception();
+        // Create indices for safe access
+        std::vector<size_t> indices(chunks.size());
+        std::iota(indices.begin(), indices.end(), 0);
+
+        // Launch threads with index-based access
+        for (size_t idx : indices) {
+            threads.emplace_back(
+                [&chunks, &operation, &exception_mutex, &exception_ptr, idx]() {
+                    try {
+                        if (idx < chunks.size()) {  // Safety check
+                            operation(chunks[idx]);
+                        }
+                    } catch (...) {
+                        std::lock_guard<std::mutex> lock(exception_mutex);
+                        if (!exception_ptr) {
+                            exception_ptr = std::current_exception();
+                        }
                     }
-                }
-            });
+                });
         }
 
+        // Join threads safely
         for (auto& thread : threads) {
-            thread.join();
+            if (thread.joinable()) {
+                thread.join();
+            }
         }
 
+        // Handle any captured exception
         if (exception_ptr) {
             std::rethrow_exception(exception_ptr);
         }

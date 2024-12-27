@@ -29,15 +29,51 @@ protected:
 TEST_F(SubChunkStrategiesTest, RecursiveStrategyTest) {
     // Create a variance strategy with threshold 3.0
     auto variance_strategy = std::make_shared<chunk_processing::VarianceStrategy<double>>(3.0);
-
+    
+    ASSERT_NE(variance_strategy, nullptr);
+    
+    // Verify the variance strategy works on its own first
+    auto variance_chunks = variance_strategy->apply(test_data);
+    ASSERT_FALSE(variance_chunks.empty());
+    
     // Create recursive strategy with max depth 2 and min size 2
     chunk_processing::RecursiveSubChunkStrategy<double> recursive_strategy(variance_strategy, 2, 2);
-
+    
     // Apply the strategy
     auto result = recursive_strategy.apply(test_data);
-
-    // Verify the results
+    
+    // Basic validation
+    ASSERT_FALSE(result.empty());
     EXPECT_GT(result.size(), 1);
+    
+    // Verify each chunk
+    size_t total_elements = 0;
+    for (const auto& chunk : result) {
+        ASSERT_FALSE(chunk.empty());
+        EXPECT_GE(chunk.size(), 2);  // min_size constraint
+        total_elements += chunk.size();
+        
+        // Verify chunk elements are from original data
+        for (const auto& element : chunk) {
+            bool found = false;
+            for (const auto& original : test_data) {
+                if (std::abs(element - original) < 1e-10) {
+                    found = true;
+                    break;
+                }
+            }
+            EXPECT_TRUE(found) << "Element " << element << " not found in original data";
+        }
+    }
+    
+    // Verify all elements are accounted for
+    EXPECT_EQ(total_elements, test_data.size());
+    
+    // Add this validation
+    for (const auto& chunk : result) {
+        ASSERT_GE(chunk.size(), 2) << "Chunk size " << chunk.size() 
+                                  << " is smaller than minimum size 2";
+    }
 }
 
 TEST_F(SubChunkStrategiesTest, HierarchicalStrategyTest) {

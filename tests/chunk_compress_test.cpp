@@ -149,3 +149,23 @@ TEST_F(ChunkCompressorTest, LongDeltaSequence) {
     auto decoded = ChunkCompressor<int>::delta_decode(encoded);
     EXPECT_EQ(decoded, long_sequence);
 }
+
+TEST_F(ChunkCompressorTest, CompressionRatio) {
+    // Test with repeated data (should compress well)
+    std::vector<int> repeated(1000, 42);  // 1000 times the value 42
+    auto encoded_repeated = ChunkCompressor<int>::run_length_encode(repeated);
+    double ratio_repeated = ChunkCompressor<int>::calculate_compression_ratio(repeated, encoded_repeated);
+    EXPECT_GT(ratio_repeated, 1.0);  // Should achieve compression
+    
+    // Test with unique data (should not compress well)
+    std::vector<int> unique_data(100);
+    std::iota(unique_data.begin(), unique_data.end(), 0);  // 0,1,2,3,...
+    auto encoded_unique = ChunkCompressor<int>::run_length_encode(unique_data);
+    double ratio_unique = ChunkCompressor<int>::calculate_compression_ratio(unique_data, encoded_unique);
+    EXPECT_GT(ratio_unique, 0.0);
+    
+    // Test edge cases
+    EXPECT_EQ(ChunkCompressor<int>::calculate_compression_ratio({}, {}), 0.0);
+    EXPECT_EQ(ChunkCompressor<int>::calculate_compression_ratio(single_value, {}), 0.0);
+    EXPECT_EQ(ChunkCompressor<int>::calculate_compression_ratio({}, encoded_repeated), 0.0);
+}
