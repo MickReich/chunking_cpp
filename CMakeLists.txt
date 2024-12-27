@@ -155,21 +155,11 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 # Create tests directory
 file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/tests)
 
-# Add test executable
-add_executable(run_tests
-    tests/test_main.cpp
-    tests/chunk_strategies_test.cpp
-    tests/advanced_chunk_strategies_test.cpp
-    tests/utils_test.cpp
-    tests/jagged_array_test.cpp
-    tests/test_visualization.cpp
-    tests/chunk_test.cpp
-    tests/chunk_compression_test.cpp
-    tests/parallel_chunk_test.cpp
-    tests/advanced_structures_test.cpp
-    tests/chunking_methods_sophisticated_test.cpp
-    tests/test_neuralnetwork.cpp
-)
+# Find all test files using globbing
+file(GLOB TEST_SOURCES CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/tests/*.cpp")
+
+# Add test executable with globbed sources
+add_executable(run_tests ${TEST_SOURCES})
 
 # Link test executable
 target_link_libraries(run_tests

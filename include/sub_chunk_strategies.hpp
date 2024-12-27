@@ -9,8 +9,8 @@
  */
 #pragma once
 
-#include "chunk_common.hpp"
 #include "chunk_strategies.hpp"
+#include <functional>
 #include <memory>
 #include <vector>
 
@@ -19,28 +19,35 @@ namespace chunk_processing {
 template <typename T>
 class RecursiveSubChunkStrategy : public ChunkStrategy<T> {
 private:
-    std::shared_ptr<ChunkStrategy<T>> strategy_;
+    std::shared_ptr<ChunkStrategy<T>> base_strategy_;
     size_t max_depth_;
-    size_t min_chunk_size_;
+    size_t min_size_;
 
-public:
-    RecursiveSubChunkStrategy(std::shared_ptr<ChunkStrategy<T>> strategy, size_t max_depth = 2,
-                              size_t min_chunk_size = 1)
-        : strategy_(strategy), max_depth_(max_depth), min_chunk_size_(min_chunk_size) {}
-
-    std::vector<std::vector<T>> apply(const std::vector<T>& data) const override {
-        if (data.empty() || data.size() < min_chunk_size_) {
+    std::vector<std::vector<T>> recursive_apply(const std::vector<T>& data, size_t depth) const {
+        if (depth >= max_depth_ || data.size() <= min_size_) {
             return {data};
         }
-        return apply_recursive(data, 0);
+
+        auto chunks = base_strategy_->apply(data);
+        std::vector<std::vector<T>> result;
+
+        for (const auto& chunk : chunks) {
+            auto sub_chunks = recursive_apply(chunk, depth + 1);
+            result.insert(result.end(), sub_chunks.begin(), sub_chunks.end());
+        }
+
+        return result;
     }
 
-protected:
-    std::vector<std::vector<T>> apply_recursive(const std::vector<T>& data, size_t depth) const {
-        if (depth >= max_depth_ || data.size() < min_chunk_size_) {
-            return {data};
-        }
-        return strategy_->apply(data);
+public:
+    RecursiveSubChunkStrategy(std::shared_ptr<ChunkStrategy<T>> strategy, size_t max_depth,
+                              size_t min_size)
+        : base_strategy_(strategy), max_depth_(max_depth), min_size_(min_size) {}
+
+    std::vector<std::vector<T>> apply(const std::vector<T>& data) const override {
+        if (data.empty())
+            return {};
+        return recursive_apply(data, 0);
     }
 };
 
@@ -48,49 +55,59 @@ template <typename T>
 class HierarchicalSubChunkStrategy : public ChunkStrategy<T> {
 private:
     std::vector<std::shared_ptr<ChunkStrategy<T>>> strategies_;
-    size_t min_chunk_size_;
+    size_t min_size_;
 
 public:
     HierarchicalSubChunkStrategy(std::vector<std::shared_ptr<ChunkStrategy<T>>> strategies,
-                                 size_t min_chunk_size = 1)
-        : strategies_(std::move(strategies)), min_chunk_size_(min_chunk_size) {}
+                                 size_t min_size)
+        : strategies_(std::move(strategies)), min_size_(min_size) {}
 
     std::vector<std::vector<T>> apply(const std::vector<T>& data) const override {
-        if (data.empty() || data.size() < min_chunk_size_) {
+        if (data.empty())
+            return {};
+        if (data.size() <= min_size_)
             return {data};
-        }
-        return apply_hierarchical(data, 0);
-    }
 
-protected:
-    std::vector<std::vector<T>> apply_hierarchical(const std::vector<T>& data, size_t level) const {
-        if (level >= strategies_.size() || data.size() < min_chunk_size_) {
-            return {data};
+        std::vector<std::vector<T>> current_chunks = {data};
+
+        for (const auto& strategy : strategies_) {
+            std::vector<std::vector<T>> next_level;
+            for (const auto& chunk : current_chunks) {
+                if (chunk.size() > min_size_) {
+                    auto sub_chunks = strategy->apply(chunk);
+                    next_level.insert(next_level.end(), sub_chunks.begin(), sub_chunks.end());
+                } else {
+                    next_level.push_back(chunk);
+                }
+            }
+            current_chunks = std::move(next_level);
         }
-        return strategies_[level]->apply(data);
+
+        return current_chunks;
     }
 };
 
 template <typename T>
 class ConditionalSubChunkStrategy : public ChunkStrategy<T> {
 private:
-    std::shared_ptr<ChunkStrategy<T>> strategy_;
+    std::shared_ptr<ChunkStrategy<T>> base_strategy_;
     std::function<bool(const std::vector<T>&)> condition_;
-    size_t min_chunk_size_;
+    size_t min_size_;
 
 public:
     ConditionalSubChunkStrategy(std::shared_ptr<ChunkStrategy<T>> strategy,
                                 std::function<bool(const std::vector<T>&)> condition,
-                                size_t min_chunk_size = 1)
-        : strategy_(strategy), condition_(condition), min_chunk_size_(min_chunk_size) {}
+                                size_t min_size)
+        : base_strategy_(strategy), condition_(std::move(condition)), min_size_(min_size) {}
 
     std::vector<std::vector<T>> apply(const std::vector<T>& data) const override {
-        if (data.empty() || data.size() < min_chunk_size_) {
+        if (data.empty())
+            return {};
+        if (data.size() <= min_size_)
             return {data};
-        }
 
         if (condition_(data)) {
-            return strategy_->apply(data);
+            return base_strategy_->apply(data);
         }
         return {data};
     }

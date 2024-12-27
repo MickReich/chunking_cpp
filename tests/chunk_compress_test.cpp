@@ -1,9 +1,17 @@
 #include "chunk_compression.hpp"
+#include <cstdint> // for uint64_t
 #include <gtest/gtest.h>
 #include <limits>
+#include <numeric> // for std::iota
+#include <utility> // for std::pair
 #include <vector>
 
 using namespace chunk_compression;
+
+template <typename T>
+bool ComparePairs(const std::pair<T, size_t>& lhs, const std::pair<T, size_t>& rhs) {
+    return lhs.first == rhs.first && lhs.second == rhs.second;
+}
 
 class ChunkCompressorTest : public ::testing::Test {
 protected:
@@ -18,22 +26,22 @@ protected:
 TEST_F(ChunkCompressorTest, BasicRunLengthEncode) {
     auto encoded = ChunkCompressor<int>::run_length_encode(repeated_data);
     EXPECT_EQ(encoded.size(), 3);
-    EXPECT_EQ(encoded[0], std::make_pair(1, 3u));
-    EXPECT_EQ(encoded[1], std::make_pair(2, 2u));
-    EXPECT_EQ(encoded[2], std::make_pair(3, 4u));
+    EXPECT_TRUE(ComparePairs(encoded[0], std::make_pair(1, size_t(3))));
+    EXPECT_TRUE(ComparePairs(encoded[1], std::make_pair(2, size_t(2))));
+    EXPECT_TRUE(ComparePairs(encoded[2], std::make_pair(3, size_t(4))));
 }
 
 TEST_F(ChunkCompressorTest, SingleValueRunLength) {
     auto encoded = ChunkCompressor<int>::run_length_encode(single_value);
     EXPECT_EQ(encoded.size(), 1);
-    EXPECT_EQ(encoded[0], std::make_pair(5, 1u));
+    EXPECT_TRUE(ComparePairs(encoded[0], std::make_pair(5, size_t(1))));
 }
 
 TEST_F(ChunkCompressorTest, UniqueValuesRunLength) {
     auto encoded = ChunkCompressor<int>::run_length_encode(unique_data);
     EXPECT_EQ(encoded.size(), unique_data.size());
     for (size_t i = 0; i < encoded.size(); ++i) {
-        EXPECT_EQ(encoded[i], std::make_pair(unique_data[i], 1u));
+        EXPECT_TRUE(ComparePairs(encoded[i], std::make_pair(unique_data[i], size_t(1))));
     }
 }
 
@@ -45,8 +53,8 @@ TEST_F(ChunkCompressorTest, EmptyRunLength) {
 TEST_F(ChunkCompressorTest, FloatingPointRunLength) {
     auto encoded = ChunkCompressor<double>::run_length_encode(floating_data);
     EXPECT_EQ(encoded.size(), 2);
-    EXPECT_EQ(encoded[0], std::make_pair(1.5, 2u));
-    EXPECT_EQ(encoded[1], std::make_pair(2.5, 3u));
+    EXPECT_TRUE(ComparePairs(encoded[0], std::make_pair(1.5, size_t(2))));
+    EXPECT_TRUE(ComparePairs(encoded[1], std::make_pair(2.5, size_t(3))));
 }
 
 // Delta Encoding Tests
@@ -131,7 +139,7 @@ TEST_F(ChunkCompressorTest, LargeSequenceCompression) {
     std::vector<int> large_sequence(10000, 42); // Long sequence of same value
     auto encoded = ChunkCompressor<int>::run_length_encode(large_sequence);
     EXPECT_EQ(encoded.size(), 1);
-    EXPECT_EQ(encoded[0], std::make_pair(42, 10000u));
+    EXPECT_TRUE(ComparePairs(encoded[0], std::make_pair(42, size_t(10000))));
 }
 
 TEST_F(ChunkCompressorTest, LongDeltaSequence) {

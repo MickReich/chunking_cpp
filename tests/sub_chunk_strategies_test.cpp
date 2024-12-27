@@ -8,11 +8,12 @@
  * - Conditional sub-chunking
  * - Edge cases and error conditions
  */
-#include "sub_chunk_strategies.hpp"
-#include "gtest/gtest.h"
+#include "chunk_strategies.hpp"
+#include <gtest/gtest.h>
+#include <memory>
 #include <vector>
 
-using namespace chunk_strategies;
+using namespace chunk_processing;
 
 /**
  * @brief Test fixture for sub-chunking strategy tests
@@ -21,47 +22,75 @@ using namespace chunk_strategies;
  */
 class SubChunkStrategiesTest : public ::testing::Test {
 protected:
-    void SetUp() override {
-        test_data = {{1.0, 1.1, 1.2, 5.0, 5.1, 5.2},
-                     {2.0, 2.1, 2.2, 10.0, 10.1, 10.2},
-                     {3.0, 3.1, 3.2, 15.0, 15.1, 15.2}};
-    }
-
-    std::vector<std::vector<double>> test_data;
+    std::vector<double> test_data = {1.0, 1.1, 1.2, 5.0, 5.1, 5.2, 2.0, 2.1, 2.2, 6.0, 6.1, 6.2,
+                                     3.0, 3.1, 3.2, 7.0, 7.1, 7.2, 4.0, 4.1, 4.2, 8.0, 8.1, 8.2};
 };
 
-TEST_F(SubChunkStrategiesTest, RecursiveSubChunking) {
-    auto variance_strategy = std::make_shared<VarianceStrategy<double>>(3.0);
-    RecursiveSubChunkStrategy<double> recursive_strategy(variance_strategy, 2, 2);
+TEST_F(SubChunkStrategiesTest, RecursiveStrategyTest) {
+    // Create a variance strategy with threshold 3.0
+    auto variance_strategy = std::make_shared<chunk_processing::VarianceStrategy<double>>(3.0);
 
+    // Create recursive strategy with max depth 2 and min size 2
+    chunk_processing::RecursiveSubChunkStrategy<double> recursive_strategy(variance_strategy, 2, 2);
+
+    // Apply the strategy
     auto result = recursive_strategy.apply(test_data);
-    EXPECT_GT(result.size(), 0);
+
+    // Verify the results
+    EXPECT_GT(result.size(), 1);
 }
 
-TEST_F(SubChunkStrategiesTest, HierarchicalSubChunking) {
-    std::vector<std::shared_ptr<ChunkStrategy<double>>> strategies = {
-        std::make_shared<VarianceStrategy<double>>(5.0),
-        std::make_shared<EntropyStrategy<double>>(1.0)};
+TEST_F(SubChunkStrategiesTest, HierarchicalStrategyTest) {
+    // Create multiple strategies
+    std::vector<std::shared_ptr<chunk_processing::ChunkStrategy<double>>> strategies = {
+        std::make_shared<chunk_processing::VarianceStrategy<double>>(5.0),
+        std::make_shared<chunk_processing::EntropyStrategy<double>>(1.0)};
 
-    HierarchicalSubChunkStrategy<double> hierarchical_strategy(strategies, 2);
+    // Create hierarchical strategy with min size 2
+    chunk_processing::HierarchicalSubChunkStrategy<double> hierarchical_strategy(strategies, 2);
+
+    // Apply the strategy
     auto result = hierarchical_strategy.apply(test_data);
-    EXPECT_GT(result.size(), 0);
+
+    // Verify the results
+    EXPECT_GT(result.size(), 1);
 }
 
-TEST_F(SubChunkStrategiesTest, ConditionalSubChunking) {
+TEST_F(SubChunkStrategiesTest, ConditionalStrategyTest) {
+    // Define condition function
     auto condition = [](const std::vector<double>& chunk) {
-        double mean = std::accumulate(chunk.begin(), chunk.end(), 0.0) / chunk.size();
-        double variance = 0.0;
-        for (const auto& val : chunk) {
-            variance += (val - mean) * (val - mean);
-        }
-        variance /= chunk.size();
-        return variance > 50.0;
+        return chunk.size() > 4; // Only subdivide chunks larger than 4 elements
     };
 
-    auto variance_strategy = std::make_shared<VarianceStrategy<double>>(5.0);
-    ConditionalSubChunkStrategy<double> conditional_strategy(variance_strategy, condition, 2);
+    // Create variance strategy
+    auto variance_strategy = std::make_shared<chunk_processing::VarianceStrategy<double>>(5.0);
 
+    // Create conditional strategy with min size 2
+    chunk_processing::ConditionalSubChunkStrategy<double> conditional_strategy(variance_strategy,
+                                                                               condition, 2);
+
+    // Apply the strategy
     auto result = conditional_strategy.apply(test_data);
-    EXPECT_GT(result.size(), 0);
+
+    // Verify the results
+    EXPECT_GT(result.size(), 1);
+}
+
+TEST_F(SubChunkStrategiesTest, EmptyDataTest) {
+    std::vector<double> empty_data;
+    auto variance_strategy = std::make_shared<chunk_processing::VarianceStrategy<double>>(3.0);
+
+    // Test each sub-chunk strategy with empty data
+    chunk_processing::RecursiveSubChunkStrategy<double> recursive_strategy(variance_strategy, 2, 2);
+    EXPECT_TRUE(recursive_strategy.apply(empty_data).empty());
+
+    std::vector<std::shared_ptr<chunk_processing::ChunkStrategy<double>>> strategies = {
+        variance_strategy};
+    chunk_processing::HierarchicalSubChunkStrategy<double> hierarchical_strategy(strategies, 2);
+    EXPECT_TRUE(hierarchical_strategy.apply(empty_data).empty());
+
+    auto condition = [](const std::vector<double>& chunk) { return chunk.size() > 4; };
+    chunk_processing::ConditionalSubChunkStrategy<double> conditional_strategy(variance_strategy,
+                                                                               condition, 2);
+    EXPECT_TRUE(conditional_strategy.apply(empty_data).empty());
 }
