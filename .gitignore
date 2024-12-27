@@ -54,3 +54,4 @@ viz/
 chunk_visualization_demo
 *checkpoint
 *.txt
+!CMakeLists.txt
