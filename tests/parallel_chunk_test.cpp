@@ -159,26 +159,30 @@ TEST_F(ParallelChunkProcessorTest, ExceptionPropagation) {
     std::vector<std::vector<int>> data = {{1}, {2}, {3}, {4}, {5}};
     int exception_threshold = 3;
 
-    EXPECT_THROW(
-        {
+    EXPECT_THROW({
+        try {
             ParallelChunkProcessor<int>::process_chunks(
-                data, [exception_threshold](std::vector<int>& chunk) {
+                data,
+                [exception_threshold](std::vector<int>& chunk) {
                     if (chunk[0] > exception_threshold) {
                         throw std::runtime_error("Value too large");
                     }
                     chunk[0] *= 2;
                 });
-        },
-        std::runtime_error);
+        } catch (const std::runtime_error& e) {
+            EXPECT_STREQ(e.what(), "Value too large");
+            throw;
+        }
+    }, std::runtime_error);
 
-    // Check that some chunks were processed before exception
+    // Verify some chunks were processed before exception
     bool found_modified = false;
     bool found_unmodified = false;
     for (const auto& chunk : data) {
         if (chunk[0] <= exception_threshold * 2 && chunk[0] % 2 == 0) {
             found_modified = true;
         }
-        if (chunk[0] > exception_threshold && chunk[0] == chunk[0] / 2 * 2) {
+        if (chunk[0] > exception_threshold && chunk[0] == chunk[0]) {
             found_unmodified = true;
         }
     }

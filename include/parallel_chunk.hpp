@@ -33,33 +33,46 @@ public:
 
         struct SharedState {
             std::mutex mutex;
-            std::exception_ptr exception;
-            bool has_error = false;
+            std::exception_ptr exception{nullptr};
+            bool has_error{false};
+            bool should_stop{false};
+            std::vector<std::vector<T>>* chunks_ptr{nullptr};
+            const std::function<void(std::vector<T>&)>* operation_ptr{nullptr};
+
+            // Constructor to properly initialize the state
+            SharedState(std::vector<std::vector<T>>& chunks_ref,
+                       const std::function<void(std::vector<T>&)>& operation_ref)
+                : chunks_ptr(&chunks_ref)
+                , operation_ptr(&operation_ref) {}
         };
 
-        auto shared_state = std::make_shared<SharedState>();
+        auto shared_state = std::make_shared<SharedState>(chunks, operation);
+
         std::vector<std::thread> threads;
         threads.reserve(chunks.size());
 
         // Create thread-safe worker function
-        auto worker = [operation](std::vector<T>& chunk, 
-                                std::shared_ptr<SharedState> state) {
+        auto worker = [](size_t index, std::shared_ptr<SharedState> state) {
+            if (state->should_stop) return;
+            
             try {
-                operation(chunk);
+                if (index < state->chunks_ptr->size()) {
+                    (*state->operation_ptr)((*state->chunks_ptr)[index]);
+                }
             } catch (...) {
                 std::lock_guard<std::mutex> lock(state->mutex);
                 if (!state->has_error) {
                     state->exception = std::current_exception();
                     state->has_error = true;
+                    state->should_stop = true;
                 }
             }
         };
 
-        // Launch threads with proper ownership semantics
-        for (auto& chunk : chunks) {
-            threads.emplace_back([&chunk, worker, shared_state]() {
-                worker(chunk, shared_state);
-            });
+        // Launch threads using indices
+        for (size_t i = 0; i < chunks.size(); ++i) {
+            if (shared_state->should_stop) break;
+            threads.emplace_back(worker, i, shared_state);
         }
 
         // Join all threads
