@@ -31,42 +31,47 @@ public:
                                const std::function<void(std::vector<T>&)>& operation) {
         if (chunks.empty()) return;
 
-        std::mutex exception_mutex;
-        std::exception_ptr exception_ptr = nullptr;
+        struct SharedState {
+            std::mutex mutex;
+            std::exception_ptr exception;
+            bool has_error = false;
+        };
+
+        auto shared_state = std::make_shared<SharedState>();
         std::vector<std::thread> threads;
-        threads.reserve(chunks.size());  // Prevent reallocation
+        threads.reserve(chunks.size());
 
-        // Create indices for safe access
-        std::vector<size_t> indices(chunks.size());
-        std::iota(indices.begin(), indices.end(), 0);
+        // Create thread-safe worker function
+        auto worker = [operation](std::vector<T>& chunk, 
+                                std::shared_ptr<SharedState> state) {
+            try {
+                operation(chunk);
+            } catch (...) {
+                std::lock_guard<std::mutex> lock(state->mutex);
+                if (!state->has_error) {
+                    state->exception = std::current_exception();
+                    state->has_error = true;
+                }
+            }
+        };
 
-        // Launch threads with index-based access
-        for (size_t idx : indices) {
-            threads.emplace_back(
-                [&chunks, &operation, &exception_mutex, &exception_ptr, idx]() {
-                    try {
-                        if (idx < chunks.size()) {  // Safety check
-                            operation(chunks[idx]);
-                        }
-                    } catch (...) {
-                        std::lock_guard<std::mutex> lock(exception_mutex);
-                        if (!exception_ptr) {
-                            exception_ptr = std::current_exception();
-                        }
-                    }
-                });
+        // Launch threads with proper ownership semantics
+        for (auto& chunk : chunks) {
+            threads.emplace_back([&chunk, worker, shared_state]() {
+                worker(chunk, shared_state);
+            });
         }
 
-        // Join threads safely
+        // Join all threads
         for (auto& thread : threads) {
             if (thread.joinable()) {
                 thread.join();
             }
         }
 
-        // Handle any captured exception
-        if (exception_ptr) {
-            std::rethrow_exception(exception_ptr);
+        // Check for exceptions after all threads complete
+        if (shared_state->has_error && shared_state->exception) {
+            std::rethrow_exception(shared_state->exception);
         }
     }
 

@@ -23,83 +23,93 @@ private:
     std::shared_ptr<ChunkStrategy<T>> base_strategy_;
     size_t max_depth_;
     size_t min_size_;
+    static constexpr size_t MAX_CHUNKS = 1000;
 
-    std::vector<std::vector<T>> recursive_apply(const std::vector<T>& data, size_t depth) const {
-        // Validate input
-        if (data.empty()) {
-            return {};
+    struct RecursionState {
+        size_t chunk_count = 0;
+        bool limit_reached = false;
+    };
+
+    std::vector<std::vector<T>> recursive_apply(const std::vector<T>& data, 
+                                              size_t depth,
+                                              RecursionState& state) const {
+        // Early exit conditions
+        if (data.empty() || state.limit_reached) {
+            return {data};
         }
 
-        // Check termination conditions
-        if (depth >= max_depth_ || data.size() <= min_size_) {
+        if (data.size() <= min_size_ || depth >= max_depth_) {
             return {data};
         }
 
         try {
-            // Apply base strategy and validate its output
+            // Apply base strategy
             auto chunks = base_strategy_->apply(data);
             
-            // Protect against invalid results from base strategy
-            if (chunks.empty()) {
+            // Validate base strategy output
+            if (chunks.empty() || chunks.size() == 1) {
                 return {data};
             }
 
-            // NEW: Check if any resulting chunk is smaller than min_size
-            bool has_small_chunks = false;
+            // Validate chunk sizes
             for (const auto& chunk : chunks) {
-                if (chunk.size() < min_size_) {
-                    has_small_chunks = true;
-                    break;
+                if (chunk.empty() || chunk.size() < min_size_) {
+                    return {data};  // Reject invalid splits
                 }
             }
-            
-            // If any chunk is too small, return original data as single chunk
-            if (has_small_chunks) {
-                return {data};
-            }
 
-            // Verify the chunks actually split the data
+            // Verify total elements
             size_t total_elements = 0;
             for (const auto& chunk : chunks) {
                 total_elements += chunk.size();
             }
-            
-            // If chunks don't preserve data or didn't actually split, return original
-            if (total_elements != data.size() || chunks.size() <= 1) {
-                return {data};
+            if (total_elements != data.size()) {
+                return {data};  // Reject if elements were lost/added
             }
 
             // Process sub-chunks
             std::vector<std::vector<T>> result;
-            result.reserve(chunks.size() * 2);  // Reasonable initial capacity
+            result.reserve(chunks.size());
 
             for (const auto& chunk : chunks) {
-                if (chunk.empty()) {
-                    continue;  // Skip empty chunks
+                if (state.chunk_count >= MAX_CHUNKS) {
+                    state.limit_reached = true;
+                    result.push_back(chunk);
+                    continue;
                 }
+
+                auto sub_chunks = recursive_apply(chunk, depth + 1, state);
                 
-                auto sub_chunks = recursive_apply(chunk, depth + 1);
-                result.insert(result.end(), sub_chunks.begin(), sub_chunks.end());
+                // Track new chunks
+                state.chunk_count += sub_chunks.size();
+                
+                // Append valid sub-chunks
+                for (const auto& sub_chunk : sub_chunks) {
+                    if (!sub_chunk.empty() && sub_chunk.size() >= min_size_) {
+                        result.push_back(sub_chunk);
+                    }
+                }
             }
 
             return result.empty() ? std::vector<std::vector<T>>{{data}} : result;
 
         } catch (const std::exception&) {
-            // If any exception occurs during processing, return original data as single chunk
-            return {data};
+            return {data};  // Safely handle any exceptions
         }
     }
 
 public:
-    RecursiveSubChunkStrategy(std::shared_ptr<ChunkStrategy<T>> strategy, 
+    RecursiveSubChunkStrategy(std::shared_ptr<ChunkStrategy<T>> strategy,
                              size_t max_depth,
                              size_t min_size)
-        : base_strategy_(strategy), max_depth_(max_depth), min_size_(min_size) {
+        : base_strategy_(strategy)
+        , max_depth_(max_depth)
+        , min_size_(min_size) {
         if (!strategy) {
             throw std::invalid_argument("Base strategy cannot be null");
         }
-        if (max_depth == 0) {
-            throw std::invalid_argument("Max depth must be greater than 0");
+        if (max_depth == 0 || max_depth > 100) {
+            throw std::invalid_argument("Invalid max depth");
         }
         if (min_size == 0) {
             throw std::invalid_argument("Min size must be greater than 0");
@@ -107,15 +117,30 @@ public:
     }
 
     std::vector<std::vector<T>> apply(const std::vector<T>& data) const override {
-        try {
-            auto result = recursive_apply(data, 0);
-            if (result.empty() && !data.empty()) {
-                return {data};
-            }
-            return result;
-        } catch (const std::exception&) {
+        if (data.empty()) {
+            return {};
+        }
+        
+        if (data.size() <= min_size_) {
             return {data};
         }
+
+        RecursionState state;
+        auto result = recursive_apply(data, 0, state);
+        
+        // Final validation
+        if (result.empty()) {
+            return {data};
+        }
+        
+        // Ensure all chunks meet minimum size
+        for (const auto& chunk : result) {
+            if (chunk.size() < min_size_) {
+                return {data};  // If any chunk is too small, return original
+            }
+        }
+
+        return result;
     }
 };
 
